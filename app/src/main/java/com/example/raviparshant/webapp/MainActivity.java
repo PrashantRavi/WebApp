@@ -22,7 +22,13 @@ public class MainActivity extends AppCompatActivity {
     webSetting.setJavaScriptEnabled(true);
 
     webView.setWebViewClient(new WebViewClient());
-    webView.loadUrl("file:///android_asset/index.html");
+   // webView.loadUrl("file:///android_asset/index.html");
+
+        if (savedInstanceState != null)
+            webView.restoreState(savedInstanceState.getBundle("webViewState"));
+        else {
+            webView.loadUrl("file:///android_asset/index.html");
+        }
 
 
 }
@@ -34,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }else {
             super.onBackPressed();
         }
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Bundle bundle = new Bundle();
+        webView.saveState(bundle);
+        outState.putBundle("webViewState", bundle);
     }
 
     private class WebViewClient extends android.webkit.WebViewClient
