@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Fork and Join using ForkJoinPool</title>
+
+    <meta name="description" content="This tutorial explains how to use the fork and join work splitting technique using Java's ForkJoinPool which was added in Java 7.">
+    <meta name="keywords"    content="java fork join forkjoinpool">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Fork and Join using ForkJoinPool">
+    <meta name="twitter:description" content="This tutorial explains how to use the fork and join work splitting technique using Java's ForkJoinPool which was added in Java 7.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Fork and Join using ForkJoinPool"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-util-concurrent/java-fork-and-join-forkjoinpool.html"/>
+    <meta property="og:description" content="This tutorial explains how to use the fork and join work splitting technique using Java's ForkJoinPool which was added in Java 7."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-util-concurrent/scheduledexecutorservice.html";
+var nextArticleInCategory = "/java-util-concurrent/lock.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 10459;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>java.util.concurrency - Java Concurrency Utilities</div><ol><li><a href="index.html">java.util.concurrent - Java Concurrency Utilities</a></li><li><a href="blockingqueue.html">BlockingQueue</a></li><li><a href="arrayblockingqueue.html">ArrayBlockingQueue</a></li><li><a href="delayqueue.html">DelayQueue</a></li><li><a href="linkedblockingqueue.html">LinkedBlockingQueue</a></li><li><a href="priorityblockingqueue.html">PriorityBlockingQueue</a></li><li><a href="synchronousqueue.html">SynchronousQueue</a></li><li><a href="blockingdeque.html">BlockingDeque</a></li><li><a href="linkedblockingdeque.html">LinkedBlockingDeque</a></li><li><a href="concurrentmap.html">ConcurrentMap</a></li><li><a href="concurrentnavigablemap.html">ConcurrentNavigableMap</a></li><li><a href="countdownlatch.html">CountDownLatch</a></li><li><a href="cyclicbarrier.html">CyclicBarrier</a></li><li><a href="exchanger.html">Exchanger</a></li><li><a href="semaphore.html">Semaphore</a></li><li><a href="executorservice.html">ExecutorService</a></li><li><a href="threadpoolexecutor.html">ThreadPoolExecutor</a></li><li><a href="scheduledexecutorservice.html">ScheduledExecutorService</a></li><li><a href="java-fork-and-join-forkjoinpool.html"><b>Java Fork and Join using ForkJoinPool</b></a></li><li><a href="lock.html">Lock</a></li><li><a href="readwritelock.html">ReadWriteLock</a></li><li><a href="atomicboolean.html">AtomicBoolean</a></li><li><a href="atomicinteger.html">AtomicInteger</a></li><li><a href="atomiclong.html">AtomicLong</a></li><li><a href="atomicreference.html">AtomicReference</a></li><li><a href="atomicstampedreference.html">AtomicStampedReference</a></li><li><a href="atomicintegerarray.html">AtomicIntegerArray</a></li><li><a href="atomiclongarray.html">AtomicLongArray</a></li><li><a href="atomicreferencearray.html">AtomicReferenceArray</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Fork and Join using ForkJoinPool</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#fork-and-join-explained">Fork and Join Explained</a><ul><li><a href="#fork">Fork</a></li><li><a href="#join">Join</a></li></ul></li><li><a href="#the-forkjoinpool">The ForkJoinPool</a><ul><li><a href="#creating-a-forkjoinpool">Creating a ForkJoinPool</a></li><li><a href="#submittting-tasks-to-forkjoinpool">Submitting Tasks to the ForkJoinPool</a></li></ul></li><li><a href="#recursive-action">RecursiveAction</a></li><li><a href="#recursive-task">RecursiveTask</a></li><li><a href="#forkjoinpool-critique">ForkJoinPool Critique</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-02-03
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The <code>ForkJoinPool</code> was added to Java in Java 7. The <code>ForkJoinPool</code> is similar to the
+    <a href="executorservice.html">Java ExecutorService</a> but with one difference. The <code>ForkJoinPool</code>
+    makes it easy for tasks to split their work up into smaller tasks which are then submitted to the
+    <code>ForkJoinPool</code> too. Tasks can keep splitting their work into smaller subtasks for as long as it makes
+    to split up the task. It may sound a bit abstract, so in this fork and join tutorial I will explain how the
+    <code>ForkJoinPool</code> works, and how splitting tasks up work.
+</p>
+
+
+
+<a name="fork-and-join-explained"></a>
+<h2>Fork and Join Explained</h2>
+
+<p>
+    Before we look at the <code>ForkJoinPool</code> I want to explain how the fork and join principle works
+    in general.
+</p>
+
+<p>
+    The fork and join principle consists of two steps which are performed recursively. These two steps are the
+    fork step and the join step.
+</p>
+
+
+
+<a name="fork"></a>
+<h3>Fork</h3>
+
+<p>
+    A task that uses the fork and join principle can <i>fork</i> (split) itself into smaller
+    subtasks which can be executed concurrently. This is illustrated in the diagram below:
+</p>
+
+
+<img src="../images/java-concurrency-utils/java-fork-and-join-1.png" alt="Splitting tasks into smaller tasks is referred to as forking tasks.">
+
+<p>
+    By splitting itself up into subtasks, each subtask can be executed in parallel by different CPUs, or different threads
+    on the same CPU.
+</p>
+
+<p>
+    A task only splits itself up into subtasks if the work the task was given is large enough for this to make sense.
+    There is an overhead to splitting up a task into subtasks, so for small amounts of work this overhead may be greater
+    than the speedup achieved by executing subtasks concurrently.
+</p>
+
+<p>
+    The limit for when it makes sense to fork a task into subtasks is also called a threshold. It is up to each task
+    to decide on a sensible threshold. It depends very much on the kind of work being done.
+</p>
+
+
+
+<a name="join"></a>
+<h3>Join</h3>
+
+<p>
+    When a task has split itself up into subtasks, the task waits until the subtasks have finished executing.
+</p>
+
+<p>
+    Once the subtasks have finished executing, the task may <i>join</i> (merge) all the results into one result.
+    This is illustrated in the diagram below:
+</p>
+
+
+<img src="../images/java-concurrency-utils/java-fork-and-join-2.png" alt="Merging the results of subtasks is referred to as joining results.">
+
+
+<p>
+    Of course, not all types of tasks may return a result. If the tasks do not return a result then a task just waits
+    for its subtasks to complete. No result merging takes place then.
+</p>
+
+
+
+<a name="the-forkjoinpool"></a>
+<h2>The ForkJoinPool</h2>
+
+<p>
+    The <code>ForkJoinPool</code> is a special thread pool which is designed to work well with fork-and-join task splitting.
+    The <code>ForkJoinPool</code> located in the <code>java.util.concurrent</code> package, so the full class name is
+    <code>java.util.concurrent.ForkJoinPool</code>.
+</p>
+
+
+
+
+<a name="creating-a-forkjoinpool"></a>
+<h3>Creating a ForkJoinPool</h3>
+
+<p>
+    You create a <code>ForkJoinPool</code> using its constructor. As a parameter to the <code>ForkJoinPool</code>
+    constructor you pass the indicated level of parallelism you desire. The parallelism level indicates how many
+    threads or CPUs you want to work concurrently on on tasks passed to the <code>ForkJoinPool</code>.
+    Here is a <code>ForkJoinPool</code> creation example:
+</p>
+
+<pre class="codeBox">
+ForkJoinPool forkJoinPool = new ForkJoinPool(4);
+</pre>
+
+<p>
+    This example creates a <code>ForkJoinPool</code> with a parallelism level of 4.
+</p>
+
+
+
+
+<a name="submittting-tasks-to-forkjoinpool"></a>
+<h3>Submitting Tasks to the ForkJoinPool</h3>
+
+<p>
+    You submit tasks to a <code>ForkJoinPool</code> similarly to how you submit tasks to an <code>ExecutorService</code>.
+    You can submit two types of tasks. A task that does not return any result (an "action"), and a task which does
+    return a result (a "task"). These two types of tasks are represented by the <code>RecursiveAction</code> and
+    <code>RecursiveTask</code> classes. How to use both of these tasks and how to submit them will be covered in the
+    following sections.
+</p>
+
+
+<a name="recursive-action"></a>
+<h2>RecursiveAction</h2>
+<p>
+    A <code>RecursiveAction</code> is a task which does not return any value. It just does some work, e.g. writing
+    data to disk, and then exits.
+</p>
+
+<p>
+    A <code>RecursiveAction</code> may still need to break up its work into smaller chunks which can be executed by
+    independent threads or CPUs.
+</p>
+
+<p>
+    You implement a <code>RecursiveAction</code> by subclassing it. Here is a <code>RecursiveAction</code> example:
+</p>
+
+<pre class="codeBox">
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RecursiveAction;
+
+public class MyRecursiveAction extends RecursiveAction {
+
+    private long workLoad = 0;
+
+    public MyRecursiveAction(long workLoad) {
+        this.workLoad = workLoad;
+    }
+
+    @Override
+    protected void compute() {
+
+        //if work is above threshold, break tasks up into smaller tasks
+        if(this.workLoad &gt; 16) {
+            System.out.println("Splitting workLoad : " + this.workLoad);
+
+            List&lt;MyRecursiveAction&gt; subtasks =
+                new ArrayList&lt;MyRecursiveAction&gt;();
+
+            subtasks.addAll(createSubtasks());
+
+            for(RecursiveAction subtask : subtasks){
+                subtask.fork();
+            }
+
+        } else {
+            System.out.println("Doing workLoad myself: " + this.workLoad);
+        }
+    }
+
+    private List&lt;MyRecursiveAction&gt; createSubtasks() {
+        List&lt;MyRecursiveAction&gt; subtasks =
+            new ArrayList&lt;MyRecursiveAction&gt;();
+
+        MyRecursiveAction subtask1 = new MyRecursiveAction(this.workLoad / 2);
+        MyRecursiveAction subtask2 = new MyRecursiveAction(this.workLoad / 2);
+
+        subtasks.add(subtask1);
+        subtasks.add(subtask2);
+
+        return subtasks;
+    }
+
+}
+</pre>
+
+
+<p>
+    This example is very simplified. The <code>MyRecursiveAction</code> simply takes a fictive <code>workLoad</code>
+    as parameter to its constructor. If the <code>workLoad</code> is above a certain threshold, the work is split
+    into subtasks which are also scheduled for execution (via the <code>.fork()</code> method of the subtasks.
+    If the <code>workLoad</code> is below a certain threshold then
+    the work is carried out by the <code>MyRecursiveAction</code> itself.
+</p>
+
+<p>
+    You can schedule a <code>MyRecursiveAction</code> for execution like this:
+</p>
+
+<pre class="codeBox">
+MyRecursiveAction myRecursiveAction = new MyRecursiveAction(24);
+
+forkJoinPool.invoke(myRecursiveAction);
+</pre>
+
+
+<a name="recursive-task"></a>
+<h2>RecursiveTask</h2>
+
+
+<p>
+    A <code>RecursiveTask</code> is a task that returns a result. It may split its work up into smaller tasks, and
+    merge the result of these smaller tasks into a collective result. The splitting and merging may take place on
+    several levels. Here is a <code>RecursiveTask</code> example:
+</p>
+
+<pre class="codeBox">
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RecursiveTask;
+    
+    
+public class MyRecursiveTask extends RecursiveTask&lt;Long&gt; {
+
+    private long workLoad = 0;
+
+    public MyRecursiveTask(long workLoad) {
+        this.workLoad = workLoad;
+    }
+
+    protected Long compute() {
+
+        //if work is above threshold, break tasks up into smaller tasks
+        if(this.workLoad &gt; 16) {
+            System.out.println("Splitting workLoad : " + this.workLoad);
+
+            List&lt;MyRecursiveTask&gt; subtasks =
+                new ArrayList&lt;MyRecursiveTask&gt;();
+            subtasks.addAll(createSubtasks());
+
+            for(MyRecursiveTask subtask : subtasks){
+                subtask.fork();
+            }
+
+            long result = 0;
+            for(MyRecursiveTask subtask : subtasks) {
+                result += subtask.join();
+            }
+            return result;
+
+        } else {
+            System.out.println("Doing workLoad myself: " + this.workLoad);
+            return workLoad * 3;
+        }
+    }
+
+    private List&lt;MyRecursiveTask&gt; createSubtasks() {
+        List&lt;MyRecursiveTask&gt; subtasks =
+        new ArrayList&lt;MyRecursiveTask&gt;();
+
+        MyRecursiveTask subtask1 = new MyRecursiveTask(this.workLoad / 2);
+        MyRecursiveTask subtask2 = new MyRecursiveTask(this.workLoad / 2);
+
+        subtasks.add(subtask1);
+        subtasks.add(subtask2);
+
+        return subtasks;
+    }
+}
+</pre>
+
+<p>
+    This example is similar to the <code>RecursiveAction</code> example except it returns a result. The class
+    <code>MyRecursiveTask</code> extends <code>RecursiveTask&lt;Long&gt;</code> which means that the result returned
+    from the task is a <code>Long</code> .
+</p>
+
+<p>
+    The <code>MyRecursiveTask</code> example also breaks the work down into subtasks, and schedules these subtasks
+    for execution using their <code>fork()</code> method.
+</p>
+
+<p>
+    Additionally, this example then receives the result returned by each subtask by calling the <code>join()</code>
+    method of each subtask. The subtask results are merged into a bigger result which is then returned. This kind
+    of joining / mergining of subtask results may occur recursively for several levels of recursion.
+</p>
+
+<p>
+    You can schedule a <code>RecursiveTask</code> like this:
+</p>
+
+<pre class="codeBox">
+MyRecursiveTask myRecursiveTask = new MyRecursiveTask(128);
+
+long mergedResult = forkJoinPool.invoke(myRecursiveTask);
+
+System.out.println("mergedResult = " + mergedResult);    
+</pre>
+
+<p>
+    Notice how you get the final result out from the <code>ForkJoinPool.invoke()</code> method call.
+</p>
+
+
+
+
+
+<a name="forkjoinpool-critique"></a>
+<h2>ForkJoinPool Critique</h2>
+
+<p>
+    It seems not everyone is equally happy with the new <code>ForkJoinPool</code> in Java 7. While searching for experiences
+    with, and opinions about, the <code>ForkJoinPool</code>, I came across the following critique:
+</p>
+
+<p>
+    <a href="http://coopsoft.com/ar/CalamityArticle.html">A Java Fork-Join Calamity</a>
+</p>
+
+<p>
+    It is well worth a read before you plan to use the <code>ForkJoinPool</code> in your own projects.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="lock.html">Lock</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

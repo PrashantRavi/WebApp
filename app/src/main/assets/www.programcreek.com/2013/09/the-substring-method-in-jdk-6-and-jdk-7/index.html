@@ -1,0 +1,778 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>The substring() Method in JDK 6 and JDK 7</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="How substring(int beginIndex, int endIndex) method works in JDK 6 and JDK 7 are different. This article use a diagram to illustrate their difference. Knowing"/>
+<meta name="keywords" content="string substring in jdk 6,string substring in jdk 7"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; The substring() Method in JDK 6 and JDK 7 Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Top 10 questions about Java Collections' href='../top-10-questions-for-java-collections/index.html'/>
+<link rel='next' title='Java hashCode() and equals() Contract for the contains(Object o) Method of Set' href='../java-hashcode-equals-contract-set-contains/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=9273.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_09_the-substring-method-in-jdk-6-and-jdk-7_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_09_the-substring-method-in-jdk-6-and-jdk-7_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-9273"> <a href="index.html" rel="bookmark">
+The substring() Method in JDK 6 and JDK 7 </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>The <code>substring(int beginIndex, int endIndex)</code> method in JDK 6 and JDK 7 are different. Knowing the difference can help you better use them. For simplicity reasons, in the following <code>substring()</code> represent the <code>substring(int beginIndex, int endIndex)</code> method. </p>
+<p><span id="more-9273"></span></p>
+<p><strong>1. What substring() does?</strong></p>
+<p>The substring(int beginIndex, int endIndex) method returns a string that starts with beginIndex and ends with endIndex-1.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #003399;">String</span> x <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;abcdef&quot;</span><span style="color: #339933;">;</span>
+x <span style="color: #339933;">=</span> x.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span>,<span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+<p>Output: </p>
+<pre>
+bc
+</pre>
+<p><strong>2. What happens when substring() is called?</strong></p>
+<p>You may know that because x is immutable, when x is assigned with the result of x.substring(1,3), it points to a totally new string like the following: </p>
+<p><img src="../../../wp-content/uploads/2013/09/string-immutability1-650x303.jpeg" alt="string-immutability" width="550" height="270" class="alignleft size-large wp-image-9283"/></p>
+<p>However, this diagram is not exactly right or it represents what really happens in the heap. What really happens when substring() is called is different between JDK 6 and JDK 7. </p>
+<p><strong>3. substring() in JDK 6</strong></p>
+<p>String is supported by a char array. In JDK 6, the String class contains 3 fields: char value[], int offset, int count. They are used to store real character array, the first index of the array, the number of characters in the String. </p>
+<p>When the substring() method is called, it creates a new string, but the string's value still points to the same array in the heap. The difference between the two Strings is their count and offset values. </p>
+<p><img src="../../../wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg" alt="string-substring-jdk6" width="600" height="360" class="alignleft size-large wp-image-9284" srcset="http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-650x389.jpeg 650w, http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6-300x179.jpeg 300w, http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk6.jpeg 889w" sizes="(max-width: 600px) 100vw, 600px"/></p>
+<p>The following code is simplified and only contains the key point for explain this problem.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">//JDK 6</span>
+<span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> offset, <span style="color: #000066; font-weight: bold;">int</span> count, <span style="color: #000066; font-weight: bold;">char</span> value<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">value</span> <span style="color: #339933;">=</span> value<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">offset</span> <span style="color: #339933;">=</span> offset<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">count</span> <span style="color: #339933;">=</span> count<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> substring<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> beginIndex, <span style="color: #000066; font-weight: bold;">int</span> endIndex<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">//check boundary</span>
+	<span style="color: #000000; font-weight: bold;">return</span>  <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span>offset <span style="color: #339933;">+</span> beginIndex, endIndex <span style="color: #339933;">-</span> beginIndex, value<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>4. A problem caused by substring() in JDK 6</strong></p>
+<p>If you have a VERY long string, but you only need a small part each time by using substring(). This will cause a performance problem since you need only a small part, you keep the whole thing. For JDK 6, the solution is using the following, which will make it point to a real substring:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">x <span style="color: #339933;">=</span> x.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>x, y<span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;&quot;</span></pre></td></tr></table></div>
+<p><strong>5. substring() in JDK 7</strong></p>
+<p>This is improved in JDK 7. In JDK 7, the substring() method actually create a new array in the heap. </p>
+<p><img src="../../../wp-content/uploads/2013/09/string-substring-jdk71-650x389.jpeg" alt="string-substring-jdk7" width="650" height="389" class="aligncenter size-large wp-image-9285" srcset="http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71-650x389.jpeg 650w, http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71-300x179.jpeg 300w, http://www.programcreek.com/wp-content/uploads/2013/09/string-substring-jdk71.jpeg 889w" sizes="(max-width: 650px) 100vw, 650px"/></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #666666; font-style: italic;">//JDK 7</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span> value<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>, <span style="color: #000066; font-weight: bold;">int</span> offset, <span style="color: #000066; font-weight: bold;">int</span> count<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">//check boundary</span>
+	<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">value</span> <span style="color: #339933;">=</span> <span style="color: #003399;">Arrays</span>.<span style="color: #006633;">copyOfRange</span><span style="color: #009900;">&#40;</span>value, offset, offset <span style="color: #339933;">+</span> count<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> substring<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> beginIndex, <span style="color: #000066; font-weight: bold;">int</span> endIndex<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">//check boundary</span>
+	<span style="color: #000066; font-weight: bold;">int</span> subLen <span style="color: #339933;">=</span> endIndex <span style="color: #339933;">-</span> beginIndex<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span>value, beginIndex, subLen<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><a href="../top-10-faqs-of-java-strings/index.html">Top 10 questions about Java String</a>. </p>
+<p>References:<br/>
+1. <a href="http://www.javaadvent.com/2012/12/changes-to-stringsubstring-in-java-7.html">Changes to substring</a><br/>
+2. <a href="http://nextmovesoftware.com/blog/2013/07/05/java-6-vs-java-7-when-implementation-matters/">Java 6 vs Java 7 when implementation matters</a></p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../02/longest-substring-which-contains-2-unique-characters/index.html" rel="bookmark" title="Longest Substring with At Most K Distinct Characters">Longest Substring with At Most K Distinct Characters </a></li>
+<li><a href="../../../2014/06/leetcode-substring-with-concatenation-of-all-words-java/index.html" rel="bookmark" title="LeetCode &#8211; Substring with Concatenation of All Words (Java)">LeetCode &#8211; Substring with Concatenation of All Words (Java) </a></li>
+<li><a href="../../../2014/05/leetcode-minimum-window-substring-java/index.html" rel="bookmark" title="LeetCode &#8211; Minimum Window Substring (Java)">LeetCode &#8211; Minimum Window Substring (Java) </a></li>
+<li><a href="../../02/leetcode-longest-substring-without-repeating-characters-java/index.html" rel="bookmark" title="LeetCode &#8211; Longest Substring Without Repeating Characters (Java)">LeetCode &#8211; Longest Substring Without Repeating Characters (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/basics/index.html" rel="category tag">Basics</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/09/the-substring-method-in-jdk-6-and-jdk-7/" dc:identifier="http://www.programcreek.com/2013/09/the-substring-method-in-jdk-6-and-jdk-7/" dc:title="The substring() Method in JDK 6 and JDK 7" trackback:ping="http://www.programcreek.com/2013/09/the-substring-method-in-jdk-6-and-jdk-7/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-10000">
+<div id="dsq-comment-header-10000" class="dsq-comment-header">
+<cite id="dsq-cite-10000">
+<span id="dsq-author-user-10000">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10000" class="dsq-comment-body">
+<div id="dsq-comment-message-10000" class="dsq-comment-message"><p>This is *NOT* an improvement. The substring having been immutable in jdk6 and earlier was a *core* building block for fast partial string manipulations. There is no fix to this in jdk7 or later: performance takes a (sometimes huge) hit.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6884">
+<div id="dsq-comment-header-6884" class="dsq-comment-header">
+<cite id="dsq-cite-6884">
+<span id="dsq-author-user-6884">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6884" class="dsq-comment-body">
+<div id="dsq-comment-message-6884" class="dsq-comment-message"><p>But with the JDK6 way there is a workaround &#8211; by explicitly creating a new string. With jdk7 there is NO way to retain the good performance /memory usage characteristics anymore. JDK7 approach is a serious regression.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6883">
+<div id="dsq-comment-header-6883" class="dsq-comment-header">
+<cite id="dsq-cite-6883">
+<span id="dsq-author-user-6883">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6883" class="dsq-comment-body">
+<div id="dsq-comment-message-6883" class="dsq-comment-message"><p>Yes. This new behavior in jdk7 is a significant backwards step.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6882">
+<div id="dsq-comment-header-6882" class="dsq-comment-header">
+<cite id="dsq-cite-6882">
+<span id="dsq-author-user-6882">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6882" class="dsq-comment-body">
+<div id="dsq-comment-message-6882" class="dsq-comment-message"><p>More common that substrings are repeatedly created from parent string. Thus jdk7 behavior is inferior.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6328">
+<div id="dsq-comment-header-6328" class="dsq-comment-header">
+<cite id="dsq-cite-6328">
+<a id="dsq-author-user-6328" href="http://mindprod.com" target="_blank" rel="nofollow">roedygreen</a>
+</cite>
+</div>
+<div id="dsq-comment-body-6328" class="dsq-comment-body">
+<div id="dsq-comment-message-6328" class="dsq-comment-message"><p>I would say &#8220;different&#8221; not &#8220;improved&#8221;. If you are plucking many small substrings from a big string that say represents file contents (my most common case) you will use more RAM with the JDK 7 method than with the JDK 6. If you need to keep the big string around JDK 6 is better. If you want to avoid pinning big string in RAM the JDK 7 method is better. I gather it would not have been practical to make it a compile time option since this decision is so pervasive.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6317">
+<div id="dsq-comment-header-6317" class="dsq-comment-header">
+<cite id="dsq-cite-6317">
+<span id="dsq-author-user-6317">JavaGuy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6317" class="dsq-comment-body">
+<div id="dsq-comment-message-6317" class="dsq-comment-message"><p>Very nice and easy to understand article 🙂<br/>
+Found another nice article that explains the memory leak possibility well in Java 6</p>
+<p><a href="http://javaterritory.blogspot.com/2014/09/how-strings-substring-function-can.html" rel="nofollow">http://javaterritory.blogspot.com/2014/09/how-strings-substring-function-can.html</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5637">
+<div id="dsq-comment-header-5637" class="dsq-comment-header">
+<cite id="dsq-cite-5637">
+<span id="dsq-author-user-5637">智 陶</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5637" class="dsq-comment-body">
+<div id="dsq-comment-message-5637" class="dsq-comment-message"><p>In jdk6，we also have the following code</p>
+<p> public String(String original) {</p>
+<p> int size = original.count;</p>
+<p> char[] originalValue = original.value;</p>
+<p> char[] v;</p>
+<p> if (originalValue.length &gt; size) {</p>
+<p> // The array representing the String is bigger than the new</p>
+<p> // String itself. Perhaps this constructor is being called</p>
+<p> // in order to trim the baggage, so make a copy of the array.</p>
+<p> int off = original.offset;</p>
+<p> v = Arrays.copyOfRange(originalValue, off, off+size);</p>
+<p> } else {</p>
+<p> // The array representing the String is the same</p>
+<p> // size as the String, so no point in making a copy.</p>
+<p> v = originalValue;</p>
+<p> }</p>
+<p> this.offset = 0;</p>
+<p> this.count = size;</p>
+<p> this.value = v;</p>
+<p> }</p>
+<p>it also can solve in JDk6 and u can do it by intern() method too.<br/>
+correct me if i am wrong</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5604">
+<div id="dsq-comment-header-5604" class="dsq-comment-header">
+<cite id="dsq-cite-5604">
+<span id="dsq-author-user-5604">Chintan Mohan Rohila</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5604" class="dsq-comment-body">
+<div id="dsq-comment-message-5604" class="dsq-comment-message"><p>WRT to Oracle Java 7, the diagram describing String objects in Java 7 needs to be updated as &#8216;count&#8217; and &#8216;offset&#8217; are no longer String class attributes. However, IBM Java 7 still has old implementation of not making new copy of &#8216;value&#8217; in substring object.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5595">
+<div id="dsq-comment-header-5595" class="dsq-comment-header">
+<cite id="dsq-cite-5595">
+<span id="dsq-author-user-5595">c094728</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5595" class="dsq-comment-body">
+<div id="dsq-comment-message-5595" class="dsq-comment-message"><p>I didn&#8217;t believe you at first so looked at the source and you are quite right. There is code in constructor that makes a copy if the begin &amp; end index don&#8217;t point at the full buffer.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5594">
+<div id="dsq-comment-header-5594" class="dsq-comment-header">
+<cite id="dsq-cite-5594">
+<span id="dsq-author-user-5594">c094728</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5594" class="dsq-comment-body">
+<div id="dsq-comment-message-5594" class="dsq-comment-message"><p>It sounds too me like the JDK7 substring will be very bad for performance when you have a very long string (say &gt; 20k) and you want to include most of it in the new string. Now it has to copy all of that data whereas in JDK6 it took no more time than creating a small substring of 2 characters since it keeps the reference to the original string and only adds pointers to the substring. Very inefficient to copy this data. Does trim() in JDK7 copy the entire string? For example if you are parsing a large XML file, substring is very efficient in JDK6 because the data is not moved, just split up into fields that refrence the original file.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5573">
+<div id="dsq-comment-header-5573" class="dsq-comment-header">
+<cite id="dsq-cite-5573">
+<span id="dsq-author-user-5573">liam</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5573" class="dsq-comment-body">
+<div id="dsq-comment-message-5573" class="dsq-comment-message"><p>In JDK6 the old char array is still referenced by the new String.So only the old String object would be be garbage collected.Not the old char array.</p>
+<p>Just as author said ,&#8221;If you have a VERY long string, but you only need a small part each time by using substring().&#8221;</p>
+<p>Terrible situation.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5369">
+<div id="dsq-comment-header-5369" class="dsq-comment-header">
+<cite id="dsq-cite-5369">
+<span id="dsq-author-user-5369">naresh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5369" class="dsq-comment-body">
+<div id="dsq-comment-message-5369" class="dsq-comment-message"><p>Imagine a situation where memory is very critical, once x is changed to hold, smaller array, i do not want to hold up memory and can garbage collect it. It will reduce memory leaks.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5308">
+<div id="dsq-comment-header-5308" class="dsq-comment-header">
+<cite id="dsq-cite-5308">
+<span id="dsq-author-user-5308">Kim</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5308" class="dsq-comment-body">
+<div id="dsq-comment-message-5308" class="dsq-comment-message"><p>I agree with you. Once you knew about the jdk 6 implementation it was quite alright.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5179">
+<div id="dsq-comment-header-5179" class="dsq-comment-header">
+<cite id="dsq-cite-5179">
+<span id="dsq-author-user-5179">Green</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5179" class="dsq-comment-body">
+<div id="dsq-comment-message-5179" class="dsq-comment-message"><p>very helpful for me ! thanks!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5163">
+<div id="dsq-comment-header-5163" class="dsq-comment-header">
+<cite id="dsq-cite-5163">
+<span id="dsq-author-user-5163">xiangxm</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5163" class="dsq-comment-body">
+<div id="dsq-comment-message-5163" class="dsq-comment-message"><p>i just don&#8217;t understand that why &#8220;The memory leak problem caused by substring() in JDK 6 is solved in JDK 7 &#8221; ?? 3Q</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5162">
+<div id="dsq-comment-header-5162" class="dsq-comment-header">
+<cite id="dsq-cite-5162">
+<span id="dsq-author-user-5162">xiangxm</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5162" class="dsq-comment-body">
+<div id="dsq-comment-message-5162" class="dsq-comment-message"><p>The memory leak problem caused by substring() in JDK 6 is solved in JDK 7, because new string will not point to the existing old character array.？？why??</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5140">
+<div id="dsq-comment-header-5140" class="dsq-comment-header">
+<cite id="dsq-cite-5140">
+<a id="dsq-author-user-5140" href="http://darkhogg.es/" target="_blank" rel="nofollow">Darkhogg</a>
+</cite>
+</div>
+<div id="dsq-comment-body-5140" class="dsq-comment-body">
+<div id="dsq-comment-message-5140" class="dsq-comment-message"><p>x = x.substring(x, y) + &#8220;&#8221;</p>
+<p>Do *NOT* use that code. That line of code is equivalent to:</p>
+<p> StringBuilder sb = new StringBuilder();<br/>
+sb.append(x.substring(x, y));<br/>
+sb.append(&#8220;&#8221;);<br/>
+x = sb.toString();</p>
+<p>Instead, do:</p>
+<p> x = new String(x.substring(x, y));</p>
+<p>You save one object reference and a bit of time.</p>
+<p>I personally don&#8217;t like the new behaviour as it can be slow and waste memory in certain situations where the old behaviour did just fine.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5139">
+<div id="dsq-comment-header-5139" class="dsq-comment-header">
+<cite id="dsq-cite-5139">
+<span id="dsq-author-user-5139">simple_plan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5139" class="dsq-comment-body">
+<div id="dsq-comment-message-5139" class="dsq-comment-message"><p>wonderful</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5137">
+<div id="dsq-comment-header-5137" class="dsq-comment-header">
+<cite id="dsq-cite-5137">
+<span id="dsq-author-user-5137">Forest</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5137" class="dsq-comment-body">
+<div id="dsq-comment-message-5137" class="dsq-comment-message"><p>very good</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5128">
+<div id="dsq-comment-header-5128" class="dsq-comment-header">
+<cite id="dsq-cite-5128">
+<span id="dsq-author-user-5128">skydiver</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5128" class="dsq-comment-body">
+<div id="dsq-comment-message-5128" class="dsq-comment-message"><p>Interesting, it seems that this was also incorporated in JDK 1.6 b14?</p>
+<p> public String(char value[], int offset, int count) {<br/>
+&#8230;..<br/>
+this.value = Arrays.copyOfRange(value, offset, offset+count);</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5054">
+<div id="dsq-comment-header-5054" class="dsq-comment-header">
+<cite id="dsq-cite-5054">
+<span id="dsq-author-user-5054">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5054" class="dsq-comment-body">
+<div id="dsq-comment-message-5054" class="dsq-comment-message"><p>You are welcome:)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5053">
+<div id="dsq-comment-header-5053" class="dsq-comment-header">
+<cite id="dsq-cite-5053">
+<span id="dsq-author-user-5053">Yuan.Ming</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5053" class="dsq-comment-body">
+<div id="dsq-comment-message-5053" class="dsq-comment-message"><p>Thanks&#8230;&#8230;&#8230;..</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5049">
+<div id="dsq-comment-header-5049" class="dsq-comment-header">
+<cite id="dsq-cite-5049">
+<span id="dsq-author-user-5049">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5049" class="dsq-comment-body">
+<div id="dsq-comment-message-5049" class="dsq-comment-message"><p>Hi Peter, </p>
+<p>Thanks a lot for your comment. The memory leak problem caused by substring() in JDK 6 is solved in JDK 7, because new string will not point to the existing old character array. </p>
+<p>The old string(with old char array) will be garbage collected if there is no other references pointing to it. </p>
+<p>Thanks. </p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5047">
+<div id="dsq-comment-header-5047" class="dsq-comment-header">
+<cite id="dsq-cite-5047">
+<span id="dsq-author-user-5047">Peter Jerald</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5047" class="dsq-comment-body">
+<div id="dsq-comment-message-5047" class="dsq-comment-message"><p>Hi, </p>
+<p>Recently I heard that substring() method causes memory leak issues. </p>
+<p><a href="http://bugs.sun.com/view_bug.do?bug_id=4513622" rel="nofollow">http://bugs.sun.com/view_bug.do?bug_id=4513622</a></p>
+<p>whether this one resolved in new version of JDK?</p>
+<p>Added to this, another question</p>
+<p>As you said in the above article, In JDK 7 the substring method creates new object, so what will have happen to old string this will retain in memory?</p>
+<p>Thanks and Regards,<br/>
+Peter Jerald</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/09/the-substring-method-in-jdk-6-and-jdk-7/';
+var disqus_identifier = '9273 http://www.programcreek.com/?p=9273';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "The substring() Method in JDK 6 and JDK 7";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=9273';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

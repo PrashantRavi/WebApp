@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Copy List with Random Pointer</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-14309</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Sun, 04 Sep 2016 06:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-14309</guid>
+		<description><![CDATA[same as copying a list without random pointer, but before creating a new node check for presence in alreadyCreated map.
+&lt;code&gt;    
+public RandomListNode copyRandomList(RandomListNode head) {
+    RandomListNode dummy = new RandomListNode(0);
+    RandomListNode prev = dummy;
+    // 
+    Map alreadyCreated = new HashMap();
+    while(head != null){
+        RandomListNode newNode = alreadyCreated.containsKey(head) ? alreadyCreated.get(head) : new RandomListNode(head.label);
+        alreadyCreated.put(head,newNode);
+        newNode.random = head.random == null &#124;&#124; alreadyCreated.containsKey(head.random) ? alreadyCreated.get(head.random) : new RandomListNode(head.random.label);
+        alreadyCreated.put(head.random,newNode.random);
+        prev.next = newNode;
+        prev = newNode;
+        head = head.next;
+    }
+    return dummy.next;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>same as copying a list without random pointer, but before creating a new node check for presence in alreadyCreated map.<br />
+<code><br />
+public RandomListNode copyRandomList(RandomListNode head) {<br />
+    RandomListNode dummy = new RandomListNode(0);<br />
+    RandomListNode prev = dummy;<br />
+    //<br />
+    Map alreadyCreated = new HashMap();<br />
+    while(head != null){<br />
+        RandomListNode newNode = alreadyCreated.containsKey(head) ? alreadyCreated.get(head) : new RandomListNode(head.label);<br />
+        alreadyCreated.put(head,newNode);<br />
+        newNode.random = head.random == null || alreadyCreated.containsKey(head.random) ? alreadyCreated.get(head.random) : new RandomListNode(head.random.label);<br />
+        alreadyCreated.put(head.random,newNode.random);<br />
+        prev.next = newNode;<br />
+        prev = newNode;<br />
+        head = head.next;<br />
+    }<br />
+    return dummy.next;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ranjith Sompalli</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-11618</link>
+		<dc:creator><![CDATA[Ranjith Sompalli]]></dc:creator>
+		<pubDate>Sat, 04 Jun 2016 03:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-11618</guid>
+		<description><![CDATA[This is my solution
+
+public RandomListNode copyRandomList(RandomListNode head) 
+
+    {
+       Map nodesMap = new HashMap();
+
+       if(head == null)
+            return null;
+
+       RandomListNode first = head;
+       while(head != null)
+       {
+           RandomListNode node = new RandomListNode(head.label);
+           nodesMap.put(head,node);
+           head = head.next;
+       }
+
+       for(RandomListNode originalNode : nodesMap.keySet())
+       {
+            nodesMap.get(originalNode).next = nodesMap.get(originalNode.next);
+            nodesMap.get(originalNode).random = nodesMap.get(originalNode.random);
+       }
+       return nodesMap.get(first);
+    }]]></description>
+		<content:encoded><![CDATA[<p>This is my solution</p>
+<p>public RandomListNode copyRandomList(RandomListNode head) </p>
+<p>    {<br />
+       Map nodesMap = new HashMap();</p>
+<p>       if(head == null)<br />
+            return null;</p>
+<p>       RandomListNode first = head;<br />
+       while(head != null)<br />
+       {<br />
+           RandomListNode node = new RandomListNode(head.label);<br />
+           nodesMap.put(head,node);<br />
+           head = head.next;<br />
+       }</p>
+<p>       for(RandomListNode originalNode : nodesMap.keySet())<br />
+       {<br />
+            nodesMap.get(originalNode).next = nodesMap.get(originalNode.next);<br />
+            nodesMap.get(originalNode).random = nodesMap.get(originalNode.random);<br />
+       }<br />
+       return nodesMap.get(first);<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Roderick Gao</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-7465</link>
+		<dc:creator><![CDATA[Roderick Gao]]></dc:creator>
+		<pubDate>Thu, 08 Oct 2015 05:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-7465</guid>
+		<description><![CDATA[This is my solution: keep putting .random and next into HashMap, then we just need one iteration instead of two.]]></description>
+		<content:encoded><![CDATA[<p>This is my solution: keep putting .random and next into HashMap, then we just need one iteration instead of two.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: traceformula</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-7131</link>
+		<dc:creator><![CDATA[traceformula]]></dc:creator>
+		<pubDate>Fri, 03 Jul 2015 23:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-7131</guid>
+		<description><![CDATA[I also have the sames solutions. And I added another solution using recursion:
+(  url: http://traceformula.blogspot.com/2015/07/copy-list-with-random-pointers.html  )
+
+public class Solution {  
+
+    public HashMap createdNode;   
+
+    public RandomListNode copyRandomList(RandomListNode head) {  
+
+        createdNode = new HashMap();  
+
+        return cc(head); 
+
+} 
+    private RandomListNode cc(RandomListNode node) {  
+
+        if(node == null)  
+
+        {  
+
+            return null;  
+
+        } 
+
+        RandomListNode newNode = new RandomListNode(node.label); 
+        createdNode.put(node, newNode);          
+
+        newNode.next = cc(node.next);  
+
+         
+
+        //now assign the random pointer  
+
+        RandomListNode newRandom = null;  
+
+        if(node.random != null)  
+
+        {  
+
+            newRandom = createdNode.get(node.random);  
+
+        }  
+
+        newNode.random = newRandom;  
+
+      
+
+        return newNode;      
+
+    }  
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I also have the sames solutions. And I added another solution using recursion:<br />
+(  url: <a href="http://traceformula.blogspot.com/2015/07/copy-list-with-random-pointers.html" rel="nofollow">http://traceformula.blogspot.com/2015/07/copy-list-with-random-pointers.html</a>  )</p>
+<p>public class Solution {  </p>
+<p>    public HashMap createdNode;   </p>
+<p>    public RandomListNode copyRandomList(RandomListNode head) {  </p>
+<p>        createdNode = new HashMap();  </p>
+<p>        return cc(head); </p>
+<p>}<br />
+    private RandomListNode cc(RandomListNode node) {  </p>
+<p>        if(node == null)  </p>
+<p>        {  </p>
+<p>            return null;  </p>
+<p>        } </p>
+<p>        RandomListNode newNode = new RandomListNode(node.label);<br />
+        createdNode.put(node, newNode);          </p>
+<p>        newNode.next = cc(node.next);  </p>
+<p>        //now assign the random pointer  </p>
+<p>        RandomListNode newRandom = null;  </p>
+<p>        if(node.random != null)  </p>
+<p>        {  </p>
+<p>            newRandom = createdNode.get(node.random);  </p>
+<p>        }  </p>
+<p>        newNode.random = newRandom;  </p>
+<p>        return newNode;      </p>
+<p>    }  </p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nuurtila</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-7109</link>
+		<dc:creator><![CDATA[nuurtila]]></dc:creator>
+		<pubDate>Mon, 29 Jun 2015 09:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-7109</guid>
+		<description><![CDATA[&#062; RandomListNode newhead=head;
+This does not create a copy. Both p and q are references to the same list.]]></description>
+		<content:encoded><![CDATA[<p>&gt; RandomListNode newhead=head;<br />
+This does not create a copy. Both p and q are references to the same list.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Monica Shankar</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-copy-list-with-random-pointer/#comment-7103</link>
+		<dc:creator><![CDATA[Monica Shankar]]></dc:creator>
+		<pubDate>Sat, 27 Jun 2015 15:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10756#comment-7103</guid>
+		<description><![CDATA[can&#039;t we simply do this
+
+
+
+
+
+p=head;
+RandomListNode newhead=head;
+q=newhead;
+
+
+while(p.random!=null)
+{
+q.label=p.label;
+q.random=p.random;
+q=q.random;
+p=p.random;
+}
+
+
+
+I really don&#039;t see the point of having random and next as complementary fields for linkedlist. Correct me if I am wrong.]]></description>
+		<content:encoded><![CDATA[<p>can&#8217;t we simply do this</p>
+<p>p=head;<br />
+RandomListNode newhead=head;<br />
+q=newhead;</p>
+<p>while(p.random!=null)<br />
+{<br />
+q.label=p.label;<br />
+q.random=p.random;<br />
+q=q.random;<br />
+p=p.random;<br />
+}</p>
+<p>I really don&#8217;t see the point of having random and next as complementary fields for linkedlist. Correct me if I am wrong.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

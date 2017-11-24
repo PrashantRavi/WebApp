@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Permutations II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Cole Thatcher</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-7337</link>
+		<dc:creator><![CDATA[Cole Thatcher]]></dc:creator>
+		<pubDate>Tue, 01 Sep 2015 23:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-7337</guid>
+		<description><![CDATA[Will take O(n!) space?]]></description>
+		<content:encoded><![CDATA[<p>Will take O(n!) space?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Paul</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-6559</link>
+		<dc:creator><![CDATA[Paul]]></dc:creator>
+		<pubDate>Tue, 13 Jan 2015 00:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-6559</guid>
+		<description><![CDATA[thanks for the solution. Would you mind to explain the containsDuplicate code?
+
+private boolean containsDuplicate(int[] arr, int start, int end) {
+	for (int i = start; i &#060;= end-1; i++) {
+		if (arr[i] == arr[end]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+
+Why should we do that to avoid duplication.]]></description>
+		<content:encoded><![CDATA[<p>thanks for the solution. Would you mind to explain the containsDuplicate code?</p>
+<p>private boolean containsDuplicate(int[] arr, int start, int end) {<br />
+	for (int i = start; i &lt;= end-1; i++) {<br />
+		if (arr[i] == arr[end]) {<br />
+			return false;<br />
+		}<br />
+	}<br />
+	return true;<br />
+}</p>
+<p>Why should we do that to avoid duplication.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vj</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-6335</link>
+		<dc:creator><![CDATA[vj]]></dc:creator>
+		<pubDate>Tue, 25 Nov 2014 07:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-6335</guid>
+		<description><![CDATA[You can swap the input  and skip numbers that are duplicates. 
+
+
+import java.util.*;
+
+public class PrintUniquePermutations {
+
+	public static void main(String args[]) {
+
+		int[] input = {1, 2, 1};
+
+		Arrays.sort(input);
+
+		String prefix = &quot;&quot;;
+
+		printUnique(prefix, input, 0);
+
+	}
+
+	private static void printUnique(String prefix, int[] input, int start) {
+
+		if (start == input.length) {
+
+			System.out.println(prefix);
+
+			return;
+
+		}	
+
+		for (int i = start; i &#060; input.length; i++) {
+
+			if (i != start &#038;&#038; input[i] == input[i-1]) {
+
+				continue;
+
+			}
+
+			swap(input, i, start);
+
+			printUnique(prefix + &#034;, &#034; + String.valueOf(input[start]), input, start + 1);
+
+			swap(input, i, start);
+
+		}
+
+	}
+
+	private static void swap(int[] input, int i, int j) {
+
+		int tmp = input[i];
+
+		input[i] = input[j];
+
+		input[j] = tmp;
+
+	}
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>You can swap the input  and skip numbers that are duplicates. </p>
+<p>import java.util.*;</p>
+<p>public class PrintUniquePermutations {</p>
+<p>	public static void main(String args[]) {</p>
+<p>		int[] input = {1, 2, 1};</p>
+<p>		Arrays.sort(input);</p>
+<p>		String prefix = &#8220;&#8221;;</p>
+<p>		printUnique(prefix, input, 0);</p>
+<p>	}</p>
+<p>	private static void printUnique(String prefix, int[] input, int start) {</p>
+<p>		if (start == input.length) {</p>
+<p>			System.out.println(prefix);</p>
+<p>			return;</p>
+<p>		}	</p>
+<p>		for (int i = start; i &lt; input.length; i++) {</p>
+<p>			if (i != start &amp;&amp; input[i] == input[i-1]) {</p>
+<p>				continue;</p>
+<p>			}</p>
+<p>			swap(input, i, start);</p>
+<p>			printUnique(prefix + &quot;, &quot; + String.valueOf(input[start]), input, start + 1);</p>
+<p>			swap(input, i, start);</p>
+<p>		}</p>
+<p>	}</p>
+<p>	private static void swap(int[] input, int i, int j) {</p>
+<p>		int tmp = input[i];</p>
+<p>		input[i] = input[j];</p>
+<p>		input[j] = tmp;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ryanlr</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-6239</link>
+		<dc:creator><![CDATA[ryanlr]]></dc:creator>
+		<pubDate>Thu, 23 Oct 2014 02:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-6239</guid>
+		<description><![CDATA[Thanks! Great solution!]]></description>
+		<content:encoded><![CDATA[<p>Thanks! Great solution!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-6077</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Mon, 18 Aug 2014 20:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-6077</guid>
+		<description><![CDATA[Use set to maintain uniqueness:
+
+	    	List&#060;List&#062; returnList = new ArrayList&#060;List&#062; ();
+
+	    	returnList.add(new ArrayList());
+
+	    	for (int i=0 ; i &#060; num.length; i++){
+
+	    		Set&#060;List&#062; currnetSet = new HashSet&#060;List&#062; ();
+
+	    		for (List l:returnList){
+
+	    			for(int j=0;j&#060; l.size() +1;j++){
+
+	    				l.add(j,num[i]);
+
+	    				ArrayList T = new ArrayList(l);
+
+	    				l.remove(j);
+
+	    				currnetSet.add(T);
+
+	    			}
+
+	    		}
+
+	    		returnList = new ArrayList&#060;List&#062; (currnetSet);
+
+	    	}
+
+	    	return returnList;
+
+	    }]]></description>
+		<content:encoded><![CDATA[<p>Use set to maintain uniqueness:</p>
+<p>	    	List&lt;List&gt; returnList = new ArrayList&lt;List&gt; ();</p>
+<p>	    	returnList.add(new ArrayList());</p>
+<p>	    	for (int i=0 ; i &lt; num.length; i++){</p>
+<p>	    		Set&lt;List&gt; currnetSet = new HashSet&lt;List&gt; ();</p>
+<p>	    		for (List l:returnList){</p>
+<p>	    			for(int j=0;j&lt; l.size() +1;j++){</p>
+<p>	    				l.add(j,num[i]);</p>
+<p>	    				ArrayList T = new ArrayList(l);</p>
+<p>	    				l.remove(j);</p>
+<p>	    				currnetSet.add(T);</p>
+<p>	    			}</p>
+<p>	    		}</p>
+<p>	    		returnList = new ArrayList&lt;List&gt; (currnetSet);</p>
+<p>	    	}</p>
+<p>	    	return returnList;</p>
+<p>	    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SSSSS</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-permutations-ii-java/#comment-6008</link>
+		<dc:creator><![CDATA[SSSSS]]></dc:creator>
+		<pubDate>Tue, 22 Jul 2014 00:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11776#comment-6008</guid>
+		<description><![CDATA[应该是不contain duplicate]]></description>
+		<content:encoded><![CDATA[<p>应该是不contain duplicate</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

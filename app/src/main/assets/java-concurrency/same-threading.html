@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Same-threading</title>
+
+    <meta name="description" content="Same-threading means scaling a single-threaded over multiple CPUs or cores in the same server. Same-threading is thus a technique to scale single-threaded architectures across all CPUs in a computer.">
+    <meta name="keywords"    content="java concurrency same-threading">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Same-threading">
+    <meta name="twitter:description" content="Same-threading means scaling a single-threaded over multiple CPUs or cores in the same server. Same-threading is thus a technique to scale single-threaded architectures across all CPUs in a computer.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Same-threading"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/same-threading.html"/>
+    <meta property="og:description" content="Same-threading means scaling a single-threaded over multiple CPUs or cores in the same server. Same-threading is thus a technique to scale single-threaded architectures across all CPUs in a computer."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/concurrency-models.html";
+var nextArticleInCategory = "/java-concurrency/concurrency-vs-parallelism.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7145;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html"><b>Same-threading</b></a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Same-threading</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#why-single-threaded-systems">Why Single-threaded Systems?</a></li><li><a href="#same-threading-single-threading-scaled-out">Same-threading, Single-threading Scaled Out</a><ul><li><a href="#one-thread-per-cpu">One Thread Per CPU</a></li></ul></li><li><a href="#no-shared-state">No Shared State</a></li><li><a href="#load-distribution">Load Distribution</a><ul><li><a href="#single-threaded-microservices">Single-threaded Microservices</a></li><li><a href="#services-with-sharded-data">Services With Sharded Data</a></li></ul></li><li><a href="#thread-communication">Thread Communication</a></li><li><a href="#simpler-concurrency-model">Simpler Concurrency Model</a></li><li><a href="#illustrations">Illustrations</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2016-05-02
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Same-threading is a concurrency model where a single-threaded systems are scaled out to N single-threaded
+    systems. The result is N single-threaded systems running in parallel.
+</p>
+
+<p>
+    A same-threaded system is not a pure single-threaded system, because it contains of multiple threads.
+    But - each of the threads run like a single-threaded system.
+</p>
+
+
+
+
+<a name="why-single-threaded-systems"></a>
+<h2>Why Single-threaded Systems?</h2>
+<p>
+    You might be wondering why anyone would design single-threaded system today. Single-threaded systems have gained
+    popularity because their concurrency models are much simpler than multi-threaded systems. Single-threaded systems
+    do not share any data with other threads. This enables single thread to use non-concurrent data structures,
+    and utilize the CPU and CPU caches better.
+</p>
+
+<p>
+    Unfortunately, single-threaded systems do not fully utilize modern CPUs. A modern CPU often comes with 2, 4
+    or more cores. Each core functions as an individual CPU. A single-threaded system can only utilize one of
+    the cores, as illustrated here:
+</p>
+
+
+<img src="../images/java-concurrency/same-threading-0.png" alt="A single-threaded system running on a 4 core CPU.">
+
+
+
+
+<a name="same-threading-single-threading-scaled-out"></a>
+<h2>Same-threading, Single-threading Scaled Out</h2>
+
+<p>
+    In order to utilize all the cores in the CPU, a single-threaded system can be scaled out to utilize the
+    whole computer.
+</p>
+
+
+
+<a name="one-thread-per-cpu"></a>
+<h3>One Thread Per CPU</h3>
+<p>
+    Same-threaded systems usually has 1 thread running per CPU in the computer. If a computer contains 4 CPUs,
+    or a CPU with 4 cores, then it would be normal to run 4 instances of the same-threaded system (4 single-threaded
+    systems). The illustration below shows this principle:
+</p>
+
+
+<img src="../images/java-concurrency/same-threading-0-1.png" alt="A same-threaded system running on a 4 core CPU.">
+
+
+
+
+<a name="no-shared-state"></a>
+<h2>No Shared State</h2>
+
+<p>
+    A same-threaded system looks similar to a multi-threaded system, since a same-threaded system has multiple
+    threads running inside it. But there is a subtle difference.
+</p>
+
+<p>
+    The difference between a same-threaded and a multi-threaded system is that the threads in a same-threaded
+    system do not share state. There is no shared memory which the threads access concurrently. No concurrent
+    data structures etc. via which the threads share data. This difference is illustrated here:
+</p>
+
+<img src="../images/java-concurrency/same-threading-4.png" alt="A multi-threaded and a same-threaded system.">
+
+
+<p>
+    The lack of shared state is what makes each thread behave as it if was a single-threaded system. However,
+    since a same-threaded system can contain more than a single thread, so it is not really a "single-threaded system".
+    In lack of a better name, I found it more precise to call such a system a <i>same-threaded</i> system,
+    rather than a "multi-threaded system with a single-threaded design". Same-threaded is easier to say, and easier
+    to understand.
+</p>
+
+<p>
+    Same-threaded basically means that data processing stays within the same thread, and that
+    no threads in a same-threaded system share data concurrently.
+</p>
+
+
+
+<a name="load-distribution"></a>
+<h2>Load Distribution</h2>
+<p>
+    Obviously, a same-threaded system needs to share the work load between the single-threaded instances running.
+    If not, only a single instance will get any work, and the system would in effect be single-threaded.
+</p>
+
+<p>
+    Exactly how you distribute the load over the different instances depend on the design of your system. I will
+    cover a few in the following sections.
+</p>
+
+
+
+<a name="single-threaded-microservices"></a>
+<h3>Single-threaded Microservices</h3>
+
+<p>
+    If your system consists of multiple microservices, each microservice can run in single-threaded mode. When you
+    deploy multiple single-threaded microservices to the same machine, each microservice can run a single thread
+    on a sigle CPU.
+</p>
+
+<p>
+    Microservices do not share any data by nature, so microservices is a good use case for a same-threaded system.
+</p>
+
+
+
+<a name="services-with-sharded-data"></a>
+<h3>Services With Sharded Data</h3>
+
+<p>
+    If your system does actually need to share data, or at least a database, you may be able to shard the
+    database. Sharding means that the data is divided among multiple databases. The data is typically divided
+    so that all data related to each other is located together in the same database. For instance, all data belonging
+    to some "owner" entity will be inserted into the same database. Sharding is out of the scope of this tutorial,
+    though, so you will have to search for tutorials about that topic.
+</p>
+
+
+
+
+
+<a name="thread-communication"></a>
+<h2>Thread Communication</h2>
+
+<p>
+    If the threads in a same-threaded need to communicate, they do so by message passing. A thread that wants to
+    send a message to thread A can do so by generating a message (a byte sequence). Thread B can then copy that
+    message (byte sequence) and read it. By copying the message thread B makes sure that thread A cannot modify
+    the message while thread B reads it. Once it is copied it is immutable for thread A.
+</p>
+
+<p>
+    Thread communication via messaging is illustrated here:
+</p>
+
+
+
+<img src="../images/java-concurrency/same-threading-5.png" alt="Thread communication via messaging in a same-threaded system.">
+
+
+<p>
+    The thread communication can take place via queues, pipes, unix sockets, TCP sockets etc. Whatever fits your
+    system.
+</p>
+
+
+
+<a name="simpler-concurrency-model"></a>
+<h2>Simpler Concurrency Model</h2>
+<p>
+    Each system running in its own thread in same-threaded system can be implemented as if it was single-threaded.
+    This means that the internal concurrency model becomes much simpler than if the threads shared state. You do not
+    have to worry about concurrent data structures and all the concurrency problems such data structures can result in.
+</p>
+
+
+
+
+<a name="illustrations"></a>
+<h2>Illustrations</h2>
+<p>
+    Here are illustrations of a single-threaded, multi-threaded and same-threaded system, so you can easier get
+    an overview of the difference between them.
+</p>
+
+<p>
+    The first illustration shows a single-threaded system.
+</p>
+
+
+<img src="../images/java-concurrency/same-threading-1.png" alt="A single-threaded system.">
+
+<p>
+    The second illustration shows a multi-threaded system where the threads share data.
+</p>
+
+<img src="../images/java-concurrency/same-threading-2.png" alt="A multi-threaded system.">
+
+<p>
+    The third illustration shows a same-threaded system with 2 threads with separate data,
+    communicating by passing messages to each other.
+</p>
+
+<img src="../images/java-concurrency/same-threading-3.png" alt="A same-threaded system.">
+
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: How does Java handle aliasing?</title>
+	<atom:link href="http://www.programcreek.com/2012/12/how-does-java-handle-aliasing/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/how-does-java-handle-aliasing/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: yqj2065</title>
+		<link>http://www.programcreek.com/2012/12/how-does-java-handle-aliasing/#comment-6180</link>
+		<dc:creator><![CDATA[yqj2065]]></dc:creator>
+		<pubDate>Wed, 01 Oct 2014 21:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=7570#comment-6180</guid>
+		<description><![CDATA[Covariant of array.]]></description>
+		<content:encoded><![CDATA[<p>Covariant of array.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tony Kaser</title>
+		<link>http://www.programcreek.com/2012/12/how-does-java-handle-aliasing/#comment-5046</link>
+		<dc:creator><![CDATA[Tony Kaser]]></dc:creator>
+		<pubDate>Sat, 21 Sep 2013 03:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=7570#comment-5046</guid>
+		<description><![CDATA[It&#039;s easier to see what is happening if you examine the underlying class.
+
+
+public static void main(String[] args) {
+   B[] b = new B[10];
+          A[] a = new A[10];
+
+
+   System.out.println(&quot;Before:&quot;);
+          System.out.println(&quot;a = &quot; + a.getClass().getCanonicalName());
+          System.out.println(&quot;a contains &quot; + a.getClass().getComponentType().getCanonicalName());
+        
+
+
+   a = b;
+        
+
+
+   System.out.println(&quot;After:&quot;);
+
+   System.out.println(&quot;a = &quot; + a.getClass().getCanonicalName());
+   System.out.println(&quot;a contains &quot; + a.getClass().getComponentType().getCanonicalName());
+}
+
+and the output is :
+
+
+Before:
+a = my.pkg.A[]
+a contains my.pkg.A
+After:
+a = my.pkg.B[]
+a contains my.pkg.B
+
+
+Notice that while &#039;a&#039; was declared as A[], the assignment &quot;a = b&quot; changes the type of &#039;a&#039; to B[].
+Since &#039;a&#039; is no longer an array of class A it can no longer store any instances of class A]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s easier to see what is happening if you examine the underlying class.</p>
+<p>public static void main(String[] args) {<br />
+   B[] b = new B[10];<br />
+          A[] a = new A[10];</p>
+<p>   System.out.println(&#8220;Before:&#8221;);<br />
+          System.out.println(&#8220;a = &#8221; + a.getClass().getCanonicalName());<br />
+          System.out.println(&#8220;a contains &#8221; + a.getClass().getComponentType().getCanonicalName());</p>
+<p>   a = b;</p>
+<p>   System.out.println(&#8220;After:&#8221;);</p>
+<p>   System.out.println(&#8220;a = &#8221; + a.getClass().getCanonicalName());<br />
+   System.out.println(&#8220;a contains &#8221; + a.getClass().getComponentType().getCanonicalName());<br />
+}</p>
+<p>and the output is :</p>
+<p>Before:<br />
+a = my.pkg.A[]<br />
+a contains my.pkg.A<br />
+After:<br />
+a = my.pkg.B[]<br />
+a contains my.pkg.B</p>
+<p>Notice that while &#8216;a&#8217; was declared as A[], the assignment &#8220;a = b&#8221; changes the type of &#8216;a&#8217; to B[].<br />
+Since &#8216;a&#8217; is no longer an array of class A it can no longer store any instances of class A</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

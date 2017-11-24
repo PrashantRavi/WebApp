@@ -1,0 +1,5428 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example java.util.Comparator</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for java.util.Comparator. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, java.util.Comparator" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=java.util.LinkedHashMap.php.html">java.util.LinkedHashMap</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=com.google.common.collect.Lists.php.html">com.google.common.collect.Lists</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.util.Log.php.html">android.util.Log</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.PriorityQueue.php.html">java.util.PriorityQueue</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Test.php.html">org.junit.Test</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.SortedSet.php.html">java.util.SortedSet</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.Date.php.html">java.util.Date</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.text.Collator.php.html">java.text.Collator</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.view.View.php.html">android.view.View</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.Map.Entry.php.html">java.util.Map.Entry</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=compare.php.html">
+                                    compare                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=equals.php.html">
+                                    equals                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=comparing.php.html">
+                                    comparing                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=naturalOrder.php.html">
+                                    naturalOrder                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=reversed.php.html">
+                                    reversed                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.Comparator&method=thenComparing.php.html">
+                                    thenComparing                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for java.util.Comparator</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">java.util.Comparator</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="java.util.Comparator"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">SAPManagerPack</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ItemUtils.java</span>
+								<a href="index-source_dir=SAPManagerPack-master_java_de_sanandrew_core_manpack_util_helpers_ItemUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2151votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2151==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2151==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Compares the two given stacks and checks for their equality.&lt;br&gt;
+ * &lt;p&gt;They are considered equal if either:
+ * &lt;ul&gt;
+ * &lt;li&gt;They are both null: Either the instances themselves or their items are both <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="89f2c9eae6edec">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> null}&lt;/li&gt;
+ * &lt;li&gt;They have the same item instance and:
+ * &lt;ul&gt;
+ * &lt;li&gt;If the given comparator is either null or its <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="334873505c5756">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> .compare(nbt1, nbt2)} method returns 0&lt;/li&gt;
+ * &lt;li&gt;Their damage value is the same &lt;i&gt;or&lt;/i&gt; either of their damage value has the value of <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="96edd6fafff8fd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> OreDictionary#WILDCARD_VALUE}&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/p&gt;
+ *
+ * @param is1      the first stack
+ * @param is2      the second stack
+ * @param nbtCheck A comparator for the NBTs of those 2 stacks, can be null to avoid checking for NBT
+ * @return true, if the stacks are equal, false otherwise.
+ */
+public static boolean areStacksEqual(ItemStack is1, ItemStack is2, Comparator&lt;NBTTagCompound&gt; nbtCheck) {
+    if( is1 == null || is2 == null ) {
+        return is1 == is2;
+    }
+
+    if( is1.getItem() == null || is2.getItem() == null ) {
+        return is1.getItem() == is2.getItem();
+    }
+
+    if( is1.getItem() == is2.getItem() ) {
+        if( nbtCheck != null ) {
+            if( nbtCheck.compare(is1.getTagCompound(), is2.getTagCompound()) != 0 ) {
+                return false;
+            }
+        }
+
+        return is1.getItemDamage() == OreDictionary.WILDCARD_VALUE || is2.getItemDamage() == OreDictionary.WILDCARD_VALUE
+                || is1.getItemDamage() == is2.getItemDamage();
+    }
+
+    return false;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">The-Digital-Parrot</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">RestrictToChainFilter.java</span>
+								<a href="index-source_dir=The-Digital-Parrot-master_src_main_java_net_schweerelos_parrot_model_filters_RestrictToChainFilter.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="6702votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="6702==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="6702==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public boolean sameChain(Chain chain) {
+	List&lt;ChainLink&gt; chainLinks = chain.getLinks();
+	if (chainLinks.size() != links.size()) {
+		return false;
+	}
+	Comparator&lt;ChainLink&gt; comp = ChainLink.getCloneComparator();
+	for (int i = 0; i &lt; links.size(); i++) {
+		ChainLink filterLink = links.get(i);
+		ChainLink chainLink = chainLinks.get(i);
+		if (comp.compare(filterLink, chainLink) != 0) {
+			// found a pair that's not same
+			return false;
+		}
+	}
+	// if we get here, we never found one pair of links that doesn't match
+	// -&gt; they all match
+	return true;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">richfaces</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ArrangeableModel.java</span>
+								<a href="index-source_dir=richfaces-master_components_rich_src_main_java_org_richfaces_model_ArrangeableModel.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="11770votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="11770==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="11770==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private int compare(FacesContext context, Object rowKey1, Object rowKey2) {
+    originalModel.setRowKey(rowKey1);
+    Object object1 = originalModel.getRowData();
+    originalModel.setRowKey(rowKey2);
+    Object object2 = originalModel.getRowData();
+    int result = 0;
+    for (Iterator&lt;SortField&gt; iterator = state.getSortFields().iterator(); iterator.hasNext() &amp;&amp; result == 0;) {
+        SortField sortField = iterator.next();
+        SortOrder sortOrder = sortField.getSortOrder();
+        if (sortOrder != null &amp;&amp; !SortOrder.unsorted.equals(sortOrder)) {
+            Comparator comparator = sortField.getComparator();
+            if (comparator != null) {
+                result = comparator.compare(object1, object2);
+            } else {
+                ValueExpression sortBy = sortField.getSortBy();
+                if (sortBy != null) {
+                    updateVar(context, var, object1);
+                    Object value1 = sortBy.getValue(context.getELContext());
+                    updateVar(context, var, object2);
+                    Object value2 = sortBy.getValue(context.getELContext());
+                    result = compareSortByValues(context, value1, value2);
+                }
+            }
+            if (SortOrder.descending.equals(sortOrder)) {
+                result = -result;
+            }
+        }
+    }
+    return result;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jlibs</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ChainedComparator.java</span>
+								<a href="index-source_dir=jlibs-master_core_src_main_java_jlibs_core_util_ChainedComparator.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="13364votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="13364==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="13364==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public int compare(T o1, T o2){
+    for(Comparator&lt;T&gt; delegate: delegates){
+        int result = delegate.compare(o1, o2);
+        if(result!=0)
+            return result;
+    }
+    return 0;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CollectionUtils.java</span>
+								<a href="index-source_dir=breakout-master_andork-core_src_org_andork_collect_CollectionUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15248votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15248==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15248==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static &lt;T&gt; void testComparator( List&lt;? extends T&gt; list , Comparator&lt;T&gt; comparator )
+{
+	for( int i = 0 ; i &lt; list.size( ) ; i++ )
+	{
+		for( int j = i ; j &lt; list.size( ) ; j++ )
+		{
+			T oi = list.get( i );
+			T oj = list.get( j );
+
+			int ci = comparator.compare( oi , oj );
+			int cj = comparator.compare( oj , oi );
+
+			if( Math.signum( ci ) != -Math.signum( cj ) )
+			{
+				throw new RuntimeException( &quot;Bad comparator: &quot; + comparator + &quot;\n\tlist.get(&quot; + i + &quot;): &quot; + oi
+					+ &quot;\n\tlist.get(&quot; + j + &quot;): &quot; + oj
+					+ &quot;\ncompare(list.get(&quot; + i + &quot;), list.get(&quot; + j + &quot;)): &quot; + ci
+					+ &quot;\ncompare(list.get(&quot; + j + &quot;), list.get(&quot; + i + &quot;)): &quot; + cj );
+			}
+		}
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">QueryIterTopN.java</span>
+								<a href="index-source_dir=jena-master_jena-arq_src_main_java_org_apache_jena_sparql_engine_iterator_QueryIterTopN.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="17914votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="17914==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="17914==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private Iterator&lt;Binding&gt; sortTopN(final QueryIterator qIter, final Comparator&lt;Binding&gt; comparator) {
+    return new IteratorDelayedInitialization&lt;Binding&gt;() {
+        @Override
+        protected Iterator&lt;Binding&gt; initializeIterator() {
+            while ( qIter.hasNext() ) {
+                Binding binding = qIter.next() ;
+                if ( heap.size() &lt; limit )
+                    add(binding) ;
+                else {
+                    Binding currentMaxLeastN = heap.peek() ;
+                    if ( comparator.compare(binding, currentMaxLeastN) &lt; 0 )
+                        add(binding) ;
+                }
+            }
+            qIter.close() ;
+            Binding[] y = heap.toArray(new Binding[]{}) ;
+            heap = null ;
+            Arrays.sort(y, comparator) ;
+            return asList(y).iterator() ;
+        }
+    } ;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">wampspring</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DestinationPatternsMessageCondition.java</span>
+								<a href="index-source_dir=wampspring-master_src_main_java_ch_rasc_wampspring_method_DestinationPatternsMessageCondition.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="19432votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="19432==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="19432==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Compare the two conditions based on the destination patterns they contain. Patterns
+ * are compared one at a time, from top to bottom via
+ * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="bcc7fcd0d5d2d7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> org.springframework.util.PathMatcher#getPatternComparator(String)}. If all
+ * compared patterns match equally, but one instance has more patterns, it is
+ * considered a closer match.
+ * &lt;p&gt;
+ * It is assumed that both instances have been obtained via
+ * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="6c172c00050207">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> #getMatchingCondition(Message)} to ensure they contain only patterns that
+ * match the request and are sorted with the best matches on top.
+ */
+@Override
+public int compareTo(DestinationPatternsMessageCondition other, Message&lt;?&gt; message) {
+	WampMessage wampMessage = (WampMessage) message;
+	String destination = wampMessage.getDestination();
+
+	Comparator&lt;String&gt; patternComparator = this.pathMatcher
+			.getPatternComparator(destination);
+
+	Iterator&lt;String&gt; iterator = this.patterns.iterator();
+	Iterator&lt;String&gt; iteratorOther = other.patterns.iterator();
+	while (iterator.hasNext() &amp;&amp; iteratorOther.hasNext()) {
+		int result = patternComparator.compare(iterator.next(), iteratorOther.next());
+		if (result != 0) {
+			return result;
+		}
+	}
+	if (iterator.hasNext()) {
+		return -1;
+	}
+	else if (iteratorOther.hasNext()) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">extFM-Tooling</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">PermissionComparatorTest.java</span>
+								<a href="index-source_dir=extFM-Tooling-master_tests_org.js.model.rbac.test_src_test_java_org_js_model_rbac_PermissionComparatorTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="20747votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="20747==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="20747==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void compareSetAttributesOfDiffFeatures() {
+   Comparator&lt;Permission&gt; permissionComparator = new PermissionComparator();
+   Feature f5 = getFeature(&quot;f5&quot;);
+   Attribute f5a1 = getAttribute(f5, &quot;a1&quot;);
+
+   Feature f6 = getFeature(&quot;f6&quot;);
+   Attribute f6a1 = getAttribute(f6, &quot;a1&quot;);
+   AttributeOperation as1 = createSetAttribute(f5, f5a1);
+   AttributeOperation as2 = createSetAttribute(f6, f6a1);
+
+   int equal = permissionComparator.compare(as1, as2);
+   assertEquals(-1, equal);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">genome-weaver-align</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MergeSort.java</span>
+								<a href="index-source_dir=genome-weaver-align-master_align_src_main_java_org_utgenome_weaver_align_dc3_MergeSort.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="45997votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="45997==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="45997==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >static &lt;T&gt; void mergeSort(T[] dest, T[] src, int low, int high, int off, Comparator&lt;T&gt; comparator) {
+
+        int length = high - low;
+        // Insertion sort on smallest arrays
+        if (length &lt; INSERTIONSORT_THRESHOLD) {
+            for (int i = low; i &lt; high; i++)
+                for (int j = i; j &gt; low &amp;&amp; comparator.compare(dest[j - 1], dest[j]) &gt; 0; j--) {
+                    swap(dest, j - 1, j);
+                }
+            return;
+        }
+
+        // Recursively sort halves of dest into src
+        int destLow = low;
+        int destHigh = high;
+        low += off;
+        high += off;
+        int mid = (low + high) &gt;&gt;&gt; 1;
+        mergeSort(dest, src, low, mid, -off, comparator);
+        mergeSort(dest, src, mid, high, -off, comparator);
+
+        // If list is already sorted, just copy from src to dest.  This is an
+        // optimization that results in faster sorts for nearly ordered lists.
+        if (comparator.compare(src[mid - 1], src[mid]) &lt;= 0) {
+            System.arraycopy(src, low, dest, destLow, length);
+            return;
+        }
+
+        // Merge sorted halves (now in src) into dest
+        for (int i = destLow, p = low, q = mid; i &lt; destHigh; i++) {
+            if (q &gt;= high || p &lt; mid &amp;&amp; comparator.compare(src[p], src[q]) &lt;= 0)
+                dest[i] = src[p++];
+            else
+                dest[i] = src[q++];
+        }
+
+    }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">wpcleaner</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CompositeComparator.java</span>
+								<a href="index-source_dir=wpcleaner-master_WikipediaCleaner_src_org_wikipediacleaner_api_data_CompositeComparator.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="50556votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="50556==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="50556==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public int compare(T o1, T o2) {
+  if (comparators != null) {
+    Iterator&lt;NamedComparator&lt;T&gt;&gt; itComparator = comparators.iterator();
+    Iterator&lt;Boolean&gt; itBoolean = (orders != null) ? orders.iterator() : null;
+    while (itComparator.hasNext()) {
+      Comparator&lt;T&gt; c = itComparator.next();
+      Boolean order = ((itBoolean != null) &amp;&amp; (itBoolean.hasNext())) ? itBoolean.next() : Boolean.TRUE;
+      int result = c.compare(o1, o2);
+      //System.out.println(&quot;Comparing [&quot; + o1 + &quot;] and [&quot; + o2 + &quot;] by &quot; + c + &quot;: &quot; + result);
+      if (result != 0) {
+        return (Boolean.FALSE.equals(order) ? -1 : 1) * result;
+      }
+    }
+  }
+  return 0;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">closure-stylesheets</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">UnsafeMergeRulesetNodes.java</span>
+								<a href="index-source_dir=closure-stylesheets-master_src_com_google_common_css_compiler_passes_UnsafeMergeRulesetNodes.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="55435votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="55435==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="55435==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Create a comparator for iterables that compares element pairwise using the
+ * given element comparator.
+ */
+private static &lt;T&gt; Comparator&lt;Iterable&lt;? extends T&gt;&gt; createIterableComparator(
+    final Comparator&lt;T&gt; elementComparator) {
+  return new Comparator&lt;Iterable&lt;? extends T&gt;&gt;() {
+    @Override
+    public int compare(Iterable&lt;? extends T&gt; o1, Iterable&lt;? extends T&gt; o2) {
+      Iterator&lt;? extends T&gt; i1 = o1.iterator();
+      Iterator&lt;? extends T&gt; i2 = o2.iterator();
+      while (true) {
+        if (i1.hasNext() &amp;&amp; !i2.hasNext()) {
+          return 1;
+        } else if (!i1.hasNext() &amp;&amp; i2.hasNext()) {
+          return -1;
+        } else if (!i1.hasNext() &amp;&amp; !i2.hasNext()) {
+          return 0;
+        } else {
+          int c = elementComparator.compare(i1.next(), i2.next());
+          if (c != 0) {
+            return c;
+          }
+        }
+      }
+    }
+  };
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">dove</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ImmutableSortedMap.java</span>
+								<a href="index-source_dir=dove-master_Reader_ext_google-collect-1.0_src_com_google_common_collect_ImmutableSortedMap.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="212464votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="212464==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="212464==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static &lt;K, V&gt; ImmutableSortedMap&lt;K, V&gt; copyOfInternal(
+    Map&lt;? extends K, ? extends V&gt; map, Comparator&lt;? super K&gt; comparator) {
+  boolean sameComparator = false;
+  if (map instanceof SortedMap) {
+    SortedMap&lt;?, ?&gt; sortedMap = (SortedMap&lt;?, ?&gt;) map;
+    Comparator&lt;?&gt; comparator2 = sortedMap.comparator();
+    sameComparator = (comparator2 == null)
+        ? comparator == NATURAL_ORDER
+        : comparator.equals(comparator2);
+  }
+
+  if (sameComparator &amp;&amp; (map instanceof ImmutableSortedMap)) {
+    // TODO: Prove that this cast is safe, even though
+    // Collections.unmodifiableSortedMap requires the same key type.
+    @SuppressWarnings(&quot;unchecked&quot;)
+    ImmutableSortedMap&lt;K, V&gt; kvMap = (ImmutableSortedMap&lt;K, V&gt;) map;
+    return kvMap;
+  }
+
+  // Using List to support concurrent map whose size changes
+  List&lt;Entry&lt;?, ?&gt;&gt; list = Lists.newArrayListWithCapacity(map.size());
+  for (Entry&lt;? extends K, ? extends V&gt; entry : map.entrySet()) {
+    list.add(entryOf(entry.getKey(), entry.getValue()));
+  }
+  Entry&lt;?, ?&gt;[] entryArray = list.toArray(new Entry&lt;?, ?&gt;[list.size()]);
+
+  if (!sameComparator) {
+    sortEntries(entryArray, comparator);
+    validateEntries(entryArray, comparator);
+  }
+
+  return new ImmutableSortedMap&lt;K, V&gt;(entryArray, comparator);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">ClusterBasedRelevanceFeedback</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MultiTerms.java</span>
+								<a href="index-source_dir=ClusterBasedRelevanceFeedback-master_src_org_apache_lucene_index_MultiTerms.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="853330votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="853330==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="853330==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public MultiTerms(Terms[] subs, ReaderUtil.Slice[] subSlices) throws IOException {
+  this.subs = subs;
+  this.subSlices = subSlices;
+  
+  Comparator&lt;BytesRef&gt; _termComp = null;
+  for(int i=0;i&lt;subs.length;i++) {
+    if (_termComp == null) {
+      _termComp = subs[i].getComparator();
+    } else {
+      // We cannot merge sub-readers that have
+      // different TermComps
+      final Comparator&lt;BytesRef&gt; subTermComp = subs[i].getComparator();
+      if (subTermComp != null &amp;&amp; !subTermComp.equals(_termComp)) {
+        throw new IllegalStateException(&quot;sub-readers have different BytesRef.Comparators; cannot merge&quot;);
+      }
+    }
+  }
+
+  termComp = _termComp;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 14</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">datavalve</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">InMemoryDataProvider.java</span>
+								<a href="index-source_dir=datavalve-master_datavalve-core_src_main_java_org_fluttercode_datavalve_provider_InMemoryDataProvider.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1157196votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1157196==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1157196==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void defineOrdering(String key) {
+	if (key == null) {
+		activeSortOrder = null;
+		return;
+	}
+
+	Comparator&lt;T&gt; sorter = translateOrderKey(key);
+
+	// if there is no matching sort order, just clear it and leave the order
+	// as is.
+	if (sorter == null) {
+		activeSortOrder = null;
+		return;
+	}
+
+	// return if we are already sorted by this value then do nothing
+	if (sorter.equals(activeSortOrder)) {
+		return;
+	}
+	// when we changed the order, it defaults to ascending
+	// orderedAscendingFlag = true;
+	activeSortOrder = sorter;
+	// sort();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 15</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Valkyrie-RCP</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">AbstractListBinding.java</span>
+								<a href="index-source_dir=Valkyrie-RCP-master_valkyrie-rcp-core_src_main_java_org_valkyriercp_form_binding_swing_AbstractListBinding.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1265916votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1265916==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1265916==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void setComparator(Comparator comparator) {
+    if (comparator != this.comparator || (comparator != null &amp;&amp; !comparator.equals(this.comparator))) {
+        if (this.comparator instanceof Observable) {
+            ((Observable) this.comparator).deleteObserver(this);
+        }
+        this.comparator = comparator;
+        if (comparator instanceof Observable) {
+            ((Observable) this.comparator).addObserver(this);
+        }
+        update();
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 16</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">guava-experimental</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ImmutableSortedMap.java</span>
+								<a href="index-source_dir=guava-experimental-master_guava-gwt_src-super_com_google_common_collect_super_com_google_common_collect_ImmutableSortedMap.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1268420votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1268420==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1268420==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static &lt;K, V&gt; ImmutableSortedMap&lt;K, V&gt; copyOfInternal(
+    Map&lt;? extends K, ? extends V&gt; map, Comparator&lt;? super K&gt; comparator) {
+
+  if (map instanceof ImmutableSortedMap) {
+    // TODO: Prove that this cast is safe, even though
+    // Collections.unmodifiableSortedMap requires the same key type.
+    @SuppressWarnings(&quot;unchecked&quot;)
+    ImmutableSortedMap&lt;K, V&gt; kvMap = (ImmutableSortedMap&lt;K, V&gt;) map;
+    Comparator&lt;?&gt; comparator2 = kvMap.comparator();
+    boolean sameComparator = (comparator2 == null)
+        ? comparator == NATURAL_ORDER
+        : comparator.equals(comparator2);
+    if (sameComparator) {
+      return kvMap;
+    }
+  }
+
+  SortedMap&lt;K, V&gt; delegate = newModifiableDelegate(comparator);
+  for (Entry&lt;? extends K, ? extends V&gt; entry : map.entrySet()) {
+    putEntryWithChecks(delegate, entry);
+  }
+  return newView(unmodifiableSortedMap(delegate), comparator);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 17</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jnlp</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SortedIterables.java</span>
+								<a href="index-source_dir=jnlp-master_src_com_google_common_collect_SortedIterables.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1449066votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1449066==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1449066==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Returns <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="5c271c3f333839">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> true} if <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="f883b89b979c9d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> elements} is a sorted collection using an ordering equivalent
+ * to <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="2e556e4d414a4b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> comparator}.
+ */
+public static boolean hasSameComparator(Comparator&lt;?&gt; comparator, Iterable&lt;?&gt; elements) {
+  checkNotNull(comparator);
+  checkNotNull(elements);
+  Comparator&lt;?&gt; comparator2;
+  if (elements instanceof SortedSet) {
+    comparator2 = comparator((SortedSet&lt;?&gt;) elements);
+  } else if (elements instanceof SortedIterable) {
+    comparator2 = ((SortedIterable&lt;?&gt;) elements).comparator();
+  } else {
+    return false;
+  }
+  return comparator.equals(comparator2);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 18</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">guava</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ImmutableSortedMap.java</span>
+								<a href="index-source_dir=guava-master_guava-gwt_src-super_com_google_common_collect_super_com_google_common_collect_ImmutableSortedMap.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1519548votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1519548==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1519548==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static &lt;K, V&gt; ImmutableSortedMap&lt;K, V&gt; copyOfInternal(
+    Map&lt;? extends K, ? extends V&gt; map, Comparator&lt;? super K&gt; comparator) {
+
+  if (map instanceof ImmutableSortedMap) {
+    // TODO: Prove that this cast is safe, even though
+    // Collections.unmodifiableSortedMap requires the same key type.
+    @SuppressWarnings(&quot;unchecked&quot;)
+    ImmutableSortedMap&lt;K, V&gt; kvMap = (ImmutableSortedMap&lt;K, V&gt;) map;
+    Comparator&lt;?&gt; comparator2 = kvMap.comparator();
+    boolean sameComparator = (comparator2 == null)
+        ? comparator == NATURAL_ORDER
+        : comparator.equals(comparator2);
+    if (sameComparator) {
+      return kvMap;
+    }
+  }
+
+  SortedMap&lt;K, V&gt; delegate = newModifiableDelegate(comparator);
+  for (Entry&lt;? extends K, ? extends V&gt; entry : map.entrySet()) {
+    putEntryWithChecks(delegate, entry);
+  }
+  return newView(unmodifiableSortedMap(delegate), comparator);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 19</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">parkandrideAPI</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ValidationException.java</span>
+								<a href="index-source_dir=parkandrideAPI-master_application_src_main_java_fi_hsl_parkandride_core_service_ValidationException.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="251755votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="251755==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="251755==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static String formatViolations(Iterable&lt;Violation&gt; violations) {
+    StringJoiner joiner = new StringJoiner(&quot;, &quot;);
+    StreamSupport.stream(violations.spliterator(), false)
+            .sorted(Comparator.comparing((Violation v) -&gt; v.path).thenComparing(v -&gt; v.type))
+            .forEach(v -&gt; joiner.add(v.path + &quot; (&quot; + v.type + &quot;)&quot;));
+    return joiner.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 20</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">expenditures</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MissionResponsibilityController.java</span>
+								<a href="index-source_dir=expenditures-master_expenditure-tracking_src_main_java_pt_ist_expenditureTrackingSystem_ui_MissionResponsibilityController.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="255581votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="255581==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="255581==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void findAllUnits(JsonArray result, String[] input) {
+    Stream&lt;Party&gt; stream = Bennu.getInstance().getPartiesSet().stream();
+    Supplier&lt;TreeSet&lt;Party&gt;&gt; s = () -&gt; new TreeSet&lt;Party&gt;(Comparator.comparing(u -&gt; u.getPresentationName()));
+    stream.filter(p -&gt; p.isUnit() &amp;&amp; hasMatch(input, StringNormalizer.normalize(p.getPresentationName()).toLowerCase()))
+            .collect(Collectors.toCollection(s)).forEach(u -&gt; addToJson(result, u));
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 21</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">rsimulator</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FileUtilsImpl.java</span>
+								<a href="index-source_dir=rsimulator-master_rsimulator-core_src_main_java_com_github_bjuvensjo_rsimulator_core_util_FileUtilsImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="494228votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="494228==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="494228==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public List&lt;Path&gt; findRequests(Path path, String extension) {
+    List&lt;Path&gt; requests;
+
+    try (Stream&lt;Path&gt; stream = Files.walk(path)) {
+        Predicate&lt;Path&gt; predicate = p -&gt; Files.isRegularFile(p) &amp;&amp; p.toFile().getName().endsWith(SUFFIX_PREFIX.concat(extension));
+        requests = stream.filter(predicate).collect(Collectors.toList());
+        Collections.sort(requests, Comparator.comparing(Path::getNameCount).thenComparing(Path::compareTo)); // Do not want depth first as given by Files.walk
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+
+    log.debug(&quot;Requests: {}&quot;, requests);
+    return requests;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 22</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">streamex</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MoreCollectorsTest.java</span>
+								<a href="index-source_dir=streamex-master_src_test_java_javax_util_streamex_MoreCollectorsTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="497423votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="497423==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="497423==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void testGreatest() {
+    List&lt;Integer&gt; ints = IntStreamEx.of(new Random(1), 1000, 1, 1000).boxed().toList();
+    List&lt;Integer&gt; sorted = StreamEx.of(ints).sorted().toList();
+    List&lt;Integer&gt; revSorted = StreamEx.of(ints).reverseSorted().toList();
+    Comparator&lt;Integer&gt; byString = Comparator.comparing(String::valueOf);
+    checkShortCircuitCollector(&quot;least(0)&quot;, Collections.emptyList(), 0, ints::stream, MoreCollectors.least(0));
+    checkCollector(&quot;least(5)&quot;, sorted.subList(0, 5), ints::stream, MoreCollectors.least(5));
+    checkCollector(&quot;least(20)&quot;, sorted.subList(0, 20), ints::stream, MoreCollectors.least(20));
+    checkCollector(&quot;least(MAX)&quot;, sorted, ints::stream, MoreCollectors.least(Integer.MAX_VALUE));
+    checkCollector(&quot;least(byString, 20)&quot;, StreamEx.of(ints).sorted(byString).limit(20).toList(), ints::stream,
+        MoreCollectors.least(byString, 20));
+
+    checkShortCircuitCollector(&quot;greatest(0)&quot;, Collections.emptyList(), 0, ints::stream, MoreCollectors.greatest(0));
+    checkCollector(&quot;greatest(5)&quot;, revSorted.subList(0, 5), ints::stream, MoreCollectors.greatest(5));
+    checkCollector(&quot;greatest(20)&quot;, revSorted.subList(0, 20), ints::stream, MoreCollectors.greatest(20));
+    checkCollector(&quot;greatest(MAX)&quot;, revSorted, ints::stream, MoreCollectors.greatest(Integer.MAX_VALUE));
+    checkCollector(&quot;greatest(byString, 20)&quot;, StreamEx.of(ints).reverseSorted(byString).limit(20).toList(),
+        ints::stream, MoreCollectors.greatest(byString, 20));
+
+    Supplier&lt;Stream&lt;Integer&gt;&gt; s = () -&gt; IntStreamEx.range(100).boxed();
+    checkCollector(&quot;1&quot;, IntStreamEx.range(1).boxed().toList(), s, MoreCollectors.least(1));
+    checkCollector(&quot;2&quot;, IntStreamEx.range(2).boxed().toList(), s, MoreCollectors.least(2));
+    checkCollector(&quot;10&quot;, IntStreamEx.range(10).boxed().toList(), s, MoreCollectors.least(10));
+    checkCollector(&quot;100&quot;, IntStreamEx.range(100).boxed().toList(), s, MoreCollectors.least(100));
+    checkCollector(&quot;200&quot;, IntStreamEx.range(100).boxed().toList(), s, MoreCollectors.least(200));
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 23</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">polly</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">NewsEntry.java</span>
+								<a href="index-source_dir=polly-master_projects_de.skuzzle.polly.plugin.rx_src_polly_rx_core_orion_http_NewsEntry.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="588936votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="588936==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="588936==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+@SuppressWarnings({ &quot;unchecked&quot;, &quot;rawtypes&quot; })
+public int compareTo(NewsEntry o) {
+    return Comparator.comparing(NewsEntry::getType)
+            .thenComparing(NewsEntry::getCompDate).reversed()
+            .thenComparing((n1, n2) -&gt; {
+                if (n1.subject instanceof Comparable &amp;&amp; 
+                        n1.getClass() == n2.getClass()) {
+                    return ((Comparable) n1).compareTo(n2);
+                }
+                return 0;
+            })
+            .compare(this, o);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 24</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Archimulator</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">LFUPolicy.java</span>
+								<a href="index-source_dir=Archimulator-master_src_main_java_archimulator_uncore_cache_replacement_LFUPolicy.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="747086votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="747086==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="747086==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public CacheAccess&lt;StateT&gt; handleReplacement(MemoryHierarchyAccess access, int set, int tag) {
+    int victimWay = this.mirrorCache.getLines(set).stream()
+            .min(Comparator.comparing(mirrorCacheLine -&gt; ((BooleanValueProvider) mirrorCacheLine.getStateProvider()).frequency))
+            .get().getWay();
+
+    return new CacheAccess&lt;&gt;(this.getCache(), access, set, victimWay, tag);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 25</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jacis</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">JacisExample2.java</span>
+								<a href="index-source_dir=jacis-master_src_main_java_org_jacis_example_JacisExample2.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="756436votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="756436==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="756436==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void main(String[] args) {
+  JacisContainer container = new JacisContainer();
+  JacisObjectTypeSpec&lt;String, Account, Account&gt; objectTypeSpec = new JacisObjectTypeSpec&lt;&gt;(String.class, Account.class, new JacisCloningObjectAdapter&lt;Account&gt;());
+  JacisStore&lt;String, Account, Account&gt; store = container.createStore(objectTypeSpec);
+
+  // First we create some accounts to have some test data...
+
+  container.withLocalTx(() -&gt; {
+    store.update(&quot;account0&quot;, new Account(&quot;account0&quot;).withdraw(100));
+    store.update(&quot;account1&quot;, new Account(&quot;account1&quot;).deposit(100));
+    store.update(&quot;account2&quot;, new Account(&quot;account2&quot;).deposit(200));
+    store.update(&quot;account3&quot;, new Account(&quot;account3&quot;).deposit(300));
+    store.update(&quot;account4&quot;, new Account(&quot;account4&quot;).deposit(400));
+    store.update(&quot;account5&quot;, new Account(&quot;account5&quot;).deposit(500));
+    store.update(&quot;account6&quot;, new Account(&quot;account6&quot;).deposit(600));
+    store.update(&quot;account7&quot;, new Account(&quot;account7&quot;).deposit(700));
+    store.update(&quot;account8&quot;, new Account(&quot;account8&quot;).deposit(800));
+    store.update(&quot;account9&quot;, new Account(&quot;account9&quot;).deposit(900));
+  });
+
+  // Now we show some examples how to use the stream API (note read only access is possible without a transaction)
+  System.out.println(&quot;sum=&quot; + store.streamReadOnly().mapToLong(acc -&gt; acc.getBalance()).sum());
+  // starting with a filter
+  System.out.println(&quot;#&gt;500=&quot; + store.streamReadOnly(acc -&gt; acc.getBalance() &gt; 500).count());
+  // adding 10% interest
+  container.withLocalTx(() -&gt; {
+    store.stream(acc -&gt; acc.getBalance() &gt; 0).forEach(acc -&gt; {
+      store.update(acc.getName(), acc.deposit(acc.getBalance() / 10));
+    });
+  });
+  // output all accounts
+  String str = store.streamReadOnly().//
+      sorted(Comparator.comparing(acc -&gt; acc.getName())). //
+      map(acc -&gt; acc.getName() + &quot;:&quot; + acc.getBalance()).//
+      collect(Collectors.joining(&quot;, &quot;));
+  System.out.println(&quot;Accounts: &quot; + str);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 26</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jease</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Informatons.java</span>
+								<a href="index-source_dir=jease-master_WEB-INF_src_jease_cms_service_Informatons.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="860003votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="860003==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="860003==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static Map&lt;Class&lt;?&gt;, Integer&gt; getDatabaseClassCount() {
+	Map&lt;Class&lt;?&gt;, Integer&gt; resultMap = new TreeMap&lt;&gt;(
+			Comparator.comparing(Class::getName));
+	for (Persistent obj : Database.query(Persistent.class)) {
+		Class&lt;?&gt; clazz = obj.getClass();
+		if (!resultMap.containsKey(clazz)) {
+			resultMap.put(clazz, 0);
+		}
+		resultMap.put(clazz, resultMap.get(clazz) + 1);
+	}
+	return resultMap;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 27</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">idnadrev</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">NextTaskChooser.java</span>
+								<a href="index-source_dir=idnadrev-master_app_src_main_java_de_ks_idnadrev_task_choosenext_NextTaskChooser.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="935086votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="935086==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="935086==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >protected List&lt;Task&gt; sortTasksByPrio(int maxTime, List&lt;Task&gt; allPossibleTasks) {
+  log.debug(&quot;Got {} tasks to choose from: {}&quot;, allPossibleTasks.size(), tasks2NameString(allPossibleTasks));
+  allPossibleTasks = new ArrayList&lt;&gt;(allPossibleTasks);
+
+  Collections.sort(allPossibleTasks, Comparator.comparing(task -&gt; {
+    long ageInDays = Duration.between(task.getCreationTime(), LocalDateTime.now()).toDays();
+    long agePrio = ageInDays * 10;
+    long asapPrio = task.getState() == TaskState.ASAP ? 100 : 0;
+
+    long estimatedMinutes = task.getEstimatedTime().toMinutes();
+
+    long matchingTimePrio;
+    if (estimatedMinutes &gt; options.getTimeThreshold()) {
+      matchingTimePrio = (long) ((maxTime - estimatedMinutes) * 10D / maxTime);
+    } else {
+      matchingTimePrio = 0;
+    }
+
+
+    agePrio *= options.getAgeFactor();
+    asapPrio *= options.getAsapFactor();
+    matchingTimePrio *= options.getTimeFactor();
+    long totalPrio = agePrio + asapPrio + matchingTimePrio;
+    log.debug(&quot;Task {} has prio {}&quot;, task.getName(), totalPrio);
+    return totalPrio;
+  }));
+  Collections.reverse(allPossibleTasks);
+  log.debug(&quot;Sorted tasks to the following order: {}&quot;, tasks2NameString(allPossibleTasks));
+  return allPossibleTasks;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 28</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">java8examples</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ComparatorExamples.java</span>
+								<a href="index-source_dir=java8examples-master_src_org_anon_ComparatorExamples.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1694822votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1694822==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1694822==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void ascendingAgeThenName() {
+	System.out.println(&quot;Sort in ascending order by age and then name&quot;);		
+	System.out.println(people.stream()
+			.sorted(Comparator.comparing(byAge)
+					.thenComparing(byName))
+					.collect(Collectors.toList()));		
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 29</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">keywhiz</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Printing.java</span>
+								<a href="index-source_dir=keywhiz-master_cli_src_main_java_keywhiz_cli_Printing.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1733245votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1733245==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1733245==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void printClientWithDetails(Client client, List&lt;String&gt; options) {
+  System.out.println(client.getName());
+  ClientDetailResponse clientDetails;
+  try {
+    clientDetails = keywhizClient.clientDetailsForId(client.getId());
+  } catch (IOException e) {
+    throw Throwables.propagate(e);
+  }
+
+  if (options.contains(&quot;groups&quot;)) {
+    System.out.println(&quot;\tGroups:&quot;);
+    clientDetails.groups.stream()
+        .sorted(Comparator.comparing(Group::getName))
+        .forEach(g -&gt; System.out.println(INDENT + g.getName()));
+  }
+
+  if (options.contains(&quot;secrets&quot;)) {
+    System.out.println(&quot;\tSecrets:&quot;);
+    clientDetails.secrets.stream()
+        .sorted(Comparator.comparing(SanitizedSecret::name))
+        .forEach(s -&gt; System.out.println(INDENT + SanitizedSecret.displayName(s)));
+  }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 30</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">molgenis</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SemanticSearchServiceImpl.java</span>
+								<a href="index-source_dir=molgenis-master_molgenis-data-semanticsearch_src_main_java_org_molgenis_data_semanticsearch_service_impl_SemanticSearchServiceImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="364991votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="364991==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="364991==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Computes the best matching synonym which is closest to a set of search terms.&lt;br/&gt;
+ * Will stem the <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="215a614d484f4a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> OntologyTerm} 's synonyms and the search terms, and then compute the maximum
+ * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="9ae1daf6f3f4f1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> StringDistance} between them. 0 means disjunct, 1 means identical
+ * 
+ * @param ontologyTerm
+ *            the <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="0b704b67626560">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> OntologyTerm}
+ * @param searchTerms
+ *            the search terms
+ * @return the maximum <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="502b103c393e3b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> StringDistance} between the ontologyterm and the search terms
+ */
+public Hit&lt;String&gt; bestMatchingSynonym(OntologyTerm ontologyTerm, Set&lt;String&gt; searchTerms)
+{
+	Stemmer stemmer = new Stemmer();
+	Optional&lt;Hit&lt;String&gt;&gt; bestSynonym = ontologyTerm.getSynonyms().stream()
+			.map(synonym -&gt; Hit.&lt;String&gt; create(synonym, distanceFrom(synonym, searchTerms, stemmer)))
+			.max(Comparator.naturalOrder());
+	return bestSynonym.get();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 31</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">streamex</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MoreCollectorsTest.java</span>
+								<a href="index-source_dir=streamex-master_src_test_java_javax_util_streamex_MoreCollectorsTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="497420votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="497420==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="497420==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void testMaxAll() {
+    List&lt;String&gt; input = Arrays.asList(&quot;a&quot;, &quot;bb&quot;, &quot;c&quot;, &quot;&quot;, &quot;cc&quot;, &quot;eee&quot;, &quot;bb&quot;, &quot;ddd&quot;);
+    checkCollector(&quot;maxAll&quot;, Arrays.asList(&quot;eee&quot;, &quot;ddd&quot;), input::stream,
+        MoreCollectors.maxAll(Comparator.comparingInt(String::length)));
+    Collector&lt;String, ?, String&gt; maxAllJoin = MoreCollectors.maxAll(Comparator.comparingInt(String::length),
+        Collectors.joining(&quot;,&quot;));
+    checkCollector(&quot;maxAllJoin&quot;, &quot;eee,ddd&quot;, input::stream, maxAllJoin);
+    checkCollector(&quot;minAll&quot;, 1L, input::stream,
+        MoreCollectors.minAll(Comparator.comparingInt(String::length), Collectors.counting()));
+    checkCollector(&quot;minAllEmpty&quot;, Arrays.asList(&quot;&quot;), input::stream,
+        MoreCollectors.minAll(Comparator.comparingInt(String::length)));
+    checkCollectorEmpty(&quot;maxAll&quot;, Collections.emptyList(),
+        MoreCollectors.maxAll(Comparator.comparingInt(String::length)));
+    checkCollectorEmpty(&quot;maxAllJoin&quot;, &quot;&quot;, maxAllJoin);
+
+    List&lt;Integer&gt; ints = IntStreamEx.of(new Random(1), 10000, 1, 1000).boxed().toList();
+    List&lt;Integer&gt; expectedMax = getMaxAll(ints, Comparator.naturalOrder());
+    List&lt;Integer&gt; expectedMin = getMaxAll(ints, Comparator.reverseOrder());
+    Collector&lt;Integer, ?, SimpleEntry&lt;Integer, Long&gt;&gt; downstream = MoreCollectors.pairing(MoreCollectors.first(),
+        Collectors.counting(), (opt, cnt) -&gt; new AbstractMap.SimpleEntry&lt;&gt;(opt.get(), cnt));
+
+    checkCollector(&quot;maxAll&quot;, expectedMax, ints::stream, MoreCollectors.maxAll(Integer::compare));
+    checkCollector(&quot;minAll&quot;, expectedMin, ints::stream, MoreCollectors.minAll());
+    checkCollector(&quot;entry&quot;, new SimpleEntry&lt;&gt;(expectedMax.get(0), (long) expectedMax.size()), ints::stream,
+        MoreCollectors.maxAll(downstream));
+    checkCollector(&quot;entry&quot;, new SimpleEntry&lt;&gt;(expectedMin.get(0), (long) expectedMin.size()), ints::stream,
+        MoreCollectors.minAll(downstream));
+
+    Integer a = new Integer(1), b = new Integer(1), c = new Integer(1000), d = new Integer(1000);
+    ints = IntStreamEx.range(10, 100).boxed().append(a, c).prepend(b, d).toList();
+    for (StreamExSupplier&lt;Integer&gt; supplier : streamEx(ints::stream)) {
+        List&lt;Integer&gt; list = supplier.get().collect(MoreCollectors.maxAll());
+        assertEquals(2, list.size());
+        assertSame(d, list.get(0));
+        assertSame(c, list.get(1));
+
+        list = supplier.get().collect(MoreCollectors.minAll());
+        assertEquals(2, list.size());
+        assertSame(b, list.get(0));
+        assertSame(a, list.get(1));
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 32</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">L2J_LoginServer</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Util.java</span>
+								<a href="index-source_dir=L2J_LoginServer-master_src_main_java_com_l2jserver_util_Util.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="741288votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="741288==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="741288==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Gets the next or same closest date from the specified days in <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="d7ac97b4b8b3b2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> daysOfWeek List} at specified <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="4a310a29252e2f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> hour} and <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="7c073c1f131819">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> min}.
+ * @param daysOfWeek the days of week
+ * @param hour the hour
+ * @param min the min
+ * @return the next or same date from the days of week at specified time
+ * @throws IllegalArgumentException if the <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="b9c2f9dad6dddc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> daysOfWeek List} is empty.
+ */
+public static LocalDateTime getNextClosestDateTime(List&lt;DayOfWeek&gt; daysOfWeek, int hour, int min) throws IllegalArgumentException
+{
+	if (daysOfWeek.isEmpty())
+	{
+		throw new IllegalArgumentException(&quot;daysOfWeek should not be empty.&quot;);
+	}
+	
+	final LocalDateTime dateNow = LocalDateTime.now();
+	final LocalDateTime dateNowWithDifferentTime = dateNow.withHour(hour).withMinute(min).withSecond(0);
+	
+	// @formatter:off
+	return daysOfWeek.stream()
+		.map(d -&gt; dateNowWithDifferentTime.with(TemporalAdjusters.nextOrSame(d)))
+		.filter(d -&gt; d.isAfter(dateNow))
+		.min(Comparator.naturalOrder())
+		.orElse(dateNowWithDifferentTime.with(TemporalAdjusters.next(daysOfWeek.get(0))));
+	// @formatter:on
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 33</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">guava-stream</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MoreCollectors.java</span>
+								<a href="index-source_dir=guava-stream-master_src_main_java_me_yanaga_guava_stream_MoreCollectors.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1066530votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1066530==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1066530==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static &lt;T, K extends Comparable&lt;K&gt;, V extends Comparable&lt;V&gt;&gt; Collector&lt;T, ?, ImmutableSetMultimap&lt;K, V&gt;&gt; toImmutableSetMultimapNaturalOrder(
+		Function&lt;? super T, ? extends K&gt; keyMapper,
+		Function&lt;? super T, ? extends V&gt; valueMapper) {
+	return toImmutableMultimap(() -&gt; ImmutableSetMultimap.&lt;K, V&gt;builder()
+					.orderKeysBy(Comparator.naturalOrder())
+					.orderValuesBy(Comparator.naturalOrder()),
+			keyMapper, valueMapper, UNORDERED, CONCURRENT);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 34</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Strata</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Swap.java</span>
+								<a href="index-source_dir=Strata-master_modules_finance_src_main_java_com_opengamma_strata_finance_rate_swap_Swap.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1182259votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1182259==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1182259==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Gets the start date of the swap.
+ * &lt;p&gt;
+ * This is the earliest accrual date of the legs, often known as the effective date.
+ * This date has been adjusted to be a valid business day.
+ * 
+ * @return the start date of the swap
+ */
+@DerivedProperty
+public LocalDate getStartDate() {
+  return legs.stream()
+      .map(SwapLeg::getStartDate)
+      .min(Comparator.naturalOrder())
+      .get();  // always at least one leg, so get() is safe
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 35</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">retrolambda</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">InterfaceStaticMethodsTest.java</span>
+								<a href="index-source_dir=retrolambda-master_end-to-end-tests_src_test_java_net_orfjackal_retrolambda_test_InterfaceStaticMethodsTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1759893votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1759893==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1759893==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void calling_static_methods_of_library_interfaces__new_method_on_old_interface() {
+    assumeThat(SystemUtils.JAVA_VERSION_FLOAT, is(lessThan(1.8f)));
+
+    thrown.expect(IncompatibleClassChangeError.class);
+    thrown.expectMessage(SystemUtils.isJavaVersionAtLeast(1.6f)
+            ? equalTo(&quot;Found interface java.util.Comparator, but class was expected&quot;)
+            : nullValue(String.class)); // on Java 5 there is no message
+
+    // We don't want this call to prevent loading this whole test class,
+    // it should only fail when this line is executed
+    Comparator.naturalOrder();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 36</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">GRire2</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">GlobalRetrievalSystem.java</span>
+								<a href="index-source_dir=GRire2-master_src_org_grire2_Retrieval_GlobalRetrievalSystem.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1811125votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1811125==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1811125==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public List&lt;RankedItem&gt; query(String id, String indexName){
+    Map&lt;String, float[][]&gt; index=_configuration.getStorer()
+            .getMap(indexName + &quot;_&quot; + _configuration.getName() + &quot;_features&quot;);
+    SimilarityMeasure similarityMeasure = _configuration.getSimilarityMeasure();
+    float[][] queryDescriptor = index.get(id);
+    return index.entrySet().stream()
+            .map(img -&gt; new RankedItem(img.getKey(), similarityMeasure.calculate(queryDescriptor, img.getValue())))
+            .sorted(similarityMeasure.getType() == SimilarityMeasure.SimilarityType.DISTANCE ?
+                    Comparator.&lt;RankedItem&gt;naturalOrder(): Comparator.&lt;RankedItem&gt;reverseOrder())
+            .collect(Collectors.toList());
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 37</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">gs-collections</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ImmutableEmptySortedBagTest.java</span>
+								<a href="index-source_dir=gs-collections-master_unit-tests_src_test_java_com_gs_collections_impl_bag_sorted_immutable_ImmutableEmptySortedBagTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1835288votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1835288==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1835288==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+@Test(expected = NoSuchElementException.class)
+public void max_without_comparator()
+{
+    this.classUnderTest().max();
+    this.classUnderTest().max(Comparator.&lt;Integer&gt;naturalOrder());
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 38</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">james-core</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SubsetProblem.java</span>
+								<a href="index-source_dir=james-core-master_src_main_java_org_jamesframework_core_subset_SubsetProblem.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2118804votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2118804==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2118804==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * &lt;p&gt;
+ * Creates a new subset problem with given data, objective and minimum/maximum subset size. Both &lt;code&gt;objective&lt;/code&gt;
+ * and &lt;code&gt;data&lt;/code&gt; are not allowed to be &lt;code&gt;null&lt;/code&gt;, an exception will be thrown if they are. Any objective
+ * designed to evaluate subset solutions (or more general solutions) using the specified data type (or more general data)
+ * is accepted. The minimum and maximum subset size should be contained in &lt;code&gt;[0,n]&lt;/code&gt; where &lt;code&gt;n&lt;/code&gt;
+ * is the number of items in the given data from which a subset is to be selected. Also, the minimum size
+ * should be smaller than or equal to the maximum size.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * If &lt;code&gt;orderIDs&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;, subset solutions generated by this problem will order IDs
+ * in ascending order (according to the natural integer ordering).
+ * &lt;/p&gt;
+ * 
+ * @param data underlying data, can not be &lt;code&gt;null&lt;/code&gt;
+ * @param objective objective function, can not be &lt;code&gt;null&lt;/code&gt;
+ * @param minSubsetSize minimum subset size (should be &amp;ge; 0 and &amp;le; maximum subset size)
+ * @param maxSubsetSize maximum subset size (should be &amp;ge; minimum subset size and &amp;le; number of items in underlying data)
+ * @param orderIDs indicates whether IDs are ordered (ascending) in generated subset solutions
+ * 
+ * @throws NullPointerException if &lt;code&gt;objective&lt;/code&gt; or &lt;code&gt;data&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;
+ * @throws IllegalArgumentException if an invalid minimum or maximum subset size is specified
+ */
+public SubsetProblem(DataType data, Objective&lt;? super SubsetSolution, ? super DataType&gt; objective,
+                     int minSubsetSize, int maxSubsetSize, boolean orderIDs) {
+    this(data, objective, minSubsetSize, maxSubsetSize, orderIDs ? Comparator.naturalOrder() : null);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 39</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jsr354-ri</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ECBAbstractRateProvider.java</span>
+								<a href="index-source_dir=jsr354-ri-master_src_main_java_org_javamoney_moneta_internal_convert_ECBAbstractRateProvider.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2250886votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2250886==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2250886==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private RateResult findExchangeRate(ConversionQuery conversionQuery) {
+	LocalDate[] dates = getQueryDates(conversionQuery);
+
+       if (dates == null) {
+       	Comparator&lt;LocalDate&gt; comparator = Comparator.naturalOrder();
+   		LocalDate date = this.rates.keySet().stream().sorted(comparator.reversed()).findFirst().orElseThrow(() -&gt; new MonetaryException(&quot;There is not more recent exchange rate to  rate on ECBRateProvider.&quot;));
+       	return new RateResult(date, this.rates.get(date));
+       } else {
+       	for (LocalDate localDate : dates) {
+       		Map&lt;String, ExchangeRate&gt; targets = this.rates.get(localDate);
+
+       		if(Objects.nonNull(targets)) {
+       			return new RateResult(localDate, targets);
+       		}
+		}
+       	String datesOnErros = Stream.of(dates).map(date -&gt; date.format(DateTimeFormatter.ISO_LOCAL_DATE)).collect(Collectors.joining(&quot;,&quot;));
+       	throw new MonetaryException(&quot;There is not exchange on day &quot; + datesOnErros + &quot; to rate to  rate on ECBRateProvider.&quot;);
+       }
+
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 40</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openjdk8-jdk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SortedOps.java</span>
+								<a href="index-source_dir=openjdk8-jdk-master_src_share_classes_java_util_stream_SortedOps.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2416457votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2416457==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2416457==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Sort using natural order of <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="9fe4dff3f6ebfaedfef3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt;T&gt;} which must be
+ * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="7f043f1c101b1a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> Comparable}.
+ */
+OfRef(AbstractPipeline&lt;?, T, ?&gt; upstream) {
+    super(upstream, StreamShape.REFERENCE,
+          StreamOpFlag.IS_ORDERED | StreamOpFlag.IS_SORTED);
+    this.isNaturalSort = true;
+    // Will throw CCE when we try to sort if T is not Comparable
+    this.comparator = (Comparator&lt;? super T&gt;) Comparator.naturalOrder();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 41</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">levelup-java-examples</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SortArray.java</span>
+								<a href="index-source_dir=levelup-java-examples-master_src_test_java_com_levelup_java_array_SortArray.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="755521votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="755521==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="755521==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void sort_numeric_array_decending_in_java8 () {
+	
+	Integer[] uwConferenceTitles = {
+			1896, 2011, 1901, 1912, 1952, 
+			1959, 1962, 1999, 1897, 1906, 
+			1993, 1998,  2010,  2012};
+
+	Comparator&lt;Integer&gt; normal = Integer::compare;
+	Comparator&lt;Integer&gt; reversed = normal.reversed(); 
+	
+	Arrays.sort(uwConferenceTitles, reversed);
+
+	assertArrayEquals(new Integer[] {
+			2012, 2011, 2010, 1999, 1998, 
+			1993, 1962, 1959, 1952, 1912, 
+			1906, 1901, 1897, 1896}, 
+			uwConferenceTitles);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 42</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">levelup-java-examples</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SortACollection.java</span>
+								<a href="index-source_dir=levelup-java-examples-master_src_test_java_com_levelup_java_collections_SortACollection.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="755734votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="755734==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="755734==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void sort_collection_with_java8_byweight_reverse() {
+
+	Comparator&lt;Wrestler&gt; normal = ((w1, w2) -&gt; Double.compare(
+			w1.getWeightClass(), w2.getWeightClass()));
+
+	Comparator&lt;Wrestler&gt; reversed = normal.reversed();
+
+	wrestlers.sort(reversed);
+
+	logger.info(wrestlers);
+
+	Optional&lt;Wrestler&gt; wrestler = wrestlers.stream().findFirst();
+
+	assertEquals(215, wrestler.get().getWeightClass(), 0);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 43</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openjdk8-jdk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BasicTest.java</span>
+								<a href="index-source_dir=openjdk8-jdk-master_test_java_util_Comparator_BasicTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2424463votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2424463==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2424463==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testReverseComparator() {
+    Comparator&lt;String&gt; cmpr = Comparator.reverseOrder();
+    Comparator&lt;String&gt; cmp = cmpr.reversed();
+
+    assertEquals(cmp.reversed(), cmpr);
+    assertEquals(0, cmp.compare(&quot;a&quot;, &quot;a&quot;));
+    assertEquals(0, cmpr.compare(&quot;a&quot;, &quot;a&quot;));
+    assertTrue(cmp.compare(&quot;a&quot;, &quot;b&quot;) &lt; 0);
+    assertTrue(cmpr.compare(&quot;a&quot;, &quot;b&quot;) &gt; 0);
+    assertTrue(cmp.compare(&quot;b&quot;, &quot;a&quot;) &gt; 0);
+    assertTrue(cmpr.compare(&quot;b&quot;, &quot;a&quot;) &lt; 0);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 44</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openjdk8-jdk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BasicTest.java</span>
+								<a href="index-source_dir=openjdk8-jdk-master_test_java_util_Comparator_BasicTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2424464votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2424464==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2424464==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testReverseComparator2() {
+    Comparator&lt;String&gt; cmp = (s1, s2) -&gt; s1.length() - s2.length();
+    Comparator&lt;String&gt; cmpr = cmp.reversed();
+
+    assertEquals(cmpr.reversed(), cmp);
+    assertEquals(0, cmp.compare(&quot;abc&quot;, &quot;def&quot;));
+    assertEquals(0, cmpr.compare(&quot;abc&quot;, &quot;def&quot;));
+    assertTrue(cmp.compare(&quot;abcd&quot;, &quot;def&quot;) &gt; 0);
+    assertTrue(cmpr.compare(&quot;abcd&quot;, &quot;def&quot;) &lt; 0);
+    assertTrue(cmp.compare(&quot;abc&quot;, &quot;defg&quot;) &lt; 0);
+    assertTrue(cmpr.compare(&quot;abc&quot;, &quot;defg&quot;) &gt; 0);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 45</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">judge</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">LoggerRepository.java</span>
+								<a href="index-source_dir=judge-master_judge-web_src_main_java_com_github_zhanhb_judge_repository_LoggerRepository.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="4678412votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="4678412==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="4678412==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private Comparator&lt;Logger&gt; toComparator(Sort.Order order) {
+    String property = order.getProperty();
+    Comparator&lt;Logger&gt; c;
+    if (&quot;level&quot;.equalsIgnoreCase(property)) {
+        c = BY_LEVEL;
+    } else if (&quot;name&quot;.equalsIgnoreCase(property)) {
+        c = order.isIgnoreCase() ? BY_NAME_I : BY_NAME;
+    } else {
+        throw new IllegalArgumentException(String.format(&quot;No property %s found for type %s!&quot;, property, Logger.class.getSimpleName()));
+    }
+    return order.isAscending() ? c : c.reversed();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 46</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">blackmarket</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ModSelectionPane.java</span>
+								<a href="index-source_dir=blackmarket-master_src_main_java_net_thirdy_blackmarket_controls_ModSelectionPane.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="465253votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="465253==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="465253==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public void accept(List&lt;ItemType&gt; itemTypes) {
+	masterData.clear();
+	List&lt;ModMapping&gt; modMappings = ModsMapping.getInstance().getModMappings();
+	if (!itemTypes.isEmpty()) {
+		List&lt;String&gt; itemTypesRaw = itemTypes.stream()
+			.map(itemType -&gt; itemType.itemType())
+			.collect(Collectors.toList());
+		modMappings = modMappings.stream()
+			.filter(mm -&gt; mm.getModType() == ModType.PSEUDO
+				|| itemTypesRaw.contains(mm.getItemType()))
+			.collect(Collectors.toList());
+	}
+	
+	Comparator&lt;ModMapping&gt; byModType = (m1, m2) -&gt;
+    	Integer.valueOf(m1.getModType().ordinal()).compareTo(Integer.valueOf(m2.getModType().ordinal()));
+    	
+    	Comparator&lt;ModMapping&gt; byModTypeThenKey = byModType.thenComparing((m1, m2) -&gt;
+    	m1.getKey().compareTo(m2.getKey())
+    );
+	modMappings.sort(byModTypeThenKey);
+	masterData.addAll(modMappings);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 47</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openjdk8-jdk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">EntryComparators.java</span>
+								<a href="index-source_dir=openjdk8-jdk-master_test_java_util_Map_EntryComparators.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2424220votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2424220==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2424220==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private &lt;K, V&gt; void assertPairComparison(K k1, V v1, K k2, V v2,
+                                    Comparator&lt;Map.Entry&lt;K, V&gt;&gt; ck,
+                                    Comparator&lt;Map.Entry&lt;K, V&gt;&gt; cv) {
+    final Map.Entry&lt;K, V&gt; p11 = new AbstractMap.SimpleImmutableEntry&lt;&gt;(k1, v1);
+    final Map.Entry&lt;K, V&gt; p12 = new AbstractMap.SimpleImmutableEntry&lt;&gt;(k1, v2);
+    final Map.Entry&lt;K, V&gt; p21 = new AbstractMap.SimpleImmutableEntry&lt;&gt;(k2, v1);
+    final Map.Entry&lt;K, V&gt; p22 = new AbstractMap.SimpleImmutableEntry&lt;&gt;(k2, v2);
+
+    assertTrue(ck.compare(p11, p11) == 0);
+    assertTrue(ck.compare(p12, p11) == 0);
+    assertTrue(ck.compare(p11, p12) == 0);
+    assertTrue(ck.compare(p12, p22) &lt; 0);
+    assertTrue(ck.compare(p12, p21) &lt; 0);
+    assertTrue(ck.compare(p21, p11) &gt; 0);
+    assertTrue(ck.compare(p21, p12) &gt; 0);
+
+    assertTrue(cv.compare(p11, p11) == 0);
+    assertTrue(cv.compare(p12, p11) &gt; 0);
+    assertTrue(cv.compare(p11, p12) &lt; 0);
+    assertTrue(cv.compare(p12, p22) == 0);
+    assertTrue(cv.compare(p12, p21) &gt; 0);
+    assertTrue(cv.compare(p21, p11) == 0);
+    assertTrue(cv.compare(p21, p12) &lt; 0);
+
+    Comparator&lt;Map.Entry&lt;K, V&gt;&gt; cmp = ck.thenComparing(cv);
+    assertTrue(cmp.compare(p11, p11) == 0);
+    assertTrue(cmp.compare(p12, p11) &gt; 0);
+    assertTrue(cmp.compare(p11, p12) &lt; 0);
+    assertTrue(cmp.compare(p12, p22) &lt; 0);
+    assertTrue(cmp.compare(p12, p21) &lt; 0);
+    assertTrue(cmp.compare(p21, p11) &gt; 0);
+    assertTrue(cmp.compare(p21, p12) &gt; 0);
+
+    cmp = cv.thenComparing(ck);
+    assertTrue(cmp.compare(p11, p11) == 0);
+    assertTrue(cmp.compare(p12, p11) &gt; 0);
+    assertTrue(cmp.compare(p11, p12) &lt; 0);
+    assertTrue(cmp.compare(p12, p22) &lt; 0);
+    assertTrue(cmp.compare(p12, p21) &gt; 0);
+    assertTrue(cmp.compare(p21, p11) &gt; 0);
+    assertTrue(cmp.compare(p21, p12) &lt; 0);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 48</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openjdk8-jdk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">EntryComparators.java</span>
+								<a href="index-source_dir=openjdk8-jdk-master_test_java_util_Map_EntryComparators.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2424221votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2424221==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2424221==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testKVComparators() {
+    // Comparator&lt;People&gt; cmp = Comparator.naturalOrder(); // Should fail to compiler as People is not comparable
+    // We can use simple comparator, but those have been tested above.
+    // Thus choose to do compose for some level of interation.
+    Comparator&lt;People&gt; cmp1 = Comparator.comparing(People::getFirstName);
+    Comparator&lt;People&gt; cmp2 = Comparator.comparing(People::getLastName);
+    Comparator&lt;People&gt; cmp = cmp1.thenComparing(cmp2);
+
+    assertPairComparison(people[0], people[0], people[1], people[1],
+                     Map.Entry.&lt;People, People&gt;comparingByKey(cmp),
+                     Map.Entry.&lt;People, People&gt;comparingByValue(cmp));
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 49</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">LambdaDojo</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">S206LambdaForCompositeFunction.java</span>
+								<a href="index-source_dir=LambdaDojo-master_projects_NetBeans_LambdaDojo_src_answers_section2_S206LambdaForCompositeFunction.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="3505643votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="3505643==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="3505643==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void sortPersonAnswer2() {
+    List&lt;Person&gt; persons = Arrays.asList(
+            new Person(&quot;James&quot;, &quot;Brown&quot;),
+            new Person(&quot;David&quot;, &quot;Crosby&quot;),
+            new Person(&quot;James&quot;, &quot;Taylor&quot;),
+            new Person(&quot;Jackson&quot;, &quot;Brown&quot;),
+            new Person(&quot;Neil&quot;, &quot;Young&quot;),
+            new Person(&quot;Coco&quot;, &quot;Taylor&quot;)
+    );
+
+    // ????????????
+    Comparator&lt;Person&gt; comparatorLast = (p1, p2) -&gt; {
+        String last1 = p1.getLast();
+        String last2 = p2.getLast();
+        return last1.compareTo(last2);
+    };
+
+    // ????????????
+    Comparator&lt;Person&gt; comparatorFirst = (p1, p2) -&gt; {
+            String first1 = p1.getFirst();
+            String first2 = p2.getFirst();
+            return first1.compareTo(first2);
+    };
+
+    // ?????????????????????????????????
+    Comparator&lt;Person&gt; comparator = comparatorLast.thenComparing(comparatorFirst);
+
+    Collections.sort(persons, comparator);
+    System.out.println(persons);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 50</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">LambdaDojo</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">S206LambdaForCompositeFunction.java</span>
+								<a href="index-source_dir=LambdaDojo-master_projects_IntelliJ_LambdaDojo_src_answers_section2_S206LambdaForCompositeFunction.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="3505647votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="3505647==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="3505647==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void sortPersonAnswer2() {
+    List&lt;Person&gt; persons = Arrays.asList(
+            new Person(&quot;James&quot;, &quot;Brown&quot;),
+            new Person(&quot;David&quot;, &quot;Crosby&quot;),
+            new Person(&quot;James&quot;, &quot;Taylor&quot;),
+            new Person(&quot;Jackson&quot;, &quot;Brown&quot;),
+            new Person(&quot;Neil&quot;, &quot;Young&quot;),
+            new Person(&quot;Coco&quot;, &quot;Taylor&quot;)
+    );
+
+    // ????????????
+    Comparator&lt;Person&gt; comparatorLast = (p1, p2) -&gt; {
+        String last1 = p1.getLast();
+        String last2 = p2.getLast();
+        return last1.compareTo(last2);
+    };
+
+    // ????????????
+    Comparator&lt;Person&gt; comparatorFirst = (p1, p2) -&gt; {
+            String first1 = p1.getFirst();
+            String first2 = p2.getFirst();
+            return first1.compareTo(first2);
+    };
+
+    // ?????????????????????????????????
+    Comparator&lt;Person&gt; comparator = comparatorLast.thenComparing(comparatorFirst);
+
+    Collections.sort(persons, comparator);
+    System.out.println(persons);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 51</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">goworks</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BaseCompletionController.java</span>
+								<a href="index-source_dir=goworks-master_works.editor.antlr4_src_org_antlr_works_editor_antlr4_completion_BaseCompletionController.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="50608votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="50608==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="50608==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public Selection getSelection(List&lt;? extends CompletionItem&gt; items, List&lt;? extends CompletionItem&gt; declarationItems) {
+    Comparator&lt;CompletionItem&gt; comparator = getComparator(CompletionResultSet.TEXT_SORT_TYPE);
+
+    String completionPrefix = getCompletionPrefix();
+    String evaluatedText = completionPrefix;
+    while (true) {
+        CompletionItem bestMatch = null;
+        int bestMatchValue = 0;
+        int prefixMatch = 0;
+        CompletionMatchEvaluator evaluator = getCompletionMatchEvaluator(evaluatedText);
+        for (CompletionItem item : items) {
+            int matchValue = evaluator.getMatchStrength(item);
+            if (matchValue &gt; 0) {
+                if ((matchValue &amp; (CompletionMatchEvaluator.PREFIX_CASE_SENSITIVE | CompletionMatchEvaluator.PREFIX)) != 0) {
+                    prefixMatch++;
+                }
+
+                boolean improved = matchValue &gt; bestMatchValue
+                    || (matchValue == bestMatchValue &amp;&amp; comparator.compare(item, bestMatch) &lt; 0);
+
+                if (improved) {
+                    bestMatch = item;
+                    bestMatchValue = matchValue;
+                }
+            }
+        }
+
+        if (bestMatch != null) {
+            int index = items.indexOf(bestMatch);
+            boolean selected =
+                declarationItems.isEmpty()
+                &amp;&amp; (!(bestMatch instanceof AbstractCompletionItem) || ((AbstractCompletionItem)bestMatch).allowInitialSelection())
+                &amp;&amp; evaluatedText != null &amp;&amp; !evaluatedText.isEmpty();
+
+            boolean unique = !completionPrefix.isEmpty()
+                &amp;&amp; (prefixMatch == 1)
+                &amp;&amp; evaluatedText.length() == completionPrefix.length();
+
+            return new Selection(index, selected, unique);
+        }
+
+        if (evaluatedText.length() == 0) {
+            break;
+        }
+
+        evaluatedText = evaluatedText.substring(0, evaluatedText.length() - 1);
+    }
+
+    return Selection.DEFAULT;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 52</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Technomap</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FilterIteratorFactory.java</span>
+								<a href="index-source_dir=Technomap-master_src_prefuse_data_util_FilterIteratorFactory.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="127345votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="127345==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="127345==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >protected static IntIterator getRangeIterator(Table t, RangePredicate rp) {
+    ColumnExpression col;
+    Expression l, r;
+    
+    // make sure columns are of the right type
+    if ( !(rp.getMiddleExpression() instanceof ColumnExpression) ||
+            ExpressionAnalyzer.hasDependency(rp.getLeftExpression()) ||
+            ExpressionAnalyzer.hasDependency(rp.getRightExpression()) )
+    {
+        return null;
+    }
+    
+    // assign variables
+    col = (ColumnExpression)rp.getMiddleExpression();
+    l = rp.getLeftExpression();
+    r = rp.getRightExpression();
+    
+    // if table has index of the right type, use it
+    Comparator cmp = rp.getComparator();
+    Index index = t.getIndex(col.getColumnName());
+    
+    if ( index == null || !cmp.equals(index.getComparator()) )
+        return null;
+    
+    int operation = rp.getOperation();
+    Class ltype = t.getColumnType(col.getColumnName());
+    
+    // TODO safety check literal types
+    
+    // get the index type
+    int indexType;
+    switch ( operation ) {
+    case RangePredicate.IN_IN:
+        indexType = Index.TYPE_AII;
+        break;
+    case RangePredicate.IN_EX:
+        indexType = Index.TYPE_AIE;
+        break;
+    case RangePredicate.EX_IN:
+        indexType = Index.TYPE_AEI;
+        break;
+    case RangePredicate.EX_EX:
+        indexType = Index.TYPE_AEE;
+        break;
+    default:
+        throw new IllegalStateException(); // should never occur
+    }
+    
+    // get the indexed rows
+    if ( ltype == int.class ) {
+        return index.rows(l.getInt(null), r.getInt(null), indexType);
+    } else if ( ltype == long.class ) {
+        return index.rows(l.getLong(null), r.getLong(null), indexType);
+    } else if ( ltype == float.class ) {
+        return index.rows(l.getFloat(null), r.getFloat(null), indexType);
+    } else if ( ltype == double.class ) {
+        return index.rows(l.getDouble(null), r.getDouble(null), indexType);
+    } else {
+        return index.rows(l.get(null), r.get(null), indexType);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 53</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Prefuse</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FilterIteratorFactory.java</span>
+								<a href="index-source_dir=Prefuse-master_core_src_main_java_prefuse_data_util_FilterIteratorFactory.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="506747votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="506747==java.util.Comparator">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="506747==java.util.Comparator">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >protected static IntIterator getRangeIterator(Table t, RangePredicate rp) {
+    ColumnExpression col;
+    Expression l, r;
+    
+    // make sure columns are of the right type
+    if ( !(rp.getMiddleExpression() instanceof ColumnExpression) ||
+            ExpressionAnalyzer.hasDependency(rp.getLeftExpression()) ||
+            ExpressionAnalyzer.hasDependency(rp.getRightExpression()) )
+    {
+        return null;
+    }
+    
+    // assign variables
+    col = (ColumnExpression)rp.getMiddleExpression();
+    l = rp.getLeftExpression();
+    r = rp.getRightExpression();
+    
+    // if table has index of the right type, use it
+    Comparator cmp = rp.getComparator();
+    Index index = t.getIndex(col.getColumnName());
+    
+    if ( index == null || !cmp.equals(index.getComparator()) )
+        return null;
+    
+    int operation = rp.getOperation();
+    Class ltype = t.getColumnType(col.getColumnName());
+    
+    // TODO safety check literal types
+    
+    // get the index type
+    int indexType;
+    switch ( operation ) {
+    case RangePredicate.IN_IN:
+        indexType = Index.TYPE_AII;
+        break;
+    case RangePredicate.IN_EX:
+        indexType = Index.TYPE_AIE;
+        break;
+    case RangePredicate.EX_IN:
+        indexType = Index.TYPE_AEI;
+        break;
+    case RangePredicate.EX_EX:
+        indexType = Index.TYPE_AEE;
+        break;
+    default:
+        throw new IllegalStateException(); // should never occur
+    }
+    
+    // get the indexed rows
+    if ( ltype == int.class ) {
+        return index.rows(l.getInt(null), r.getInt(null), indexType);
+    } else if ( ltype == long.class ) {
+        return index.rows(l.getLong(null), r.getLong(null), indexType);
+    } else if ( ltype == float.class ) {
+        return index.rows(l.getFloat(null), r.getFloat(null), indexType);
+    } else if ( ltype == double.class ) {
+        return index.rows(l.getDouble(null), r.getDouble(null), indexType);
+    } else {
+        return index.rows(l.get(null), r.get(null), indexType);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("Comparator", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(Comparator, "ig") ,'<div style="background-color:red">' + Comparator + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

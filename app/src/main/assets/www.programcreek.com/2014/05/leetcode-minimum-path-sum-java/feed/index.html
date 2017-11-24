@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Minimum Path Sum (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: AJ</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/#comment-15299</link>
+		<dc:creator><![CDATA[AJ]]></dc:creator>
+		<pubDate>Sun, 16 Oct 2016 03:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14104#comment-15299</guid>
+		<description><![CDATA[	static int minPath(int[][] a) {
+		if (a == null &#124;&#124; a.length == 0) {
+			return 0;
+		}
+		int m = a.length;
+		int n = a[0].length;
+		for (int i = 1; i &#060; m; i++) {
+			a[i][0] = a[i - 1][0] + a[i][0];
+		}
+
+		for (int j = 1; j &#060; n; j++) {
+			a[0][j] = a[0][j - 1] + a[0][j];
+		}
+
+		for (int i = 1; i &#060; m; i++) {
+			for (int j = 1; j &#060; n; j++) {
+				a[i][j] = Math.min(a[i - 1][j], a[i][j - 1]) + a[i][j];
+			}
+		}
+		return a[m - 1][n - 1];
+	}]]></description>
+		<content:encoded><![CDATA[<p>	static int minPath(int[][] a) {<br />
+		if (a == null || a.length == 0) {<br />
+			return 0;<br />
+		}<br />
+		int m = a.length;<br />
+		int n = a[0].length;<br />
+		for (int i = 1; i &lt; m; i++) {<br />
+			a[i][0] = a[i &#8211; 1][0] + a[i][0];<br />
+		}</p>
+<p>		for (int j = 1; j &lt; n; j++) {<br />
+			a[0][j] = a[0][j &#8211; 1] + a[0][j];<br />
+		}</p>
+<p>		for (int i = 1; i &lt; m; i++) {<br />
+			for (int j = 1; j &lt; n; j++) {<br />
+				a[i][j] = Math.min(a[i &#8211; 1][j], a[i][j &#8211; 1]) + a[i][j];<br />
+			}<br />
+		}<br />
+		return a[m &#8211; 1][n &#8211; 1];<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vasyl Grygoryev</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/#comment-8152</link>
+		<dc:creator><![CDATA[Vasyl Grygoryev]]></dc:creator>
+		<pubDate>Sun, 03 Jan 2016 12:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14104#comment-8152</guid>
+		<description><![CDATA[For 2nd solution we can use only one row for temp datas - O(n) extra space:
+&lt;code&gt;
+public int minPathSum(int[][] grid) {
+  if (grid == null &#124;&#124; grid.length == 0 &#124;&#124; grid[0].length == 0)
+    return 0;
+
+  int[] temp = new int[grid[0].length];
+
+  for (int i = 0; i &#060; grid.length; i++)
+    for (int j = 0; j  0)
+        if (i &#062; 0)
+          temp[j] = Math.min(temp[j], temp[j - 1]);
+        else
+          temp[j] = temp[j - 1];
+      temp[j] += grid[i][j];
+    }
+
+  return temp[temp.length - 1];
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>For 2nd solution we can use only one row for temp datas &#8211; O(n) extra space:<br />
+<code><br />
+public int minPathSum(int[][] grid) {<br />
+  if (grid == null || grid.length == 0 || grid[0].length == 0)<br />
+    return 0;</p>
+<p>  int[] temp = new int[grid[0].length];</p>
+<p>  for (int i = 0; i &lt; grid.length; i++)<br />
+    for (int j = 0; j  0)<br />
+        if (i &gt; 0)<br />
+          temp[j] = Math.min(temp[j], temp[j - 1]);<br />
+        else<br />
+          temp[j] = temp[j - 1];<br />
+      temp[j] += grid[i][j];<br />
+    }</p>
+<p>  return temp[temp.length - 1];<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ryan Shaw</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/#comment-8073</link>
+		<dc:creator><![CDATA[Ryan Shaw]]></dc:creator>
+		<pubDate>Thu, 31 Dec 2015 00:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14104#comment-8073</guid>
+		<description><![CDATA[Dijkstra algorithm is the solution.]]></description>
+		<content:encoded><![CDATA[<p>Dijkstra algorithm is the solution.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sharan Srinivasan</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/#comment-7641</link>
+		<dc:creator><![CDATA[Sharan Srinivasan]]></dc:creator>
+		<pubDate>Thu, 03 Dec 2015 19:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14104#comment-7641</guid>
+		<description><![CDATA[The recursive dfs method can be made more efficient with memoization. Store each i,j value previously computed and call it each it you need it -  following the first computation]]></description>
+		<content:encoded><![CDATA[<p>The recursive dfs method can be made more efficient with memoization. Store each i,j value previously computed and call it each it you need it &#8211;  following the first computation</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jason zhang</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-minimum-path-sum-java/#comment-6995</link>
+		<dc:creator><![CDATA[jason zhang]]></dc:creator>
+		<pubDate>Sun, 31 May 2015 17:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14104#comment-6995</guid>
+		<description><![CDATA[The DP assumes that we can only walk down, but not up.  If we can walk up, this is a a shortest ptah problem]]></description>
+		<content:encoded><![CDATA[<p>The DP assumes that we can only walk down, but not up.  If we can walk up, this is a a shortest ptah problem</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

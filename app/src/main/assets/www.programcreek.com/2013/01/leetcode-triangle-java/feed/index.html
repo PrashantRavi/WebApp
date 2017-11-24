@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Triangle (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/01/leetcode-triangle-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Rudolf Eremyan</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-14653</link>
+		<dc:creator><![CDATA[Rudolf Eremyan]]></dc:creator>
+		<pubDate>Wed, 21 Sep 2016 13:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-14653</guid>
+		<description><![CDATA[Without using Extra Space, just modified existing ArrayLists
+
+public static int findMinPath(ArrayList&#060;ArrayList&#062; lists) {
+		
+		if(lists.size() == 1){
+			return lists.get(0).get(0);
+		}
+		
+		for(int i = lists.size()-2; i &#062;= 0; i--){
+			int size = lists.get(i).size();
+			
+			for(int j = 0; j &#060; size; j++){
+				int min = Math.min( (lists.get(i).get(j) + lists.get(i+1).get(j)), (lists.get(i).get(j) + lists.get(i+1).get(j+1)) );
+				lists.get(i).set(j, min);
+			}
+		}
+		
+		return lists.get(0).get(0);
+	}]]></description>
+		<content:encoded><![CDATA[<p>Without using Extra Space, just modified existing ArrayLists</p>
+<p>public static int findMinPath(ArrayList&lt;ArrayList&gt; lists) {</p>
+<p>		if(lists.size() == 1){<br />
+			return lists.get(0).get(0);<br />
+		}</p>
+<p>		for(int i = lists.size()-2; i &gt;= 0; i&#8211;){<br />
+			int size = lists.get(i).size();</p>
+<p>			for(int j = 0; j &lt; size; j++){<br />
+				int min = Math.min( (lists.get(i).get(j) + lists.get(i+1).get(j)), (lists.get(i).get(j) + lists.get(i+1).get(j+1)) );<br />
+				lists.get(i).set(j, min);<br />
+			}<br />
+		}</p>
+<p>		return lists.get(0).get(0);<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Surabhi Dixit</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-12888</link>
+		<dc:creator><![CDATA[Surabhi Dixit]]></dc:creator>
+		<pubDate>Tue, 26 Jul 2016 02:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-12888</guid>
+		<description><![CDATA[Anything wrong with my solution?
+&lt;code&gt;
+public static int addinput(int[][]x)
+{
+    int i=0,j=0,sum=0,previous=0;
+    while(i1&#038;&#038;j!=1)
+            j=1;
+
+    }
+    return sum;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Anything wrong with my solution?<br />
+<code><br />
+public static int addinput(int[][]x)<br />
+{<br />
+    int i=0,j=0,sum=0,previous=0;<br />
+    while(i1&amp;&amp;j!=1)<br />
+            j=1;</p>
+<p>    }<br />
+    return sum;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Piyush Chaudhary</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-8992</link>
+		<dc:creator><![CDATA[Piyush Chaudhary]]></dc:creator>
+		<pubDate>Mon, 08 Feb 2016 18:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-8992</guid>
+		<description><![CDATA[Wrong solution. Won&#039;t work for : [[-1],[2,3],[1,-1,-3]]]]></description>
+		<content:encoded><![CDATA[<p>Wrong solution. Won&#8217;t work for : [[-1],[2,3],[1,-1,-3]]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kUkaraCH4</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-7621</link>
+		<dc:creator><![CDATA[kUkaraCH4]]></dc:creator>
+		<pubDate>Mon, 23 Nov 2015 03:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-7621</guid>
+		<description><![CDATA[This solution uses O(n) extra space. You can technically use O(1) space, given that modification of the original triangle is allowed, by storing the partial minimum sum of the current value and the smaller of its lower neighbors. If we need to restore the original triangle we can then do it in a separate method which does use O(n) extra space but is only called lazily when needed:
+
+&lt;code&gt;
+
+public int minimumTotal(ArrayList&#060;ArrayList&#062; a) {
+	    if (a == null &#124;&#124; a.size() == 0) return -1;
+	    if (a.size() == 1) return a.get(0).get(0);
+	    for (int i = a.size() - 2; i &#062;= 0; i--) {
+	        ArrayList low = a.get(i);
+	        ArrayList high = a.get(i+1);
+	        for (int j = 0; j i).toArray();
+	    for (int i = a.size() - 2; i &#062;= 0; i--) {
+	        ArrayList curr = a.get(i);
+	        for (int j = 0; j &#060; curr.size(); j++) {
+	            int sum = curr.get(j);
+	            curr.set(j, curr.get(j) - Math.min(mem[j], mem[j+1]));
+	            mem[j] = sum;
+	        }
+	    }
+	    return res;
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>This solution uses O(n) extra space. You can technically use O(1) space, given that modification of the original triangle is allowed, by storing the partial minimum sum of the current value and the smaller of its lower neighbors. If we need to restore the original triangle we can then do it in a separate method which does use O(n) extra space but is only called lazily when needed:</p>
+<p><code></p>
+<p>public int minimumTotal(ArrayList&lt;ArrayList&gt; a) {<br />
+	    if (a == null || a.size() == 0) return -1;<br />
+	    if (a.size() == 1) return a.get(0).get(0);<br />
+	    for (int i = a.size() - 2; i &gt;= 0; i--) {<br />
+	        ArrayList low = a.get(i);<br />
+	        ArrayList high = a.get(i+1);<br />
+	        for (int j = 0; j i).toArray();<br />
+	    for (int i = a.size() - 2; i &gt;= 0; i--) {<br />
+	        ArrayList curr = a.get(i);<br />
+	        for (int j = 0; j &lt; curr.size(); j++) {<br />
+	            int sum = curr.get(j);<br />
+	            curr.set(j, curr.get(j) - Math.min(mem[j], mem[j+1]));<br />
+	            mem[j] = sum;<br />
+	        }<br />
+	    }<br />
+	    return res;<br />
+	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Candis</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-7613</link>
+		<dc:creator><![CDATA[Candis]]></dc:creator>
+		<pubDate>Sat, 21 Nov 2015 10:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-7613</guid>
+		<description><![CDATA[The first solution could have been right had we created another array and stored there and then copied it back to temp.! The space was still O(N)! :)]]></description>
+		<content:encoded><![CDATA[<p>The first solution could have been right had we created another array and stored there and then copied it back to temp.! The space was still O(N)! 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lthuongvn</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-triangle-java/#comment-7594</link>
+		<dc:creator><![CDATA[lthuongvn]]></dc:creator>
+		<pubDate>Thu, 12 Nov 2015 22:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11525#comment-7594</guid>
+		<description><![CDATA[Can we solve this problem by finding the minimum value at each row. Then the path from top to bottom would be the root, min of 1st row, min of 2nd row,,., min of last row.]]></description>
+		<content:encoded><![CDATA[<p>Can we solve this problem by finding the minimum value at each row. Then the path from top to bottom would be the root, min of 1st row, min of 2nd row,,., min of last row.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,1479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Median of Two Sorted Arrays (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays. The overall run time complexity should be O(log (m"/>
+<meta name="keywords" content="leetcode - median of two sorted arrays java,median of two sorted arrays"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Median of Two Sorted Arrays (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Clone Graph (Java)' href='../leetcode-clone-graph-java/index.html'/>
+<link rel='next' title='小白Moto G北美版刷中文三步走' href='../%E5%B0%8F%E7%99%BDmotog%E5%8C%97%E7%BE%8E%E7%89%88%E5%88%B7%E4%B8%AD%E6%96%87%E4%B8%89%E6%AD%A5%E8%B5%B0/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=10893.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-median-of-two-sorted-arrays-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-median-of-two-sorted-arrays-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-10893"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Median of Two Sorted Arrays (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<blockquote><p>There are two sorted arrays A and B of size m and n respectively. Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p></blockquote>
+<p><strong>Java Solution 1</strong></p>
+<p>This problem can be converted to the problem of finding kth element, k is (A's length + B' Length)/2. </p>
+<p>If any of the two arrays is empty, then the kth element is the non-empty array's kth element. If k == 0, the kth element is the first element of A or B. </p>
+<p>For normal cases(all other cases), we need to move the pointer at the pace of half of the array size to get log(n) time. </p>
+<p><img src="../../../wp-content/uploads/2012/12/median-of-two-sorted-array-730x571.png" alt="median-of-two-sorted-array" width="730" height="571" class="alignleft size-large wp-image-15805" srcset="http://www.programcreek.com/wp-content/uploads/2012/12/median-of-two-sorted-array-730x571.png 730w, http://www.programcreek.com/wp-content/uploads/2012/12/median-of-two-sorted-array-400x313.png 400w, http://www.programcreek.com/wp-content/uploads/2012/12/median-of-two-sorted-array-768x601.png 768w, http://www.programcreek.com/wp-content/uploads/2012/12/median-of-two-sorted-array.png 1188w" sizes="(max-width: 730px) 100vw, 730px"/></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">double</span> findMedianSortedArrays<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> nums1, <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> nums2<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> total <span style="color: #339933;">=</span> nums1.<span style="color: #006633;">length</span><span style="color: #339933;">+</span>nums2.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>total<span style="color: #339933;">%</span>2<span style="color: #339933;">==</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>findKth<span style="color: #009900;">&#40;</span>total<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span>, nums1, nums2, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">+</span>findKth<span style="color: #009900;">&#40;</span>total<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, nums1, nums2, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">/</span><span style="color: #cc66cc;">2.0</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> findKth<span style="color: #009900;">&#40;</span>total<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span>, nums1, nums2, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> findKth<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> k, <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> nums1, <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> nums2, <span style="color: #000066; font-weight: bold;">int</span> s1, <span style="color: #000066; font-weight: bold;">int</span> s2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s1<span style="color: #339933;">&gt;=</span>nums1.<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> nums2<span style="color: #009900;">&#91;</span>s2<span style="color: #339933;">+</span>k<span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s2<span style="color: #339933;">&gt;=</span>nums2.<span style="color: #006633;">length</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> nums1<span style="color: #009900;">&#91;</span>s1<span style="color: #339933;">+</span>k<span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>k<span style="color: #339933;">==</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">min</span><span style="color: #009900;">&#40;</span>nums1<span style="color: #009900;">&#91;</span>s1<span style="color: #009900;">&#93;</span>, nums2<span style="color: #009900;">&#91;</span>s2<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">int</span> m1 <span style="color: #339933;">=</span> s1<span style="color: #339933;">+</span>k<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> m2 <span style="color: #339933;">=</span> s2<span style="color: #339933;">+</span>k<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span><span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">int</span> mid1 <span style="color: #339933;">=</span> m1<span style="color: #339933;">&lt;</span>nums1.<span style="color: #006633;">length</span><span style="color: #339933;">?</span>nums1<span style="color: #009900;">&#91;</span>m1<span style="color: #009900;">&#93;</span><span style="color: #339933;">:</span><span style="color: #003399;">Integer</span>.<span style="color: #006633;">MAX_VALUE</span><span style="color: #339933;">;</span>    
+    <span style="color: #000066; font-weight: bold;">int</span> mid2 <span style="color: #339933;">=</span> m2<span style="color: #339933;">&lt;</span>nums2.<span style="color: #006633;">length</span><span style="color: #339933;">?</span>nums2<span style="color: #009900;">&#91;</span>m2<span style="color: #009900;">&#93;</span><span style="color: #339933;">:</span><span style="color: #003399;">Integer</span>.<span style="color: #006633;">MAX_VALUE</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>mid1<span style="color: #339933;">&lt;</span>mid2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> findKth<span style="color: #009900;">&#40;</span>k<span style="color: #339933;">-</span>k<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, nums1, nums2, m1<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span>, s2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> findKth<span style="color: #009900;">&#40;</span>k<span style="color: #339933;">-</span>k<span style="color: #339933;">/</span><span style="color: #cc66cc;">2</span>, nums1, nums2, s1, m2<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Time is O(log(k)).</p>
+<p><strong>Java solution 2 </strong></p>
+<p>Actually, we can write the binary search solution in multiple different ways. The following is one of them.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">double</span> findMedianSortedArrays<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> A<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>, <span style="color: #000066; font-weight: bold;">int</span> B<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> m <span style="color: #339933;">=</span> A.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> n <span style="color: #339933;">=</span> B.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>m <span style="color: #339933;">+</span> n<span style="color: #009900;">&#41;</span> <span style="color: #339933;">%</span> <span style="color: #cc66cc;">2</span> <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #666666; font-style: italic;">// odd</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">double</span><span style="color: #009900;">&#41;</span> findKth<span style="color: #009900;">&#40;</span>A, B, <span style="color: #009900;">&#40;</span>m <span style="color: #339933;">+</span> n<span style="color: #009900;">&#41;</span> <span style="color: #339933;">/</span> <span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">0</span>, m <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">0</span>, n <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">// even</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #009900;">&#40;</span>findKth<span style="color: #009900;">&#40;</span>A, B, <span style="color: #009900;">&#40;</span>m <span style="color: #339933;">+</span> n<span style="color: #009900;">&#41;</span> <span style="color: #339933;">/</span> <span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">0</span>, m <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">0</span>, n <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> 
+			<span style="color: #339933;">+</span> findKth<span style="color: #009900;">&#40;</span>A, B, <span style="color: #009900;">&#40;</span>m <span style="color: #339933;">+</span> n<span style="color: #009900;">&#41;</span> <span style="color: #339933;">/</span> <span style="color: #cc66cc;">2</span> <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">0</span>, m <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">0</span>, n <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">*</span> <span style="color: #cc66cc;">0.5</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">int</span> findKth<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> A<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>, <span style="color: #000066; font-weight: bold;">int</span> B<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>, <span style="color: #000066; font-weight: bold;">int</span> k, 
+	<span style="color: #000066; font-weight: bold;">int</span> aStart, <span style="color: #000066; font-weight: bold;">int</span> aEnd, <span style="color: #000066; font-weight: bold;">int</span> bStart, <span style="color: #000066; font-weight: bold;">int</span> bEnd<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">int</span> aLen <span style="color: #339933;">=</span> aEnd <span style="color: #339933;">-</span> aStart <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> bLen <span style="color: #339933;">=</span> bEnd <span style="color: #339933;">-</span> bStart <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// Handle special cases</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>aLen <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> B<span style="color: #009900;">&#91;</span>bStart <span style="color: #339933;">+</span> k<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>bLen <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> A<span style="color: #009900;">&#91;</span>aStart <span style="color: #339933;">+</span> k<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>k <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> A<span style="color: #009900;">&#91;</span>aStart<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&lt;</span> B<span style="color: #009900;">&#91;</span>bStart<span style="color: #009900;">&#93;</span> <span style="color: #339933;">?</span> A<span style="color: #009900;">&#91;</span>aStart<span style="color: #009900;">&#93;</span> <span style="color: #339933;">:</span> B<span style="color: #009900;">&#91;</span>bStart<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">int</span> aMid <span style="color: #339933;">=</span> aLen <span style="color: #339933;">*</span> k <span style="color: #339933;">/</span> <span style="color: #009900;">&#40;</span>aLen <span style="color: #339933;">+</span> bLen<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// a's middle count</span>
+	<span style="color: #000066; font-weight: bold;">int</span> bMid <span style="color: #339933;">=</span> k <span style="color: #339933;">-</span> aMid <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// b's middle count</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// make aMid and bMid to be array index</span>
+	aMid <span style="color: #339933;">=</span> aMid <span style="color: #339933;">+</span> aStart<span style="color: #339933;">;</span>
+	bMid <span style="color: #339933;">=</span> bMid <span style="color: #339933;">+</span> bStart<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>A<span style="color: #009900;">&#91;</span>aMid<span style="color: #009900;">&#93;</span> <span style="color: #339933;">&gt;</span> B<span style="color: #009900;">&#91;</span>bMid<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		k <span style="color: #339933;">=</span> k <span style="color: #339933;">-</span> <span style="color: #009900;">&#40;</span>bMid <span style="color: #339933;">-</span> bStart <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		aEnd <span style="color: #339933;">=</span> aMid<span style="color: #339933;">;</span>
+		bStart <span style="color: #339933;">=</span> bMid <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+		k <span style="color: #339933;">=</span> k <span style="color: #339933;">-</span> <span style="color: #009900;">&#40;</span>aMid <span style="color: #339933;">-</span> aStart <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		bEnd <span style="color: #339933;">=</span> bMid<span style="color: #339933;">;</span>
+		aStart <span style="color: #339933;">=</span> aMid <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">return</span> findKth<span style="color: #009900;">&#40;</span>A, B, k, aStart, aEnd, bStart, bEnd<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2015/07/leetcode-find-k-pairs-with-smallest-sums-java/index.html" rel="bookmark" title="LeetCode &#8211; Find K Pairs with Smallest Sums (Java)">LeetCode &#8211; Find K Pairs with Smallest Sums (Java) </a></li>
+<li><a href="../../../2014/05/leetcode-intersection-of-two-arrays-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Intersection of Two Arrays II (Java)">LeetCode &#8211; Intersection of Two Arrays II (Java) </a></li>
+<li><a href="../../../2015/05/leetcode-intersection-of-two-arrays-java/index.html" rel="bookmark" title="LeetCode &#8211; Intersection of Two Arrays (Java)">LeetCode &#8211; Intersection of Two Arrays (Java) </a></li>
+<li><a href="../../../2014/05/merge-k-sorted-arrays-in-java/index.html" rel="bookmark" title="Merge K Sorted Arrays in Java">Merge K Sorted Arrays in Java </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-median-of-two-sorted-arrays-java/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-median-of-two-sorted-arrays-java/" dc:title="LeetCode &#8211; Median of Two Sorted Arrays (Java)" trackback:ping="http://www.programcreek.com/2012/12/leetcode-median-of-two-sorted-arrays-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-14457">
+<div id="dsq-comment-header-14457" class="dsq-comment-header">
+<cite id="dsq-cite-14457">
+<span id="dsq-author-user-14457">Udaydeep Thota</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14457" class="dsq-comment-body">
+<div id="dsq-comment-message-14457" class="dsq-comment-message"><p>For 1st solution, it prints 7 which is correct !!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-13844">
+<div id="dsq-comment-header-13844" class="dsq-comment-header">
+<cite id="dsq-cite-13844">
+<span id="dsq-author-user-13844">yuvi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13844" class="dsq-comment-body">
+<div id="dsq-comment-message-13844" class="dsq-comment-message"><p>int[] nums1 = new int[]{1,2, 7, 8};<br/>
+int[] nums2 = new int[]{3, 4, 5, 6, 9, 10, 11, 12, 13};</p>
+<p>System.out.println(medianTwoSortedArrays.findMedianSortedArrays(nums1, nums2));<br/>
+Prints 9.</p>
+<p>How is any one of the solutions correct. This makes no sense.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-13586">
+<div id="dsq-comment-header-13586" class="dsq-comment-header">
+<cite id="dsq-cite-13586">
+<span id="dsq-author-user-13586">Pushbuffer</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13586" class="dsq-comment-body">
+<div id="dsq-comment-message-13586" class="dsq-comment-message"><p>Why do you initiate aMid as aMid = aLen * k / (aLen + bLen) ?? What&#8217;s the point??<br/>
+&gt;&gt; Answer is this post:<br/>
+<a href="http://articles.leetcode.com/find-k-th-smallest-element-in-union-of/" rel="nofollow">http://articles.leetcode.com/find-k-th-smallest-element-in-union-of/</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-12697">
+<div id="dsq-comment-header-12697" class="dsq-comment-header">
+<cite id="dsq-cite-12697">
+<span id="dsq-author-user-12697">Subodh Karwa</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12697" class="dsq-comment-body">
+<div id="dsq-comment-message-12697" class="dsq-comment-message"><p>If the two arrays are of length &#8216;n&#8217;, the complexity would be O(n), in that case.<br/>
+The above solution has a better complexity</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-12592">
+<div id="dsq-comment-header-12592" class="dsq-comment-header">
+<cite id="dsq-cite-12592">
+<span id="dsq-author-user-12592">Yejin Kim</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12592" class="dsq-comment-body">
+<div id="dsq-comment-message-12592" class="dsq-comment-message"><p>(1) aMid = aLen / 2, (2) k = (aLen + bLen) / 2<br/>
+2k = (aLen + bLen) which means (3) 2 = (aLen + bLen) / k<br/>
+then, just substitute (3) to (1)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-12007">
+<div id="dsq-comment-header-12007" class="dsq-comment-header">
+<cite id="dsq-cite-12007">
+<span id="dsq-author-user-12007">SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12007" class="dsq-comment-body">
+<div id="dsq-comment-message-12007" class="dsq-comment-message"><p>I used using an array and storing till (n+m)/2. Is this fine.</p>
+<p>public class Solution {<br/>
+public double findMedianSortedArrays(int[] nums1, int[] nums2) {<br/>
+int le=nums1.length+nums2.length;<br/>
+int l =(le)/2;</p>
+<p> int[] arr =new int[l+1];<br/>
+int j=0;<br/>
+int k=0;<br/>
+for(int i=0;i=nums1.length || k&gt;=nums2.length){</p>
+<p> if(j&gt;=nums1.length){<br/>
+arr[i]=nums2[k];<br/>
+k++;<br/>
+}else{<br/>
+arr[i]=nums1[j];<br/>
+j++;<br/>
+}<br/>
+}else{<br/>
+if(nums1[j]nums2[k]){<br/>
+arr[i]=nums2[k];<br/>
+k++;<br/>
+}else{<br/>
+arr[i]=nums2[k];<br/>
+if(i+1&lt;=l){<br/>
+i++;<br/>
+arr[i]=nums1[j];<br/>
+j++;<br/>
+}</p>
+<p> k++;<br/>
+}<br/>
+}<br/>
+}<br/>
+if(le%2==0){<br/>
+return (arr[l]+arr[l-1])/2.0;<br/>
+}else<br/>
+return arr[l];<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-11659">
+<div id="dsq-comment-header-11659" class="dsq-comment-header">
+<cite id="dsq-cite-11659">
+<span id="dsq-author-user-11659">Darewreck</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11659" class="dsq-comment-body">
+<div id="dsq-comment-message-11659" class="dsq-comment-message"><p>I&#8217;m not seeing the connection between the two formulas&#8230;and how those two is used to derive the other.</p>
+<p>aMid = aLen * k/(aLen + bLen) </p>
+<p>from<br/>
+aMid = aLen / 2 and k = （aLen + bLen)/2</p>
+<p>at best you get:</p>
+<p>aMid = aLen / 2 = (2k-bLen)/2 which is not aLen * k/(aLen + bLen)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-11323">
+<div id="dsq-comment-header-11323" class="dsq-comment-header">
+<cite id="dsq-cite-11323">
+<span id="dsq-author-user-11323">Rush</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11323" class="dsq-comment-body">
+<div id="dsq-comment-message-11323" class="dsq-comment-message"><p>Can you expound on this?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-10997">
+<div id="dsq-comment-header-10997" class="dsq-comment-header">
+<cite id="dsq-cite-10997">
+<span id="dsq-author-user-10997">Dean</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10997" class="dsq-comment-body">
+<div id="dsq-comment-message-10997" class="dsq-comment-message"><p>Thank you. This is the best solution among all online!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9098">
+<div id="dsq-comment-header-9098" class="dsq-comment-header">
+<cite id="dsq-cite-9098">
+<span id="dsq-author-user-9098">toinfinity</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9098" class="dsq-comment-body">
+<div id="dsq-comment-message-9098" class="dsq-comment-message"><p>Step 5 is correct if and only if length of both array is the same. Only in this occasion, median of two subarrays equal to the median of two original arrays.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9006">
+<div id="dsq-comment-header-9006" class="dsq-comment-header">
+<cite id="dsq-cite-9006">
+<span id="dsq-author-user-9006">Andrew</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9006" class="dsq-comment-body">
+<div id="dsq-comment-message-9006" class="dsq-comment-message"><p><code><br/>
+solution 2 when N&gt;M</p>
+<p>public class Solution {</p>
+<p> public double findMedianSortedArrays(int[] nums1, int[] nums2) {</p>
+<p> if(nums1.length&gt;nums2.length){</p>
+<p> int[] tem= nums1;</p>
+<p> nums1=nums2;</p>
+<p> nums2=tem;</p>
+<p> }</p>
+<p> int s1 = nums1.length;</p>
+<p> int s2 = nums2.length;</p>
+<p> if(s1==0&amp;&amp;s2==0) return 0;</p>
+<p> int m1=(s1-1)/2;</p>
+<p> int m2=(s2-1)/2;</p>
+<p> if(s1==0){</p>
+<p> double median= (s2%2==0)? (nums2[m2]+nums2[m2+1])/2.0: nums2[m2];</p>
+<p> return median;</p>
+<p> }</p>
+<p> double mv1 =0;</p>
+<p> double mv2=0;</p>
+<p> mv1= (s1%2==0)? (nums1[m1]+nums1[m1+1])/2.0: nums1[m1];</p>
+<p> mv2= (s2%2==0)? (nums2[m2]+nums2[m2+1])/2.0: nums2[m2];</p>
+<p> if (mv1==mv2) return mv1;</p>
+<p> if(s1==1) {</p>
+<p> if(s2%2==0){</p>
+<p> if(nums1[0]nums2[m2+1]) return nums2[m2+1];</p>
+<p> else return nums1[0];</p>
+<p> }</p>
+<p> }else{</p>
+<p> if (s2==1) return (nums1[0]+nums2[0])/2.0;</p>
+<p> if(nums1[0]&lt;nums2[m2]){</p>
+<p> if (nums1[0]nums2[m2+1]) return (nums2[m2+1]+nums2[m2])/2.0;</p>
+<p> else return (nums1[0]+nums2[m2])/2.0;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> int s=s1+s2;</p>
+<p> if (s % 2 == 0) {</p>
+<p> if(s1==s2)</p>
+<p> return findMedianSortedArrays(nums1,0,s1-1,nums2,0,s1-1,false);</p>
+<p> else{</p>
+<p> if(nums1[0]&gt;=nums2[(s2+s1)/2]) return (nums2[(s2+s1)/2-1]+nums2[(s2+s1)/2])/2.0;</p>
+<p> if(nums1[s1-1]nums1[s1-1])return nums2[(s2-s1)/2];</p>
+<p> return findMedianSortedArrays(nums1,0,s1-1,nums2,(s2-s1)/2+1,(s2+s1)/2,true);</p>
+<p> }<br/>
+}</p>
+<p> public double findMedianSortedArrays(int[] n1, int nb1,int ne1,int[] n2,int nb2, int ne2, boolean odd) {</p>
+<p> int s = ne1 - nb1 + 1 ;</p>
+<p> if(s==2){</p>
+<p> if (odd) return Integer.min(Integer.max(n1[nb1],n2[nb2]),Integer.min(n1[ne1],n2[ne2]));</p>
+<p> return (Integer.max(n1[nb1],n2[nb2])+Integer.min(n1[ne1],n2[ne2]))/2.0;</p>
+<p> }</p>
+<p> int mid = (s-1)/2;</p>
+<p> if (n1[nb1+mid]==n2[nb2+mid]) return n1[nb1+mid];</p>
+<p> if (n1[nb1+mid]&gt;n2[nb2+mid]){</p>
+<p> if(s%2==0) ne1=nb1+mid+1;</p>
+<p> else ne1=nb1+mid;</p>
+<p> return findMedianSortedArrays(n1,nb1,ne1,n2,nb2+ mid,ne2,odd);</p>
+<p> }</p>
+<p> if(s%2==0) ne2=nb2+mid+1;</p>
+<p> else ne2=nb2+mid;</p>
+<p> return findMedianSortedArrays(n1,nb1+mid,ne1,n2,nb2,ne2,odd);</p>
+<p> }</p>
+<p>}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9002">
+<div id="dsq-comment-header-9002" class="dsq-comment-header">
+<cite id="dsq-cite-9002">
+<span id="dsq-author-user-9002">Andrew</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9002" class="dsq-comment-body">
+<div id="dsq-comment-message-9002" class="dsq-comment-message"><p>when N&gt;M ,tail N to M. then solution 2 O(log m)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9001">
+<div id="dsq-comment-header-9001" class="dsq-comment-header">
+<cite id="dsq-cite-9001">
+<span id="dsq-author-user-9001">Andrew</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9001" class="dsq-comment-body">
+<div id="dsq-comment-message-9001" class="dsq-comment-message"><p>solution 2 when nM<br/>
+public static double findMedianSortedArrays(int[] nums1, int[] nums2) {</p>
+<p> int s1 = nums1.length;</p>
+<p> int s2 = nums2.length;</p>
+<p> if(s1==0&amp;&amp;s2==0) return 0;</p>
+<p> if(nums1.length&gt;nums2.length){</p>
+<p> int[] tem= nums1;</p>
+<p> nums1=nums2;</p>
+<p> nums2=tem;</p>
+<p> }</p>
+<p> int m1=(s1-1)/2;</p>
+<p> int m2=(s2-1)/2;</p>
+<p> if(s1==0)</p>
+<p> return (s2%2==0)? (nums2[m2]+nums2[m2+1])/2.0: nums2[m2];</p>
+<p> double mv1 =0;</p>
+<p> double mv2=0;</p>
+<p> mv1= (s1%2==0)? (nums1[m1]+nums1[m1+1])/2.0: nums1[m1];</p>
+<p> mv2= (s2%2==0)? (nums2[m2]+nums2[m2+1])/2.0: nums2[m2];</p>
+<p> if (mv1==mv2) return mv1;</p>
+<p> if (s2==1&amp;&amp;s1==1) return (nums1[0]+nums2[0])/2.0;</p>
+<p> if(s1==1) {</p>
+<p> if(s2%2==0){</p>
+<p> if(nums1[0]nums2[m2+1]) return nums2[m2+1];</p>
+<p> else return nums1[0];</p>
+<p> }</p>
+<p> }else{</p>
+<p> if(nums1[0]&lt;nums2[m2]){</p>
+<p> if (nums1[0]nums2[m2+1]) return (nums2[m2+1]+nums2[m2])/2.0;</p>
+<p> else return (nums1[0]+nums2[m2])/2.0;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> int s=s1+s2;</p>
+<p> if (s % 2 == 0) {</p>
+<p> if(s1==s2)</p>
+<p> return findMedianSortedArrays(nums1,0,s1-1,nums2,0,s1-1,false);</p>
+<p> else{</p>
+<p> if(nums1[0]&gt;=nums2[(s2+s1)/2]) return (nums2[(s2+s1)/2-1]+nums2[(s2+s1)/2])/2.0;</p>
+<p> if(nums1[s1-1]nums1[s1-1])return nums2[(s2-s1)/2];</p>
+<p> return findMedianSortedArrays(nums1,0,s1-1,nums2,(s2-s1)/2+1,(s2+s1)/2,true);</p>
+<p> }</p>
+<p> }</p>
+<p> public static double findMedianSortedArrays(int[] n1, int nb1,int ne1,int[] n2,int nb2, int ne2, boolean odd) {</p>
+<p> int s = ne1 &#8211; nb1 + 1 ;</p>
+<p> if(s==2){</p>
+<p> if (odd) return Integer.min(Integer.max(n1[nb1],n2[nb2]),Integer.min(n1[ne1],n2[ne2]));</p>
+<p> return (Integer.max(n1[nb1],n2[nb2])+Integer.min(n1[ne1],n2[ne2]))/2.0;</p>
+<p> }</p>
+<p> int mid = (s-1)/2;</p>
+<p> if (n1[nb1+mid]==n2[nb2+mid]) return n1[nb1+mid];</p>
+<p> if (n1[nb1+mid]&gt;n2[nb2+mid]){</p>
+<p> if(s%2==0) ne1=nb1+mid+1;</p>
+<p> else ne1=nb1+mid;</p>
+<p> return findMedianSortedArrays(n1,nb1,ne1,n2,nb2+mid,ne2,odd);</p>
+<p> }</p>
+<p> if(s%2==0) ne2=nb2+mid+1;</p>
+<p> else ne2=nb2+mid;</p>
+<p> return findMedianSortedArrays(n1,nb1+mid,ne1,n2,nb2,ne2,odd);</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7643">
+<div id="dsq-comment-header-7643" class="dsq-comment-header">
+<cite id="dsq-cite-7643">
+<span id="dsq-author-user-7643">Riaz Ud Din</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7643" class="dsq-comment-body">
+<div id="dsq-comment-message-7643" class="dsq-comment-message"><p>Thanks very much for the explanation. You are a lifesaver. Can you please also explain the logic for int bMid = k &#8211; aMid &#8211; 1; // b&#8217;s middle count</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7634">
+<div id="dsq-comment-header-7634" class="dsq-comment-header">
+<cite id="dsq-cite-7634">
+<span id="dsq-author-user-7634">lanoche</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7634" class="dsq-comment-body">
+<div id="dsq-comment-message-7634" class="dsq-comment-message"><p>in this case a={2,3,4} b={1},i think the answer can not work.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7623">
+<div id="dsq-comment-header-7623" class="dsq-comment-header">
+<cite id="dsq-cite-7623">
+<span id="dsq-author-user-7623">Tajinder Singh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7623" class="dsq-comment-body">
+<div id="dsq-comment-message-7623" class="dsq-comment-message"><p>No. It won&#8217;t work if the length of the 2 arrays is different.<br/>
+implementation at:<br/>
+&#8220;http://www.geeksforgeeks.org/median-of-two-sorted-arrays/&#8221;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7305">
+<div id="dsq-comment-header-7305" class="dsq-comment-header">
+<cite id="dsq-cite-7305">
+<span id="dsq-author-user-7305">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7305" class="dsq-comment-body">
+<div id="dsq-comment-message-7305" class="dsq-comment-message"><p>In Java, 1/2*3=0 and 1*3/2=1. Reason is that in the first expression, 1/2 is evaluated as 0.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7304">
+<div id="dsq-comment-header-7304" class="dsq-comment-header">
+<cite id="dsq-cite-7304">
+<span id="dsq-author-user-7304">Yiru</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7304" class="dsq-comment-body">
+<div id="dsq-comment-message-7304" class="dsq-comment-message"><p>I am not sure why it says index out of bound when I put (aLen/(aLen+bLen)*k) instead of (aLen*k/(aLen+bLen)). Anyone can explain?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7215">
+<div id="dsq-comment-header-7215" class="dsq-comment-header">
+<cite id="dsq-cite-7215">
+<span id="dsq-author-user-7215">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7215" class="dsq-comment-body">
+<div id="dsq-comment-message-7215" class="dsq-comment-message"><p>Thank you for the great code. Especially for sweet variables&#8217; names 🙂<br/>
+(However, explanation of algorithm by Gunner86 is not related to code!)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7214">
+<div id="dsq-comment-header-7214" class="dsq-comment-header">
+<cite id="dsq-cite-7214">
+<span id="dsq-author-user-7214">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7214" class="dsq-comment-body">
+<div id="dsq-comment-message-7214" class="dsq-comment-message"><p>Could you please explain those initiating aMid and bMid? I cannot get it.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7213">
+<div id="dsq-comment-header-7213" class="dsq-comment-header">
+<cite id="dsq-cite-7213">
+<span id="dsq-author-user-7213">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7213" class="dsq-comment-body">
+<div id="dsq-comment-message-7213" class="dsq-comment-message"><p>Is that wrong to put:<br/>
+aMid = aLen / 2 and bMid = bLen / 2</p>
+<p>Do we get wrong output?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7050">
+<div id="dsq-comment-header-7050" class="dsq-comment-header">
+<cite id="dsq-cite-7050">
+<span id="dsq-author-user-7050">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7050" class="dsq-comment-body">
+<div id="dsq-comment-message-7050" class="dsq-comment-message"><p>good idea ! but there is a problem. if we find the kth-1 value, we still can&#8217;t decide the kth value in which array.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7049">
+<div id="dsq-comment-header-7049" class="dsq-comment-header">
+<cite id="dsq-cite-7049">
+<span id="dsq-author-user-7049">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7049" class="dsq-comment-body">
+<div id="dsq-comment-message-7049" class="dsq-comment-message"><p>because A[aMid] still have possibility to be the kth number. so should include it.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7048">
+<div id="dsq-comment-header-7048" class="dsq-comment-header">
+<cite id="dsq-cite-7048">
+<span id="dsq-author-user-7048">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7048" class="dsq-comment-body">
+<div id="dsq-comment-message-7048" class="dsq-comment-message"><p>well done ! but there is a little problem with u method. if aLen=7, bLen=16, k=7, u can get aMid=0. i think you&#8217;d better cast the aLen to type double first. this is to say, you&#8217;d better write like this<br/>
+aMid = (int) ( (double)aLen / (aLen + bLen) * k)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7047">
+<div id="dsq-comment-header-7047" class="dsq-comment-header">
+<cite id="dsq-cite-7047">
+<span id="dsq-author-user-7047">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7047" class="dsq-comment-body">
+<div id="dsq-comment-message-7047" class="dsq-comment-message"><p>Because in the original post, function findKth is a general function to find kth number in two sorted arrays, not only median of two sorted arrays.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7046">
+<div id="dsq-comment-header-7046" class="dsq-comment-header">
+<cite id="dsq-cite-7046">
+<span id="dsq-author-user-7046">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7046" class="dsq-comment-body">
+<div id="dsq-comment-message-7046" class="dsq-comment-message"><p>I suppose your calculation is not right. the result of this algorithm is 6.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7045">
+<div id="dsq-comment-header-7045" class="dsq-comment-header">
+<cite id="dsq-cite-7045">
+<span id="dsq-author-user-7045">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7045" class="dsq-comment-body">
+<div id="dsq-comment-message-7045" class="dsq-comment-message"><p>if k==m+n, the program can recursively hit the condition k==0</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7044">
+<div id="dsq-comment-header-7044" class="dsq-comment-header">
+<cite id="dsq-cite-7044">
+<span id="dsq-author-user-7044">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7044" class="dsq-comment-body">
+<div id="dsq-comment-message-7044" class="dsq-comment-message"><p>scwinji is right. you can read his answer.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7043">
+<div id="dsq-comment-header-7043" class="dsq-comment-header">
+<cite id="dsq-cite-7043">
+<span id="dsq-author-user-7043">卢刘杰</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7043" class="dsq-comment-body">
+<div id="dsq-comment-message-7043" class="dsq-comment-message"><p>your analysis is more general and awesome and i think you are right. but there is one little problem in your answer. I suppose &#8220;If A[aMid] is less than B[bMid], &#8221; shoule be &#8220;If A[aMid] is greater than B[bMid], &#8220;. anyway , thank you very much.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6989">
+<div id="dsq-comment-header-6989" class="dsq-comment-header">
+<cite id="dsq-cite-6989">
+<span id="dsq-author-user-6989">Jk</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6989" class="dsq-comment-body">
+<div id="dsq-comment-message-6989" class="dsq-comment-message"><p>I love this site&#8217;s solutions, they are so clean and easy to understand! 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6896">
+<div id="dsq-comment-header-6896" class="dsq-comment-header">
+<cite id="dsq-cite-6896">
+<span id="dsq-author-user-6896">bitorange</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6896" class="dsq-comment-body">
+<div id="dsq-comment-message-6896" class="dsq-comment-message"><p>you can do like this: aMid=(int)(1.0*aLen/(aLen+bLen)*k);</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6860">
+<div id="dsq-comment-header-6860" class="dsq-comment-header">
+<cite id="dsq-cite-6860">
+<span id="dsq-author-user-6860">Frank</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6860" class="dsq-comment-body">
+<div id="dsq-comment-message-6860" class="dsq-comment-message"><p>int aMid = aLen * k / (aLen + bLen);</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6859">
+<div id="dsq-comment-header-6859" class="dsq-comment-header">
+<cite id="dsq-cite-6859">
+<span id="dsq-author-user-6859">Frank</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6859" class="dsq-comment-body">
+<div id="dsq-comment-message-6859" class="dsq-comment-message"><p>why this magic formula? I tried others, but only this one works, whY?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6500">
+<div id="dsq-comment-header-6500" class="dsq-comment-header">
+<cite id="dsq-cite-6500">
+<span id="dsq-author-user-6500">gunners86</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6500" class="dsq-comment-body">
+<div id="dsq-comment-message-6500" class="dsq-comment-message"><p>when you arrange the two array it would be 25, 28 ,30 ,31. So the median would be average of 28 and 30. 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6499">
+<div id="dsq-comment-header-6499" class="dsq-comment-header">
+<cite id="dsq-cite-6499">
+<span id="dsq-author-user-6499">scwinji</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6499" class="dsq-comment-body">
+<div id="dsq-comment-message-6499" class="dsq-comment-message"><p>Right, to use the code&#8217;s terms, aMid + bMid + 1 = k must be satisfied to be able to make the conclusions it does when A[aMid] &gt; B[bMid] (expanded on later). They also must all be integers &gt;= 0. That line is just how X Wang decided to determine these values, and it has certain runtime properties associated with it. You *could* replace the lines with randomly generating these numbers within bounds:</p>
+<p> int aMid, bMid;<br/>
+Random r = new Random();<br/>
+if (aLen &gt; bLen) {<br/>
+bMid = (int)(Math.min(bLen,k) * r.nextDouble());<br/>
+aMid = k &#8211; bMid &#8211; 1;<br/>
+} else {<br/>
+aMid = (int)(Math.min(aLen,k) * r.nextDouble());<br/>
+bMid = k &#8211; aMid &#8211; 1;<br/>
+}</p>
+<p>&#8230; which would still get you the right answer, but have pretty different runtime properties.</p>
+<p>As for why aMid + bMid + 1 = k is significant: If A[aMid] is less than B[bMid], you know that any elements in after A[aMid] in A can&#8217;t be the kth element since there are too many elements in B lower than it (and would exceed k elements). You also know that B[bMid] and any element before B[bMid] in B can&#8217;t be the kth element since there are too few elements in A lower than it (there wouldn&#8217;t be enough elements before B[bMid] to be the kth element).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6498">
+<div id="dsq-comment-header-6498" class="dsq-comment-header">
+<cite id="dsq-cite-6498">
+<span id="dsq-author-user-6498">scwinji</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6498" class="dsq-comment-body">
+<div id="dsq-comment-message-6498" class="dsq-comment-message"><p>It&#8217;s really odd how this was picked out as the pseudocode to X Wang&#8217;s solution, but it doesn&#8217;t say anything about the kth element. This algorithm doesn&#8217;t have a solution for when an array is of size 1, and also produces an incorrect solution for inputs ar1=[1,2,3] and ar2=[100,100]. On step 4, you get to a point where ar1=[2,3] and ar2=[100,100], and then step 6 calculates the median as (max(2,100) + min(3,100))/2 = 51.5, when it should be actually 3. Sorry, but this is not the same algorithm as the original post.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6493">
+<div id="dsq-comment-header-6493" class="dsq-comment-header">
+<cite id="dsq-cite-6493">
+<span id="dsq-author-user-6493">JY</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6493" class="dsq-comment-body">
+<div id="dsq-comment-message-6493" class="dsq-comment-message"><p>Which means that you can just do aMid = aLen / 2</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6470">
+<div id="dsq-comment-header-6470" class="dsq-comment-header">
+<cite id="dsq-cite-6470">
+<span id="dsq-author-user-6470">Zaga</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6470" class="dsq-comment-body">
+<div id="dsq-comment-message-6470" class="dsq-comment-message"><p>Also, why int aMid = aLen * k / (aLen + bLen); // a&#8217;s middle count</p>
+<p> int bMid = k &#8211; aMid &#8211; 1; // b&#8217;s middle count to calculate mid element. Why not aMid = aLen / 2 and bMid = bLen / 2</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6469">
+<div id="dsq-comment-header-6469" class="dsq-comment-header">
+<cite id="dsq-cite-6469">
+<span id="dsq-author-user-6469">Zaga</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6469" class="dsq-comment-body">
+<div id="dsq-comment-message-6469" class="dsq-comment-message"><p>I think when k == m + n is also a special case that should be handled similar to k == 0</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6433">
+<div id="dsq-comment-header-6433" class="dsq-comment-header">
+<cite id="dsq-cite-6433">
+<span id="dsq-author-user-6433">Ryan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6433" class="dsq-comment-body">
+<div id="dsq-comment-message-6433" class="dsq-comment-message"><p>considering [1,2,3] and [4,5,6,7,8,9,10,11]<br/>
+the results of this algorithm is 3.5 where the real median is 6. Am i missing something here or is this solution only applys when the two list size are the same?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6348">
+<div id="dsq-comment-header-6348" class="dsq-comment-header">
+<cite id="dsq-cite-6348">
+<span id="dsq-author-user-6348">nisha</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6348" class="dsq-comment-body">
+<div id="dsq-comment-message-6348" class="dsq-comment-message"><p>What if the two subarrays in the end are {25, 30} and {28, 31}? Here the median should have been average of 25 and 28. This is not attainable going by the logic mentioned by you. Can you please put some light on it?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6346">
+<div id="dsq-comment-header-6346" class="dsq-comment-header">
+<cite id="dsq-cite-6346">
+<span id="dsq-author-user-6346">Shibai Li</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6346" class="dsq-comment-body">
+<div id="dsq-comment-message-6346" class="dsq-comment-message"><p>Why is this inclusive? Could any one elaborate on this?</p>
+<p>aEnd = aMid; // not aEnd = aMid &#8211; 1?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6345">
+<div id="dsq-comment-header-6345" class="dsq-comment-header">
+<cite id="dsq-cite-6345">
+<span id="dsq-author-user-6345">Shibai Li</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6345" class="dsq-comment-body">
+<div id="dsq-comment-message-6345" class="dsq-comment-message"><p>same question here, can anyone give a better answer?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6266">
+<div id="dsq-comment-header-6266" class="dsq-comment-header">
+<cite id="dsq-cite-6266">
+<span id="dsq-author-user-6266">quicker</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6266" class="dsq-comment-body">
+<div id="dsq-comment-message-6266" class="dsq-comment-message"><p>in the even case you have to run the algo twice. If your findkth func just returns the index and the value, then you can just find the kth -1 value to then find the average without searching for the next value</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6249">
+<div id="dsq-comment-header-6249" class="dsq-comment-header">
+<cite id="dsq-cite-6249">
+<span id="dsq-author-user-6249">Vishal</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6249" class="dsq-comment-body">
+<div id="dsq-comment-message-6249" class="dsq-comment-message"><p>If you merge them and find the median element then time complexity would jump to O(n+m).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6211">
+<div id="dsq-comment-header-6211" class="dsq-comment-header">
+<cite id="dsq-cite-6211">
+<a id="dsq-author-user-6211" href="http://www.lyrj.info" target="_blank" rel="nofollow">Changfeng Chi</a>
+</cite>
+</div>
+<div id="dsq-comment-body-6211" class="dsq-comment-body">
+<div id="dsq-comment-message-6211" class="dsq-comment-message"><p>大牛</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6148">
+<div id="dsq-comment-header-6148" class="dsq-comment-header">
+<cite id="dsq-cite-6148">
+<span id="dsq-author-user-6148">Cheng</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6148" class="dsq-comment-body">
+<div id="dsq-comment-message-6148" class="dsq-comment-message"><p>Hmm, not really. It should be okay if the length for both arrays or both sub-arrays are different. Open to discuss:)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6049">
+<div id="dsq-comment-header-6049" class="dsq-comment-header">
+<cite id="dsq-cite-6049">
+<span id="dsq-author-user-6049">codingpan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6049" class="dsq-comment-body">
+<div id="dsq-comment-message-6049" class="dsq-comment-message"><p>aMid = aLen / 2 and k = （aLen + bLen)/2, so aMid = aLen * k/(aLen + bLen)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6031">
+<div id="dsq-comment-header-6031" class="dsq-comment-header">
+<cite id="dsq-cite-6031">
+<span id="dsq-author-user-6031">Kirk Zhang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6031" class="dsq-comment-body">
+<div id="dsq-comment-message-6031" class="dsq-comment-message"><p>I don&#8217;t think it matters as long as the invariant i + j = k &#8211; 1 is satisfied.<br/>
+The reason is it might be able to guess the kth element quicker if you weight the arrays.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6030">
+<div id="dsq-comment-header-6030" class="dsq-comment-header">
+<cite id="dsq-cite-6030">
+<span id="dsq-author-user-6030">Kirk Zhang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6030" class="dsq-comment-body">
+<div id="dsq-comment-message-6030" class="dsq-comment-message"><p>You have to do it in O(log(length of A + length of B))</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6028">
+<div id="dsq-comment-header-6028" class="dsq-comment-header">
+<cite id="dsq-cite-6028">
+<span id="dsq-author-user-6028">javanoob</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6028" class="dsq-comment-body">
+<div id="dsq-comment-message-6028" class="dsq-comment-message"><p>I might be missing something but since A and B are two sorted arrays, why not just merge them and return the middle element?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5949">
+<div id="dsq-comment-header-5949" class="dsq-comment-header">
+<cite id="dsq-cite-5949">
+<span id="dsq-author-user-5949">mengchao</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5949" class="dsq-comment-body">
+<div id="dsq-comment-message-5949" class="dsq-comment-message"><p>This is the best solution I have ever seen, simple, efficient and elegant. But I spend a lot of time understanding initiating aMid and bMid. Thank you for sharing this!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5947">
+<div id="dsq-comment-header-5947" class="dsq-comment-header">
+<cite id="dsq-cite-5947">
+<span id="dsq-author-user-5947">Dave</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5947" class="dsq-comment-body">
+<div id="dsq-comment-message-5947" class="dsq-comment-message"><p>Can you guys tell me if this one is OK ?</p>
+<p> public static void main(String[] args) {<br/>
+int[] arr1 = { 1, 3, 4, 7, 8, 11, 44, 55, 62 };<br/>
+int[] arr2 = { 2, 4, 5, 7, 33, 56, 77 };<br/>
+double median = getMedian(arr1, arr2);<br/>
+System.out.println(&#8220;calculated Median : &#8221; + median);<br/>
+}</p>
+<p> private static double getMedian(int[] arr1, int[] arr2) {<br/>
+int[] medianIndices = getMedianIndices(arr1.length, arr2.length);<br/>
+double median = 0;<br/>
+int currIndx1 = 0, currIndx2 = 0, currArr = 0;<br/>
+if (medianIndices.length == 2) {<br/>
+for (int i = 0; i &lt;= medianIndices[1]; i++) {<br/>
+if (arr1[currIndx1] &lt; arr2[currIndx2])<br/>
+currArr = 1;<br/>
+else<br/>
+currArr = 2;</p>
+<p> if (i == medianIndices[0] || i == medianIndices[1]) {<br/>
+if (currArr == 1)<br/>
+median += arr1[currIndx1];<br/>
+else<br/>
+median += arr2[currIndx2];<br/>
+}</p>
+<p> if (currArr == 1)<br/>
+currIndx1++;<br/>
+else<br/>
+currIndx2++;<br/>
+}<br/>
+median = median / 2;<br/>
+} else {<br/>
+for (int i = 0; i &lt;= medianIndices[0]; i++) {<br/>
+if (arr1[currIndx1] &lt; arr2[currIndx2])<br/>
+currArr = 1;<br/>
+else<br/>
+currArr = 2;</p>
+<p> if (i == medianIndices[0]) {<br/>
+if (currArr == 1)<br/>
+median += arr1[currIndx1];<br/>
+else<br/>
+median += arr2[currIndx2];<br/>
+}</p>
+<p> if (currArr == 1)<br/>
+currIndx1++;<br/>
+else<br/>
+currIndx2++;<br/>
+}<br/>
+}<br/>
+return median;<br/>
+}</p>
+<p> private static int[] getMedianIndices(int l1, int l2) {<br/>
+int[] medianIndices;<br/>
+if ((l1 + l2) % 2 == 0) {<br/>
+medianIndices = new int[2];<br/>
+medianIndices[0] = (l1 + l2) / 2 &#8211; 1;<br/>
+medianIndices[1] = (l1 + l2) / 2;<br/>
+} else {<br/>
+medianIndices = new int[1];<br/>
+medianIndices[0] = (l1 + l2) / 2;<br/>
+}<br/>
+return medianIndices;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5939">
+<div id="dsq-comment-header-5939" class="dsq-comment-header">
+<cite id="dsq-cite-5939">
+<span id="dsq-author-user-5939">n00b23</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5939" class="dsq-comment-body">
+<div id="dsq-comment-message-5939" class="dsq-comment-message"><p>can anyone answer it?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5900">
+<div id="dsq-comment-header-5900" class="dsq-comment-header">
+<cite id="dsq-cite-5900">
+<span id="dsq-author-user-5900">Jerry Wu</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5900" class="dsq-comment-body">
+<div id="dsq-comment-message-5900" class="dsq-comment-message"><p>To use this algorithm, Array A and B need to be the same length</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5890">
+<div id="dsq-comment-header-5890" class="dsq-comment-header">
+<cite id="dsq-cite-5890">
+<span id="dsq-author-user-5890">gunners86</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5890" class="dsq-comment-body">
+<div id="dsq-comment-message-5890" class="dsq-comment-message"><p>Perhaps the logic will help to understand it better..</p>
+<p>Algorithm:</p>
+<p>1) Calculate the medians m1 and m2 of the input arrays ar1[]<br/>
+and ar2[] respectively.<br/>
+2) If m1 and m2 both are equal then we are done.<br/>
+return m1 (or m2)<br/>
+3) If m1 is greater than m2, then median is present in one<br/>
+of the below two subarrays.<br/>
+a) From first element of ar1 to m1 (ar1[0&#8230;|_n/2_|])<br/>
+b) From m2 to last element of ar2 (ar2[|_n/2_|&#8230;n-1])<br/>
+4) If m2 is greater than m1, then median is present in one<br/>
+of the below two subarrays.<br/>
+a) From m1 to last element of ar1 (ar1[|_n/2_|&#8230;n-1])<br/>
+b) From first element of ar2 to m2 (ar2[0&#8230;|_n/2_|])<br/>
+5) Repeat the above process until size of both the subarrays<br/>
+becomes 2.<br/>
+6) If size of the two arrays is 2 then use below formula to get<br/>
+the median.<br/>
+Median = (max(ar1[0], ar2[0]) + min(ar1[1], ar2[1]))/2</p>
+<p>Thanks</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5735">
+<div id="dsq-comment-header-5735" class="dsq-comment-header">
+<cite id="dsq-cite-5735">
+<span id="dsq-author-user-5735">codergirl227</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5735" class="dsq-comment-body">
+<div id="dsq-comment-message-5735" class="dsq-comment-message"><p>Kartrace<br/>
+points out<br/>
+do the ratio first.<br/>
+aMid = aLen / (aLen + bLen) * k</p>
+<p>NO!!! do the * first. or you will fail. e.g {2, 3, 4} and {1}.</p>
+<p>3/4*2=0 3*2/4=1.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5601">
+<div id="dsq-comment-header-5601" class="dsq-comment-header">
+<cite id="dsq-cite-5601">
+<span id="dsq-author-user-5601">Kartrace</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5601" class="dsq-comment-body">
+<div id="dsq-comment-message-5601" class="dsq-comment-message"><p>do the ratio first.<br/>
+aMid = aLen / (aLen + bLen) * k</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5584">
+<div id="dsq-comment-header-5584" class="dsq-comment-header">
+<cite id="dsq-cite-5584">
+<span id="dsq-author-user-5584">Kun Han</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5584" class="dsq-comment-body">
+<div id="dsq-comment-message-5584" class="dsq-comment-message"><p>Why do you initiate aMid as aMid = aLen * k / (aLen + bLen) ?? What&#8217;s the point??</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5526">
+<div id="dsq-comment-header-5526" class="dsq-comment-header">
+<cite id="dsq-cite-5526">
+<span id="dsq-author-user-5526">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5526" class="dsq-comment-body">
+<div id="dsq-comment-message-5526" class="dsq-comment-message"><p>过奖了，加油。</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5521">
+<div id="dsq-comment-header-5521" class="dsq-comment-header">
+<cite id="dsq-cite-5521">
+<span id="dsq-author-user-5521">木木彬</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5521" class="dsq-comment-body">
+<div id="dsq-comment-message-5521" class="dsq-comment-message"><p>你的算法太厉害了~正在刷leetcode</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5517">
+<div id="dsq-comment-header-5517" class="dsq-comment-header">
+<cite id="dsq-cite-5517">
+<span id="dsq-author-user-5517">online chesstle</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5517" class="dsq-comment-body">
+<div id="dsq-comment-message-5517" class="dsq-comment-message"><p>the edge conditions are incorrect start + k is not the kth element. For Example when start==0 and we are looking to get 8th element, we would end up with array[8] whereas we need array[7] (th: // Handle special cases<br/>
+if (aLen == 0)<br/>
+return B[bStart + k];<br/>
+if (bLen == 0)<br/>
+return A[aStart + k];</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5408">
+<div id="dsq-comment-header-5408" class="dsq-comment-header">
+<cite id="dsq-cite-5408">
+<span id="dsq-author-user-5408">ecc</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5408" class="dsq-comment-body">
+<div id="dsq-comment-message-5408" class="dsq-comment-message"><p>I have never used java until today but when I tried this code, I noticed that this line:<br/>
+int aMid = aLen * k / (aLen + bLen);<br/>
+overflows very easily when aLen, k &gt; 65536<br/>
+I used a very ugly hack:<br/>
+int aMid = k * 4 / (aLen + bLen) * aLen / 4<br/>
+But what is the best practice?</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-median-of-two-sorted-arrays-java/';
+var disqus_identifier = '10893 http://www.programcreek.com/?p=10893';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Median of Two Sorted Arrays (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=10893';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

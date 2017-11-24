@@ -1,0 +1,742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>HashSet vs. TreeSet vs. LinkedHashSet</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="A Set contains no duplicate elements. That is one of the major reasons to use a set. There are 3 commonly used implementations of Set: HashSet, TreeSet and"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; HashSet vs. TreeSet vs. LinkedHashSet Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; LRU Cache (Java)' href='../leetcode-lru-cache-java/index.html'/>
+<link rel='next' title='ArrayList vs. LinkedList vs. Vector' href='../arraylist-vs-linkedlist-vs-vector/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=8126.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_03_hashset-vs-treeset-vs-linkedhashset_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_03_hashset-vs-treeset-vs-linkedhashset_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-8126"> <a href="index.html" rel="bookmark">
+HashSet vs. TreeSet vs. LinkedHashSet </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>A Set contains no duplicate elements. That is one of the major reasons to use a set. There are 3 commonly used implementations of Set: HashSet, TreeSet and LinkedHashSet. When and which to use is an important question. In brief, if you need a fast set, you should use HashSet; if you need a sorted set, then TreeSet should be used; if you need a set that can be store the insertion order, LinkedHashSet should be used. </p>
+<p><strong>1. Set Interface</strong></p>
+<p><term>Set</term> interface extends <term>Collection</term> interface. In a set, no duplicates are allowed. Every element in a set must be unique. You can simply add elements to a set, and duplicates will be removed automatically. </p>
+<p><img src="../../../wp-content/uploads/2009/02/java-collection-hierarchy.jpeg" width="650" height="360" class="alignnone"/></p>
+<p><strong>2. HashSet vs. TreeSet vs. LinkedHashSet </strong></p>
+<p>HashSet is Implemented using a hash table. Elements are not ordered. The <term>add</term>, <term>remove</term>, and <term>contains</term> methods have constant time complexity O(1).</p>
+<p>TreeSet is implemented using a tree structure(red-black tree in algorithm book). The elements in a set are sorted, but the <term>add</term>, <term>remove</term>, and <term>contains</term> methods has time complexity of O(log (n)). It offers several methods to deal with the ordered set like first(), last(), headSet(), tailSet(), etc. </p>
+<p>LinkedHashSet is between HashSet and TreeSet. It is implemented as a hash table with a linked list running through it, so it provides the order of insertion. The time complexity of basic methods is O(1). </p>
+<p><strong>3. TreeSet Example</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">TreeSet<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span> tree <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TreeSet<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+tree.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">12</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+tree.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">63</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+tree.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">34</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+tree.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">45</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+Iterator<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span> iterator <span style="color: #339933;">=</span> tree.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Tree set data: &quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; &quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Output is sorted as follows:</p>
+<pre>
+Tree set data: 12 34 45 63 
+</pre>
+<p>Now let's define a Dog class as follows:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> Dog <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		size <span style="color: #339933;">=</span> s<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> size <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;&quot;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Let's add some dogs to TreeSet like the following:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.Iterator</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.TreeSet</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> TestTreeSet <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> dset <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		Iterator<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> iterator <span style="color: #339933;">=</span> dset.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; &quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Compile ok, but run-time error occurs:</p>
+<pre>
+Exception in thread "main" java.lang.ClassCastException: collection.Dog cannot be cast to java.lang.Comparable
+	at java.util.TreeMap.put(Unknown Source)
+	at java.util.TreeSet.add(Unknown Source)
+	at collection.TestTreeSet.main(TestTreeSet.java:22)
+</pre>
+<p>Because TreeSet is sorted, the Dog object need to implement <term>java.lang.Comparable</term>'s <term>compareTo()</term> method like the following:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> Dog <span style="color: #000000; font-weight: bold;">implements</span> Comparable<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		size <span style="color: #339933;">=</span> s<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> toString<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> size <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot;&quot;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compareTo<span style="color: #009900;">&#40;</span>Dog o<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	        <span style="color: #000000; font-weight: bold;">return</span> size <span style="color: #339933;">-</span> o.<span style="color: #006633;">size</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>The output is: </p>
+<pre>
+1 2 3 
+</pre>
+<p><strong>4. HashSet Example</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">HashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> dset <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">5</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">4</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+Iterator<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> iterator <span style="color: #339933;">=</span> dset.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; &quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Output:</p>
+<pre>
+5 3 2 1 4 
+</pre>
+<p>Note the order is not certain. </p>
+<p><strong>5. LinkedHashSet Example</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">LinkedHashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> dset <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> LinkedHashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">5</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+dset.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">4</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+Iterator<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> iterator <span style="color: #339933;">=</span> dset.<span style="color: #006633;">iterator</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">hasNext</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">print</span><span style="color: #009900;">&#40;</span>iterator.<span style="color: #006633;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; &quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>The order of the output is certain and it is the insertion order:</p>
+<pre>
+2 1 3 5 4 
+</pre>
+<p><strong>6. Performance testing</strong></p>
+<p>The following method tests the performance of the three class on <term>add()</term> method.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+	<span style="color: #003399;">Random</span> r <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Random</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	HashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> hashSet <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> treeSet <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	LinkedHashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> linkedSet <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> LinkedHashSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// start time</span>
+	<span style="color: #000066; font-weight: bold;">long</span> startTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1000</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> x <span style="color: #339933;">=</span> r.<span style="color: #006633;">nextInt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1000</span> <span style="color: #339933;">-</span> <span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+		hashSet.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #666666; font-style: italic;">// end time</span>
+	<span style="color: #000066; font-weight: bold;">long</span> endTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">long</span> duration <span style="color: #339933;">=</span> endTime <span style="color: #339933;">-</span> startTime<span style="color: #339933;">;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;HashSet: &quot;</span> <span style="color: #339933;">+</span> duration<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// start time</span>
+	startTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1000</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> x <span style="color: #339933;">=</span> r.<span style="color: #006633;">nextInt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1000</span> <span style="color: #339933;">-</span> <span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+		treeSet.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #666666; font-style: italic;">// end time</span>
+	endTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	duration <span style="color: #339933;">=</span> endTime <span style="color: #339933;">-</span> startTime<span style="color: #339933;">;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;TreeSet: &quot;</span> <span style="color: #339933;">+</span> duration<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// start time</span>
+	startTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1000</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> x <span style="color: #339933;">=</span> r.<span style="color: #006633;">nextInt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1000</span> <span style="color: #339933;">-</span> <span style="color: #cc66cc;">10</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">;</span>
+		linkedSet.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	<span style="color: #666666; font-style: italic;">// end time</span>
+	endTime <span style="color: #339933;">=</span> <span style="color: #003399;">System</span>.<span style="color: #006633;">nanoTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	duration <span style="color: #339933;">=</span> endTime <span style="color: #339933;">-</span> startTime<span style="color: #339933;">;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;LinkedHashSet: &quot;</span> <span style="color: #339933;">+</span> duration<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>From the output below, we can clearly wee that HashSet is the fastest one. </p>
+<pre>
+HashSet: 2244768
+TreeSet: 3549314
+LinkedHashSet: 2263320
+</pre>
+<p>* The test is not precise, but can reflect the basic idea that TreeSet is much slower because it is sorted. </p>
+<p><img src="../../../wp-content/uploads/2013/03/hashset-treeset-linkedhashset1.png" alt="hashset-treeset-linkedhashset" width="600" height="371" class="alignnone size-full wp-image-11812" srcset="http://www.programcreek.com/wp-content/uploads/2013/03/hashset-treeset-linkedhashset1.png 600w, http://www.programcreek.com/wp-content/uploads/2013/03/hashset-treeset-linkedhashset1-300x185.png 300w" sizes="(max-width: 600px) 100vw, 600px"/></p>
+<p>Read:<a href="../arraylist-vs-linkedlist-vs-vector/index.html" title="ArrayList vs. LinkedList vs. Vector"> ArrayList vs. LinkedList vs. Vector</a></p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../arraylist-vs-linkedlist-vs-vector/index.html" rel="bookmark" title="ArrayList vs. LinkedList vs. Vector">ArrayList vs. LinkedList vs. Vector </a></li>
+<li><a href="../../../2009/02/a-simple-treeset-example/index.html" rel="bookmark" title="A simple TreeSet example">A simple TreeSet example </a></li>
+<li><a href="../../10/efficient-counter-in-java/index.html" rel="bookmark" title="Efficient Counter in Java">Efficient Counter in Java </a></li>
+<li><a href="../../../2009/02/implement-comparable-for-a-treeset/index.html" rel="bookmark" title="Implement Comparable for a TreeSet">Implement Comparable for a TreeSet </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/java-collections/index.html" rel="category tag">Collections</a> >> <a href="../../../category/versus/index.html" rel="category tag">Versus</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/" dc:identifier="http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/" dc:title="HashSet vs. TreeSet vs. LinkedHashSet" trackback:ping="http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-8587">
+<div id="dsq-comment-header-8587" class="dsq-comment-header">
+<cite id="dsq-cite-8587">
+<span id="dsq-author-user-8587">Paola Greco</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8587" class="dsq-comment-body">
+<div id="dsq-comment-message-8587" class="dsq-comment-message"><p>In your performance test you do not take in count the .next operation. That&#8217;s important for the comparison between HashSet [O(h/n)] and LinkedHashSet [O(1)]</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7931">
+<div id="dsq-comment-header-7931" class="dsq-comment-header">
+<cite id="dsq-cite-7931">
+<span id="dsq-author-user-7931">BatSlug</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7931" class="dsq-comment-body">
+<div id="dsq-comment-message-7931" class="dsq-comment-message"><p>Good article, bad way to present data: numbers on diagram say about 1.5 times difference, picture shows 6 times difference&#8230; Looks pretty scary for a reader scheming through the page&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7495">
+<div id="dsq-comment-header-7495" class="dsq-comment-header">
+<cite id="dsq-cite-7495">
+<a id="dsq-author-user-7495" href="http://javaproficiency.com" target="_blank" rel="nofollow">Shivam Singh</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7495" class="dsq-comment-body">
+<div id="dsq-comment-message-7495" class="dsq-comment-message"><p>well explain and must visit java <a href="http://tinyurl.com/javacollectionxamples" rel="nofollow">collection examples</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7494">
+<div id="dsq-comment-header-7494" class="dsq-comment-header">
+<cite id="dsq-cite-7494">
+<a id="dsq-author-user-7494" href="http://javaproficiency.com" target="_blank" rel="nofollow">Shivam Singh</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7494" class="dsq-comment-body">
+<div id="dsq-comment-message-7494" class="dsq-comment-message"><p>well explain and visit best java collection examples <a href="http://tinyurl.com/ovtq83g" rel="nofollow"> here </a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7004">
+<div id="dsq-comment-header-7004" class="dsq-comment-header">
+<cite id="dsq-cite-7004">
+<span id="dsq-author-user-7004">konqi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7004" class="dsq-comment-body">
+<div id="dsq-comment-message-7004" class="dsq-comment-message"><p>If you find this article helpful &#8211; think! What this articles does benchmark is adding values to various sets.<br/>
+The much more important question is: What are you doing with the set once the values are added?<br/>
+Of course a TreeSet is slow when adding values because all new values are sorted. That&#8217;s why you would normally avoid filling a TreeSet like that all together (You&#8217;d fill an array/LinkedHashSet and initialize your TreeSet with that array).<br/>
+BUT: A TreeSet is very fast if you want to randomly access values in your Set because it has been sorted and there is no need to walk through the Array or LinkedList that backs the other lists.<br/>
+All LinkedStuff is slow when randomly accessing values but they are very fast when moving or replacing objects.<br/>
+Lastly: A HashSet is the most memory demanding of them all. If you have lots of RAM and you want resonable performance for read and writes to your set, this is the one to use.<br/>
+Summary: Which Set is the fastest cannot simply be benchmarked by adding values to different types of sets. The right set for your use case may be dependent on more than just the performance during set initialization.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6817">
+<div id="dsq-comment-header-6817" class="dsq-comment-header">
+<cite id="dsq-cite-6817">
+<span id="dsq-author-user-6817">Muhammad Aamir</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6817" class="dsq-comment-body">
+<div id="dsq-comment-message-6817" class="dsq-comment-message"><p>Dear Friends,, this is a nice code, works 100% perfect.<br/>
+do not worry about the results. it depends upon the System you are using. and also the Processor business. Every time you run this code, it will give different results</p>
+<p>Thanks 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6312">
+<div id="dsq-comment-header-6312" class="dsq-comment-header">
+<cite id="dsq-cite-6312">
+<span id="dsq-author-user-6312">bhawna</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6312" class="dsq-comment-body">
+<div id="dsq-comment-message-6312" class="dsq-comment-message"><p>dsvgd</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6259">
+<div id="dsq-comment-header-6259" class="dsq-comment-header">
+<cite id="dsq-cite-6259">
+<span id="dsq-author-user-6259">Puneeth Shivalingaiah</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6259" class="dsq-comment-body">
+<div id="dsq-comment-message-6259" class="dsq-comment-message"><p>Thanks Buddy 🙂 Simple and concise</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6060">
+<div id="dsq-comment-header-6060" class="dsq-comment-header">
+<cite id="dsq-cite-6060">
+<span id="dsq-author-user-6060">karthik</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6060" class="dsq-comment-body">
+<div id="dsq-comment-message-6060" class="dsq-comment-message"><p>The result is exchanged like below</p>
+<p>HashSet: 1109680</p>
+<p>TreeSet: 500201</p>
+<p>LinkedHashSet: 1675388</p>
+<p>When i run u r code &#8230;it will be exception Exception in thread &#8220;main&#8221; java.lang.ClassCastException: setproject.Dog1 cannot be cast to java.lang.Comparable</p>
+<p> at java.util.TreeMap.compare(Unknown Source)</p>
+<p> at java.util.TreeMap.put(Unknown Source)</p>
+<p> at java.util.TreeSet.add(Unknown Source)</p>
+<p> at setproject.Main.main(Main.java:36)</p>
+<p>I just add comparable interface with Dog class but the result is exchanged.. Give me the correct solution.. Thanx in advance</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5750">
+<div id="dsq-comment-header-5750" class="dsq-comment-header">
+<cite id="dsq-cite-5750">
+<span id="dsq-author-user-5750">Somesh Rathi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5750" class="dsq-comment-body">
+<div id="dsq-comment-message-5750" class="dsq-comment-message"><p>explained in very simple and easy to understand manner.. Performance test results helped to visualise and convince the theory learnt using practical way.. Awesome article.. keep writing ..</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5624">
+<div id="dsq-comment-header-5624" class="dsq-comment-header">
+<cite id="dsq-cite-5624">
+<span id="dsq-author-user-5624">Satish Kumar SIngh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5624" class="dsq-comment-body">
+<div id="dsq-comment-message-5624" class="dsq-comment-message"><p>Performance Test results are unexpected. We can not say order would be this</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5551">
+<div id="dsq-comment-header-5551" class="dsq-comment-header">
+<cite id="dsq-cite-5551">
+<span id="dsq-author-user-5551">Luiz Sewaybricker</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5551" class="dsq-comment-body">
+<div id="dsq-comment-message-5551" class="dsq-comment-message"><p>The results are exchanged, the correct is:</p>
+<p>TreeSet: 2263320<br/>
+LinkedHashSet: 3549314</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5390">
+<div id="dsq-comment-header-5390" class="dsq-comment-header">
+<cite id="dsq-cite-5390">
+<span id="dsq-author-user-5390">Sandeep Jaiswal</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5390" class="dsq-comment-body">
+<div id="dsq-comment-message-5390" class="dsq-comment-message"><p>well done, very nicely , crisply explained.. gone through entire page withing 1 minute.. thansk</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/';
+var disqus_identifier = '8126 http://www.programcreek.com/?p=8126';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "HashSet vs. TreeSet vs. LinkedHashSet";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=8126';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

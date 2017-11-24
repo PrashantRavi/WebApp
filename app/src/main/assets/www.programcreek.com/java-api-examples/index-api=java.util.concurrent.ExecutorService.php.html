@@ -1,0 +1,1612 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example java.util.concurrent.ExecutorService</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for java.util.concurrent.ExecutorService. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, java.util.concurrent.ExecutorService" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=java.util.concurrent.Callable.php.html">java.util.concurrent.Callable</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.Future.php.html">java.util.concurrent.Future</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.ThreadPoolExecutor.php.html">java.util.concurrent.ThreadPoolExecutor</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Test.php.html">org.junit.Test</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.ExecutionException.php.html">java.util.concurrent.ExecutionException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.Executors.php.html">java.util.concurrent.Executors</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.atomic.AtomicInteger.php.html">java.util.concurrent.atomic.AtomicInteger</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.ThreadFactory.php.html">java.util.concurrent.ThreadFactory</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.TimeUnit.php.html">java.util.concurrent.TimeUnit</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.concurrent.CountDownLatch.php.html">java.util.concurrent.CountDownLatch</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=shutdown.php.html">
+                                    shutdown                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=submit.php.html">
+                                    submit                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=shutdownNow.php.html">
+                                    shutdownNow                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=execute.php.html">
+                                    execute                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=awaitTermination.php.html">
+                                    awaitTermination                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=invokeAll.php.html">
+                                    invokeAll                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=isTerminated.php.html">
+                                    isTerminated                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=isShutdown.php.html">
+                                    isShutdown                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.concurrent.ExecutorService&method=invokeAny.php.html">
+                                    invokeAny                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for java.util.concurrent.ExecutorService</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">java.util.concurrent.ExecutorService</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="java.util.concurrent.ExecutorService"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TestDatasetGraphWithLock.java</span>
+								<a href="index-source_dir=jena-master_jena-arq_src_test_java_org_apache_jena_sparql_core_TestDatasetGraphWithLock.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="17738votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="17738==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="17738==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public synchronized void dsg_with_lock_concurrency_01() throws InterruptedException, ExecutionException, TimeoutException {
+    ExecutorService executor = Executors.newFixedThreadPool(2);
+
+    try {
+        final DatasetGraphWithLock dsg = new DatasetGraphWithLock(DatasetGraphFactory.createMem());
+
+        Callable&lt;Boolean&gt; callable = new Callable&lt;Boolean&gt;() {
+
+            @Override
+            public Boolean call() {
+                dsg.begin(ReadWrite.READ);
+
+                // Hold the lock for a few seconds
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    // Ignore error
+                }
+
+                dsg.commit();
+                return true;
+            }
+
+        };
+
+        // Fire off two threads
+        Future&lt;Boolean&gt; f1 = executor.submit(callable);
+        Future&lt;Boolean&gt; f2 = executor.submit(callable);
+        Assert.assertTrue(f1.get(4, TimeUnit.SECONDS));
+        Assert.assertTrue(f2.get(4, TimeUnit.SECONDS));
+    } finally {
+        executor.shutdownNow();
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">led-server</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ServerIntegrationTest.java</span>
+								<a href="index-source_dir=led-server-master_src_test_java_org_led_http_ServerIntegrationTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1082votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1082==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1082==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void shouldProcessConcurrentGets() throws Exception {
+
+    int threads = 300;
+    final HttpGet get = new HttpGet(&quot;http://localhost:8889/test&quot;);
+    final CyclicBarrier barrier = new CyclicBarrier(threads);
+    final AtomicInteger done = new AtomicInteger();
+    ExecutorService executor = Executors.newFixedThreadPool(threads);
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i &lt; threads; i++) {
+        executor.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    final DefaultHttpClient client = new DefaultHttpClient();
+                    barrier.await();
+                    HttpResponse response = client.execute(get);
+
+                    EntityUtils.consumeQuietly(response.getEntity());
+                    assertEquals(200, response.getStatusLine()
+                            .getStatusCode());
+                    done.incrementAndGet();
+                } catch (InterruptedException | BrokenBarrierException
+                        | IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    while (done.get() != threads) {
+        // wait
+        Thread.sleep(500);
+
+    }
+    System.err.println(&quot;DONE, Time: &quot;
+            + (System.currentTimeMillis() - startTime));
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">windtalk</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">JmmDNSImpl.java</span>
+								<a href="index-source_dir=windtalk-master_src_javax_jmdns_impl_JmmDNSImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="5020votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="5020==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="5020==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public ServiceInfo[] getServiceInfos(final String type, final String name, final boolean persistent, final long timeout) {
+    // We need to run this in parallel to respect the timeout.
+    final Set&lt;ServiceInfo&gt; result = Collections.synchronizedSet(new HashSet&lt;ServiceInfo&gt;(_knownMDNS.size()));
+    ExecutorService executor = Executors.newCachedThreadPool();
+    for (final JmDNS mDNS : _knownMDNS.values()) {
+        executor.submit(new Runnable() {
+            /**
+             * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="671c270e090f02150e13230804">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>}
+             */
+            @Override
+            public void run() {
+                result.add(mDNS.getServiceInfo(type, name, persistent, timeout));
+            }
+        });
+    }
+    executor.shutdown();
+    try {
+        executor.awaitTermination(timeout, TimeUnit.MILLISECONDS);
+    } catch (InterruptedException exception) {
+        logger.log(Level.WARNING, &quot;Exception &quot;, exception);
+    }
+    return result.toArray(new ServiceInfo[result.size()]);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">rave</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DefaultLockServiceTest.java</span>
+								<a href="index-source_dir=rave-master_rave-components_rave-commons_src_test_java_org_apache_rave_service_impl_DefaultLockServiceTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="261409votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="261409==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="261409==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void testThreads(final boolean useSharedLock) throws InterruptedException {
+    ExecutorService executorService = Executors.newFixedThreadPool(10);
+    Collection&lt;Callable&lt;String&gt;&gt; tasks = new ArrayList&lt;Callable&lt;String&gt;&gt;();
+    for (int i = 0; i &lt; 10; i++) {
+        tasks.add(new Callable&lt;String&gt;() {
+            @Override
+            public String call() throws Exception {
+                String threadName = Thread.currentThread().getName();
+                String lockKey = useSharedLock ? &quot;SHARED&quot; : threadName;
+                Lock lock = service.borrowLock(lockKey);
+                try {
+                    lock.lock();
+                    Thread.sleep(125);
+                    System.out.println(threadName);
+                    return lockKey;
+                } finally {
+                    lock.unlock();
+                    service.returnLock(lock);
+                }
+            }
+        });
+    }
+    executorService.invokeAll(tasks);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">cloudtm-data-platform</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DefaultExecutorService.java</span>
+								<a href="index-source_dir=cloudtm-data-platform-master_src_Infinispan_core_src_main_java_org_infinispan_distexec_DefaultExecutorService.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="350466votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="350466==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="350466==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Creates a new DefaultExecutorService given a master cache node and an ExecutorService for
+ * parallel execution of task ran on this node. All distributed task executions will be initiated
+ * from this Infinispan cache node.
+ * 
+ * @param masterCacheNode
+ *           Cache node initiating distributed task
+ * @param localExecutorService
+ *           ExecutorService to run local tasks
+ */
+public DefaultExecutorService(Cache&lt;?, ?&gt; masterCacheNode, ExecutorService localExecutorService){
+   super();
+   if (masterCacheNode == null)
+      throw new IllegalArgumentException(&quot;Can not use null cache for DefaultExecutorService&quot;);
+   else if (localExecutorService == null)
+      throw new IllegalArgumentException(&quot;Can not use null instance of ExecutorService&quot;);
+   else if (localExecutorService.isShutdown())
+      throw new IllegalArgumentException(&quot;Can not use an instance of ExecutorService which is shutdown&quot;);
+
+   ensureProperCacheState(masterCacheNode.getAdvancedCache());
+
+   this.cache = masterCacheNode.getAdvancedCache();
+   ComponentRegistry registry = cache.getComponentRegistry();
+
+   this.rpc = cache.getRpcManager();
+   this.invoker = registry.getComponent(InterceptorChain.class);
+   this.factory = registry.getComponent(CommandsFactory.class);
+   this.marshaller = registry.getComponent(StreamingMarshaller.class, CACHE_MARSHALLER);
+   this.localExecutorService = localExecutorService;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">droolsjbpm</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ExternalExecutorService.java</span>
+								<a href="index-source_dir=droolsjbpm-master_drools-core_src_main_java_org_drools_concurrent_ExternalExecutorService.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="949413votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="949413==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="949413==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="0f744f6661676a7d667b4b606c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>}
+ */
+public Object invokeAny(Collection tasks,
+		long timeout, TimeUnit unit) throws InterruptedException,
+		ExecutionException, TimeoutException {
+	ExecutorService service = delegate.get();
+	if (service != null) {
+		// since the tasks are either executed or cancelled, there is no
+		// need to track them
+		return service.invokeAny(tasks, timeout, unit);
+	}
+	throw new RejectedExecutionException(
+			&quot;Execution service is terminated. No more tasks can be executed.&quot;);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">browserid-verifier</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Verifier.java</span>
+								<a href="index-source_dir=browserid-verifier-master_lib_src_main_java_info_modprobe_browserid_Verifier.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="98votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="98==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="98==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/***
+ * @param assertion
+ * @param audience
+ * @param timeOut
+ *            To wait for the verification process. Unlike
+ *            the low level <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="770c371b1e191c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> URLConnection#setConnectTimeout(int)} and
+ *            <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="641f24080d0a0f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> URLConnection#setReadTimeout(int)} which set different
+ *            time outs for the connection and read processes, this a global
+ *            time out for the entire verification process.
+ *            Its value should be &gt; 0.
+ * @param timeUnit    
+ *
+ * @return the result of the verification
+ * 
+ * @throws <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="99e2d9faf6fdfc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> BrowserIDResponse} if there is a failure in the
+ *         verification process
+ * @throws <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="225962414d4647">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> IllegalArgumentException} if the arguments are invalid.
+ */
+public BrowserIDResponse verify(final String assertion,
+		final String audience, final long timeOut, final TimeUnit timeUnit) {
+	log.debug(&quot;assertion: '{}' audience: '{}'&quot;, assertion, audience);
+	if (assertion == null || !(assertion.length() &gt; 0)) {
+		throw new IllegalArgumentException(&quot;assertion is mandatory&quot;);
+	}
+	if (audience == null || !(audience.length() &gt; 0)) {
+		throw new IllegalArgumentException(&quot;audience is mandatory&quot;);
+	}
+	if (timeOut &lt;= 0) {
+		throw new IllegalArgumentException(&quot;Timeout value should be &gt; 0&quot;);
+	}
+
+	try {
+		final JSONRequest body = new JSONRequest(assertion, audience);
+		log.debug(&quot;Verifying: '{}' using: '{}'&quot;, body.toString(), this.url);
+		final URL verifierURL = new URL(this.url);
+		final HttpsURLConnection connection = prepareConnection(verifierURL);
+		String response = &quot;&quot;;
+		/* Execute the verification task */
+		final ExecutorService verifierExecutor = Executors
+				.newSingleThreadExecutor();
+		final Callable&lt;String&gt; verifyTask = new VerifyTask(connection,
+				body);
+		final Future&lt;String&gt; verifyExcution = verifierExecutor
+				.submit(verifyTask);
+
+		verifierExecutor.shutdown();
+		try {
+			response = verifyExcution.get(timeOut, timeUnit);
+
+		} catch (final InterruptedException | TimeoutException thExc) {
+			throw new BrowserIDException(thExc);
+
+		} catch (final ExecutionException execExc) {
+			throw new BrowserIDException(execExc.getCause());
+		}
+
+		log.debug(&quot;Response from verifier: [{}] '{}'&quot;,
+				connection.getResponseCode(), response);
+
+		return new BrowserIDResponse(response);
+
+	} catch (final IOException ioexc) {
+		throw new BrowserIDException(ioexc);
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ConcurrencyTest.java</span>
+								<a href="index-source_dir=jena-master_jena-core_src_test_java_org_apache_jena_reasoner_rulesys_test_ConcurrencyTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="17105votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="17105==java.util.concurrent.ExecutorService">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="17105==java.util.concurrent.ExecutorService">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void doTestConcurrency(final OntModel model) throws InterruptedException {
+        // initialize the model
+        final String NS = PrintUtil.egNS;
+        
+        model.enterCriticalSection(Lock.WRITE);
+        final OntClass Top = model.createClass(NS + &quot;Top&quot;);
+        for (int i = 0; i &lt; MODEL_SIZE; i++) {
+            OntClass C = model.createClass(NS + &quot;C&quot; + i);
+            Top.addSubClass(C);
+            model.createIndividual(NS + &quot;i&quot; + i, C);
+        }
+        model.leaveCriticalSection();
+
+        class QueryExecutingRunnable implements Runnable {
+            @Override
+            @SuppressWarnings(&quot;unchecked&quot;)
+            public void run() {
+                // Keep this thread running until the specified duration has expired
+                long runStartedAt = System.currentTimeMillis();
+                while(System.currentTimeMillis() - runStartedAt &lt; TEST_LENGTH)
+                {
+                    Thread.yield();
+                    
+                    model.enterCriticalSection(Lock.READ);
+                    try {
+                        // Iterate over all statements
+                        StmtIterator it = model.listStatements();
+                        
+//                        // Debug
+//                        List&lt;Statement&gt; s = it.toList();
+//                        it = new StmtIteratorImpl(s.iterator()) ;
+                        
+                        while(it.hasNext()) it.nextStatement();
+                        it.close();
+                        
+                        // Check number of instances of Top class
+                        int count = 0;
+                        ExtendedIterator&lt;OntResource&gt; ei = (ExtendedIterator&lt;OntResource&gt;) Top.listInstances();
+                        while (ei.hasNext()) {
+                            ei.next();
+                            count++;
+                        }
+                        ei.close();
+                        if (MODEL_SIZE != count) {
+                            if (FULL_TEST) System.err.println(&quot;Failure - found &quot; + count + &quot; instance, expected &quot; + MODEL_SIZE);
+                            throw new JenaException(&quot;Failure - found &quot; + count + &quot; instance, expected &quot; + MODEL_SIZE);
+                        }
+                    }
+                    finally {   model.leaveCriticalSection(); }
+                }
+            }
+        }
+        
+        // Start the threads
+        ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
+        for(int i = 0; i &lt; NUM_THREADS; ++i) {
+            executorService.submit(new QueryExecutingRunnable());
+        }
+        
+        // Wait for threads to finish
+        executorService.shutdown(); // this will *not* terminate any threads currently running
+        Thread.sleep(TEST_LENGTH + 50);
+        
+        // Possibly in deadlock, wait a little longer to be sure
+        for(int i = 0; i &lt; 50 &amp;&amp; !executorService.isTerminated(); i++) {
+            Thread.sleep(20);
+        }
+        
+        if(!executorService.isTerminated()) {
+            /* uncomment this block to perform deadlock checking, only on java 1.6 */
+            // Check for deadlock
+            ThreadMXBean tmx = ManagementFactory.getThreadMXBean();
+            long[] ids = tmx.findDeadlockedThreads();
+            if (ids != null) {
+                ThreadInfo[] infos = tmx.getThreadInfo(ids, true, true);
+                
+                System.err.println(&quot;*** Deadlocked threads&quot;);
+                for (ThreadInfo ti : infos) {
+                    System.err.println(&quot;Thread \&quot;&quot; + ti.getThreadName() + &quot;\&quot; id=&quot; + ti.getThreadId() + &quot; &quot; 
+                            + ti.getThreadState().toString());
+                    System.err.println(&quot;Lock name: &quot; + ti.getLockName() + &quot; owned by \&quot;&quot;
+                            + ti.getLockOwnerName() + &quot;\&quot; id=&quot; + ti.getLockOwnerId());
+                    System.err.println(&quot;\nStack trace:&quot;);
+                    for(StackTraceElement st : ti.getStackTrace())
+                        System.err.println(&quot;   &quot; + st.getClassName() + &quot;.&quot; + st.getMethodName() 
+                                + &quot; (&quot; + st.getFileName() + &quot;:&quot; + st.getLineNumber() + &quot;)&quot; );
+                    System.err.println();
+                }
+            }
+            Assert.assertTrue(&quot;Deadlock detected!&quot;, false);
+            /* end deadlock block */
+            assertTrue(&quot;Failed to terminate execution&quot;, false);
+        }
+    }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("ExecutorService", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(ExecutorService, "ig") ,'<div style="background-color:red">' + ExecutorService + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

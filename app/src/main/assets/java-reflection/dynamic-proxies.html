@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Reflection - Dynamic Proxies</title>
+
+    <meta name="description" content="This text explains how to create dynamic interface implementations at runtime using Java Reflections Dynamic Proxy capabilities">
+    <meta name="keywords"    content="java reflection dynamic proxies proxy">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Reflection - Dynamic Proxies">
+    <meta name="twitter:description" content="This text explains how to create dynamic interface implementations at runtime using Java Reflections Dynamic Proxy capabilities">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Reflection - Dynamic Proxies"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-reflection/dynamic-proxies.html"/>
+    <meta property="og:description" content="This text explains how to create dynamic interface implementations at runtime using Java Reflections Dynamic Proxy capabilities"/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-reflection/arrays.html";
+var nextArticleInCategory = "/java-reflection/dynamic-class-loading-reloading.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7828;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Reflection</div><ol><li><a href="index.html">Java Reflection Tutorial</a></li><li><a href="classes.html">Java Reflection - Classes</a></li><li><a href="constructors.html">Java Reflection - Constructors</a></li><li><a href="fields.html">Java Reflection - Fields</a></li><li><a href="methods.html">Java Reflection - Methods</a></li><li><a href="getters-setters.html">Java Reflection - Getters and Setters</a></li><li><a href="private-fields-and-methods.html">Java Reflection - Private Fields and Methods</a></li><li><a href="annotations.html">Java Reflection - Annotations</a></li><li><a href="generics.html">Java Reflection - Generics</a></li><li><a href="arrays.html">Java Reflection - Arrays</a></li><li><a href="dynamic-proxies.html"><b>Java Reflection - Dynamic Proxies</b></a></li><li><a href="dynamic-class-loading-reloading.html">Java Reflection - Dynamic Class Loading and Reloading</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Reflection - Dynamic Proxies</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#proxy">Creating Proxies</a></li><li><a href="#handlers">InvocationHandler's</a></li><li><a href="#usecases">Known Use Cases</a><ul><li><a href="#database-connection-and-transaction-management">Database Connection and Transaction Management</a></li><li><a href="#dynamic-mock-objects-for-unit-testing">Dynamic Mock Objects for Unit Testing</a></li><li><a href="#adaptation-of-di-container-to-custom-factory-interface">Adaptation of DI Container to Custom Factory Interfaces</a></li><li><a href="#aop-like-method-interception">AOP-like Method Interception</a></li></ul></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-05-21
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Using Java Reflection you create dynamic implementations of interfaces at runtime. You
+    do so using the class <code>java.lang.reflect.Proxy</code>. The name of this class is
+    why I refer to these dynamic interface implementations as dynamic proxies. Dynamic
+    proxies can be used for many different purposes, e.g. database connection and
+    transaction management, dynamic mock objects for unit testing, and other AOP-like
+    method intercepting purposes.
+</p>
+
+
+
+<a name="proxy"></a>
+<h2>Creating Proxies</h2>
+
+<p>
+    You create dynamic proxies using the <code>Proxy.newProxyInstance()</code> method.
+    The <code>newProxyInstance()</code> methods takes 3 parameters:
+</p>
+
+<ol>
+    <li>The <code>ClassLoader</code> that is to "load" the dynamic proxy class.</li>
+    <li>An array of interfaces to implement.</li>
+    <li>An <code>InvocationHandler</code> to forward all methods calls on the proxy to.</li>
+</ol>
+
+<p>
+    Here is an example:
+</p>
+
+<pre class="codeBox">
+InvocationHandler handler = new MyInvocationHandler();
+MyInterface proxy = (MyInterface) Proxy.newProxyInstance(
+                            MyInterface.class.getClassLoader(),
+                            new Class[] { MyInterface.class },
+                            handler);
+</pre>
+
+<p>
+    After running this code the <code>proxy</code> variable contains a dynamic implementation
+    of the <code>MyInterface</code> interface. All calls to the proxy will be forwarded to
+    the <code>handler</code> implementation of the general <code>InvocationHandler</code>
+    interface. InvocationHandler's are covered i the next section.
+</p>
+
+
+
+<a name="handlers"></a>
+<h2>InvocationHandler's</h2>
+
+<p>
+    As mentioned earlier you must pass an <code>InvocationHandler</code> implementation to the <code>Proxy.newProxyInstance()</code>
+    method. All method calls to the dynamic proxy are forwarded to this <code>InvocationHandler</code> implementation.
+    Here is how the <code>InvocationHandler</code> interface looks:
+</p>
+
+<pre class="codeBox">
+public interface InvocationHandler{
+  Object invoke(Object proxy, Method method, Object[] args)
+         throws Throwable;
+}
+</pre>
+
+<p>
+    Here is an example implementation:
+</p>
+
+<pre class="codeBox">
+public class MyInvocationHandler implements InvocationHandler{
+
+  public Object invoke(Object proxy, Method method, Object[] args)
+  throws Throwable {
+    //do something "dynamic"
+  }
+}
+</pre>
+
+<p>
+    The <code>proxy</code> parameter passed to the <code>invoke()</code> method
+    is the dynamic proxy object implementing the interface. Most often
+    you don't need this object.
+</p>
+
+<p>
+    The <code>Method</code> object passed into the <code>invoke()</code> method
+    represents the method called on the interface the dynamic proxy implements.
+    From the <code>Method</code> object you can obtain the method name, parameter types,
+    return type, etc. See the text on <a href="methods.html">Methods</a> for more
+    information.
+</p>
+
+<p>
+    The <code>Object[] args</code> array contains the parameter values passed to the proxy
+    when the method in the interface implemented was called. Note: Primitives (int, long etc)
+    in the implemented interface are wrapped in their object counterparts (Integer, Long etc.).
+</p>
+
+
+
+<a name="usecases"></a>
+<h2>Known Use Cases</h2>
+
+<p>
+    Dynamic proxies are known to be used for at least the following purposes:
+</p>
+
+<ul>
+    <li>Database Connection and Transaction Management</li>
+    <li>Dynamic Mock Objects for Unit Testing</li>
+    <li>Adaptation of DI Container to Custom Factory Interfaces</li>
+    <li>AOP-like Method Interception</li>
+</ul>
+
+
+<a name="database-connection-and-transaction-management"></a>
+<h3>Database Connection and Transaction Management</h3>
+<p>
+    The Spring framework has a transaction proxy that can start and commit / rollback a transaction
+    for you. How this works is described in more detail in the text
+    <a href="../java-persistence/advanced-connection-and-transaction-demarcation-and-propagation.html">
+        Advanced Connection and Transaction Demarcation and Propagation</a>
+    , so I'll only describe it briefly. The call sequence becomes something
+    along this:
+</p>
+
+<pre class="codeBox">
+web controller --> proxy.execute(...);
+  proxy --> connection.setAutoCommit(false);
+  proxy --> realAction.execute();
+    realAction does database work
+  proxy --> connection.commit();
+</pre>
+
+
+
+<a name="dynamic-mock-objects-for-unit-testing"></a>
+<h3>Dynamic Mock Objects for Unit Testing</h3>
+<p>
+    The <a href="http://butterfly.jenkov.com">Butterfly Testing Tools</a> makes use of dynamic
+    proxies to implement dynamic stubs, mocks and proxies for unit testing. When testing a
+    class A that uses another class B (interface really), you can pass a mock implementation of B
+    into A instead of a real B. All method calls on B are now recorded, and you can set what
+    return values the mock B is to return.
+</p>
+
+<p>
+    Furthermore Butterfly Testing Tools allow you to
+    wrap a real B in a mock B, so that all method calls on the mock are recorded, and then forwarded
+    to the real B. This makes it possible to check what methods were called on a real functioning
+    B. For instance, if testing a DAO you can wrap the database connection in a mock. The DAO
+    will not see the difference, and the DAO can read/write data to the database as usual since the
+    mock forwards all calls to the database. But now you can check via the mock if the DAO uses
+    the connection properly, for instance if the <code>connection.close()</code> is called (or NOT called),
+    if you expected that. This is normally not possible to determine from the return value of a DAO.
+</p>
+
+
+<a name="adaptation-of-di-container-to-custom-factory-interface"></a>
+<h3>Adaptation of DI Container to Custom Factory Interfaces</h3>
+<p>
+    The dependency injection container <a href="http://butterfly.jenkov.com">Butterfly Container</a>
+    has a powerful feature that allows you to inject the whole container into beans produced by it.
+    But, since you don't want a dependency on the container interface, the container is capable
+    of adapting itself to a custom factory interface of your design. You only need the interface.
+    No implementation. Thus the factory interface and
+    your class could look something like this:
+</p>
+
+<pre class="codeBox">
+public interface IMyFactory {
+  Bean   bean1();
+  Person person();
+  ...
+}
+</pre>
+
+<pre class="codeBox">
+public class MyAction{
+
+  protected IMyFactory myFactory= null;
+
+  public MyAction(IMyFactory factory){
+    this.myFactory = factory;
+  }
+
+  public void execute(){
+    Bean bean = this.myFactory.bean();
+    Person person = this.myFactory.person();
+  }
+
+}
+</pre>
+
+<p>
+    When the <code>MyAction</code> class calls methods on the <code>IMyFactory</code> instance
+    injected into its constructor by the container, the method calls are translated into calls
+    to the <code>IContainer.instance()</code> method, which is the method you use to obtain
+    instances from the container. That way an object can use Butterfly Container as a factory
+    at runtime, rather than only to have dependencies injected into itself at creation time.
+    And this without having any dependencies on any Butterfly Container specific interfaces.
+</p>
+
+
+<a name="aop-like-method-interception"></a>
+<h3>AOP-like Method Interception</h3>
+
+<p>
+    The Spring framework makes it possible to intercept method calls to a given bean,
+    provided that bean implements some interface. The Spring framework wraps the bean
+    in a dynamic proxy. All calls to the bean are then intercepted by the proxy. The
+    proxy can decide to call other methods on other objects either before, instead of,
+    or after delegating the method call to the bean wrapped.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="dynamic-class-loading-reloading.html">Java Reflection - Dynamic Class Loading and Reloading</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,1883 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example android.content.SharedPreferences</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for android.content.SharedPreferences. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, android.content.SharedPreferences" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=android.app.Activity.php.html">android.app.Activity</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.util.Log.php.html">android.util.Log</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.widget.TextView.php.html">android.widget.TextView</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.content.SharedPreferences.Editor.php.html">android.content.SharedPreferences.Editor</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.content.Context.php.html">android.content.Context</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.content.DialogInterface.php.html">android.content.DialogInterface</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.preference.PreferenceManager.php.html">android.preference.PreferenceManager</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.widget.Toast.php.html">android.widget.Toast</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.os.Bundle.php.html">android.os.Bundle</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.net.Uri.php.html">android.net.Uri</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.view.View.php.html">android.view.View</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.content.Intent.php.html">android.content.Intent</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=Editor.php.html">
+                                    Editor                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getString.php.html">
+                                    getString                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getBoolean.php.html">
+                                    getBoolean                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=edit.php.html">
+                                    edit                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getInt.php.html">
+                                    getInt                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getLong.php.html">
+                                    getLong                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=contains.php.html">
+                                    contains                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=registerOnSharedPreferenceChangeListener.php.html">
+                                    registerOnSharedPreferenceChangeListener                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getStringSet.php.html">
+                                    getStringSet                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getFloat.php.html">
+                                    getFloat                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=getAll.php.html">
+                                    getAll                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=OnSharedPreferenceChangeListener.php.html">
+                                    OnSharedPreferenceChangeListener                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=unregisterOnSharedPreferenceChangeListener.php.html">
+                                    unregisterOnSharedPreferenceChangeListener                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=android.content.SharedPreferences&method=equals.php.html">
+                                    equals                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for android.content.SharedPreferences</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">android.content.SharedPreferences</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="http://developer.android.com/reference/android/content/SharedPreferences.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="android.content.SharedPreferences"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">WiFi-Automatic</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Start.java</span>
+								<a href="index-source_dir=WiFi-Automatic-master_src_main_java_de_j4velin_wifiAutoOff_Start.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="26476votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="26476==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="26476==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Sets all necessary timers / starts the background service depending on
+ * the user settings
+ *
+ * @param c the context
+ */
+@SuppressWarnings(&quot;deprecation&quot;)
+static void start(final Context c) {
+    createTimers(c);
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+    AlarmManager am = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+    if (prefs.getBoolean(&quot;on_every&quot;, false)) {
+        long interval = prefs.contains(&quot;on_every_time_min&quot;) ?
+                1000 * 60 * prefs.getInt(&quot;on_every_time_min&quot;, Receiver.ON_EVERY_TIME_MIN) :
+                AlarmManager.INTERVAL_HOUR *
+                        prefs.getInt(&quot;on_every_time&quot;, Receiver.ON_EVERY_TIME_MIN / 60);
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval,
+                PendingIntent.getBroadcast(c, Receiver.TIMER_ON_EVERY,
+                        new Intent(c, Receiver.class).putExtra(&quot;changeWiFi&quot;, true)
+                                .setAction(&quot;ON_EVERY&quot;), PendingIntent.FLAG_UPDATE_CURRENT));
+    } else { // stop timer
+        am.cancel(PendingIntent.getBroadcast(c, Receiver.TIMER_ON_EVERY,
+                new Intent(c, Receiver.class).putExtra(&quot;changeWiFi&quot;, true)
+                        .setAction(&quot;ON_EVERY&quot;), PendingIntent.FLAG_UPDATE_CURRENT));
+    }
+
+    c.getPackageManager().setComponentEnabledSetting(new ComponentName(c, UnlockReceiver.class),
+            prefs.getBoolean(&quot;on_unlock&quot;, true) ?
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP);
+
+    c.startService(new Intent(c, GeofenceUpdateService.class));
+
+    if (BuildConfig.DEBUG) Logger.log(&quot;all timers set/cleared&quot;);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">arduino-android</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ResponseHelper.java</span>
+								<a href="index-source_dir=arduino-android-master_HomeAutomation_src_com_simonmonk_home_ResponseHelper.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="8votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="8==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="8==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >void setSetting(String name, String value)
+{
+	SharedPreferences settings = mActivity.getSharedPreferences(PrefsActivity.PREFS_NAME, 0);
+	SharedPreferences.Editor editor = settings.edit();
+       editor.putString(name, value);
+       editor.commit();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">arduino-android</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">InputController.java</span>
+								<a href="index-source_dir=arduino-android-master_TempLoggerLaunch_src_org_simonmonk_templogger_InputController.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="22votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="22==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="22==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void sendPachubeReading(double reading) {
+	SharedPreferences settings = mHostActivity.getSharedPreferences(SettingsActivity.PREFS_NAME, 0);
+       String pachubeFeed = settings.getString(&quot;PACHUBEFEEDID&quot;, null);
+       String pachubeKey = settings.getString(&quot;PACHUBEKEY&quot;, null);	
+       if (pachubeFeed == null ||  pachubeKey == null) {
+       	alert(&quot;Go to Settings and add entries for Parachube Feed ID and Key.&quot;);
+       }
+       else {
+       	try {
+               Pachube p = new Pachube(pachubeKey);
+               Feed f = p.getFeed(Integer.parseInt(pachubeFeed));
+               f.updateDatastream(1, reading);
+       	} 
+       	catch (PachubeException e) {
+            //   alert(e.errorMessage);
+               mSendCheckBox.setChecked(false);
+       	}
+       }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">dlna</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">YouUtility.java</span>
+								<a href="index-source_dir=dlna-master_dlna_youplayer_src_com_youplayer_util_YouUtility.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="6000votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="6000==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="6000==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static boolean getRecommendRightFlag(Context context){
+	boolean res = false;
+	if (context != null) {
+		SharedPreferences settings = context.getSharedPreferences(
+				RECOMMEND_RIGHT, 0);
+		res = settings.getBoolean(RECOMMEND_FIRST, false);
+	}
+	
+	return res;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">dlna</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">YouUtility.java</span>
+								<a href="index-source_dir=dlna-master_dlna_youplayer_src_com_youplayer_util_YouUtility.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="6014votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="6014==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="6014==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static int getSubtitileyouSize(Context context){
+	if(null == context)return 1;
+	SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+	int ret = settings.getInt(SUB_TITLE_FONTSIZE, 1);
+	LOG.v(TAG, &quot;getSubtitileyouSize&quot;, ret);
+	return ret;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">dlna</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">YouUtility.java</span>
+								<a href="index-source_dir=dlna-master_dlna_youplayer_src_com_youplayer_util_YouUtility.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="6010votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="6010==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="6010==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static long getCanelNotificationTime(Context context){
+	long time = 0;
+	if(context != null){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		time = settings.getLong(&quot;cancel_time&quot;, System.currentTimeMillis());
+	}
+	return time;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">codemap</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">WorkspaceFragment.java</span>
+								<a href="index-source_dir=codemap-master_src_com_hdweiss_codemap_view_workspace_WorkspaceFragment.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="86164votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="86164==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="86164==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+		Bundle savedInstanceState) {
+	super.onCreateView(inflater, container, savedInstanceState);
+
+	setHasOptionsMenu(true);
+			
+	View view = inflater.inflate(R.layout.workspace, container, false);
+	codeMapView = (WorkspaceView) view.findViewById(R.id.codemap);
+	outlineBrowser = (OutlineBrowser) view.findViewById(R.id.outline_browser);
+	workspaceBrowser = (WorkspaceBrowser) view.findViewById(R.id.workspace_browser);
+
+	init();
+	
+	SharedPreferences prefs = PreferenceManager
+			.getDefaultSharedPreferences(getActivity());
+	prefs.registerOnSharedPreferenceChangeListener(this);
+
+	if(savedInstanceState != null)
+		restoreInstanceState(savedInstanceState);
+	
+	return view;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">notes</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">NotesWidgetConfigure.java</span>
+								<a href="index-source_dir=notes-master_app_src_main_java_com_odoo_addons_notes_widgets_NotesWidgetConfigure.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="88415votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="88415==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="88415==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static List&lt;Integer&gt; getPref(Context context, int appWidgetId,
+                                    String key) {
+    SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+    Set&lt;String&gt; selectedIdSet = prefs.getStringSet(key + &quot;_&quot; + appWidgetId,
+            null);
+    List&lt;Integer&gt; selectedIdList = new ArrayList&lt;Integer&gt;();
+    for (String id : selectedIdSet)
+        selectedIdList.add(Integer.parseInt(id));
+    return selectedIdList;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Jide-Note</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SharedPreferenceUtils.java</span>
+								<a href="index-source_dir=Jide-Note-master_app_src_main_java_com_ouwenjie_note_utils_SharedPreferenceUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="53643votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="53643==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="53643==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * ???????????????????????????????????????????
+ *
+ * @param context
+ * @param key
+ * @param defaultObject
+ * @return
+ */
+public static Object get(Context context, String key, Object defaultObject) {
+    SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+
+    if (defaultObject instanceof String) {
+        return sp.getString(key, (String) defaultObject);
+    } else if (defaultObject instanceof Integer) {
+        return sp.getInt(key, (Integer) defaultObject);
+    } else if (defaultObject instanceof Boolean) {
+        return sp.getBoolean(key, (Boolean) defaultObject);
+    } else if (defaultObject instanceof Float) {
+        return sp.getFloat(key, (Float) defaultObject);
+    } else if (defaultObject instanceof Long) {
+        return sp.getLong(key, (Long) defaultObject);
+    }
+
+    return null;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">android_packages_apps_AeroControl</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ProfileFragment.java</span>
+								<a href="index-source_dir=android_packages_apps_AeroControl-master_AeroControl_src_com_aero_control_fragments_ProfileFragment.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="23987votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="23987==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="23987==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void applyProfile(SharedPreferences AeroProfile) {
+
+        // Just to be save, loading default again;
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit();
+
+        // Get all our preferences;
+        final Map&lt;String,?&gt; allKeys = AeroProfile.getAll();
+
+        saveProfile(allKeys, editor);
+    }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">SimpleNews</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ExpandableNewsFragment.java</span>
+								<a href="index-source_dir=SimpleNews-master_SimpleNewsProject_SimpleNews_src_main_java_de_dala_simplenews_ui_ExpandableNewsFragment.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="233217votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="233217==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="233217==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void addListener() {
+    if (listener == null) {
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                switch (key) {
+                    case PrefUtilities.CURRENT_NEWS_TYPE_MODE:
+                        newsTypeModeChanged(PrefUtilities.getInstance().getNewsTypeMode());
+                        break;
+                    case PrefUtilities.MULTIPLE_COLUMNS_LANDSCAPE:
+                        gridSettingsChanged();
+                        break;
+                    case PrefUtilities.MULTIPLE_COLUMNS_PORTRAIT:
+                        gridSettingsChanged();
+                        break;
+                }
+            }
+        };
+        PrefUtilities.getInstance().addListener(listener);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">kotoba-android</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MainWordsTrain.java</span>
+								<a href="index-source_dir=kotoba-android-master_src_ee_yutani_kotoba_MainWordsTrain.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="182673votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="182673==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="182673==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override public void onPause()
+{
+    // Put ids
+    if (m_id != null)
+        m_state_id = m_id.Serialize();
+
+    // Training
+    if (m_train != null) {
+        DataTrainQuestion next = m_train.Next();
+        if (next != null) {
+            m_state_train_id_cur = next.IdQuestion();
+            m_state_train_id_recent = next.IdRecent();
+            m_state_train_id_choice = next.IdChoice();
+        }
+        DataTrainQuestion last = m_train.Last();
+        if (last != null) {
+            m_state_train_id_last = last.IdQuestion();
+            m_state_train_last_correct = last.Correct();
+        }
+    }
+
+    // Sentence scroll
+    m_state_sentence_index = m_view_sentence_list.getFirstVisiblePosition();
+    View v = m_view_sentence_list.getChildAt(0);
+    m_state_sentence_top = (v == null) ? 0 : v.getTop();
+
+    // Settings
+    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    settings.unregisterOnSharedPreferenceChangeListener(this);
+
+    // Superclass
+    super.onPause();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">newFunf</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ConfiguredPipeline.java</span>
+								<a href="index-source_dir=newFunf-master_old_configured_ConfiguredPipeline.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="238848votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="238848==android.content.SharedPreferences">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="238848==android.content.SharedPreferences">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void onSharedPreferenceChanged (SharedPreferences sharedPreferences, String key) {
+	Log.i(TAG, &quot;Shared Prefs changed&quot;);
+	if (sharedPreferences.equals(getConfig().getPrefs())) {
+		Log.i(TAG, &quot;Configuration changed&quot;);
+		onConfigChange(getConfig().toString(true));
+		if (FunfConfig.isDataRequestKey(key)) {
+			if (isEnabled()) {
+				String probeName = FunfConfig.keyToProbename(key);
+				sendProbeRequest(probeName);
+			}
+		} else if (FunfConfig.CONFIG_UPDATE_PERIOD_KEY.equals(key)) {
+			cancelAlarm(ACTION_UPDATE_CONFIG);
+		} else if (FunfConfig.DATA_ARCHIVE_PERIOD_KEY.equals(key)) {
+			cancelAlarm(ACTION_ARCHIVE_DATA);
+		} else if (FunfConfig.DATA_UPLOAD_PERIOD_KEY.equals(key)) {
+			cancelAlarm(ACTION_UPLOAD_DATA);
+		}
+		if (isEnabled()) {
+			scheduleAlarms();
+		}
+		
+	} else if (sharedPreferences.equals(getSystemPrefs()) &amp;&amp; ENABLED_KEY.equals(key)) {
+		Log.i(TAG, &quot;System prefs changed&quot;);
+		reload();
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("SharedPreferences", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(SharedPreferences, "ig") ,'<div style="background-color:red">' + SharedPreferences + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

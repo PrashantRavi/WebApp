@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Insert Interval</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-insert-interval/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Sreekar</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-11727</link>
+		<dc:creator><![CDATA[Sreekar]]></dc:creator>
+		<pubDate>Wed, 08 Jun 2016 19:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-11727</guid>
+		<description><![CDATA[First thing that came to mind is binary search. I wonder admin considered it to be unnecessarily complex or something.]]></description>
+		<content:encoded><![CDATA[<p>First thing that came to mind is binary search. I wonder admin considered it to be unnecessarily complex or something.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-10082</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Mon, 04 Apr 2016 23:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-10082</guid>
+		<description><![CDATA[I propose a best case O(log N) solution based on binary search. Note however that the overall algorithm can have a O(N) cost due to interval removal from the array (cost of arbitrary position removal in an array) - which could be optimized/amortized separately.
+
+&lt;code&gt; 
+class Interval {
+    final int s;
+    final int e;
+
+    Interval(int s, int e) { this.s = s; this.e = e; }
+
+    /** Assumes there exists an overlap */
+    Interval merge(Interval o) {
+        return new Interval(Math.min(s, o.s), Math.max(e, o.e));
+    }
+}
+
+void insert(Interval i, ArrayList sortedList) {
+    if (sortedList.isEmpty()) {
+        sortedList.add(i);
+        return;
+    }
+
+    int idxS = searchInsertIdx(i.s, sortedList);
+    //we look for e+1 because we want to merge if eq too (see logic later)
+    int idxE = searchInsertIdx(i.e + 1, sortedList);
+
+    boolean replaceS = false;
+    if (idxS &#062; 0) {
+        Interval prev = sortedList.get(idxS - 1);
+        if (prev.e &#062;= i.s) {
+            i = i.merge(prev);
+            idxS -= 1;
+            replaceS = true;
+        }
+    }
+
+    if (idxS &#060; idxE) {
+        Interval lastToMerge = sortedList.get(idxE - 1);
+        i = i.merge(lastToMerge);
+        if ((idxS + 1) &#060; idxE) {
+            removeRange(idxS + 1, idxE, sortedList);
+            replaceS = true;
+        }
+    }
+
+    if (replaceS) sortedList.set(idxS, i);
+    else sortedList.add(idxS, i);
+}
+
+void removeRange(int s, int e, ArrayList sortedList) {
+    sortedList.subList(s, e).clear();
+}
+
+/* Returns the position where an Interval starting at startValue should be inserted ignoring merges */
+int searchInsertIdx(int startValue, ArrayList sortedList) {
+    if (sortedList.isEmpty()) return 0;
+
+    int s = 0;
+    int e = sortedList.size();
+    while (e &#062; s) {
+        int mid = (e + s)/2;
+        Interval atMid = sortedList.get(mid);
+
+        if (atMid.s == startValue) return mid;
+        else if(atMid.s &#060; startValue) s = mid + 1;
+        else e = mid - 1;
+    }
+
+    return sortedList.get(s).s &#060; startValue? s + 1 : s;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>I propose a best case O(log N) solution based on binary search. Note however that the overall algorithm can have a O(N) cost due to interval removal from the array (cost of arbitrary position removal in an array) &#8211; which could be optimized/amortized separately.</p>
+<p><code><br />
+class Interval {<br />
+    final int s;<br />
+    final int e;</p>
+<p>    Interval(int s, int e) { this.s = s; this.e = e; }</p>
+<p>    /** Assumes there exists an overlap */<br />
+    Interval merge(Interval o) {<br />
+        return new Interval(Math.min(s, o.s), Math.max(e, o.e));<br />
+    }<br />
+}</p>
+<p>void insert(Interval i, ArrayList sortedList) {<br />
+    if (sortedList.isEmpty()) {<br />
+        sortedList.add(i);<br />
+        return;<br />
+    }</p>
+<p>    int idxS = searchInsertIdx(i.s, sortedList);<br />
+    //we look for e+1 because we want to merge if eq too (see logic later)<br />
+    int idxE = searchInsertIdx(i.e + 1, sortedList);</p>
+<p>    boolean replaceS = false;<br />
+    if (idxS &gt; 0) {<br />
+        Interval prev = sortedList.get(idxS - 1);<br />
+        if (prev.e &gt;= i.s) {<br />
+            i = i.merge(prev);<br />
+            idxS -= 1;<br />
+            replaceS = true;<br />
+        }<br />
+    }</p>
+<p>    if (idxS &lt; idxE) {<br />
+        Interval lastToMerge = sortedList.get(idxE - 1);<br />
+        i = i.merge(lastToMerge);<br />
+        if ((idxS + 1) &lt; idxE) {<br />
+            removeRange(idxS + 1, idxE, sortedList);<br />
+            replaceS = true;<br />
+        }<br />
+    }</p>
+<p>    if (replaceS) sortedList.set(idxS, i);<br />
+    else sortedList.add(idxS, i);<br />
+}</p>
+<p>void removeRange(int s, int e, ArrayList sortedList) {<br />
+    sortedList.subList(s, e).clear();<br />
+}</p>
+<p>/* Returns the position where an Interval starting at startValue should be inserted ignoring merges */<br />
+int searchInsertIdx(int startValue, ArrayList sortedList) {<br />
+    if (sortedList.isEmpty()) return 0;</p>
+<p>    int s = 0;<br />
+    int e = sortedList.size();<br />
+    while (e &gt; s) {<br />
+        int mid = (e + s)/2;<br />
+        Interval atMid = sortedList.get(mid);</p>
+<p>        if (atMid.s == startValue) return mid;<br />
+        else if(atMid.s &lt; startValue) s = mid + 1;<br />
+        else e = mid - 1;<br />
+    }</p>
+<p>    return sortedList.get(s).s &lt; startValue? s + 1 : s;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jack Y</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-9949</link>
+		<dc:creator><![CDATA[Jack Y]]></dc:creator>
+		<pubDate>Mon, 28 Mar 2016 16:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-9949</guid>
+		<description><![CDATA[sortmerge]]></description>
+		<content:encoded><![CDATA[<p>sortmerge</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Juan Gomez</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-8447</link>
+		<dc:creator><![CDATA[Juan Gomez]]></dc:creator>
+		<pubDate>Sun, 17 Jan 2016 18:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-8447</guid>
+		<description><![CDATA[It&#039;s a great solution. I think this is not necessary, though: 
+
+ &#124;&#124; interval.start &#060;= newInterval.end]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s a great solution. I think this is not necessary, though: </p>
+<p> || interval.start &lt;= newInterval.end</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Omar Edgardo Lugo Sánchez</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-7384</link>
+		<dc:creator><![CDATA[Omar Edgardo Lugo Sánchez]]></dc:creator>
+		<pubDate>Sun, 13 Sep 2015 05:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-7384</guid>
+		<description><![CDATA[just add the new interval, and run 7) Merge Intervals]]></description>
+		<content:encoded><![CDATA[<p>just add the new interval, and run 7) Merge Intervals</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tia</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-insert-interval/#comment-5552</link>
+		<dc:creator><![CDATA[tia]]></dc:creator>
+		<pubDate>Thu, 27 Feb 2014 21:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11364#comment-5552</guid>
+		<description><![CDATA[I add some check before inserting. Sorry, attached pic twice. Don&#039;t know how to remove it.]]></description>
+		<content:encoded><![CDATA[<p>I add some check before inserting. Sorry, attached pic twice. Don&#8217;t know how to remove it.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

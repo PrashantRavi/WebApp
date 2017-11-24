@@ -1,0 +1,4389 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example java.nio.ByteBuffer</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for java.nio.ByteBuffer. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, java.nio.ByteBuffer" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=org.junit.Assert.php.html">org.junit.Assert</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.ByteOrder.php.html">java.nio.ByteOrder</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.ByteArrayOutputStream.php.html">java.io.ByteArrayOutputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Test.php.html">org.junit.Test</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.CharBuffer.php.html">java.nio.CharBuffer</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.apache.cassandra.utils.ByteBufferUtil.php.html">org.apache.cassandra.utils.ByteBufferUtil</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.channels.SocketChannel.php.html">java.nio.channels.SocketChannel</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.charset.Charset.php.html">java.nio.charset.Charset</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStream.php.html">java.io.InputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.channels.FileChannel.php.html">java.nio.channels.FileChannel</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=allocate.php.html">
+                                    allocate                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=put.php.html">
+                                    put                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=wrap.php.html">
+                                    wrap                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=get.php.html">
+                                    get                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=position.php.html">
+                                    position                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=remaining.php.html">
+                                    remaining                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=limit.php.html">
+                                    limit                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=flip.php.html">
+                                    flip                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=getInt.php.html">
+                                    getInt                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=array.php.html">
+                                    array                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=order.php.html">
+                                    order                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=putInt.php.html">
+                                    putInt                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=allocateDirect.php.html">
+                                    allocateDirect                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=rewind.php.html">
+                                    rewind                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=hasRemaining.php.html">
+                                    hasRemaining                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=clear.php.html">
+                                    clear                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=getShort.php.html">
+                                    getShort                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=putShort.php.html">
+                                    putShort                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=capacity.php.html">
+                                    capacity                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.nio.ByteBuffer&method=getLong.php.html">
+                                    getLong                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                            <div id="view_complete_list" >
+                                   <a style="font-size: 11px;color:grey;">View more ...</a>
+                                </div>
+
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=hasArray.php.html">
+                                    hasArray                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=putLong.php.html">
+                                    putLong                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=arrayOffset.php.html">
+                                    arrayOffset                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=duplicate.php.html">
+                                    duplicate                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asFloatBuffer.php.html">
+                                    asFloatBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=mark.php.html">
+                                    mark                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=reset.php.html">
+                                    reset                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=slice.php.html">
+                                    slice                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asShortBuffer.php.html">
+                                    asShortBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asIntBuffer.php.html">
+                                    asIntBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=isDirect.php.html">
+                                    isDirect                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=getDouble.php.html">
+                                    getDouble                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=getFloat.php.html">
+                                    getFloat                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=getChar.php.html">
+                                    getChar                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=putFloat.php.html">
+                                    putFloat                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=compact.php.html">
+                                    compact                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=putDouble.php.html">
+                                    putDouble                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asReadOnlyBuffer.php.html">
+                                    asReadOnlyBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=putChar.php.html">
+                                    putChar                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=equals.php.html">
+                                    equals                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=isReadOnly.php.html">
+                                    isReadOnly                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asCharBuffer.php.html">
+                                    asCharBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asLongBuffer.php.html">
+                                    asLongBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=asDoubleBuffer.php.html">
+                                    asDoubleBuffer                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=getClass.php.html">
+                                    getClass                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=compareTo.php.html">
+                                    compareTo                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" style="display: none;">
+                                <a href="index-class=java.nio.ByteBuffer&method=toString.php.html">
+                                    toString                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for java.nio.ByteBuffer</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">java.nio.ByteBuffer</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="java.nio.ByteBuffer"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">nikeplus-fuelband-se-reversed</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">AdvertisementData.java</span>
+								<a href="index-source_dir=nikeplus-fuelband-se-reversed-master_src_com_evilsocket_blehacks_AdvertisementData.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="207votes">28</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="207==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="207==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static ArrayList&lt;ParcelUuid&gt; parseUuids(byte[] paramArrayOfByte) {
+	ByteBuffer localByteBuffer = ByteBuffer.wrap(paramArrayOfByte);
+	localByteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+	ArrayList localArrayList = new ArrayList();
+	while (localByteBuffer.remaining() &gt;= 16) {
+		long l = localByteBuffer.getLong();
+		localArrayList.add(new ParcelUuid(new UUID(localByteBuffer
+				.getLong(), l)));
+	}
+	return localArrayList;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">richfaces</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ResourceUtils.java</span>
+								<a href="index-source_dir=richfaces-master_core_src_main_java_org_richfaces_resource_ResourceUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="12833votes">8</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="12833==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="12833==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void copyStreamContent(InputStream is, OutputStream os) throws IOException {
+    ReadableByteChannel inChannel = Channels.newChannel(is);
+    WritableByteChannel outChannel = Channels.newChannel(os);
+
+    // TODO make this configurable
+    ByteBuffer buffer = ByteBuffer.allocate(8192);
+    int read;
+
+    while ((read = inChannel.read(buffer)) &gt; 0) {
+        buffer.rewind();
+        buffer.limit(read);
+
+        while (read &gt; 0) {
+            read -= outChannel.write(buffer);
+        }
+
+        buffer.clear();
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">led-server</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ChannelUtils.java</span>
+								<a href="index-source_dir=led-server-master_src_main_java_org_led_util_ChannelUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1093votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1093==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1093==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void copy(final ReadableByteChannel src,
+        final WritableByteChannel dest) throws IOException {
+    final ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
+    while (src.read(buffer) != -1) {
+        // prepare the buffer to be drained
+        buffer.flip();
+        // write to the channel, may block
+        dest.write(buffer);
+        // If partial transfer, shift remainder down
+        // If buffer is empty, same as doing clear()
+        buffer.compact();
+    }
+    // EOF will leave buffer in fill state
+    buffer.flip();
+    // make sure the buffer is fully drained.
+    while (buffer.hasRemaining()) {
+        dest.write(buffer);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BufferHelper.java</span>
+								<a href="index-source_dir=breakout-master_andork-jogl-gl2es2-utils_src_org_andork_jogl_BufferHelper.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15332votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15332==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15332==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void writeTo( ByteBuffer buffer )
+{
+	for( Object n : result )
+	{
+		if( n instanceof Byte )
+		{
+			buffer.put( ( Byte ) n );
+		}
+		else if( n instanceof Short )
+		{
+			buffer.putShort( ( Short ) n );
+		}
+		else if( n instanceof Character )
+		{
+			buffer.putChar( ( Character ) n );
+		}
+		else if( n instanceof Integer )
+		{
+			buffer.putInt( ( Integer ) n );
+		}
+		else if( n instanceof Long )
+		{
+			buffer.putLong( ( Long ) n );
+		}
+		else if( n instanceof Float )
+		{
+			buffer.putFloat( ( Float ) n );
+		}
+		else if( n instanceof Double )
+		{
+			buffer.putDouble( ( Double ) n );
+		}
+		else if( n instanceof Short )
+		{
+			buffer.putShort( ( Short ) n );
+		}
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">lettuce</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CommandArgs.java</span>
+								<a href="index-source_dir=lettuce-master_src_main_java_com_lambdaworks_redis_protocol_CommandArgs.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="515votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="515==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="515==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void realloc(int size) {
+    ByteBuffer newBuffer = ByteBuffer.allocate(size);
+    this.buffer.flip();
+    newBuffer.put(this.buffer);
+    newBuffer.mark();
+    this.buffer = newBuffer;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">nikeplus-fuelband-se-reversed</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">AdvertisementData.java</span>
+								<a href="index-source_dir=nikeplus-fuelband-se-reversed-master_src_com_evilsocket_blehacks_AdvertisementData.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="206votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="206==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="206==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static Bundle parse(byte[] scanRecord) {
+	Bundle parsed = new Bundle();
+	ByteBuffer buffer = ByteBuffer.wrap(scanRecord);
+	
+	while (true) 
+	{
+		int i = buffer.remaining() &gt; 0 ? buffer.get() : 0;
+
+		
+		if( i == 0 || i &gt; buffer.remaining() )
+			break;
+		
+		int j = buffer.get();
+		byte[] arrayOfByte = new byte[i - 1];
+		buffer.get(arrayOfByte);
+		
+		switch (j) {
+		default:
+			break;
+		case -1:
+			parsed.putByteArray(&quot;COMPANYCODE&quot;,Arrays.copyOfRange(arrayOfByte, 0, 2));
+			parsed.putByteArray(&quot;MANUDATA&quot;,Arrays.copyOfRange(arrayOfByte, 2, arrayOfByte.length));
+			break;
+		case 6:
+		case 7:
+			parsed.putParcelableArrayList(&quot;SERVICES&quot;,parseUuids(arrayOfByte));
+			break;
+		case 9:
+			parsed.putString(&quot;LOCALNAME&quot;, new String(arrayOfByte));
+		}
+	}
+	
+	return parsed;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">sslcertx</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">WriteBuffer.java</span>
+								<a href="index-source_dir=sslcertx-master_src_main_java_org_properssl_sslcertx_mariadb_jdbc_internal_common_packet_buffer_WriteBuffer.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="657votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="657==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="657==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public byte[] toByteArrayWithLength(final byte packetNumber) {
+    final int length = byteBuffer.capacity() - byteBuffer.remaining();
+    final ByteBuffer returnBuffer = ByteBuffer.allocate(length + 4);
+    final byte [] lenArr = intToByteArray(length);
+    lenArr[3] = packetNumber;
+    returnBuffer.put(lenArr);
+    returnBuffer.put(byteBuffer.array(), 0,length);
+    return returnBuffer.array();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">led-server</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ChannelUtils.java</span>
+								<a href="index-source_dir=led-server-master_src_main_java_org_led_util_ChannelUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1094votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1094==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1094==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Reads the bytebuffer first, then the channel fully.
+ * 
+ * @param buffer
+ * @param channel
+ * @param maxBytes
+ * @return
+ * @throws InterruptedException
+ * @throws ExecutionException
+ */
+public static byte[] readFully(ByteBuffer buffer,
+        AsynchronousSocketChannel channel, int maxBytes)
+        throws InterruptedException, ExecutionException {
+    if (buffer == null) {
+        throw new IllegalArgumentException(&quot;Buffer cannot be null&quot;);
+    }
+
+    if (channel == null) {
+        throw new IllegalArgumentException(&quot;Channel cannot be null&quot;);
+    }
+    ByteList result = new ByteList();
+    byte[] remainingBytes = new byte[buffer.remaining()];
+    buffer.get(remainingBytes);
+    result.addAll(remainingBytes);
+    byte[] bytes = new byte[buffer.capacity()];
+    while ((channel.read(buffer).get()) &gt; 0 &amp;&amp; result.size() &lt; maxBytes) {
+        buffer.flip();
+        if (buffer.capacity() &lt; bytes.length) {
+            bytes = new byte[buffer.capacity()];
+        }
+        buffer.get(bytes);
+        result.addAll(bytes);
+        buffer.clear();
+    }
+
+    return result.toArray();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">led-server</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ChannelUtilsTest.java</span>
+								<a href="index-source_dir=led-server-master_src_test_java_org_led_util_ChannelUtilsTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1087votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1087==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1087==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void bufferCapacityTest() {
+
+    byte[] bytes = HELLO_WORLD.getBytes();
+    ByteBuffer buffer = ByteBuffer.wrap(bytes);
+    int beforeCapacity = buffer.capacity();
+    buffer.get();
+    int afterCapacity = buffer.capacity();
+    assertEquals(bytes.length, beforeCapacity);
+    assertEquals(beforeCapacity, afterCapacity);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jlibs</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DeflaterOutput.java</span>
+								<a href="index-source_dir=jlibs-master_nio_src_main_java_jlibs_nio_filters_DeflaterOutput.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="13108votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="13108==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="13108==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public int write(ByteBuffer src) throws IOException{
+    ensureOpen();
+    deflate(false);
+    if(src.hasRemaining() &amp;&amp; deflater.needsInput()){
+        int wrote;
+        if(src.hasArray()){
+            wrote = src.remaining();
+            setInput(src.array(), src.arrayOffset()+src.position(), wrote);
+            src.position(src.limit());
+        }else{
+            if(tmpBuffer==null)
+                tmpBuffer = Reactor.current().allocator.allocateHeap();
+            else
+                tmpBuffer.clear();
+            wrote = NIOUtil.copy(src, tmpBuffer);
+            setInput(tmpBuffer.array(), 0, tmpBuffer.position());
+        }
+        deflate(false);
+        return wrote;
+    }else
+        return 0;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ByteBufferLib.java</span>
+								<a href="index-source_dir=jena-master_jena-base_src_main_java_org_apache_jena_atlas_lib_ByteBufferLib.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="18078votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="18078==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="18078==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >final private static void acopyArray(ByteBuffer bb, int src, int dst, int length, int slotLen) {
+    byte[] b = bb.array() ;
+
+    int offset = bb.arrayOffset() ;
+
+    int bSrc = src * slotLen ;
+    int bDst = dst * slotLen ;
+    int bLen = length * slotLen ;
+
+    arraycopy(b, offset + bSrc, b, offset + bDst, bLen) ;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jlibs</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MultipartParser.java</span>
+								<a href="index-source_dir=jlibs-master_nio_src_main_java_jlibs_nio_http_msg_parser_MultipartParser.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="13067votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="13067==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="13067==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void writeContent(int pos, ByteBuffer buffer, ByteBuffer delimiter) throws IOException{
+    if(buffer.position()-pos&gt;delimiter.capacity()){
+        ByteBuffer src = buffer.duplicate();
+        src.position(pos);
+        src.limit(buffer.position()-delimiter.capacity());
+        write(src);
+    }
+    delimiter.clear();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">lettuce</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Utf8StringCodec.java</span>
+								<a href="index-source_dir=lettuce-master_src_main_java_com_lambdaworks_redis_codec_Utf8StringCodec.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="554votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="554==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="554==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private synchronized String decode(ByteBuffer bytes) {
+    chars.clear();
+    bytes.mark();
+
+    decoder.reset();
+    while (decoder.decode(bytes, chars, true) == OVERFLOW || decoder.flush(chars) == OVERFLOW) {
+        chars = CharBuffer.allocate(chars.capacity() * 2);
+        bytes.reset();
+    }
+
+    return chars.flip().toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 14</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BlockAccessMapped.java</span>
+								<a href="index-source_dir=jena-master_jena-tdb_src_main_java_org_apache_jena_tdb_base_file_BlockAccessMapped.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="16980votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="16980==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="16980==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private ByteBuffer getByteBuffer(long _id)
+{
+    // Limitation: ids must be integers.
+    // ids are used to index into []-arrays.
+    int id = (int)_id ;
+    
+    int seg = segment(id) ;                 // Segment.
+    int segOff = byteOffset(id) ;           // Byte offset in segment
+
+    if ( getLog().isTraceEnabled() ) 
+        getLog().trace(format(&quot;%d =&gt; [%d, %d]&quot;, id, seg, segOff)) ;
+
+    synchronized (this) {
+        try {
+            // Need to put the alloc AND the slice/reset inside a sync.
+            ByteBuffer segBuffer = allocSegment(seg) ;
+            // Now slice the buffer to get the ByteBuffer to return
+            segBuffer.position(segOff) ;
+            segBuffer.limit(segOff+blockSize) ;
+            ByteBuffer dst = segBuffer.slice() ;
+            
+            // And then reset limit to max for segment.
+            segBuffer.limit(segBuffer.capacity()) ;
+            // Extend block count when we allocate above end. 
+            numFileBlocks = Math.max(numFileBlocks, id+1) ;
+            return dst ;
+        } catch (IllegalArgumentException ex) {
+            // Shouldn't (ha!) happen because the second &quot;limit&quot; resets 
+            log.error(&quot;Id: &quot;+id) ;
+            log.error(&quot;Seg=&quot;+seg) ;
+            log.error(&quot;Segoff=&quot;+segOff) ;
+            log.error(ex.getMessage(), ex) ;
+            throw ex ;
+        }
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 15</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">OrderNowAndroid</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TextureUtils.java</span>
+								<a href="index-source_dir=OrderNowAndroid-master_src_com_aphidmobile_utils_TextureUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="44031votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="44031==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="44031==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static ShortBuffer toShortBuffer(short[] v) {
+  ByteBuffer buf = ByteBuffer.allocateDirect(v.length * 2);
+  buf.order(ByteOrder.nativeOrder());
+  ShortBuffer buffer = buf.asShortBuffer();
+  buffer.put(v);
+  buffer.position(0);
+  return buffer;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 16</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">hazelcast-archive</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SetCommand.java</span>
+								<a href="index-source_dir=hazelcast-archive-master_hazelcast_src_main_java_com_hazelcast_impl_ascii_memcache_SetCommand.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="206403votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="206403==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="206403==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >void copy(ByteBuffer cb) {
+    if (cb.isDirect()) {
+        int n = Math.min(cb.remaining(), bbValue.remaining());
+        if (n &gt; 0) {
+            cb.get(bbValue.array(), bbValue.position(), n);
+            bbValue.position(bbValue.position() + n);
+        }
+    } else {
+        IOUtil.copyToHeapBuffer(cb, bbValue);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 17</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openmuc</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FileObject.java</span>
+								<a href="index-source_dir=openmuc-master_projects_datalogger_slotsdb_src_main_java_org_openmuc_framework_datalogger_slotsdb_FileObject.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="170322votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="170322==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="170322==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Returns a List of Value Objects containing the measured Values between provided start and end timestamp
+ * 
+ * @param start
+ * @param end
+ * @throws IOException
+ */
+public List&lt;Record&gt; read(long start, long end) throws IOException {
+	start = getClosestTimestamp(start); // round to: startTimestamp +
+										// n*stepIntervall
+	end = getClosestTimestamp(end); // round to: startTimestamp +
+									// n*stepIntervall
+
+	List&lt;Record&gt; toReturn = new Vector&lt;Record&gt;();
+
+	if (start &lt; end) {
+		if (start &lt; startTimeStamp) {
+			// of this file.
+			start = startTimeStamp;
+		}
+		if (end &gt; getTimestampForLatestValue()) {
+			end = getTimestampForLatestValue();
+		}
+
+		if (!canRead) {
+			enableInput();
+		}
+
+		long timestampcounter = start;
+		long startPos = getBytePosition(start);
+		long endPos = getBytePosition(end);
+
+		fis.getChannel().position(startPos);
+
+		byte[] b = new byte[(int) (endPos - startPos) + 9];
+		dis.read(b, 0, b.length);
+		ByteBuffer bb = ByteBuffer.wrap(b);
+		bb.rewind();
+
+		for (int i = 0; i &lt;= (endPos - startPos) / 9; i++) {
+			double d = bb.getDouble();
+			Flag s = Flag.newFlag(bb.get());
+			if (!Double.isNaN(d)) {
+				toReturn.add(new Record(new DoubleValue(d), timestampcounter, s));
+			}
+			timestampcounter += storagePeriod;
+		}
+
+	}
+	else if (start == end) {
+		toReturn.add(read(start));
+		toReturn.removeAll(Collections.singleton(null));
+	}
+	return toReturn; // Always return a list -&gt; might be empty -&gt; never is
+						// null, to avoid NP's
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 18</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Survey3dModel.java</span>
+								<a href="index-source_dir=breakout-master_Breakout_src_main_java_org_breakout_model_Survey3dModel.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15374votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15374==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15374==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static RfStarTree&lt;Shot3d&gt; createTree( List&lt;Shot3d&gt; shot3ds , ByteBuffer geomBuffer ,
+	int maxChildrenPerBranch , int minSplitSize , int numToReinsert , Subtask task )
+{
+	RfStarTree&lt;Shot3d&gt; tree = new RfStarTree&lt;Shot3d&gt;( 3 , maxChildrenPerBranch , minSplitSize , numToReinsert );
+
+	int numShots = geomBuffer.capacity( ) / GEOM_BPS;
+
+	task.setStatus( &quot;creating spatial index&quot; );
+	task.setTotal( numShots );
+
+	for( int s = 0 ; s &lt; numShots ; s++ )
+	{
+		float[ ] mbr = voidRectf( 3 );
+
+		int shotStart = s * GEOM_BPS;
+
+		for( int v = 0 ; v &lt; GEOM_VPS ; v++ )
+		{
+			geomBuffer.position( shotStart + v * GEOM_BPV );
+			float x = geomBuffer.getFloat( );
+			float y = geomBuffer.getFloat( );
+			float z = geomBuffer.getFloat( );
+
+			mbr[ 0 ] = nmin( mbr[ 0 ] , x );
+			mbr[ 1 ] = nmin( mbr[ 1 ] , y );
+			mbr[ 2 ] = nmin( mbr[ 2 ] , z );
+			mbr[ 3 ] = nmax( mbr[ 3 ] , x );
+			mbr[ 4 ] = nmax( mbr[ 4 ] , y );
+			mbr[ 5 ] = nmax( mbr[ 5 ] , z );
+		}
+
+		Shot3d shot = shot3ds.get( s );
+		shot.leaf = tree.createLeaf( mbr , shot );
+		tree.insert( shot.leaf );
+
+		if( ( s % 100 ) == 0 &amp;&amp; task.isCanceling( ) )
+		{
+			return null;
+		}
+		task.setCompleted( s );
+	}
+
+	task.end( );
+	return tree;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 19</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">usc</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">UscHeader.java</span>
+								<a href="index-source_dir=usc-master_usc-channel-impl_src_main_java_org_opendaylight_usc_protocol_UscHeader.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="28014votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="28014==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="28014==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Constructs an USC header from a byte stream
+ * 
+ * @param buf
+ * @return the USC header
+ */
+public static UscHeader fromByteBuffer(ByteBuffer buf) {
+    byte byte0 = buf.get(0);
+    // byte 0, bits [0, 4)
+    final int uscVersion = getBitsAsInteger(byte0, 0, 4);
+
+    // byte 0, bits [4, 8)
+    final OperationType operationType = OperationType.valueOf(getBitsAsInteger(byte0, 4, 4));
+
+    // byte 1 reserved
+
+    // bytes [2, 4)
+    final int applicationPort = buf.getChar(2);
+
+    // bytes [4, 6)
+    final int sessionId = buf.getChar(4);
+
+    // bytes [6, 8)
+    final int payloadLength = buf.getChar(PAYLOAD_LENGTH_OFFSET);
+
+    return new UscHeader(uscVersion, operationType, applicationPort, sessionId, payloadLength);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 20</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">UVGenerator.java</span>
+								<a href="index-source_dir=breakout-master_andork-jogl-gl2es2-utils_src_org_andork_jogl_util_UVGenerator.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15321votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15321==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15321==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static void putUV( ByteBuffer uvs , int uvsOffset , int uvsStride ,
+		float[ ][ ] n , int[ ] triIndices , int[ ] quadCornerIndices , int cornerIndex , float[ ] v0 , float[ ] v1 , float[ ] uv )
+{
+	sub3( v1 , v0 , uv );
+	normalize3( uv );
+	cross( uv , n[ cornerIndex ] , uv );
+	cross( n[ cornerIndex ] , uv , uv );
+	
+	uvs.position( uvsOffset + triIndices[ quadCornerIndices[ cornerIndex ] ] * uvsStride );
+	uvs.putFloat( uv[ 0 ] );
+	uvs.putFloat( uv[ 1 ] );
+	uvs.putFloat( uv[ 2 ] );
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 21</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">divolte-collector</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">AvroRecordBuffer.java</span>
+								<a href="index-source_dir=divolte-collector-master_src_main_java_io_divolte_server_AvroRecordBuffer.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="92820votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="92820==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="92820==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private AvroRecordBuffer(final DivolteIdentifier partyId, final DivolteIdentifier sessionId, final long eventTime, final long cookieUtcOffset, final GenericRecord record) throws IOException {
+    this.partyId = Objects.requireNonNull(partyId);
+    this.sessionId = Objects.requireNonNull(sessionId);
+    this.eventTime = eventTime;
+    this.cookieUtcOffset = cookieUtcOffset;
+
+    /*
+     * We avoid ByteArrayOutputStream as it is fully synchronized and performs
+     * a lot of copying. Instead, we create a byte array and point a
+     * ByteBuffer to it and create a custom OutputStream implementation that
+     * writes directly to the ByteBuffer. If we under-allocate, we recreate
+     * the entire object using a larger byte array. All subsequent instances
+     * will also allocate the larger size array from that point onward.
+     */
+    final ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[BUFFER_SIZE.get()]);
+    final DatumWriter&lt;GenericRecord&gt; writer = new SpecificDatumWriter&lt;&gt;(record.getSchema());
+    final Encoder encoder = EncoderFactory.get().directBinaryEncoder(new ByteBufferOutputStream(byteBuffer), null);
+
+    writer.write(record, encoder);
+
+    // Prepare buffer for reading, and store it (read-only).
+    byteBuffer.flip();
+    this.byteBuffer = byteBuffer.asReadOnlyBuffer();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 22</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">hank</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TestHankSmartClient.java</span>
+								<a href="index-source_dir=hank-master_hank-client_src_test_java_com_liveramp_hank_client_TestHankSmartClient.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="128907votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="128907==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="128907==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public HankResponse get(int domainId, ByteBuffer key) {
+  applyMode();
+  ++numRequests;
+  if (key.equals(KEY_NOT_FOUND)) {
+    return HankResponse.not_found(true);
+  } else {
+    return response;
+  }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 23</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">netty3.9-note</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DirectChannelBufferFactory.java</span>
+								<a href="index-source_dir=netty3.9-note-master_src_org_jboss_netty_buffer_DirectChannelBufferFactory.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="256654votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="256654==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="256654==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public ChannelBuffer getBuffer(ByteBuffer nioBuffer) {
+    if (!nioBuffer.isReadOnly() &amp;&amp; nioBuffer.isDirect()) {
+        return ChannelBuffers.wrappedBuffer(nioBuffer);
+    }
+
+    ChannelBuffer buf = getBuffer(nioBuffer.order(), nioBuffer.remaining());
+    int pos = nioBuffer.position();
+    buf.writeBytes(nioBuffer);
+    nioBuffer.position(pos);
+    return buf;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 24</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">platform-packages-apps-Gallery3D</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CacheService.java</span>
+								<a href="index-source_dir=platform-packages-apps-Gallery3D-master_src_com_cooliris_cache_CacheService.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="197679votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="197679==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="197679==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static final long[] toLongArray(final byte[] data) {
+    final ByteBuffer bBuffer = ByteBuffer.wrap(data);
+    final LongBuffer lBuffer = bBuffer.asLongBuffer();
+    final int numLongs = lBuffer.capacity();
+    final long[] retVal = new long[numLongs];
+    for (int i = 0; i &lt; numLongs; ++i) {
+        retVal[i] = lBuffer.get(i);
+    }
+    return retVal;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 25</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">eclipse-gov.redhawk.ide</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BinDataWriter.java</span>
+								<a href="index-source_dir=eclipse-gov.redhawk.ide-master_plugins_gov.redhawk.ide.snapshot.ui_src_gov_redhawk_ide_snapshot_writer_internal_BinDataWriter.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="464066votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="464066==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="464066==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public void pushPacket(double[] data, int offset, int length, PrecisionUTCTime time) throws IOException {
+	ByteBuffer buffer = allocateByteBuffer(length * getSettings().getType().getBytePerAtom());
+	DoubleBuffer tBuff = buffer.asDoubleBuffer();
+	tBuff.put(data, offset, length); 
+	fileChannel.write(buffer);
+	numSamples += length;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 26</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">x3d-aether</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Struct.java</span>
+								<a href="index-source_dir=x3d-aether-master_libs_J2SE_Javolution_src_javolution_io_Struct.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="567778votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="567778==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="567778==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Returns this struct address. This method allows for structs
+ * to be referenced (e.g. pointer) from other structs.
+ *
+ * @return the struct memory address.
+ * @throws UnsupportedOperationException if the struct buffer is not
+ *         a direct buffer.
+ * @see    Reference32
+ * @see    Reference64
+ */
+public final long address() {
+    ByteBuffer thisBuffer = this.getByteBuffer();
+    if (ADDRESS_METHOD != null) {
+        Long start = (Long) ADDRESS_METHOD.invoke(thisBuffer);
+        return start.longValue() + getByteBufferPosition();
+    } else {
+        throw new UnsupportedOperationException(
+                &quot;Operation not supported for &quot; + thisBuffer.getClass());
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 27</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">foe</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TarArchiveEntry.java</span>
+								<a href="index-source_dir=foe-master_FreenetCompress_src_org_apache_commons_compress_archivers_tar_TarArchiveEntry.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="197305votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="197305==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="197305==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Evaluate an entry's header format from a header buffer.
+ *
+ * @param header The tar entry header buffer to evaluate the format for.
+ * @return format type
+ */
+private int evaluateType(byte[] header) {
+    final ByteBuffer magic = ByteBuffer.wrap(header, MAGIC_OFFSET, MAGICLEN);
+    if (magic.compareTo(ByteBuffer.wrap(MAGIC_GNU.getBytes())) == 0)
+        return FORMAT_OLDGNU;
+    if (magic.compareTo(ByteBuffer.wrap(MAGIC_POSIX.getBytes())) == 0)
+        return FORMAT_POSIX;
+    return 0;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 28</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">RelaxFactory</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CookieRfc6265UtilTest.java</span>
+								<a href="index-source_dir=RelaxFactory-master_rxf-couch_src_test_java_rxf_couch_CookieRfc6265UtilTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="110870votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="110870==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="110870==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void testSimpleHeader() {
+  ByteBuffer buf = (ByteBuffer) StandardCharsets.UTF_8.encode(H1).rewind();
+  buf.toString();
+
+  Rfc822HeaderState apply = Tx.current().hdr().read(buf);
+  List&lt;String&gt; headersNamed = apply.$req().getHeadersNamed(HttpHeaders.Cookie);
+  assertEquals(TMID_8627085284984078588, headersNamed.iterator().next());
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 29</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">nikeplus-fuelband-se-reversed</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MainActivity.java</span>
+								<a href="index-source_dir=nikeplus-fuelband-se-reversed-master_src_com_evilsocket_blehacks_MainActivity.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="199votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="199==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="199==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+ protected void onCreate(Bundle savedInstanceState) {
+     super.onCreate(savedInstanceState);
+     setContentView(R.layout.activity_main);
+     
+     Logger.setLogView( this, (TextView)findViewById( R.id.log_view ) );
+
+     _btManager = (BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE);
+     _btAdapter = _btManager.getAdapter();
+     
+     if( _btAdapter.isEnabled() == false ){
+     	Logger.w( &quot;Bluetooth is disabled.&quot; );
+     	
+     	Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);   
+         startActivityForResult(enableIntent,REQUEST_ENABLE_BT);
+     }
+                   
+     _leScanCallback = new BluetoothAdapter.LeScanCallback() {
+     	
+@Override
+public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+	if( _scanning == false )
+		return;
+	
+	try
+	{
+		/*
+		 * Parse device advertisment data.
+		 */
+		final Bundle advData = AdvertisementData.parse(scanRecord);
+		/*
+		 * Is this a nike device?
+		 */
+		if( Arrays.equals(advData.getByteArray(&quot;COMPANYCODE&quot;), NIKE_COMPANY_CODE ) )
+		{
+			Logger.i( &quot;FOUND NIKE DEVICE [&quot; + device +&quot;]&quot; );
+			
+			dumpDeviceAdvData( advData );
+			
+			_scanning = false;
+			_btAdapter.stopLeScan(_leScanCallback);
+			
+			Logger.i( &quot;Connecting to GATT server ...&quot; );
+			
+			_ioqueue = new BLEIoQueue( new BLEIoQueue.QueueCallbacks() {	
+				private BluetoothGattService	    _CopperheadService = null;
+				private BluetoothGattCharacteristic _CommandChannel = null;
+				private BluetoothGattCharacteristic _ResponseChannel = null;
+
+				// add a raw packet to the queue
+	        	private void addPacket( BLEIoQueue queue, byte[] data, BLEIoOperation.OnResponseCallback callback ){
+	        		BLEIoOperation op = new BLEIoOperation( BLEIoOperation.Type.WRITE_CHARACTERISTICS, &quot;Sending command.&quot;, callback );
+
+	        		op.set_data( data );
+	        		op.set_characteristic( _CommandChannel );
+	        						        						        		
+	        		queue.add(op);			        						        	
+	        	}
+	        	
+	        	private void addPacket( BLEIoQueue queue, String s, BLEIoOperation.OnResponseCallback callback ){
+	        		byte[] buffer = new byte[ s.length() / 2 ];
+	        		
+	        		for( int i = 0, j = 0; i &lt; s.length(); i += 2, ++j ){
+	        			buffer[j] = (byte) ((Character.digit(s.charAt(i), 16) &lt;&lt; 4)
+	                             			+ Character.digit(s.charAt(i+1), 16));
+	        		}
+	        		
+	        		addPacket( queue, buffer, callback );
+	        	}
+
+	        	// create the needed packet to request a specific setting from the device
+	        	private void requestSetting( BLEIoQueue queue, int code )
+	        	{
+	        		CopperheadPacket oppacket = new CopperheadPacket(5);
+	        		oppacket.setOpcode((byte)10);
+	        		ByteBuffer b = oppacket.getPayloadBuffer();
+	        		b.put( (byte)1 );
+	        		b.put( (byte)code );
+	        		
+	        		Packet p = Packet.wrap(oppacket);
+	        		
+	        		p.setProtocolLayer( CommandResponseOperation.ProtocolLayer.COMMAND );
+	        		p.setPacketCount(0);
+	        		p.setPacketIndex(0);
+	        		p.setSequenceNumber(1);
+	        		
+	        		addPacket( queue, p.getBuffer(), new BLEIoOperation.OnResponseCallback() {																	
+	        			@Override
+	        			public void onData(Packet config) {
+	        				byte[] raw = config.getBuffer();
+	
+	        				try
+	        				{
+	        					Utils.processGetSettingsResponse(raw);
+	        				}
+	        				catch( Exception e )
+	        				{
+	        					Logger.e( e.toString() );
+	        				}
+	        			}
+	        		} );
+	        	}
+	        	
+				@Override
+				public void onServicesDiscovered(BLEIoQueue queue, BluetoothGatt gatt, int status) {								
+					dumpServices(gatt);
+					
+					_CopperheadService = gatt.getService( COPPERHEAD_SERVICE_UUID );
+			    	if( _CopperheadService == null ){
+			    		Logger.e( &quot;No Copperhead service found.&quot; );
+			    		return;
+			    	}
+			    	
+			    	/*
+			    	 * Get command and response channels.
+			    	 */
+			    	_CommandChannel = _CopperheadService.getCharacteristic( COPPERHEAD_CMD_UUID );						    	
+			    	_ResponseChannel = _CopperheadService.getCharacteristic( COPPERHEAD_RSP_UUID );
+			    	
+			    	if( _CommandChannel == null ){
+			    		Logger.e( &quot;Could not find COPPERHEAD_CMD_UUID&quot; );
+			    		return;
+			    	}
+			    	else if( _ResponseChannel == null ){
+			    		Logger.e( &quot;Could not find COPPERHEAD_RSP_UUID&quot; );
+			    		return;
+			    	}
+			    	
+			    	/*
+			    	 * Enable the response channel to receive incoming data notifications.
+			    	 */
+			    	BluetoothGattDescriptor rsp_config_desc = _ResponseChannel.getDescriptor( CLIENT_CHARACTERISTIC_CONFIG_UUID );
+			    	if( rsp_config_desc == null ){
+			    		Logger.e( &quot;RSP has no client config.&quot; );
+			    		return;
+			    	}
+
+			    	BLEIoOperation notify = new BLEIoOperation( BLEIoOperation.Type.NOTIFY_START, &quot;Enable response channel notifications.&quot; );
+			    	
+			    	notify.set_characteristic( _ResponseChannel );
+			    	notify.set_descriptor( rsp_config_desc );
+			    		
+			    	queue.add(notify);
+			    	
+			    	final BLEIoQueue fq = queue;
+
+			    	Packet auth = new Packet(19);
+			    	
+			    	/*
+			    	 * Send the &quot;START AUTH&quot; packet -&gt; 0x90 0x01 0x01 0x00 .....
+			    	 */
+			    	auth.setProtocolLayer( CommandResponseOperation.ProtocolLayer.SESSION );
+			    	auth.setPacketCount(0);
+			    	auth.setPacketIndex(0);
+			    	auth.setSequenceNumber(1);
+			    	auth.setCommandBytes( (byte)1, (byte)1 );
+			    	
+			    	addPacket( queue, auth.getBuffer(), new BLEIoOperation.OnResponseCallback() {									
+						@Override
+						public void onData( Packet challenge_packet ) {										
+							
+							Logger.d( &quot;&lt;&lt; &quot; + challenge_packet.toString() );
+
+							ByteBuffer buffer = challenge_packet.getBuffered(ByteOrder.LITTLE_ENDIAN);
+							
+							// remove op code and length
+							int opcode = buffer.get();
+							int length = buffer.get();
+																	
+							switch( buffer.get() )
+							{
+								case 0x41:
+									Logger.i( &quot;Received authentication challenge&quot; );
+														
+									/*
+									 * Get 16 bytes of AUTH nonce
+									 */
+									byte[] nonce = new byte[16];
+									buffer.get(nonce);
+
+									if ((nonce == null) || (nonce.length != 16))
+									{
+										Logger.e(&quot;Missing or invalid authentication challenge nonce&quot;);
+									}
+									else
+									{
+									    CopperheadCRC32 crc = new CopperheadCRC32();
+									    
+									    byte[] auth_token = Utils.hexToBytes(&quot;FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF&quot;); 
+							    												    
+										Logger.d( &quot;NONCE: &quot; + Utils.bytesToHex( nonce ) );
+										
+										/*
+										 * Create the response packet: 0xb0 0x03 0x02 [2 BYTES OF CRC] 0x00 ...
+										 */
+										Packet resp_packet = new Packet(19);
+										
+										resp_packet.setProtocolLayer( CommandResponseOperation.ProtocolLayer.SESSION );
+										resp_packet.setPacketCount(0);
+										resp_packet.setPacketIndex(0);
+										resp_packet.setSequenceNumber( challenge_packet.getSequenceNumber() + 1 );
+										
+										ByteBuffer response = ByteBuffer.allocate(18);
+										
+										response.put( (byte)0x03 );
+										response.put( (byte)0x02 );
+										
+										crc.update(nonce);
+									    crc.update(auth_token);
+									    
+									    short sum = (short)((0xFFFF &amp; crc.getValue()) ^ (0xFFFF &amp; crc.getValue() &gt;&gt;&gt; 16));
+									    												    
+									    response.putShort(sum);
+									    
+									    resp_packet.setPayload( response.array() );
+
+										addPacket( fq, resp_packet.getBuffer(), new BLEIoOperation.OnResponseCallback() {														
+											@Override
+											public void onData(Packet challenge_response) {
+												
+												Logger.d( &quot;&lt;&lt; &quot; + challenge_response.toString() );
+												
+												ByteBuffer buffer = challenge_response.getBuffered(ByteOrder.LITTLE_ENDIAN);
+												
+												// remove op code and length
+												int opcode = buffer.get();
+												int length = buffer.get();
+												
+												/*
+												 * Get the authentication reply code.
+												 */
+												int reply = buffer.get();
+												
+												if( reply == 0x42 ) {
+													Logger.i( &quot;Succesfully authenticated.&quot; );
+														
+													// Request some settings
+													requestSetting( fq, Utils.getSettingCode( &quot;BAND_COLOR&quot; ) );
+													requestSetting( fq, Utils.getSettingCode( &quot;FUEL&quot; ) );
+													requestSetting( fq, Utils.getSettingCode( &quot;FIRST_NAME&quot; ) );
+													requestSetting( fq, Utils.getSettingCode( &quot;SERIAL_NUMBER&quot; ) );
+												}
+												else {
+													Logger.e( &quot;Authentication failure, reply: &quot; + reply );
+												}
+											}
+										});
+									}
+									
+								break;
+								
+								default:
+									
+									Logger.e( &quot;Unknown auth code.&quot; );
+							}
+						}
+					});	
+				}
+			});
+							
+			device.connectGatt( MainActivity.this, false, _ioqueue );
+		}
+	}
+	catch( Exception e )
+	{
+		Logger.e( e.toString() );
+	}
+}
+     };
+     
+     Logger.i( &quot;Starting scann ...&quot; );
+     
+     _scanning = true;
+     _btAdapter.startLeScan(_leScanCallback);
+ }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 30</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">nikeplus-fuelband-se-reversed</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Utils.java</span>
+								<a href="index-source_dir=nikeplus-fuelband-se-reversed-master_src_com_evilsocket_blehacks_Utils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="205votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="205==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="205==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void processGetSettingsResponse(byte[] raw) throws Exception {
+ByteBuffer byteBuffer = ByteBuffer.wrap(raw);
+
+// skip protocol first four bytes
+byte dummy1 = byteBuffer.get();
+byte dummy2 = byteBuffer.get();
+byte dummy3 = byteBuffer.get();
+byte dummy4 = byteBuffer.get();
+
+      byte elements = byteBuffer.get();
+
+      if (elements &lt;= 0) {
+          return;
+      }
+
+      for(byte b = 0; b &lt; elements; ++b) 
+      {
+          if( byteBuffer.remaining() &lt; 2 ) {
+              throw new Exception(&quot;Decoding error, not enough remaining bytes&quot;);
+          }
+          
+          byte configKey = byteBuffer.get();
+          byte valueSize = byteBuffer.get();
+
+          valueSize = (byte)( Math.min( (int)valueSize, byteBuffer.remaining() ) &amp; 0xFF );
+          
+          final String settingKey = getSettingKey(configKey);
+          if (settingKey == null) 
+          {
+          	Logger.e( &quot;Unknown config key &quot; + configKey );
+              byteBuffer.position(valueSize + byteBuffer.position());
+          }
+          else 
+          {
+              switch (getSettingType(configKey)) 
+              {
+                  case BYTE: {
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + ( byteBuffer.get() &amp; 0xFF ) );                        
+                      break;
+                  }
+                  case BYTE_ARRAY: {
+                      final byte[] array = new byte[valueSize];
+                      byteBuffer.get(array);
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + Utils.bytesToHex(array) );                                                
+                      break;
+                  }
+                  case STRING: {
+                      final byte[] array2 = new byte[valueSize];
+                      byteBuffer.get(array2);
+                      byte b2;
+                      for (b2 = 0; b2 &lt; valueSize &amp;&amp; array2[b2] != 0; ++b2) {}
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + new String(array2, 0, b2, Charset.forName(&quot;US-ASCII&quot;)) );                                                
+                      break;
+                  }
+                  case UINT32: {
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + byteBuffer.getInt() );                        
+                      break;
+                  }
+                  case UINT16: {
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + byteBuffer.getShort() );                        
+                      break;
+                  }
+                  case BOOLEAN: {
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + ( byteBuffer.get() == 0 ? &quot;false&quot; : &quot;true&quot; ) );                        
+                      break;
+                  }
+                  case DOB_CALENDAR: {
+                      final int int1 = byteBuffer.getInt();
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + ( new GregorianCalendar(int1 &amp; 0xFFFF, -1 + (0xFF &amp; int1 &gt;&gt;&gt; 16), int1 &gt;&gt;&gt; 24) ) );                        
+                      break;
+                  }
+                  case GENDER: {
+                  	String gender = &quot;UNKNOWN&quot;;
+                      switch (byteBuffer.get()) {
+                          case 77: {
+                              gender = &quot;MALE&quot;;
+                              break;
+                          }
+                          case 70: {
+                              gender = &quot;FEMALE&quot;;
+                              break;
+                          }
+                      }
+                  	Logger.i( &quot;Got setting: &quot; + settingKey + &quot; = &quot; + gender );                        
+
+                      break;
+                  }
+                  
+                  default:
+                  	
+                  	throw new Exception(&quot;Unknown config type&quot;);
+              }
+          }
+      }
+  }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 31</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">cassandra-dev</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SequenceFile.java</span>
+								<a href="index-source_dir=cassandra-dev-master_src_com_facebook_infrastructure_io_SequenceFile.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="16472votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="16472==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="16472==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Read a UTF8 string from a serialized buffer.
+ * @param buffer buffer from which a UTF8 string is read
+ * @return a Java String
+*/
+protected static String readUTF(ByteBuffer in) throws IOException
+{
+    int utflen = in.getShort();
+    byte[] bytearr = new byte[utflen];
+    char[] chararr = new char[utflen];
+
+    int c, char2, char3;
+    int count = 0;
+    int chararr_count = 0;
+
+    in.get(bytearr, 0, utflen);
+
+    while (count &lt; utflen)
+    {
+        c = (int) bytearr[count] &amp; 0xff;
+        if (c &gt; 127)
+            break;
+        count++;
+        chararr[chararr_count++] = (char) c;
+    }
+
+    while (count &lt; utflen)
+    {
+        c = (int) bytearr[count] &amp; 0xff;
+        switch (c &gt;&gt; 4)
+        {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            /* 0xxxxxxx */
+            count++;
+            chararr[chararr_count++] = (char) c;
+            break;
+        case 12:
+        case 13:
+            /* 110x xxxx 10xx xxxx */
+            count += 2;
+            if (count &gt; utflen)
+                throw new UTFDataFormatException(
+                &quot;malformed input: partial character at end&quot;);
+            char2 = (int) bytearr[count - 1];
+            if ((char2 &amp; 0xC0) != 0x80)
+                throw new UTFDataFormatException(
+                        &quot;malformed input around byte &quot; + count);
+            chararr[chararr_count++] = (char) (((c &amp; 0x1F) &lt;&lt; 6) | (char2 &amp; 0x3F));
+            break;
+        case 14:
+            /* 1110 xxxx 10xx xxxx 10xx xxxx */
+            count += 3;
+            if (count &gt; utflen)
+                throw new UTFDataFormatException(
+                &quot;malformed input: partial character at end&quot;);
+            char2 = (int) bytearr[count - 2];
+            char3 = (int) bytearr[count - 1];
+            if (((char2 &amp; 0xC0) != 0x80) || ((char3 &amp; 0xC0) != 0x80))
+                throw new UTFDataFormatException(
+                        &quot;malformed input around byte &quot; + (count - 1));
+            chararr[chararr_count++] = (char) (((c &amp; 0x0F) &lt;&lt; 12)
+                    | ((char2 &amp; 0x3F) &lt;&lt; 6) | ((char3 &amp; 0x3F) &lt;&lt; 0));
+            break;
+        default:
+            /* 10xx xxxx, 1111 xxxx */
+            throw new UTFDataFormatException(&quot;malformed input around byte &quot;
+                    + count);
+        }
+    }
+    // The number of chars produced may be less than utflen
+    return new String(chararr, 0, chararr_count);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 32</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">IndexedPackedCube.java</span>
+								<a href="index-source_dir=breakout-master_andork-jogl-gl2es2-utils_src_org_andork_jogl_util_IndexedPackedCube.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15319votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15319==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15319==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void init( GL2ES2 gl )
+{
+	int vertexShader = JoglUtils.loadShader( gl , GL2ES2.GL_VERTEX_SHADER , vertexShaderCode );
+	int fragmentShader = JoglUtils.loadShader( gl , GL2ES2.GL_FRAGMENT_SHADER , fragmentShaderCode );
+	
+	mProgram = gl.glCreateProgram( ); // create empty OpenGL ES Program
+	checkGLError( gl , &quot;glCreateProgram&quot; );
+	gl.glAttachShader( mProgram , vertexShader ); // add the vertex shader
+	checkGLError( gl , &quot;glAttachShader&quot; );
+	// to program
+	gl.glAttachShader( mProgram , fragmentShader ); // add the fragment
+	checkGLError( gl , &quot;glAttachShader&quot; );
+	// shader to program
+	gl.glLinkProgram( mProgram ); // creates OpenGL ES program executables
+	checkGLError( gl , &quot;glLinkProgram&quot; );
+	
+	// initialize vertex byte buffer for shape coordinates
+	ByteBuffer bb = ByteBuffer.allocateDirect(
+			// (number of coordinate values * 4 bytes per float)
+			verts.length * 4 );
+	// use the device hardware's native byte order
+	bb.order( ByteOrder.nativeOrder( ) );
+	
+	// create a floating point buffer from the ByteBuffer
+	vertexBuffer = bb.asFloatBuffer( );
+	// add the coordinates to the FloatBuffer
+	vertexBuffer.put( verts );
+	// set the buffer to read the first coordinate
+	vertexBuffer.position( 0 );
+	
+	bb = ByteBuffer.allocateDirect( indices.length * 2 );
+	bb.order( ByteOrder.nativeOrder( ) );
+	indexBuffer = bb.asCharBuffer( );
+	indexBuffer.put( indices );
+	indexBuffer.position( 0 );
+	
+	int[ ] vbos = new int[ 1 ];
+	gl.glGenBuffers( 1 , vbos , 0 );
+	vbo = vbos[ 0 ];
+	
+	int[ ] ebos = new int[ 1 ];
+	gl.glGenBuffers( 1 , ebos , 0 );
+	ebo = ebos[ 0 ];
+	
+	gl.glBindBuffer( GL2ES2.GL_ARRAY_BUFFER , vbo );
+	checkGLError( gl , &quot;glBindBuffer&quot; );
+	
+	gl.glBufferData( GL2ES2.GL_ARRAY_BUFFER , vertexBuffer.capacity( ) * 4 , vertexBuffer , GL2ES2.GL_STATIC_DRAW );
+	checkGLError( gl , &quot;glBufferData&quot; );
+	
+	// get handle to vertex shader's vPosition member
+	mPositionHandle = gl.glGetAttribLocation( mProgram , &quot;vPosition&quot; );
+	checkGLError( gl , &quot;glGetAttribLocation&quot; );
+	
+	// Enable a handle to the triangle vertices
+	gl.glEnableVertexAttribArray( mPositionHandle );
+	checkGLError( gl , &quot;glEnableVertexAttribArray&quot; );
+	
+	vertexBuffer.position( 0 );
+	
+	// Prepare the triangle coordinate data
+	gl.glVertexAttribPointer( mPositionHandle , COORDS_PER_VERTEX , GL2ES2.GL_FLOAT , false , VERTEX_STRIDE , 0 );
+	checkGLError( gl , &quot;glVertexAttribPointer&quot; );
+	
+	// get handle to fragment shader's vColor member
+	mColorHandle = gl.glGetAttribLocation( mProgram , &quot;vColor&quot; );
+	checkGLError( gl , &quot;glGetAttribLocation&quot; );
+	
+	// Enable a handle to the triangle vertices
+	gl.glEnableVertexAttribArray( mColorHandle );
+	checkGLError( gl , &quot;glEnableVertexAttribArray&quot; );
+	
+	vertexBuffer.position( COLOR_OFFSET );
+	
+	// Prepare the triangle coordinate data
+	gl.glVertexAttribPointer( mColorHandle , COLORS_PER_VERTEX , GL2ES2.GL_FLOAT , false , VERTEX_STRIDE , COLOR_OFFSET * 4 );
+	checkGLError( gl , &quot;glVertexAttribPointer&quot; );
+	
+	// get handle to fragment shader's vNormal member
+	mNormalHandle = gl.glGetAttribLocation( mProgram , &quot;vNormal&quot; );
+	checkGLError( gl , &quot;glGetAttribLocation&quot; );
+	
+	// Enable a handle to the triangle vertices
+	gl.glEnableVertexAttribArray( mNormalHandle );
+	checkGLError( gl , &quot;glEnableVertexAttribArray&quot; );
+	
+	vertexBuffer.position( NORMAL_OFFSET );
+	
+	// Prepare the triangle coordinate data
+	gl.glVertexAttribPointer( mNormalHandle , NORMALS_PER_VERTEX , GL2ES2.GL_FLOAT , false , VERTEX_STRIDE , NORMAL_OFFSET * 4 );
+	checkGLError( gl , &quot;glVertexAttribPointer&quot; );
+	
+	gl.glBindBuffer( GL2ES2.GL_ELEMENT_ARRAY_BUFFER , ebo );
+	checkGLError( gl , &quot;glBindBuffer&quot; );
+	
+	gl.glBufferData( GL2ES2.GL_ELEMENT_ARRAY_BUFFER , indexBuffer.capacity( ) * 2 , indexBuffer , GL2ES2.GL_STATIC_DRAW );
+	checkGLError( gl , &quot;glBufferData&quot; );
+	
+	gl.glBindBuffer( GL2ES2.GL_ARRAY_BUFFER , 0 );
+	checkGLError( gl , &quot;glBindBuffer&quot; );
+	
+	gl.glBindBuffer( GL2ES2.GL_ELEMENT_ARRAY_BUFFER , 0 );
+	checkGLError( gl , &quot;glBindBuffer&quot; );
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 33</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">breakout</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TransparentTerrain.java</span>
+								<a href="index-source_dir=breakout-master_Breakout_src_main_java_org_breakout_model_TransparentTerrain.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="15387votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="15387==java.nio.ByteBuffer">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="15387==java.nio.ByteBuffer">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public void init( GL2ES2 gl )
+{
+	if( initialized )
+	{
+		return;
+	}
+	
+	initialized = true;
+	
+	String vertexShader = &quot;uniform mat4 p;&quot; +
+			&quot;uniform mat4 v;&quot; +
+			&quot;uniform mat4 m;&quot; +
+			&quot;uniform mat3 n;&quot; +
+			
+			&quot;attribute vec4 a_pos;&quot; +
+			
+			&quot;void main() {&quot; +
+			&quot;  gl_Position = p * v * m * a_pos;&quot; +
+			&quot;}&quot;;
+	
+	String fragmentShader = &quot;uniform vec4 u_color;&quot; +
+			
+			&quot;void main() {&quot; +
+			&quot;  gl_FragColor = u_color;&quot; +
+			&quot;}&quot;;
+	
+	program = JoglUtils.loadProgram( gl , vertexShader , fragmentShader );
+	
+	ByteBuffer b;
+	b = ByteBuffer.allocateDirect( numVertexRows * numVertexCols * 16 );
+	b.order( ByteOrder.nativeOrder( ) );
+	
+	for( int row = 0 ; row &lt; numVertexRows ; row++ )
+	{
+		for( int col = 0 ; col &lt; numVertexCols ; col++ )
+		{
+			float[ ] v = vertices[ row ][ col ];
+			b.putFloat( v[ 0 ] );
+			b.putFloat( v[ 1 ] );
+			b.putFloat( v[ 2 ] );
+			b.putFloat( 1f );
+		}
+	}
+	
+	b.position( 0 );
+	
+	gl.glGenBuffers( 1 , vbo , 0 );
+	gl.glBindBuffer( GL_ARRAY_BUFFER , vbo[ 0 ] );
+	gl.glBufferData( GL_ARRAY_BUFFER , b.capacity( ) , b , GL_STATIC_DRAW );
+	gl.glBindBuffer( GL_ARRAY_BUFFER , 0 );
+	
+	b = ByteBuffer.allocateDirect( numCellRows * numCellCols * 24 );
+	b.order( ByteOrder.nativeOrder( ) );
+	indices = b.asIntBuffer( );
+	
+	for( int row = 0 ; row &lt; numCellRows ; row++ )
+	{
+		int rowStart = row * numVertexCols;
+		int nextRowStart = rowStart + numVertexCols;
+		for( int col = 0 ; col &lt; numCellCols ; col++ )
+		{
+			indices.put( rowStart + col );
+			indices.put( nextRowStart + col + 1 );
+			indices.put( nextRowStart + col );
+			indices.put( nextRowStart + col + 1 );
+			indices.put( rowStart + col );
+			indices.put( rowStart + col + 1 );
+		}
+	}
+	
+	indices.position( 0 );
+	
+	gl.glGenBuffers( 1 , ebo , 0 );
+	gl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER , ebo[ 0 ] );
+	gl.glBufferData( GL_ELEMENT_ARRAY_BUFFER , indices.capacity( ) * 4 , indices , GL_STATIC_DRAW );
+	gl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER , 0 );
+	
+	b = ByteBuffer.allocateDirect( numCellRows * numCellCols * 4 );
+	b.order( ByteOrder.nativeOrder( ) );
+	counts = b.asIntBuffer( );
+	while( counts.hasRemaining( ) )
+	{
+		counts.put( 6 );
+	}
+	counts.position( 0 );
+	
+	indexPointers = PointerBuffer.allocateDirect( numCellRows * numCellCols );
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("ByteBuffer", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(ByteBuffer, "ig") ,'<div style="background-color:red">' + ByteBuffer + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Slipped Conditions</title>
+
+    <meta name="description" content="This tutorial explains what slipped conditions in multithreading is, and how to avoid it.">
+    <meta name="keywords"    content="Java concurrency slipped conditions">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Slipped Conditions">
+    <meta name="twitter:description" content="This tutorial explains what slipped conditions in multithreading is, and how to avoid it.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Slipped Conditions"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/slipped-conditions.html"/>
+    <meta property="og:description" content="This tutorial explains what slipped conditions in multithreading is, and how to avoid it."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/nested-monitor-lockout.html";
+var nextArticleInCategory = "/java-concurrency/locks.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 12289;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html"><b>Slipped Conditions</b></a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Slipped Conditions</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#what-is-slipped-conditions">What is Slipped Conditions?</a></li><li><a href="#example">A More Realistic Example</a><ul><li><a href="#removing-slipped-conditions">Removing the Slipped Conditions Problem</a></li></ul></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <a name="what-is-slipped-conditions"></a>
+<h2>What is Slipped Conditions?</h2>
+<p>
+    Slipped conditions means, that from the time a thread has checked a certain condition until it acts upon it,
+    the condition has been changed by another thread so that it is errornous for the first thread to act.
+    Here is a simple example:
+</p>
+
+<pre class="codeBox">
+public class Lock {
+
+    private boolean isLocked = true;
+
+    public void lock(){
+      synchronized(this){
+        while(isLocked){
+          try{
+            this.wait();
+          } catch(InterruptedException e){
+            //do nothing, keep waiting
+          }
+        }
+      }
+
+      synchronized(this){
+        isLocked = true;
+      }
+    }
+
+    public synchronized void unlock(){
+      isLocked = false;
+      this.notify();
+    }
+
+}
+</pre>
+
+
+<p>
+    Notice how the <code>lock()</code> method contains two synchronized blocks. The first block waits until
+    <code>isLocked</code> is false. The second block sets <code>isLocked</code> to true, to lock the
+    <code>Lock</code> instance for other threads.
+</p>
+
+<p>
+    Imagine that <code>isLocked</code> is false, and two threads call <code>lock()</code> at the same time.
+    If the first thread entering the first synchronized block is preempted right after the first synchronized
+    block, this thread will have checked <code>isLocked</code> and noted it to be false. If the second thread
+    is now allowed to execute, and thus enter the first synchronized block, this thread too will see
+    <code>isLocked</code> as false. Now both threads have read the condition as false. Then both threads
+    will enter the second synchronized block, set <code>isLocked</code> to true, and continue.
+</p>
+
+<p>
+    This situation is an example of slipped conditions. Both threads test the condition, then exit the
+    synchronized block, thereby allowing other threads to test the condition, before any of the two
+    first threads change the conditions for subsequent threads. In other words, the condition has slipped
+    from the time the condition was checked until the threads change it for subsequent threads.
+</p>
+
+<p> To avoid slipped conditions the testing and setting of the conditions must be done atomically by the
+    thread doing it, meaning that no other thread can check the condition in between the testing and setting
+    of the condition by the first thread.
+</p>
+
+<p>
+    The solution in the example above is simple. Just move the line <code>isLocked = true;</code> up into the
+    first synchronized block, right after the while loop. Here is how it looks:
+</p>
+
+<pre class="codeBox">
+public class Lock {
+
+    private boolean isLocked = true;
+
+    public void lock(){
+      synchronized(this){
+        while(isLocked){
+          try{
+            this.wait();
+          } catch(InterruptedException e){
+            //do nothing, keep waiting
+          }
+        }
+        isLocked = true;
+      }
+    }
+
+    public synchronized void unlock(){
+      isLocked = false;
+      this.notify();
+    }
+
+}
+</pre>
+
+<p>Now the testing and setting of the <code>isLocked</code> condition is done atomically from inside
+    the same synchronized block.
+</p>
+
+
+<a name="example"></a>
+<h2>A More Realistic Example</h2>
+<p>
+    You may rightfully argue that you would never implement a Lock like the first implementation
+    shown in this text, and thus claim slipped conditions to be a rather theoretical problem.
+    But the first example was kept rather simple to better convey the notion of slipped conditions.
+</p>
+
+<p>
+    A more realistic example would be during the implementation of a fair lock, as discussed in the
+    text on <a href="starvation-and-fairness.html">Starvation and Fairness</a>. If we look at
+    the naive implementation from the text <a href="nested-monitor-lockout.html">Nested Monitor Lockout</a>,
+    and try to remove the nested monitor lock problem it, it is easy to arrive at an implementation
+    that suffers from slipped conditions. First I'll show the example from the nested monitor lockout
+    text:
+</p>
+
+<pre class="codeBox">
+//Fair Lock implementation with nested monitor lockout problem
+
+public class FairLock {
+  private boolean           isLocked       = false;
+  private Thread            lockingThread  = null;
+  private List&lt;QueueObject&gt; waitingThreads =
+            new ArrayList&lt;QueueObject&gt;();
+
+  public void lock() throws InterruptedException{
+    QueueObject queueObject = new QueueObject();
+
+    <b>synchronized(this){</b>
+      waitingThreads.add(queueObject);
+
+      while(isLocked || waitingThreads.get(0) != queueObject){
+
+        <b>synchronized(queueObject){</b>
+          try{
+            queueObject.wait();
+          }catch(InterruptedException e){
+            waitingThreads.remove(queueObject);
+            throw e;
+          }
+        <b>}</b>
+      }
+      waitingThreads.remove(queueObject);
+      isLocked = true;
+      lockingThread = Thread.currentThread();
+    <b>}</b>
+  }
+
+  public <b>synchronized</b> void unlock(){
+    if(this.lockingThread != Thread.currentThread()){
+      throw new IllegalMonitorStateException(
+        "Calling thread has not locked this lock");
+    }
+    isLocked      = false;
+    lockingThread = null;
+    if(waitingThreads.size() > 0){
+      QueueObject queueObject = waitingThread.get(0);
+      <b>synchronized(queueObject){</b>
+        queueObject.notify();
+      <b>}</b>
+    }
+  }
+}
+</pre>
+
+<pre class="codeBox">
+public class QueueObject {}
+</pre>
+
+<p>
+    Notice how the <code>synchronized(queueObject)</code> with its <code>queueObject.wait()</code> call is
+    nested inside the <code>synchronized(this)</code> block, resulting in the nested monitor lockout problem.
+    To avoid this problem the <code>synchronized(queueObject)</code> block must be moved outside the
+    <code>synchronized(this)</code> block. Here is how that could look:
+</p>
+
+<pre class="codeBox">
+//Fair Lock implementation with slipped conditions problem
+
+public class FairLock {
+  private boolean           isLocked       = false;
+  private Thread            lockingThread  = null;
+  private List&lt;QueueObject&gt; waitingThreads =
+            new ArrayList&lt;QueueObject&gt;();
+
+  public void lock() throws InterruptedException{
+    QueueObject queueObject = new QueueObject();
+
+    synchronized(this){
+      waitingThreads.add(queueObject);
+    }
+
+    boolean mustWait = true;
+    while(mustWait){
+
+      synchronized(this){
+        mustWait = isLocked
+      }
+
+      synchronized(queueObject){
+        if(mustWait){
+          try{
+            queueObject.wait();
+          }catch(InterruptedException e){
+            waitingThreads.remove(queueObject);
+            throw e;
+          }
+        }
+      }
+    }
+
+    synchronized(this){
+      waitingThreads.remove(queueObject);
+      isLocked = true;
+      lockingThread = Thread.currentThread();
+    }
+  }
+}
+</pre>
+
+<p>
+    Note: Only the <code>lock()</code> method is shown, since it is the only method I have changed.
+</p>
+
+<p>
+    Notice how the <code>lock()</code> method now contains 3 synchronized blocks.
+</p>
+<p>
+    The first <code>synchronized(this)</code>
+    block checks the condition by setting <code>mustWait = isLocked || waitingThreads.get(0) != queueObject</code>.
+</p>
+<p>
+    The second <code>synchronized(queueObject)</code> block checks if the thread is to wait or not. Already at this time
+    another thread may have unlocked the lock, but lets forget that for the time being. Let's assume that the lock
+    was unlocked, so the thread exits the <code>synchronized(queueObject)</code> block right away.
+</p>
+<p>
+    The third <code>synchronized(this)</code> block is only executed if <code>mustWait = false</code>. This sets
+    the condition <code>isLocked</code> back to <code>true</code> etc. and leaves the <code>lock()</code> method.
+</p>
+
+<p>
+    Imagine what will happen if two threads call <code>lock()</code> at the same time when the lock is unlocked.
+    First thread 1 will check the <code>isLocked</code> conditition and see it false. Then thread 2 will do
+    the same thing. Then neither of them will wait, and both will set the state <code>isLocked</code> to
+    true. This is a prime example of slipped conditions.
+</p>
+
+
+<a name="removing-slipped-conditions"></a>
+<h3>Removing the Slipped Conditions Problem</h3>
+<p>
+    To remove the slipped conditions problem from the example above, the content of the
+    last <code>synchronized(this)</code> block must be moved up into the first block.
+    The code will naturally have to be changed a little bit too, to adapt to this move.
+    Here is how it looks:
+</p>
+
+<pre class="codeBox">
+//Fair Lock implementation without nested monitor lockout problem,
+//but with missed signals problem.
+
+public class FairLock {
+  private boolean           isLocked       = false;
+  private Thread            lockingThread  = null;
+  private List&lt;QueueObject&gt; waitingThreads =
+            new ArrayList&lt;QueueObject&gt;();
+
+  public void lock() throws InterruptedException{
+    QueueObject queueObject = new QueueObject();
+
+    synchronized(this){
+      waitingThreads.add(queueObject);
+    }
+
+    boolean mustWait = true;
+    while(mustWait){
+
+        <b>
+        synchronized(this){
+            mustWait = isLocked || waitingThreads.get(0) != queueObject;
+            if(!mustWait){
+                waitingThreads.remove(queueObject);
+                isLocked = true;
+                lockingThread = Thread.currentThread();
+                return;
+            }
+        } </b>
+
+      synchronized(queueObject){
+        if(mustWait){
+          try{
+            queueObject.wait();
+          }catch(InterruptedException e){
+            waitingThreads.remove(queueObject);
+            throw e;
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+
+<p>
+    Notice how the local variable <code>mustWait</code> is tested and set within the same synchronized code
+    block now. Also notice, that even if the <code>mustWait</code> local variable is also checked outside
+    the <code>synchronized(this)</code> code block, in the <code>while(mustWait)</code> clause, the value
+    of the <code>mustWait</code> variable is never changed outside the <code>synchronized(this)</code>.
+    A thread that evaluates <code>mustWait</code> to false will atomically also set the internal conditions (<code>isLocked</code>)
+    so that any other thread checking the condition will evaluate it to true.
+</p>
+
+<p>
+    The <code>return;</code> statement in the <code>synchronized(this)</code> block is not necessary. It is
+    just a small optimization. If the thread must not wait (<code>mustWait == false</code>), then there
+    is no reason to enter the <code>synchronized(queueObject)</code> block and execute the
+    <code>if(mustWait)</code> clause.
+</p>
+
+<p>
+    The observant reader will notice that the above implementation of a fair lock still suffers from a
+    missed signal problem. Imagine that the FairLock instance is locked when a thread calls
+    <code>lock()</code>. After the first <code>synchronized(this)</code> block <code>mustWait</code>
+    is true. Then imagine that the thread calling <code>lock()</code> is preempted, and the thread
+    that locked the lock calls unlock(). If you look at the <code>unlock()</code> implementation shown
+    earlier, you will notice that it calls <code>queueObject.notify()</code>. But, since the thread
+    waiting in <code>lock()</code> has not yet called <code>queueObject.wait()</code>, the call to
+    <code>queueObject.notify()</code> passes into oblivion. The signal is missed. When the thread
+    calling <code>lock()</code> right after calls <code>queueObject.wait()</code> it will remain blocked
+    until some other thread calls <code>unlock()</code>, which may never happen.
+</p>
+<p>
+    The missed signals problems is the reason that the <code>FairLock</code> implementation shown
+    in the text <a href="starvation-and-fairness.html">Starvation and Fairness</a> has turned the
+    <code>QueueObject</code> class into a semaphore with two methods: <code>doWait()</code> and
+    <code>doNotify()</code>. These methods store and react the signal internally in the QueueObject.
+    That way the signal is not missed, even if <code>doNotify()</code> is called before <code>doWait()</code>.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="locks.html">Locks in Java</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

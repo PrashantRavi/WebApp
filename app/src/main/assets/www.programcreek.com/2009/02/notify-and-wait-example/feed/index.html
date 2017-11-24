@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Java Thread: notify() and wait() examples</title>
+	<atom:link href="http://www.programcreek.com/2009/02/notify-and-wait-example/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2009/02/notify-and-wait-example/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: pl4za</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-15064</link>
+		<dc:creator><![CDATA[pl4za]]></dc:creator>
+		<pubDate>Fri, 07 Oct 2016 14:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-15064</guid>
+		<description><![CDATA[My take on the first example. Added a sleep to simulate a notify too before the wait and a condition check to avoid thread lock:
+
+public class ThreadA {
+    public static void main(String[] args){
+        ThreadB b = new ThreadB();
+        b.start();
+      try {
+ 		Thread.sleep(1000); // simulate a notify() before the wait()
+      }
+      catch (InterruptedException e) {
+        
+      }
+        synchronized(b){
+            try{
+              System.out.println(&quot;Waiting for b to complete...&quot;);
+              while (b.isAlive()) { //condition guarantees no thread lock occurs
+                b.wait();
+              }
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+ 
+            System.out.println(&quot;Total is: &quot; + b.total);
+        }
+    }
+}
+ 
+class ThreadB extends Thread{
+    int total;
+    @Override
+    public void run(){
+        synchronized(this){
+            for(int i=0; i&#060;100 ; i++){
+                total += i;
+            }
+            notify();
+        }
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>My take on the first example. Added a sleep to simulate a notify too before the wait and a condition check to avoid thread lock:</p>
+<p>public class ThreadA {<br />
+    public static void main(String[] args){<br />
+        ThreadB b = new ThreadB();<br />
+        b.start();<br />
+      try {<br />
+ 		Thread.sleep(1000); // simulate a notify() before the wait()<br />
+      }<br />
+      catch (InterruptedException e) {</p>
+<p>      }<br />
+        synchronized(b){<br />
+            try{<br />
+              System.out.println(&#8220;Waiting for b to complete&#8230;&#8221;);<br />
+              while (b.isAlive()) { //condition guarantees no thread lock occurs<br />
+                b.wait();<br />
+              }<br />
+            }catch(InterruptedException e){<br />
+                e.printStackTrace();<br />
+            }</p>
+<p>            System.out.println(&#8220;Total is: &#8221; + b.total);<br />
+        }<br />
+    }<br />
+}</p>
+<p>class ThreadB extends Thread{<br />
+    int total;<br />
+    @Override<br />
+    public void run(){<br />
+        synchronized(this){<br />
+            for(int i=0; i&lt;100 ; i++){<br />
+                total += i;<br />
+            }<br />
+            notify();<br />
+        }<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-15048</link>
+		<dc:creator><![CDATA[Rahul]]></dc:creator>
+		<pubDate>Thu, 06 Oct 2016 11:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-15048</guid>
+		<description><![CDATA[Why we should always call wait method in loop]]></description>
+		<content:encoded><![CDATA[<p>Why we should always call wait method in loop</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Angelina Lawrence</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-13782</link>
+		<dc:creator><![CDATA[Angelina Lawrence]]></dc:creator>
+		<pubDate>Thu, 18 Aug 2016 16:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-13782</guid>
+		<description><![CDATA[know how to you satisfy &lt;a href=&quot;https://www.yahoo.com&quot; rel=&quot;nofollow&quot;&gt;yahoo&lt;/a&gt; offer us an case in point of a accurate instance 1 by means of Runnable?]]></description>
+		<content:encoded><![CDATA[<p>know how to you satisfy <a href="https://www.yahoo.com" rel="nofollow">yahoo</a> offer us an case in point of a accurate instance 1 by means of Runnable?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sergey Zaytsev</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-12787</link>
+		<dc:creator><![CDATA[Sergey Zaytsev]]></dc:creator>
+		<pubDate>Fri, 22 Jul 2016 16:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-12787</guid>
+		<description><![CDATA[It looks like in example#2 code in getMessage() is broken... notify() method call is too early which&#039;ll wake up thread(s) already in m&#039;s waitSet ( which exactly is thread called putMessage() ). notify() should be places at the end of getMessage() method.]]></description>
+		<content:encoded><![CDATA[<p>It looks like in example#2 code in getMessage() is broken&#8230; notify() method call is too early which&#8217;ll wake up thread(s) already in m&#8217;s waitSet ( which exactly is thread called putMessage() ). notify() should be places at the end of getMessage() method.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: TSMX</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-11912</link>
+		<dc:creator><![CDATA[TSMX]]></dc:creator>
+		<pubDate>Thu, 16 Jun 2016 05:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-11912</guid>
+		<description><![CDATA[Can you please provide us an example of a correct Example 1 using Runnable?]]></description>
+		<content:encoded><![CDATA[<p>Can you please provide us an example of a correct Example 1 using Runnable?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ries van Twisk</title>
+		<link>http://www.programcreek.com/2009/02/notify-and-wait-example/#comment-10273</link>
+		<dc:creator><![CDATA[Ries van Twisk]]></dc:creator>
+		<pubDate>Fri, 08 Apr 2016 14:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=240#comment-10273</guid>
+		<description><![CDATA[Yes, you can try this example and once a while it will lock up.]]></description>
+		<content:encoded><![CDATA[<p>Yes, you can try this example and once a while it will lock up.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

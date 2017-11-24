@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Nested Monitor Lockout</title>
+
+    <meta name="description" content="This tutorial explains how a nested monitor lockout can occur, and how nested monitor lockout is different from a traditional deadlock.">
+    <meta name="keywords"    content="Java concurrency nested monitor lockout">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Nested Monitor Lockout">
+    <meta name="twitter:description" content="This tutorial explains how a nested monitor lockout can occur, and how nested monitor lockout is different from a traditional deadlock.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Nested Monitor Lockout"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/nested-monitor-lockout.html"/>
+    <meta property="og:description" content="This tutorial explains how a nested monitor lockout can occur, and how nested monitor lockout is different from a traditional deadlock."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/starvation-and-fairness.html";
+var nextArticleInCategory = "/java-concurrency/slipped-conditions.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 8508;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html"><b>Nested Monitor Lockout</b></a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Nested Monitor Lockout</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#how-nested-monitor-lockout-occurs">How Nested Monitor Lockout Occurs</a></li><li><a href="#example">A More Realistic Example</a></li><li><a href="#vsdeadlock">Nested Monitor Lockout vs. Deadlock</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <a name="how-nested-monitor-lockout-occurs"></a>
+<h2>How Nested Monitor Lockout Occurs</h2>
+<p>
+    Nested monitor lockout is a problem similar to deadlock. A nested monitor lockout occurs
+    like this:
+</p>
+
+<pre class="codeBox">
+Thread 1 synchronizes on A
+Thread 1 synchronizes on B (while synchronized on A)
+Thread 1 decides to wait for a signal from another thread before continuing
+Thread 1 calls B.wait() thereby releasing the lock on B, but not A.
+
+Thread 2 needs to lock both A and B (in that sequence)
+        to send Thread 1 the signal.
+Thread 2 cannot lock A, since Thread 1 still holds the lock on A.
+Thread 2 remain blocked indefinately waiting for Thread1
+        to release the lock on A
+
+Thread 1 remain blocked indefinately waiting for the signal from
+        Thread 2, thereby
+        never releasing the lock on A, that must be released to make
+        it possible for Thread 2 to send the signal to Thread 1, etc.
+</pre>
+
+<p>
+    This may sound like a pretty theoretical situation, but look at the naive <code>Lock</code>
+    implemenation below:
+</p>
+
+<pre class="codeBox">
+//lock implementation with nested monitor lockout problem
+
+public class Lock{
+  protected MonitorObject monitorObject = new MonitorObject();
+  protected boolean isLocked = false;
+
+  public void lock() throws InterruptedException{
+    <b>synchronized(this){</b>
+      while(isLocked){
+        <b>synchronized(this.monitorObject){</b>
+            this.monitorObject.wait();
+        <b>}</b>
+      }
+      isLocked = true;
+    <b>}</b>
+  }
+
+  public void unlock(){
+    <b>synchronized(this){</b>
+      this.isLocked = false;
+      <b>synchronized(this.monitorObject){</b>
+        this.monitorObject.notify();
+      <b>}</b>
+    <b>}</b>
+  }
+}
+</pre>
+
+<p>
+    Notice how the <code>lock()</code> method first synchronizes on "this", then synchronizes
+    on the <code>monitorObject</code> member. If <code>isLocked</code> is false there is no problem. The
+    thread does not call <code>monitorObject.wait()</code>. If <code>isLocked</code> is true however,
+    the thread calling <code>lock()</code> is parked waiting in the <code>monitorObject.wait()</code> call.
+</p>
+
+<p>
+    The problem with this is, that the call to <code>monitorObject.wait()</code> only releases the synchronization
+    monitor on the <code>monitorObject</code> member, and not the synchronization monitor associated with "this".
+    In other words, the thread that was just parked waiting is still holding the synchronization lock on "this".
+</p>
+
+<p> When the thread that locked the <code>Lock</code> in the first place tries to unlock it by calling
+    <code>unlock()</code> it will be blocked trying to enter the <code>synchronized(this)</code> block
+    in the <code>unlock() method</code>. It will remain blocked until the thread waiting in <code>lock()</code>
+    leaves the <code>synchronized(this)</code> block. But the thread waiting in the <code>lock()</code> method
+    will not leave that block until the <code>isLocked</code> is set to false, and a <code>monitorObject.notify()</code>
+    is executed, as it happens in <code>unlock()</code>.
+</p>
+
+<p>
+    Put shortly, the thread waiting in <code>lock()</code> needs an <code>unlock()</code> call to execute
+    successfully for it to exit <code>lock()</code> and the synchronized blocks inside it. But, no thread
+    can actually execute <code>unlock()</code> until the thread waiting in <code>lock()</code> leaves the
+    outer synchronized block.
+</p>
+
+<p>
+    This result is that any thread calling either <code>lock()</code> or <code>unlock()</code> will become
+    blocked indefinately. This is called a nested monitor lockout.
+</p>
+
+<a name="example"></a>
+<h2>A More Realistic Example</h2>
+<p>
+    You may claim that you would never implement a lock like the one shown earlier.
+    That you would not call <code>wait()</code> and <code>notify()</code> on an internal
+    monitor object, but rather on the
+    This is probably true. But there are situations in which designs like the one above
+    may arise. For instance, if you were to implement
+    <a href="starvation-and-fairness.html">fairness</a> in a Lock.
+    When doing so you want each thread to call <code>wait()</code> on each their own
+    queue object, so that you can notify the threads one at a time.
+</p>
+
+<p>
+    Look at this naive implementation of a fair lock:
+</p>
+
+<pre class="codeBox">
+//Fair Lock implementation with nested monitor lockout problem
+
+public class FairLock {
+  private boolean           isLocked       = false;
+  private Thread            lockingThread  = null;
+  private List&lt;QueueObject&gt; waitingThreads =
+            new ArrayList&lt;QueueObject&gt;();
+
+  public void lock() throws InterruptedException{
+    QueueObject queueObject = new QueueObject();
+
+    <b>synchronized(this){</b>
+      waitingThreads.add(queueObject);
+
+      while(isLocked || waitingThreads.get(0) != queueObject){
+
+        <b>synchronized(queueObject){</b>
+          try{
+            queueObject.wait();
+          }catch(InterruptedException e){
+            waitingThreads.remove(queueObject);
+            throw e;
+          }
+        <b>}</b>
+      }
+      waitingThreads.remove(queueObject);
+      isLocked = true;
+      lockingThread = Thread.currentThread();
+    <b>}</b>
+  }
+
+  public <b>synchronized</b> void unlock(){
+    if(this.lockingThread != Thread.currentThread()){
+      throw new IllegalMonitorStateException(
+        "Calling thread has not locked this lock");
+    }
+    isLocked      = false;
+    lockingThread = null;
+    if(waitingThreads.size() > 0){
+      QueueObject queueObject = waitingThread.get(0);
+      <b>synchronized(queueObject){</b>
+        queueObject.notify();
+      <b>}</b>
+    }
+  }
+}
+</pre>
+
+<pre class="codeBox">
+public class QueueObject {}
+</pre>
+
+<p>
+    At first glance this implementation may look fine, but notice how the <code>lock()</code> method calls
+    <code>queueObject.wait();</code> from inside two synchronized blocks. One synchronized on "this", and
+    nested inside that, a block synchronized on the <code>queueObject</code> local variable.
+    When a thread calls <code>queueObject.wait()</code>it releases the lock on the <code>QueueObject</code> instance,
+    but not the lock associated with "this".
+</p>
+
+<p>
+    Notice too, that the <code>unlock()</code> method is declared synchronized which equals a
+    <code>synchronized(this)</code> block. This means, that if a thread is waiting inside <code>lock()</code>
+    the monitor object associated with "this" will be locked by the waiting thread. All threads calling
+    <code>unlock()</code> will remain blocked indefinately, waiting for the waiting thread to release
+    the lock on "this". But this will never happen, since this only happens if a thread succeeds in sending
+    a signal to the waiting thread, and this can only be sent by executing the <code>unlock()</code>
+    method.
+</p>
+
+<p>And so, the FairLock implementation from above could lead to nested monitor lockout.
+    A better implementation of a fair lock is described in the text
+    <a href="starvation-and-fairness.html">Starvation and Fairness</a>.
+</p>
+
+
+
+<a name="vsdeadlock"></a>
+<h2>Nested Monitor Lockout vs. Deadlock</h2>
+<p>
+    The result of nested monitor lockout and deadlock are pretty much the same:
+    The threads involved end up blocked forever waiting for each other.
+</p>
+
+<p>
+    The two situations are not equal though. As explained in the text on <a href="deadlock.html">Deadlock</a>
+    a deadlock occurs when two threads obtain locks in different order. Thread 1 locks A, waits for B. Thread 2
+    has locked B, and now waits for A. As explained in the text on
+    <a href="deadlock-prevention.html">Deadlock Prevention</a> deadlocks can be avoided by always locking
+    the locks in the same order (Lock Ordering). However, a nested monitor lockout occurs exactly by
+    two threads taking the locks <b>in the same order</b>. Thread 1 locks A and B, then releases B and waits
+    for a signal from Thread 2. Thread 2 needs both A and B to send Thread 1 the signal. So, one thread is
+    waiting for a signal, and another for a lock to be released.
+</p>
+
+<p>
+    The difference is summed up here:
+</p>
+
+<pre class="codeBox">
+In deadlock, two threads are waiting for each other to release locks.
+
+In nested monitor lockout, Thread 1 is holding a lock A, and waits
+for a signal from Thread 2. Thread 2 needs the lock A to send the
+signal to Thread 1.
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="slipped-conditions.html">Slipped Conditions</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

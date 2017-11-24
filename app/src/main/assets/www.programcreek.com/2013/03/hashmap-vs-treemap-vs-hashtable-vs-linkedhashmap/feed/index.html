@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: HashMap vs. TreeMap vs. Hashtable vs. LinkedHashMap</title>
+	<atom:link href="http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Bilbo Baggins</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-14693</link>
+		<dc:creator><![CDATA[Bilbo Baggins]]></dc:creator>
+		<pubDate>Fri, 23 Sep 2016 13:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-14693</guid>
+		<description><![CDATA[Your comparable implementation has a bug. It should return this.size - o.size]]></description>
+		<content:encoded><![CDATA[<p>Your comparable implementation has a bug. It should return this.size &#8211; o.size</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tajinder Singh</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-7598</link>
+		<dc:creator><![CDATA[Tajinder Singh]]></dc:creator>
+		<pubDate>Mon, 16 Nov 2015 01:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-7598</guid>
+		<description><![CDATA[great explanation !]]></description>
+		<content:encoded><![CDATA[<p>great explanation !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: axa</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-7443</link>
+		<dc:creator><![CDATA[axa]]></dc:creator>
+		<pubDate>Tue, 29 Sep 2015 13:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-7443</guid>
+		<description><![CDATA[&lt;code&gt; 
+String foo = &quot;bar&quot;;
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+String foo = "bar";<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Brett Ryan</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-7115</link>
+		<dc:creator><![CDATA[Brett Ryan]]></dc:creator>
+		<pubDate>Tue, 30 Jun 2015 23:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-7115</guid>
+		<description><![CDATA[Note that with a TreeMap it is strongly recommended that the compareTo implementation be consistent with equals. If for example the comparator used only compares some members (like size in your case) then two dogs with the same size but different colour would be treated as equal.
+
+This is a common mistake where some will think the Comparator implementation only represents the sort order, but it&#039;s important for equality in this case.
+
+It&#039;s also important that your equals and compareTo implementations are consistent to obey the contract given in the Map interface.
+
+Another point I would like to add is that with all keys for any implementation it&#039;s advised that they are immutable. If mutation should occur after the insertion of a key then the map has been compromised. Making your member variables final will satisfy this contract. It&#039;s permissible that members not deeming equality can be mutable, however it is ill advised unless transient.]]></description>
+		<content:encoded><![CDATA[<p>Note that with a TreeMap it is strongly recommended that the compareTo implementation be consistent with equals. If for example the comparator used only compares some members (like size in your case) then two dogs with the same size but different colour would be treated as equal.</p>
+<p>This is a common mistake where some will think the Comparator implementation only represents the sort order, but it&#8217;s important for equality in this case.</p>
+<p>It&#8217;s also important that your equals and compareTo implementations are consistent to obey the contract given in the Map interface.</p>
+<p>Another point I would like to add is that with all keys for any implementation it&#8217;s advised that they are immutable. If mutation should occur after the insertion of a key then the map has been compromised. Making your member variables final will satisfy this contract. It&#8217;s permissible that members not deeming equality can be mutable, however it is ill advised unless transient.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Martin Carney</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-6283</link>
+		<dc:creator><![CDATA[Martin Carney]]></dc:creator>
+		<pubDate>Wed, 05 Nov 2014 17:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-6283</guid>
+		<description><![CDATA[Your Dog.equals() and Dog.hashCode() methods are CRAP.
+
+The equals method uses == to compare two Strings. If you need to check that two Strings are the same, use String.equals(), not ==. The == operator checks if the two objects have the same memory address, that is, if they are in fact the same object, as opposed to two identical objects. The ONLY reason you example works is because Java only creates one instance of each hardcoded String in the source when the program starts up.
+
+The equals method also does not check to make sure the object being compared to is a Dog object. If a Cat is passed in, you will get an exception for casting a Cat as a Dog.
+
+The hashCode method is not robust in the slightest. Instead of returning the string&#039;s length, which has a high probability of repeating and clusters in the range of 1-10, you should at least do something like &quot;return color.hashCode()&quot; and take advantage of String&#039;s robust hashCode method.
+
+The point of a hashCode method is to generate a reproducible value based on the object&#039;s attributes, such that any two objects which are o1.equals(o2) == true will produce the same hash, but any two objects which are not equal are unlikely to produce the same hash. The hashes should be fairly evenly distributed between Integer.MAX_VALUE and Integer.MIN_VALUE, or at least 0 and Integer.MAX_VALUE. If you don&#039;t know how to generate a good hash algorithm, then just leverage String&#039;s hashCode() function on whatever String or combination of Strings is most likely to be unique between two different objects of that type.]]></description>
+		<content:encoded><![CDATA[<p>Your Dog.equals() and Dog.hashCode() methods are CRAP.</p>
+<p>The equals method uses == to compare two Strings. If you need to check that two Strings are the same, use String.equals(), not ==. The == operator checks if the two objects have the same memory address, that is, if they are in fact the same object, as opposed to two identical objects. The ONLY reason you example works is because Java only creates one instance of each hardcoded String in the source when the program starts up.</p>
+<p>The equals method also does not check to make sure the object being compared to is a Dog object. If a Cat is passed in, you will get an exception for casting a Cat as a Dog.</p>
+<p>The hashCode method is not robust in the slightest. Instead of returning the string&#8217;s length, which has a high probability of repeating and clusters in the range of 1-10, you should at least do something like &#8220;return color.hashCode()&#8221; and take advantage of String&#8217;s robust hashCode method.</p>
+<p>The point of a hashCode method is to generate a reproducible value based on the object&#8217;s attributes, such that any two objects which are o1.equals(o2) == true will produce the same hash, but any two objects which are not equal are unlikely to produce the same hash. The hashes should be fairly evenly distributed between Integer.MAX_VALUE and Integer.MIN_VALUE, or at least 0 and Integer.MAX_VALUE. If you don&#8217;t know how to generate a good hash algorithm, then just leverage String&#8217;s hashCode() function on whatever String or combination of Strings is most likely to be unique between two different objects of that type.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jake Locker</title>
+		<link>http://www.programcreek.com/2013/03/hashmap-vs-treemap-vs-hashtable-vs-linkedhashmap/#comment-6107</link>
+		<dc:creator><![CDATA[Jake Locker]]></dc:creator>
+		<pubDate>Thu, 11 Sep 2014 02:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8153#comment-6107</guid>
+		<description><![CDATA[There is concurrentHashMap but which was added a while back. That being said I believe only one thread at a time can alter a concurrent hash map and it is still not as predictable as HashTable.]]></description>
+		<content:encoded><![CDATA[<p>There is concurrentHashMap but which was added a while back. That being said I believe only one thread at a time can alter a concurrent hash map and it is still not as predictable as HashTable.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

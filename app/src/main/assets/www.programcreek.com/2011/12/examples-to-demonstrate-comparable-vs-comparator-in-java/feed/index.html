@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Comparable vs. Comparator in Java</title>
+	<atom:link href="http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: appu</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-14812</link>
+		<dc:creator><![CDATA[appu]]></dc:creator>
+		<pubDate>Tue, 27 Sep 2016 09:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-14812</guid>
+		<description><![CDATA[TestArraylist.java
+===================================
+package Compare;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import Util.TestUtil;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Binary Search using collections
+ * 
+ * */
+public class TestArraylist {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList ar=new ArrayList();
+		 ar.add(11);
+		ar.add(22);
+		ar.add(2);
+		ar.add(23);
+		ar.add(5);
+		
+		int searchval=23;
+		//  sorting List
+		Collections.sort(ar);
+		
+		for(int arr:ar){
+			System.out.print(&quot;arrrr  &quot;+arr);
+		}
+		
+		// method call
+		int  result=TestUtil.BinarySrchArrayList(ar,searchval);
+		System.out.println(&quot;result outside &quot;+result);
+		
+		if(result&#062;=0){
+			System.out.println(&quot;result  &quot;+result);
+		}
+		else{
+			System.out.println(&quot;result Not exist  &quot;);
+		}
+		
+
+	}
+
+}
+
+
+TestComparableSrch.java
+============================
+package Compare;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import Util.TestUtil;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Binary Search using comparable
+ * 
+ * */
+public class TestComparableSrch {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int searchval=2;
+		EmployeeComp e1= new EmployeeComp(4, &quot;john&quot;, 24);
+		EmployeeComp e2= new EmployeeComp(3, &quot;muir&quot;, 20);
+		EmployeeComp e3= new EmployeeComp(5, &quot;rose&quot;, 21);
+		EmployeeComp e4= new EmployeeComp(1, &quot;victor&quot;, 22);
+		
+		ArrayList arrlist=new ArrayList();
+		arrlist.add(e1);
+		arrlist.add(e2);
+		arrlist.add(e3);
+		arrlist.add(e4);
+		
+		// sorting
+		Collections.sort(arrlist);
+		
+		for(EmployeeComp e:arrlist){
+			System.out.println(&quot;eeee  &quot;+e.getEmpName());
+		}
+		String result=TestUtil.BinaryComparableArrayList(arrlist,searchval);
+		System.out.println(&quot;result  &quot;+result);
+		
+	}
+
+}
+
+TestComparatorSrch.java
+======================================
+package Compare;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import Util.TestUtil;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Binary Search using comparator
+ * 
+ * */
+public class TestComparatorSrch {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String searchval=&quot;muirs&quot;;
+		EmployeeComparator e1= new EmployeeComparator(4, &quot;john&quot;, 24);
+		EmployeeComparator e2= new EmployeeComparator(3, &quot;rose&quot;, 20);
+		EmployeeComparator e3= new EmployeeComparator(5, &quot;muir&quot;, 21);
+		EmployeeComparator e4= new EmployeeComparator(1, &quot;victor&quot;, 22);
+		
+		ArrayList arrlist=new ArrayList();
+		arrlist.add(e1);
+		arrlist.add(e2);
+		arrlist.add(e3);
+		arrlist.add(e4);
+		
+		// sorting
+		Collections.sort(arrlist,new EmployeeComparator());
+		for(EmployeeComparator e:arrlist){
+			System.out.println(&quot;eeee  &quot;+e.getEmpName());
+		}
+		String result=TestUtil.BinaryComparatorArrayList(arrlist,searchval);
+		System.out.println(&quot;result  &quot;+result);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>TestArraylist.java<br />
+===================================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Arrays;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using collections<br />
+ *<br />
+ * */<br />
+public class TestArraylist {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub<br />
+		ArrayList ar=new ArrayList();<br />
+		 ar.add(11);<br />
+		ar.add(22);<br />
+		ar.add(2);<br />
+		ar.add(23);<br />
+		ar.add(5);</p>
+<p>		int searchval=23;<br />
+		//  sorting List<br />
+		Collections.sort(ar);</p>
+<p>		for(int arr:ar){<br />
+			System.out.print(&#8220;arrrr  &#8220;+arr);<br />
+		}</p>
+<p>		// method call<br />
+		int  result=TestUtil.BinarySrchArrayList(ar,searchval);<br />
+		System.out.println(&#8220;result outside &#8220;+result);</p>
+<p>		if(result&gt;=0){<br />
+			System.out.println(&#8220;result  &#8220;+result);<br />
+		}<br />
+		else{<br />
+			System.out.println(&#8220;result Not exist  &#8220;);<br />
+		}</p>
+<p>	}</p>
+<p>}</p>
+<p>TestComparableSrch.java<br />
+============================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using comparable<br />
+ *<br />
+ * */<br />
+public class TestComparableSrch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		int searchval=2;<br />
+		EmployeeComp e1= new EmployeeComp(4, &#8220;john&#8221;, 24);<br />
+		EmployeeComp e2= new EmployeeComp(3, &#8220;muir&#8221;, 20);<br />
+		EmployeeComp e3= new EmployeeComp(5, &#8220;rose&#8221;, 21);<br />
+		EmployeeComp e4= new EmployeeComp(1, &#8220;victor&#8221;, 22);</p>
+<p>		ArrayList arrlist=new ArrayList();<br />
+		arrlist.add(e1);<br />
+		arrlist.add(e2);<br />
+		arrlist.add(e3);<br />
+		arrlist.add(e4);</p>
+<p>		// sorting<br />
+		Collections.sort(arrlist);</p>
+<p>		for(EmployeeComp e:arrlist){<br />
+			System.out.println(&#8220;eeee  &#8220;+e.getEmpName());<br />
+		}<br />
+		String result=TestUtil.BinaryComparableArrayList(arrlist,searchval);<br />
+		System.out.println(&#8220;result  &#8220;+result);</p>
+<p>	}</p>
+<p>}</p>
+<p>TestComparatorSrch.java<br />
+======================================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using comparator<br />
+ *<br />
+ * */<br />
+public class TestComparatorSrch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		String searchval=&#8221;muirs&#8221;;<br />
+		EmployeeComparator e1= new EmployeeComparator(4, &#8220;john&#8221;, 24);<br />
+		EmployeeComparator e2= new EmployeeComparator(3, &#8220;rose&#8221;, 20);<br />
+		EmployeeComparator e3= new EmployeeComparator(5, &#8220;muir&#8221;, 21);<br />
+		EmployeeComparator e4= new EmployeeComparator(1, &#8220;victor&#8221;, 22);</p>
+<p>		ArrayList arrlist=new ArrayList();<br />
+		arrlist.add(e1);<br />
+		arrlist.add(e2);<br />
+		arrlist.add(e3);<br />
+		arrlist.add(e4);</p>
+<p>		// sorting<br />
+		Collections.sort(arrlist,new EmployeeComparator());<br />
+		for(EmployeeComparator e:arrlist){<br />
+			System.out.println(&#8220;eeee  &#8220;+e.getEmpName());<br />
+		}<br />
+		String result=TestUtil.BinaryComparatorArrayList(arrlist,searchval);<br />
+		System.out.println(&#8220;result  &#8220;+result);</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: appu</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-14811</link>
+		<dc:creator><![CDATA[appu]]></dc:creator>
+		<pubDate>Tue, 27 Sep 2016 09:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-14811</guid>
+		<description><![CDATA[TestUtil.java
+====================
+package Util;
+import java.util.ArrayList;
+import Compare.EmployeeComp;
+import Compare.EmployeeComparator;
+//Util method for the business logic
+public class TestUtil {
+	static int RecordNotExist=-1;
+	public static int BinarySrchArray(int[]arr,int searchval){
+//System.out.println(&quot;searchval&quot;+searchval);
+		if(arr!=null){
+			//System.out.println(&quot;arr.length&quot;+arr.length);
+		int low=0;
+		int high=arr.length-1;
+		int mid=(low+high)/2;
+		int out;
+		
+		while(low&#060;=high){
+		if(arr[mid]==searchval){
+			//System.out.println(&#034;hi  &#034;+searchval);
+			out=arr[mid];
+			return mid;
+		}
+		else if(arr[mid]&#060;searchval){
+			
+			low=mid+1;
+		}
+		else{
+			high=mid-1;
+		}
+		mid=(low+high)/2;
+			
+		}
+		
+		}
+		
+		return RecordNotExist;
+		
+	
+	}
+	
+
+	//arraylist
+	public static int BinarySrchArrayList(ArrayList arr,int searchval){
+//System.out.println(&quot;searchval&quot;+searchval);
+		if(arr!=null){
+			//System.out.println(&quot;arr.length&quot;+arr.length);
+		int low=0;
+		int high=arr.size()-1;
+		int mid=(low+high)/2;
+		int out;
+		
+		while(low&#060;=high){
+		if(arr.get(mid)==searchval){
+			//System.out.println(&#034;hi  &#034;+searchval);
+			out=arr.get(mid);
+			return mid;
+		}
+		else if(arr.get(mid)&#060;searchval){
+			
+			low=mid+1;
+		}
+		else{
+			high=mid-1;
+		}
+		mid=(low+high)/2;
+			
+		}
+		
+		}
+		
+		return RecordNotExist;
+		
+	
+	}
+	
+	// comparable
+	
+	public static String BinaryComparableArrayList(ArrayList arr,int searchval){
+		//System.out.println(&quot;searchval&quot;+searchval);
+				if(arr!=null){
+					//System.out.println(&quot;arr.length&quot;+arr.length);
+				int low=0;
+				int high=arr.size()-1;
+				int mid=(low+high)/2;
+				int out;
+				
+				while(low&#060;=high){
+				if(arr.get(mid).getEmpId()==searchval){
+					//System.out.println(&#034;hi  &#034;+searchval);
+					out=arr.get(mid).getEmpId();
+					return arr.get(mid).getEmpName();
+				}
+				else if(arr.get(mid).getEmpId()&#060;searchval){
+					
+					low=mid+1;
+				}
+				else{
+					high=mid-1;
+				}
+				mid=(low+high)/2;
+					
+				}
+				
+				}
+				
+				return &#034;RecordNotExist&#034;;
+				
+			
+			}
+	//Comparator
+	
+	public static String BinaryComparatorArrayList(ArrayList arr,String searchval){
+		//System.out.println(&quot;searchval&quot;+searchval);
+				if(arr!=null){
+					//System.out.println(&quot;arr.length&quot;+arr.length);
+				int low=0;
+				int high=arr.size()-1;
+				int mid=(low+high)/2;
+				int out;
+				
+				while(low&#060;=high){
+				if(arr.get(mid).getEmpName().equals(searchval)){
+					//System.out.println(&#034;hi  &#034;+searchval);
+					out=arr.get(mid).getEmpId();
+					System.out.println(&#034;hi  &#034;+out);
+					return arr.get(mid).getEmpName();
+				}
+				else if(arr.get(mid).getEmpName().compareTo(searchval)&#060;0){
+					
+					low=mid+1;
+				}
+				else{
+					high=mid-1;
+				}
+				mid=(low+high)/2;
+					
+				}
+				
+				}
+				
+				return &#034;NameNotExist&#034;;
+				
+			
+			}
+}
+
+
+EmployeeComp.java
+============================
+package Compare;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Implementation using comparable interface for sorting employee objects
+ * 
+ * */
+public class EmployeeComp implements Comparable {
+	
+	private int empId;
+	private String empName;
+	private int age;
+	
+	public EmployeeComp(int id,String name,int age){
+		this.empId=id;
+		this.empName=name;
+		this.age=age;
+	}
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public int compareTo(EmployeeComp o) {
+		// TODO Auto-generated method stub
+		return this.empId-o.empId;
+	}
+	
+
+}
+
+
+EmployeeComparator.java
+==============================
+package Compare;
+
+import java.util.Comparator;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Implementation using comparator interface for sorting employee objects
+ * 
+ * */
+public class EmployeeComparator implements Comparator {
+	
+	private int empId;
+	private String empName;
+	private int age;
+	
+	public EmployeeComparator(){
+		
+	}
+	
+public EmployeeComparator(int id,String name,int age){
+	this.empId=id;
+	this.empName=name;
+	this.age=age;
+}
+
+
+public int getEmpId() {
+	return empId;
+}
+public void setEmpId(int empId) {
+	this.empId = empId;
+}
+public String getEmpName() {
+	return empName;
+}
+public void setEmpName(String empName) {
+	this.empName = empName;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+@Override
+public int compare(EmployeeComparator object1, EmployeeComparator object2) {
+	// TODO Auto-generated method stub
+	return object1.getEmpName().compareTo(object2.getEmpName());
+}
+
+}
+
+TestBinaryArraySearch:
+================================
+package Compare;
+
+import java.util.Arrays;
+
+import Util.TestUtil;
+/*
+ * author:
+ * date:
+ * purpose:
+ * Binary search using Arrays
+ * 
+ * */
+public class TestBinaryArraySearch {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int [] arr={1,22,6,3,9};
+		int searchval=1;
+		//  sorting array
+		Arrays.sort(arr);
+		for(int i=0;i=0){
+			System.out.println(&quot;result  &quot;+result);
+		}
+		else{
+			System.out.println(&quot;result Not exist  &quot;);
+		}
+		
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>TestUtil.java<br />
+====================<br />
+package Util;<br />
+import java.util.ArrayList;<br />
+import Compare.EmployeeComp;<br />
+import Compare.EmployeeComparator;<br />
+//Util method for the business logic<br />
+public class TestUtil {<br />
+	static int RecordNotExist=-1;<br />
+	public static int BinarySrchArray(int[]arr,int searchval){<br />
+//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+		if(arr!=null){<br />
+			//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+		int low=0;<br />
+		int high=arr.length-1;<br />
+		int mid=(low+high)/2;<br />
+		int out;</p>
+<p>		while(low&lt;=high){<br />
+		if(arr[mid]==searchval){<br />
+			//System.out.println(&quot;hi  &quot;+searchval);<br />
+			out=arr[mid];<br />
+			return mid;<br />
+		}<br />
+		else if(arr[mid]&lt;searchval){</p>
+<p>			low=mid+1;<br />
+		}<br />
+		else{<br />
+			high=mid-1;<br />
+		}<br />
+		mid=(low+high)/2;</p>
+<p>		}</p>
+<p>		}</p>
+<p>		return RecordNotExist;</p>
+<p>	}</p>
+<p>	//arraylist<br />
+	public static int BinarySrchArrayList(ArrayList arr,int searchval){<br />
+//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+		if(arr!=null){<br />
+			//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+		int low=0;<br />
+		int high=arr.size()-1;<br />
+		int mid=(low+high)/2;<br />
+		int out;</p>
+<p>		while(low&lt;=high){<br />
+		if(arr.get(mid)==searchval){<br />
+			//System.out.println(&quot;hi  &quot;+searchval);<br />
+			out=arr.get(mid);<br />
+			return mid;<br />
+		}<br />
+		else if(arr.get(mid)&lt;searchval){</p>
+<p>			low=mid+1;<br />
+		}<br />
+		else{<br />
+			high=mid-1;<br />
+		}<br />
+		mid=(low+high)/2;</p>
+<p>		}</p>
+<p>		}</p>
+<p>		return RecordNotExist;</p>
+<p>	}</p>
+<p>	// comparable</p>
+<p>	public static String BinaryComparableArrayList(ArrayList arr,int searchval){<br />
+		//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+				if(arr!=null){<br />
+					//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+				int low=0;<br />
+				int high=arr.size()-1;<br />
+				int mid=(low+high)/2;<br />
+				int out;</p>
+<p>				while(low&lt;=high){<br />
+				if(arr.get(mid).getEmpId()==searchval){<br />
+					//System.out.println(&quot;hi  &quot;+searchval);<br />
+					out=arr.get(mid).getEmpId();<br />
+					return arr.get(mid).getEmpName();<br />
+				}<br />
+				else if(arr.get(mid).getEmpId()&lt;searchval){</p>
+<p>					low=mid+1;<br />
+				}<br />
+				else{<br />
+					high=mid-1;<br />
+				}<br />
+				mid=(low+high)/2;</p>
+<p>				}</p>
+<p>				}</p>
+<p>				return &quot;RecordNotExist&quot;;</p>
+<p>			}<br />
+	//Comparator</p>
+<p>	public static String BinaryComparatorArrayList(ArrayList arr,String searchval){<br />
+		//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+				if(arr!=null){<br />
+					//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+				int low=0;<br />
+				int high=arr.size()-1;<br />
+				int mid=(low+high)/2;<br />
+				int out;</p>
+<p>				while(low&lt;=high){<br />
+				if(arr.get(mid).getEmpName().equals(searchval)){<br />
+					//System.out.println(&quot;hi  &quot;+searchval);<br />
+					out=arr.get(mid).getEmpId();<br />
+					System.out.println(&quot;hi  &quot;+out);<br />
+					return arr.get(mid).getEmpName();<br />
+				}<br />
+				else if(arr.get(mid).getEmpName().compareTo(searchval)&lt;0){</p>
+<p>					low=mid+1;<br />
+				}<br />
+				else{<br />
+					high=mid-1;<br />
+				}<br />
+				mid=(low+high)/2;</p>
+<p>				}</p>
+<p>				}</p>
+<p>				return &quot;NameNotExist&quot;;</p>
+<p>			}<br />
+}</p>
+<p>EmployeeComp.java<br />
+============================<br />
+package Compare;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Implementation using comparable interface for sorting employee objects<br />
+ *<br />
+ * */<br />
+public class EmployeeComp implements Comparable {</p>
+<p>	private int empId;<br />
+	private String empName;<br />
+	private int age;</p>
+<p>	public EmployeeComp(int id,String name,int age){<br />
+		this.empId=id;<br />
+		this.empName=name;<br />
+		this.age=age;<br />
+	}</p>
+<p>	public int getEmpId() {<br />
+		return empId;<br />
+	}</p>
+<p>	public void setEmpId(int empId) {<br />
+		this.empId = empId;<br />
+	}</p>
+<p>	public String getEmpName() {<br />
+		return empName;<br />
+	}</p>
+<p>	public void setEmpName(String empName) {<br />
+		this.empName = empName;<br />
+	}</p>
+<p>	public int getAge() {<br />
+		return age;<br />
+	}</p>
+<p>	public void setAge(int age) {<br />
+		this.age = age;<br />
+	}</p>
+<p>	@Override<br />
+	public int compareTo(EmployeeComp o) {<br />
+		// TODO Auto-generated method stub<br />
+		return this.empId-o.empId;<br />
+	}</p>
+<p>}</p>
+<p>EmployeeComparator.java<br />
+==============================<br />
+package Compare;</p>
+<p>import java.util.Comparator;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Implementation using comparator interface for sorting employee objects<br />
+ *<br />
+ * */<br />
+public class EmployeeComparator implements Comparator {</p>
+<p>	private int empId;<br />
+	private String empName;<br />
+	private int age;</p>
+<p>	public EmployeeComparator(){</p>
+<p>	}</p>
+<p>public EmployeeComparator(int id,String name,int age){<br />
+	this.empId=id;<br />
+	this.empName=name;<br />
+	this.age=age;<br />
+}</p>
+<p>public int getEmpId() {<br />
+	return empId;<br />
+}<br />
+public void setEmpId(int empId) {<br />
+	this.empId = empId;<br />
+}<br />
+public String getEmpName() {<br />
+	return empName;<br />
+}<br />
+public void setEmpName(String empName) {<br />
+	this.empName = empName;<br />
+}<br />
+public int getAge() {<br />
+	return age;<br />
+}<br />
+public void setAge(int age) {<br />
+	this.age = age;<br />
+}<br />
+@Override<br />
+public int compare(EmployeeComparator object1, EmployeeComparator object2) {<br />
+	// TODO Auto-generated method stub<br />
+	return object1.getEmpName().compareTo(object2.getEmpName());<br />
+}</p>
+<p>}</p>
+<p>TestBinaryArraySearch:<br />
+================================<br />
+package Compare;</p>
+<p>import java.util.Arrays;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary search using Arrays<br />
+ *<br />
+ * */<br />
+public class TestBinaryArraySearch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		int [] arr={1,22,6,3,9};<br />
+		int searchval=1;<br />
+		//  sorting array<br />
+		Arrays.sort(arr);<br />
+		for(int i=0;i=0){<br />
+			System.out.println(&#8220;result  &#8220;+result);<br />
+		}<br />
+		else{<br />
+			System.out.println(&#8220;result Not exist  &#8220;);<br />
+		}</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: appu</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-14808</link>
+		<dc:creator><![CDATA[appu]]></dc:creator>
+		<pubDate>Tue, 27 Sep 2016 07:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-14808</guid>
+		<description><![CDATA[thank for the detailed explanation,,i was able to get the following]]></description>
+		<content:encoded><![CDATA[<p>thank for the detailed explanation,,i was able to get the following</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yishagerew lulie</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-14706</link>
+		<dc:creator><![CDATA[Yishagerew lulie]]></dc:creator>
+		<pubDate>Fri, 23 Sep 2016 19:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-14706</guid>
+		<description><![CDATA[As approach #3, we can implement the comparator as an anonymous class for the treemap. Its more reasonable if the only place we will use the comparator is one time only.
+TreeSet d = new TreeSet(new Comparator(){
+        @Override
+	public int compare(Dog d1, Dog d2) {
+		return d1.size - d2.size;
+	}
+});]]></description>
+		<content:encoded><![CDATA[<p>As approach #3, we can implement the comparator as an anonymous class for the treemap. Its more reasonable if the only place we will use the comparator is one time only.<br />
+TreeSet d = new TreeSet(new Comparator(){<br />
+        @Override<br />
+	public int compare(Dog d1, Dog d2) {<br />
+		return d1.size &#8211; d2.size;<br />
+	}<br />
+});</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venu Sabbani</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-10573</link>
+		<dc:creator><![CDATA[Venu Sabbani]]></dc:creator>
+		<pubDate>Thu, 21 Apr 2016 11:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-10573</guid>
+		<description><![CDATA[we can add comparator logic with ananymous method way .. 
+
+package com.venu.comparator;
+
+import java.util.*;  
+
+import java.io.*;  
+
+  
+
+class Simple{  
+
+public static void main(String args[]){  
+
+  
+
+ArrayList al=new ArrayList();  
+
+al.add(new Student(101,&quot;Vijay&quot;,23));  
+
+al.add(new Student(106,&quot;Ajay&quot;,27));  
+
+al.add(new Student(105,&quot;Jai&quot;,21));  
+
+  
+
+System.out.println(&quot;Sorting by Name...&quot;);  
+
+ 
+Collections.sort(al,new Comparator() {
+
+	@Override
+
+	public int compare(Student o1, Student o2) {
+
+		// TODO Auto-generated method stub
+
+		
+
+		return o1.name.compareTo(o2.name);
+
+		
+
+	}
+
+});
+
+Iterator abs = al.iterator();
+
+while(abs.hasNext()){
+
+Student x = 	(Student) abs.next();
+
+System.out.println(&quot;the values &quot; + x.age + &quot;the names&quot; + x.name + &quot;the roll no&quot; + x.rollno);
+
+}
+
+Collections.sort(al,new Comparator() {
+
+	@Override
+
+	public int compare(Student o1, Student o2) {
+
+		// TODO Auto-generated method stub
+
+		if(o1.age == o2.age)
+
+		return 0;
+
+		else if(o1.age &#062;o2.age)
+
+		return 1;
+
+		else 
+
+		return -1;
+
+	
+
+		
+
+	}
+
+});
+
+Iterator agecmp = al.iterator();
+
+while(agecmp.hasNext()){
+
+Student x = 	(Student) agecmp.next();
+
+System.out.println(x.rollno+&quot; &quot;+x.name+&quot; &quot;+x.age);
+
+}
+
+}  
+
+}
+
+
+//POJO Class 
+
+package com.venu.comparator;
+class Student{  
+int rollno; 
+String name;  
+int age; 
+
+
+public int getRollno() {
+	return rollno;
+}
+
+public void setRollno(int rollno) {
+	this.rollno = rollno;
+}
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public int getAge() {
+	return age;
+}
+
+public void setAge(int age) {
+	this.age = age;
+}
+
+
+Student(int rollno,String name,int age){  
+this.rollno=rollno;  
+this.name=name;  
+this.age=age;  
+}  
+
+
+}  
+]]></description>
+		<content:encoded><![CDATA[<p>we can add comparator logic with ananymous method way .. </p>
+<p>package com.venu.comparator;</p>
+<p>import java.util.*;  </p>
+<p>import java.io.*;  </p>
+<p>class Simple{  </p>
+<p>public static void main(String args[]){  </p>
+<p>ArrayList al=new ArrayList();  </p>
+<p>al.add(new Student(101,&#8221;Vijay&#8221;,23));  </p>
+<p>al.add(new Student(106,&#8221;Ajay&#8221;,27));  </p>
+<p>al.add(new Student(105,&#8221;Jai&#8221;,21));  </p>
+<p>System.out.println(&#8220;Sorting by Name&#8230;&#8221;);  </p>
+<p>Collections.sort(al,new Comparator() {</p>
+<p>	@Override</p>
+<p>	public int compare(Student o1, Student o2) {</p>
+<p>		// TODO Auto-generated method stub</p>
+<p>		return o1.name.compareTo(o2.name);</p>
+<p>	}</p>
+<p>});</p>
+<p>Iterator abs = al.iterator();</p>
+<p>while(abs.hasNext()){</p>
+<p>Student x = 	(Student) abs.next();</p>
+<p>System.out.println(&#8220;the values &#8221; + x.age + &#8220;the names&#8221; + x.name + &#8220;the roll no&#8221; + x.rollno);</p>
+<p>}</p>
+<p>Collections.sort(al,new Comparator() {</p>
+<p>	@Override</p>
+<p>	public int compare(Student o1, Student o2) {</p>
+<p>		// TODO Auto-generated method stub</p>
+<p>		if(o1.age == o2.age)</p>
+<p>		return 0;</p>
+<p>		else if(o1.age &gt;o2.age)</p>
+<p>		return 1;</p>
+<p>		else </p>
+<p>		return -1;</p>
+<p>	}</p>
+<p>});</p>
+<p>Iterator agecmp = al.iterator();</p>
+<p>while(agecmp.hasNext()){</p>
+<p>Student x = 	(Student) agecmp.next();</p>
+<p>System.out.println(x.rollno+&#8221; &#8220;+x.name+&#8221; &#8220;+x.age);</p>
+<p>}</p>
+<p>}  </p>
+<p>}</p>
+<p>//POJO Class </p>
+<p>package com.venu.comparator;<br />
+class Student{<br />
+int rollno;<br />
+String name;<br />
+int age; </p>
+<p>public int getRollno() {<br />
+	return rollno;<br />
+}</p>
+<p>public void setRollno(int rollno) {<br />
+	this.rollno = rollno;<br />
+}</p>
+<p>public String getName() {<br />
+	return name;<br />
+}</p>
+<p>public void setName(String name) {<br />
+	this.name = name;<br />
+}</p>
+<p>public int getAge() {<br />
+	return age;<br />
+}</p>
+<p>public void setAge(int age) {<br />
+	this.age = age;<br />
+}</p>
+<p>Student(int rollno,String name,int age){<br />
+this.rollno=rollno;<br />
+this.name=name;<br />
+this.age=age;<br />
+}  </p>
+<p>}  </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: infoj</title>
+		<link>http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/#comment-7578</link>
+		<dc:creator><![CDATA[infoj]]></dc:creator>
+		<pubDate>Mon, 09 Nov 2015 16:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=5378#comment-7578</guid>
+		<description><![CDATA[Comparable defines the natural ordering for the class objects....If we need any other ordering then we have to define comparator. Since comparator is not tied to a class so we can have several comparators depicting different sort (based on the fields) sequences for the same class... 
+
+See a post about differences here - http://netjs.blogspot.com/2015/10/difference-between-comparable-and-comparator-java.html]]></description>
+		<content:encoded><![CDATA[<p>Comparable defines the natural ordering for the class objects&#8230;.If we need any other ordering then we have to define comparator. Since comparator is not tied to a class so we can have several comparators depicting different sort (based on the fields) sequences for the same class&#8230; </p>
+<p>See a post about differences here &#8211; <a href="http://netjs.blogspot.com/2015/10/difference-between-comparable-and-comparator-java.html" rel="nofollow">http://netjs.blogspot.com/2015/10/difference-between-comparable-and-comparator-java.html</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,2537 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example org.apache.commons.lang3.ArrayUtils</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for org.apache.commons.lang3.ArrayUtils. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, org.apache.commons.lang3.ArrayUtils" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5621 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=com.google.common.collect.Lists.php.html">com.google.common.collect.Lists</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Assert.php.html">org.junit.Assert</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Test.php.html">org.junit.Test</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.lang.reflect.Field.php.html">java.lang.reflect.Field</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.lang.reflect.Method.php.html">java.lang.reflect.Method</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.nio.ByteBuffer.php.html">java.nio.ByteBuffer</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.lang.reflect.InvocationTargetException.php.html">java.lang.reflect.InvocationTargetException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.Date.php.html">java.util.Date</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStream.php.html">java.io.InputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.apache.commons.lang3.StringUtils.php.html">org.apache.commons.lang3.StringUtils</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=contains.php.html">
+                                    contains                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=isEmpty.php.html">
+                                    isEmpty                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=isNotEmpty.php.html">
+                                    isNotEmpty                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=add.php.html">
+                                    add                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=clone.php.html">
+                                    clone                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=addAll.php.html">
+                                    addAll                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=subarray.php.html">
+                                    subarray                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=indexOf.php.html">
+                                    indexOf                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=EMPTY_OBJECT_ARRAY.php.html">
+                                    EMPTY_OBJECT_ARRAY                                </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=EMPTY_STRING_ARRAY.php.html">
+                                    EMPTY_STRING_ARRAY                                </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=toPrimitive.php.html">
+                                    toPrimitive                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=toObject.php.html">
+                                    toObject                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=remove.php.html">
+                                    remove                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=reverse.php.html">
+                                    reverse                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=toString.php.html">
+                                    toString                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=getLength.php.html">
+                                    getLength                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=nullToEmpty.php.html">
+                                    nullToEmpty                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=EMPTY_CLASS_ARRAY.php.html">
+                                    EMPTY_CLASS_ARRAY                                </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=removeElement.php.html">
+                                    removeElement                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.lang3.ArrayUtils&method=toArray.php.html">
+                                    toArray                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for org.apache.commons.lang3.ArrayUtils</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">org.apache.commons.lang3.ArrayUtils</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/ArrayUtils.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="org.apache.commons.lang3.ArrayUtils"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">dynunit</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">AtgDustCase.java</span>
+								<a href="index-source_dir=dynunit-master_src_main_java_atg_tools_dynunit_test_AtgDustCase.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="325576votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="325576==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="325576==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Every *.properties file copied using this method will have it's scope (if one is available) set to global.
+ *
+ * @param sourceDirectories
+ *         One or more directories containing needed configuration files.
+ * @param destinationDirectory
+ *         where to copy the above files to. This will also be the
+ *         configuration location.
+ * @param excludedDirectories
+ *         One or more directories not to include during the copy
+ *         process. Use this one to speeds up the test cycle
+ *         considerably. You can also call it with an empty
+ *         <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="d6ad96babfb8bd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> String[]} or &lt;code&gt;null&lt;/code&gt; if nothing should be
+ *         excluded
+ *
+ * @throws IOException
+ *         Whenever some file related error's occur.
+ */
+protected final void copyConfigurationFiles(@NotNull final String[] sourceDirectories,
+                                            @NotNull final String destinationDirectory,
+                                            @Nullable final String... excludedDirectories)
+        throws IOException {
+    logger.entry(sourceDirectories, destinationDirectory, excludedDirectories);
+    setConfigurationLocation(destinationDirectory);
+
+    logger.info(&quot;Copying configurating files and forcing global scope on all configs.&quot;);
+    preCopyingOfConfigurationFiles(sourceDirectories, excludedDirectories);
+    for (final String sourceDirectory : sourceDirectories) {
+        FileUtils.copyDirectory(new File(sourceDirectory), new File(destinationDirectory), new FileFilter() {
+            @Override
+            public boolean accept(final File file) {
+                return ArrayUtils.contains(excludedDirectories, file.getName());
+            }
+        });
+    }
+    forceGlobalScopeOnAllConfigs(destinationDirectory);
+
+    if (FileUtil.isDirty()) {
+        FileUtil.serialize(
+                GLOBAL_FORCE_SER, FileUtil.getConfigFilesTimestamps()
+        );
+    }
+    logger.exit();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">rave</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SynchronizingAspect.java</span>
+								<a href="index-source_dir=rave-master_rave-components_rave-commons_src_main_java_org_apache_rave_synchronization_SynchronizingAspect.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="261416votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="261416==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="261416==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private EvaluationContext getEvaluationContext(Class&lt;?&gt; targetClass, Method method, Object[] args) {
+    EvaluationContext context = new StandardEvaluationContext();
+    if (ArrayUtils.isEmpty(args)) {
+        return context;
+    }
+
+    Method targetMethod = getTargetMethod(targetClass, method);
+    for (int i = 0; i &lt; args.length; i++) {
+        context.setVariable(&quot;p&quot; + i, args[i]);
+    }
+
+    String[] parameterNames = paramNameDiscoverer.getParameterNames(targetMethod);
+    if (parameterNames != null) {
+        for (int i = 0; i &lt; parameterNames.length; i++) {
+            context.setVariable(parameterNames[i], args[i]);
+        }
+    }
+
+    return context;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">eGov</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FileStoreUtils.java</span>
+								<a href="index-source_dir=eGov-master_egov_egov-egi_src_main_java_org_egov_infra_utils_FileStoreUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="271555votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="271555==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="271555==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public Set&lt;FileStoreMapper&gt; addToFileStore(final MultipartFile[] files, final String moduleName) {
+    if (ArrayUtils.isNotEmpty(files))
+        return Arrays
+                .asList(files)
+                .stream()
+                .filter(file -&gt; !file.isEmpty())
+                .map(file -&gt; {
+                    try {
+                        return fileStoreService.store(file.getInputStream(), file.getOriginalFilename(),
+                                file.getContentType(), moduleName);
+                    } catch (final Exception e) {
+                        throw new ApplicationRuntimeException(&quot;Error occurred while getting inputstream&quot;, e);
+                    }
+                }).collect(Collectors.toSet());
+    else
+        return null;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Magiology_1.7.10</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">InfoFile.java</span>
+								<a href="index-source_dir=Magiology_1.7.10-master_src_main_java_com_magiology_clientdata_InfoFile.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="216723votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="216723==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="216723==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public void loadValue(){
+	boolean isOkForLoading=false;
+	while(isOkForLoading)try{if(!FileContent[lineId].contains(&quot; &quot;+(lineId-4)+&quot;-&gt;&quot;))save();
+	}catch(ArrayIndexOutOfBoundsException e){FileContent=ArrayUtils.add(FileContent, &quot;&quot;);}
+	string=load();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">streamline</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">StrTokenizer.java</span>
+								<a href="index-source_dir=streamline-master_org.juxtapose.apache.commons_src_org_apache_commons_lang3_text_StrTokenizer.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="916525votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="916525==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="916525==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Reset this tokenizer, giving it a new input string to parse.
+ * In this manner you can re-use a tokenizer with the same settings
+ * on multiple input lines.
+ *
+ * @param input  the new character array to tokenize, not cloned, null sets no text to parse
+ * @return this, to enable chaining
+ */
+public StrTokenizer reset(char[] input) {
+    reset();
+    this.chars = ArrayUtils.clone(input);
+    return this;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Eemory</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">StringUtil.java</span>
+								<a href="index-source_dir=Eemory-master_com.prairie.eemory_src_com_prairie_eemory_util_StringUtil.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="70781votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="70781==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="70781==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static String[] splitByMultipleSeparatorsPreserveAllTokens(final String str, final String[] separators) {
+    String[] transition = ArrayUtils.EMPTY_STRING_ARRAY;
+    String[] splits = { str };
+    for (String sep : separators) {
+        for (String part : splits) {
+            String[] r = StringUtils.isEmpty(part) ? ArrayUtils.toArray(part) : StringUtils.splitByWholeSeparatorPreserveAllTokens(part, sep);
+            transition = ArrayUtils.addAll(transition, r);
+        }
+        splits = transition;
+        transition = ArrayUtils.EMPTY_STRING_ARRAY;
+    }
+    return splits;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">civilizer</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MainController.java</span>
+								<a href="index-source_dir=civilizer-master_src_main_java_com_civilizer_web_controller_MainController.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="410626votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="410626==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="410626==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void trashFragments(FragmentSelectionBean fsb, String unselected) {
+    final String[] tmp = StringUtils.split(unselected);
+    final long[] excIds = new long[tmp.length]; // ids to be excluded
+    for (int i=0; i&lt;tmp.length; ++i) {
+           excIds[i] = Integer.parseInt(tmp[i]);
+       }
+    final List&lt;Long&gt; ids = new ArrayList&lt;&gt;();
+    for (Long id : fsb.getFragmentIds()) {
+        if (ArrayUtils.indexOf(excIds, id) &gt;= 0)
+            continue;
+           ids.add(id);
+       }
+    trashFragments(ids);
+    fsb.clear();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">streamline</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ConstructorUtils.java</span>
+								<a href="index-source_dir=streamline-master_org.juxtapose.apache.commons_src_org_apache_commons_lang3_reflect_ConstructorUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="916488votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="916488==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="916488==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * &lt;p&gt;Returns a new instance of the specified class inferring the right constructor
+ * from the types of the arguments.&lt;/p&gt;
+ * 
+ * &lt;p&gt;This locates and calls a constructor.
+ * The constructor signature must match the argument types by assignment compatibility.&lt;/p&gt;
+ *
+ * @param &lt;T&gt; the type to be constructed
+ * @param cls  the class to be constructed, not null
+ * @param args  the array of arguments, null treated as empty
+ * @return new instance of &lt;code&gt;cls&lt;/code&gt;, not null
+ *
+ * @throws NoSuchMethodException if a matching constructor cannot be found
+ * @throws IllegalAccessException if invocation is not permitted by security
+ * @throws InvocationTargetException if an error occurs on invocation
+ * @throws InstantiationException if an error occurs on instantiation
+ * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
+ */
+public static &lt;T&gt; T invokeConstructor(Class&lt;T&gt; cls, Object... args)
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+        InstantiationException {
+    if (args == null) {
+        args = ArrayUtils.EMPTY_OBJECT_ARRAY;
+    }
+    Class&lt;?&gt; parameterTypes[] = new Class[args.length];
+    for (int i = 0; i &lt; args.length; i++) {
+        parameterTypes[i] = args[i].getClass();
+    }
+    return invokeConstructor(cls, args, parameterTypes);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">EiraIRC</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Utils.java</span>
+								<a href="index-source_dir=EiraIRC-master_src_main_java_net_blay09_mods_eirairc_util_Utils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="53848votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="53848==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="53848==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static int[] extractPorts(String url, int defaultPort) {
+    int colonIdx = url.indexOf(':');
+    int lastColonIdx = url.indexOf(':');
+    boolean isIPV6 = colonIdx != lastColonIdx;
+    int portIdx = lastColonIdx;
+    if (isIPV6) {
+        int endIdx = url.lastIndexOf(']');
+        if (endIdx == -1) {
+            portIdx = -1;
+        }
+    }
+    if (portIdx != -1) {
+        try {
+            String[] portRanges = url.substring(portIdx + 1).split(&quot;\\+&quot;);
+            List&lt;Integer&gt; portList = new ArrayList&lt;&gt;();
+            for (int i = 0; i &lt; portRanges.length; i++) {
+                int sepIdx = portRanges[i].indexOf('-');
+                if (sepIdx != -1) {
+                    int min = Integer.parseInt(portRanges[i].substring(0, sepIdx));
+                    int max = Integer.parseInt(portRanges[i].substring(sepIdx + 1));
+                    if (min &gt; max) {
+                        int oldMin = min;
+                        min = max;
+                        max = oldMin;
+                    }
+                    if (max - min &gt; 5) {
+                        throw new RuntimeException(&quot;EiraIRC: Port ranges bigger than 5 are not allowed! Split them up if you really have to.&quot;);
+                    }
+                    for (int j = min; j &lt;= max; j++) {
+                        portList.add(j);
+                    }
+                } else {
+                    portList.add(Integer.parseInt(portRanges[i]));
+                }
+            }
+            return ArrayUtils.toPrimitive(portList.toArray(new Integer[portList.size()]));
+        } catch (NumberFormatException e) {
+            return new int[]{defaultPort};
+        }
+    }
+    return new int[]{defaultPort};
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">firetweet</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">QuickSearchBarActivity.java</span>
+								<a href="index-source_dir=firetweet-master_firetweet_src_main_java_org_getlantern_firetweet_activity_support_QuickSearchBarActivity.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="705025votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="705025==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="705025==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+    final long[] ids = new long[reverseSortedPositions.length];
+    for (int i = 0, j = reverseSortedPositions.length; i &lt; j; i++) {
+        final int position = reverseSortedPositions[i];
+        final SearchHistoryItem item = (SearchHistoryItem) mUsersSearchAdapter.getItem(position);
+        mUsersSearchAdapter.removeItemAt(position);
+        ids[i] = item.getCursorId();
+    }
+    final ContentResolver cr = getContentResolver();
+    final Long[] idsObject = ArrayUtils.toObject(ids);
+    ContentResolverUtils.bulkDelete(cr, SearchHistory.CONTENT_URI, SearchHistory._ID, idsObject,
+            null, false);
+    getSupportLoaderManager().restartLoader(0, null, this);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">SAPManagerPack</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">GuiColorPickerCtrl.java</span>
+								<a href="index-source_dir=SAPManagerPack-master_java_de_sanandrew_core_manpack_mod_client_gui_GuiColorPickerCtrl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2218votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2218==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2218==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@SuppressWarnings( &quot;FloatingPointEquality&quot; )
+public void setHsbFromRgb(int rgb) {
+    float[] splitColors = ArrayUtils.remove(SAPUtils.getRgbaFromColorInt(rgb).getColorFloatArray(), 3);  // don't need the alpha value (3)
+
+    float max = Floats.max(splitColors);
+    float min = Floats.min(splitColors);
+
+    if( max == min ) {
+        this.hue = 0;
+    } else if( max == splitColors[0] ) {
+        this.hue = Math.round(60.0F * ((splitColors[1] - splitColors[2]) / (max - min)));
+    } else if( max == splitColors[1] ) {
+        this.hue = Math.round(60.0F * (2.0F + (splitColors[2] - splitColors[0]) / (max - min)));
+    } else if( max == splitColors[2] ) {
+        this.hue = Math.round(60.0F * (4.0F + (splitColors[0] - splitColors[1]) / (max - min)));
+    }
+
+    if( this.hue &lt; 0 ) {
+        this.hue += 360;
+    }
+
+    if( max &lt;= 0.01F ) {
+        this.sat = 0;
+    } else {
+        this.sat = Math.round((max - min) / max * 100.0F);
+    }
+
+    this.bright = Math.round(max * 100.0F);
+
+    this.calcResultColor();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">levelup-java-examples</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ReverseElementsInArray.java</span>
+								<a href="index-source_dir=levelup-java-examples-master_src_test_java_com_levelup_java_array_ReverseElementsInArray.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="755513votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="755513==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="755513==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void reverse_elements_in_array_with_apache_commons () {
+	
+	ArrayUtils.reverse(MONTHS_OF_YEAR_BACKWARDS);
+	
+	logger.info(Arrays.toString(MONTHS_OF_YEAR_BACKWARDS));
+
+	assertEquals(&quot;May&quot;, MONTHS_OF_YEAR_BACKWARDS[4]);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">QueryEngineInfo.java</span>
+								<a href="index-source_dir=jena-master_jena-arq_src_main_java_org_apache_jena_sparql_mgt_QueryEngineInfo.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="17972votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="17972==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="17972==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public String getLastQueryString()
+{ 
+    Query q = query ;    // Get once.
+    if ( q != null ) return q.toString() ;
+    // Sometimes an alegra expression is executited without a query.
+    return getLastAlgebra() ;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 14</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jspxcms304</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">UserRoleServiceImpl.java</span>
+								<a href="index-source_dir=jspxcms304-master_src_com_jspxcms_core_service_impl_UserRoleServiceImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2090129votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2090129==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2090129==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Transactional
+public List&lt;UserRole&gt; save(User user, Integer[] roleIds) {
+	int len = ArrayUtils.getLength(roleIds);
+	List&lt;UserRole&gt; userRoles = new ArrayList&lt;UserRole&gt;(len);
+	user.setUserRoles(userRoles);
+	if (len &gt; 0) {
+		UserRole userRole;
+		Role role;
+		for (Integer roleId : roleIds) {
+			role = roleService.get(roleId);
+			userRole = new UserRole(user, role);
+			dao.save(userRole);
+			role.addUserRole(userRole);
+			userRoles.add(userRole);
+		}
+	}
+	return userRoles;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 15</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">SevenCommons</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MCDataInputImpl.java</span>
+								<a href="index-source_dir=SevenCommons-master_src_main_java_de_take_weiland_mods_commons_net_MCDataInputImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1507171votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1507171==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1507171==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public boolean[] readBooleans(@Nullable boolean[] b) {
+	int len = readVarInt();
+	if (len &lt; 0) {
+		return null;
+	} else if (len == 0) {
+		return ArrayUtils.nullToEmpty(b);
+	} else {
+		if (b == null || b.length != len) {
+			b = new boolean[len];
+		}
+		checkAvailable(((len - 1) &gt;&gt; 3) + 1); // works for len &gt; 0
+
+		int currentByte = 0;
+		for (int idx = 0; idx &lt; len; idx++) {
+			int bit = (idx &amp; 7); // idx % 8
+			if (bit == 0) {
+				currentByte = readUnsignedByte();
+			}
+			b[idx] = (currentByte &amp; (1 &lt;&lt; bit)) != 0;
+		}
+
+		return b;
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 16</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">streamline</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ConstructorUtils.java</span>
+								<a href="index-source_dir=streamline-master_org.juxtapose.apache.commons_src_org_apache_commons_lang3_reflect_ConstructorUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="916489votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="916489==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="916489==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * &lt;p&gt;Returns a new instance of the specified class choosing the right constructor
+ * from the list of parameter types.&lt;/p&gt;
+ * 
+ * &lt;p&gt;This locates and calls a constructor.
+ * The constructor signature must match the parameter types by assignment compatibility.&lt;/p&gt;
+ *
+ * @param &lt;T&gt; the type to be constructed
+ * @param cls  the class to be constructed, not null
+ * @param args  the array of arguments, null treated as empty
+ * @param parameterTypes  the array of parameter types, null treated as empty
+ * @return new instance of &lt;code&gt;cls&lt;/code&gt;, not null
+ *
+ * @throws NoSuchMethodException if a matching constructor cannot be found
+ * @throws IllegalAccessException if invocation is not permitted by security
+ * @throws InvocationTargetException if an error occurs on invocation
+ * @throws InstantiationException if an error occurs on instantiation
+ * @see Constructor#newInstance
+ */
+public static &lt;T&gt; T invokeConstructor(Class&lt;T&gt; cls, Object[] args, Class&lt;?&gt;[] parameterTypes)
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+        InstantiationException {
+    if (parameterTypes == null) {
+        parameterTypes = ArrayUtils.EMPTY_CLASS_ARRAY;
+    }
+    if (args == null) {
+        args = ArrayUtils.EMPTY_OBJECT_ARRAY;
+    }
+    Constructor&lt;T&gt; ctor = getMatchingAccessibleConstructor(cls, parameterTypes);
+    if (ctor == null) {
+        throw new NoSuchMethodException(
+            &quot;No such accessible constructor on object: &quot; + cls.getName());
+    }
+    return ctor.newInstance(args);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 17</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">alien4cloud</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">UserController.java</span>
+								<a href="index-source_dir=alien4cloud-master_alien4cloud-security_src_main_java_alien4cloud_security_users_rest_UserController.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="399291votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="399291==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="399291==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Removes a role from a given user.
+ *
+ * @param username The unique username of the user from which to remove the role.
+ * @param role The role to remove to the user.
+ * @return an empty (void) rest <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="3249725e5b5c59">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> RestResponse}.
+ */
+@ApiOperation(value = &quot;Remove a role from a user.&quot;)
+@RequestMapping(value = &quot;/{username}/roles/{role}&quot;, method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+@PreAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+@Audit
+public RestResponse&lt;Void&gt; removeRole(@PathVariable String username, @PathVariable String role, HttpServletResponse servletResponse) {
+    if (username == null || username.isEmpty()) {
+        return RestResponseBuilder.&lt;Void&gt; builder()
+                .error(RestErrorBuilder.builder(RestErrorCode.ILLEGAL_PARAMETER).message(&quot;username cannot be null or empty&quot;).build()).build();
+    } else if (userService.isAdmin(username) &amp;&amp; userService.countAdminUser() == 1) {
+        servletResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return RestResponseBuilder
+                .&lt;Void&gt; builder()
+                .error(RestErrorBuilder.builder(RestErrorCode.DELETE_LAST_ADMIN_ROLE_ERROR)
+                        .message(&quot;It's forbidden to remove the admin role of the last admin user.&quot;)
+                        .build()).build();
+    }
+    String goodRoleToAdd = Role.getStringFormatedRole(role);
+    User user = userService.retrieveUser(username);
+    String[] roles = user.getRoles();
+    roles = ArrayUtils.removeElement(roles, goodRoleToAdd);
+    user.setRoles(roles);
+    alienUserDao.save(user);
+
+    return RestResponseBuilder.&lt;Void&gt; builder().build();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 18</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Eemory</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BootstrappingDialog.java</span>
+								<a href="index-source_dir=Eemory-master_com.prairie.eemory_src_com_prairie_eemory_ui_BootstrappingDialog.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="70763votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="70763==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="70763==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void createButtonProps() {
+    if (brands.get(0) == EvernoteBrand.EVERNOTE_SANDBOX) {
+        allBtnLabels = ArrayUtils.toArray(Messages.Plugin_OAuth_Configure, Messages.Plugin_OAuth_NotNow); // make sure we don't have Switch button for sandbox mode.
+        switchClicked = -1;
+        okClicked = 0;
+    } else if (brands.get(0) == EvernoteBrand.EVERNOTE_INTERNATIONAL || brands.get(0) == EvernoteBrand.EVERNOTE_YINXIANG) {
+        allBtnLabels = ArrayUtils.toArray(getSwitchButtonLabel(brands.get(1)), Messages.Plugin_OAuth_Configure, Messages.Plugin_OAuth_NotNow);
+        switchClicked = 0;
+        okClicked = 1;
+    } else {
+        // should not happen
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 19</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">AIDR</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">CollectionServiceImpl.java</span>
+								<a href="index-source_dir=AIDR-master_aidr-manager_src_main_java_qa_qcri_aidr_manager_service_impl_CollectionServiceImpl.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="30972votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="30972==org.apache.commons.lang3.ArrayUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="30972==org.apache.commons.lang3.ArrayUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+@Transactional(readOnly = true)
+public String getFollowTwitterIDs(String followList, String userName) {
+	if (followList != null &amp;&amp; !followList.isEmpty()) {
+		List&lt;String&gt; userList = Arrays.asList(followList.split(&quot;,&quot;));
+
+		if (null == accessTokenStr || null == accessTokenSecretStr) {
+			UserConnection userConnection = userConnectionRepository.fetchbyUsername(userName);
+			accessTokenStr = userConnection.getAccessToken();
+			accessTokenSecretStr = userConnection.getSecret();
+		}
+
+		String[] userNameList = null;
+		long[] userIdList = null;
+		if (userList != null) {
+			try {
+				userNameList = new String[userList.size()];
+				userIdList = new long[userList.size()];
+				int i = 0;
+				int j = 0;
+				logger.info(&quot;Received string: &quot; + followList + &quot;, Split follow string: &quot; + userList);
+				for (String user: userList) {
+					//logger.info(&quot;Looking at follow data: &quot; + user);
+					if (StringUtils.isNumeric(user.trim())) {
+						try {
+							userIdList[j] = Long.parseLong(user.trim());
+							//logger.info(&quot;Going to fetch twitter userData for the following twitterID: &quot; + userIdList[j]);
+							++j;
+						} catch (Exception ex) {
+							logger.error(&quot;Exception in parsing string to number: &quot;, ex);
+						}		
+					} else {
+						userNameList[i] = user.trim();
+						//logger.info(&quot;Going to fetch twitter userData for the following screen name: &quot; + userNameList[i]);
+						++i;
+					}
+				}
+				userNameList = ArrayUtils.subarray(userNameList, 0, i);
+				userIdList = ArrayUtils.subarray(userIdList, 0, j);
+			} catch (Exception e) {
+				logger.error(&quot;Exception while getting follow twitter Ids&quot;,e);
+			}
+		}
+		List&lt;User&gt; dataList = new ArrayList&lt;User&gt;();
+		if (userNameList != null &amp;&amp; userNameList.length &gt; 0) {
+			dataList.addAll(getUserDataFromScreenName(userNameList, userName));
+		}
+		if (userIdList != null &amp;&amp; userIdList.length &gt; 0) {
+			dataList.addAll(getUserDataFromTwitterID(userIdList, userName));
+		}
+
+		if (!dataList.isEmpty()) {
+			StringBuffer followIDs = new StringBuffer();
+			for (User u: dataList) {
+				followIDs.append(u.getId()).append(&quot;,&quot;);
+			}
+			followIDs.deleteCharAt(followIDs.lastIndexOf(&quot;,&quot;));
+			//logger.info(&quot;Created follow twitterID list: &quot; + followIDs.toString());
+			return followIDs.toString();		
+		}
+		else {
+			return null;
+		}
+
+	}
+	return null;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("ArrayUtils", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(ArrayUtils, "ig") ,'<div style="background-color:red">' + ArrayUtils + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

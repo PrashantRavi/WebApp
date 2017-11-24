@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Word Break II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Debosmit Ray</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-10743</link>
+		<dc:creator><![CDATA[Debosmit Ray]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2016 01:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-10743</guid>
+		<description><![CDATA[There is an issue with type-safety if you use an array of a generic list. Ideally, type-safety is not something you would want to tinker with. A list of ArrayList would be a much better design choice. Working code with couple other fixes: https://github.com/dray92/Programming-Questions/blob/master/leetcode/Word_Break_II.java]]></description>
+		<content:encoded><![CDATA[<p>There is an issue with type-safety if you use an array of a generic list. Ideally, type-safety is not something you would want to tinker with. A list of ArrayList would be a much better design choice. Working code with couple other fixes: <a href="https://github.com/dray92/Programming-Questions/blob/master/leetcode/Word_Break_II.java" rel="nofollow">https://github.com/dray92/Programming-Questions/blob/master/leetcode/Word_Break_II.java</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Eugene Arnatovich</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-9523</link>
+		<dc:creator><![CDATA[Eugene Arnatovich]]></dc:creator>
+		<pubDate>Sun, 06 Mar 2016 11:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-9523</guid>
+		<description><![CDATA[Works as magic...
+&lt;code&gt;
+public List solution(String s, String[] dict){
+   int n = s.length();
+   Map&#060;Integer, List&#062; map = new HashMap();	
+   for (String d : dict) {
+      int m = d.length();
+      for (int i = 0; i n) {
+            break;
+         }
+         if (s.regionMatches(i, d, 0, m)) {
+            if (!map.containsKey(i)) {
+               map.put(i, new ArrayList());
+            }
+            map.get(i).add(i+m);
+         }
+      }
+   }
+   StringBuilder sb = new StringBuilder(s);
+   List res = new ArrayList();
+   func(0, map, sb, res, 0);
+      return res;
+   }
+public void func(int key, Map&#060;Integer, List&#062; map, StringBuilder sb, List res, int delta) {
+   if (!map.containsKey(key)) {
+      res.add(sb.toString().trim());
+      return;
+   }
+   sb.insert(key+delta, &quot; &quot;);
+   List lst = map.get(key);
+   for (int k : lst) {
+      func(k, map, sb, res, delta+1);
+   }
+   if (key &#062; 0) {
+      sb.deleteCharAt(key+delta);
+   }
+}&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Works as magic&#8230;<br />
+<code><br />
+public List solution(String s, String[] dict){<br />
+   int n = s.length();<br />
+   Map&lt;Integer, List&gt; map = new HashMap();<br />
+   for (String d : dict) {<br />
+      int m = d.length();<br />
+      for (int i = 0; i n) {<br />
+            break;<br />
+         }<br />
+         if (s.regionMatches(i, d, 0, m)) {<br />
+            if (!map.containsKey(i)) {<br />
+               map.put(i, new ArrayList());<br />
+            }<br />
+            map.get(i).add(i+m);<br />
+         }<br />
+      }<br />
+   }<br />
+   StringBuilder sb = new StringBuilder(s);<br />
+   List res = new ArrayList();<br />
+   func(0, map, sb, res, 0);<br />
+      return res;<br />
+   }<br />
+public void func(int key, Map&lt;Integer, List&gt; map, StringBuilder sb, List res, int delta) {<br />
+   if (!map.containsKey(key)) {<br />
+      res.add(sb.toString().trim());<br />
+      return;<br />
+   }<br />
+   sb.insert(key+delta, " ");<br />
+   List lst = map.get(key);<br />
+   for (int k : lst) {<br />
+      func(k, map, sb, res, delta+1);<br />
+   }<br />
+   if (key &gt; 0) {<br />
+      sb.deleteCharAt(key+delta);<br />
+   }<br />
+}</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dexter</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-7502</link>
+		<dc:creator><![CDATA[Dexter]]></dc:creator>
+		<pubDate>Mon, 19 Oct 2015 05:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-7502</guid>
+		<description><![CDATA[How about storing the word start index in t[].
+
+	public static int wordBreak(String s, Set dict) {
+
+        int[] t = new int[s.length()+1];
+
+         //set first to be true, why?
+
+        //Because we need initial state
+
+ 		for(int j = 0 ; j &#060; t.length; j++){
+
+ 			t[j] = -1;
+
+ 		}
+
+        t[0] = 1;
+
+        for(int i=0; i s.length())
+
+                    continue;
+
+ 
+
+                if(t[end] != -1) continue;
+
+ 
+
+                if(s.substring(i, end).equals(a)){
+
+                    t[end] = i;
+
+                }
+
+            }
+
+        }
+
+        int start = t[s.length()];
+
+ 		int end = s.length();
+
+ 		while(true){
+
+ 			
+
+ 			if(start &#060; 0 &#124;&#124; end &#060; 0)
+
+ 				break;
+
+ 			System.out.println(s.substring(start, end));
+
+ 			end = start;
+
+ 			start = t[start];
+
+ 			
+
+ 			if(start == 0){
+
+ 				System.out.println(s.substring(start,end));
+
+ 				break;
+
+ 			}
+
+ 		}
+
+        return t[s.length()];
+
+    }]]></description>
+		<content:encoded><![CDATA[<p>How about storing the word start index in t[].</p>
+<p>	public static int wordBreak(String s, Set dict) {</p>
+<p>        int[] t = new int[s.length()+1];</p>
+<p>         //set first to be true, why?</p>
+<p>        //Because we need initial state</p>
+<p> 		for(int j = 0 ; j &lt; t.length; j++){</p>
+<p> 			t[j] = -1;</p>
+<p> 		}</p>
+<p>        t[0] = 1;</p>
+<p>        for(int i=0; i s.length())</p>
+<p>                    continue;</p>
+<p>                if(t[end] != -1) continue;</p>
+<p>                if(s.substring(i, end).equals(a)){</p>
+<p>                    t[end] = i;</p>
+<p>                }</p>
+<p>            }</p>
+<p>        }</p>
+<p>        int start = t[s.length()];</p>
+<p> 		int end = s.length();</p>
+<p> 		while(true){</p>
+<p> 			if(start &lt; 0 || end &lt; 0)</p>
+<p> 				break;</p>
+<p> 			System.out.println(s.substring(start, end));</p>
+<p> 			end = start;</p>
+<p> 			start = t[start];</p>
+<p> 			if(start == 0){</p>
+<p> 				System.out.println(s.substring(start,end));</p>
+<p> 				break;</p>
+<p> 			}</p>
+<p> 		}</p>
+<p>        return t[s.length()];</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: antonio081014</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-7398</link>
+		<dc:creator><![CDATA[antonio081014]]></dc:creator>
+		<pubDate>Fri, 18 Sep 2015 18:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-7398</guid>
+		<description><![CDATA[Thank you.]]></description>
+		<content:encoded><![CDATA[<p>Thank you.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pig</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-7393</link>
+		<dc:creator><![CDATA[pig]]></dc:creator>
+		<pubDate>Thu, 17 Sep 2015 04:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-7393</guid>
+		<description><![CDATA[My 90.97% Java Solution in Leetcode with explanation 
+https://pingzhblog.wordpress.com/2015/09/17/wordbreak-ii/]]></description>
+		<content:encoded><![CDATA[<p>My 90.97% Java Solution in Leetcode with explanation<br />
+<a href="https://pingzhblog.wordpress.com/2015/09/17/wordbreak-ii/" rel="nofollow">https://pingzhblog.wordpress.com/2015/09/17/wordbreak-ii/</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: antonio081014</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-word-break-ii-java/#comment-7191</link>
+		<dc:creator><![CDATA[antonio081014]]></dc:creator>
+		<pubDate>Sun, 19 Jul 2015 01:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13746#comment-7191</guid>
+		<description><![CDATA[BTW, what do you do?]]></description>
+		<content:encoded><![CDATA[<p>BTW, what do you do?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Reverse Linked List II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/06/leetcode-reverse-linked-list-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/06/leetcode-reverse-linked-list-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Venk</title>
+		<link>http://www.programcreek.com/2014/06/leetcode-reverse-linked-list-ii-java/#comment-12598</link>
+		<dc:creator><![CDATA[Venk]]></dc:creator>
+		<pubDate>Wed, 13 Jul 2016 14:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14444#comment-12598</guid>
+		<description><![CDATA[Simple and best solution found in LeetCode discuss
+
+&lt;code&gt;
+public static ListNode reverseBetween(ListNode head, int m, int n) {
+		
+	    if(head == null) return null;
+	    
+	    ListNode dummy = new ListNode(0); // create a dummy node to mark the head of this list
+	    dummy.next = head;
+	    
+	    ListNode pre = dummy; // make a pointer pre as a marker for the node before reversing
+	    for(int i = 0; i pre = 1, start = 2, then = 3
+	    // dummy-&#062; 1 -&#062; 2 -&#062; 3 -&#062; 4 -&#062; 5
+	    
+	    for(int i=0; i1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then = 4
+	    // second reversing: dummy-&#062;1 - 4 - 3 - 2 - 5; pre = 1, start = 2, then = 5 (finish)
+	    
+	    return dummy.next;
+	    
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Simple and best solution found in LeetCode discuss</p>
+<p><code><br />
+public static ListNode reverseBetween(ListNode head, int m, int n) {</p>
+<p>	    if(head == null) return null;</p>
+<p>	    ListNode dummy = new ListNode(0); // create a dummy node to mark the head of this list<br />
+	    dummy.next = head;</p>
+<p>	    ListNode pre = dummy; // make a pointer pre as a marker for the node before reversing<br />
+	    for(int i = 0; i pre = 1, start = 2, then = 3<br />
+	    // dummy-&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</p>
+<p>	    for(int i=0; i1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then = 4<br />
+	    // second reversing: dummy-&gt;1 - 4 - 3 - 2 - 5; pre = 1, start = 2, then = 5 (finish)</p>
+<p>	    return dummy.next;</p>
+<p>	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sruthi</title>
+		<link>http://www.programcreek.com/2014/06/leetcode-reverse-linked-list-ii-java/#comment-9598</link>
+		<dc:creator><![CDATA[Sruthi]]></dc:creator>
+		<pubDate>Fri, 11 Mar 2016 19:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14444#comment-9598</guid>
+		<description><![CDATA[public class ReverseLinkedListMtoN2 {
+
+	public ListNode reverseBetween(ListNode head, int m, int n) {
+
+		if (m != n) {
+
+			ListNode curr = head;
+
+			int i = 1;
+
+			ListNode prevHead = null;
+
+			ListNode tail = null;
+
+			ListNode prev = null;
+
+			ListNode next = null;
+
+			while (i &#060; m) {
+
+				prevHead = curr;
+
+				curr = curr.next;
+
+				i++;
+
+			}
+
+			tail = curr;
+
+			next = curr.next;
+
+			while (i &#060; n) {
+
+				prev = curr;
+
+				curr = next;
+
+				next = curr.next;
+
+				curr.next = prev;
+
+				i++;
+
+			}
+
+			if (m == 1)
+
+				head = curr;
+
+			else
+
+				prevHead.next = curr;
+
+			tail.next = next;
+
+		}
+
+		return head;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>public class ReverseLinkedListMtoN2 {</p>
+<p>	public ListNode reverseBetween(ListNode head, int m, int n) {</p>
+<p>		if (m != n) {</p>
+<p>			ListNode curr = head;</p>
+<p>			int i = 1;</p>
+<p>			ListNode prevHead = null;</p>
+<p>			ListNode tail = null;</p>
+<p>			ListNode prev = null;</p>
+<p>			ListNode next = null;</p>
+<p>			while (i &lt; m) {</p>
+<p>				prevHead = curr;</p>
+<p>				curr = curr.next;</p>
+<p>				i++;</p>
+<p>			}</p>
+<p>			tail = curr;</p>
+<p>			next = curr.next;</p>
+<p>			while (i &lt; n) {</p>
+<p>				prev = curr;</p>
+<p>				curr = next;</p>
+<p>				next = curr.next;</p>
+<p>				curr.next = prev;</p>
+<p>				i++;</p>
+<p>			}</p>
+<p>			if (m == 1)</p>
+<p>				head = curr;</p>
+<p>			else</p>
+<p>				prevHead.next = curr;</p>
+<p>			tail.next = next;</p>
+<p>		}</p>
+<p>		return head;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shivendra</title>
+		<link>http://www.programcreek.com/2014/06/leetcode-reverse-linked-list-ii-java/#comment-7217</link>
+		<dc:creator><![CDATA[Shivendra]]></dc:creator>
+		<pubDate>Mon, 27 Jul 2015 16:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14444#comment-7217</guid>
+		<description><![CDATA[Why to create new ListNode???
+When the same stuff can be done just by rearranging the references?
+
+
+/** 
+ * Definition for singly-linked list. 
+ * public class ListNode { 
+ *     int val; 
+ *     ListNode next; 
+ *     ListNode(int x) { val = x; } 
+ * } 
+ */ 
+public class Solution { 
+    public ListNode reverseBetween(ListNode head, int m, int n) { 
+         
+        if(m==n) 
+            return head; 
+             
+        ListNode mprev = null; 
+        ListNode nafter = null; 
+        ListNode mprevprev = null; 
+        ListNode temp = head; 
+         
+        int i=1; 
+        while(temp!=null &#038;&#038; i&#060;=n){ 
+ 
+            if(i==m-1){ 
+                mprevprev = temp; 
+            } 
+            if(i==m){ 
+                mprev = temp; 
+            } 
+            if(i==n){ 
+                nafter = temp.next; 
+                temp.next = null; 
+            } 
+            ++i; 
+            temp = temp.next; 
+ 
+        } 
+         
+        if(mprev.next == null) 
+            return head; 
+         
+        // Reverse the link list from m to n 
+         
+        ListNode x = mprev; 
+        ListNode y = x.next; 
+        x.next = nafter; 
+         
+        while(x!=null &#038;&#038; y!=null){ 
+            ListNode t = y.next; 
+            y.next = x; 
+            x=y; 
+            y=t; 
+        } 
+         
+        if(mprevprev!=null) 
+            mprevprev.next =x; 
+        else 
+            return x; 
+             
+        return head; 
+         
+    } 
+}]]></description>
+		<content:encoded><![CDATA[<p>Why to create new ListNode???<br />
+When the same stuff can be done just by rearranging the references?</p>
+<p>/**<br />
+ * Definition for singly-linked list.<br />
+ * public class ListNode {<br />
+ *     int val;<br />
+ *     ListNode next;<br />
+ *     ListNode(int x) { val = x; }<br />
+ * }<br />
+ */<br />
+public class Solution {<br />
+    public ListNode reverseBetween(ListNode head, int m, int n) { </p>
+<p>        if(m==n)<br />
+            return head; </p>
+<p>        ListNode mprev = null;<br />
+        ListNode nafter = null;<br />
+        ListNode mprevprev = null;<br />
+        ListNode temp = head; </p>
+<p>        int i=1;<br />
+        while(temp!=null &amp;&amp; i&lt;=n){ </p>
+<p>            if(i==m-1){<br />
+                mprevprev = temp;<br />
+            }<br />
+            if(i==m){<br />
+                mprev = temp;<br />
+            }<br />
+            if(i==n){<br />
+                nafter = temp.next;<br />
+                temp.next = null;<br />
+            }<br />
+            ++i;<br />
+            temp = temp.next; </p>
+<p>        } </p>
+<p>        if(mprev.next == null)<br />
+            return head; </p>
+<p>        // Reverse the link list from m to n </p>
+<p>        ListNode x = mprev;<br />
+        ListNode y = x.next;<br />
+        x.next = nafter; </p>
+<p>        while(x!=null &amp;&amp; y!=null){<br />
+            ListNode t = y.next;<br />
+            y.next = x;<br />
+            x=y;<br />
+            y=t;<br />
+        } </p>
+<p>        if(mprevprev!=null)<br />
+            mprevprev.next =x;<br />
+        else<br />
+            return x; </p>
+<p>        return head; </p>
+<p>    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

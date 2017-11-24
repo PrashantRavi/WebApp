@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Leetcode &#8211; Binary Tree Inorder Traversal (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: hming</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-13575</link>
+		<dc:creator><![CDATA[hming]]></dc:creator>
+		<pubDate>Wed, 10 Aug 2016 15:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-13575</guid>
+		<description><![CDATA[wouldn&#039;t top.left = null modify the original tree and hence a bad style?]]></description>
+		<content:encoded><![CDATA[<p>wouldn&#8217;t top.left = null modify the original tree and hence a bad style?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Programming Help</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-12683</link>
+		<dc:creator><![CDATA[Programming Help]]></dc:creator>
+		<pubDate>Mon, 18 Jul 2016 02:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-12683</guid>
+		<description><![CDATA[You could try for a full customized solution
+http://www.helpwithprogramming.com/]]></description>
+		<content:encoded><![CDATA[<p>You could try for a full customized solution<br />
+<a href="http://www.helpwithprogramming.com/" rel="nofollow">http://www.helpwithprogramming.com/</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: soham</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-8363</link>
+		<dc:creator><![CDATA[soham]]></dc:creator>
+		<pubDate>Thu, 14 Jan 2016 01:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-8363</guid>
+		<description><![CDATA[This Solution uses an auxillary class MyTreeNode to wrap the OriginalTreeNode class in order to provide a processed tag on elements in stack. The code becomes more intuitive and required very little modification for other traversals.
+
+
+
+
+
+
+
+
+import java.util.*;
+
+//Definition for binary tree
+class OriginalTreeNode {
+     int val;
+     OriginalTreeNode left;
+     OriginalTreeNode right;
+     OriginalTreeNode(int x) { val = x; }
+ }
+
+//Definition for custom tree node which adds a tag
+class MyTreeNode {
+     int val;
+     boolean processed;
+     OriginalTreeNode left;
+     OriginalTreeNode right;
+     MyTreeNode(OriginalTreeNode x) 
+     { 
+    	 val = x.val;
+    	 left = x.left;
+    	 right = x.right;
+    	 // initially set to false
+    	 processed = false;
+     }
+ }
+
+ 
+class Solution {
+    public ArrayList inorderTraversal(OriginalTreeNode root) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+         ArrayList lst = new ArrayList();
+ 
+        if(root == null)
+            return lst; 
+ 
+        Stack stack = new Stack();       
+        stack.push(new MyTreeNode(root));
+        
+        while(!stack.empty()){
+ 
+           MyTreeNode current = stack.pop();
+           
+           // if the left and right children are already added for it then just print it out.
+           if(current.processed){
+        	   lst.add(current.val);
+        	   continue;
+           }
+           
+           // pushing right element as innermost on stack to visit it last
+           if(current.right != null)
+        	   stack.push(new MyTreeNode(current.right));
+           
+           // then pushing the root and marking it as processed before doing so
+           current.processed = true;
+           stack.push(current);
+           
+           // pushing left node as the outermost so it is printed first
+           if(current.left != null)
+        	   stack.push(new MyTreeNode(current.left));                     	
+        }
+ 
+        return lst;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>This Solution uses an auxillary class MyTreeNode to wrap the OriginalTreeNode class in order to provide a processed tag on elements in stack. The code becomes more intuitive and required very little modification for other traversals.</p>
+<p>import java.util.*;</p>
+<p>//Definition for binary tree<br />
+class OriginalTreeNode {<br />
+     int val;<br />
+     OriginalTreeNode left;<br />
+     OriginalTreeNode right;<br />
+     OriginalTreeNode(int x) { val = x; }<br />
+ }</p>
+<p>//Definition for custom tree node which adds a tag<br />
+class MyTreeNode {<br />
+     int val;<br />
+     boolean processed;<br />
+     OriginalTreeNode left;<br />
+     OriginalTreeNode right;<br />
+     MyTreeNode(OriginalTreeNode x)<br />
+     {<br />
+    	 val = x.val;<br />
+    	 left = x.left;<br />
+    	 right = x.right;<br />
+    	 // initially set to false<br />
+    	 processed = false;<br />
+     }<br />
+ }</p>
+<p>class Solution {<br />
+    public ArrayList inorderTraversal(OriginalTreeNode root) {<br />
+        // IMPORTANT: Please reset any member data you declared, as<br />
+        // the same Solution instance will be reused for each test case.<br />
+         ArrayList lst = new ArrayList();</p>
+<p>        if(root == null)<br />
+            return lst; </p>
+<p>        Stack stack = new Stack();<br />
+        stack.push(new MyTreeNode(root));</p>
+<p>        while(!stack.empty()){</p>
+<p>           MyTreeNode current = stack.pop();</p>
+<p>           // if the left and right children are already added for it then just print it out.<br />
+           if(current.processed){<br />
+        	   lst.add(current.val);<br />
+        	   continue;<br />
+           }</p>
+<p>           // pushing right element as innermost on stack to visit it last<br />
+           if(current.right != null)<br />
+        	   stack.push(new MyTreeNode(current.right));</p>
+<p>           // then pushing the root and marking it as processed before doing so<br />
+           current.processed = true;<br />
+           stack.push(current);</p>
+<p>           // pushing left node as the outermost so it is printed first<br />
+           if(current.left != null)<br />
+        	   stack.push(new MyTreeNode(current.left));<br />
+        }</p>
+<p>        return lst;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: skjdhlj</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-7348</link>
+		<dc:creator><![CDATA[skjdhlj]]></dc:creator>
+		<pubDate>Fri, 04 Sep 2015 18:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-7348</guid>
+		<description><![CDATA[bad solutions]]></description>
+		<content:encoded><![CDATA[<p>bad solutions</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ojas Juneja</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-7276</link>
+		<dc:creator><![CDATA[Ojas Juneja]]></dc:creator>
+		<pubDate>Tue, 11 Aug 2015 02:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-7276</guid>
+		<description><![CDATA[Another Iterative Approach:
+&lt;code&gt;
+
+ public List inorderTraversal(TreeNode root) {
+
+       List list = new ArrayList();
+
+		if (root == null) {
+
+			return list;
+
+		}
+
+		Stack stack = new Stack();
+
+		stack.push(root);
+
+		while (stack.size() &#062; 0) {
+
+			while (root.left != null) {
+
+				root = root.left;
+
+				stack.push(root);
+
+			}
+
+			list.add(stack.pop().val);
+
+			while (root.right == null) {
+
+				if (!stack.isEmpty()) {
+
+					root = stack.pop();
+
+					list.add(root.val);
+
+				} else {
+
+					break;
+
+				}
+
+			}
+
+			root = root.right;
+
+			if (root == null) {
+
+				break;
+
+			}
+
+			stack.push(root);
+
+		}
+
+		return list;
+
+    }
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Another Iterative Approach:<br />
+<code></p>
+<p> public List inorderTraversal(TreeNode root) {</p>
+<p>       List list = new ArrayList();</p>
+<p>		if (root == null) {</p>
+<p>			return list;</p>
+<p>		}</p>
+<p>		Stack stack = new Stack();</p>
+<p>		stack.push(root);</p>
+<p>		while (stack.size() &gt; 0) {</p>
+<p>			while (root.left != null) {</p>
+<p>				root = root.left;</p>
+<p>				stack.push(root);</p>
+<p>			}</p>
+<p>			list.add(stack.pop().val);</p>
+<p>			while (root.right == null) {</p>
+<p>				if (!stack.isEmpty()) {</p>
+<p>					root = stack.pop();</p>
+<p>					list.add(root.val);</p>
+<p>				} else {</p>
+<p>					break;</p>
+<p>				}</p>
+<p>			}</p>
+<p>			root = root.right;</p>
+<p>			if (root == null) {</p>
+<p>				break;</p>
+<p>			}</p>
+<p>			stack.push(root);</p>
+<p>		}</p>
+<p>		return list;</p>
+<p>    }</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hengameh</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/#comment-6944</link>
+		<dc:creator><![CDATA[Hengameh]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 10:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10597#comment-6944</guid>
+		<description><![CDATA[Your method type should be &quot;Array-List&quot;.
+and you never return or print your array-list as your result.]]></description>
+		<content:encoded><![CDATA[<p>Your method type should be &#8220;Array-List&#8221;.<br />
+and you never return or print your array-list as your result.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

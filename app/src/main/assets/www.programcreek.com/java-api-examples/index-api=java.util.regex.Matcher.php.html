@@ -1,0 +1,2299 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example java.util.regex.Matcher</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for java.util.regex.Matcher. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, java.util.regex.Matcher" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=java.io.FileReader.php.html">java.io.FileReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=android.util.Log.php.html">android.util.Log</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.Locale.php.html">java.util.Locale</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.text.ParseException.php.html">java.text.ParseException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.regex.Pattern.php.html">java.util.regex.Pattern</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStreamReader.php.html">java.io.InputStreamReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.BufferedReader.php.html">java.io.BufferedReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.util.Date.php.html">java.util.Date</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStream.php.html">java.io.InputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.net.URL.php.html">java.net.URL</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=find.php.html">
+                                    find                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=group.php.html">
+                                    group                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=matches.php.html">
+                                    matches                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=end.php.html">
+                                    end                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=start.php.html">
+                                    start                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=groupCount.php.html">
+                                    groupCount                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=appendReplacement.php.html">
+                                    appendReplacement                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=appendTail.php.html">
+                                    appendTail                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=replaceAll.php.html">
+                                    replaceAll                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=reset.php.html">
+                                    reset                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=lookingAt.php.html">
+                                    lookingAt                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=region.php.html">
+                                    region                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=replaceFirst.php.html">
+                                    replaceFirst                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=quoteReplacement.php.html">
+                                    quoteReplacement                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=toMatchResult.php.html">
+                                    toMatchResult                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=hitEnd.php.html">
+                                    hitEnd                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=regionStart.php.html">
+                                    regionStart                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=useTransparentBounds.php.html">
+                                    useTransparentBounds                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.util.regex.Matcher&method=useAnchoringBounds.php.html">
+                                    useAnchoringBounds                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for java.util.regex.Matcher</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">java.util.regex.Matcher</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="java.util.regex.Matcher"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jentrata-msh</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Template.java</span>
+								<a href="index-source_dir=jentrata-msh-master_Commons_src_main_java_hk_hku_cecid_piazza_commons_pagelet_Template.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1398votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1398==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1398==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Parses the template content and initializes this template.
+ */
+public void parse() {
+    List elements = new ArrayList();
+
+    String regexp = &quot;&lt;!--[\\s]*template-((.*?))[\\s]*--&gt;&quot;;
+    Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+    Matcher m = p.matcher(template);
+    
+    int cur = 0;
+    for (int i=0; m.find(); i++) {
+        if (m.start()&gt;cur) {
+            elements.add(new TemplateElement(template.substring(cur, m.start()), true));
+        }
+        elements.add(new TemplateElement(m.group(1)));
+        cur = m.end();
+    }
+    if (cur &lt; template.length()) {
+        elements.add(new TemplateElement(template.substring(cur, template.length()), true));
+    }
+    
+    iterator = elements.iterator();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Grinnell-DB-Android</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">RequestTask.java</span>
+								<a href="index-source_dir=Grinnell-DB-Android-master_GrinnellDirectory_src_edu_grinnell_appdev_grinnelldirectory_RequestTask.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1044votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1044==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1044==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private String numberParser(String str) {
+	String match = &quot;[0-9]+&quot;;
+	Pattern pattern = Pattern.compile(&quot;-?\\d+&quot;);
+	Matcher m = pattern.matcher(str);
+	while (m.find()) {
+		return m.group(0);
+	}
+	return null;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">lettuce</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ServerCommandTest.java</span>
+								<a href="index-source_dir=lettuce-master_src_test_java_com_lambdaworks_redis_ServerCommandTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="367votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="367==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="367==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Test
+public void clientKillExtended() throws Exception {
+
+    RedisConnection&lt;String, String&gt; connection2 = client.connect();
+    connection2.clientSetname(&quot;killme&quot;);
+
+    Pattern p = Pattern.compile(&quot;^.*addr=([^ ]+).*name=killme.*$&quot;, Pattern.MULTILINE | Pattern.DOTALL);
+    String clients = redis.clientList();
+    Matcher m = p.matcher(clients);
+
+    assertThat(m.matches()).isTrue();
+    String addr = m.group(1);
+    assertThat(redis.clientKill(KillArgs.Builder.addr(addr).skipme())).isGreaterThan(0);
+
+    assertThat(redis.clientKill(KillArgs.Builder.id(4234))).isEqualTo(0);
+    assertThat(redis.clientKill(KillArgs.Builder.typeSlave().id(4234))).isEqualTo(0);
+    assertThat(redis.clientKill(KillArgs.Builder.typeNormal().id(4234))).isEqualTo(0);
+    assertThat(redis.clientKill(KillArgs.Builder.typePubsub().id(4234))).isEqualTo(0);
+
+    connection2.close();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">sslcertx</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MySQLCallableStatement.java</span>
+								<a href="index-source_dir=sslcertx-master_src_main_java_org_properssl_sslcertx_mariadb_jdbc_MySQLCallableStatement.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="737votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="737==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="737==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public MySQLCallableStatement(MySQLConnection connection, String query) throws SQLException{
+    con = connection;
+
+    query = Utils.nativeSQL(query, ((MySQLConnection)connection).noBackslashEscapes);
+    batchIgnoreResult = new BitSet();
+    Matcher m = CALLABLE_STATEMENT_PATTERN.matcher(query);
+    if(!m.matches())
+        throw new SQLSyntaxErrorException(&quot;invalid callable syntax&quot;);
+
+    //
+    boolean isFunction = (m.group(1) != null);
+    String procedureName = m.group(2);
+    String arguments = m.group(3);
+    if (!isFunction) {
+        // real stored procedure, generate &quot;CALL PROC(args)&quot;, with ? in args replaces by variables
+        callQuery = &quot;call &quot; + procedureName + resolveArguments(arguments,1);
+    }
+    else {
+        // function returning result, generate &quot;SELECT FUNC(args) into @_jdbc_var_1
+        callQuery = &quot;select &quot; + procedureName + resolveArguments(arguments, 2) + &quot; into &quot; + getVariableName(1);
+    }
+    callStatement = con.createStatement();
+
+    // Generate set _jdbc_var1=?,....set jdbc_var_n=? prepared statement
+    if (parametersCount != 0) {
+        StringBuffer sb = new StringBuffer(&quot;set &quot;);
+        for(int i = 1; i &lt;= parametersCount; i++) {
+            if(i &gt; 1) {
+                sb.append(&quot;,&quot;);
+            }
+            sb.append(getVariableName(i));
+            sb.append(&quot;=?&quot;);
+        }
+        preparedStatement = con.prepareStatement(sb.toString());
+        for(int i=1; i&lt;= parametersCount; i++) {
+            preparedStatement.setNull(i, Types.NULL);
+        }
+    }
+    params = new CallParameter[parametersCount+1];
+    for(int i=1 ; i &lt;= parametersCount; i++) {
+        params[i] = new CallParameter();
+    }
+    if (isFunction) {
+        // the query was in the form {?=call function()}, so the first parameter is always output
+        params[1].isOutput = true;
+    }
+    parameterMetadata = new CallableParameterMetaData(params, con, procedureName, isFunction);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jentrata-msh</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">PayloadCache.java</span>
+								<a href="index-source_dir=jentrata-msh-master_Plugins_CorvusAS2Plus_src_main_java_hk_hku_cecid_edi_as2_module_PayloadCache.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1269votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1269==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1269==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private String encodeFilename(String filename) {
+    StringBuffer buffer = new StringBuffer(); 
+    if (filename != null) {
+        Pattern p = Pattern.compile(&quot;[\\\\/:\\*\\?\&quot;\\&lt;\\&gt;\\|\\[\\]%]&quot;);
+        Matcher m = p.matcher(filename);
+        int i = 0;
+        while (m.find()) {
+            buffer.append(filename.substring(i, m.start()));
+            char sc = m.group().charAt(0);
+            buffer.append(&quot;%&quot;).append(Integer.toHexString((int)sc).toUpperCase());
+            i = m.end();
+        }
+        buffer.append(filename.substring(i, filename.length()));
+    }
+    return buffer.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jentrata-msh</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">StringUtilities.java</span>
+								<a href="index-source_dir=jentrata-msh-master_Commons_src_main_java_hk_hku_cecid_piazza_commons_util_StringUtilities.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1489votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1489==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1489==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * @param string
+ * @param regex
+ * @param group the &lt;b&gt;one-based&lt;/b&gt; index of the target group. 
+ * The default group is the zeroth group, which is the whole expression
+ * @return each match of the specified group
+ */
+public static List&lt;String&gt; extractRegexMulti(String string, String regex, int group) {
+    List&lt;String&gt; result = new ArrayList&lt;String&gt;();
+    
+    if (string == null) {
+        return result;
+    }
+    
+    Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+    Matcher matcher = pattern.matcher(string);
+    
+    while (matcher.find()) {
+        if (group &gt; matcher.groupCount()) {
+        } else {
+            result.add(matcher.group(group));
+        }
+    }
+    return result;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">TinyProtocolAPI</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Reflection.java</span>
+								<a href="index-source_dir=TinyProtocolAPI-master_src_com_gmail_zahusek_tinyprotocolapi_utility_Reflection.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="7878votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="7878==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="7878==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static String expandVariables(String name) {
+	StringBuffer output = new StringBuffer();
+	Matcher matcher = MATCH_VARIABLE.matcher(name);
+
+	while (matcher.find()) {
+		String variable = matcher.group(1);
+		String replacement = &quot;&quot;;
+
+		if (&quot;nms&quot;.equalsIgnoreCase(variable))
+			replacement = NMS_PREFIX;
+		else if (&quot;obc&quot;.equalsIgnoreCase(variable))
+			replacement = OBC_PREFIX;
+		else if (&quot;version&quot;.equalsIgnoreCase(variable))
+			replacement = VERSION;
+		else
+			throw new IllegalArgumentException(&quot;Unknown variable: &quot;
+					+ variable);
+
+		if (replacement.length() &gt; 0 &amp;&amp; matcher.end() &lt; name.length()
+				&amp;&amp; name.charAt(matcher.end()) != '.')
+			replacement += &quot;.&quot;;
+		matcher.appendReplacement(output,
+				Matcher.quoteReplacement(replacement));
+	}
+
+	matcher.appendTail(output);
+	return output.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">richfaces</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ResourceServletMapping.java</span>
+								<a href="index-source_dir=richfaces-master_core_src_main_java_org_richfaces_resource_mapping_ResourceServletMapping.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="12851votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="12851==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="12851==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >static String getResourcePath(Resource resource) {
+    final StringBuffer buffer = new StringBuffer();
+
+    String ln = Strings.nullToEmpty(resource.getLibraryName());
+    if (!ln.isEmpty()) {
+        buffer.append(ln).append(&quot;/&quot;);
+    }
+
+    buffer.append(resource.getResourceName());
+
+    try {
+        URI originalRequestPath = new URI(&quot;path://&quot; + resource.getRequestPath());
+        String query = originalRequestPath.getQuery();
+        Matcher matcher = LN_PATTERN.matcher(query);
+        if (matcher.matches()) {
+            ln = matcher.group(2);
+            query = matcher.replaceFirst(&quot;$1$3&quot;);
+            matcher = AMP_CLEANUP_PATTERN.matcher(query);
+            if (matcher.matches()) {
+                query = matcher.replaceAll(&quot;$1$2$3&quot;);
+            }
+        }
+        if (!query.isEmpty()) {
+            buffer.append(&quot;?&quot;).append(query);
+        }
+        return buffer.toString();
+    } catch (URISyntaxException e) {
+        throw new IllegalStateException(String.format(&quot;Failed to parse requestPath '%s' for resource '%s': %s&quot;,
+                resource.getRequestPath(), ResourceKey.create(resource), e.getMessage()), e);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">NTriple.java</span>
+								<a href="index-source_dir=jena-master_jena-core_src_main_java_org_apache_jena_rdfxml_xmlinput_NTriple.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="17181votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="17181==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="17181==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * 
+ * Replace any non-legal char (or Z) with ZNN where NN are the hex codes
+ * in UTF-8
+ * @param anonymousID Is something that corresponds to an XMLName 
+ * @return an ascii string that is legal NTriple
+ */
+public static String escapeNTriple(String anonymousID) {
+	Matcher matcher = ntripleBnode.matcher(anonymousID);
+	if (matcher.matches())
+		return anonymousID;
+	matcher.reset();
+	StringBuilder rslt = new StringBuilder();
+	int lastNotMatched = 0;
+	while (matcher.find()) {
+		
+		String unmatched = anonymousID.substring(lastNotMatched, matcher.start());
+		
+		rslt.append(escapeUTF8(unmatched));
+		lastNotMatched = matcher.end();
+		rslt.append(matcher.group());
+	}
+	rslt.append(escapeUTF8(anonymousID.substring(lastNotMatched)));
+	return rslt.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">phonegap-geolocation</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MediaType.java</span>
+								<a href="index-source_dir=phonegap-geolocation-master_platforms_android_CordovaLib_src_com_squareup_okhttp_MediaType.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="13810votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="13810==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="13810==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Returns a media type for <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="97ecd7f4f8f3f2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> string}, or null if <a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="5a211a39353e3f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> string} is not a
+ * well-formed media type.
+ */
+public static MediaType parse(String string) {
+  Matcher typeSubtype = TYPE_SUBTYPE.matcher(string);
+  if (!typeSubtype.lookingAt()) return null;
+  String type = typeSubtype.group(1).toLowerCase(Locale.US);
+  String subtype = typeSubtype.group(2).toLowerCase(Locale.US);
+
+  String charset = null;
+  Matcher parameter = PARAMETER.matcher(string);
+  for (int s = typeSubtype.end(); s &lt; string.length(); s = parameter.end()) {
+    parameter.region(s, string.length());
+    if (!parameter.lookingAt()) return null; // This is not a well-formed media type.
+
+    String name = parameter.group(1);
+    if (name == null || !name.equalsIgnoreCase(&quot;charset&quot;)) continue;
+    if (charset != null) throw new IllegalArgumentException(&quot;Multiple charsets: &quot; + string);
+    charset = parameter.group(2) != null
+        ? parameter.group(2)  // Value is a token.
+        : parameter.group(3); // Value is a quoted string.
+  }
+
+  return new MediaType(string, type, subtype, charset);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">wso2-synapse</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">PayloadFactoryMediator.java</span>
+								<a href="index-source_dir=wso2-synapse-master_modules_core_src_main_java_org_apache_synapse_mediators_transform_PayloadFactoryMediator.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="25897votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="25897==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="25897==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Goes through SynapsePath argument list, evaluating each by calling stringValueOf and returns a HashMap String, String
+ * array where each item will contain a hash map with key &quot;evaluated expression&quot; and value &quot;SynapsePath type&quot;.
+ * @param synCtx
+ * @return
+ */
+private HashMap&lt;String, String&gt;[] getArgValues(MessageContext synCtx) {
+    HashMap&lt;String, String&gt;[] argValues = new HashMap[pathArgumentList.size()];
+    HashMap&lt;String, String&gt; valueMap;
+    String value = &quot;&quot;;
+    for (int i = 0; i &lt; pathArgumentList.size(); ++i) {       /*ToDo use foreach*/
+        Argument arg = pathArgumentList.get(i);
+        if (arg.getValue() != null) {
+            value = arg.getValue();
+            if (!isXML(value)) {
+                value = StringEscapeUtils.escapeXml(value);
+            }
+            value = Matcher.quoteReplacement(value);
+        } else if (arg.getExpression() != null) {
+            value = arg.getExpression().stringValueOf(synCtx);
+            if (value != null) {
+                // XML escape the result of an expression that produces a literal, if the target format
+                // of the payload is XML.
+                if (!isXML(value) &amp;&amp; !arg.getExpression().getPathType().equals(SynapsePath.JSON_PATH)
+                        &amp;&amp; XML_TYPE.equals(getType())) {
+                    value = StringEscapeUtils.escapeXml(value);
+                }
+                value = Matcher.quoteReplacement(value);
+            } else {
+                value = &quot;&quot;;
+            }
+        } else {
+            handleException(&quot;Unexpected arg type detected&quot;, synCtx);
+        }
+        //value = value.replace(String.valueOf((char) 160), &quot; &quot;).trim();
+        valueMap = new HashMap&lt;String, String&gt;();
+        if (null != arg.getExpression()) {
+            valueMap.put(value, arg.getExpression().getPathType());
+        } else {
+            valueMap.put(value, SynapsePath.X_PATH);
+        }
+        argValues[i] = valueMap;
+    }
+    return argValues;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">extFM-Tooling</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ConsistencyCheckHandler.java</span>
+								<a href="index-source_dir=extFM-Tooling-master_pde_org.feature.multi.perspective.measure_src_main_java_org_feature_multi_perspective_measure_performance_ConsistencyCheckHandler.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="20768votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="20768==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="20768==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void determineInfo(List&lt;String&gt; paramList, String param, IFile file) {
+   String fileName = file.getName();
+   // example:
+   // documentmanagement.feature_balanced_height2_countChildren2_vpCount10_groupsVP1_2012-03-31-082230484.cluster_FCount_2012-03-31-082231424.featuremapping
+   String regex = param + &quot;([0-9])*&quot;;
+   Pattern pattern = Pattern.compile(regex);
+   Matcher matcher = pattern.matcher(fileName);
+   while (matcher.find()) {
+      MatchResult result = matcher.toMatchResult();
+      String match = result.group();
+      String number = match.substring(param.length());
+      paramList.add(number);
+   }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">spikes</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">StringUtil.java</span>
+								<a href="index-source_dir=spikes-master_typewriter_src_main_java_novoda_android_typewriter_util_StringUtil.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="193430votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="193430==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="193430==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static String snakify(String original) {
+    if (original == null || original.length() == 0)
+        return &quot;&quot;;
+
+    StringBuilder builder = new StringBuilder();
+    Pattern p = Pattern.compile(&quot;[A-Z][a-z0-9]+&quot;);
+    Matcher m = p.matcher(original);
+    String word;
+    while (m.find()) {
+        word = m.group();
+        builder.append(word.toLowerCase());
+        if (!m.hitEnd()) {
+            builder.append('_');
+        }
+    }
+    if (builder.length() == 0) {
+        return original.toLowerCase();
+    }
+    return builder.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 14</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">openwayback</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MementoUtilsTest.java</span>
+								<a href="index-source_dir=openwayback-master_wayback-core_src_test_java_org_archive_wayback_memento_MementoUtilsTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1397556votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1397556==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1397556==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testGenerateMementoLinkHeaders() {
+	final CaptureSearchResults results = new CaptureSearchResults();
+	results.addSearchResult(createCapture(&quot;20140101000000&quot;));
+	results.addSearchResult(createCapture(&quot;20140125000000&quot;));
+	results.setClosest(results.getResults().getLast());
+
+	final WaybackRequest wbr = new WaybackRequest();
+	wbr.setAccessPoint(accessPoint);
+	wbr.setRequestUrl(&quot;http://example.com/&quot;);
+
+	String result = MementoUtils.generateMementoLinkHeaders(results, wbr, true, true);
+
+	List&lt;String&gt; elements = new ArrayList&lt;String&gt;();
+	Matcher m = LINK_ELEMENT_PATTERN.matcher(result);
+	while (m.regionStart() &lt; result.length() &amp;&amp; m.lookingAt()) {
+		elements.add(m.group(1));
+		m.region(m.end(), result.length());
+	}
+	assertEquals(result.length(), m.regionStart());
+
+	// TODO: order doesn't really matter
+	assertEquals(&quot;&lt;http://example.com/&gt;; rel=\&quot;original\&quot;&quot;,
+		elements.get(0));
+	assertEquals(&quot;&lt;/web/timemap/link/http://example.com/&gt;; rel=\&quot;timemap\&quot;; type=\&quot;application/link-format\&quot;&quot;,
+		elements.get(1));
+	assertEquals(&quot;&lt;/web/http://example.com/&gt;; rel=\&quot;timegate\&quot;&quot;,
+		elements.get(2));
+	assertEquals(&quot;&lt;/web/20140125000000/http://example.com/&gt;; rel=\&quot;last memento\&quot;; datetime=\&quot;Sat, 25 Jan 2014 00:00:00 GMT\&quot;&quot;,
+		elements.get(3));
+	assertEquals(&quot;&lt;/web/20140101000000/http://example.com/&gt;; rel=\&quot;prev first memento\&quot;; datetime=\&quot;Wed, 01 Jan 2014 00:00:00 GMT\&quot;&quot;,
+		elements.get(4));
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 15</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">open-mika</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MatcherTest.java</span>
+								<a href="index-source_dir=open-mika-master_core-vm_java5_org_apache_harmony_regex_tests_java_util_regex_MatcherTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1425554votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1425554==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1425554==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * @test java.util.regex.Matcher#hasTransparentBounds()
+ * test hasTransparentBounds() method.
+@TestTargetNew(
+    level = TestLevel.COMPLETE,
+    notes = &quot;Verifies that hasTransparentBound method returns correct value.&quot;,
+    method = &quot;hasTransparentBounds&quot;,
+    args = {}
+)  
+ */
+public void test_hasTransparentBounds() {
+    String testPattern = &quot;abb&quot;;
+    String testString = &quot;ab\nb&quot;;
+    Pattern pat = Pattern.compile(testPattern);
+    Matcher mat = pat.matcher(testString);
+
+    assertFalse(&quot;Matcher uses opaque bounds by default&quot;,
+            mat.hasTransparentBounds());
+
+    Matcher mu = mat.useTransparentBounds(true);
+    assertTrue(&quot;Incorrect value of anchoring bounds&quot;,
+            mu.hasTransparentBounds());
+
+    mu = mat.useTransparentBounds(false);
+    assertFalse(&quot;Incorrect value of anchoring bounds&quot;,
+            mu.hasTransparentBounds());
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 16</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">open-mika</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MatcherTest.java</span>
+								<a href="index-source_dir=open-mika-master_core-vm_java5_org_apache_harmony_regex_tests_java_util_regex_MatcherTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1425553votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1425553==java.util.regex.Matcher">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1425553==java.util.regex.Matcher">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * @test java.util.regex.Matcher#hasAnchoringBounds()
+ * test hasAnchoringBounds() method.
+@TestTargetNew(
+    level = TestLevel.COMPLETE,
+    notes = &quot;Verifies that hasAnchoringBounds method returns correct value.&quot;,
+    method = &quot;hasAnchoringBounds&quot;,
+    args = {}
+)          
+ */
+public void test_hasAnchoringBounds() {
+    String testPattern = &quot;abb&quot;;
+    String testString = &quot;abb&quot;;
+    Pattern pat = Pattern.compile(testPattern);
+    Matcher mat = pat.matcher(testString);
+
+    assertTrue(&quot;Matcher uses anchoring bound by default&quot;,
+            mat.hasAnchoringBounds());
+
+    Matcher mu = mat.useAnchoringBounds(true);
+    assertTrue(&quot;Incorrect value of anchoring bounds&quot;,
+            mu.hasAnchoringBounds());
+
+    mu = mat.useAnchoringBounds(false);
+    assertFalse(&quot;Incorrect value of anchoring bounds&quot;,
+            mu.hasAnchoringBounds());
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("Matcher", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(Matcher, "ig") ,'<div style="background-color:red">' + Matcher + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

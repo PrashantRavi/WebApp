@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Symmetric Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/03/leetcode-symmetric-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/03/leetcode-symmetric-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Shlesh Tiwari</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-symmetric-tree-java/#comment-12256</link>
+		<dc:creator><![CDATA[Shlesh Tiwari]]></dc:creator>
+		<pubDate>Fri, 01 Jul 2016 06:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13814#comment-12256</guid>
+		<description><![CDATA[public class leet_func {
+	String tree1 = &quot;&quot;;
+	String tree2 = &quot;&quot;;
+	public void PostOrder(TreeNode root){
+		if(root == null){
+			tree1 += null;
+			return;
+		}
+		PostOrder(root.left);
+		PostOrder(root.right);
+		//System.out.println(root.val);
+		tree1 += root.val;
+		
+	}
+	
+	public void reversePostOrder(TreeNode root){ //Reverse of post order to compare
+		if(root == null){ //Comparison should give the same result. 
+			tree2+=null;
+			return;
+		}
+		reversePostOrder(root.right);
+		reversePostOrder(root.left);
+		//System.out.println(root.val);
+		tree2 += root.val;
+	}
+	
+	
+	public boolean isSymmetric(TreeNode root){
+		PostOrder(root);
+		reversePostOrder(root);
+		System.out.println(tree1);
+		System.out.println(tree2);
+		
+		//Comparison gives the same result. Draw the tree and check
+		//PostOrder -&#062; left -&#062; right -&#062; root
+		//ReversePostOrder -&#062; right -&#062; left -&#062; root
+		
+		if(tree1.equals(tree2)){ 
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>public class leet_func {<br />
+	String tree1 = &#8220;&#8221;;<br />
+	String tree2 = &#8220;&#8221;;<br />
+	public void PostOrder(TreeNode root){<br />
+		if(root == null){<br />
+			tree1 += null;<br />
+			return;<br />
+		}<br />
+		PostOrder(root.left);<br />
+		PostOrder(root.right);<br />
+		//System.out.println(root.val);<br />
+		tree1 += root.val;</p>
+<p>	}</p>
+<p>	public void reversePostOrder(TreeNode root){ //Reverse of post order to compare<br />
+		if(root == null){ //Comparison should give the same result.<br />
+			tree2+=null;<br />
+			return;<br />
+		}<br />
+		reversePostOrder(root.right);<br />
+		reversePostOrder(root.left);<br />
+		//System.out.println(root.val);<br />
+		tree2 += root.val;<br />
+	}</p>
+<p>	public boolean isSymmetric(TreeNode root){<br />
+		PostOrder(root);<br />
+		reversePostOrder(root);<br />
+		System.out.println(tree1);<br />
+		System.out.println(tree2);</p>
+<p>		//Comparison gives the same result. Draw the tree and check<br />
+		//PostOrder -&gt; left -&gt; right -&gt; root<br />
+		//ReversePostOrder -&gt; right -&gt; left -&gt; root</p>
+<p>		if(tree1.equals(tree2)){<br />
+			return true;<br />
+		}else{<br />
+			return false;<br />
+		}<br />
+	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Burhan COKCA</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-symmetric-tree-java/#comment-7016</link>
+		<dc:creator><![CDATA[Burhan COKCA]]></dc:creator>
+		<pubDate>Sun, 07 Jun 2015 22:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13814#comment-7016</guid>
+		<description><![CDATA[Iterative solution. We will need two queue two store the left and right.
+
+
+
+if(root == null) return true;
+
+        
+
+        Queue left = new LinkedList();
+
+        Queue right = new LinkedList();
+
+
+        left.add(root.left);
+
+        right.add(root.right);
+
+        
+
+        while(!left.isEmpty() &#038;&#038; !right.isEmpty()){
+
+            TreeNode l = left.remove();
+
+            TreeNode r = right.remove();
+
+            
+
+            if(l == null &#038;&#038; r == null) continue;
+
+            else if(l == null &#124;&#124; r == null) return false;
+
+            
+
+            if(l.val != r.val){
+
+                return false;
+
+            }
+
+            else{
+
+                left.add(l.left);
+
+                left.add(l.right);
+
+                right.add(r.right);
+
+                right.add(r.left);
+
+            }
+
+        }
+
+        
+
+        return true;
+
+]]></description>
+		<content:encoded><![CDATA[<p>Iterative solution. We will need two queue two store the left and right.</p>
+<p>if(root == null) return true;</p>
+<p>        Queue left = new LinkedList();</p>
+<p>        Queue right = new LinkedList();</p>
+<p>        left.add(root.left);</p>
+<p>        right.add(root.right);</p>
+<p>        while(!left.isEmpty() &amp;&amp; !right.isEmpty()){</p>
+<p>            TreeNode l = left.remove();</p>
+<p>            TreeNode r = right.remove();</p>
+<p>            if(l == null &amp;&amp; r == null) continue;</p>
+<p>            else if(l == null || r == null) return false;</p>
+<p>            if(l.val != r.val){</p>
+<p>                return false;</p>
+<p>            }</p>
+<p>            else{</p>
+<p>                left.add(l.left);</p>
+<p>                left.add(l.right);</p>
+<p>                right.add(r.right);</p>
+<p>                right.add(r.left);</p>
+<p>            }</p>
+<p>        }</p>
+<p>        return true;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

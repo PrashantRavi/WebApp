@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Collections - hashCode() and equals()</title>
+
+    <meta name="description" content="Explains what to be aware of, when implementing hashCode() and equals() in your own classes, for use with the Java Collections.">
+    <meta name="keywords"    content="java collection collections API framework hashcode equals">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Collections - hashCode() and equals()">
+    <meta name="twitter:description" content="Explains what to be aware of, when implementing hashCode() and equals() in your own classes, for use with the Java Collections.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Collections - hashCode() and equals()"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-collections/hashcode-equals.html"/>
+    <meta property="og:description" content="Explains what to be aware of, when implementing hashCode() and equals() in your own classes, for use with the Java Collections."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-collections/stack.html";
+var nextArticleInCategory = "/java-collections/sorting.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7204;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Collections</div><ol><li><a href="index.html">Java Collections Tutorial</a></li><li><a href="overview.html">Java Collections - Overview</a></li><li><a href="iterable.html">Java Collections - Iterable</a></li><li><a href="collection.html">Java Collections - Collection</a></li><li><a href="generic-collections.html">Java Collections - Generic Collections</a></li><li><a href="list.html">Java Collections - List</a></li><li><a href="set.html">Java Collections - Set</a></li><li><a href="sortedset.html">Java Collections - SortedSet</a></li><li><a href="navigableset.html">Java Collections - NavigableSet</a></li><li><a href="map.html">Java Collections - Map</a></li><li><a href="sortedmap.html">Java Collections - SortedMap</a></li><li><a href="navigablemap.html">Java Collections - NavigableMap</a></li><li><a href="queue.html">Java Collections - Queue</a></li><li><a href="deque.html">Java Collections - Deque</a></li><li><a href="stack.html">Java Collections - Stack</a></li><li><a href="hashcode-equals.html"><b>Java Collections - hashCode() and equals()</b></a></li><li><a href="sorting.html">Java Collections - Sorting</a></li><li><a href="streams.html">Java Collections - Streams</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Collections - hashCode() and equals()</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-02-10
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The methods <code>hashCode()</code> and  <code>equals()</code> play a distinct role
+    in the objects you insert into Java collections. The specific contract rules of
+    these two methods are best described in the JavaDoc. Here I will just tell you
+    what role they play. What they are used for, so you know why their implementations
+    are important.
+</p>
+
+
+<br/>
+<h2>equals()</h2>
+<p>
+    <code>equals()</code> is used in most collections to determine if a collection contains a
+    given element. For instance:
+</p>
+
+<pre class="codeBox">
+List list = new ArrayList();
+list.add("123");
+
+<b>boolean contains123 = list.contains("123");</b>
+</pre>
+
+<p>
+    The <code>ArrayList</code> iterates all its elements and execute <code>"123".equals(element)</code>
+    to determine if the element is equal to the parameter object "123". It is the
+    <code>String.equals()</code> implementation that determines if two strings are equal.
+</p>
+
+<p>
+    The <code>equals()</code> method is also used when removing elements. For instance:
+</p>
+
+<pre class="codeBox">
+List list = new ArrayList();
+list.add("123");
+
+<b>boolean removed = list.remove("123");</b>
+</pre>
+
+<p>
+    The <code>ArrayList</code> again iterates all its elements and execute <code>"123".equals(element)</code>
+    to determine if the element is equal to the parameter object "123". The first element it finds that
+    is equal to the given parameter "123" is removed.
+</p>
+
+<p>
+    As you can see, a proper implementation of <code>.equals()</code> is essential for your own classes
+    to work well with the Java Collection classes. So how do you implement <code>equals()</code> "properly"?
+</p>
+
+<p>
+    So, when are two objects equal? That depends on your application, the classes, and what you are trying to do.
+    For instance, let's say you are loading and processing <code>Employee</code> objects stored in a database.
+    Here is a simple example of such an <code>Employee</code> class:
+</p>
+
+<pre class="codeBox">
+public class Employee {
+    protected long   employeeId;
+    protected String firstName;
+    protected String lastName;
+}
+</pre>
+
+<p>
+    You could decide that two <code>Employee</code> objects are equal to each other if just their <code>employeeId</code>'s
+    are equal. Or, you could decide that all fields must be equal - both <code>employeeId</code>, <code>firstName</code>
+    and <code>lastName</code>. Here are two example implementation of <code>equals()</code> matching these criterias:
+</p>
+
+<pre class="codeBox">
+public class Employee {
+  ...
+  public boolean equals(Object o){
+    if(o == null)                return false;
+    if(!(o instanceof) Employee) return false;
+
+    Employee other = (Employee) o;
+    return this.employeeId == other.employeeId;
+  }
+}
+</pre>
+
+<pre class="codeBox">
+public class Employee {
+  ...
+  public boolean equals(Object o){
+    if(o == null)                return false;
+    if(!(o instanceof) Employee) return false;
+
+    Employee other = (Employee) o;
+    if(this.employeeId != other.employeeId)      return false;
+    if(! this.firstName.equals(other.firstName)) return false;
+    if(! this.lastName.equals(other.lastName))   return false;
+
+    return true;
+  }
+}
+</pre>
+
+
+<p>
+    Which of these two implementations is "proper" depends on what you need to do. Sometimes you need to lookup
+    an <code>Employee</code> object from a cache. In that case perhaps all you need is for the <code>employeeId</code>
+    to be equal. In other cases you may need more than that - for instance to determine if a copy of an <code>Employee</code>
+    object has changed from the original.
+</p>
+
+
+<br/>
+<h2>hashCode()</h2>
+
+<p>
+    The <code>hashCode()</code> method of objects is used when you insert them into a <code>HashTable</code>, <code>HashMap</code>
+    or <code>HashSet</code>. If you do not know the theory of how a hashtable works internally, you can read about
+    <a href="http://en.wikipedia.org/wiki/Hashtable" target="_blank">hastables on Wikipedia.org</a>.
+</p>
+
+<p>
+    When inserting an object into a hastable you use a key. The hash code of this key is calculated, and used to
+    determine where to <b>store</b> the object internally. When you need to lookup an object in a hashtable you also
+    use a key. The hash code of this key is calculated and used to determine where to <b>search</b> for the object.
+</p>
+<p>
+    The hash code only points to a certain "area" (or list, bucket etc) internally. Since different key objects
+    could potentially have the same hash code, the hash code itself is no guarantee that the right key is found.
+    The hashtable then iterates this area (all keys with the same hash code) and uses the
+    key's <code>equals()</code> method to find the right key. Once the right key is found, the object stored for
+    that key is returned.
+</p>
+
+<p>
+    So, as you can see, a combination of the <code>hashCode()</code> and <code>equals()</code> methods are used
+    when storing and when looking up objects in a hashtable.
+</p>
+
+<p>
+    Here are two rules that are good to know about implementing the <code>hashCode()</code> method in your own classes,
+    if the hashtables in the Java Collections API are to work correctly:
+</p>
+
+<ol>
+    <li>If object1 and object2 are equal according to their <code>equals()</code> method, they must also have the same hash code.</li>
+    <li>If object1 and object2 have the same hash code, they do NOT have to be equal too.</li>
+</ol>
+
+<p>
+    In shorter words:
+</p>
+
+<ol>
+    <li>If equal, then same hash codes too.</li>
+    <li>Same hash codes no guarantee of being equal.</li>
+</ol>
+
+<p>
+    Here are two example implementation of the <code>hashCode()</code> method matching the <code>equals()</code> methods
+    shown earlier:
+</p>
+
+
+<pre class="codeBox">
+public class Employee {
+  protected long   employeeId;
+  protected String firstName;
+  protected String lastName;
+
+  public int hashCode(){
+    return (int) employeeId;
+  }
+}
+</pre>
+
+<pre class="codeBox">
+public class Employee {
+    protected long   employeeId;
+    protected String firstName;
+    protected String lastName;
+
+  public int hashCode(){
+    return (int) employeeId *
+                firstName.hashCode() *
+                lastName.hashCode();
+  }
+}
+</pre>
+
+<p>
+    Notice, that if two <code>Employee</code> objects are equal, they will also have the same hash code. But,
+    as is especially easy to see in the first example, two <code>Employee</code> objects can be not equal,
+    and still have the same hash code.
+</p>
+<p>
+    In both examples the hash code is the <code>employeeId</code> is rounded down to
+    an <code>int</code>. That means that many employee id's could result in the same hash code, but these
+    <code>Employee</code> objects would still not be equal, since they don't have the same employee id.
+</p>
+
+
+
+<br/>
+<h2>More Detail in the JavaDoc</h2>
+<p>
+    For a 100% precise description of how to implement <code>equals()</code> and <code>hashCode()</code> you should
+    check out the official JavaDoc's. The purpose of this text was mostly to explain how they are used by the
+    Java Collection classes. Understanding this makes it easier to implement them to suit your purposes.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="sorting.html">Java Collections - Sorting</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

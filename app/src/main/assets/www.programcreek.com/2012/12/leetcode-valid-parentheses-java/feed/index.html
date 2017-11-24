@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Valid Parentheses (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Badarinath</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-14352</link>
+		<dc:creator><![CDATA[Badarinath]]></dc:creator>
+		<pubDate>Tue, 06 Sep 2016 00:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-14352</guid>
+		<description><![CDATA[simple Solution is to add every character to Hash set and get the size of it. As Set doesn&#039;t store duplicates this is the easiest and simple way to get the count.
+
+below is the code 
+&lt;code&gt;
+static int longest(String s){
+        int result  = 0;
+        int a = s.length();
+        Set set = new HashSet();
+        for(int i=0; i&#060;a-1 ; i++){
+            set.add(s.charAt(i));
+        }
+        System.out.println(&#034;Length of the  string is&#034; + set.size());
+        return result;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>simple Solution is to add every character to Hash set and get the size of it. As Set doesn&#8217;t store duplicates this is the easiest and simple way to get the count.</p>
+<p>below is the code<br />
+<code><br />
+static int longest(String s){<br />
+        int result  = 0;<br />
+        int a = s.length();<br />
+        Set set = new HashSet();<br />
+        for(int i=0; i&lt;a-1 ; i++){<br />
+            set.add(s.charAt(i));<br />
+        }<br />
+        System.out.println(&quot;Length of the  string is&quot; + set.size());<br />
+        return result;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ryan Biesemeyer</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-14026</link>
+		<dc:creator><![CDATA[Ryan Biesemeyer]]></dc:creator>
+		<pubDate>Wed, 24 Aug 2016 20:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-14026</guid>
+		<description><![CDATA[Unfortunately, this solution lets a lot of invalid inputs through: e.g. &quot;[(])&quot;, &quot;((}&quot;, and &quot;[)}&quot;.]]></description>
+		<content:encoded><![CDATA[<p>Unfortunately, this solution lets a lot of invalid inputs through: e.g. &#8220;[(])&#8221;, &#8220;((}&#8221;, and &#8220;[)}&#8221;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sameer Deswal</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-12941</link>
+		<dc:creator><![CDATA[Sameer Deswal]]></dc:creator>
+		<pubDate>Wed, 27 Jul 2016 10:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-12941</guid>
+		<description><![CDATA[&lt;code&gt; 
+static Map charMap = new HashMap();
+	static{
+		charMap.put(&#039;]&#039;, &#039;[&#039;);
+		charMap.put(&#039;}&#039;, &#039;{&#039;);
+		charMap.put(&#039;)&#039;, &#039;(&#039;);;
+	}
+	static String paranthesis=&quot;{}[]()&quot;;
+	public static void main(String[] args) {
+		String str=&quot;{}[]()&quot;;
+		String str1=&quot;{][][}&quot;;
+		String str2=&quot;{[()]}&quot;;
+		validate(str);
+		validate(str1);
+		validate(str2);
+	}
+
+	private static void validate(String str) {
+		Stack characters = new Stack();
+		for (Character character : str.toCharArray()) {
+			if(paranthesis.indexOf(character)&#062;=0){
+				if(charMap.keySet().contains(character)){
+					if(characters.size()==0){
+						System.out.println(&quot;Invalid&quot;);
+						return;
+					}else if(!charMap.get(character).equals(characters.peek())){
+						System.out.println(&quot;Invalid&quot;);
+						return;
+					}else{
+						characters.pop();
+					}
+				}else{
+					characters.push(character);
+				}
+				
+			}
+		}
+		System.out.println(&quot;Valid&quot;);
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+static Map charMap = new HashMap();<br />
+	static{<br />
+		charMap.put(']', '[');<br />
+		charMap.put('}', '{');<br />
+		charMap.put(')', '(');;<br />
+	}<br />
+	static String paranthesis="{}[]()";<br />
+	public static void main(String[] args) {<br />
+		String str="{}[]()";<br />
+		String str1="{][][}";<br />
+		String str2="{[()]}";<br />
+		validate(str);<br />
+		validate(str1);<br />
+		validate(str2);<br />
+	}</p>
+<p>	private static void validate(String str) {<br />
+		Stack characters = new Stack();<br />
+		for (Character character : str.toCharArray()) {<br />
+			if(paranthesis.indexOf(character)&gt;=0){<br />
+				if(charMap.keySet().contains(character)){<br />
+					if(characters.size()==0){<br />
+						System.out.println("Invalid");<br />
+						return;<br />
+					}else if(!charMap.get(character).equals(characters.peek())){<br />
+						System.out.println("Invalid");<br />
+						return;<br />
+					}else{<br />
+						characters.pop();<br />
+					}<br />
+				}else{<br />
+					characters.push(character);<br />
+				}</p>
+<p>			}<br />
+		}<br />
+		System.out.println("Valid");<br />
+	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cc</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-9162</link>
+		<dc:creator><![CDATA[cc]]></dc:creator>
+		<pubDate>Mon, 22 Feb 2016 02:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-9162</guid>
+		<description><![CDATA[this solution is very interesting~]]></description>
+		<content:encoded><![CDATA[<p>this solution is very interesting~</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bmm6o</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-8072</link>
+		<dc:creator><![CDATA[bmm6o]]></dc:creator>
+		<pubDate>Wed, 30 Dec 2015 23:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-8072</guid>
+		<description><![CDATA[It&#039;s true that map.values.contains() has complexity linear with the size of the map.  It&#039;s incorrect to simply combine that with the O(n) of the loop (linear in the length of the input).  (Also note that the map has constant size.)]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s true that map.values.contains() has complexity linear with the size of the map.  It&#8217;s incorrect to simply combine that with the O(n) of the loop (linear in the length of the input).  (Also note that the map has constant size.)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Taoufik Bdiri</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-valid-parentheses-java/#comment-6925</link>
+		<dc:creator><![CDATA[Taoufik Bdiri]]></dc:creator>
+		<pubDate>Wed, 29 Apr 2015 20:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11223#comment-6925</guid>
+		<description><![CDATA[Here is my solution accepted by LeetCode using a Stack, and 2 strings. 
+
+public class Solution {
+	public boolean isValid(String s) {
+		Stack stack = new Stack();
+		String operator = &quot;({[&quot;;
+		String operator2 = &quot;)}]&quot;;
+		for (int i = 0; i &#060; s.length(); i++) {
+			if (operator.contains(s.substring(i, i + 1))) {
+				int index = operator.indexOf(s.substring(i, i + 1));
+				stack.push(operator2.charAt(index));
+			} else if (stack.isEmpty())
+				return false;
+			else {
+				char myChar = stack.pop();
+				if (myChar != s.charAt(i))
+					return false;
+			}
+		}
+		if (!stack.empty())
+			return false;
+		return true;
+	}
+}
+]]></description>
+		<content:encoded><![CDATA[<p>Here is my solution accepted by LeetCode using a Stack, and 2 strings. </p>
+<p>public class Solution {<br />
+	public boolean isValid(String s) {<br />
+		Stack stack = new Stack();<br />
+		String operator = &#8220;({[&#8220;;<br />
+		String operator2 = &#8220;)}]&#8221;;<br />
+		for (int i = 0; i &lt; s.length(); i++) {<br />
+			if (operator.contains(s.substring(i, i + 1))) {<br />
+				int index = operator.indexOf(s.substring(i, i + 1));<br />
+				stack.push(operator2.charAt(index));<br />
+			} else if (stack.isEmpty())<br />
+				return false;<br />
+			else {<br />
+				char myChar = stack.pop();<br />
+				if (myChar != s.charAt(i))<br />
+					return false;<br />
+			}<br />
+		}<br />
+		if (!stack.empty())<br />
+			return false;<br />
+		return true;<br />
+	}<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

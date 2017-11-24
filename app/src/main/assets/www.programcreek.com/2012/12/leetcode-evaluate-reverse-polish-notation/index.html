@@ -1,0 +1,904 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Evaluate Reverse Polish Notation</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Evaluate the value of an arithmetic expression in Reverse Polish Notation. Valid operators are +, -, *, /. Each operand may be an integer or another expression."/>
+<meta name="keywords" content="leetcode evaluate reverse polish notation"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Evaluate Reverse Polish Notation Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Copy List with Random Pointer' href='../leetcode-copy-list-with-random-pointer/index.html'/>
+<link rel='next' title='面试10大算法汇总＋常见题目解答' href='../%E9%9D%A2%E8%AF%9510%E5%A4%A7%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB%EF%BC%8B%E5%B8%B8%E8%A7%81%E9%A2%98%E7%9B%AE%E8%A7%A3%E7%AD%94/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=10776.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-evaluate-reverse-polish-notation_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-evaluate-reverse-polish-notation_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-10776"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Evaluate Reverse Polish Notation </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Evaluate the value of an arithmetic expression in Reverse Polish Notation. Valid operators are +, -, *, /. Each operand may be an integer or another expression. For example:</p>
+<pre>
+  ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
+  ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+</pre>
+<p><strong>1. Naive Approach</strong></p>
+<p>This problem can be solved by using a stack. We can loop through each element in the given array. When it is a number, push it to the stack. When it is an operator, pop two numbers from the stack, do the calculation, and push back the result. </p>
+<p><img src="../../../wp-content/uploads/2012/12/Evaluate-Reverse-Polish-Notation-650x469.png" alt="Evaluate Reverse Polish Notation" width="450" height="279" class="alignleft size-large wp-image-10886"/></p>
+<p>The following is the code. However, this code contains compilation errors in leetcode. Why?</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Test <span style="color: #009900;">&#123;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tokens <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#123;</span> <span style="color: #0000ff;">&quot;2&quot;</span>, <span style="color: #0000ff;">&quot;1&quot;</span>, <span style="color: #0000ff;">&quot;+&quot;</span>, <span style="color: #0000ff;">&quot;3&quot;</span>, <span style="color: #0000ff;">&quot;*&quot;</span> <span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>evalRPN<span style="color: #009900;">&#40;</span>tokens<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">int</span> evalRPN<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tokens<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> returnValue <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">String</span> operators <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;+-*/&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+		Stack<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> stack <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Stack<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> t <span style="color: #339933;">:</span> tokens<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>operators.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #666666; font-style: italic;">//push to stack if it is a number</span>
+				stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span><span style="color: #666666; font-style: italic;">//pop numbers from stack if it is an operator</span>
+				<span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #000066; font-weight: bold;">int</span> b <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">case</span> <span style="color: #0000ff;">&quot;+&quot;</span><span style="color: #339933;">:</span>
+					stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>a <span style="color: #339933;">+</span> b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					<span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">case</span> <span style="color: #0000ff;">&quot;-&quot;</span><span style="color: #339933;">:</span>
+					stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>b <span style="color: #339933;">-</span> a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					<span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">case</span> <span style="color: #0000ff;">&quot;*&quot;</span><span style="color: #339933;">:</span>
+					stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>a <span style="color: #339933;">*</span> b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					<span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+				<span style="color: #000000; font-weight: bold;">case</span> <span style="color: #0000ff;">&quot;/&quot;</span><span style="color: #339933;">:</span>
+					stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>b <span style="color: #339933;">/</span> a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+					<span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		returnValue <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">return</span> returnValue<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>The problem is that switch string statement is only available from JDK 1.7. Leetcode apparently use a JDK version below 1.7. </p>
+<p><strong>2. Accepted Solution</strong></p>
+<p>If you want to use switch statement, you can convert the above by using the following code which use the index of a string "+-*/".</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> evalRPN<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tokens<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">int</span> returnValue <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #003399;">String</span> operators <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;+-*/&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+        Stack<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> stack <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Stack<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> t <span style="color: #339933;">:</span> tokens<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>operators.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">int</span> a <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000066; font-weight: bold;">int</span> b <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000066; font-weight: bold;">int</span> index <span style="color: #339933;">=</span> operators.<span style="color: #006633;">indexOf</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">switch</span><span style="color: #009900;">&#40;</span>index<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                    <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">:</span>
+                        stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">+</span>b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">:</span>
+                        stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>b<span style="color: #339933;">-</span>a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">2</span><span style="color: #339933;">:</span>
+                        stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>a<span style="color: #339933;">*</span>b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">case</span> <span style="color: #cc66cc;">3</span><span style="color: #339933;">:</span>
+                        stack.<span style="color: #006633;">push</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>b<span style="color: #339933;">/</span>a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        returnValue <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">valueOf</span><span style="color: #009900;">&#40;</span>stack.<span style="color: #006633;">pop</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">return</span> returnValue<span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../leetcode-solution-of-binary-tree-inorder-traversal-in-java/index.html" rel="bookmark" title="Leetcode &#8211; Binary Tree Inorder Traversal (Java)">Leetcode &#8211; Binary Tree Inorder Traversal (Java) </a></li>
+<li><a href="../leetcode-solution-for-binary-tree-preorder-traversal-in-java/index.html" rel="bookmark" title="Leetcode &#8211; Binary Tree Preorder Traversal (Java)">Leetcode &#8211; Binary Tree Preorder Traversal (Java) </a></li>
+<li><a href="../leetcode-reverse-integer/index.html" rel="bookmark" title="LeetCode &#8211; Reverse Integer">LeetCode &#8211; Reverse Integer </a></li>
+<li><a href="../../../2014/03/leetcode-reverse-bits-java/index.html" rel="bookmark" title="LeetCode &#8211; Reverse Bits (Java)">LeetCode &#8211; Reverse Bits (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/" dc:title="LeetCode &#8211; Evaluate Reverse Polish Notation" trackback:ping="http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-15184">
+<div id="dsq-comment-header-15184" class="dsq-comment-header">
+<cite id="dsq-cite-15184">
+<span id="dsq-author-user-15184">emirpolo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15184" class="dsq-comment-body">
+<div id="dsq-comment-message-15184" class="dsq-comment-message"><p>JavaScript</p>
+<p>function ReversePolishNotation(ain) {<br/>
+var out = [];<br/>
+ain.forEach(function(o){<br/>
+if(!isNaN(o)) {<br/>
+out.push(o);<br/>
+}<br/>
+else {<br/>
+var a = out.pop();<br/>
+var b = out.pop();<br/>
+out.push(eval(b + o + a));<br/>
+}<br/>
+});<br/>
+return out.pop();<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-13693">
+<div id="dsq-comment-header-13693" class="dsq-comment-header">
+<cite id="dsq-cite-13693">
+<span id="dsq-author-user-13693">Greg Mueller</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13693" class="dsq-comment-body">
+<div id="dsq-comment-message-13693" class="dsq-comment-message"><p>Thanks Ryan, I tried this and found an error &#8211; in eval_op, you are missing the &#8216;:&#8217; before each return. Also you named your main function &#8216;eval&#8217;, which overwrites the built-in eval function.</p>
+<p>I refactored your code down to this. The main difference is that I am building a string that looks like Python code and then calling eval on that string. Also, I am storing the numbers as strings, since I am not forcing the intergers to flow, or float to integer.</p>
+<p><code><br/>
+def rpn(expr):<br/>
+s = []<br/>
+expr = expr.split() if type(expr) == type('') else expr<br/>
+for item in expr:<br/>
+if item.isnumeric():<br/>
+s.append(int(item))<br/>
+elif item in {'+', '-', '*', '/'}:<br/>
+intermediate_expr = ' '.join((str(s.pop()), item, str(s.pop())))<br/>
+s.append(eval(intermediate_expr))<br/>
+else:<br/>
+raise ValueError('Invalid value: ' + item)<br/>
+return s.pop()</p>
+<p>rpn('4 13 5 / +')<br/>
+rpn(["2", "1", "+", "3", "*"])<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-13495">
+<div id="dsq-comment-header-13495" class="dsq-comment-header">
+<cite id="dsq-cite-13495">
+<span id="dsq-author-user-13495">bimal prasad pandey</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13495" class="dsq-comment-body">
+<div id="dsq-comment-message-13495" class="dsq-comment-message"><p>thanx for it</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7805">
+<div id="dsq-comment-header-7805" class="dsq-comment-header">
+<cite id="dsq-cite-7805">
+<span id="dsq-author-user-7805">Ryan Shaw</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7805" class="dsq-comment-body">
+<div id="dsq-comment-message-7805" class="dsq-comment-message"><p>Python solution:<br/>
+<code><br/>
+def eval_op(land, rand, op):<br/>
+if (op == '-') return land - rand<br/>
+if (op == '+') return land + rand<br/>
+if (op == '/') return land / rand<br/>
+if (op == '*') return land * rand<br/>
+raise ValueError('unrecognized op: ' + op)</p>
+<p>def is_op(c):<br/>
+return c == '+' or c == '-' or c == '*' or c == '/'</p>
+<p>def eval(expr):<br/>
+s = []<br/>
+for c in expr:<br/>
+if not is_op(c): s.append(int(c))<br/>
+else:<br/>
+rand, land = s.pop(), s.pop()<br/>
+s.append(eval_op(land, rand, c))<br/>
+return s.pop()<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7529">
+<div id="dsq-comment-header-7529" class="dsq-comment-header">
+<cite id="dsq-cite-7529">
+<span id="dsq-author-user-7529">Abhishek Roy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7529" class="dsq-comment-body">
+<div id="dsq-comment-message-7529" class="dsq-comment-message"><p>This may be due to lowercase &#8220;s&#8221; in &#8220;string&#8221;. Try using &#8220;String&#8221; instead of &#8220;string&#8221; as shown below,<br/>
+Stack stack = new Stack();</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7327">
+<div id="dsq-comment-header-7327" class="dsq-comment-header">
+<cite id="dsq-cite-7327">
+<span id="dsq-author-user-7327">srj_michael</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7327" class="dsq-comment-body">
+<div id="dsq-comment-message-7327" class="dsq-comment-message"><p><code> </p>
+<p> Stack stack = new Stack();</code><br/>
+Showing error as :type stack does not take parameter</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7326">
+<div id="dsq-comment-header-7326" class="dsq-comment-header">
+<cite id="dsq-cite-7326">
+<span id="dsq-author-user-7326">srj_michael</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7326" class="dsq-comment-body">
+<div id="dsq-comment-message-7326" class="dsq-comment-message"><p>It&#8217;s showing error.<br/>
+error: type stack does not take parameter.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7254">
+<div id="dsq-comment-header-7254" class="dsq-comment-header">
+<cite id="dsq-cite-7254">
+<span id="dsq-author-user-7254">Yunxiao Zou</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7254" class="dsq-comment-body">
+<div id="dsq-comment-message-7254" class="dsq-comment-message"><p>naive approach works for current Leetcode Java OJ</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7211">
+<div id="dsq-comment-header-7211" class="dsq-comment-header">
+<cite id="dsq-cite-7211">
+<span id="dsq-author-user-7211">Taylor Annaterre</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7211" class="dsq-comment-body">
+<div id="dsq-comment-message-7211" class="dsq-comment-message"><p><a href="https://www.youtube.com/watch?v=-6wM2eJQWh4" rel="nofollow">https://www.youtube.com/watch?v=-6wM2eJQWh4</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7142">
+<div id="dsq-comment-header-7142" class="dsq-comment-header">
+<cite id="dsq-cite-7142">
+<span id="dsq-author-user-7142">meha</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7142" class="dsq-comment-body">
+<div id="dsq-comment-message-7142" class="dsq-comment-message"><p>I was evaluating the second eg. i.e [&#8220;4&#8221;, &#8220;13&#8221;, &#8220;5&#8221;, &#8220;/&#8221;, &#8220;+&#8221;] -&gt; (4 + (13 / 5)) -&gt; 6 and solution is 4 instead of 6, because you pop 5 and then 13 ==&gt; which will give you 5/13 =0 and hence the expression will result in 4.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6837">
+<div id="dsq-comment-header-6837" class="dsq-comment-header">
+<cite id="dsq-cite-6837">
+<span id="dsq-author-user-6837">Parag Chaudhari</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6837" class="dsq-comment-body">
+<div id="dsq-comment-message-6837" class="dsq-comment-message"><p>There is a bug in this code, first pop() must be a right operand and second pop() must be a left operand. </p>
+<p>Also, include following Edge Cases:<br/>
+1. You should check before returning that stack contains only one element.<br/>
+2. You must check divide by zero error for division operation<br/>
+3. You must handle unary operators e.g. factorial (!)<br/>
+4. Before performing any binary operation you must check whether stack has 2 operands.<br/>
+5. Before performing any unary operation you must check whether stack has 1 operand.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6826">
+<div id="dsq-comment-header-6826" class="dsq-comment-header">
+<cite id="dsq-cite-6826">
+<span id="dsq-author-user-6826">anonymous</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6826" class="dsq-comment-body">
+<div id="dsq-comment-message-6826" class="dsq-comment-message"><p>Here it is in Ruby if anyone is curious:</p>
+<p>def evaluate(expression)<br/>
+stack = []<br/>
+until expression.empty?<br/>
+a = expression.shift<br/>
+if (a.eql?(&#8220;+&#8221;) || a.eql?(&#8220;*&#8221;) || a.eql?(&#8220;-&#8220;) || a.eql?(&#8220;/&#8221;))<br/>
+x, y = stack.pop, stack.pop<br/>
+stack.push y.send(a, x)<br/>
+else<br/>
+stack.push a.to_i<br/>
+end<br/>
+end<br/>
+stack.first<br/>
+end<br/>
+evaluate [&#8220;4&#8221;, &#8220;13&#8221;, &#8220;5&#8221;, &#8220;/&#8221;, &#8220;+&#8221;]<br/>
+#=&gt; 6</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6816">
+<div id="dsq-comment-header-6816" class="dsq-comment-header">
+<cite id="dsq-cite-6816">
+<span id="dsq-author-user-6816">cg22165</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6816" class="dsq-comment-body">
+<div id="dsq-comment-message-6816" class="dsq-comment-message"><p>Better to use a Stack of Integers. Boxing and unboxing should be more efficient than creating and garbage collecting a lot of Strings.</p>
+<p>Better to wrap most of the operation and data type conversions in a try-catch. The catch can simply return &#8220;Data error&#8221;, &#8220;Invalid expression&#8221;, or similar.</p>
+<p>The pop of a and b should be reversed. &#8220;0 1 /&#8221; is valid, but &#8220;1 0 /&#8221; is an error. </p>
+<p>Honey badger doesn&#8217;t care whether you use ints, doubles, bigdecimals, whatever. They are looking for a good algorithm.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6785">
+<div id="dsq-comment-header-6785" class="dsq-comment-header">
+<cite id="dsq-cite-6785">
+<span id="dsq-author-user-6785">sebastian</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6785" class="dsq-comment-body">
+<div id="dsq-comment-message-6785" class="dsq-comment-message"><p>always a and b will be an int ? dont you think that maybe b could be null ? and in this case you wil have problems with the operations.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6719">
+<div id="dsq-comment-header-6719" class="dsq-comment-header">
+<cite id="dsq-cite-6719">
+<span id="dsq-author-user-6719">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6719" class="dsq-comment-body">
+<div id="dsq-comment-message-6719" class="dsq-comment-message"><p>It does not belong here, and can you put the code inside &lt;pre&gt; tags?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6717">
+<div id="dsq-comment-header-6717" class="dsq-comment-header">
+<cite id="dsq-cite-6717">
+<span id="dsq-author-user-6717">Salil Surendran</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6717" class="dsq-comment-body">
+<div id="dsq-comment-message-6717" class="dsq-comment-message"><p>What do you guys think of this solution. This is an O(n) solution</p>
+<p>private String findLongestPalindromicSubString(String str){</p>
+<p> if(str == null || str.length() == 0)<br/>
+return null;<br/>
+else if(str.length() == 1)<br/>
+return str;<br/>
+else{<br/>
+//Traverse down the string and which is each character<br/>
+//check this logic.<br/>
+int index=1;<br/>
+String longestPalindrome=null;<br/>
+while(index &lt; str.length()/*||<br/>
+(longestPalindrome != null &amp;&amp; str.length() &#8211; index 2 &amp;&amp; str.charAt(index) == str.charAt(index &#8211; 2))<br/>
+currentPalindrome=readPalindrome(index &#8211; 2, index, str);</p>
+<p> if(currentPalindrome != null){<br/>
+if(longestPalindrome == null || currentPalindrome.length() &gt; longestPalindrome.length())<br/>
+longestPalindrome=currentPalindrome;<br/>
+index+=currentPalindrome.length() / 2;<br/>
+}else<br/>
+index++;<br/>
+}<br/>
+return longestPalindrome;<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6599">
+<div id="dsq-comment-header-6599" class="dsq-comment-header">
+<cite id="dsq-cite-6599">
+<a id="dsq-author-user-6599" href="http://soltesza.wordpress.com/" target="_blank" rel="nofollow">sola</a>
+</cite>
+</div>
+<div id="dsq-comment-body-6599" class="dsq-comment-body">
+<div id="dsq-comment-message-6599" class="dsq-comment-message"><p>I also don&#8217;t understand why the accepted solution uses Integer, it should use Double or at least Float.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6304">
+<div id="dsq-comment-header-6304" class="dsq-comment-header">
+<cite id="dsq-cite-6304">
+<span id="dsq-author-user-6304">Julien Dreux</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6304" class="dsq-comment-body">
+<div id="dsq-comment-message-6304" class="dsq-comment-message"><p>This implementation makes wrong assumptions about the pop/push methods on arrays. Pop and push act at the end of the array, the shift and unshift methods should be used instead.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6290">
+<div id="dsq-comment-header-6290" class="dsq-comment-header">
+<cite id="dsq-cite-6290">
+<span id="dsq-author-user-6290">themansitiwari</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6290" class="dsq-comment-body">
+<div id="dsq-comment-message-6290" class="dsq-comment-message"><p>what if we want the user to give in the input? like what if we have two digit or three digit numbers separated by comma or space?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5980">
+<div id="dsq-comment-header-5980" class="dsq-comment-header">
+<cite id="dsq-cite-5980">
+<span id="dsq-author-user-5980">Dongyon Kang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5980" class="dsq-comment-body">
+<div id="dsq-comment-message-5980" class="dsq-comment-message"><p>wouldn&#8217;t b/a return an integer, which could be incorrect in cases such as &#8220;1/2&#8221; since b and a are both ints?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5975">
+<div id="dsq-comment-header-5975" class="dsq-comment-header">
+<cite id="dsq-cite-5975">
+<span id="dsq-author-user-5975">Axel Hadfeg</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5975" class="dsq-comment-body">
+<div id="dsq-comment-message-5975" class="dsq-comment-message"><p>The problem presented above is for a reverse polish notation (or postfix notation).<br/>
+The problem you describe is in standard infix format. Postfix notation always assumes you have two operands preceding an operator. Thus your case doesn&#8217;t really apply. You could, however, make an error check for special cases that fall beyond the method&#8217;s assumptions. For example 2* would be 2 *1, or 2 *0, whatever you deem fit.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5891">
+<div id="dsq-comment-header-5891" class="dsq-comment-header">
+<cite id="dsq-cite-5891">
+<span id="dsq-author-user-5891">codingfacts</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5891" class="dsq-comment-body">
+<div id="dsq-comment-message-5891" class="dsq-comment-message"><p>what about this case. 2*3-1</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5697">
+<div id="dsq-comment-header-5697" class="dsq-comment-header">
+<cite id="dsq-cite-5697">
+<span id="dsq-author-user-5697">Henco Appel</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5697" class="dsq-comment-body">
+<div id="dsq-comment-message-5697" class="dsq-comment-message"><p>Thought I&#8217;d point out something slightly nicer than using the index, in Java 1.6 you can switch on chars, so why not just switch on t.charAt(0) for cases &#8216;+&#8217;, &#8216;-&#8216;, &#8216;*&#8217;, &#8216;/&#8217;. Also means that you don&#8217;t have to do a search, even though it&#8217;s only a String of 4 characters.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5696">
+<div id="dsq-comment-header-5696" class="dsq-comment-header">
+<cite id="dsq-cite-5696">
+<span id="dsq-author-user-5696">Henco Appel</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5696" class="dsq-comment-body">
+<div id="dsq-comment-message-5696" class="dsq-comment-message"><p>The hole point of RPN is that you don&#8217;t need the brackets, the order of the numbers and operators is what defines the order of the operations, so no need for brackets or BODMAS.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5629">
+<div id="dsq-comment-header-5629" class="dsq-comment-header">
+<cite id="dsq-cite-5629">
+<span id="dsq-author-user-5629">shreyas KN</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5629" class="dsq-comment-body">
+<div id="dsq-comment-message-5629" class="dsq-comment-message"><p>hey are we not supposed to apply the BODMAS rules here ?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5403">
+<div id="dsq-comment-header-5403" class="dsq-comment-header">
+<cite id="dsq-cite-5403">
+<span id="dsq-author-user-5403">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5403" class="dsq-comment-body">
+<div id="dsq-comment-message-5403" class="dsq-comment-message"><p>Changed. Thanks!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5397">
+<div id="dsq-comment-header-5397" class="dsq-comment-header">
+<cite id="dsq-cite-5397">
+<span id="dsq-author-user-5397">JeffreyT</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5397" class="dsq-comment-body">
+<div id="dsq-comment-message-5397" class="dsq-comment-message"><p>for the naive solution, you may want to replace &#8220;a &#8211; b&#8221; with &#8220;b &#8211; a&#8221; in case &#8220;-&#8221; of switch block.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/';
+var disqus_identifier = '10776 http://www.programcreek.com/?p=10776';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Evaluate Reverse Polish Notation";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=10776';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

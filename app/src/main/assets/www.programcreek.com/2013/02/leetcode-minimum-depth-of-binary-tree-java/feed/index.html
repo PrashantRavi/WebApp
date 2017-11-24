@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Minimum Depth of Binary Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: rupalph</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-13081</link>
+		<dc:creator><![CDATA[rupalph]]></dc:creator>
+		<pubDate>Mon, 01 Aug 2016 05:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-13081</guid>
+		<description><![CDATA[Correct recursive solution:
+&lt;code&gt;
+public int minDepth(TreeNode node,int depth) {
+	 	
+		if (node == null) return 0;
+	 		
+	 	int depth1=minDepth(node.left,depth+1);
+	 	int depth2=minDepth(node.right,depth+1);
+
+		return (Math.min(depth1,depth2 )+depth);
+	}
+
+Call above method as minDepth(root,0)
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Correct recursive solution:<br />
+<code><br />
+public int minDepth(TreeNode node,int depth) {</p>
+<p>		if (node == null) return 0;</p>
+<p>	 	int depth1=minDepth(node.left,depth+1);<br />
+	 	int depth2=minDepth(node.right,depth+1);</p>
+<p>		return (Math.min(depth1,depth2 )+depth);<br />
+	}</p>
+<p>Call above method as minDepth(root,0)<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Israel Lopez</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-12173</link>
+		<dc:creator><![CDATA[Israel Lopez]]></dc:creator>
+		<pubDate>Tue, 28 Jun 2016 17:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-12173</guid>
+		<description><![CDATA[It works with only one queue
+
+private  int minimunDepth(TreeNode root){
+		
+		int totalDepth =0;
+		
+		if(root == null)
+            return totalDepth;
+ 
+		Queue queue = new LinkedList();
+		queue.add(root);
+        totalDepth++;
+        TreeNode rootNew, rootNewRight;
+        
+        while (!queue.isEmpty()){
+        	
+        	TreeNode node = queue.poll();
+        	root = node;
+        	totalDepth++;
+        	rootNew = node.leftChild;
+        	rootNewRight = node.rightChild;
+        	
+        	if (rootNew != null &#038;&#038; (rootNew.leftChild !=null &#124;&#124; rootNew.rightChild!=null) )
+        		queue.add(rootNew);
+        	else break;
+        	if (rootNewRight != null &#038;&#038; (rootNewRight.rightChild != null &#124;&#124; rootNewRight.leftChild != null) )
+        		queue.add(rootNewRight);
+        	else break;
+        	
+        	
+        }
+        
+        return totalDepth;
+		
+	}]]></description>
+		<content:encoded><![CDATA[<p>It works with only one queue</p>
+<p>private  int minimunDepth(TreeNode root){</p>
+<p>		int totalDepth =0;</p>
+<p>		if(root == null)<br />
+            return totalDepth;</p>
+<p>		Queue queue = new LinkedList();<br />
+		queue.add(root);<br />
+        totalDepth++;<br />
+        TreeNode rootNew, rootNewRight;</p>
+<p>        while (!queue.isEmpty()){</p>
+<p>        	TreeNode node = queue.poll();<br />
+        	root = node;<br />
+        	totalDepth++;<br />
+        	rootNew = node.leftChild;<br />
+        	rootNewRight = node.rightChild;</p>
+<p>        	if (rootNew != null &amp;&amp; (rootNew.leftChild !=null || rootNew.rightChild!=null) )<br />
+        		queue.add(rootNew);<br />
+        	else break;<br />
+        	if (rootNewRight != null &amp;&amp; (rootNewRight.rightChild != null || rootNewRight.leftChild != null) )<br />
+        		queue.add(rootNewRight);<br />
+        	else break;</p>
+<p>        }</p>
+<p>        return totalDepth;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: juno</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-11726</link>
+		<dc:creator><![CDATA[juno]]></dc:creator>
+		<pubDate>Wed, 08 Jun 2016 18:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-11726</guid>
+		<description><![CDATA[return Math.max(minDepth(root.left), minDepth(root.right)) +1;]]></description>
+		<content:encoded><![CDATA[<p>return Math.max(minDepth(root.left), minDepth(root.right)) +1;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ryanlr</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-10381</link>
+		<dc:creator><![CDATA[ryanlr]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2016 15:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-10381</guid>
+		<description><![CDATA[Changed.]]></description>
+		<content:encoded><![CDATA[<p>Changed.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gao can</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-8328</link>
+		<dc:creator><![CDATA[gao can]]></dc:creator>
+		<pubDate>Tue, 12 Jan 2016 04:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-8328</guid>
+		<description><![CDATA[Seems wrong]]></description>
+		<content:encoded><![CDATA[<p>Seems wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Shah</title>
+		<link>http://www.programcreek.com/2013/02/leetcode-minimum-depth-of-binary-tree-java/#comment-8283</link>
+		<dc:creator><![CDATA[Ankit Shah]]></dc:creator>
+		<pubDate>Sun, 10 Jan 2016 02:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11730#comment-8283</guid>
+		<description><![CDATA[you can further optimzer your solution Vishal by doing this: not need for the other code in between.
+
+	private int minDepth(TreeNode root) {
+		if (root == null) return 0;
+		return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+	}]]></description>
+		<content:encoded><![CDATA[<p>you can further optimzer your solution Vishal by doing this: not need for the other code in between.</p>
+<p>	private int minDepth(TreeNode root) {<br />
+		if (root == null) return 0;<br />
+		return 1 + Math.min(minDepth(root.left), minDepth(root.right));<br />
+	}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

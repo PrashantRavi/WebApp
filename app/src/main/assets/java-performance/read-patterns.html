@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java High Performance Read Patterns</title>
+
+    <meta name="description" content="">
+    <meta name="keywords"    content="Java high performance read patterns">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java High Performance Read Patterns">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java High Performance Read Patterns"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/read-patterns.html"/>
+    <meta property="og:description" content=""/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/java-arraylist-vs-openarraylist-performance.html";
+var nextArticleInCategory = "/java-performance/micro-batching.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 9124;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html"><b>Java High Performance Read Patterns</b></a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java High Performance Read Patterns</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#read-into-new">Read Into New</a></li><li><a href="#read-into-existing">Read Into Existing</a></li><li><a href="#read-out-of">Read Out Of</a></li><li><a href="#navigator">Navigator</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2016-03-14
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    How your Java application reads data can have a big impact on its read performance. In this article I will describe
+    a few different read patterns and explain their performance characteristics.
+</p>
+
+
+
+
+<a name="read-into-new"></a>
+<h2>Read Into New</h2>
+
+<p>
+    The first Java read pattern is the read-into-new pattern. This is what you would typically learn in university as
+    the "right" way of reading data.
+</p>
+
+<p>
+    The read-into-new pattern is the pattern of having a read method which reads some kind of data and returns a new
+    data structure with the read data. Here is first a simple example data structure:
+</p>
+
+<pre class="codeBox">
+public class MyData {
+    public int val1 = 0;
+    public int val2 = 0;
+}
+</pre>
+
+<p>
+    Here is an example read method which reads data into a <code>MyData</code> object:
+</p>
+
+<pre class="codeBox">
+public MyData readMyData(byte[] source) {
+    MyData myData = new MyData();
+
+    myData.val1 = source[0];
+    myData.val2 = source[1];
+
+    return myData;
+}
+</pre>
+
+<p>
+    As you can see, the <code>readMyData()</code> method returns a <code>MyData</code> object. First a <code>MyData</code>
+    object is created. Second, the <code>readMyData()</code> method reads data into the <code>MyData</code> object.
+    Third, the <code>MyData</code> object is returned to the calling code.
+</p>
+
+<p>
+    What is worth noting about this read pattern is that every time you call the <code>readMyData()</code> method
+    a new <code>MyData</code> object is returned. That is why the pattern is called <i>read-into-new</i>, meaning
+    data is read into a new object.
+</p>
+
+<p>
+    If the <code>readMyData()</code> method is called frequently that will lead to a lot of <code>MyData</code> objects
+    being created. That puts pressure on the object allocation system and the garbage collector. This results in
+    lower performance, and possibly longer garbage collection pauses from time to time.
+</p>
+
+<p>
+    Another disadvantage of the read-into-new pattern is that each object may be located in very different areas
+    of the computer's memory. This means that the chance of the object being the CPU cache is low.
+</p>
+
+
+
+
+<a name="read-into-existing"></a>
+<h2>Read Into Existing</h2>
+
+<p>
+    The read-into-existing pattern reads data into an existing object instead of create a new object for every
+    call to the read method. This means that the same object can be reset and reused for multiple
+    calls to the read method. Here is how the earlier <code>readMyData()</code> method would look using the
+    read-into-existing pattern:
+</p>
+
+<pre class="codeBox">
+ public MyData readMyData(byte[] source, MyData myData) {
+
+    myData.val1 = source[0];
+    myData.val2 = source[1];
+
+    return myData;
+}
+</pre>
+
+<p>
+    The main difference from the previous version to this version is that this version takes the <code>MyData</code>
+    object to read the data into as parameter. It is now up to the caller of the <code>readMyData()</code> method
+    to decide if an existing <code>MyData</code> instance should be reused, or if a new instance should be
+    created.
+</p>
+
+<p>
+    Reusing a <code>MyData</code> instance rather than creating a new will save time and memory compared to
+    always creating a new instance. It will also lower the pressure on the Java garbage collector, so the risk of
+    long garbage collection pauses is reduced.
+</p>
+
+<p>
+    Reusing an object also means that the chance the object is located in the CPU cache is much higher than when
+    you create a new object for each call to the <code>readMyData()</code> method.
+</p>
+
+
+
+
+<a name="read-out-of"></a>
+<h2>Read Out Of</h2>
+
+<p>
+    The read-out-of pattern does not read data into objects. Instead it read the needed values directly from the
+    underlying data source.
+</p>
+
+<p>
+    Reading values directly from the data source can save some time because data does not
+    first need to be copied into an object before it can be used. When needed, the values are copied directly out
+    of the underlying data source.
+</p>
+
+<p>
+    Reading values directly from the data source also has the advantage that only the data that is actually used
+    will be copied out of the underlying data source. Thus, if the reading code only needs part of the data, only
+    those parts are copied out.
+</p>
+
+<p>
+    To change the previous example code to read data directly from the underlying source we need to change the implementation of the
+    <code>MyData</code> class:
+</p>
+
+<pre class="codeBox">
+public class MyData() {
+
+    private byte[] source = null;
+
+    public MyData() {
+    }
+
+    public void setSource(byte[] source) {
+        this.source = source;
+    }
+
+    public int getVal1() {
+        return this.source[0];
+    }
+
+    public int getVal2() {
+        return this.source[1];
+    }
+}
+</pre>
+
+<p>
+    To use the <code>MyData</code> class in its new variation, you will use code like this:
+</p>
+
+<pre class="codeBox">
+byte[] source = ... //get bytes from somewhere
+
+MyData myData = new MyData();
+
+myData.setSource(source);
+
+int val1 = myData.getVal1();
+int val2 = myData.getVal2();
+</pre>
+
+<p>
+    Notice first, that you can reuse the <code>MyData</code> instance. Just call <code>setSource()</code> when you
+    need to read data out of a new byte array.
+</p>
+
+<p>
+    Second, data is only copied out once - from the byte array to the code using the value. It is not first copied
+    from the byte array to the <code>MyData</code> object, and then from there to whatever calculation needs the
+    value.
+</p>
+
+<p>
+    Third, only if you actually call both <code>getVal1()</code> and <code>getVal2()</code> will the corresponding
+    data be read out of the underlying byte array. If only one of the values is needed by a calculation, only
+    that value needs to be read out of the byte array. This saves time when only part of the data is used.
+</p>
+
+<p>
+    A read method that reads data into an object does most often not know how much of the data is needed. Thus
+    it is normal to copy all the data into the object. Unless you create multiple read methods tailored for each
+    calculation, but that adds more work to your plate.
+</p>
+
+
+
+<a name="navigator"></a>
+<h2>Navigator</h2>
+
+<p>
+    If the underlying data source contains multiple "records" or "objects", you can change the read-out-of pattern
+    to the navigator pattern. The navigator patterns works like the read-out-of pattern but adds methods for navigating
+    between the records or objects in the underlying source.
+</p>
+
+<p>
+    Assuming that each <code>MyData</code> object consists of 2 bytes from the underlying source, here is how
+    the <code>MyData</code> class would look with a navigation method added:
+</p>
+
+<pre class="codeBox">
+public class MyData() {
+
+    private byte[] source = null;
+    private int    offset = 0;
+
+    public MyData() {
+    }
+
+    public void setSource(byte[] source, int offset) {
+        this.source = source;
+        this.offset = offset;
+    }
+
+    public int getVal1() {
+        return this.source[this.offset];
+    }
+
+    public int getVal2() {
+        return this.source[this.offset + 1];
+    }
+
+    public void next() {
+        this.offset += 2;  //2 bytes per record
+    }
+
+    public boolean hasNext() {
+        this.offset < this.source.length;
+    }
+}
+</pre>
+
+
+<p>
+    The first change is the that the <code>setSource()</code> method now takes an extra parameter called
+    <code>offset</code>. This is not strictly necessary, but that enables the <code>MyData</code> navigator
+    to start from an offset into the source byte array instead of the first byte.
+</p>
+
+<p>
+    The second change is that the <code>getVal1()</code> and <code>getVal2()</code> methods now use the
+    value of the internal <code>offset</code> variable as index into the source array when reading values out.
+</p>
+
+<p>
+    The third change is the addition of the <code>next()</code> method. The <code>next()</code> method increments
+    the internal <code>offset</code> variable by 2, so that the <code>offset</code> variable points to the next
+    record in the array.
+</p>
+
+<p>
+    The fourth change is the addition of the <code>hasNext()</code> method which returns true if the source
+    byte array has more records (bytes) in it.
+</p>
+
+<p>
+    You use the navigator version of <code>MyData</code> like this:
+</p>
+
+<pre class="codeBox">
+byte[] source = ... // get byte array from somewhere
+
+MyData myData = new MyData();
+myData.setSource(source, 0);
+
+while(myData.hasNext()) {
+    int val1 = myData.getVal1();
+    int val2 = myData.getVal2();
+
+    myData.next();
+}
+
+</pre>
+
+
+<p>
+    As you can see, using the <code>MyData</code> class in the navigator pattern implementation is pretty
+    straightforward. Very similar to using a standard Java <code>Iterator</code> .
+</p>
+
+
+
+
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="micro-batching.html">Micro Batching</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

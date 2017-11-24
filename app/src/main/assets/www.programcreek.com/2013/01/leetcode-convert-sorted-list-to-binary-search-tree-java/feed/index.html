@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Convert Sorted List to Binary Search Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Cullan Ln</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-12605</link>
+		<dc:creator><![CDATA[Cullan Ln]]></dc:creator>
+		<pubDate>Wed, 13 Jul 2016 15:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-12605</guid>
+		<description><![CDATA[public class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode end = head;
+        while (end.next != null) {
+            end = end.next;
+        }
+        return sortedListToBST(head, end);
+    }
+    public TreeNode sortedListToBST(ListNode head, ListNode end) {
+        if (end.next == head) { //basically same ideas as start &#062; end; occurs when one node left so head &#062; midPrev and mid.next &#062; end
+            return null;
+        }
+        ListNode midPrev = findMidPrev(head, end);
+        ListNode mid = midPrev.next;
+        TreeNode node = new TreeNode(mid.val);
+        node.left = sortedListToBST(head, midPrev);
+        node.right = sortedListToBST(mid.next, end);
+        
+        return node;
+    }
+    //return node previous to mid
+    public ListNode findMidPrev(ListNode head, ListNode end) {
+        ListNode slowPrev = new ListNode(0);
+        slowPrev.next = head;
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while (fast.next != end &#038;&#038; fast != end &#038;&#038; fast.next != null &#038;&#038; fast != null) {
+            slowPrev = slowPrev.next;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        return slowPrev;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>public class Solution {<br />
+    public TreeNode sortedListToBST(ListNode head) {<br />
+        if (head == null) {<br />
+            return null;<br />
+        }<br />
+        ListNode end = head;<br />
+        while (end.next != null) {<br />
+            end = end.next;<br />
+        }<br />
+        return sortedListToBST(head, end);<br />
+    }<br />
+    public TreeNode sortedListToBST(ListNode head, ListNode end) {<br />
+        if (end.next == head) { //basically same ideas as start &gt; end; occurs when one node left so head &gt; midPrev and mid.next &gt; end<br />
+            return null;<br />
+        }<br />
+        ListNode midPrev = findMidPrev(head, end);<br />
+        ListNode mid = midPrev.next;<br />
+        TreeNode node = new TreeNode(mid.val);<br />
+        node.left = sortedListToBST(head, midPrev);<br />
+        node.right = sortedListToBST(mid.next, end);</p>
+<p>        return node;<br />
+    }<br />
+    //return node previous to mid<br />
+    public ListNode findMidPrev(ListNode head, ListNode end) {<br />
+        ListNode slowPrev = new ListNode(0);<br />
+        slowPrev.next = head;<br />
+        ListNode slow = head;<br />
+        ListNode fast = head;</p>
+<p>        while (fast.next != end &amp;&amp; fast != end &amp;&amp; fast.next != null &amp;&amp; fast != null) {<br />
+            slowPrev = slowPrev.next;<br />
+            slow = slow.next;<br />
+            fast = fast.next.next;<br />
+        }</p>
+<p>        return slowPrev;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kamal al-din</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-7512</link>
+		<dc:creator><![CDATA[kamal al-din]]></dc:creator>
+		<pubDate>Wed, 21 Oct 2015 01:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-7512</guid>
+		<description><![CDATA[For mid, your calculation would be better protected against overflow if it was this: int mid = start + (end-start)/2 ..Funny story, this was actually a bug in BST&#039;s for a long time until someone found that it caused overflow. Hope this helps! 
+Elegant solution otherwise!]]></description>
+		<content:encoded><![CDATA[<p>For mid, your calculation would be better protected against overflow if it was this: int mid = start + (end-start)/2 ..Funny story, this was actually a bug in BST&#8217;s for a long time until someone found that it caused overflow. Hope this helps!<br />
+Elegant solution otherwise!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jason zhang</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-7082</link>
+		<dc:creator><![CDATA[jason zhang]]></dc:creator>
+		<pubDate>Mon, 22 Jun 2015 05:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-7082</guid>
+		<description><![CDATA[Approve for this algorithm: http://blog.flexdms.com/2014/03/sorted-list-to-height-balanced-binary.html]]></description>
+		<content:encoded><![CDATA[<p>Approve for this algorithm: <a href="http://blog.flexdms.com/2014/03/sorted-list-to-height-balanced-binary.html" rel="nofollow">http://blog.flexdms.com/2014/03/sorted-list-to-height-balanced-binary.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Chong</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-6611</link>
+		<dc:creator><![CDATA[Chong]]></dc:creator>
+		<pubDate>Thu, 29 Jan 2015 19:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-6611</guid>
+		<description><![CDATA[Hi. Can we put the input list as a member of first sortedListToBST function, and then pass it to second sortedListToBST function each time when calling it? If wo do it like this, and we move the pointer inside of sortedListToBST function, will this movement aware by caller? Thank you!]]></description>
+		<content:encoded><![CDATA[<p>Hi. Can we put the input list as a member of first sortedListToBST function, and then pass it to second sortedListToBST function each time when calling it? If wo do it like this, and we move the pointer inside of sortedListToBST function, will this movement aware by caller? Thank you!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CopperCash</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-6537</link>
+		<dc:creator><![CDATA[CopperCash]]></dc:creator>
+		<pubDate>Wed, 07 Jan 2015 01:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-6537</guid>
+		<description><![CDATA[def build_from_sorted_list(cls, start_node, end_node=None):
+    if None == start_node:
+        return None
+    elif start_node is end_node:
+        return cls(start_node.value)
+
+    slow, fast = start_node, start_node
+    while (end_node is not slow.next) and (end_node is not fast.next) and (end_node is not fast.next.next):
+        slow = slow.next
+        fast = fast.next.next
+
+    node = cls(slow.value)
+    node.left = cls.build_from_sorted_list(start_node, slow)
+    node.right = cls.build_from_sorted_list(slow.next, end_node)
+
+
+    return node
+
+
+
+recursive python version]]></description>
+		<content:encoded><![CDATA[<p>def build_from_sorted_list(cls, start_node, end_node=None):<br />
+    if None == start_node:<br />
+        return None<br />
+    elif start_node is end_node:<br />
+        return cls(start_node.value)</p>
+<p>    slow, fast = start_node, start_node<br />
+    while (end_node is not slow.next) and (end_node is not fast.next) and (end_node is not fast.next.next):<br />
+        slow = slow.next<br />
+        fast = fast.next.next</p>
+<p>    node = cls(slow.value)<br />
+    node.left = cls.build_from_sorted_list(start_node, slow)<br />
+    node.right = cls.build_from_sorted_list(slow.next, end_node)</p>
+<p>    return node</p>
+<p>recursive python version</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amir</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-convert-sorted-list-to-binary-search-tree-java/#comment-6494</link>
+		<dc:creator><![CDATA[Amir]]></dc:creator>
+		<pubDate>Sun, 28 Dec 2014 17:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11615#comment-6494</guid>
+		<description><![CDATA[elegant code, well done!]]></description>
+		<content:encoded><![CDATA[<p>elegant code, well done!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

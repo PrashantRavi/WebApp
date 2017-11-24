@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Reflection - Dynamic Class Loading and Reloading</title>
+
+    <meta name="description" content="This text explains how to load and reload classes dynamically in Java.">
+    <meta name="keywords"    content="java reflection dynamic class loading reloading">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Reflection - Dynamic Class Loading and Reloading">
+    <meta name="twitter:description" content="This text explains how to load and reload classes dynamically in Java.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Reflection - Dynamic Class Loading and Reloading"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-reflection/dynamic-class-loading-reloading.html"/>
+    <meta property="og:description" content="This text explains how to load and reload classes dynamically in Java."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-reflection/dynamic-proxies.html";
+var nextArticleInCategory = "";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 10741;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Reflection</div><ol><li><a href="index.html">Java Reflection Tutorial</a></li><li><a href="classes.html">Java Reflection - Classes</a></li><li><a href="constructors.html">Java Reflection - Constructors</a></li><li><a href="fields.html">Java Reflection - Fields</a></li><li><a href="methods.html">Java Reflection - Methods</a></li><li><a href="getters-setters.html">Java Reflection - Getters and Setters</a></li><li><a href="private-fields-and-methods.html">Java Reflection - Private Fields and Methods</a></li><li><a href="annotations.html">Java Reflection - Annotations</a></li><li><a href="generics.html">Java Reflection - Generics</a></li><li><a href="arrays.html">Java Reflection - Arrays</a></li><li><a href="dynamic-proxies.html">Java Reflection - Dynamic Proxies</a></li><li><a href="dynamic-class-loading-reloading.html"><b>Java Reflection - Dynamic Class Loading and Reloading</b></a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Reflection - Dynamic Class Loading and Reloading</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#classloader">The ClassLoader</a></li><li><a href="#classloaderHierarchy">The ClassLoader Hierarchy</a></li><li><a href="#loading">Class Loading</a></li><li><a href="#dynamicloading">Dynamic Class Loading</a></li><li><a href="#dynamicreloading">Dynamic Class Reloading</a></li><li><a href="#designing">Designing your Code for Class Reloading</a></li><li><a href="#example">ClassLoader Load / Reload Example</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-05-21
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    It is possible to load and reload classes at runtime in Java, though it is not as straightforward
+    as one might have hoped. This text will explain when and how you can load and reload classes
+    in Java.
+</p>
+<p>
+    You can argue whether Java's dynamic class loading features are really part of Java Reflection,
+    or a part of the core Java platform. Anyways, the article has been put in the Java Reflection
+    trail in lack of a better place to put it.
+</p>
+
+
+
+<a name="classloader"></a>
+<h2>The ClassLoader</h2>
+
+<p>
+    All classes in a Java application are loaded using some subclass of <code>java.lang.ClassLoader</code>.
+    Loading classes dynamically must therefore also be done using a <code>java.lang.ClassLoader</code> subclass.
+</p>
+
+<p>
+    When a class is loaded, all classes it references are loaded too. This class loading pattern happens recursively,
+    until all classes needed are loaded. This may not be all classes in the application. Unreferenced classes are
+    not loaded until the time they are referenced.
+</p>
+
+
+
+<a name="classloaderHierarchy"></a>
+<h2>The ClassLoader Hierarchy</h2>
+
+<p>
+    Class loaders in Java are organized into a hierarchy. When you create a new standard Java <code>ClassLoader</code>
+    you must provide it with a parent <code>ClassLoader</code>. If a <code>ClassLoader</code> is asked to
+    load a class, it will ask its parent class loader to load it. If the parent class loader can't find
+    the class, the child class loader then tries to load it itself.
+</p>
+
+
+
+<a name="loading"></a>
+<h2>Class Loading</h2>
+<p>
+    The steps a given class loader uses when loading classes are:
+</p>
+
+<ol>
+    <li>Check if the class was already loaded.</li>
+    <li>If not loaded, ask parent class loader to load the class.</li>
+    <li>If parent class loader cannot load class, attempt to load it in this class loader.</li>
+</ol>
+
+<p>
+    When you implement a class loader that is capable of reloading classes you will need
+    to deviate a bit from this sequence. The classes to reload should not be requested
+    loaded by the parent class loader. More on that later.
+</p>
+
+
+
+<a name="dynamicloading"></a>
+<h2>Dynamic Class Loading</h2>
+<p>
+    Loading a class dynamically is easy. All you need to do is to obtain a <code>ClassLoader</code>
+    and call its <code>loadClass()</code> method. Here is an example:
+</p>
+
+<pre class="codeBox">
+
+public class MainClass {
+
+  public static void main(String[] args){
+
+    ClassLoader classLoader = MainClass.class.getClassLoader();
+
+    try {
+        Class aClass = classLoader.loadClass("com.jenkov.MyClass");
+        System.out.println("aClass.getName() = " + aClass.getName());
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+
+}
+</pre>
+
+
+
+<a name="dynamicreloading"></a>
+<h2>Dynamic Class Reloading</h2>
+
+<p>
+    Dynamic class reloading is a bit more challenging. Java's builtin Class loaders always checks if a class
+    is already loaded before loading it. Reloading the class is therefore not possible using Java's builtin
+    class loaders. To reload a class you will have to implement your own <code>ClassLoader</code> subclass.
+</p>
+
+<p>
+    Even with a custom subclass of <code>ClassLoader</code> you have a challenge.
+    Every loaded class
+    needs to be linked. This is done using the <code>ClassLoader.resolve()</code> method. This method
+    is final, and thus cannot be overridden in your <code>ClassLoader</code> subclass. The <code>resolve()</code>
+    method will not allow any given <code>ClassLoader</code> instance to link the same class twice.
+    Therefore, everytime you want to reload a class you must use a new instance of your
+    <code>ClassLoader</code> subclass. This is not impossible, but necessary to know when designing
+    for class reloading.
+</p>
+
+
+
+<a name="designing"></a>
+<h2>Designing your Code for Class Reloading</h2>
+
+<p>
+    As stated earlier you cannot reload a class using
+    a <code>ClassLoader</code> that has already loaded that class once. Therefore you will have to reload
+    the class using a different <code>ClassLoader</code> instance. But this poses som new challenges.
+</p>
+
+<p>
+    Every class loaded in a Java application is identified by its fully qualified name (package name + class name),
+    and the <code>ClassLoader</code> instance that loaded it. That means, that a class <code>MyObject</code> loaded
+    by class loader A, is not the same class as the <code>MyObject</code> class loaded with class loader B.
+    Look at this code:
+</p>
+
+<pre class="codeBox">
+MyObject object = (MyObject)
+    myClassReloadingFactory.newInstance("com.jenkov.MyObject");
+</pre>
+
+<p>
+    Notice how the <code>MyObject</code> class is referenced in the code, as the type
+    of the <code>object</code> variable. This causes the <code>MyObject</code> class
+    to be loaded by the same class loader that loaded the class this code is residing in.
+</p>
+
+<p>
+    If the <code>myClassReloadingFactory</code> object factory reloads the <code>MyObject</code>
+    class using a different class loader than the class the above code resides in, you cannot
+    cast the instance of the reloaded <code>MyObject</code> class to the <code>MyObject</code>
+    type of the <code>object</code> variable. Since the two <code>MyObject</code> classes were
+    loaded with different class loaders, the are regarded as different classes, even if they
+    have the same fully qualified class name. Trying to cast an object of the one class to a
+    reference of the other will result in a <code>ClassCastException</code>.
+</p>
+
+<p>
+    It is possible to work around this limitation but you will have to change your code in either
+    of two ways:
+</p>
+
+<ol>
+    <li>Use an interface as the variable type, and just reload the implementing class.</li>
+    <li>Use a superclass as the variable type, and just reload a subclass.</li>
+</ol>
+
+<p>Here are two coresponding code examples:</p>
+
+<pre class="codeBox">
+<b>MyObjectInterface</b> object = <b>(MyObjectInterface)</b>
+    myClassReloadingFactory.newInstance("com.jenkov.MyObject");
+</pre>
+
+<pre class="codeBox">
+<b>MyObjectSuperclass</b> object = <b>(MyObjectSuperclass)</b>
+    myClassReloadingFactory.newInstance("com.jenkov.MyObject");
+</pre>
+
+<p>
+    Either of these two methods will work if the type of the variable, the interface
+    or superclass, is not reloaded when the implementing class or subclass is reloaded.
+</p>
+<p>
+    To make this work you will of course need to implement your class loader to let the interface
+    or superclass be loaded by its parent. When your class loader is asked to load the <code>MyObject</code>
+    class, it will also be asked to load the <code>MyObjectInterface</code> class, or the
+    <code>MyObjectSuperclass</code> class, since these are referenced from within the <code>MyObject</code>
+    class.
+
+    Your class loader must delegate the loading of
+    those classes to the same class loader that loaded the class containing the interface or superclass typed
+    variables.
+</p>
+
+
+
+<a name="example"></a>
+<h2>ClassLoader Load / Reload Example</h2>
+
+<p>
+    The text above has contained a lot of talk. Let's look at a simple example.
+    Below is an example of a simple <code>ClassLoader</code> subclass. Notice
+    how it delegates class loading to its parent except for the one class it
+    is intended to be able to reload. If the loading of this class is delegated
+    to the parent class loader, it cannot be reloaded later. Remember, a class
+    can only be loaded once by the same <code>ClassLoader</code> instance.
+</p>
+
+<p>
+    As said earlier, this is just an example that serves to show you the
+    basics of a <code>ClassLoader</code>'s behaviour. It is not a production
+    ready template for your own class loaders.
+    Your own class loaders should probably not be limited to a single class, but
+    a collection of classes that you know you will need to reload. In addition,
+    you should probably not hardcode the class paths either.
+</p>
+
+<pre class="codeBox">
+public class MyClassLoader extends ClassLoader{
+
+    public MyClassLoader(ClassLoader parent) {
+        super(parent);
+    }
+
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        if(!"reflection.MyObject".equals(name))
+                return super.loadClass(name);
+
+        try {
+            String url = "file:C:/data/projects/tutorials/web/WEB-INF/" +
+                            "classes/reflection/MyObject.class";
+            URL myUrl = new URL(url);
+            URLConnection connection = myUrl.openConnection();
+            InputStream input = connection.getInputStream();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int data = input.read();
+
+            while(data != -1){
+                buffer.write(data);
+                data = input.read();
+            }
+
+            input.close();
+
+            byte[] classData = buffer.toByteArray();
+
+            return defineClass("reflection.MyObject",
+                    classData, 0, classData.length);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+}
+</pre>
+
+<p>
+    <br/>
+    Below is an example use of the <code>MyClassLoader</code>.
+</p>
+
+<pre class="codeBox">
+public static void main(String[] args) throws
+    ClassNotFoundException,
+    IllegalAccessException,
+    InstantiationException {
+
+    ClassLoader parentClassLoader = MyClassLoader.class.getClassLoader();
+    MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
+    Class myObjectClass = classLoader.loadClass("reflection.MyObject");
+
+    AnInterface2       object1 =
+            (AnInterface2) myObjectClass.newInstance();
+
+    MyObjectSuperClass object2 =
+            (MyObjectSuperClass) myObjectClass.newInstance();
+
+    //create new class loader so classes can be reloaded.
+    classLoader = new MyClassLoader(parentClassLoader);
+    myObjectClass = classLoader.loadClass("reflection.MyObject");
+
+    object1 = (AnInterface2)       myObjectClass.newInstance();
+    object2 = (MyObjectSuperClass) myObjectClass.newInstance();
+
+}
+</pre>
+
+<p>
+    <br/>
+    Here is the <code>reflection.MyObject</code> class that is loaded using
+    the class loader. Notice how it both extends a superclass and implements
+    an interface. This is just for the sake of the example. In your own
+    code you would only have to one of the two - extend or implement.
+</p>
+
+<pre class="codeBox">
+public class MyObject extends MyObjectSuperClass implements AnInterface2{
+    //... body of class ... override superclass methods
+    //    or implement interface methods
+}
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next"></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,1344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>OpenNLP example</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="This tutorial is for showing how to use OpenNLP. The OpenNLP examples in this tutorial are all fully tested and working fine. You can directly copy out the code"/>
+<meta name="keywords" content="opennlp tutorial,opennlp example,opennlp examples,natural language parsing"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; OpenNLP Tutorial Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Research in Software Engineering &#8211; Available Data/Artifacts' href='../research-in-software-engineering-available-artifacts/index.html'/>
+<link rel='next' title='Parse HTML in Java' href='../parse-html-in-java/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=7131.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_05_opennlp-tutorial_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_05_opennlp-tutorial_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-7131"> <a href="index.html" rel="bookmark">
+OpenNLP Tutorial </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>The Apache OpenNLP library is a machine learning based toolkit for processing of natural language text. It includes a sentence detector, a tokenizer, a name finder, a parts-of-speech (POS) tagger, a chunker, and a parser. It has very good APIs that can be easily integrated with a Java program. However, the documentation contains unupdated information. </p>
+<p>In this tutorial, I will show you how to use Apache OpenNLP through a set of simple examples. </p>
+<ul>
+<li><a href="#sentence detector">1. Sentence Detector</a></li>
+<li><a href="#tokenizer">2. Tokenizer</a></li>
+<li><a href="#name finder">3. Name Finder</a></li>
+<li><a href="#tagger">4. POS Tagger</a></li>
+<li><a href="#chunker">5. Chunker</a></li>
+<li><a href="#parser">6. Parser</a></li>
+</ul>
+<p><strong><a>0. Download Jar Files and Set Up Environment</a></strong></p>
+<p>Before starting the examples, you need to download the jar files required and add to your project build path. The jar files required are loaced at "apache-opennlp-1.5.3-bin.zip" which can be download <a href="http://opennlp.apache.org/cgi-bin/download.cgi" target="_blank">here</a>. </p>
+<p>Accessed on March 2014, the download page looks like the following:</p>
+<p><img src="../../../wp-content/uploads/2012/05/opennlp-download-jar-300x100.png" alt="opennlp-download-jar" width="300" height="100" class="alignnone size-medium wp-image-12122" srcset="http://www.programcreek.com/wp-content/uploads/2012/05/opennlp-download-jar-300x100.png 300w, http://www.programcreek.com/wp-content/uploads/2012/05/opennlp-download-jar.png 357w" sizes="(max-width: 300px) 100vw, 300px"/></p>
+<p>Unzip the .zip file and copy the 4 jar files in the "lib" directory to your project. In addition, you will need to download some model files later based on what you want to do (shown in examples below), which can be downloaded <a href="http://opennlp.sourceforge.net/models-1.5/" target="_blank">here</a>. </p>
+<p><strong><a name="sentence detector">1. Sentence Detector</a> </strong></p>
+<p>Sentence detector is for detecting sentence boundaries. Given the following paragraph:</p>
+<pre>
+Hi. How are you? This is Mike.
+</pre>
+<p>sentence detector returns an array of strings. In this case, the array has two elements as below.</p>
+<pre>
+Hi. How are you? 
+This is Mike.
+</pre>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> SentenceDetect<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> InvalidFormatException,
+		<span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #003399;">String</span> paragraph <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Hi. How are you? This is Mike.&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// always start with a model, a model is learned from training data</span>
+	<span style="color: #003399;">InputStream</span> is <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-sent.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	SentenceModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SentenceModel<span style="color: #009900;">&#40;</span>is<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	SentenceDetectorME sdetector <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> SentenceDetectorME<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> sentences<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> sdetector.<span style="color: #006633;">sentDetect</span><span style="color: #009900;">&#40;</span>paragraph<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>sentences<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>sentences<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	is.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong><a name="tokenizer">2. Tokenizer</a> </strong></p>
+<p>Tokens are usually words which are separated by space, but there are exceptions. For example, "isn't" gets split into "is" and "n't, since it is a a brief format of "is not". Our sentence is separated into the following tokens:</p>
+<pre>
+Hi
+.
+How
+are
+you
+?
+This
+is
+Mike
+.
+</pre>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> Tokenize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> InvalidFormatException, <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #003399;">InputStream</span> is <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-token.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	TokenizerModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TokenizerModel<span style="color: #009900;">&#40;</span>is<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	Tokenizer tokenizer <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TokenizerME<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> tokens<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> tokenizer.<span style="color: #006633;">tokenize</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Hi. How are you? This is Mike.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> a <span style="color: #339933;">:</span> tokens<span style="color: #009900;">&#41;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	is.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong><a name="name finder">3. Name Finder</a></strong></p>
+<p>By its name, name finder just finds names in the context. Check out the following example to see what name finder can do. It accepts an array of strings, and find the names inside. </p>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> findName<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #003399;">InputStream</span> is <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-ner-person.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	TokenNameFinderModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TokenNameFinderModel<span style="color: #009900;">&#40;</span>is<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	is.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	NameFinderME nameFinder <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> NameFinderME<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>sentence <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#123;</span>
+		    <span style="color: #0000ff;">&quot;Mike&quot;</span>,
+		    <span style="color: #0000ff;">&quot;Smith&quot;</span>,
+		    <span style="color: #0000ff;">&quot;is&quot;</span>,
+		    <span style="color: #0000ff;">&quot;a&quot;</span>,
+		    <span style="color: #0000ff;">&quot;good&quot;</span>,
+		    <span style="color: #0000ff;">&quot;person&quot;</span>
+		    <span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+&nbsp;
+		Span nameSpans<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> nameFinder.<span style="color: #006633;">find</span><span style="color: #009900;">&#40;</span>sentence<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span>Span s<span style="color: #339933;">:</span> nameSpans<span style="color: #009900;">&#41;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>			
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong><a name="tagger">4. POS Tagger</a></strong></p>
+<pre>
+Hi._NNP How_WRB are_VBP you?_JJ This_DT is_VBZ Mike._NNP
+</pre>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> POSTag<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	POSModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSModelLoader<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>	
+		.<span style="color: #006633;">load</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">File</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-pos-maxent.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	PerformanceMonitor perfMon <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PerformanceMonitor<span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">err</span>, <span style="color: #0000ff;">&quot;sent&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	POSTaggerME tagger <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSTaggerME<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> input <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Hi. How are you? This is Mike.&quot;</span><span style="color: #339933;">;</span>
+	ObjectStream<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> lineStream <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PlainTextByLineStream<span style="color: #009900;">&#40;</span>
+			<span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">StringReader</span><span style="color: #009900;">&#40;</span>input<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	perfMon.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #003399;">String</span> line<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>line <span style="color: #339933;">=</span> lineStream.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #003399;">String</span> whitespaceTokenizerLine<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> WhitespaceTokenizer.<span style="color: #006633;">INSTANCE</span>
+				.<span style="color: #006633;">tokenize</span><span style="color: #009900;">&#40;</span>line<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tags <span style="color: #339933;">=</span> tagger.<span style="color: #006633;">tag</span><span style="color: #009900;">&#40;</span>whitespaceTokenizerLine<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		POSSample sample <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSSample<span style="color: #009900;">&#40;</span>whitespaceTokenizerLine, tags<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>sample.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		perfMon.<span style="color: #006633;">incrementCounter</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	perfMon.<span style="color: #006633;">stopAndPrintFinalResult</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong><a name="chunker">5. Chunker</a></strong></p>
+<p>Chunker may not be a concern for some users, but it is worth to mention it here. What chunker does is to partition a sentence to a set of chunks by using the tokens generated by tokenizer.<br/>
+I don't have a good example to show why chunker is very useful, but you can replace the sentence with your own sentences in the following example code, and try to generate something you like. </p>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> chunk<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	POSModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSModelLoader<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+			.<span style="color: #006633;">load</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">File</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-pos-maxent.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	PerformanceMonitor perfMon <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PerformanceMonitor<span style="color: #009900;">&#40;</span><span style="color: #003399;">System</span>.<span style="color: #006633;">err</span>, <span style="color: #0000ff;">&quot;sent&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	POSTaggerME tagger <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSTaggerME<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> input <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Hi. How are you? This is Mike.&quot;</span><span style="color: #339933;">;</span>
+	ObjectStream<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> lineStream <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PlainTextByLineStream<span style="color: #009900;">&#40;</span>
+			<span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">StringReader</span><span style="color: #009900;">&#40;</span>input<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	perfMon.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #003399;">String</span> line<span style="color: #339933;">;</span>
+	<span style="color: #003399;">String</span> whitespaceTokenizerLine<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> tags <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>line <span style="color: #339933;">=</span> lineStream.<span style="color: #006633;">read</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		whitespaceTokenizerLine <span style="color: #339933;">=</span> WhitespaceTokenizer.<span style="color: #006633;">INSTANCE</span>
+				.<span style="color: #006633;">tokenize</span><span style="color: #009900;">&#40;</span>line<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		tags <span style="color: #339933;">=</span> tagger.<span style="color: #006633;">tag</span><span style="color: #009900;">&#40;</span>whitespaceTokenizerLine<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		POSSample sample <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> POSSample<span style="color: #009900;">&#40;</span>whitespaceTokenizerLine, tags<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>sample.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			perfMon.<span style="color: #006633;">incrementCounter</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+	perfMon.<span style="color: #006633;">stopAndPrintFinalResult</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// chunker</span>
+	<span style="color: #003399;">InputStream</span> is <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-chunker.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	ChunkerModel cModel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ChunkerModel<span style="color: #009900;">&#40;</span>is<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	ChunkerME chunkerME <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ChunkerME<span style="color: #009900;">&#40;</span>cModel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #003399;">String</span> result<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> chunkerME.<span style="color: #006633;">chunk</span><span style="color: #009900;">&#40;</span>whitespaceTokenizerLine, tags<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s <span style="color: #339933;">:</span> result<span style="color: #009900;">&#41;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	Span<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> span <span style="color: #339933;">=</span> chunkerME.<span style="color: #006633;">chunkAsSpans</span><span style="color: #009900;">&#40;</span>whitespaceTokenizerLine, tags<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>Span s <span style="color: #339933;">:</span> span<span style="color: #009900;">&#41;</span>
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong><a name="parser">6. Parser</a></strong></p>
+<p>Given this sentence: "Programcreek is a very huge and useful website.", parser can return the following:<br/>
+<a href="../../../wp-content/uploads/2012/05/opennlp-parser-result.png"><img src="../../../wp-content/uploads/2012/05/opennlp-parser-result.png" alt="" title="opennlp-parser-result" width="464" height="358" class="alignleft size-full wp-image-7146" srcset="http://www.programcreek.com/wp-content/uploads/2012/05/opennlp-parser-result.png 464w, http://www.programcreek.com/wp-content/uploads/2012/05/opennlp-parser-result-300x231.png 300w" sizes="(max-width: 464px) 100vw, 464px"/></a></p>
+<p>Example Code:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> Parse<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> InvalidFormatException, <span style="color: #003399;">IOException</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">// http://sourceforge.net/apps/mediawiki/opennlp/index.php?title=Parser#Training_Tool</span>
+	<span style="color: #003399;">InputStream</span> is <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">FileInputStream</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;en-parser-chunking.bin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	ParserModel model <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ParserModel<span style="color: #009900;">&#40;</span>is<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">Parser</span> parser <span style="color: #339933;">=</span> ParserFactory.<span style="color: #006633;">create</span><span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #003399;">String</span> sentence <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;Programcreek is a very huge and useful website.&quot;</span><span style="color: #339933;">;</span>
+	Parse topParses<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> ParserTool.<span style="color: #006633;">parseLine</span><span style="color: #009900;">&#40;</span>sentence, parser, <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>Parse p <span style="color: #339933;">:</span> topParses<span style="color: #009900;">&#41;</span>
+		p.<span style="color: #006633;">show</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	is.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">/*
+	 * (TOP (S (NP (NN Programcreek) ) (VP (VBZ is) (NP (DT a) (ADJP (RB
+	 * very) (JJ huge) (CC and) (JJ useful) ) ) ) (. website.) ) )
+	 */</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>References:<br/>
+Even though the documentation is not good, some part is still useful from OpenNLP official site.<br/>
+wiki: http://sourceforge.net/apps/mediawiki/opennlp/index.php?title=Main_Page<br/>
+Java Doc: http://opennlp.apache.org/documentation/1.5.2-incubating/apidocs/opennlp-tools/index.html</p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../07/java-example-for-using-stanford-postagger/index.html" rel="bookmark" title="Java example for using Stanford POSTagger">Java example for using Stanford POSTagger </a></li>
+<li><a href="../parse-html-in-java/index.html" rel="bookmark" title="Parse HTML in Java">Parse HTML in Java </a></li>
+<li><a href="../../../2011/03/java-write-to-a-file-code-example/index.html" rel="bookmark" title="How to Write a File Line by Line in Java?">How to Write a File Line by Line in Java? </a></li>
+<li><a href="../../../2011/11/use-jdt-astparser-to-parse-java-file/index.html" rel="bookmark" title="Use JDT ASTParser to Parse Single .java files">Use JDT ASTParser to Parse Single .java files </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/frameworks/opennlp/index.html" rel="category tag">OpenNLP</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/05/opennlp-tutorial/" dc:identifier="http://www.programcreek.com/2012/05/opennlp-tutorial/" dc:title="OpenNLP Tutorial" trackback:ping="http://www.programcreek.com/2012/05/opennlp-tutorial/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-11027">
+<div id="dsq-comment-header-11027" class="dsq-comment-header">
+<cite id="dsq-cite-11027">
+<span id="dsq-author-user-11027">yolo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11027" class="dsq-comment-body">
+<div id="dsq-comment-message-11027" class="dsq-comment-message"><p>I&#8217;ve added all jar files to the build path.Is there anything else i should add?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-11026">
+<div id="dsq-comment-header-11026" class="dsq-comment-header">
+<cite id="dsq-cite-11026">
+<span id="dsq-author-user-11026">yolo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11026" class="dsq-comment-body">
+<div id="dsq-comment-message-11026" class="dsq-comment-message"><p>why does my code show error when i use the parse() example?<br/>
+error: Parse cannot be resolved to a type</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-10439">
+<div id="dsq-comment-header-10439" class="dsq-comment-header">
+<cite id="dsq-cite-10439">
+<span id="dsq-author-user-10439">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10439" class="dsq-comment-body">
+<div id="dsq-comment-message-10439" class="dsq-comment-message"><p>I think the parser&#8217;s result is wrong. Check out this online parser <a href="http://nlp.stanford.edu/corenlp/process" rel="nofollow">http://nlp.stanford.edu:8080/corenlp/process</a>.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-10397">
+<div id="dsq-comment-header-10397" class="dsq-comment-header">
+<cite id="dsq-cite-10397">
+<span id="dsq-author-user-10397">juyeon ji</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10397" class="dsq-comment-body">
+<div id="dsq-comment-message-10397" class="dsq-comment-message"><p>thanks for your post.<br/>
+in 6.parser, why last word in sentence(website) isn&#8217;t classed as NN?<br/>
+why last word isn&#8217;t classed as anything?<br/>
+i&#8217;m waiting for your reply.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9926">
+<div id="dsq-comment-header-9926" class="dsq-comment-header">
+<cite id="dsq-cite-9926">
+<span id="dsq-author-user-9926">Amal Ghrab</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9926" class="dsq-comment-body">
+<div id="dsq-comment-message-9926" class="dsq-comment-message"><p>hey ,</p>
+<p>I’m trying to parse a resume/CV .first step to do i will separate the different parts of my CV: Personal informations,education , skills , inerests ….</p>
+<p>so to do that is it right to use the Parse Tree of OpenNLP to make sure that the different part are separated and the text that exist after is the value .</p>
+<p>some help please .</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9442">
+<div id="dsq-comment-header-9442" class="dsq-comment-header">
+<cite id="dsq-cite-9442">
+<span id="dsq-author-user-9442">Eduardo Felipe</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9442" class="dsq-comment-body">
+<div id="dsq-comment-message-9442" class="dsq-comment-message"><p>Really thanks for the examples. Very clear and direct. Best regards,</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-8607">
+<div id="dsq-comment-header-8607" class="dsq-comment-header">
+<cite id="dsq-cite-8607">
+<span id="dsq-author-user-8607">astha tripathi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8607" class="dsq-comment-body">
+<div id="dsq-comment-message-8607" class="dsq-comment-message"><p>your model file was not properly downloaded.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8481">
+<div id="dsq-comment-header-8481" class="dsq-comment-header">
+<cite id="dsq-cite-8481">
+<a id="dsq-author-user-8481" href="http://youthlin.com/" target="_blank" rel="nofollow">Youth.霖</a>
+</cite>
+</div>
+<div id="dsq-comment-body-8481" class="dsq-comment-body">
+<div id="dsq-comment-message-8481" class="dsq-comment-message"><p>Very Thinks.<br/>
+Can I write as follows?:<br/>
+1.<br/>
+InputStream is = OpenNLPTest.class.getClassLoader().<br/>
+getResourceAsStream(&#8220;en-sent.bin&#8221;);</p>
+<p>4.<br/>
+POSModel model = new POSModelLoader()<br/>
+.load(new File(OpenNLPTest.class.getClassLoader()<br/>
+.getResource(&#8220;en-pos-maxent.bin&#8221;).getFile()));</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7862">
+<div id="dsq-comment-header-7862" class="dsq-comment-header">
+<cite id="dsq-cite-7862">
+<span id="dsq-author-user-7862">Hitesh Desai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7862" class="dsq-comment-body">
+<div id="dsq-comment-message-7862" class="dsq-comment-message"><p>yes. you need to download appropriate stopwords file and using this file words as stopwords and remove from your parser o/p.<br/>
+may be its helpfull you.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7100">
+<div id="dsq-comment-header-7100" class="dsq-comment-header">
+<cite id="dsq-cite-7100">
+<span id="dsq-author-user-7100">sabena</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7100" class="dsq-comment-body">
+<div id="dsq-comment-message-7100" class="dsq-comment-message"><p>meto hav same problem if u find any solution?<br/>
+help me</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6948">
+<div id="dsq-comment-header-6948" class="dsq-comment-header">
+<cite id="dsq-cite-6948">
+<span id="dsq-author-user-6948">Inquisitive</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6948" class="dsq-comment-body">
+<div id="dsq-comment-message-6948" class="dsq-comment-message"><p>Nice tutorial. Made it easy to use opennlp. Could you please specify how to use categorizer? How to create model for that. Just a petite example.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6787">
+<div id="dsq-comment-header-6787" class="dsq-comment-header">
+<cite id="dsq-cite-6787">
+<span id="dsq-author-user-6787">rohk</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6787" class="dsq-comment-body">
+<div id="dsq-comment-message-6787" class="dsq-comment-message"><p>import opennlp.tools.postag.POSModel;</p>
+<p>InputStream modelStream = new FileInputStream(&#8220;filename&#8221;);</p>
+<p> POSModel model = new POSModel(modelStream);</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6780">
+<div id="dsq-comment-header-6780" class="dsq-comment-header">
+<cite id="dsq-cite-6780">
+<span id="dsq-author-user-6780">Harsha</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6780" class="dsq-comment-body">
+<div id="dsq-comment-message-6780" class="dsq-comment-message"><p>Hi Gemmaicle,</p>
+<p>you need to import 2 other staements which are</p>
+<p>import opennlp.tools.sentdetect.SentenceDetectorME;<br/>
+import opennlp.tools.sentdetect.SentenceModel;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6645">
+<div id="dsq-comment-header-6645" class="dsq-comment-header">
+<cite id="dsq-cite-6645">
+<span id="dsq-author-user-6645">Peter Mason</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6645" class="dsq-comment-body">
+<div id="dsq-comment-message-6645" class="dsq-comment-message"><p>i got ZLIB error while running , how is that going to be fixed ? your response is much appreciated thanks</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6485">
+<div id="dsq-comment-header-6485" class="dsq-comment-header">
+<cite id="dsq-cite-6485">
+<span id="dsq-author-user-6485">zila</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6485" class="dsq-comment-body">
+<div id="dsq-comment-message-6485" class="dsq-comment-message"><p>hi,<br/>
+import java.io.File;</p>
+<p>import java.io.FileInputStream;<br/>
+import java.io.IOException;<br/>
+import java.io.InputStream;<br/>
+import java.util.HashMap;</p>
+<p>import opennlp.tools.util.model.BaseModel;<br/>
+import opennlp.tools.chunker.ChunkerME;<br/>
+import opennlp.tools.chunker.ChunkerModel;<br/>
+import opennlp.tools.postag.POSModel;<br/>
+import opennlp.tools.postag.POSTaggerME;<br/>
+import opennlp.tools.tokenize.TokenizerME;<br/>
+import opennlp.tools.tokenize.TokenizerModel;<br/>
+import opennlp.tools.util.Span;</p>
+<p>public class chunk {</p>
+<p> static final int N = 2;</p>
+<p> public static void main(String[] args)throws IOException {</p>
+<p> try {<br/>
+HashMap termFrequencies = new HashMap();<br/>
+String modelPath = &#8220;c:\temp\opennlpmodels\&#8221;;<br/>
+TokenizerModel tm = new TokenizerModel(new FileInputStream(new File(modelPath + &#8220;en-token.zip&#8221;)));<br/>
+//String wordBreaker=</p>
+<p> TokenizerME wordBreaker = new TokenizerME(tm);</p>
+<p> InputStream modelIn = null;</p>
+<p> try {<br/>
+modelIn = new FileInputStream(&#8220;en-pos-maxent.bin&#8221;);<br/>
+POSModel model = new POSModel(modelIn);<br/>
+}<br/>
+catch (IOException e) {<br/>
+// Model loading failed, handle the error<br/>
+e.printStackTrace();<br/>
+}<br/>
+finally {<br/>
+if (modelIn != null) {<br/>
+try {<br/>
+modelIn.close();<br/>
+}<br/>
+catch (IOException e) {<br/>
+}<br/>
+}<br/>
+}</p>
+<p> POSTaggerME tagger = new POSTaggerME(model);</p>
+<p> //POSModel pm = new POSModel(new FileInputStream(new File(modelPath + &#8220;en-pos-maxent.zip&#8221;)));<br/>
+// POSTaggerME posme = new POSTaggerME(pm);</p>
+<p> ChunkerModel model = null;</p>
+<p> try {<br/>
+modelIn = new FileInputStream(&#8220;en-chunker.bin&#8221;);<br/>
+model = new ChunkerModel(modelIn);<br/>
+} catch (IOException e) {<br/>
+// Model loading failed, handle the error<br/>
+e.printStackTrace();<br/>
+} finally {<br/>
+if (modelIn != null) {<br/>
+try {<br/>
+modelIn.close();<br/>
+} catch (IOException e) {<br/>
+}<br/>
+}<br/>
+}</p>
+<p> ChunkerME chunker = new ChunkerME(model);</p>
+<p> // InputStream modelIn = new FileInputStream(modelPath + &#8220;en-chunker.zip&#8221;);<br/>
+// ChunkerModel chunkerModel = new ChunkerModel(modelIn);<br/>
+// ChunkerME chunkerME = new ChunkerME(chunkerModel);<br/>
+//this is your sentence<br/>
+String sentence = &#8220;Barack Hussein Obama II is the 44th awesome President of the United States, and the first African American to hold the office.&#8221;;<br/>
+//words is the tokenized sentence<br/>
+String[] words = wordBreaker.tokenize(sentence);<br/>
+//posTags are the parts of speech of every word in the sentence (The chunker needs this info of course)<br/>
+String[] posTags = posme.tag(words);<br/>
+//chunks are the start end &#8220;spans&#8221; indices to the chunks in the words array<br/>
+Span[] chunks = chunkerME.chunkAsSpans(words, posTags);<br/>
+//chunkStrings are the actual chunks<br/>
+String[] chunkStrings = Span.spansToStrings(chunks, words);<br/>
+for (int i = 0; i &lt; chunks.length; i++) {<br/>
+String np = chunkStrings[i];<br/>
+if (chunks[i].getType().equals(&quot;NP&quot;)) {<br/>
+if (termFrequencies.containsKey(np)) {<br/>
+termFrequencies.put(np, termFrequencies.get(np) + 1);<br/>
+} else {<br/>
+termFrequencies.put(np, 1);<br/>
+}<br/>
+}<br/>
+}<br/>
+System.out.println(termFrequencies);</p>
+<p> } catch (IOException e) {<br/>
+}<br/>
+}</p>
+<p> }</p>
+<p>this is my program.but i am not able to run this because of the errors below.</p>
+<p>Exception in thread &quot;main&quot; java.lang.Error: Unresolved compilation problems:<br/>
+Cannot instantiate the type POSModel<br/>
+model cannot be resolved to a variable<br/>
+The constructor ChunkerME(ChunkerModel) is undefined<br/>
+posme cannot be resolved<br/>
+chunkerME cannot be resolved</p>
+<p> at chunk.main(chunk.java:37)</p>
+<p>&quot;please help me to solve this&quot;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6465">
+<div id="dsq-comment-header-6465" class="dsq-comment-header">
+<cite id="dsq-cite-6465">
+<span id="dsq-author-user-6465">Sarosh Madara</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6465" class="dsq-comment-body">
+<div id="dsq-comment-message-6465" class="dsq-comment-message"><p>please help me to use opennlp please guide me step by step.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6464">
+<div id="dsq-comment-header-6464" class="dsq-comment-header">
+<cite id="dsq-cite-6464">
+<span id="dsq-author-user-6464">Muhammad Sarosh Madara</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6464" class="dsq-comment-body">
+<div id="dsq-comment-message-6464" class="dsq-comment-message"><p>hey, listen if you have used it with clear concept so help me I couldn&#8217;t use</p>
+<p>import opennlp.tools.chunker.*;<br/>
+import opennlp.tools.cmdline.*;<br/>
+import opennlp.tools.coref.*;<br/>
+import opennlp.tools.dictionary.*;<br/>
+import opennlp.tools.doccat.*;<br/>
+import opennlp.tools.formats.*;<br/>
+import opennlp.tools.namefind.*;</p>
+<p>or any of the above what should i do to get it work..</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6155">
+<div id="dsq-comment-header-6155" class="dsq-comment-header">
+<cite id="dsq-cite-6155">
+<span id="dsq-author-user-6155">Dilan Wijerathne</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6155" class="dsq-comment-body">
+<div id="dsq-comment-message-6155" class="dsq-comment-message"><p>I have same question</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6011">
+<div id="dsq-comment-header-6011" class="dsq-comment-header">
+<cite id="dsq-cite-6011">
+<span id="dsq-author-user-6011">Rajendra Prasad</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6011" class="dsq-comment-body">
+<div id="dsq-comment-message-6011" class="dsq-comment-message"><p>Hi,Not able run by tomcat,but its working from main method which run by eclipse.<br/>
+Please help. I am using opennlp1.5 version </p>
+<p>InputStream in=new FileInputStream(&#8220;/home/rajendraprasad.yk/Desktop/data/en-sent.bin&#8221;);<br/>
+System.out.println(&#8220;===============&gt;&#8221;+in);<br/>
+sModel=new SentenceModel(in);<br/>
+System.out.println(&#8220;SentenceDetector============&gt;&#8221;+sModel);</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5866">
+<div id="dsq-comment-header-5866" class="dsq-comment-header">
+<cite id="dsq-cite-5866">
+<span id="dsq-author-user-5866">Jay Nanavati</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5866" class="dsq-comment-body">
+<div id="dsq-comment-message-5866" class="dsq-comment-message"><p>Hi,</p>
+<p>I&#8217;ve downloaded apache-opennlp-1.5.3-bin.zip file. I&#8217;ve also copied all the 4 jar files into C:Program FilesJavajdk1.7.0jrelibext directory on my machine.</p>
+<p>Next, I&#8217;ve written the following code:</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</p>
+<p>import java.io.*;</p>
+<p>import opennlp.tools.chunker.*;</p>
+<p>import opennlp.tools.cmdline.*;</p>
+<p>import opennlp.tools.coref.*;</p>
+<p>import opennlp.tools.dictionary.*;</p>
+<p>import opennlp.tools.doccat.*;</p>
+<p>import opennlp.tools.formats.*;</p>
+<p>import opennlp.tools.namefind.*;</p>
+<p>import opennlp.tools.ngram.*;</p>
+<p>import opennlp.tools.parser.*;</p>
+<p>import opennlp.tools.postag.*;</p>
+<p>import opennlp.tools.sentdetect.*;</p>
+<p>import opennlp.tools.stemmer.*;</p>
+<p>import opennlp.tools.tokenize.*;</p>
+<p>import opennlp.tools.util.*;</p>
+<p>import opennlp.maxent.*;</p>
+<p>import opennlp.model.*;</p>
+<p>import opennlp.perceptron.*;</p>
+<p>import opennlp.uima.postag.*;</p>
+<p>class TestApache</p>
+<p>{</p>
+<p>public static void POSTag() throws IOException {</p>
+<p> POSModel model = new POSModelLoader().load(new File(&#8220;en-pos-maxent.bin&#8221;));</p>
+<p> PerformanceMonitor perfMon = new PerformanceMonitor(System.err, &#8220;sent&#8221;);</p>
+<p> POSTaggerME tagger = new POSTaggerME(model);</p>
+<p> String input = &#8220;Hi. How are you? This is Mike.&#8221;;</p>
+<p> ObjectStream lineStream = new PlainTextByLineStream(new StringReader(input));</p>
+<p> perfMon.start();</p>
+<p> String line;</p>
+<p> while ((line = lineStream.read()) != null) {</p>
+<p> String whitespaceTokenizerLine[] = WhitespaceTokenizer.INSTANCE.tokenize(line);</p>
+<p> String[] tags = tagger.tag(whitespaceTokenizerLine);</p>
+<p> POSSample sample = new POSSample(whitespaceTokenizerLine, tags);</p>
+<p> System.out.println(sample.toString());</p>
+<p> perfMon.incrementCounter();</p>
+<p> }</p>
+<p> perfMon.stopAndPrintFinalResult();</p>
+<p>}</p>
+<p>}</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>When I try to compile this code, I get the following error:</p>
+<p>TestApache.java:28: error: cannot find symbol</p>
+<p> POSModel model = new POSModelLoader().load(new File(&#8220;en-pos-maxent.bin&#8221;));</p>
+<p> ^<br/>
+symbol: class POSModelLoader<br/>
+location: class TestApache</p>
+<p>PLEASE HELP ME RESOLVE THIS. MY DOCTORAL RESEARCH WORK IS STUCK HERE.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5853">
+<div id="dsq-comment-header-5853" class="dsq-comment-header">
+<cite id="dsq-cite-5853">
+<span id="dsq-author-user-5853">Nikhil Brahmbhatt</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5853" class="dsq-comment-body">
+<div id="dsq-comment-message-5853" class="dsq-comment-message"><p>This was extremely useful , thanks a million pal 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5508">
+<div id="dsq-comment-header-5508" class="dsq-comment-header">
+<cite id="dsq-cite-5508">
+<span id="dsq-author-user-5508">bezzu</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5508" class="dsq-comment-body">
+<div id="dsq-comment-message-5508" class="dsq-comment-message"><p>I am using en-pos-maxent.bin file for POSTagging. But it is giving Invalid format exception. When I googled i found that I have to remove tags.tag dict from the bin file. How to remove that? Please help me</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5151">
+<div id="dsq-comment-header-5151" class="dsq-comment-header">
+<cite id="dsq-cite-5151">
+<span id="dsq-author-user-5151">Sujata Mehta</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5151" class="dsq-comment-body">
+<div id="dsq-comment-message-5151" class="dsq-comment-message"><p>Hi, we are trying to design a grammar checker using machine learning for which we need the POS tagger and parser functions of OpenNLP. But it keeps giving the exception : Usage: POSDictionaryWriter [-encoding encoding] dictionary tag_files . We cant figure out what the problem is !! Please help us .</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5028">
+<div id="dsq-comment-header-5028" class="dsq-comment-header">
+<cite id="dsq-cite-5028">
+<span id="dsq-author-user-5028">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5028" class="dsq-comment-body">
+<div id="dsq-comment-message-5028" class="dsq-comment-message"><p>Yes, OpenNLP can run on windows.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5027">
+<div id="dsq-comment-header-5027" class="dsq-comment-header">
+<cite id="dsq-cite-5027">
+<span id="dsq-author-user-5027">dhanashree</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5027" class="dsq-comment-body">
+<div id="dsq-comment-message-5027" class="dsq-comment-message"><p>hi..what are the basic requirements for opennlp?can it run on windows7 32bit or not?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5025">
+<div id="dsq-comment-header-5025" class="dsq-comment-header">
+<cite id="dsq-cite-5025">
+<span id="dsq-author-user-5025">Jayant</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5025" class="dsq-comment-body">
+<div id="dsq-comment-message-5025" class="dsq-comment-message"><p>I have started learning Open NLP and curious to know that once we have POS Tagger , can we get its corresponding English sentence back ?</p>
+<p> For example:</p>
+<p>Input string: Hi._NNP How_WRB are_VBP you?_JJ This_DT is_VBZMike._NNP </p>
+<p>OutPut string: Hi. How are you? This is Mike.</p>
+<p>Any help or pointers is highly appreciated.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5024">
+<div id="dsq-comment-header-5024" class="dsq-comment-header">
+<cite id="dsq-cite-5024">
+<span id="dsq-author-user-5024">yudhir</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5024" class="dsq-comment-body">
+<div id="dsq-comment-message-5024" class="dsq-comment-message"><p>Anybody have any files relating to conll2003 NER (Named entity Relation) .</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5017">
+<div id="dsq-comment-header-5017" class="dsq-comment-header">
+<cite id="dsq-cite-5017">
+<span id="dsq-author-user-5017">pavel</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5017" class="dsq-comment-body">
+<div id="dsq-comment-message-5017" class="dsq-comment-message"><p>Would be great to see how to parse with the latest OpenNLP version. Seems like the ParserTool has gone missing.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5016">
+<div id="dsq-comment-header-5016" class="dsq-comment-header">
+<cite id="dsq-cite-5016">
+<span id="dsq-author-user-5016">Jerome Chung</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5016" class="dsq-comment-body">
+<div id="dsq-comment-message-5016" class="dsq-comment-message"><p>it&#8217;s a great tutorial,thanks.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5015">
+<div id="dsq-comment-header-5015" class="dsq-comment-header">
+<cite id="dsq-cite-5015">
+<span id="dsq-author-user-5015">Gemmaicle</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5015" class="dsq-comment-body">
+<div id="dsq-comment-message-5015" class="dsq-comment-message"><p>Hi! how do I include the models in netbeans. The classes are not recognize like SentenceModel and SentenceDetectorME. tnx!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5010">
+<div id="dsq-comment-header-5010" class="dsq-comment-header">
+<cite id="dsq-cite-5010">
+<span id="dsq-author-user-5010">mahi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5010" class="dsq-comment-body">
+<div id="dsq-comment-message-5010" class="dsq-comment-message"><p>Hi, from the parser output i want to remove stop words because i want to get only meaningful words, is there any way to do this any aip?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5003">
+<div id="dsq-comment-header-5003" class="dsq-comment-header">
+<cite id="dsq-cite-5003">
+<span id="dsq-author-user-5003">xera</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5003" class="dsq-comment-body">
+<div id="dsq-comment-message-5003" class="dsq-comment-message"><p>For No 6. Parser, how do I write the output (p.show()) to the textfile?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4972">
+<div id="dsq-comment-header-4972" class="dsq-comment-header">
+<cite id="dsq-cite-4972">
+<span id="dsq-author-user-4972">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4972" class="dsq-comment-body">
+<div id="dsq-comment-message-4972" class="dsq-comment-message"><p>This is a complicated problem if OpenNLP does not provide API to do that. This link may be helpful: <a href="http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.sentdetect.training" rel="nofollow">http://opennlp.apache.org/documentation/1.5.3/manual/opennlp.html#tools.sentdetect.training</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4970">
+<div id="dsq-comment-header-4970" class="dsq-comment-header">
+<cite id="dsq-cite-4970">
+<span id="dsq-author-user-4970">Mohamed</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4970" class="dsq-comment-body">
+<div id="dsq-comment-message-4970" class="dsq-comment-message"><p>How to create our models or to add ather models like Sport, art &#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4968">
+<div id="dsq-comment-header-4968" class="dsq-comment-header">
+<cite id="dsq-cite-4968">
+<span id="dsq-author-user-4968">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4968" class="dsq-comment-body">
+<div id="dsq-comment-message-4968" class="dsq-comment-message"><p>I don&#8217;t think OpenNLP can do that. But when you parse the sentence, you get a tree. Then you may form the clause you want by defining your own rules.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4965">
+<div id="dsq-comment-header-4965" class="dsq-comment-header">
+<cite id="dsq-cite-4965">
+<span id="dsq-author-user-4965">roostae</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4965" class="dsq-comment-body">
+<div id="dsq-comment-message-4965" class="dsq-comment-message"><p>I want to extract subordinate clause,main clause,relative clause,restrictive relative clause,non-restrictive relative clause from sentences but I don&#8217;t know how doing this work. for example:</p>
+<p>&#8220;I first saw her in Paris, where I lived in the early nineties.&#8221;<br/>
+[main clause][relative clause]</p>
+<p>&#8220;She held out the hand that was hurt.&#8221;<br/>
+[main clause][restrictive relative clause]</p>
+<p>please help me to do this work?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4957">
+<div id="dsq-comment-header-4957" class="dsq-comment-header">
+<cite id="dsq-cite-4957">
+<span id="dsq-author-user-4957">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4957" class="dsq-comment-body">
+<div id="dsq-comment-message-4957" class="dsq-comment-message"><p>Models are learned from training data, and then used to process new data.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4956">
+<div id="dsq-comment-header-4956" class="dsq-comment-header">
+<cite id="dsq-cite-4956">
+<span id="dsq-author-user-4956">vivek john</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4956" class="dsq-comment-body">
+<div id="dsq-comment-message-4956" class="dsq-comment-message"><p>what are the model files used for?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4912">
+<div id="dsq-comment-header-4912" class="dsq-comment-header">
+<cite id="dsq-cite-4912">
+<span id="dsq-author-user-4912">Paolo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4912" class="dsq-comment-body">
+<div id="dsq-comment-message-4912" class="dsq-comment-message"><p>hi&#8230;thank you for this tutorial.<br/>
+do you know witch input type format are supported by openNLP? for example&#8230; txt, pdf, doc, xml etc&#8230;</p>
+<p>thank you<br/>
+ragards from Italy</p>
+</div>
+</div>
+</li> 
+<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-4881">
+<div id="dsq-comment-header-4881" class="dsq-comment-header">
+<cite id="dsq-cite-4881">
+<span id="dsq-author-user-4881">Ron</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4881" class="dsq-comment-body">
+<div id="dsq-comment-message-4881" class="dsq-comment-message"><p>Yes, findName() should print range.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4875">
+<div id="dsq-comment-header-4875" class="dsq-comment-header">
+<cite id="dsq-cite-4875">
+<span id="dsq-author-user-4875">ASHISH</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4875" class="dsq-comment-body">
+<div id="dsq-comment-message-4875" class="dsq-comment-message"><p>findName() prints the following output , is it correct?&#8230;.</p>
+<p>[0..2)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4733">
+<div id="dsq-comment-header-4733" class="dsq-comment-header">
+<cite id="dsq-cite-4733">
+<span id="dsq-author-user-4733">Alessandra</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4733" class="dsq-comment-body">
+<div id="dsq-comment-message-4733" class="dsq-comment-message"><p>I would like to provide (train) a POS tagger model for italian language. I have some questions:<br/>
+&#8211; may I use a token_tag pair list in place of a tagged sentence list? Something like<br/>
+casa_NOUN<br/>
+e_CON (that is Conjunction)<br/>
+&#8230;<br/>
+&#8211; Do I need to provide a tag dictionary? Is there a default tag dictionary?<br/>
+thanks</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4730">
+<div id="dsq-comment-header-4730" class="dsq-comment-header">
+<cite id="dsq-cite-4730">
+<span id="dsq-author-user-4730">Adam</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4730" class="dsq-comment-body">
+<div id="dsq-comment-message-4730" class="dsq-comment-message"><p>Thanks so much for posting this! I really appreciate it. In the first example, with sentence boundary detection, why is &#8220;Hi. How are you?&#8221; shown as 1 sentence? Is this a bug in the program?</p>
+<p>Thanks</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4725">
+<div id="dsq-comment-header-4725" class="dsq-comment-header">
+<cite id="dsq-cite-4725">
+<span id="dsq-author-user-4725">developerSh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4725" class="dsq-comment-body">
+<div id="dsq-comment-message-4725" class="dsq-comment-message"><p>The very simple and effective example code to start the work on opennlp 10x a lot</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4706">
+<div id="dsq-comment-header-4706" class="dsq-comment-header">
+<cite id="dsq-cite-4706">
+<a id="dsq-author-user-4706" href="http://corvettebrasil.com" target="_blank" rel="nofollow">Carlos</a>
+</cite>
+</div>
+<div id="dsq-comment-body-4706" class="dsq-comment-body">
+<div id="dsq-comment-message-4706" class="dsq-comment-message"><p>Hi there,</p>
+<p>Is it possible to post here the source code or email it to me? Thanks!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4692">
+<div id="dsq-comment-header-4692" class="dsq-comment-header">
+<cite id="dsq-cite-4692">
+<span id="dsq-author-user-4692">Giri</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4692" class="dsq-comment-body">
+<div id="dsq-comment-message-4692" class="dsq-comment-message"><p>simple and good ..</p>
+</div>
+</div>
+</li> 
+<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="dsq-comment-4682">
+<div id="dsq-comment-header-4682" class="dsq-comment-header">
+<cite id="dsq-cite-4682">
+<span id="dsq-author-user-4682">Admin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4682" class="dsq-comment-body">
+<div id="dsq-comment-message-4682" class="dsq-comment-message"><p>thanks a lot.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4681">
+<div id="dsq-comment-header-4681" class="dsq-comment-header">
+<cite id="dsq-cite-4681">
+<span id="dsq-author-user-4681">Joern</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4681" class="dsq-comment-body">
+<div id="dsq-comment-message-4681" class="dsq-comment-message"><p>Official documentation for 1.5.2 is located here:<br/>
+<a href="http://opennlp.apache.org/documentation/1.5.2-incubating/manual/opennlp.html" rel="nofollow">http://opennlp.apache.org/documentation/1.5.2-incubating/manual/opennlp.html</a></p>
+<p>The documentation over at SourceForge is outdated.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/05/opennlp-tutorial/';
+var disqus_identifier = '7131 http://www.programcreek.com/?p=7131';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "OpenNLP Tutorial";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=7131';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

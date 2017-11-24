@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Leetcode &#8211; Longest Palindromic Substring (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: wu</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-14499</link>
+		<dc:creator><![CDATA[wu]]></dc:creator>
+		<pubDate>Wed, 14 Sep 2016 10:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-14499</guid>
+		<description><![CDATA[in scala
+
+```
+ def findPS(os: String) = {
+    def isPS(s: String): Boolean = s == s.reverse
+    val idxedS = os.toList.zip(0 until os.length)
+    val idxDict = idxedS
+      .groupBy[Char]{ case (c, idx) =&#062; c }
+      .map {case (c, tps) =&#062; (c, tps.map(_._2).sorted.reverse)}
+    var (psLength, psStr) = (1, &quot;&quot;)
+    idxedS.foreach { case (c, idx) =&#062;
+      idxDict(c).takeWhile(_ &#062; idx).foreach { nIdx =&#062;
+        os.substring(idx, nIdx + 1) match {
+          case subS if isPS(subS) &#038;&#038; nIdx-idx &#062; psLength =&#062;
+            psLength = nIdx - idx + 1
+            psStr = subS
+          case _ =&#062; ()
+        }
+      }
+    }
+    psStr
+  }
+```]]></description>
+		<content:encoded><![CDATA[<p>in scala</p>
+<p>&#8220;`<br />
+ def findPS(os: String) = {<br />
+    def isPS(s: String): Boolean = s == s.reverse<br />
+    val idxedS = os.toList.zip(0 until os.length)<br />
+    val idxDict = idxedS<br />
+      .groupBy[Char]{ case (c, idx) =&gt; c }<br />
+      .map {case (c, tps) =&gt; (c, tps.map(_._2).sorted.reverse)}<br />
+    var (psLength, psStr) = (1, &#8220;&#8221;)<br />
+    idxedS.foreach { case (c, idx) =&gt;<br />
+      idxDict(c).takeWhile(_ &gt; idx).foreach { nIdx =&gt;<br />
+        os.substring(idx, nIdx + 1) match {<br />
+          case subS if isPS(subS) &amp;&amp; nIdx-idx &gt; psLength =&gt;<br />
+            psLength = nIdx &#8211; idx + 1<br />
+            psStr = subS<br />
+          case _ =&gt; ()<br />
+        }<br />
+      }<br />
+    }<br />
+    psStr<br />
+  }<br />
+&#8220;`</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Lakshminarayan Kamath</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-9163</link>
+		<dc:creator><![CDATA[Lakshminarayan Kamath]]></dc:creator>
+		<pubDate>Mon, 22 Feb 2016 20:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-9163</guid>
+		<description><![CDATA[public class LongestPalindrome
+{
+    public static void main(String[] args)
+    {
+        String input=&quot;abccbp&quot;;
+        String longest=longestPalindrome(input);
+        System.out.println(longest);
+    }
+
+    public static String longestPalindrome(String input)
+    {
+        if(input.isEmpty())
+            return input;
+
+        if(input.length()==1)
+            return input;
+
+        String longest=&quot;&quot;;
+        String output=&quot;&quot;;
+        int length=0;
+
+        for(int i=0;i&#060;input.length();i++)
+        {
+            longest=&#034;&#034;;
+
+            for(int j=i;jlength)
+                    {
+                        length=longest.length();
+                        output=longest;
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>public class LongestPalindrome<br />
+{<br />
+    public static void main(String[] args)<br />
+    {<br />
+        String input=&#8221;abccbp&#8221;;<br />
+        String longest=longestPalindrome(input);<br />
+        System.out.println(longest);<br />
+    }</p>
+<p>    public static String longestPalindrome(String input)<br />
+    {<br />
+        if(input.isEmpty())<br />
+            return input;</p>
+<p>        if(input.length()==1)<br />
+            return input;</p>
+<p>        String longest=&#8221;&#8221;;<br />
+        String output=&#8221;&#8221;;<br />
+        int length=0;</p>
+<p>        for(int i=0;i&lt;input.length();i++)<br />
+        {<br />
+            longest=&quot;&quot;;</p>
+<p>            for(int j=i;jlength)<br />
+                    {<br />
+                        length=longest.length();<br />
+                        output=longest;<br />
+                    }<br />
+                }<br />
+            }<br />
+        }</p>
+<p>        return output;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CRH</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-8869</link>
+		<dc:creator><![CDATA[CRH]]></dc:creator>
+		<pubDate>Wed, 03 Feb 2016 00:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-8869</guid>
+		<description><![CDATA[I think Solution 3 expects the characters to be adjacent. This question usually is just about finding longest NOT necessarily contiguous substring. The recursive approach of this problem will be exponential time, 2^n . But using dynamic programming time can be reduced to n^2]]></description>
+		<content:encoded><![CDATA[<p>I think Solution 3 expects the characters to be adjacent. This question usually is just about finding longest NOT necessarily contiguous substring. The recursive approach of this problem will be exponential time, 2^n . But using dynamic programming time can be reduced to n^2</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: 卢刘杰</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-7080</link>
+		<dc:creator><![CDATA[卢刘杰]]></dc:creator>
+		<pubDate>Sun, 21 Jun 2015 12:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-7080</guid>
+		<description><![CDATA[yep ! u are right.  the objective is to make the length between i and j is 3.]]></description>
+		<content:encoded><![CDATA[<p>yep ! u are right.  the objective is to make the length between i and j is 3.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: 卢刘杰</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-7079</link>
+		<dc:creator><![CDATA[卢刘杰]]></dc:creator>
+		<pubDate>Sun, 21 Jun 2015 12:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-7079</guid>
+		<description><![CDATA[I suppose u at wrong at some point.]]></description>
+		<content:encoded><![CDATA[<p>I suppose u at wrong at some point.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Harish</title>
+		<link>http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/#comment-6904</link>
+		<dc:creator><![CDATA[Harish]]></dc:creator>
+		<pubDate>Sat, 18 Apr 2015 06:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10552#comment-6904</guid>
+		<description><![CDATA[ABCCBP iis working fine. But incase I give ABCDA, the longest possible palindrome is &#039;AA&#039; but it is showing &#039;A&#039;. Hope I didn&#039;t unnderstand it wrong..!]]></description>
+		<content:encoded><![CDATA[<p>ABCCBP iis working fine. But incase I give ABCDA, the longest possible palindrome is &#8216;AA&#8217; but it is showing &#8216;A&#8217;. Hope I didn&#8217;t unnderstand it wrong..!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

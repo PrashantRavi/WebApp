@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Leetcode &#8211; Add Two Numbers (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/add-two-numbers/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/add-two-numbers/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Udaydeep Thota</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-14295</link>
+		<dc:creator><![CDATA[Udaydeep Thota]]></dc:creator>
+		<pubDate>Sat, 03 Sep 2016 22:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-14295</guid>
+		<description><![CDATA[You could do it, but its not a good practice to navigate the list with the head pointers.]]></description>
+		<content:encoded><![CDATA[<p>You could do it, but its not a good practice to navigate the list with the head pointers.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Udaydeep Thota</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-14294</link>
+		<dc:creator><![CDATA[Udaydeep Thota]]></dc:creator>
+		<pubDate>Sat, 03 Sep 2016 22:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-14294</guid>
+		<description><![CDATA[Works for all the cases, you are just changing the order of numbers and adding it in the same way. Eg: 490 +829 = 1319. Using this method gives 094+928 = 9131 which is correct (Reverse of 9131 is 1319)]]></description>
+		<content:encoded><![CDATA[<p>Works for all the cases, you are just changing the order of numbers and adding it in the same way. Eg: 490 +829 = 1319. Using this method gives 094+928 = 9131 which is correct (Reverse of 9131 is 1319)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-14078</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Fri, 26 Aug 2016 07:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-14078</guid>
+		<description><![CDATA[A slightly simpler version,  
+
+ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int reminder = 0, sum = 0, nextDigit = 0;
+        ListNode dummyNode = new ListNode(0);
+        ListNode T = dummyNode;
+        while (l1 !=null &#038;&#038; l2 != null){
+            sum = l1.val+l2.val+reminder; 
+            nextDigit = sum &#062; 9 ? sum-10 : sum;
+            reminder = sum &#062; 9 ? 1 : 0;
+            T.next = new ListNode(nextDigit);
+            l1=l1.next;
+            l2=l2.next;
+            T=T.next;
+        }
+        while (l1 !=null){
+            sum = l1.val+reminder;
+            nextDigit = sum &#062; 9 ? sum-10 : sum;
+            reminder = sum &#062; 9 ? 1 : 0;
+            l1=l1.next;
+            T.next = new ListNode(nextDigit);
+            T=T.next;
+        }
+        while (l2 !=null){
+            sum = l2.val+reminder;
+            nextDigit = sum &#062; 9 ? sum-10 : sum;
+            reminder = sum &#062; 9 ? 1 : 0;
+            l2=l2.next;
+            T.next = new ListNode(nextDigit);
+            T=T.next;
+        }
+        if (reminder != 0 )
+            T.next = new ListNode(reminder);
+        return dummyNode.next;
+    }]]></description>
+		<content:encoded><![CDATA[<p>A slightly simpler version,  </p>
+<p> public ListNode addTwoNumbers(ListNode l1, ListNode l2) {<br />
+        int reminder = 0, sum = 0, nextDigit = 0;<br />
+        ListNode dummyNode = new ListNode(0);<br />
+        ListNode T = dummyNode;<br />
+        while (l1 !=null &amp;&amp; l2 != null){<br />
+            sum = l1.val+l2.val+reminder;<br />
+            nextDigit = sum &gt; 9 ? sum-10 : sum;<br />
+            reminder = sum &gt; 9 ? 1 : 0;<br />
+            T.next = new ListNode(nextDigit);<br />
+            l1=l1.next;<br />
+            l2=l2.next;<br />
+            T=T.next;<br />
+        }<br />
+        while (l1 !=null){<br />
+            sum = l1.val+reminder;<br />
+            nextDigit = sum &gt; 9 ? sum-10 : sum;<br />
+            reminder = sum &gt; 9 ? 1 : 0;<br />
+            l1=l1.next;<br />
+            T.next = new ListNode(nextDigit);<br />
+            T=T.next;<br />
+        }<br />
+        while (l2 !=null){<br />
+            sum = l2.val+reminder;<br />
+            nextDigit = sum &gt; 9 ? sum-10 : sum;<br />
+            reminder = sum &gt; 9 ? 1 : 0;<br />
+            l2=l2.next;<br />
+            T.next = new ListNode(nextDigit);<br />
+            T=T.next;<br />
+        }<br />
+        if (reminder != 0 )<br />
+            T.next = new ListNode(reminder);<br />
+        return dummyNode.next;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-7571</link>
+		<dc:creator><![CDATA[Rahul]]></dc:creator>
+		<pubDate>Sat, 07 Nov 2015 01:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-7571</guid>
+		<description><![CDATA[Thanks for the code.. Logically its correct. The only concern is about adding a 4 digit number to a 3 digit number in regular order]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the code.. Logically its correct. The only concern is about adding a 4 digit number to a 3 digit number in regular order</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jayce Kim</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-7485</link>
+		<dc:creator><![CDATA[Jayce Kim]]></dc:creator>
+		<pubDate>Fri, 16 Oct 2015 19:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-7485</guid>
+		<description><![CDATA[I am also curious about that. Did you figure it out?]]></description>
+		<content:encoded><![CDATA[<p>I am also curious about that. Did you figure it out?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: random</title>
+		<link>http://www.programcreek.com/2012/12/add-two-numbers/#comment-6754</link>
+		<dc:creator><![CDATA[random]]></dc:creator>
+		<pubDate>Sun, 08 Mar 2015 07:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10613#comment-6754</guid>
+		<description><![CDATA[Bunch of looser have you guys tested it once ?
+it wasted my 50 min of time.]]></description>
+		<content:encoded><![CDATA[<p>Bunch of looser have you guys tested it once ?<br />
+it wasted my 50 min of time.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

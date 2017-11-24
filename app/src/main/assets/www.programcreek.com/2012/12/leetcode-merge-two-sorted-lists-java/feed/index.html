@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Merge Two Sorted Lists (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Kartik Downey Jr.</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-14816</link>
+		<dc:creator><![CDATA[Kartik Downey Jr.]]></dc:creator>
+		<pubDate>Tue, 27 Sep 2016 12:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-14816</guid>
+		<description><![CDATA[lol we don&#039;t have to move all pointers, its alright to just copy its reference]]></description>
+		<content:encoded><![CDATA[<p>lol we don&#8217;t have to move all pointers, its alright to just copy its reference</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shelly Jaglan</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-14436</link>
+		<dc:creator><![CDATA[Shelly Jaglan]]></dc:creator>
+		<pubDate>Fri, 09 Sep 2016 15:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-14436</guid>
+		<description><![CDATA[code has mistake
+correct code
+in 
+else if(l1==null){
+            p.next = l2;
+            l2 = l2.next;
+            p = p.next;
+            break;
+        }
+else if(l2==null){
+            p.next = l1;
+            l1 = l1.next;
+            p = p.next;
+            break;
+        }]]></description>
+		<content:encoded><![CDATA[<p>code has mistake<br />
+correct code<br />
+in<br />
+else if(l1==null){<br />
+            p.next = l2;<br />
+            l2 = l2.next;<br />
+            p = p.next;<br />
+            break;<br />
+        }<br />
+else if(l2==null){<br />
+            p.next = l1;<br />
+            l1 = l1.next;<br />
+            p = p.next;<br />
+            break;<br />
+        }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tunca tunç</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-14186</link>
+		<dc:creator><![CDATA[tunca tunç]]></dc:creator>
+		<pubDate>Tue, 30 Aug 2016 20:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-14186</guid>
+		<description><![CDATA[Thanks, much simple solution.
+using recursion space complexity is O(n).
+space complexity O(1) would be much better.]]></description>
+		<content:encoded><![CDATA[<p>Thanks, much simple solution.<br />
+using recursion space complexity is O(n).<br />
+space complexity O(1) would be much better.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek Muralidharan</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-11073</link>
+		<dc:creator><![CDATA[Vivek Muralidharan]]></dc:creator>
+		<pubDate>Sat, 14 May 2016 01:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-11073</guid>
+		<description><![CDATA[I liked the core of your solution of creating a fakehead. But, unfortunately it is not complete. Below is the complete non-recursive solution for the above problem in JAVA:
+&lt;code&gt;
+ 
+public class MergingTwoSortedLists {
+
+     private class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+     }
+
+     ListNode head1;
+     ListNode head2;		
+	
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode list1 = l1;
+        ListNode list2 = l2;
+        
+        ListNode head = new ListNode(0);
+        ListNode merged = head;
+        
+        if(l1 == null &#038;&#038; l2 != null){
+            return l2;
+        }
+        
+        if(l1 != null &#038;&#038; l2 == null){
+            return l1;
+        }
+        
+        while(list1 != null &#038;&#038; list2 != null){
+            if(list1.val &#060; list2.val){
+                merged.next = list1;
+                list1 = list1.next;
+            }
+            else{
+                merged.next = list2;
+                list2 = list2.next;
+            }
+            merged = merged.next;
+        }
+        //If list1 alone is present
+        while(list1 != null){
+            merged.next = list1;
+            list1 = list1.next;
+            merged = merged.next;
+        }
+        
+        //If list2 alone is present 
+        while(list2 != null){
+            merged.next = list2;
+            list2 = list2.next;
+            merged = merged.next;
+        }
+     return head.next;   
+    }
+
+	public void display(ListNode head){
+		ListNode temp = head;
+		while(temp != null){
+			System.out.print(temp.val+&#034; &#034;);
+			temp = temp.next;
+		}
+		System.out.println();
+	}	
+
+	public static void main(String[] args){
+		MergingTwoSortedLists obj = new MergingTwoSortedLists();
+		obj.head1 = obj.new ListNode(1);
+		obj.head1.next = obj.new ListNode(3);		
+		obj.head2 = obj.new ListNode(2);
+		obj.head2.next = obj.new ListNode(4);
+		obj.display(obj.head1);		
+		obj.display(obj.head2);
+		obj.display(obj.mergeTwoLists(obj.head1,obj.head2));
+		
+	}	
+}
+&lt;/code&gt;&#060;/pre]]></description>
+		<content:encoded><![CDATA[<p>I liked the core of your solution of creating a fakehead. But, unfortunately it is not complete. Below is the complete non-recursive solution for the above problem in JAVA:<br />
+<code></p>
+<p>public class MergingTwoSortedLists {</p>
+<p>     private class ListNode {<br />
+      int val;<br />
+      ListNode next;<br />
+      ListNode(int x) { val = x; }<br />
+     }</p>
+<p>     ListNode head1;<br />
+     ListNode head2;		</p>
+<p>    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {<br />
+        ListNode list1 = l1;<br />
+        ListNode list2 = l2;</p>
+<p>        ListNode head = new ListNode(0);<br />
+        ListNode merged = head;</p>
+<p>        if(l1 == null &amp;&amp; l2 != null){<br />
+            return l2;<br />
+        }</p>
+<p>        if(l1 != null &amp;&amp; l2 == null){<br />
+            return l1;<br />
+        }</p>
+<p>        while(list1 != null &amp;&amp; list2 != null){<br />
+            if(list1.val &lt; list2.val){<br />
+                merged.next = list1;<br />
+                list1 = list1.next;<br />
+            }<br />
+            else{<br />
+                merged.next = list2;<br />
+                list2 = list2.next;<br />
+            }<br />
+            merged = merged.next;<br />
+        }<br />
+        //If list1 alone is present<br />
+        while(list1 != null){<br />
+            merged.next = list1;<br />
+            list1 = list1.next;<br />
+            merged = merged.next;<br />
+        }</p>
+<p>        //If list2 alone is present<br />
+        while(list2 != null){<br />
+            merged.next = list2;<br />
+            list2 = list2.next;<br />
+            merged = merged.next;<br />
+        }<br />
+     return head.next;<br />
+    }</p>
+<p>	public void display(ListNode head){<br />
+		ListNode temp = head;<br />
+		while(temp != null){<br />
+			System.out.print(temp.val+&quot; &quot;);<br />
+			temp = temp.next;<br />
+		}<br />
+		System.out.println();<br />
+	}	</p>
+<p>	public static void main(String[] args){<br />
+		MergingTwoSortedLists obj = new MergingTwoSortedLists();<br />
+		obj.head1 = obj.new ListNode(1);<br />
+		obj.head1.next = obj.new ListNode(3);<br />
+		obj.head2 = obj.new ListNode(2);<br />
+		obj.head2.next = obj.new ListNode(4);<br />
+		obj.display(obj.head1);<br />
+		obj.display(obj.head2);<br />
+		obj.display(obj.mergeTwoLists(obj.head1,obj.head2));</p>
+<p>	}<br />
+}<br />
+</code>&lt;/pre</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Joe West</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-10653</link>
+		<dc:creator><![CDATA[Joe West]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2016 14:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-10653</guid>
+		<description><![CDATA[What Александр Ефремов says is correct. Pointers must be moved]]></description>
+		<content:encoded><![CDATA[<p>What Александр Ефремов says is correct. Pointers must be moved</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: karansingh14</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-merge-two-sorted-lists-java/#comment-9913</link>
+		<dc:creator><![CDATA[karansingh14]]></dc:creator>
+		<pubDate>Thu, 24 Mar 2016 15:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11184#comment-9913</guid>
+		<description><![CDATA[for me recursion worked  :-
+
+    public static Node mergeLists(Node headA, Node headB) {
+        Node headC = null;
+        if (headA == null) {
+            return headB;
+        }
+        if (headB == null) {
+            return headA;
+        }
+
+        if (headA.data &#060;= headB.data) {
+            headC = headA;
+            headC.next = mergeLists(headA.next, headB);
+        } else {
+            headC = headB;
+            headC.next = mergeLists(headA, headB.next);
+        }
+        return headC;
+    }]]></description>
+		<content:encoded><![CDATA[<p>for me recursion worked  :-</p>
+<p>    public static Node mergeLists(Node headA, Node headB) {<br />
+        Node headC = null;<br />
+        if (headA == null) {<br />
+            return headB;<br />
+        }<br />
+        if (headB == null) {<br />
+            return headA;<br />
+        }</p>
+<p>        if (headA.data &lt;= headB.data) {<br />
+            headC = headA;<br />
+            headC.next = mergeLists(headA.next, headB);<br />
+        } else {<br />
+            headC = headB;<br />
+            headC.next = mergeLists(headA, headB.next);<br />
+        }<br />
+        return headC;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

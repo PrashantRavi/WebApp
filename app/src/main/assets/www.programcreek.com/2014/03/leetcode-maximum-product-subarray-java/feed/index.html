@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Maximum Product Subarray (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Archit</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/#comment-15689</link>
+		<dc:creator><![CDATA[Archit]]></dc:creator>
+		<pubDate>Thu, 27 Oct 2016 01:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13736#comment-15689</guid>
+		<description><![CDATA[Constant space using dynamic programming !
+
+&lt;code&gt;
+public int maxProductConstantSpace(int[] nums){
+        int min_so_far = nums[0];
+        int max_so_far = nums[0];
+        int curr_max = nums[0];
+        int curr_min = nums[0];
+         int result = 0;
+        for (int i = 1; i  0){
+                    curr_max = Math.max(nums[i],nums[i] * max_so_far);
+                    curr_min = Math.min(nums[i] , nums[i] * min_so_far);
+
+                } else {
+                    curr_max = Math.max(nums[i],nums[i] * min_so_far);
+                    curr_min = Math.min(nums[i] , nums[i] * max_so_far);
+                }
+                max_so_far = curr_max;
+                min_so_far = curr_min;
+            result = Math.max(result,max_so_far);
+        }
+        return result;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Constant space using dynamic programming !</p>
+<p><code><br />
+public int maxProductConstantSpace(int[] nums){<br />
+        int min_so_far = nums[0];<br />
+        int max_so_far = nums[0];<br />
+        int curr_max = nums[0];<br />
+        int curr_min = nums[0];<br />
+         int result = 0;<br />
+        for (int i = 1; i  0){<br />
+                    curr_max = Math.max(nums[i],nums[i] * max_so_far);<br />
+                    curr_min = Math.min(nums[i] , nums[i] * min_so_far);</p>
+<p>                } else {<br />
+                    curr_max = Math.max(nums[i],nums[i] * min_so_far);<br />
+                    curr_min = Math.min(nums[i] , nums[i] * max_so_far);<br />
+                }<br />
+                max_so_far = curr_max;<br />
+                min_so_far = curr_min;<br />
+            result = Math.max(result,max_so_far);<br />
+        }<br />
+        return result;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/#comment-13585</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Thu, 11 Aug 2016 21:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13736#comment-13585</guid>
+		<description><![CDATA[&lt;code&gt;  
+   public int maxProduct(int[] nums) {
+        if (nums.length &#060; 1)
+            return 0;
+        int max = nums[0];
+        int currentMax = max;
+        int min = max;
+        for (int i =1;i&#060;nums.length;i++){
+            int temp  = Math.min(nums[i], Math.min(min*nums[i],currentMax*nums[i]));
+            currentMax = Math.max(nums[i], Math.max(min*nums[i],currentMax*nums[i]));
+            min = temp;
+            max = Math.max(max,currentMax);
+        }
+        return max;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+   public int maxProduct(int[] nums) {<br />
+        if (nums.length &lt; 1)<br />
+            return 0;<br />
+        int max = nums[0];<br />
+        int currentMax = max;<br />
+        int min = max;<br />
+        for (int i =1;i&lt;nums.length;i++){<br />
+            int temp  = Math.min(nums[i], Math.min(min*nums[i],currentMax*nums[i]));<br />
+            currentMax = Math.max(nums[i], Math.max(min*nums[i],currentMax*nums[i]));<br />
+            min = temp;<br />
+            max = Math.max(max,currentMax);<br />
+        }<br />
+        return max;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shashi Kant</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/#comment-7462</link>
+		<dc:creator><![CDATA[Shashi Kant]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2015 08:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13736#comment-7462</guid>
+		<description><![CDATA[works for zero element case too
+
+public static int maximumProductSubArray(int[] arr){
+
+		int maxProd=1;
+
+		for(int start=0;start 0; end--) {
+
+				int prod=1;
+
+				for(int i=start;i&#060;=end;i++){
+
+					prod*=arr[i];
+
+				}
+
+				maxProd=Math.max(maxProd, prod);
+
+			}
+
+		}
+
+		return maxProd;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>works for zero element case too</p>
+<p>public static int maximumProductSubArray(int[] arr){</p>
+<p>		int maxProd=1;</p>
+<p>		for(int start=0;start 0; end&#8211;) {</p>
+<p>				int prod=1;</p>
+<p>				for(int i=start;i&lt;=end;i++){</p>
+<p>					prod*=arr[i];</p>
+<p>				}</p>
+<p>				maxProd=Math.max(maxProd, prod);</p>
+<p>			}</p>
+<p>		}</p>
+<p>		return maxProd;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jason zhang</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-maximum-product-subarray-java/#comment-7052</link>
+		<dc:creator><![CDATA[jason zhang]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2015 06:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13736#comment-7052</guid>
+		<description><![CDATA[Brute force is not correct. For example, this test case can not pass: [-2, 4]
+
+Another solution. Should be faster than DP
+
+
+//if we have zero, we reset maxXXXWithLastElement
+
+	//assume that no element is zero.
+
+	public static int maximumSubarrayProduct(int[] input){
+
+		
+
+		//remove simple case to simplify process
+
+		if (input.length==1){
+
+			return input[0];
+
+		}
+
+		int allProduct=1;
+
+		for (int i=0; i0){
+
+			return allProduct;
+
+		}
+
+		
+
+		//all value is negative
+
+		int left=0;
+
+		int right=input.length-1;
+
+		//find the right most index which gives us an positive number.
+
+		for (; right&#062;=0; right--){
+
+			allProduct=allProduct/input[right];
+
+			if(allProduct&#062;0){
+
+				max=Math.max(allProduct, max);
+
+				right--;
+
+				break;
+
+			}
+
+		}
+
+		
+
+		if (right==-1){
+
+			//we can not have a positive number if subarray starting from zero.
+
+			//only one element is included;
+
+			allProduct=input[0];
+
+			max=allProduct;
+
+			right=0;
+
+		}
+
+		
+
+		//the max value is input[0]*input[1]*...*input[right];
+
+		int leftOver=allProduct;
+
+		int newLeft=left;
+
+		for (; newLeft0 &#038;&#038; allProduct&#060;0) &#124;&#124; (leftOver0)){
+
+				//switch signed;
+
+				newLeft++;
+
+				break;
+
+			}
+
+		}
+
+		
+
+		int newAllValue=leftOver;
+
+		for (int j=right+1; j&#060;input.length; j++){
+
+			newAllValue*=input[j];
+
+		}
+
+		max=Math.max(newAllValue, max);
+
+		
+
+		
+
+		return max;
+
+		
+
+	}
+
+]]></description>
+		<content:encoded><![CDATA[<p>Brute force is not correct. For example, this test case can not pass: [-2, 4]</p>
+<p>Another solution. Should be faster than DP</p>
+<p>//if we have zero, we reset maxXXXWithLastElement</p>
+<p>	//assume that no element is zero.</p>
+<p>	public static int maximumSubarrayProduct(int[] input){</p>
+<p>		//remove simple case to simplify process</p>
+<p>		if (input.length==1){</p>
+<p>			return input[0];</p>
+<p>		}</p>
+<p>		int allProduct=1;</p>
+<p>		for (int i=0; i0){</p>
+<p>			return allProduct;</p>
+<p>		}</p>
+<p>		//all value is negative</p>
+<p>		int left=0;</p>
+<p>		int right=input.length-1;</p>
+<p>		//find the right most index which gives us an positive number.</p>
+<p>		for (; right&gt;=0; right&#8211;){</p>
+<p>			allProduct=allProduct/input[right];</p>
+<p>			if(allProduct&gt;0){</p>
+<p>				max=Math.max(allProduct, max);</p>
+<p>				right&#8211;;</p>
+<p>				break;</p>
+<p>			}</p>
+<p>		}</p>
+<p>		if (right==-1){</p>
+<p>			//we can not have a positive number if subarray starting from zero.</p>
+<p>			//only one element is included;</p>
+<p>			allProduct=input[0];</p>
+<p>			max=allProduct;</p>
+<p>			right=0;</p>
+<p>		}</p>
+<p>		//the max value is input[0]*input[1]*&#8230;*input[right];</p>
+<p>		int leftOver=allProduct;</p>
+<p>		int newLeft=left;</p>
+<p>		for (; newLeft0 &amp;&amp; allProduct&lt;0) || (leftOver0)){</p>
+<p>				//switch signed;</p>
+<p>				newLeft++;</p>
+<p>				break;</p>
+<p>			}</p>
+<p>		}</p>
+<p>		int newAllValue=leftOver;</p>
+<p>		for (int j=right+1; j&lt;input.length; j++){</p>
+<p>			newAllValue*=input[j];</p>
+<p>		}</p>
+<p>		max=Math.max(newAllValue, max);</p>
+<p>		return max;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Clone Graph (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-clone-graph-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-14308</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Sun, 04 Sep 2016 05:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-14308</guid>
+		<description><![CDATA[A DFS with alreadyAvailable map that stores (label,new node)
+And if node is present in map, use it else create a new node and put in map.
+&lt;code&gt;
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if (node == null)
+            return node;
+        Map alreadyAvailable = new HashMap();
+        return cloneGraphHelper(node,alreadyAvailable);
+    }
+    private UndirectedGraphNode cloneGraphHelper(UndirectedGraphNode node, Map alreadyAvailable) {
+        if ( alreadyAvailable.containsKey(node.label) ) 
+            return alreadyAvailable.get(node.label);
+        UndirectedGraphNode returnNode = new UndirectedGraphNode(node.label);
+        alreadyAvailable.put(node.label,returnNode);
+        for(UndirectedGraphNode N: node.neighbors)
+            returnNode.neighbors.add(cloneGraphHelper(N,alreadyAvailable));
+        return returnNode;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>A DFS with alreadyAvailable map that stores (label,new node)<br />
+And if node is present in map, use it else create a new node and put in map.<br />
+<code><br />
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {<br />
+        if (node == null)<br />
+            return node;<br />
+        Map alreadyAvailable = new HashMap();<br />
+        return cloneGraphHelper(node,alreadyAvailable);<br />
+    }<br />
+    private UndirectedGraphNode cloneGraphHelper(UndirectedGraphNode node, Map alreadyAvailable) {<br />
+        if ( alreadyAvailable.containsKey(node.label) )<br />
+            return alreadyAvailable.get(node.label);<br />
+        UndirectedGraphNode returnNode = new UndirectedGraphNode(node.label);<br />
+        alreadyAvailable.put(node.label,returnNode);<br />
+        for(UndirectedGraphNode N: node.neighbors)<br />
+            returnNode.neighbors.add(cloneGraphHelper(N,alreadyAvailable));<br />
+        return returnNode;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gowtham Bk</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-8816</link>
+		<dc:creator><![CDATA[gowtham Bk]]></dc:creator>
+		<pubDate>Mon, 01 Feb 2016 07:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-8816</guid>
+		<description><![CDATA[Why should it be bfs ? why not dfs??]]></description>
+		<content:encoded><![CDATA[<p>Why should it be bfs ? why not dfs??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rashmibrahma</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-6956</link>
+		<dc:creator><![CDATA[rashmibrahma]]></dc:creator>
+		<pubDate>Thu, 14 May 2015 18:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-6956</guid>
+		<description><![CDATA[
+
+import java.util.HashSet;
+
+import java.util.Set;
+
+
+public class CloneGraph {
+
+	public static UndirectedGraphNode cloneGraph(UndirectedGraphNode root1) {
+
+		if(root1==null){
+
+			return null;
+
+		}
+
+		UndirectedGraphNode root2;
+
+		Set visited=new HashSet();
+
+		root2=cloneGraph(root1, visited);
+
+		return root2;
+
+	}
+
+	
+
+	private static UndirectedGraphNode cloneGraph(UndirectedGraphNode root1, Set visited){
+
+		visited.add(root1.label);
+
+
+
+		UndirectedGraphNode root2=new UndirectedGraphNode(root1.label);
+
+		for(UndirectedGraphNode node:root1.neighbors){
+
+			root2.neighbors.add(node);
+
+
+			if(!visited.contains(node.label)){
+
+
+				cloneGraph(node, visited);
+
+			}
+
+		}
+
+
+
+		return root2;
+
+	}
+
+
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p>import java.util.HashSet;</p>
+<p>import java.util.Set;</p>
+<p>public class CloneGraph {</p>
+<p>	public static UndirectedGraphNode cloneGraph(UndirectedGraphNode root1) {</p>
+<p>		if(root1==null){</p>
+<p>			return null;</p>
+<p>		}</p>
+<p>		UndirectedGraphNode root2;</p>
+<p>		Set visited=new HashSet();</p>
+<p>		root2=cloneGraph(root1, visited);</p>
+<p>		return root2;</p>
+<p>	}</p>
+<p>	private static UndirectedGraphNode cloneGraph(UndirectedGraphNode root1, Set visited){</p>
+<p>		visited.add(root1.label);</p>
+<p>		UndirectedGraphNode root2=new UndirectedGraphNode(root1.label);</p>
+<p>		for(UndirectedGraphNode node:root1.neighbors){</p>
+<p>			root2.neighbors.add(node);</p>
+<p>			if(!visited.contains(node.label)){</p>
+<p>				cloneGraph(node, visited);</p>
+<p>			}</p>
+<p>		}</p>
+<p>		return root2;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Wayne</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-6844</link>
+		<dc:creator><![CDATA[Wayne]]></dc:creator>
+		<pubDate>Thu, 02 Apr 2015 02:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-6844</guid>
+		<description><![CDATA[
+
+import java.util.ArrayList;
+
+import java.util.HashMap;
+
+import java.util.List;
+
+public class Solution {
+
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+
+        if (node == null) {
+
+            return null;
+
+        }
+
+        HashMap hasProcessed
+
+                = new HashMap();
+
+        return cloneGraph(node, hasProcessed);
+
+    }
+
+    private UndirectedGraphNode cloneGraph(UndirectedGraphNode node,
+
+                                           HashMap hasProcessed) {
+
+        UndirectedGraphNode newNode = new UndirectedGraphNode(node.label);
+
+        hasProcessed.put(node, newNode);
+
+        for (UndirectedGraphNode next : node.neighbors) {
+
+            if (hasProcessed.get(next) == null) {
+
+                newNode.neighbors.add(cloneGraph(next, hasProcessed));
+
+            } else {
+
+                newNode.neighbors.add(hasProcessed.get(next));
+
+            }
+
+        }
+
+        return newNode;
+
+    }
+
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p>import java.util.ArrayList;</p>
+<p>import java.util.HashMap;</p>
+<p>import java.util.List;</p>
+<p>public class Solution {</p>
+<p>    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {</p>
+<p>        if (node == null) {</p>
+<p>            return null;</p>
+<p>        }</p>
+<p>        HashMap hasProcessed</p>
+<p>                = new HashMap();</p>
+<p>        return cloneGraph(node, hasProcessed);</p>
+<p>    }</p>
+<p>    private UndirectedGraphNode cloneGraph(UndirectedGraphNode node,</p>
+<p>                                           HashMap hasProcessed) {</p>
+<p>        UndirectedGraphNode newNode = new UndirectedGraphNode(node.label);</p>
+<p>        hasProcessed.put(node, newNode);</p>
+<p>        for (UndirectedGraphNode next : node.neighbors) {</p>
+<p>            if (hasProcessed.get(next) == null) {</p>
+<p>                newNode.neighbors.add(cloneGraph(next, hasProcessed));</p>
+<p>            } else {</p>
+<p>                newNode.neighbors.add(hasProcessed.get(next));</p>
+<p>            }</p>
+<p>        }</p>
+<p>        return newNode;</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Howard</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-6650</link>
+		<dc:creator><![CDATA[Howard]]></dc:creator>
+		<pubDate>Tue, 17 Feb 2015 21:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-6650</guid>
+		<description><![CDATA[Great code. I just wonder whether it should be queue.poll( ), instead of queue.pop( )?]]></description>
+		<content:encoded><![CDATA[<p>Great code. I just wonder whether it should be queue.poll( ), instead of queue.pop( )?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yoonsoo Kim</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-clone-graph-java/#comment-6253</link>
+		<dc:creator><![CDATA[Yoonsoo Kim]]></dc:creator>
+		<pubDate>Sat, 25 Oct 2014 21:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10845#comment-6253</guid>
+		<description><![CDATA[How about the following algorithm in C++? I don&#039;t think we need to use BFS when copying a whole graph. A whole graph can&#039;t be represented by a single node but by a list of node. So I think the following approach works too. The most important thing to clone a whole graph is using hash map between original node and cloned node, not the BFS.
+
+
+struct node {
+  int v;
+  vector E;
+  node(int v) : v(v) {}
+};
+
+auto clone_graph = [](const vector&#038; G) {
+  vector retG(G.size(), nullptr);
+  unordered_map node_map;
+  for (size_t i = 0; i v };
+    retG[i]-&#062;E.resize(G[i]-&#062;E.size());
+    node_map[G[i]] = retG[i];
+  }
+
+  for (size_t i = 0; i &#060; retG.size(); ++i) {
+    for (size_t j = 0; j E.size(); ++j) {
+      retG[i]-&#062;E[j] = node_map[G[i]-&#062;E[j]];
+    }
+  }
+
+  return retG;
+};
+
+
+Here is another approach which is using BFS.
+
+
+auto clone_graph2 = [](const vector&#038; G) {
+  unordered_map cloned;
+  function impl = [&#038;](node* o) {
+  queue q;
+  cloned[o] = new node(o-&#062;v);
+  cloned[o]-&#062;E.resize(o-&#062;E.size());
+  q.push(o);
+
+  while (!q.empty()) {
+    auto n = q.front();
+    q.pop();
+    for (size_t i = 0; i E.size(); ++i) {
+      if (cloned.find(n-&#062;E[i]) == cloned.end()) {
+        q.push(n-&#062;E[i]);
+        cloned[n-&#062;E[i]] = new node(n-&#062;E[i]-&#062;v);
+        cloned[n-&#062;E[i]]-&#062;E.resize(n-&#062;E[i]-&#062;E.size());
+      }
+      cloned[n]-&#062;E[i] = cloned[n-&#062;E[i]];
+    }
+  }
+
+  return cloned[o];
+  };
+
+  vector retG(G.size(), nullptr);
+  for (size_t i = 0; i &#060; retG.size(); ++i) {
+    retG[i] = cloned.find(G[i]) == cloned.end() ? impl(G[i]) : cloned[G[i]];
+  }
+
+  return retG;
+};
+
+I prefer the first approach for its simplicity
+]]></description>
+		<content:encoded><![CDATA[<p>How about the following algorithm in C++? I don&#8217;t think we need to use BFS when copying a whole graph. A whole graph can&#8217;t be represented by a single node but by a list of node. So I think the following approach works too. The most important thing to clone a whole graph is using hash map between original node and cloned node, not the BFS.</p>
+<p>struct node {<br />
+  int v;<br />
+  vector E;<br />
+  node(int v) : v(v) {}<br />
+};</p>
+<p>auto clone_graph = [](const vector&amp; G) {<br />
+  vector retG(G.size(), nullptr);<br />
+  unordered_map node_map;<br />
+  for (size_t i = 0; i v };<br />
+    retG[i]-&gt;E.resize(G[i]-&gt;E.size());<br />
+    node_map[G[i]] = retG[i];<br />
+  }</p>
+<p>  for (size_t i = 0; i &lt; retG.size(); ++i) {<br />
+    for (size_t j = 0; j E.size(); ++j) {<br />
+      retG[i]-&gt;E[j] = node_map[G[i]-&gt;E[j]];<br />
+    }<br />
+  }</p>
+<p>  return retG;<br />
+};</p>
+<p>Here is another approach which is using BFS.</p>
+<p>auto clone_graph2 = [](const vector&amp; G) {<br />
+  unordered_map cloned;<br />
+  function impl = [&amp;](node* o) {<br />
+  queue q;<br />
+  cloned[o] = new node(o-&gt;v);<br />
+  cloned[o]-&gt;E.resize(o-&gt;E.size());<br />
+  q.push(o);</p>
+<p>  while (!q.empty()) {<br />
+    auto n = q.front();<br />
+    q.pop();<br />
+    for (size_t i = 0; i E.size(); ++i) {<br />
+      if (cloned.find(n-&gt;E[i]) == cloned.end()) {<br />
+        q.push(n-&gt;E[i]);<br />
+        cloned[n-&gt;E[i]] = new node(n-&gt;E[i]-&gt;v);<br />
+        cloned[n-&gt;E[i]]-&gt;E.resize(n-&gt;E[i]-&gt;E.size());<br />
+      }<br />
+      cloned[n]-&gt;E[i] = cloned[n-&gt;E[i]];<br />
+    }<br />
+  }</p>
+<p>  return cloned[o];<br />
+  };</p>
+<p>  vector retG(G.size(), nullptr);<br />
+  for (size_t i = 0; i &lt; retG.size(); ++i) {<br />
+    retG[i] = cloned.find(G[i]) == cloned.end() ? impl(G[i]) : cloned[G[i]];<br />
+  }</p>
+<p>  return retG;<br />
+};</p>
+<p>I prefer the first approach for its simplicity</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

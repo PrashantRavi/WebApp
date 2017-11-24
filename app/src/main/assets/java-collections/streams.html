@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Collections - Streams</title>
+
+    <meta name="description" content="This tutorial explains Java 8's new Stream API which is part of Java Collections. The Stream API can be used to process elements in a collection in a more functional programming style.">
+    <meta name="keywords"    content="java collection stream">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Collections - Streams">
+    <meta name="twitter:description" content="This tutorial explains Java 8's new Stream API which is part of Java Collections. The Stream API can be used to process elements in a collection in a more functional programming style.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Collections - Streams"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-collections/streams.html"/>
+    <meta property="og:description" content="This tutorial explains Java 8's new Stream API which is part of Java Collections. The Stream API can be used to process elements in a collection in a more functional programming style."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-collections/sorting.html";
+var nextArticleInCategory = "";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 9725;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Collections</div><ol><li><a href="index.html">Java Collections Tutorial</a></li><li><a href="overview.html">Java Collections - Overview</a></li><li><a href="iterable.html">Java Collections - Iterable</a></li><li><a href="collection.html">Java Collections - Collection</a></li><li><a href="generic-collections.html">Java Collections - Generic Collections</a></li><li><a href="list.html">Java Collections - List</a></li><li><a href="set.html">Java Collections - Set</a></li><li><a href="sortedset.html">Java Collections - SortedSet</a></li><li><a href="navigableset.html">Java Collections - NavigableSet</a></li><li><a href="map.html">Java Collections - Map</a></li><li><a href="sortedmap.html">Java Collections - SortedMap</a></li><li><a href="navigablemap.html">Java Collections - NavigableMap</a></li><li><a href="queue.html">Java Collections - Queue</a></li><li><a href="deque.html">Java Collections - Deque</a></li><li><a href="stack.html">Java Collections - Stack</a></li><li><a href="hashcode-equals.html">Java Collections - hashCode() and equals()</a></li><li><a href="sorting.html">Java Collections - Sorting</a></li><li><a href="streams.html"><b>Java Collections - Streams</b></a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Collections - Streams</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#obtaining-a-stream-from-a-collection">Obtaining a Stream From a Collection</a></li><li><a href="#stream-processing-steps">Stream Processing Phases</a></li><li><a href="#stream-filter">Stream.filter()</a></li><li><a href="#stream-map">Stream.map()</a></li><li><a href="#stream-collect">Stream.collect()</a></li><li><a href="#stream-min-max">Stream.min() and Stream.max()</a></li><li><a href="#stream-count">Stream.count()</a></li><li><a href="#reduce">Stream.reduce()</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Java 8 Streams is a new addition to the Java Collections API, which brings a new way to process collections
+    of objects. Thus, streams in the Java Collections API is a different concept than the input and output streams
+    in the Java IO API, even if the idea is similar (a stream of objects from a collection,
+    instead of a stream of bytes or characters).
+</p>
+
+
+<p>
+    Streams are designed to work with <a href="../java/lambda-expressions.html">Java lambda expressions</a>. Many
+    of the examples in this text will use lambda expressions, so if you don't already know them, you should
+    read up on them before reading this text.
+</p>
+
+
+<a name="obtaining-a-stream-from-a-collection"></a>
+<h2>Obtaining a Stream From a Collection</h2>
+
+<p>
+    You obtain a stream from a collection like this:
+</p>
+
+<pre class="codeBox">
+List&lt;String&gt; items = new ArrayList&lt;String&gt;();
+
+items.add("one");
+items.add("two");
+items.add("three");
+
+Stream&lt;String&gt; stream = items.stream();
+</pre>
+
+<p>
+    First a <code>List</code> of strings is created and three strings are added to it.
+    Then a <code>Stream</code> of strings is obtained by calling the <code>items.stream()</code>
+    method. This is similar to how  you obtain an <code>Iterator</code> by calling the <code>items.iterator()</code>
+    method, but a <code>Stream</code> is a different animal than an <code>Iterator</code>.
+</p>
+
+
+
+<a name="stream-processing-steps"></a>
+<h2>Stream Processing Phases</h2>
+
+<p>
+    Once you have obtained a <code>Stream</code> instance from a <code>Collection</code> instance, you use that
+    stream to process the elements in the collection.
+</p>
+
+<p>
+    Processing the elements in the stream happens in two steps / phases:
+</p>
+
+<ol>
+    <li>Configuration</li>
+    <li>Processing</li>
+</ol>
+
+<p>
+    First the stream is configured. The configuration can consist of filters and mappings.
+    Second, the stream is processed. The processing consists of doing something to the
+    filtered and mapped objects. No processing takes place during the configuring calls.
+    Not until a processing method is called on the stream.
+</p>
+
+
+
+<a name="stream-filter"></a>
+<h2>Stream.filter()</h2>
+<p>
+    You filter a stream using the <code>filter()</code> method. Here is a stream filtering example:
+</p>
+
+<pre class="codeBox">
+    stream.filter( item -> item.startsWith("o") );
+</pre>
+
+<p>
+    The <code>filter()</code> method takes a <code>Predicate</code> as parameter.
+    The <code>Predicate</code> interface contains a function called <code>test()</code> which
+    the <a href="../java/lambda-expressions.html">lambda expression</a> passed as parameter above
+    is matched against. In other words, the lambda expression implements the <code>Predicate.test()</code>
+    method.
+</p>
+
+<p>
+    The <code>test()</code> method is defined like this:
+</p>
+
+<pre class="codeBox">
+boolean test(T t)
+</pre>
+
+<p>
+    It takes a single parameter and returns a <code>boolean</code>. If you look at the lambda expression above,
+    you can see that it takes a single parameter <code>item</code> and returns a boolean - the result of
+    the <code>item.startsWith("o")</code> method call.
+</p>
+
+<p>
+    When you call the <code>filter()</code> method on a <code>Stream</code>, the filter passed as parameter
+    to the <code>filter()</code> method is stored internally. No filtering takes place yet.
+</p>
+
+<p>
+    The parameter passed to the <code>filter()</code> function determines what items in the stream should
+    be processed, and which that should be excluded from the processing. If the <code>Predicate.test()</code>
+    method of the parameter passed to <code>filter()</code> returns <code>true</code> for an item, that
+    means it should be processed. If <code>false</code> is returned, the item is not processed.
+</p>
+
+
+
+<a name="stream-map"></a>
+<h2>Stream.map()</h2>
+
+<p>
+    It is possible to map the items in a collection to other objects. In other words, for each item in
+    the collection you create a new object based on that item. How the mapping is done is up to you.
+    Here is a simple Java stream mapping example:
+</p>
+
+
+<pre class="codeBox">
+items.stream()
+     .map( item -&gt; item.toUpperCase() )
+</pre>
+
+<p>
+    This example maps all strings in the <code>items</code> collection to their uppercase equivalents.
+</p>
+
+<p>
+    Again, this example doesn't actually perform the mapping. It only configures the stream for mapping.
+    Once one of the stream processing methods are invoked, the mapping (and filtering) will be performed.
+</p>
+
+
+
+<a name="stream-collect"></a>
+<h2>Stream.collect()</h2>
+
+<p>
+    The <code>collect()</code> method is one of the stream processing methods on the <code>Stream</code> interface.
+    When this method is invoked, the filtering and mapping will take place and the object resulting from those
+    actions will be collected. Here is a <code>stream.collect()</code> example:
+</p>
+
+
+<pre class="codeBox">
+List&lt;String&gt; filtered = items.stream()
+    .filter( item -&gt; item.startsWith("o") )
+    .collect(Collectors.toList());
+</pre>
+
+<p>
+    This example creates a stream, adds a filter, and collects all object accepted by the filter
+    in a <code>List</code>. The filter only accepts items (strings) which start with the character
+    <code>o</code>. The resulting <code>List</code> thus contains all strings from the <code>items</code>
+    collection which starts with the character <code>o</code>. 
+</p>
+
+
+
+
+<a name="stream-min-max"></a>
+<h2>Stream.min() and Stream.max()</h2>
+
+<p>
+    The <code>min()</code> and <code>max()</code> methods are stream processing methods. Once these are called,
+    the stream will be iterated, filtering and mapping applied, and the minimum or maximum value in the stream
+    will be returned.
+</p>
+
+<p>
+    Here is a Java <code>Stream.min()</code> example:
+</p>
+
+<pre class="codeBox">
+ String shortest = items.stream()
+        .min(Comparator.comparing(item -> item.length()))
+        .get();
+
+</pre>
+
+
+<p>
+    The <code>min()</code> and <code>max()</code> methods return an <code>Optional</code> instance which
+    has a <code>get()</code> method on, which you use to obtain the value. In case the stream has no elements
+    the <code>get()</code> method will return null.
+</p>
+
+<p>
+    The <code>min()</code> and <code>max()</code> methods take a <code>Comparator</code> as parameter.
+    The <code>Comparator.comparing()</code> method creates a <code>Comparator</code> based on the
+    lambda expression passed to it. In fact, the <code>comparing()</code> method takes a <code>Function</code>
+    which is a functional interface suited for lambda expressions. It takes one parameter and returns a value.
+</p>
+
+
+
+<a name="stream-count"></a>
+<h2>Stream.count()</h2>
+<p>
+    The <code>count()</code> method simply returns the number of elements in the stream after filtering has
+    been applied. Here is an example:
+</p>
+
+<pre class="codeBox">
+long count = items.stream()
+     .filter( item -> item.startsWith("t"))
+     .count();
+</pre>
+
+<p>
+    This example iterates the stream and keeps all elements that start with the character <code>t</code>,
+    and then counts these elements.
+</p>
+
+<p>
+    The <code>count()</code> method returns a <code>long</code> which is the count of elements in the stream
+    after filtering etc.
+</p>
+
+
+
+
+<a name="reduce"></a>
+<h2>Stream.reduce()</h2>
+
+<p>
+    The <code>reduce()</code> method can reduce the elements of a stream to a single value.
+    Here is an example:
+</p>
+
+<pre class="codeBox">
+String reduced2 = items.stream()
+        .reduce((acc, item) -> acc + " " + item)
+        .get();
+</pre>
+
+<p>
+    The <code>reduce()</code> method takes a <code>BinaryOperator</code> as parameter, which can easily
+    be implemented using a lambda expression. The <code>BinaryOperator.apply()</code> method is the
+    method implemented by the lambda expression above. This method takes two parameters. The <code>acc</code>
+    which is the accumulated value, and <code>item</code> which is an element from the stream. Thus,
+    the value created by the <code>reduce()</code> function is the accumulated value after processing
+    the last element in the stream. In the example above, each item is concatenated to the accumulated
+    value. This is done by the lambda expression implementing the <code>BinaryOperator</code>.
+</p>
+
+<p>
+    The <code>reduce()</code> method taking a <code>BinaryOperator</code> as parameter returns an
+    <code>Optional</code> . In case the stream contains no elements, the <code>Optional.get()</code>
+    returns null. Otherwise it returns the reduced value.
+</p>
+
+<p>
+    There is another <code>reduce()</code> method which takes two parameters. It takes an initial value
+    for the accumulated value, and then a <code>BinaryOperator</code>. Here is an example:
+</p>
+
+<pre class="codeBox">
+String reduced = items.stream()
+        .reduce("", (acc, item) -> acc + " " + item);
+</pre>
+
+<p>
+    This example takes an empty string as initial value, and then the same lambda expression as the
+    previous example. This version of the <code>reduce()</code> method returns the accumulated value
+    directly, and not an <code>Optional</code>. If the stream contains no elements, the initial value
+    will be returned.
+</p>
+
+<p>
+    The <code>reduce()</code> method can be combined with the <code>filter()</code> method too.
+    Here is an example:
+</p>
+
+<pre class="codeBox">
+String reduced = items.stream()
+    .filter( item -> item.startsWith("o"))
+    .reduce("", (acc, item) -> acc + " " + item);
+</pre>
+
+
+<p>
+    This example keeps all elements that start with the character <code>o</code>, and then reduce these
+    elements into a single value.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next"></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

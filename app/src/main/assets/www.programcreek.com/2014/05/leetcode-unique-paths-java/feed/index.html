@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Unique Paths (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-unique-paths-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Vasyl Grygoryev</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-14361</link>
+		<dc:creator><![CDATA[Vasyl Grygoryev]]></dc:creator>
+		<pubDate>Tue, 06 Sep 2016 07:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-14361</guid>
+		<description><![CDATA[It works and it gives 2 in case 2x2. 
+Lets check formula:
+0) m = 2; n = 2
+1) Decrease n and m by one =&#062; m = 1; n =1
+2) use formula (m+n)! / (m!n!) = (1+1)!/(1!1!)= 2
+
+Lets check the code:
+&#062; m--; // =&#062; m=1
+&#062; n--; // =&#062; n=1
+if-condition doesn&#039;t work in this case:
+&#062; if (m &#062; n) { // in our case m = n = 1
+Set variables:
+&#062; int divider = 2;
+&#062; int result = 1;
+Count combinations (loop):
+&#062; for (int i = n + m; i &#062; n; i--) { // in our case i = 2; 2 &#062; 1; i--
+&#062; result *= i; // =&#062; result =2;
+While loop doesn&#039;t work in our case. Condition divider &#060;= m (2  while (divider  for (int i = n + m; i &#062; n; i--) { // in our case i = 1; 1 &#062; 1; i--
+1 &#062; 1 - is false, so for-loop is finished
+&#062; return result; // result = 2
+So it gives 2.]]></description>
+		<content:encoded><![CDATA[<p>It works and it gives 2 in case 2&#215;2.<br />
+Lets check formula:<br />
+0) m = 2; n = 2<br />
+1) Decrease n and m by one =&gt; m = 1; n =1<br />
+2) use formula (m+n)! / (m!n!) = (1+1)!/(1!1!)= 2</p>
+<p>Lets check the code:<br />
+&gt; m&#8211;; // =&gt; m=1<br />
+&gt; n&#8211;; // =&gt; n=1<br />
+if-condition doesn&#8217;t work in this case:<br />
+&gt; if (m &gt; n) { // in our case m = n = 1<br />
+Set variables:<br />
+&gt; int divider = 2;<br />
+&gt; int result = 1;<br />
+Count combinations (loop):<br />
+&gt; for (int i = n + m; i &gt; n; i&#8211;) { // in our case i = 2; 2 &gt; 1; i&#8211;<br />
+&gt; result *= i; // =&gt; result =2;<br />
+While loop doesn&#8217;t work in our case. Condition divider &lt;= m (2  while (divider  for (int i = n + m; i &gt; n; i&#8211;) { // in our case i = 1; 1 &gt; 1; i&#8211;<br />
+1 &gt; 1 &#8211; is false, so for-loop is finished<br />
+&gt; return result; // result = 2<br />
+So it gives 2.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prasad Bhagwat</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-14344</link>
+		<dc:creator><![CDATA[Prasad Bhagwat]]></dc:creator>
+		<pubDate>Mon, 05 Sep 2016 16:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-14344</guid>
+		<description><![CDATA[Does not work!! Take 2x2, Solution is 2, your solution gives 1.]]></description>
+		<content:encoded><![CDATA[<p>Does not work!! Take 2&#215;2, Solution is 2, your solution gives 1.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vasyl Grygoryev</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-7912</link>
+		<dc:creator><![CDATA[Vasyl Grygoryev]]></dc:creator>
+		<pubDate>Thu, 24 Dec 2015 00:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-7912</guid>
+		<description><![CDATA[Good point! But there are (m-1)+(n-1) moves. So we need decrease m and n by one and then can use the formula m+n)! / (m!n!)
+
+My algorithm with O(min(m,n)) time complexity and O(1) extra space:
+&lt;code&gt;
+public int uniquePaths(int m, int n) {
+  m--;
+  n--;
+  
+  if (m &#062; n) {
+    int t = m;
+    m = n;
+    n = t;
+  }
+
+  int divider = 2;
+  int result = 1;
+  for (int i = n + m; i &#062; n; i--) {
+    result *= i;
+    while (divider &#060;= m &#038;&#038; result % divider == 0)
+      result /= divider++;
+  }
+
+  return result;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Good point! But there are (m-1)+(n-1) moves. So we need decrease m and n by one and then can use the formula m+n)! / (m!n!)</p>
+<p>My algorithm with O(min(m,n)) time complexity and O(1) extra space:<br />
+<code><br />
+public int uniquePaths(int m, int n) {<br />
+  m--;<br />
+  n--;</p>
+<p>  if (m &gt; n) {<br />
+    int t = m;<br />
+    m = n;<br />
+    n = t;<br />
+  }</p>
+<p>  int divider = 2;<br />
+  int result = 1;<br />
+  for (int i = n + m; i &gt; n; i--) {<br />
+    result *= i;<br />
+    while (divider &lt;= m &amp;&amp; result % divider == 0)<br />
+      result /= divider++;<br />
+  }</p>
+<p>  return result;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ugur Basak</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-7538</link>
+		<dc:creator><![CDATA[Ugur Basak]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2015 21:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-7538</guid>
+		<description><![CDATA[Hi Sansor, as you&#039;ve said this code will work but only for small numbers. Because it is re-calculating same values again and again. Dynamic Programming solution will be much faster.]]></description>
+		<content:encoded><![CDATA[<p>Hi Sansor, as you&#8217;ve said this code will work but only for small numbers. Because it is re-calculating same values again and again. Dynamic Programming solution will be much faster.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sherif</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-7511</link>
+		<dc:creator><![CDATA[sherif]]></dc:creator>
+		<pubDate>Tue, 20 Oct 2015 18:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-7511</guid>
+		<description><![CDATA[to compute factorial won&#039;t be a o(1), this will take o(m+n) but still thumbs up for the maths solution!]]></description>
+		<content:encoded><![CDATA[<p>to compute factorial won&#8217;t be a o(1), this will take o(m+n) but still thumbs up for the maths solution!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sansor</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-unique-paths-java/#comment-7390</link>
+		<dc:creator><![CDATA[sansor]]></dc:creator>
+		<pubDate>Wed, 16 Sep 2015 10:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14110#comment-7390</guid>
+		<description><![CDATA[This code is running perfectly.. 
+
+
+	public int numberOfPaths(int m, int n) {
+		if (m == 1 &#124;&#124; n == 1) {
+			return 1;
+		}
+		int temp = numberOfPaths(m - 1, n) + numberOfPaths(m, n - 1);
+		return temp;
+
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>This code is running perfectly.. </p>
+<p>	public int numberOfPaths(int m, int n) {<br />
+		if (m == 1 || n == 1) {<br />
+			return 1;<br />
+		}<br />
+		int temp = numberOfPaths(m &#8211; 1, n) + numberOfPaths(m, n &#8211; 1);<br />
+		return temp;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

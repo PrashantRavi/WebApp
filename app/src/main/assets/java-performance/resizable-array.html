@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Resizable Array</title>
+
+    <meta name="description" content="Sometimes you want to keep data in a single, consecutive array for fast and easy access, but need the array to be
+    resizable, or at least expandable. This tutorial shows you how to implement a resizable array in Java.">
+    <meta name="keywords"    content="java resizable array">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Resizable Array">
+    <meta name="twitter:description" content="Sometimes you want to keep data in a single, consecutive array for fast and easy access, but need the array to be
+    resizable, or at least expandable. This tutorial shows you how to implement a resizable array in Java.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Resizable Array"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/resizable-array.html"/>
+    <meta property="og:description" content="Sometimes you want to keep data in a single, consecutive array for fast and easy access, but need the array to be
+    resizable, or at least expandable. This tutorial shows you how to implement a resizable array in Java."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/ring-buffer.html";
+var nextArticleInCategory = "/java-performance/java-for-vs-switch-performance.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 11208;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html"><b>Java Resizable Array</b></a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Resizable Array</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#java-resizable-array-github-repository">Java Resizable Array - GitHub Repository</a></li><li><a href="#resizable-array-use-case">Resizable Array Use Case</a></li><li><a href="#resizable-array-design">Resizable Array Design</a><ul><li><a href="#keeping-track-of-free-blocks">Keeping Track of Free Blocks</a></li></ul></li><li><a href="#expand-on-write">Expand on Write</a></li><li><a href="#freeing-arrays">Freeing Arrays</a></li><li><a href="#using-the-resizablearraybuffer">Using the ResizableArrayBuffer</a><ul><li><a href="#creating-a-resizablearraybuffer">Creating a ResizableArrayBuffer</a></li><li><a href="#obtaining-a-resizablearray-instance">Obtaining a ResizableArray Instance</a></li><li><a href="#writing-to-a-resizablearray">Writing to a ResizableArray</a></li><li><a href="#reading-from-a-resizablearray">Reading From a ResizableArray</a></li><li><a href="#freeing-a-resizablearray">Freeing a ResizableArray</a></li></ul></li><li><a href="#variations-on-the-design">Variations on the Design</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-10-20
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Sometimes you want to keep data in a single, consecutive array for fast and easy access, but need the array to be
+    resizable, or at least expandable. Java arrays are not resizable. To get a resizable array you need to implement
+    it yourself. In this tutorial I will show you how to implement a resizable array in Java.
+</p>
+
+
+
+<a name="java-resizable-array-github-repository"></a>
+<h2>Java Resizable Array - GitHub Repository</h2>
+
+<p>
+    The code for the Java resizable array implemented in this tutorial can be found on GitHub (for easy access):
+</p>
+
+<p>
+    <a href="https://github.com/jjenkov/java-resizable-array">https://github.com/jjenkov/java-resizable-array</a>
+</p>
+
+<p>
+    The code consist of 3 Java classes and 2 unit tests.
+</p>
+
+
+
+
+<a name="resizable-array-use-case"></a>
+<h2>Resizable Array Use Case</h2>
+
+<p>
+    Imagine you have a server receiving messages of varying sizes. Some messages are very small (e.g. less than 4KB),
+    others as large as 1MB or even larger.
+</p>
+
+<p>
+    If the server is receiving messages from many (100K +) connections at the same time, we need to limit how much
+    memory we pre-allocate for each message. We cannot just allocate the maximal message size (e.g. 1MB or 16MB etc.) for
+    each buffer. That would deplete the server memory fast when the number of connections and messages go up!
+    100.000 x 1MB = 100GB (approximately - not precisely - but you get the picture).
+</p>
+
+<p>
+    Instead we want to assume that most messages are small, so we start with a small buffer. If a message grows beyond
+    the small buffer size, we allocate a new, larger array and copy the data to the new, larger array. If the message
+    outgrows the larger array, an even larger array is allocated, and the message is copied to that.
+</p>
+
+<p>
+    Using this strategy, most messages will only ever use a small buffer. This means that the server memory is
+    used more efficiently. 100.000 x 4KB (small buffer size) is only 400MB. Most servers should be able to handle that.
+    Even at 4GB (1.000.000 x 4KB) modern servers should be able to handle it.
+</p>
+
+
+
+
+<a name="resizable-array-design"></a>
+<h2>Resizable Array Design</h2>
+
+<p>
+    The resizable array is designed to consist of two components:
+</p>
+
+<ul>
+    <li>ResizableArray</li>
+    <li>ResizableArrayBuffer</li>
+</ul>
+
+<p>
+    The <code>ResizableArrayBuffer</code> contains a single, large array. This array is divided into three sections.
+    One section for small arrays, one for medium size arrays and one for large arrays.
+</p>
+
+<p>
+    The <code>ResizableArray</code> represents a single, resizable array, with its data stored in the array in
+    the <code>ResizableArrayBuffer</code>.
+</p>
+
+<p>
+    Here is a diagram illustrating the large array divided into sections, and each section divided into blocks.
+</p>
+
+<img src="../images/java-performance/resizable-array-1.png" alt="The design of the ResizableArrayBuffer which backs all the ResizableArray instances.">
+
+<p>
+    By reserving an area of the large array in the <code>ResizableArrayBuffer</code> for each message size interval
+    (small, medium, large), we make sure that the array cannot be fully filled with either size messages. For instance,
+    receiving a lot of small messages cannot take all the memory and thus block for medium and large messages. Similarly,
+    receiving a lot of large messages cannot take up all memory and block for medium and small messages.
+</p>
+
+<p>
+    Since all messages start as small messages, if the amount of small arrays is depleted, no new arrays can be allocated,
+    regardless of whether or not there is space in the medium and large array sections. However, it is possible to
+    make the small array section large enough that the probability of this happening is very low.
+</p>
+
+<p>
+    It is still possible to grow small messages into medium and large messages, even if the small message section
+    is fully used.
+</p>
+
+
+
+<a name="keeping-track-of-free-blocks"></a>
+<h3>Keeping Track of Free Blocks</h3>
+
+<p>
+    The large array inside the <code>ResizableArrayBuffer</code> is split up into three sections. Each section is split
+    up into smaller blocks. Each block in each section has the same size. Blocks in the small message section has the
+    same small block size. Blocks in the medium message section has the same medium block size. And blocks in the
+    large message section has the same large block size.
+</p>
+
+<p>
+    When all blocks within a section has the same size, it is easier to keep track of used and unused blocks.
+    You can simply use a queue containing the start indexes of each block. One queue is needed for each section of
+    the shared array. Thus, one queue is needed to keep track of free small blocks, one queue for free medium blocks
+    and one queue for free large blocks.
+</p>
+
+<p>
+    Allocating a block from any of the sections can be accomplished simply by taking the next free block start index
+    from the queue associated with the desired section. Freeing a block is done by putting the start index back into
+    the corresponding queue.
+</p>
+
+<p>
+    As a queue I have used a simple <a href="ring-buffer.html">Ring Buffer</a> implementation. The implementation
+    used in the GitHubRepository is called <code>QueueIntFlip</code>.
+</p>
+
+
+
+
+<a name="expand-on-write"></a>
+<h2>Expand on Write</h2>
+<p>
+    The Resizable array will expand itself when you write data to it. If you attempt to write more data to it than
+    it has space for in its currently allocated block, it will allocate a new, larger block and copy all its data
+    to that new block. The previous smaller block is then freed.
+</p>
+
+
+
+<a name="freeing-arrays"></a>
+<h2>Freeing Arrays</h2>
+
+<p>
+    Once you are done with a resizable array you should free it again, so that it can be used for other messages.
+</p>
+
+
+
+<a name="using-the-resizablearraybuffer"></a>
+<h2>Using the ResizableArrayBuffer</h2>
+
+<p>
+    I want to show you how to use the <code>ResizableArrayBuffer</code> (from the <code>GitHub</code> repository).
+</p>
+
+
+
+
+<a name="creating-a-resizablearraybuffer"></a>
+<h3>Creating a ResizableArrayBuffer</h3>
+
+<p>
+    First you must create a <code>ResizableArrayBuffer</code>. You do so like this:
+</p>
+
+<pre class="codeBox">
+int smallBlockSize  =    4 * 1024;
+int mediumBlockSize =  128 * 1024;
+int largeBlockSize  = 1024 * 1024;
+
+int smallBlockCount  = 1024;
+int mediumBlockCount =   32;
+int largeBlockCount  =    4;
+
+ResizableArrayBuffer arrayBuffer =
+        new ResizableArrayBuffer(
+                smallBlockSize , smallBlockCount,
+                mediumBlockSize, mediumBlockCount,
+                largeBlockSize,  largeBlockCount);
+</pre>
+
+<p>
+    This example creates a <code>ResizableArrayBuffer</code> with a small array size of 4KB, medium array size of
+    128KB and a larger array size of 1MB. The <code>ResizableArrayBuffer</code> contains space for 1024 small arrays (4MB in total),
+    32 medium arrays (4MB in total) and 4 large arrays (4MB in total) - for a full shared array size of 12MB.
+</p>
+
+
+
+<a name="obtaining-a-resizablearray-instance"></a>
+<h3>Obtaining a ResizableArray Instance</h3>
+
+<p>
+    To obtain a <code>ResizableArray</code> instance, call the <code>ResizableArrayBuffer</code>'s <code>getArray()</code>
+    method, like this:
+</p>
+
+<pre class="codeBox">
+ResizableArray resizableArray = arrayBuffer.getArray();
+</pre>
+
+
+<p>
+    This example obtains a <code>ResizableArray</code> of the smallest size (4KB the small size was set to earlier).
+</p>
+
+
+
+
+<a name="writing-to-a-resizablearray"></a>
+<h3>Writing to a ResizableArray</h3>
+
+<p>
+    You write to a <code>ResizableArray</code> by calling its <code>write()</code> method. The <code>ResizableArray</code>
+    class in the GitHub repository only contains a single <code>write()</code> method which takes a <code>ByteBuffer</code>
+    as parameter. It should be pretty easy to add more <code>write()</code> methods yourself, though.
+</p>
+
+<p>
+    Here is a write example:
+</p>
+
+<pre class="codeBox">
+ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+
+for(int i=0; i < 1024; i++){
+    byteBuffer.put((byte) i);
+}
+byteBuffer.flip():
+
+int bytesCopied = resizableArray.write(byteBuffer);
+</pre>
+
+<p>
+    This example copies the contents of the <code>ByteBuffer</code> into the array (block) of the <code>ResizableArray</code>.
+    The value returned by <code>write()</code> is the number of bytes copied from the <code>ByteBuffer</code>.
+</p>
+
+<p>
+    In case the <code>ByteBuffer</code> had contained more data than the <code>ResizableArray</code>, the
+    <code>ResizableArray</code> will attempt to expand itself to make space for the data in the <code>ByteBuffer</code>.
+    If the <code>ResizableArray</code> cannot contain all the data in the <code>ByteBuffer</code> after expanding
+    itself to the max size, the <code>write()</code> method will return <code>-1</code> and no data will have been
+    copied at all!
+</p>
+
+
+
+<a name="reading-from-a-resizablearray"></a>
+<h3>Reading From a ResizableArray</h3>
+
+<p>
+    When you read from a <code>ResizableArray</code> you do so directly in the shared array which all
+    <code>ResizableArray</code> instances share. The <code>ResizableArray</code> contains the following
+    public field:
+</p>
+
+<pre class="codeBox">
+public byte[] sharedArray = null;
+public int    offset      = 0;
+public int    capacity    = 0;
+public int    length      = 0;
+</pre>
+
+<p>
+    The <code>sharedArray</code> field references the shared array which all <code>ResizableArray</code> instances
+    keep their data in. That is the array kept internally in the <code>ResizableArrayBuffer</code> too.
+</p>
+
+<p>
+    The <code>offset</code> field contains the start index in the shared array where this <code>ResizableArray</code>
+    keeps its data (the block assigned to it).
+</p>
+
+<p>
+    The <code>capacity</code> field contains the size of the block in the shared array assigned to this
+    <code>ResizableArray</code> instance.
+</p>
+
+<p>
+    The <code>length</code> field contains how much of the assigned block the <code>ResizableArray</code> is actually
+    using.
+</p>
+
+<p>
+    To read the data written to a <code>ResizableArray</code> simply read the bytes from <code>sharedArray[offset]</code>
+    to <code>sharedArray[offset + length -1]</code>.
+</p>
+
+
+
+
+<a name="freeing-a-resizablearray"></a>
+<h3>Freeing a ResizableArray</h3>
+
+<p>
+    Once you are done using a <code>ResizableArray</code> instance you should free it. You do so simply by calling
+    the <code>free()</code> method on the <code>ResizableArray</code>, like this:
+</p>
+
+<pre class="codeBox">
+resizableArray.free();
+</pre>
+
+<p>
+    Calling <code>free()</code> takes care of returning the used block to the correct block queue, regardless of
+    the size of the block allocated to the <code>ResizableArray</code>.
+</p>
+
+
+
+
+<a name="variations-on-the-design"></a>
+<h2>Variations on the Design</h2>
+
+<p>
+    You can change the design of my <code>ResizableArrayBuffer</code> to meet your needs. For instance, you can
+    create more than 3 sections inside it. It should be fairly easy to do. Just look at the code in the GitHub
+    repository and modify it.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

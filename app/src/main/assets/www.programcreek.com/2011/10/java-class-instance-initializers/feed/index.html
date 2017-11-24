@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: What is Instance Initializer in Java?</title>
+	<atom:link href="http://www.programcreek.com/2011/10/java-class-instance-initializers/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Xingxian Li</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-7271</link>
+		<dc:creator><![CDATA[Xingxian Li]]></dc:creator>
+		<pubDate>Sat, 08 Aug 2015 16:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-7271</guid>
+		<description><![CDATA[http://docs.oracle.com/javase/specs/jls/se8/html/jls-12.html#jls-12.4.1  You are totally right!!]]></description>
+		<content:encoded><![CDATA[<p><a href="http://docs.oracle.com/javase/specs/jls/se8/html/jls-12.html#jls-12.4.1" rel="nofollow">http://docs.oracle.com/javase/specs/jls/se8/html/jls-12.html#jls-12.4.1</a>  You are totally right!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siddhartha Gupta</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-6570</link>
+		<dc:creator><![CDATA[Siddhartha Gupta]]></dc:creator>
+		<pubDate>Wed, 14 Jan 2015 23:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-6570</guid>
+		<description><![CDATA[Very useful.]]></description>
+		<content:encoded><![CDATA[<p>Very useful.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vokavoka</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-6269</link>
+		<dc:creator><![CDATA[vokavoka]]></dc:creator>
+		<pubDate>Sat, 01 Nov 2014 00:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-6269</guid>
+		<description><![CDATA[The problem is that your example does not really show the correct order, and it is **NOT** what you think you see...
+The true order is really:
+    1. First static initializer.
+When we make an instance of the class:
+   2. Then member variable declarations, with DEFAULT initialization, NOT explicit initialization.
+   3. THEN the class constructor.... NOT a call to the instance initializer 
+   4. Then an implicit call to the superclass constructor.
+   5. Then the explicit member variable initialization.
+   6. Then the instance initializer
+   7. Then the rest of the constructor
+
+Thus, for a member variable when you write: 
+private int a = 10; 
+what really is happening is more like 
+private int a;
+and a 
+a=10; 
+early in the constructor, but after the call to the superclass constructor.
+
+Sometimes you need to know this, for example if the superclass constructor calls an overridden method. Look for example at the following code:
+
+class A 
+{
+    public int c = 10;
+    public int d = 10;
+
+    public A() {
+    System.out.println(&quot;Impicit call to superclass constructor. In A constructor&quot;);
+    System.out.println(&quot;The value of c: &quot; + c);
+    System.out.println(&quot;The value of d: &quot; + d);
+    printc();
+    c = 15;
+    }
+
+    public void printc() {
+    System.out.println(&quot;In A.printc - we should never get here...&quot;);
+    System.out.println(&quot;In A.printc. c is: &quot; + c);
+    System.out.println(&quot;In A.printc. d is: &quot; + d);
+    }
+}
+
+class B extends A 
+{
+    // variables are not overridden, but hidden...
+    public int d = 10;
+    private int e = 5;
+
+    static {
+    System.out.println(&quot;In B static initializer&quot;);
+    }
+
+    {
+    System.out.println(&quot;In B instance initializer&quot;);
+    System.out.println(&quot;c is not set set, c is : &quot; + c);    
+    System.out.println(&quot;The value of d is: &quot; + d);
+    System.out.println(&quot;The value of e is: &quot; + e);
+    c = 20;
+    d = 20;
+    System.out.println(&quot;c is set to 20, now c is : &quot; + c);
+    System.out.println(&quot;d is set to 20, now d is : &quot; + d);
+    }
+
+    public B() {
+    // Here we have an implicit call to super();
+    System.out.println(&quot;In B constructor&quot;);
+    System.out.println(&quot;c is not set set, c is : &quot; + c);    
+    System.out.println(&quot;d is not set set, d is : &quot; + d);    
+    c = 30;
+    d = 30;
+    System.out.println(&quot;c is set to 30, now c is : &quot; + c);
+    System.out.println(&quot;d is set to 30, now c is : &quot; + d);
+    }
+
+    public void printc() {
+    System.out.println(&quot;In B.printc&quot;);
+    System.out.println(&quot;In B.printc. c is: &quot; + c);
+    System.out.println(&quot;In B.printc. d is: &quot; + d);
+    System.out.println(&quot;in B.printc. e is: &quot; + e);
+    }
+    
+    public static void main(String[] args) {
+    System.out.println(&quot;Start of static main&quot;);
+    B b = new B();
+    System.out.println(&quot;End of static main&quot;);    
+    }
+}
+
+The output is:
+In B static initializer
+Start of static main
+Impicit call to superclass constructor. In A constructor
+The value of c: 10
+The value of d: 10
+In B.printc
+In B.printc. c is: 10
+In B.printc. d is: 0
+in B.printc. e is: 0
+In B instance initializer
+c is not set set, c is : 15
+The value of d is: 10
+The value of e is: 5
+c is set to 20, now c is : 20
+d is set to 20, now d is : 20
+In B constructor
+c is not set set, c is : 20
+d is not set set, d is : 20
+c is set to 30, now c is : 30
+d is set to 30, now c is : 30
+End of static main
+
+
+As you can see, as soon as we make an instance of B, the first thing that happens is a call to the superclass constructor! It prints out c and the local value of d. It then calls printc. Since printc is overridded, it will call B.printc. It prints out c=10, d=0 and e=0 !!! d, which hides a.d, is 0. The explicit value is not set yet!!! c = 10 since it was set early in the A constructor. Then execution returns to the A constructor, c is set to 15, and then execution returns to the B constructor. Now the B instance initializer is run. We can see that the A constructor is already run since c=15, which was set last in the A constructor. Now, however, d is set to 10! Thus d must have been set after the call to the superclass constructor but before the execution of the instance initializer. The same holds for e, which was 0 in the call to B.princ but which now is 5. Then the rest of the B constructor is executed.
+
+
+Thus the order is: static initializer, then, when we make an instance, the construcor is called. The first thing that happens in the constructor is a call to the superclass constructor. When returning from the superclass constructor all EXPLICIT member variable initialization occurs but not until after the superclass constructor has returned, then the instance initializer is called, and then the rest of constructor is run.
+Thus if we write it out explicitly:
+class A {
+  private int a = 10;
+  { a = 20 } 
+  public A() {
+     a = 30;
+}
+}
+Really is:
+class A {
+   pritvate int a;
+
+   public A() {
+     super();
+     a = 10;
+     // instance initializer
+     a = 20;
+     // rest of the construtor
+     a = 30;
+  }
+}
+
+
+Really a bit strange.]]></description>
+		<content:encoded><![CDATA[<p>The problem is that your example does not really show the correct order, and it is **NOT** what you think you see&#8230;<br />
+The true order is really:<br />
+    1. First static initializer.<br />
+When we make an instance of the class:<br />
+   2. Then member variable declarations, with DEFAULT initialization, NOT explicit initialization.<br />
+   3. THEN the class constructor&#8230;. NOT a call to the instance initializer<br />
+   4. Then an implicit call to the superclass constructor.<br />
+   5. Then the explicit member variable initialization.<br />
+   6. Then the instance initializer<br />
+   7. Then the rest of the constructor</p>
+<p>Thus, for a member variable when you write:<br />
+private int a = 10;<br />
+what really is happening is more like<br />
+private int a;<br />
+and a<br />
+a=10;<br />
+early in the constructor, but after the call to the superclass constructor.</p>
+<p>Sometimes you need to know this, for example if the superclass constructor calls an overridden method. Look for example at the following code:</p>
+<p>class A<br />
+{<br />
+    public int c = 10;<br />
+    public int d = 10;</p>
+<p>    public A() {<br />
+    System.out.println(&#8220;Impicit call to superclass constructor. In A constructor&#8221;);<br />
+    System.out.println(&#8220;The value of c: &#8221; + c);<br />
+    System.out.println(&#8220;The value of d: &#8221; + d);<br />
+    printc();<br />
+    c = 15;<br />
+    }</p>
+<p>    public void printc() {<br />
+    System.out.println(&#8220;In A.printc &#8211; we should never get here&#8230;&#8221;);<br />
+    System.out.println(&#8220;In A.printc. c is: &#8221; + c);<br />
+    System.out.println(&#8220;In A.printc. d is: &#8221; + d);<br />
+    }<br />
+}</p>
+<p>class B extends A<br />
+{<br />
+    // variables are not overridden, but hidden&#8230;<br />
+    public int d = 10;<br />
+    private int e = 5;</p>
+<p>    static {<br />
+    System.out.println(&#8220;In B static initializer&#8221;);<br />
+    }</p>
+<p>    {<br />
+    System.out.println(&#8220;In B instance initializer&#8221;);<br />
+    System.out.println(&#8220;c is not set set, c is : &#8221; + c);<br />
+    System.out.println(&#8220;The value of d is: &#8221; + d);<br />
+    System.out.println(&#8220;The value of e is: &#8221; + e);<br />
+    c = 20;<br />
+    d = 20;<br />
+    System.out.println(&#8220;c is set to 20, now c is : &#8221; + c);<br />
+    System.out.println(&#8220;d is set to 20, now d is : &#8221; + d);<br />
+    }</p>
+<p>    public B() {<br />
+    // Here we have an implicit call to super();<br />
+    System.out.println(&#8220;In B constructor&#8221;);<br />
+    System.out.println(&#8220;c is not set set, c is : &#8221; + c);<br />
+    System.out.println(&#8220;d is not set set, d is : &#8221; + d);<br />
+    c = 30;<br />
+    d = 30;<br />
+    System.out.println(&#8220;c is set to 30, now c is : &#8221; + c);<br />
+    System.out.println(&#8220;d is set to 30, now c is : &#8221; + d);<br />
+    }</p>
+<p>    public void printc() {<br />
+    System.out.println(&#8220;In B.printc&#8221;);<br />
+    System.out.println(&#8220;In B.printc. c is: &#8221; + c);<br />
+    System.out.println(&#8220;In B.printc. d is: &#8221; + d);<br />
+    System.out.println(&#8220;in B.printc. e is: &#8221; + e);<br />
+    }</p>
+<p>    public static void main(String[] args) {<br />
+    System.out.println(&#8220;Start of static main&#8221;);<br />
+    B b = new B();<br />
+    System.out.println(&#8220;End of static main&#8221;);<br />
+    }<br />
+}</p>
+<p>The output is:<br />
+In B static initializer<br />
+Start of static main<br />
+Impicit call to superclass constructor. In A constructor<br />
+The value of c: 10<br />
+The value of d: 10<br />
+In B.printc<br />
+In B.printc. c is: 10<br />
+In B.printc. d is: 0<br />
+in B.printc. e is: 0<br />
+In B instance initializer<br />
+c is not set set, c is : 15<br />
+The value of d is: 10<br />
+The value of e is: 5<br />
+c is set to 20, now c is : 20<br />
+d is set to 20, now d is : 20<br />
+In B constructor<br />
+c is not set set, c is : 20<br />
+d is not set set, d is : 20<br />
+c is set to 30, now c is : 30<br />
+d is set to 30, now c is : 30<br />
+End of static main</p>
+<p>As you can see, as soon as we make an instance of B, the first thing that happens is a call to the superclass constructor! It prints out c and the local value of d. It then calls printc. Since printc is overridded, it will call B.printc. It prints out c=10, d=0 and e=0 !!! d, which hides a.d, is 0. The explicit value is not set yet!!! c = 10 since it was set early in the A constructor. Then execution returns to the A constructor, c is set to 15, and then execution returns to the B constructor. Now the B instance initializer is run. We can see that the A constructor is already run since c=15, which was set last in the A constructor. Now, however, d is set to 10! Thus d must have been set after the call to the superclass constructor but before the execution of the instance initializer. The same holds for e, which was 0 in the call to B.princ but which now is 5. Then the rest of the B constructor is executed.</p>
+<p>Thus the order is: static initializer, then, when we make an instance, the construcor is called. The first thing that happens in the constructor is a call to the superclass constructor. When returning from the superclass constructor all EXPLICIT member variable initialization occurs but not until after the superclass constructor has returned, then the instance initializer is called, and then the rest of constructor is run.<br />
+Thus if we write it out explicitly:<br />
+class A {<br />
+  private int a = 10;<br />
+  { a = 20 }<br />
+  public A() {<br />
+     a = 30;<br />
+}<br />
+}<br />
+Really is:<br />
+class A {<br />
+   pritvate int a;</p>
+<p>   public A() {<br />
+     super();<br />
+     a = 10;<br />
+     // instance initializer<br />
+     a = 20;<br />
+     // rest of the construtor<br />
+     a = 30;<br />
+  }<br />
+}</p>
+<p>Really a bit strange.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: derhein</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-6252</link>
+		<dc:creator><![CDATA[derhein]]></dc:creator>
+		<pubDate>Sat, 25 Oct 2014 13:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-6252</guid>
+		<description><![CDATA[Also note that Anonymous classes that implement interfaces [1] have no constructors. Therefore instance initializers are neede to execute any kinds of expressions at construction time.
+
+[1] http://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#syntax-of-anonymous-classes]]></description>
+		<content:encoded><![CDATA[<p>Also note that Anonymous classes that implement interfaces [1] have no constructors. Therefore instance initializers are neede to execute any kinds of expressions at construction time.</p>
+<p>[1] <a href="http://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#syntax-of-anonymous-classes" rel="nofollow">http://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#syntax-of-anonymous-classes</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lol</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-6067</link>
+		<dc:creator><![CDATA[lol]]></dc:creator>
+		<pubDate>Wed, 13 Aug 2014 09:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-6067</guid>
+		<description><![CDATA[r u tard?]]></description>
+		<content:encoded><![CDATA[<p>r u tard?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siraj</title>
+		<link>http://www.programcreek.com/2011/10/java-class-instance-initializers/#comment-5428</link>
+		<dc:creator><![CDATA[Siraj]]></dc:creator>
+		<pubDate>Fri, 03 Jan 2014 04:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=1068#comment-5428</guid>
+		<description><![CDATA[I want to know how to get an JComboBox to auto suggest the elements when we type in the combo box. For an example, If I had loaded a JComboBox with these names using MySQL, [Amila, Nimila, Nikila, Sunil] and when I type &quot;N&quot; inside the Combo Box, it&#039;ll drop down the list only showing Nimila &#038; Nikila as suggestions. And I&#039;m trying to do this on NetBeans. Thanks.]]></description>
+		<content:encoded><![CDATA[<p>I want to know how to get an JComboBox to auto suggest the elements when we type in the combo box. For an example, If I had loaded a JComboBox with these names using MySQL, [Amila, Nimila, Nikila, Sunil] and when I type &#8220;N&#8221; inside the Combo Box, it&#8217;ll drop down the list only showing Nimila &amp; Nikila as suggestions. And I&#8217;m trying to do this on NetBeans. Thanks.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

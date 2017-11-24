@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>Struts 2 Tutorial Series &#8211; How to insert Tiles to your project</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="This tutorial is based on Struts 2 Tutorial Series - Login application. 1. What is Tiles? Apache Tiles is a templating framework built to simplify the"/>
+<meta name="keywords" content="code download,sample appliation,struts 2,tiles,tutorial"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; Struts 2 Tutorial Series &#8211; How to insert Tiles to your project Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Struts 2 Tutorial Series: A simple Hibernate application' href='../a-simple-hibernate-application/index.html'/>
+<link rel='next' title='Java.lang.exception: can&#8217;t locate library at com.izforge.izpack.util.librarian.loadarchspecificlibrary' href='../java-lang-exception-cant-locate-library-at-com-izforge-izpack-util-librarian-loadarchspecificlibrary/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=1545.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2010_03_struts-2-tutorial-series-how-to-insert-tiles-to-your-project_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2010_03_struts-2-tutorial-series-how-to-insert-tiles-to-your-project_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-1545"> <a href="index.html" rel="bookmark">
+Struts 2 Tutorial Series &#8211; How to insert Tiles to your project </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>This tutorial is based on Struts 2 Tutorial Series - L<a href="../struts-2-tutorials-sample-application-login-module/index.html">ogin application</a>.</p>
+<p><strong>1. What is Tiles?</strong></p>
+<p>Apache Tiles is a templating framework built to simplify the development of web application user interfaces. Tiles allows you to define page fragments which can be assembled into a complete page at runtime. See the snapshot below.</p>
+<p><strong>2. Goal of this application</strong></p>
+<p>We will add Tiles to our Login application. After a user login,<br/>
+<img src="../../../wp-content/uploads/2010/03/62.jpg" alt="" title="struts 2 login form" width="300" height="144" class="alignnone size-full wp-image-1547"/></p>
+<p>a well-formatted page will displays like this. You can download the code <br/> <a href="../../../downloads/index.html">here</a>.</p>
+<p><img class="alignnone size-full wp-image-1546" title="tiles sample application" src="../../../wp-content/uploads/2010/03/1.jpg" alt="" width="598" height="382" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/1.jpg 598w, http://www.programcreek.com/wp-content/uploads/2010/03/1-300x191.jpg 300w" sizes="(max-width: 598px) 100vw, 598px"/></p>
+<p><strong>3. Tools and libraries required</strong></p>
+<p>This application is based on the login application, it use the same environment.</p>
+<p>1. JDK 1.5 or above<br/>
+2. Tomcat 6.0<br/>
+3. Eclipse IDE for Java EE Developers<br/>
+4. Struts 2.0.14 (link). JAR files required for this application. <a href="http://mirror.switch.ch/mirror/apache/dist/struts/library/struts-2.0.14-lib.zip">Download Link 1</a>.<br/>
+<a href="http://hotfile.com/dl/33757448/10744ed/struts-2.0.14-lib.rar.html">Download link 2</a>(permanent on hotfile.com)<br/>
+5. Libraries used.</p>
+<p><img src="../../../wp-content/uploads/2010/03/21.jpg" alt="" title="tiles library" width="245" height="219" class="alignnone size-full wp-image-1548"/></p>
+<p><strong>4. Getting Started </strong></p>
+<p>This is based on our Login application. If you haven't walk through it, you can do it now. Or you can also get the required file by going back to the tutorial or downloading this <a href="http://programcreek.com/downloads/Struts2Login.rar">package</a>.</p>
+<p><strong>5. Configuring Tiles in web.xml</strong></p>
+<p>To configure Tiles, an entry for listener has to be made in web.xml. Open the web.xml from WEB-INF folder and add following code into it. </p>
+<p>web.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;listener<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;listener-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.struts2.tiles.StrutsTilesListener<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/listener-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/listener<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context-param<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;param-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>tilesDefinitions<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/param-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;param-value<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>/WEB-INF/tiles.xml<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/param-value<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context-param<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p>Here is the finally code.</p>
+<p>web.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span><span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;web-app</span> <span style="color: #000066;">xmlns:xsi</span>=<span style="color: #ff0000;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">xmlns</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span style="color: #000066;">xmlns:web</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">xsi:schemaLocation</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">id</span>=<span style="color: #ff0000;">&quot;WebApp_ID&quot;</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;2.5&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;display-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>Struts2 Login<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/display-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;listener<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;listener-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.struts2.tiles.StrutsTilesListener<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/listener-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/listener<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;context-param<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;param-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>tilesDefinitions<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/param-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;param-value<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>/WEB-INF/tiles.xml<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/param-value<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/context-param<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>struts2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.struts2.dispatcher.FilterDispatcher<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>struts2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>/*<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>Login.jsp<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/web-app<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p><strong>6. Configuring tiles.xml file</strong></p>
+<p>Create a file tiles.xml in WEB-INF folder and copy following code into it.<br/>
+<img src="../../../wp-content/uploads/2010/03/31.jpg" alt="" title="3" width="160" height="118" class="alignnone size-full wp-image-1550"/></p>
+<p>tiles.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #00bbdd;">&lt;!DOCTYPE tiles-definitions PUBLIC</span>
+<span style="color: #00bbdd;">       &quot;-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN&quot;</span>
+<span style="color: #00bbdd;">       &quot;http://tiles.apache.org/dtds/tiles-config_2_0.dtd&quot;&gt;</span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;tiles-definitions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;definition</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;baseLayout&quot;</span> <span style="color: #000066;">template</span>=<span style="color: #ff0000;">&quot;/BaseLayout.jsp&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;title&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;header&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;/Header.jsp&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;menu&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;/Menu.jsp&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;body&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;footer&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;/Footer.jsp&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/definition<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;definition</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;/welcome.tiles&quot;</span> <span style="color: #000066;">extends</span>=<span style="color: #ff0000;">&quot;baseLayout&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;title&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;Welcome page&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;body&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;/Welcome.jsp&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/definition<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;definition</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;/error.tiles&quot;</span> <span style="color: #000066;">extends</span>=<span style="color: #ff0000;">&quot;baseLayout&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;title&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;Error page&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;put-attribute</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;body&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;/Error.jsp&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/definition<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/tiles-definitions<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p>In the tiles.xml file, we have define a baseLayout using template BaseLayout.jsp. This layout contains attributes such as header, title, body, menu and footer. The layout is then extended and new definitions for Welcome page and Error page is defined. When We override the base layout, only those changed attribute will be change to be different with base layout. All other attribute remains the same with base layout.</p>
+<p><strong>7. Struts.xml file and LoginAction Class</strong></p>
+<p>To demonstrate tiles, we add a logout function to LoginAction class. </p>
+<p>LoginAction.java</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.struts2</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.opensymphony.xwork2.ActionSupport</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> LoginAction <span style="color: #000000; font-weight: bold;">extends</span> ActionSupport<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> username<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> password<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> authenticate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">username</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;admin&quot;</span><span style="color: #009900;">&#41;</span>
+				<span style="color: #339933;">&amp;&amp;</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">password</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;admin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #0000ff;">&quot;success&quot;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			addActionError<span style="color: #009900;">&#40;</span>getText<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;error.login&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #0000ff;">&quot;error&quot;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> logout<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #0000ff;">&quot;logout&quot;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getUsername<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> username<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setUsername<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> username<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">username</span> <span style="color: #339933;">=</span> username<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getPassword<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> password<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setPassword<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">password</span> <span style="color: #339933;">=</span> password<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>In struts.xml file, we add <result-types> tags to the package to invoke tiles to handle requests.</p>
+<p>struts.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #00bbdd;">&lt;!DOCTYPE struts PUBLIC</span>
+<span style="color: #00bbdd;">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot;</span>
+<span style="color: #00bbdd;">    &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;</span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;struts<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.enable.DynamicMethodInvocation&quot;</span></span>
+<span style="color: #009900;">		<span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;false&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.devMode&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;false&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.custom.i18n.resources&quot;</span></span>
+<span style="color: #009900;">		<span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;ApplicationResources&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;package</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;default&quot;</span> <span style="color: #000066;">extends</span>=<span style="color: #ff0000;">&quot;struts-default&quot;</span> <span style="color: #000066;">namespace</span>=<span style="color: #ff0000;">&quot;/&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result-types<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result-type</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;tiles&quot;</span></span>
+<span style="color: #009900;">				<span style="color: #000066;">class</span>=<span style="color: #ff0000;">&quot;org.apache.struts2.views.tiles.TilesResult&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result-types<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;action</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;login&quot;</span> <span style="color: #000066;">method</span>=<span style="color: #ff0000;">&quot;authenticate&quot;</span></span>
+<span style="color: #009900;">			<span style="color: #000066;">class</span>=<span style="color: #ff0000;">&quot;com.programcreek.struts2.LoginAction&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;success&quot;</span> <span style="color: #000066;">type</span>=<span style="color: #ff0000;">&quot;tiles&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>/welcome.tiles<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;error&quot;</span> <span style="color: #000066;">type</span>=<span style="color: #ff0000;">&quot;tiles&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>/error.tiles<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/action<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;action</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;logout&quot;</span> <span style="color: #000066;">method</span>=<span style="color: #ff0000;">&quot;logout&quot;</span> </span>
+<span style="color: #009900;">			<span style="color: #000066;">class</span>=<span style="color: #ff0000;">&quot;com.programcreek.struts2.LoginAction&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;logout&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>/Login.jsp<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/action<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/package<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/struts<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p><strong>8. Creating JSP files</strong></p>
+<p>Here is all JSP files.<br/>
+<img src="../../../wp-content/uploads/2010/03/41.jpg" alt="" title="4" width="153" height="252" class="alignnone size-full wp-image-1551"/></p>
+<p>BaseLayout.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ taglib uri=&quot;http://tiles.apache.org/tags-tiles&quot; prefix=&quot;tiles&quot;%&gt;
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+	&lt;title&gt;&lt;tiles:insertAttribute name=&quot;title&quot; ignore=&quot;true&quot; /&gt;&lt;/title&gt;
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;all&quot; href=&quot;style.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body id=&quot;home&quot;&gt;
+&lt;div id=&quot;header&quot;&gt;
+	&lt;tiles:insertAttribute name=&quot;header&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;wrap&quot;&gt;
+	&lt;div id=&quot;content&quot;&gt;
+		&lt;tiles:insertAttribute name=&quot;body&quot; /&gt;
+	&lt;/div&gt;
+	&lt;div id=&quot;sidebar&quot;&gt;
+		&lt;tiles:insertAttribute name=&quot;menu&quot; /&gt;
+	&lt;/div&gt;
+	&lt;div id=&quot;footer&quot;&gt;
+		&lt;tiles:insertAttribute name=&quot;footer&quot; /&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></td></tr></table></div>
+<p>Error.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">error page.</pre></td></tr></table></div>
+<p>Footer.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&nbsp;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&nbsp;
+http://www.programcreek.com</pre></td></tr></table></div>
+<p>Header.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;h1&gt;Struts 2 Example&lt;/h1&gt;</pre></td></tr></table></div>
+<p>Login.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Struts 2 - Login Application&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Struts 2 - Login Application&lt;/h2&gt;
+&lt;s:actionerror /&gt;
+&lt;s:form action=&quot;login.action&quot; method=&quot;post&quot;&gt;
+	&lt;s:textfield name=&quot;username&quot; key=&quot;label.username&quot; size=&quot;20&quot; /&gt;
+	&lt;s:password name=&quot;password&quot; key=&quot;label.password&quot; size=&quot;20&quot; /&gt;
+	&lt;s:submit method=&quot;execute&quot; key=&quot;label.login&quot; align=&quot;center&quot; /&gt;
+&lt;/s:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></td></tr></table></div>
+<p>Menu.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;s:url id=&quot;testUrlId&quot; namespace=&quot;/&quot; action=&quot;logout&quot;&gt;
+&lt;/s:url&gt;
+&lt;s:a errorText=&quot;Sorry your request had an error.&quot;
+	href=&quot;%{testUrlId}&quot;&gt;
+	Logout
+&lt;/s:a&gt;</pre></td></tr></table></div>
+<p>Here, be careful about how to define a link to trigger an action.</p>
+<p>Welcome.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;html&gt;
+&nbsp;
+&lt;head&gt;
+&lt;title&gt;Welcome Page - Struts 2 - Login Application&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h2&gt;Congratulations, &lt;s:property value=&quot;username&quot; /&gt;!&lt;/h2&gt;
+	Welcome to Struts 2 world.
+	&lt;h3&gt;What is Apache Tiles&lt;/h3&gt;
+	Apache Tiles is a templating framework built to simplify the 
+	development of web application user interfaces. Tiles allows 
+	authors to define page fragments which can be assembled into 
+	a complete page at runtime. These fragments, or tiles, can be 
+	used as simple includes in order to reduce the duplication of 
+	common page elements or embedded within other tiles to develop
+	 a series of reusable templates. These templates streamline the
+	  development of a consistent look and feel across an entire 
+	  application. Tiles grew in popularity as a component of the
+	   popular Struts framework. It has since been extracted from 
+	   Struts and is now integrated with various frameworks, such 
+	   as Struts 2 and Shale.
+&lt;/body&gt;
+&lt;/html&gt;</pre></td></tr></table></div>
+<p>style.css</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="css" style="font-family:monospace;"><span style="color: #a1a100;">@CHARSET &quot;ISO-8859-1&quot;;</span>
+&nbsp;
+<span style="color: #cc00cc;">#header</span> <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">border</span><span style="color: #00AA00;">:</span><span style="color: #933;">1px</span> <span style="color: #993333;">solid</span> <span style="color: #000000; font-weight: bold;">blue</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">background-position</span><span style="color: #00AA00;">:</span><span style="color: #933;">50%</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">background-repeat</span><span style="color: #00AA00;">:</span><span style="color: #993333;">repeat</span> <span style="color: #993333;">no-repeat</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span><span style="color: #933;">130px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span> <span style="color: #933;">10px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#wrap</span> <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">background-color</span><span style="color: #00AA00;">:</span><span style="color: #993333;">white</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-bottom</span><span style="color: #00AA00;">:</span><span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-left</span><span style="color: #00AA00;">:</span><span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-right</span><span style="color: #00AA00;">:</span><span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-top</span><span style="color: #00AA00;">:</span><span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  overflow-x<span style="color: #00AA00;">:</span><span style="color: #993333;">hidden</span><span style="color: #00AA00;">;</span>
+  overflow-y<span style="color: #00AA00;">:</span><span style="color: #993333;">hidden</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding-left</span><span style="color: #00AA00;">:</span><span style="color: #933;">10px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding-right</span><span style="color: #00AA00;">:</span><span style="color: #933;">10px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">position</span><span style="color: #00AA00;">:</span><span style="color: #993333;">relative</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span><span style="color: #933;">980px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+#<span style="color: #000000; font-weight: bold;">content</span> <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">display</span><span style="color: #00AA00;">:</span><span style="color: #993333;">inline</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">float</span><span style="color: #00AA00;">:</span><span style="color: #000000; font-weight: bold;">left</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">font-size</span><span style="color: #00AA00;">:</span><span style="color: #933;">100%</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">line-height</span><span style="color: #00AA00;">:</span><span style="color: #933;">1.6em</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin</span><span style="color: #00AA00;">:</span><span style="color: #933;">15px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span><span style="color: #933;">5px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span><span style="color: #000000; font-weight: bold;">left</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span><span style="color: #933;">580px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">border</span><span style="color: #00AA00;">:</span><span style="color: #933;">1px</span> <span style="color: #993333;">solid</span> <span style="color: #000000; font-weight: bold;">blue</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">min-height</span><span style="color: #00AA00;">:</span> <span style="color: #933;">500px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+<span style="color: #cc00cc;">#sidebar</span> <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">display</span><span style="color: #00AA00;">:</span><span style="color: #993333;">inline</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">float</span><span style="color: #00AA00;">:</span><span style="color: #000000; font-weight: bold;">right</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">line-height</span><span style="color: #00AA00;">:</span><span style="color: #933;">1.5em</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin</span><span style="color: #00AA00;">:</span><span style="color: #933;">15px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span><span style="color: #933;">5px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span><span style="color: #933;">300px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">border</span><span style="color: #00AA00;">:</span><span style="color: #933;">1px</span> <span style="color: #993333;">solid</span> <span style="color: #000000; font-weight: bold;">blue</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">min-height</span><span style="color: #00AA00;">:</span> <span style="color: #933;">500px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+<span style="color: #cc00cc;">#footer</span> <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">border</span><span style="color: #00AA00;">:</span><span style="color: #933;">1px</span> <span style="color: #993333;">solid</span> <span style="color: #000000; font-weight: bold;">blue</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">background-position</span><span style="color: #00AA00;">:</span><span style="color: #933;">50%</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">background-repeat</span><span style="color: #00AA00;">:</span><span style="color: #993333;">repeat</span> <span style="color: #993333;">no-repeat</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">clear</span><span style="color: #00AA00;">:</span><span style="color: #993333;">both</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span><span style="color: #933;">60px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-bottom</span><span style="color: #00AA00;">:</span><span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-left</span><span style="color: #00AA00;">:</span><span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-right</span><span style="color: #00AA00;">:</span><span style="color: #993333;">auto</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">margin-top</span><span style="color: #00AA00;">:</span><span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding-bottom</span><span style="color: #00AA00;">:</span><span style="color: #933;">10px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding-top</span><span style="color: #00AA00;">:</span><span style="color: #933;">25px</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">text-align</span><span style="color: #00AA00;">:</span><span style="color: #993333;">center</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">width</span><span style="color: #00AA00;">:</span><span style="color: #933;">980px</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span></pre></td></tr></table></div>
+<p>style.css is used for styling the layout.</p>
+<p><strong>9. We are done now</strong></p>
+<p>The file structure should look like this.</p>
+<p><img src="../../../wp-content/uploads/2010/03/51.jpg" alt="" title="5" width="262" height="460" class="alignnone size-full wp-image-1554"/></p>
+<p><strong> 10. Run application</strong></p>
+<p>Login page</p>
+<p><img src="../../../wp-content/uploads/2010/03/63.jpg" alt="" title="6" width="311" height="140" class="alignnone size-full wp-image-1555" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/63.jpg 311w, http://www.programcreek.com/wp-content/uploads/2010/03/63-300x135.jpg 300w" sizes="(max-width: 311px) 100vw, 311px"/></p>
+<p>Welcome page</p>
+<p><img src="../../../wp-content/uploads/2010/03/11.jpg" alt="" title="1" width="598" height="382" class="alignnone size-full wp-image-1556" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/11.jpg 598w, http://www.programcreek.com/wp-content/uploads/2010/03/11-300x191.jpg 300w" sizes="(max-width: 598px) 100vw, 598px"/></p>
+<p>References: <a href="http://download.oracle.com/docs/cd/B14099_19/web.1012/b14017/filters.htm#i1000654">Servlet filters and Event Listeners</a></p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../struts-2-tutorials-sample-application-login-module/index.html" rel="bookmark" title="Struts 2 Tutorial Series: Sample Application &#8211; Login Module">Struts 2 Tutorial Series: Sample Application &#8211; Login Module </a></li>
+<li><a href="../../05/the-best-free-struts-2-tutorial/index.html" rel="bookmark" title="The Best Struts 2 Tutorial Index">The Best Struts 2 Tutorial Index </a></li>
+<li><a href="../../../2011/08/some-notes-about-struts-2-actions/index.html" rel="bookmark" title="Struts 2 Tutorial Series: Some notes about Struts 2 Actions">Struts 2 Tutorial Series: Some notes about Struts 2 Actions </a></li>
+<li><a href="../../../2011/09/illustration-for-struts-2-interceptors/index.html" rel="bookmark" title="Struts 2 Tutorial Series: Illustration for Struts 2 Interceptors">Struts 2 Tutorial Series: Illustration for Struts 2 Interceptors </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/frameworks/struts-2/index.html" rel="category tag">Struts 2</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2010/03/struts-2-tutorial-series-how-to-insert-tiles-to-your-project/" dc:identifier="http://www.programcreek.com/2010/03/struts-2-tutorial-series-how-to-insert-tiles-to-your-project/" dc:title="Struts 2 Tutorial Series &#8211; How to insert Tiles to your project" trackback:ping="http://www.programcreek.com/2010/03/struts-2-tutorial-series-how-to-insert-tiles-to-your-project/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-6137">
+<div id="dsq-comment-header-6137" class="dsq-comment-header">
+<cite id="dsq-cite-6137">
+<span id="dsq-author-user-6137">Alex</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6137" class="dsq-comment-body">
+<div id="dsq-comment-message-6137" class="dsq-comment-message"><p>Nice tutorial 🙂<br/>
+But cant download the code though 🙁</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3063">
+<div id="dsq-comment-header-3063" class="dsq-comment-header">
+<cite id="dsq-cite-3063">
+<span id="dsq-author-user-3063">Munish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-3063" class="dsq-comment-body">
+<div id="dsq-comment-message-3063" class="dsq-comment-message"><p>Help me.<br/>
+can i directly run Tiles Layout page .. without index.jsp page when i deployed project..<br/>
+mail me on <a href="../../../cdn-cgi/l/email-protection/index.html#dfb2aab1b6acb7acb7beadb2bee8ececec9facb6b8b1b6b1a8b0adb4acf1bcb0b2"><span class="__cf_email__" data-cfemail="3b564e5552485348535a49565a0c0808087b48525c5552554c5449504815585456">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-2112">
+<div id="dsq-comment-header-2112" class="dsq-comment-header">
+<cite id="dsq-cite-2112">
+<span id="dsq-author-user-2112">Sunil</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2112" class="dsq-comment-body">
+<div id="dsq-comment-message-2112" class="dsq-comment-message"><p>Hi I am facing following exceptions with above</p>
+<p>java.lang.InstantiationException<br/>
+at org.apache.catalina.core.ApplicationFilterConfig.(ApplicationFilterConfig.java:124)<br/>
+at org.apache.catalina.core.StandardContext.filterStart(StandardContext.java:4685)</p>
+<p>and many more exceptions are throwing.</p>
+<p>Please tell me what is the problem&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="dsq-comment-2095">
+<div id="dsq-comment-header-2095" class="dsq-comment-header">
+<cite id="dsq-cite-2095">
+<span id="dsq-author-user-2095">Admin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2095" class="dsq-comment-body">
+<div id="dsq-comment-message-2095" class="dsq-comment-message"><p>Thanks for your comments. 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-2093">
+<div id="dsq-comment-header-2093" class="dsq-comment-header">
+<cite id="dsq-cite-2093">
+<a id="dsq-author-user-2093" href="http://www.google.com" target="_blank" rel="nofollow">Ravikumar</a>
+</cite>
+</div>
+<div id="dsq-comment-body-2093" class="dsq-comment-body">
+<div id="dsq-comment-message-2093" class="dsq-comment-message"><p>Hello Sir,<br/>
+Really the above example are very useful for struts biggnners,</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1800">
+<div id="dsq-comment-header-1800" class="dsq-comment-header">
+<cite id="dsq-cite-1800">
+<span id="dsq-author-user-1800">swathi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1800" class="dsq-comment-body">
+<div id="dsq-comment-message-1800" class="dsq-comment-message"><p>hi this is swathi.im new to struts2.can u give me detail description of struts2 how it works .how action works how return value is retured and all those basic things</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1776">
+<div id="dsq-comment-header-1776" class="dsq-comment-header">
+<cite id="dsq-cite-1776">
+<a id="dsq-author-user-1776" href="http://www.standmixerattachments.com/kitchenaid-pasta-attachment/" target="_blank" rel="nofollow">Kitchenaid Pasta Maker Attachment</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1776" class="dsq-comment-body">
+<div id="dsq-comment-message-1776" class="dsq-comment-message"><p>Hey man I just wanted to say thanks for taking the time to write something worth my time to read. I am all over the net and I see so much pointless content that is just written for the sake of putting something new on their page. It takes devotion to create good stuff, thanks for caring.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1774">
+<div id="dsq-comment-header-1774" class="dsq-comment-header">
+<cite id="dsq-cite-1774">
+<a id="dsq-author-user-1774" href="http://www.accesshealthcareonline.com" target="_blank" rel="nofollow">Access Healthcare</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1774" class="dsq-comment-body">
+<div id="dsq-comment-message-1774" class="dsq-comment-message"><p>I am little confused how you attach style.css with jquery ??</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1719">
+<div id="dsq-comment-header-1719" class="dsq-comment-header">
+<cite id="dsq-cite-1719">
+<a id="dsq-author-user-1719" href="http://menssilverbracelet.org/" target="_blank" rel="nofollow">Mens silver bracelets</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1719" class="dsq-comment-body">
+<div id="dsq-comment-message-1719" class="dsq-comment-message"><p>Anja Vanhekken</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1640">
+<div id="dsq-comment-header-1640" class="dsq-comment-header">
+<cite id="dsq-cite-1640">
+<a id="dsq-author-user-1640" href="http://www.posterio.de" target="_blank" rel="nofollow">Poster</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1640" class="dsq-comment-body">
+<div id="dsq-comment-message-1640" class="dsq-comment-message"><p>nice and well written tutorial.<br/>
+Like+!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1634">
+<div id="dsq-comment-header-1634" class="dsq-comment-header">
+<cite id="dsq-cite-1634">
+<a id="dsq-author-user-1634" href="http://www.4writers.net" target="_blank" rel="nofollow">writers job</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1634" class="dsq-comment-body">
+<div id="dsq-comment-message-1634" class="dsq-comment-message"><p>The good storage of facts referring to this topic people search, at the freelance writing service.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1633">
+<div id="dsq-comment-header-1633" class="dsq-comment-header">
+<cite id="dsq-cite-1633">
+<a id="dsq-author-user-1633" href="http://www.bestfinance-blog.com" target="_blank" rel="nofollow">STONEIda</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1633" class="dsq-comment-body">
+<div id="dsq-comment-message-1633" class="dsq-comment-message"><p>I had got a dream to start my own commerce, but I didn&#8217;t earn enough of cash to do that. Thank heaven my fellow recommended to utilize the <a href="http://bestfinance-blog.com" rel="nofollow">loan</a>. Hence I used the auto loan and realized my dream.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1632">
+<div id="dsq-comment-header-1632" class="dsq-comment-header">
+<cite id="dsq-cite-1632">
+<a id="dsq-author-user-1632" href="http://www.wowne.de" target="_blank" rel="nofollow">wow gold</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1632" class="dsq-comment-body">
+<div id="dsq-comment-message-1632" class="dsq-comment-message"><p>Many other World of Warcraft gold would do well to take notes on how the Warcraft guide illustrates the art of World of Warcraft gold making into no risk and easy to follow steps.These World of Warcraft player are very efficient in buying cheap wow gold. For many of these gold makers, this is their real job.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2010/03/struts-2-tutorial-series-how-to-insert-tiles-to-your-project/';
+var disqus_identifier = '1545 http://www.programcreek.com/?p=1545';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "Struts 2 Tutorial Series &#8211; How to insert Tiles to your project";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=1545';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+</html>
+<!-- Localized -->

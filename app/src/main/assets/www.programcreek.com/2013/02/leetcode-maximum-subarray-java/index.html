@@ -1,0 +1,903 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Maximum Subarray (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array , the contiguous"/>
+<meta name="keywords" content="leetcode - maximum subarray (java)"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Maximum Subarray (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Subsets II (Java)' href='../../01/leetcode-subsets-ii-java/index.html'/>
+<link rel='next' title='Eclipse Plug-in Development &#8211; Create a Perspective' href='../eclipse-plug-in-development-creat-a-perspective/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=11721.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-maximum-subarray-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-maximum-subarray-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-11721"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Maximum Subarray (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.</p>
+<p>For example, given the array <code>[−2,1,−3,4,−1,2,1,−5,4]</code>, the contiguous subarray <code>[4,−1,2,1]</code> has the largest sum = 6.</p>
+<p><strong>1. Dynamic Programming Solution</strong></p>
+<p>The changing condition for dynamic programming is "We should ignore the sum of the previous n-1 elements if nth element is greater than the sum."</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> maxSubArray<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> A<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> max <span style="color: #339933;">=</span> A<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> sum <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span>A.<span style="color: #006633;">length</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+		sum<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> A<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> A.<span style="color: #006633;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			sum<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>A<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span>, sum<span style="color: #009900;">&#91;</span>i <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">+</span> A<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			max <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max, sum<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>1. Simple Solution</strong></p>
+<p>Mehdi provided the following solution in his comment. The time space is optimized to be O(1).</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> maxSubArray<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> A<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+       <span style="color: #000066; font-weight: bold;">int</span> newsum<span style="color: #339933;">=</span>A<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+       <span style="color: #000066; font-weight: bold;">int</span> max<span style="color: #339933;">=</span>A<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+       <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>i<span style="color: #339933;">&lt;</span>A.<span style="color: #006633;">length</span><span style="color: #339933;">;</span>i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+           newsum<span style="color: #339933;">=</span><span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>newsum<span style="color: #339933;">+</span>A<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span>,A<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+           max<span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max, newsum<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+       <span style="color: #009900;">&#125;</span>
+       <span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>This problem is asked by Palantir. </p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/03/leetcode-maximum-product-subarray-java/index.html" rel="bookmark" title="LeetCode &#8211; Maximum Product Subarray (Java)">LeetCode &#8211; Maximum Product Subarray (Java) </a></li>
+<li><a href="../../../2014/05/leetcode-minimum-size-subarray-sum-java/index.html" rel="bookmark" title="LeetCode &#8211; Minimum Size Subarray Sum (Java)">LeetCode &#8211; Minimum Size Subarray Sum (Java) </a></li>
+<li><a href="../../../2014/03/leetcode-maximum-gap-java/index.html" rel="bookmark" title="LeetCode &#8211; Maximum Gap (Java)">LeetCode &#8211; Maximum Gap (Java) </a></li>
+<li><a href="../leetcode-binary-tree-maximum-path-sum-java/index.html" rel="bookmark" title="LeetCode &#8211; Binary Tree Maximum Path Sum (Java)">LeetCode &#8211; Binary Tree Maximum Path Sum (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/02/leetcode-maximum-subarray-java/" dc:identifier="http://www.programcreek.com/2013/02/leetcode-maximum-subarray-java/" dc:title="LeetCode &#8211; Maximum Subarray (Java)" trackback:ping="http://www.programcreek.com/2013/02/leetcode-maximum-subarray-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-14802">
+<div id="dsq-comment-header-14802" class="dsq-comment-header">
+<cite id="dsq-cite-14802">
+<span id="dsq-author-user-14802">Avinash Ujjwal</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14802" class="dsq-comment-body">
+<div id="dsq-comment-message-14802" class="dsq-comment-message"><p>/* Here is the solution using kadane&#8217;s algorithm but it only works when there is at least one positive element in the given array. */</p>
+<p>public static int maxSubArray(int[] array) {<br/>
+int maxSum = 0, newSum = 0;</p>
+<p> for(int i = 0; i 0) {<br/>
+newSum = newSum + array[i];<br/>
+} else {<br/>
+newSum = 0;<br/>
+}<br/>
+maxSum = Math.max(maxSum, newSum);<br/>
+}<br/>
+return maxSum;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14561">
+<div id="dsq-comment-header-14561" class="dsq-comment-header">
+<cite id="dsq-cite-14561">
+<span id="dsq-author-user-14561">Mohan Gaddam</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14561" class="dsq-comment-body">
+<div id="dsq-comment-message-14561" class="dsq-comment-message"><p>Guess it fails for lot of cases, For Ex input Array:<br/>
+5, -4, 9, -3500, 25, -3, 12, 5900, 15, -23, 18, 14, 11, 93, 12, 34, 56, -125, 66, -255, 95, 68, 4558, -2, 203</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9381">
+<div id="dsq-comment-header-9381" class="dsq-comment-header">
+<cite id="dsq-cite-9381">
+<span id="dsq-author-user-9381">Eric</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9381" class="dsq-comment-body">
+<div id="dsq-comment-message-9381" class="dsq-comment-message"><p>only fails with all negative numbers</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9022">
+<div id="dsq-comment-header-9022" class="dsq-comment-header">
+<cite id="dsq-cite-9022">
+<span id="dsq-author-user-9022">Prasad Kailkere Sridhar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9022" class="dsq-comment-body">
+<div id="dsq-comment-message-9022" class="dsq-comment-message"><p>Extending Mehdi&#8217;s solution, you can track the subarray (indices) using 2 more variables startIndex and endIndex (initialize before the for loop and add below code inside the for loop at the end):</p>
+<p>if (max == A[i])<br/>
+{<br/>
+startIndex = i;<br/>
+}<br/>
+else if (max == newsum)<br/>
+{<br/>
+endIndex = i;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-8257">
+<div id="dsq-comment-header-8257" class="dsq-comment-header">
+<cite id="dsq-cite-8257">
+<span id="dsq-author-user-8257">Allan Yin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8257" class="dsq-comment-body">
+<div id="dsq-comment-message-8257" class="dsq-comment-message"><p>I will still work. plz test yourself.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7503">
+<div id="dsq-comment-header-7503" class="dsq-comment-header">
+<cite id="dsq-cite-7503">
+<span id="dsq-author-user-7503">Dexter</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7503" class="dsq-comment-body">
+<div id="dsq-comment-message-7503" class="dsq-comment-message"><p>Solution with array indexes:</p>
+<p>public static void maxArray(int[] arr){</p>
+<p> int prevStart = -1;</p>
+<p> int currentStart = prevStart;</p>
+<p> int maxHere = 0;</p>
+<p> int maxSoFar = 0;</p>
+<p> int end = -1;</p>
+<p> for(int i = 0; i&lt; arr.length; i++){</p>
+<p> if(arr[i] &lt; 0 &amp;&amp; maxSoFar == 0){</p>
+<p> continue;</p>
+<p> }</p>
+<p> maxHere += arr[i];</p>
+<p> if(currentStart == -1){</p>
+<p> currentStart = i;</p>
+<p> }</p>
+<p> if(maxHere maxSoFar){</p>
+<p> maxSoFar = maxHere;</p>
+<p> prevStart = currentStart;</p>
+<p> end = i;</p>
+<p> }</p>
+<p> }</p>
+<p> System.out.println(&#8220;Max Sum:&#8221; + maxSoFar);</p>
+<p> System.out.println(&#8220;Start: &#8221; + prevStart);</p>
+<p> System.out.println(&#8220;End: &#8221; + end);</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7037">
+<div id="dsq-comment-header-7037" class="dsq-comment-header">
+<cite id="dsq-cite-7037">
+<span id="dsq-author-user-7037">Satish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7037" class="dsq-comment-body">
+<div id="dsq-comment-message-7037" class="dsq-comment-message"><p>Copy pasted from eclipse ide.I m not sure why it appears this way. Sorry for that</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7036">
+<div id="dsq-comment-header-7036" class="dsq-comment-header">
+<cite id="dsq-cite-7036">
+<span id="dsq-author-user-7036">Satish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7036" class="dsq-comment-body">
+<div id="dsq-comment-message-7036" class="dsq-comment-message"><p>Check this out O(1) with position:</p>
+<p>public static int maxSubArray(int[] A) {<br/>
+int newsum=A[0];<br/>
+int max=A[0];<br/>
+int j = 0;<br/>
+int i_max = 0;<br/>
+for(int i=1; i&lt;A.length; i++){<br/>
+newsum += A[i];<br/>
+if (newsum max) {<br/>
+max = newsum;<br/>
+i_max = i;<br/>
+}<br/>
+}<br/>
+System.out.println(j + &#8220;,&#8221; + i_max + &#8221; = &#8221; + max);<br/>
+return max;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6902">
+<div id="dsq-comment-header-6902" class="dsq-comment-header">
+<cite id="dsq-cite-6902">
+<span id="dsq-author-user-6902">Sam</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6902" class="dsq-comment-body">
+<div id="dsq-comment-message-6902" class="dsq-comment-message"><p>The naive solution should work on {-1, -2, 5, -2}.<br/>
+could you double check plz?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6881">
+<div id="dsq-comment-header-6881" class="dsq-comment-header">
+<cite id="dsq-cite-6881">
+<span id="dsq-author-user-6881">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6881" class="dsq-comment-body">
+<div id="dsq-comment-message-6881" class="dsq-comment-message"><p>The DP solution is not correct. The condition should be &#8220;we ignore the previous n-1 sum if it were less than or equal to 0&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6783">
+<div id="dsq-comment-header-6783" class="dsq-comment-header">
+<cite id="dsq-cite-6783">
+<span id="dsq-author-user-6783">Dhwanit Shah</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6783" class="dsq-comment-body">
+<div id="dsq-comment-message-6783" class="dsq-comment-message"><p>Above solution is not correct. Pls find the rectified complete solution below:</p>
+<p>#include<br/>
+using namespace std;<br/>
+int max(int a, int b)</p>
+<p>{<br/>
+if(a&gt;b)<br/>
+return a;<br/>
+return b;<br/>
+}</p>
+<p>int maxSubArray(int* A, int len) {</p>
+<p> int sum = 0;<br/>
+int maxSum = -1000000; //some very large negative number</p>
+<p> for (int i = 0; i &lt; len; i++) {<br/>
+if (sum &lt; 0){<br/>
+sum = A[i]; // change<br/>
+}<br/>
+else<br/>
+{<br/>
+sum += A[i];<br/>
+}<br/>
+maxSum = max(maxSum, sum); // change<br/>
+}<br/>
+return maxSum;<br/>
+}</p>
+<p>int main() {<br/>
+int a[] = {-1,-2,3,4,-5,6};<br/>
+cout&lt;&lt;maxSubArray(a, 6);<br/>
+return 0;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6772">
+<div id="dsq-comment-header-6772" class="dsq-comment-header">
+<cite id="dsq-cite-6772">
+<span id="dsq-author-user-6772">swm8023</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6772" class="dsq-comment-body">
+<div id="dsq-comment-message-6772" class="dsq-comment-message"><p>The first solution is correct. It&#8217;s same to the last solution</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6250">
+<div id="dsq-comment-header-6250" class="dsq-comment-header">
+<cite id="dsq-cite-6250">
+<span id="dsq-author-user-6250">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6250" class="dsq-comment-body">
+<div id="dsq-comment-message-6250" class="dsq-comment-message"><p>Put code between &lt;pre&gt; and &lt;/pre&gt;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6248">
+<div id="dsq-comment-header-6248" class="dsq-comment-header">
+<cite id="dsq-cite-6248">
+<span id="dsq-author-user-6248">garukun</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6248" class="dsq-comment-body">
+<div id="dsq-comment-message-6248" class="dsq-comment-message"><p>Thanks! I was wondering how you guys created code like posting.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6247">
+<div id="dsq-comment-header-6247" class="dsq-comment-header">
+<cite id="dsq-cite-6247">
+<span id="dsq-author-user-6247">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6247" class="dsq-comment-body">
+<div id="dsq-comment-message-6247" class="dsq-comment-message"><p>This solution is wrong, I tried it using { -1, -2, 5, -2 }.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6246">
+<div id="dsq-comment-header-6246" class="dsq-comment-header">
+<cite id="dsq-cite-6246">
+<span id="dsq-author-user-6246">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6246" class="dsq-comment-body">
+<div id="dsq-comment-message-6246" class="dsq-comment-message"><p>I think your solution is also correct. </p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6245">
+<div id="dsq-comment-header-6245" class="dsq-comment-header">
+<cite id="dsq-cite-6245">
+<span id="dsq-author-user-6245">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6245" class="dsq-comment-body">
+<div id="dsq-comment-message-6245" class="dsq-comment-message"><p>I have added this solution, thanks!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6243">
+<div id="dsq-comment-header-6243" class="dsq-comment-header">
+<cite id="dsq-cite-6243">
+<span id="dsq-author-user-6243">garukun</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6243" class="dsq-comment-body">
+<div id="dsq-comment-message-6243" class="dsq-comment-message"><p>Will something like this work? We observe that the if the element about to be added to create the next summation is already greater than the previous summation, then we will ignore the previous summation and start a new maxSum from the current index. The code would look something like:</p>
+<p>[code]</p>
+<p>public int maxSum(int[] arr) {</p>
+<p> int maxSum = Integer.MIN_VALUE;</p>
+<p> for (int i = 0, sumSoFar = -1, sum; i sum) {</p>
+<p> sumSoFar = arr[i];</p>
+<p> } else {</p>
+<p> sumSoFar = sum;</p>
+<p> }</p>
+<p> maxSum = Math.max(maxSum, sumSoFar);</p>
+<p> }</p>
+<p> return maxSum;</p>
+<p>}</p>
+<p>// Test input and iterations<br/>
+[−2,1,−3,4,−1,2,1,−5,4]</p>
+<p>i = 0; sum = -3, sumSoFar = -2, maxSum = -2 ;</p>
+<p>i = 1; sum = -1, sumSoFar = -1, maxSum = -1 ;</p>
+<p>i = 2; sum = -4, sumSoFar = -3, maxSum = -3 ;</p>
+<p>i = 3; sum = 1, sumSoFar = 4, maxSum = 4 ;</p>
+<p>i = 4; sum = 3, sumSoFar = 3, maxSum = 3 ;</p>
+<p>i = 5; sum = 5, sumSoFar = 5, maxSum = 5 ;</p>
+<p>i = 6; sum = 6, sumSoFar = 6, maxSum = 6 ;</p>
+<p>i = 7; sum = 1, sumSoFar = 1, maxSum = 6 ;</p>
+<p>i = 8; sum = 5, sumSoFar = 5, maxSum = 6 ;</p>
+<p>[/code]</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6213">
+<div id="dsq-comment-header-6213" class="dsq-comment-header">
+<cite id="dsq-cite-6213">
+<span id="dsq-author-user-6213">Kevin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6213" class="dsq-comment-body">
+<div id="dsq-comment-message-6213" class="dsq-comment-message"><p>An array with all negative number will break naive solution, since &#8220;(containing at least one number) &#8220;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6196">
+<div id="dsq-comment-header-6196" class="dsq-comment-header">
+<cite id="dsq-cite-6196">
+<span id="dsq-author-user-6196">Jiaming</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6196" class="dsq-comment-body">
+<div id="dsq-comment-message-6196" class="dsq-comment-message"><p>The &#8220;Naive Solution&#8221; works, nothing&#8217;s wrong with that line, I think it&#8217;s not working anymore if you change that row.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6095">
+<div id="dsq-comment-header-6095" class="dsq-comment-header">
+<cite id="dsq-cite-6095">
+<span id="dsq-author-user-6095">Shaowei Ling</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6095" class="dsq-comment-body">
+<div id="dsq-comment-message-6095" class="dsq-comment-message"><p>Based on the second method(DP style), I write this for printing the sub array in details. I tested the example in the question and it works.</p>
+<p> public int maxSubArray(int[] A) {<br/>
+int max = A[0];<br/>
+int[] sum = new int[A.length];<br/>
+sum[0] = A[0];</p>
+<p> int begin = 0;<br/>
+int end = 0;</p>
+<p> for(int i=1; i<a> sum[i-1] + A[i]) {<br/>
+sum[i] = A[i];<br/>
+newBegin = i;<br/>
+newEnd = i;<br/>
+} else {<br/>
+sum[i] = sum[i-1] + A[i];<br/>
+newEnd = i;<br/>
+}</p>
+<p> if(sum[i] &gt; max) {<br/>
+max = sum[i];<br/>
+begin = newBegin;<br/>
+end = newEnd;<br/>
+}<br/>
+}</p>
+<p> // print the subArray<br/>
+for(int i = begin; i &lt;= end; i++) {<br/>
+System.out.print(A[i]+ &quot; &quot;);<br/>
+}<br/>
+System.out.println();</p>
+<p> return max;<br/>
+}</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5976">
+<div id="dsq-comment-header-5976" class="dsq-comment-header">
+<cite id="dsq-cite-5976">
+<span id="dsq-author-user-5976">play_boy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5976" class="dsq-comment-body">
+<div id="dsq-comment-message-5976" class="dsq-comment-message"><p>Native Solution is wrong, but you can change some row, and it will be ok!</p>
+<p>like this:</p>
+<p>public static int maxSubArray(int[] A) {<br/>
+int sum = 0;<br/>
+int maxSum = Integer.MIN_VALUE;</p>
+<p> for (int i = 0; i &lt; A.length; i++) {<br/>
+sum += A[i];</p>
+<p> if (sum &lt; 0)<br/>
+sum = A[i]; // change<br/>
+maxSum = Math.max(maxSum, sum); // change<br/>
+}</p>
+<p> return maxSum;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5906">
+<div id="dsq-comment-header-5906" class="dsq-comment-header">
+<cite id="dsq-cite-5906">
+<span id="dsq-author-user-5906">Mehdi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5906" class="dsq-comment-body">
+<div id="dsq-comment-message-5906" class="dsq-comment-message"><p>you can also do it with O(1) space complexity instead of O(n):</p>
+<pre>
+  public int maxSubArray(int[] A) {
+       int newsum=A[0];
+       int max=A[0];
+       for(int i=1;i&lt;A.length;i++){
+           newsum=Math.max(newsum+A[i],A[i]);
+           max= Math.max(max, newsum);
+       }
+       return max;
+    }
+</pre>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5872">
+<div id="dsq-comment-header-5872" class="dsq-comment-header">
+<cite id="dsq-cite-5872">
+<span id="dsq-author-user-5872">Yat</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5872" class="dsq-comment-body">
+<div id="dsq-comment-message-5872" class="dsq-comment-message"><p>Hi, what about the actual subarray that should be returned? Only the max sum is returned in the two solutions above.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5707">
+<div id="dsq-comment-header-5707" class="dsq-comment-header">
+<cite id="dsq-cite-5707">
+<span id="dsq-author-user-5707">曹超</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5707" class="dsq-comment-body">
+<div id="dsq-comment-message-5707" class="dsq-comment-message"><p>because it&#8217;s a wrong method</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5706">
+<div id="dsq-comment-header-5706" class="dsq-comment-header">
+<cite id="dsq-cite-5706">
+<span id="dsq-author-user-5706">曹超</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5706" class="dsq-comment-body">
+<div id="dsq-comment-message-5706" class="dsq-comment-message"><p>原理就是错的</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5702">
+<div id="dsq-comment-header-5702" class="dsq-comment-header">
+<cite id="dsq-cite-5702">
+<span id="dsq-author-user-5702">Darren</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5702" class="dsq-comment-body">
+<div id="dsq-comment-message-5702" class="dsq-comment-message"><p>Why does the so-called &#8220;Naive Solution&#8221; not work? I think the algorithm is correct, and it passes the OJ as well.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/02/leetcode-maximum-subarray-java/';
+var disqus_identifier = '11721 http://www.programcreek.com/?p=11721';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Maximum Subarray (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=11721';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

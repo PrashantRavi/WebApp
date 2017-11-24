@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Locks in Java</title>
+
+    <meta name="description" content="This tutorial explains what a lock is in multithreading, shows an example of how to implement a lock, and discusses topics like reentrance, and when to unlock a lock etc.">
+    <meta name="keywords"    content="java concurrency locks lock">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Locks in Java">
+    <meta name="twitter:description" content="This tutorial explains what a lock is in multithreading, shows an example of how to implement a lock, and discusses topics like reentrance, and when to unlock a lock etc.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Locks in Java"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/locks.html"/>
+    <meta property="og:description" content="This tutorial explains what a lock is in multithreading, shows an example of how to implement a lock, and discusses topics like reentrance, and when to unlock a lock etc."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/slipped-conditions.html";
+var nextArticleInCategory = "/java-concurrency/read-write-locks.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 10009;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html"><b>Locks in Java</b></a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Locks in Java</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#simple-lock">A Simple Lock</a></li><li><a href="#reentrance">Lock Reentrance</a></li><li><a href="#fairness">Lock Fairness</a></li><li><a href="#finally">Calling unlock() From a finally-clause</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    A lock is a thread synchronization mechanism like synchronized blocks except locks
+    can be more sophisticated than Java's synchronized blocks. Locks (and other more
+    advanced synchronization mechanisms) are created using synchronized blocks, so
+    it is not like we can get totally rid of the <code>synchronized</code> keyword.
+</p>
+
+<p>From Java 5 the
+    package <code>java.util.concurrent.locks</code> contains several lock implementations,
+    so you may not have to implement your own locks. But you will still need to know
+    how to use them, and it can still be useful to know the theory behind their
+    implementation. For more details, see my tutorial on the <a href="../java-util-concurrent/lock.html"><code>java.util.concurrent.locks.Lock</code></a>
+    interface.
+</p>
+
+
+
+<a name="simple-lock"></a>
+<h2>A Simple Lock</h2>
+
+
+<p>
+    Let's start out by looking at a synchronized block of Java code:
+</p>
+
+<pre class="codeBox">
+public class Counter{
+
+  private int count = 0;
+
+  public int inc(){
+    synchronized(this){
+      return ++count;
+    }
+  }
+}
+</pre>
+
+<p>
+    Notice the <code>synchronized(this)</code> block in the <code>inc()</code> method.
+    This block makes sure that only one thread can execute the <code>return ++count</code>
+    at a time. The code in the synchronized block could have been more advanced, but
+    the simple <code>++count</code> suffices to get the point across.
+</p>
+
+<p>
+    The <code>Counter</code> class could have been written like this instead, using
+    a <code>Lock</code> instead of a synchronized block:
+</p>
+
+
+<pre class="codeBox">
+public class Counter{
+
+  private Lock lock = new Lock();
+  private int count = 0;
+
+  public int inc(){
+    lock.lock();
+    int newCount = ++count;
+    lock.unlock();
+    return newCount;
+  }
+}
+</pre>
+
+<p>
+    The <code>lock()</code> method locks the <code>Lock</code> instance so that all
+    threads calling <code>lock()</code> are blocked until <code>unlock()</code> is
+    executed.
+</p>
+
+
+<p>
+    Here is a simple <code>Lock</code> implementation:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  private boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){
+      wait();
+    }
+    isLocked = true;
+  }
+
+  public synchronized void unlock(){
+    isLocked = false;
+    notify();
+  }
+}
+</pre>
+
+<p>
+    Notice the <code>while(isLocked)</code> loop, which is also called a
+    "spin lock". Spin locks and the methods <code>wait()</code> and <code>notify()</code>
+    are covered in more detail in the text
+    <a href="thread-signaling.html">Thread Signaling</a>. While <code>isLocked</code> is true,
+    the thread calling <code>lock()</code> is parked waiting in the <code>wait()</code> call.
+    In case the thread should return unexpectedly from the wait() call without having
+    received a <code>notify()</code> call (AKA a <a href="thread-signaling.html#spuriouswakeups">Spurious Wakeup</a>)
+    the thread re-checks the <code>isLocked</code> condition to see if it is safe to
+    proceed or not, rather than just assume that being awakened means it is safe to proceed.
+    If <code>isLocked</code> is false, the thread exits the <code>while(isLocked)</code> loop,
+    and sets <code>isLocked</code> back to true, to lock the <code>Lock</code> instance for other
+    threads calling <code>lock()</code>.
+</p>
+
+<p>
+    When the thread is done with the code in the <a href="race-conditions-and-critical-sections.html">critical section</a>
+    (the code between <code>lock()</code> and <code>unlock()</code>), the thread calls <code>unlock()</code>.
+    Executing <code>unlock()</code> sets <code>isLocked</code> back to false, and notifies (awakens) one of the
+    threads waiting in the <code>wait()</code> call in the <code>lock()</code> method, if any.
+</p>
+
+
+
+<a name="reentrance"></a>
+<h2>Lock Reentrance</h2>
+<p>
+    Synchronized blocks in Java are reentrant. This means, that if a Java thread enters a synchronized block of
+    code, and thereby take the lock on the monitor object the block is synchronized on, the thread can enter
+    other Java code blocks synchronized on the same monitor object. Here is an example:
+</p>
+
+
+<pre class="codeBox">
+public class Reentrant{
+
+  public synchronized outer(){
+    inner();
+  }
+
+  public synchronized inner(){
+    //do something
+  }
+}
+</pre>
+
+<p>
+    Notice how both <code>outer()</code> and <code>inner()</code> are declared synchronized,
+    which in Java is equivalent to a <code>synchronized(this)</code> block.
+    If a thread calls <code>outer()</code> there is no problem calling inner() from inside
+    <code>outer()</code>, since both methods (or blocks) are synchronized on the same
+    monitor object ("this"). If a thread already holds the lock on a monitor object, it has
+    access to all blocks synchronized on the same monitor object. This is called reentrance.
+    The thread can reenter any block of code for which it already holds the lock.
+</p>
+
+<p>
+    The lock implementation shown earlier is not reentrant. If we rewrite the <code>Reentrant</code>
+    class like below, the thread calling <code>outer()</code> will be blocked inside the
+    <code>lock.lock()</code> in the <code>inner()</code> method.
+</p>
+
+<pre class="codeBox">
+public class Reentrant2{
+
+  Lock lock = new Lock();
+
+  public outer(){
+    lock.lock();
+    inner();
+    lock.unlock();
+  }
+
+  public synchronized inner(){
+    lock.lock();
+    //do something
+    lock.unlock();
+  }
+}
+</pre>
+
+<p>
+    A thread calling <code>outer()</code> will first lock the <code>Lock</code> instance. Then it
+    will call <code>inner()</code>. Inside the <code>inner()</code> method the thread will again
+    try to lock the <code>Lock</code> instance. This will fail (meaning the thread will be blocked),
+    since the <code>Lock</code> instance was locked already in the <code>outer()</code> method.
+</p>
+
+<p>
+    The reason the thread will be blocked the second time it calls <code>lock()</code> without
+    having called <code>unlock()</code> in between, is apparent when we look at the <code>lock()</code>
+    implementation:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){
+      wait();
+    }
+    isLocked = true;
+  }
+
+  ...
+}
+</pre>
+
+<p>
+    It is the condition inside the while loop (spin lock) that determines if a thread is allowed to
+    exit the <code>lock()</code> method or not. Currently the condition is that <code>isLocked</code>
+    must be <code>false</code> for this to be allowed, regardless of what thread locked it.
+</p>
+
+<p>
+    To make the <code>Lock</code> class reentrant we need to make a small change:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  boolean isLocked = false;
+  Thread  lockedBy = null;
+  int     lockedCount = 0;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    Thread callingThread = Thread.currentThread();
+    while(isLocked && lockedBy != callingThread){
+      wait();
+    }
+    isLocked = true;
+    lockedCount++;
+    lockedBy = callingThread;
+  }
+
+
+  public synchronized void unlock(){
+    if(Thread.curentThread() == this.lockedBy){
+      lockedCount--;
+
+      if(lockedCount == 0){
+        isLocked = false;
+        notify();
+      }
+    }
+  }
+
+  ...
+}
+</pre>
+
+<p>
+    Notice how the while loop (spin lock) now also takes the thread that locked the <code>Lock</code>
+    instance into consideration. If either the lock is unlocked (<code>isLocked</code> = false) or
+    the calling thread is the thread that locked the <code>Lock</code> instance, the while loop
+    will not execute, and the thread calling <code>lock()</code> will be allowed to exit the method.
+</p>
+
+<p>
+    Additionally, we need to count the number of times the lock has been locked by the same
+    thread. Otherwise, a single call to <code>unlock()</code> will unlock the lock, even if
+    the lock has been locked multiple times. We don't want the lock to be unlocked until the
+    thread that locked it, has executed the same amount of <code>unlock()</code> calls as
+    <code>lock()</code> calls.
+</p>
+
+
+<p>
+    The <code>Lock</code> class is now reentrant.
+</p>
+
+
+<a name="fairness"></a>
+<h2>Lock Fairness</h2>
+
+<p>
+    Java's synchronized blocks makes no guarantees about the sequence in which threads trying to enter them
+    are granted access. Therefore, if many threads are constantly competing for access to the same
+    synchronized block, there is a risk that one or more of the threads are never granted access - that
+    access is always granted to other threads. This is called starvation. To avoid this a <code>Lock</code> should be fair.
+    Since the <code>Lock</code> implementations shown in this text uses synchronized blocks internally, they do not guarantee
+    fairness. Starvation and fairness are discussed in more detail in the text
+    <a href="starvation-and-fairness.html">Starvation and Fairness</a>.
+</p>
+
+
+
+<a name="finally"></a>
+<h2>Calling unlock() From a finally-clause</h2>
+
+<p>
+    When guarding a critical section with a <code>Lock</code>, and the critical section may throw exceptions,
+    it is important to call the <code>unlock()</code> method from inside a <code>finally</code>-clause. Doing so makes
+    sure that the <code>Lock</code> is unlocked so other threads can lock it. Here is an example:
+</p>
+
+<pre class="codeBox">
+lock.lock();
+try{
+  //do critical section code, which may throw exception
+} finally {
+  lock.unlock();
+}
+</pre>
+
+<p>
+    This little construct makes sure that the <code>Lock</code> is unlocked in case an
+    exception is thrown from the code in the critical section. If <code>unlock()</code>
+    was not called from inside a <code>finally</code>-clause, and an exception was thrown
+    from the critical section, the <code>Lock</code> would remain locked forever, causing
+    all threads calling <code>lock()</code> on that <code>Lock</code> instance to halt
+    indefinately.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="read-write-locks.html">Read / Write Locks in Java</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

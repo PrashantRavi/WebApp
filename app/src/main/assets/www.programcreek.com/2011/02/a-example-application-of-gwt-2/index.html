@@ -1,0 +1,845 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>GWT Tutorial: Example Application (2)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Welcome to GWT Tutorial series where we will explore how to create a GWT application. This is the second part of the tutorial and it is about RPC, and Datastore"/>
+<meta name="keywords" content="gwt example application,gwt tutorial"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; GWT Tutorial: Example Application (2) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='GWT Tutorial: Example Application (1)' href='../../01/a-example-application-of-gwt/index.html'/>
+<link rel='next' title='GWT Tutorial: Example Application (3)' href='../a-example-application-of-gwt-3/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=2660.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2011_02_a-example-application-of-gwt-2_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2011_02_a-example-application-of-gwt-2_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-2660"> <a href="index.html" rel="bookmark">
+GWT Tutorial: Example Application (2) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Welcome to GWT Tutorial series where we will explore how to create a GWT application. This is the second part of the tutorial and it is about RPC, and Datastore from Google App Engine. To simplify the content, the Login service is ignored. That means you don't need login to add a note. The sample application finally looks like this.</p>
+<p><a href="http://udnotes.appspot.com/"><img src="../../../wp-content/uploads/2011/02/5.jpg" alt="" title="5" width="418" height="265" class="alignleft size-full wp-image-2677" srcset="http://www.programcreek.com/wp-content/uploads/2011/02/5.jpg 418w, http://www.programcreek.com/wp-content/uploads/2011/02/5-300x190.jpg 300w" sizes="(max-width: 418px) 100vw, 418px"/></a><br/>
+<script type="text/javascript"><!--
+google_ad_client = "pub-5732630628268628";
+/* 336x280, created 2/21/11 */
+google_ad_slot = "2137779594";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script><br/>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><br/>
+Google App Engine is free, so the app is live for you to take a look. <a href="http://udnotes.appspot.com/">http://udnotes.appspot.com/</a></p>
+<p>To create a GWT application mainly 3 parts would be hard to understand for new users:</p>
+<ol>
+<li>Create a client side code. This is all about simple GUI app implementation. Instead of using Swing Component, you use Component from GWT.</li>
+<li>Communicate to Server with RPC. Here is the part required more attention.</li>
+<li>User Google DataStore data. The cool part is here.</li>
+</ol>
+<p><span id="more-2660"></span></p>
+<p>In order to complete a RPC call, three steps will be evolved. The comments in UDNotes class explains the 3 steps in detail and useful to understand the process.<br/>
+1) An interface with extends RemoteService that lists the service method you need.<br/>
+2) An asynchronous version of the interface above.<br/>
+3) An implementation of the service which extends RemoteServiceServlet implements NoteService. </p>
+<p><strong>1. Create a NoteService interface under "client" package.</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.tutorials.client</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.rpc.RemoteService</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.rpc.RemoteServiceRelativePath</span><span style="color: #339933;">;</span>
+&nbsp;
+@RemoteServiceRelativePath<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;note&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> NoteService <span style="color: #000000; font-weight: bold;">extends</span> RemoteService <span style="color: #009900;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> addNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> removeNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getNotes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>2. Create an asynchronous version of the interface under "client" package. </strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.tutorials.client</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.rpc.AsyncCallback</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">interface</span> NoteServiceAsync <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">void</span> addNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note, AsyncCallback<span style="color: #339933;">&lt;</span>Void<span style="color: #339933;">&gt;</span> callback<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">void</span> getNotes<span style="color: #009900;">&#40;</span>AsyncCallback<span style="color: #339933;">&lt;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">&gt;</span> callback<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">void</span> removeNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note, AsyncCallback<span style="color: #339933;">&lt;</span>Void<span style="color: #339933;">&gt;</span> callback<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>3. Create a Note class under "server" package. This involves with how to use JDO to store data. </strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.tutorials.server</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.Date</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.annotations.IdGeneratorStrategy</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.annotations.IdentityType</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.annotations.PersistenceCapable</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.annotations.Persistent</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.annotations.PrimaryKey</span><span style="color: #339933;">;</span>
+&nbsp;
+@PersistenceCapable<span style="color: #009900;">&#40;</span>identityType <span style="color: #339933;">=</span> IdentityType.<span style="color: #006633;">APPLICATION</span><span style="color: #009900;">&#41;</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Note <span style="color: #009900;">&#123;</span>
+&nbsp;
+	@PrimaryKey
+	@Persistent<span style="color: #009900;">&#40;</span>valueStrategy <span style="color: #339933;">=</span> IdGeneratorStrategy.<span style="color: #006633;">IDENTITY</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Long</span> id<span style="color: #339933;">;</span>
+	@Persistent
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> note<span style="color: #339933;">;</span>
+	@Persistent
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Date</span> createDate<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">//a good way to use constructor</span>
+	<span style="color: #000000; font-weight: bold;">public</span> Note<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">createDate</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Date</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> Note<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> symbol<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">note</span> <span style="color: #339933;">=</span> symbol<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Long</span> getId<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">id</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getNote<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">note</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">Date</span> getCreateDate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">createDate</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">note</span> <span style="color: #339933;">=</span> note<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>4. Implement the service implementation under "server" package. </strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.tutorials.server</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.ArrayList</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.List</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.logging.Level</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.logging.Logger</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.JDOHelper</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.PersistenceManager</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">javax.jdo.PersistenceManagerFactory</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.server.rpc.RemoteServiceServlet</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.programcreek.tutorials.client.NoteService</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> NoteServiceImpl <span style="color: #000000; font-weight: bold;">extends</span> RemoteServiceServlet <span style="color: #000000; font-weight: bold;">implements</span> NoteService <span style="color: #009900;">&#123;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">long</span> serialVersionUID <span style="color: #339933;">=</span> 1L<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> Logger LOG <span style="color: #339933;">=</span> Logger.<span style="color: #006633;">getLogger</span><span style="color: #009900;">&#40;</span>NoteServiceImpl.<span style="color: #000000; font-weight: bold;">class</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> PersistenceManagerFactory PMF <span style="color: #339933;">=</span> JDOHelper.<span style="color: #006633;">getPersistenceManagerFactory</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;transactions-optional&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> addNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		PersistenceManager pm <span style="color: #339933;">=</span> getPersistenceManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			pm.<span style="color: #006633;">makePersistent</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Note<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>
+			pm.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> removeNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		PersistenceManager pm <span style="color: #339933;">=</span> getPersistenceManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000066; font-weight: bold;">long</span> deleteCount <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>	
+			<span style="color: #003399;">String</span> query <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;select from &quot;</span> <span style="color: #339933;">+</span> Note.<span style="color: #000000; font-weight: bold;">class</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			List<span style="color: #339933;">&lt;</span>Note<span style="color: #339933;">&gt;</span> Notes <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>List<span style="color: #339933;">&lt;</span>Note<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#41;</span> pm.<span style="color: #006633;">newQuery</span><span style="color: #009900;">&#40;</span>query<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">execute</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>Note Note <span style="color: #339933;">:</span> Notes<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>note.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>Note.<span style="color: #006633;">getNote</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					deleteCount<span style="color: #339933;">++;</span>
+					pm.<span style="color: #006633;">deletePersistent</span><span style="color: #009900;">&#40;</span>Note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>deleteCount <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				LOG.<span style="color: #006633;">log</span><span style="color: #009900;">&#40;</span>Level.<span style="color: #006633;">WARNING</span>, <span style="color: #0000ff;">&quot;removeNote deleted &quot;</span> <span style="color: #339933;">+</span> deleteCount
+						<span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; Notes&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>
+			pm.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> getNotes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		PersistenceManager pm <span style="color: #339933;">=</span> getPersistenceManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		List<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> symbols <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ArrayList<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">String</span> query <span style="color: #339933;">=</span> <span style="color: #0000ff;">&quot;select from &quot;</span> <span style="color: #339933;">+</span> Note.<span style="color: #000000; font-weight: bold;">class</span>.<span style="color: #006633;">getName</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			List<span style="color: #339933;">&lt;</span>Note<span style="color: #339933;">&gt;</span> Notes <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>List<span style="color: #339933;">&lt;</span>Note<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#41;</span> pm.<span style="color: #006633;">newQuery</span><span style="color: #009900;">&#40;</span>query<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">execute</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>Note Note <span style="color: #339933;">:</span> Notes<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				symbols.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>Note.<span style="color: #006633;">getNote</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">finally</span> <span style="color: #009900;">&#123;</span>
+			pm.<span style="color: #006633;">close</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> ret <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span>symbols.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s <span style="color: #339933;">:</span> symbols<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			ret<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> s<span style="color: #339933;">;</span>
+			i<span style="color: #339933;">++;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">return</span> ret<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> PersistenceManager getPersistenceManager<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> PMF.<span style="color: #006633;">getPersistenceManager</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>5. Edit the web application deployment descriptor (/war/WEB-INF/web.xml).</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span><span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #00bbdd;">&lt;!DOCTYPE web-app</span>
+<span style="color: #00bbdd;">    PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span>
+<span style="color: #00bbdd;">    &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;&gt;</span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;web-app<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+ <span style="color: #808080; font-style: italic;">&lt;!-- Servlets --&gt;</span>  
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;servlet<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+    <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;servlet-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>noteService<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/servlet-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+    <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;servlet-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>com.programcreek.tutorials.server.NoteServiceImpl<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/servlet-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/servlet<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+&nbsp;
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;servlet-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+    <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;servlet-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>noteService<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/servlet-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+    <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>/udnotes/note<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/servlet-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+  <span style="color: #808080; font-style: italic;">&lt;!-- Default page to serve --&gt;</span>
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+    <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>UDNotes.html<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+  <span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/web-app<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p><strong>6. Edit UDNotes.java under "client" package.</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">&nbsp;
+<span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.tutorials.client</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.ArrayList</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.core.client.EntryPoint</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.core.client.GWT</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.event.dom.client.ClickEvent</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.event.dom.client.ClickHandler</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.event.dom.client.KeyCodes</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.event.dom.client.KeyPressEvent</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.event.dom.client.KeyPressHandler</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.Window</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.rpc.AsyncCallback</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.Anchor</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.Button</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.FlexTable</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.HorizontalPanel</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.Label</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.RootPanel</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.TextArea</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.google.gwt.user.client.ui.VerticalPanel</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #008000; font-style: italic; font-weight: bold;">/**
+ * Entry point classes define &lt;code&gt;onModuleLoad()&lt;/code&gt;.
+ */</span>
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> UDNotes <span style="color: #000000; font-weight: bold;">implements</span> EntryPoint <span style="color: #009900;">&#123;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> VerticalPanel mainPanel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> VerticalPanel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> FlexTable notesFlexTable <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> FlexTable<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> HorizontalPanel addPanel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HorizontalPanel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">TextArea</span> newSymbolTextBox <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">TextArea</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Button</span> addNoteButton <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Add&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Label</span> lastUpdatedLabel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Label</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> ArrayList<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> NotesNames <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ArrayList<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> VerticalPanel loginPanel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> VerticalPanel<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Label</span> loginLabel <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Label</span><span style="color: #009900;">&#40;</span>
+			<span style="color: #0000ff;">&quot;Please sign in to your Google Account to access the NoteWatcher application.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// (1) Create the client proxy. Note that although you are creating the</span>
+	<span style="color: #666666; font-style: italic;">// service interface properly, you cast the result to the asynchronous</span>
+	<span style="color: #666666; font-style: italic;">// version of the interface. The cast is always safe because the</span>
+	<span style="color: #666666; font-style: italic;">// generated proxy implements the asynchronous interface automatically.</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">final</span> NoteServiceAsync NoteService <span style="color: #339933;">=</span> GWT.<span style="color: #006633;">create</span><span style="color: #009900;">&#40;</span>NoteService.<span style="color: #000000; font-weight: bold;">class</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onModuleLoad<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Create table for Note data.</span>
+		notesFlexTable.<span style="color: #006633;">setText</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #0000ff;">&quot;Note&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// set button's style</span>
+		addNoteButton.<span style="color: #006633;">addStyleName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;addButton&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Assemble Add Note panel.</span>
+		addPanel.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>newSymbolTextBox<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		addPanel.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>addNoteButton<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Assemble Main panel.</span>
+		mainPanel.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>notesFlexTable<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		mainPanel.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>addPanel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		mainPanel.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>lastUpdatedLabel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Associate the Main panel with the HTML host page.</span>
+		RootPanel.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>mainPanel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Move cursor focus to the input box.</span>
+		newSymbolTextBox.<span style="color: #006633;">setWidth</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;300px&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		newSymbolTextBox.<span style="color: #006633;">setFocus</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Listen for mouse events on the Add button.</span>
+		addNoteButton.<span style="color: #006633;">addClickHandler</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> ClickHandler<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onClick<span style="color: #009900;">&#40;</span>ClickEvent event<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				addNote<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Listen for keyboard events in the input box.</span>
+		newSymbolTextBox.<span style="color: #006633;">addKeyPressHandler</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> KeyPressHandler<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onKeyPress<span style="color: #009900;">&#40;</span>KeyPressEvent event<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>event.<span style="color: #006633;">getCharCode</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> KeyCodes.<span style="color: #006633;">KEY_ENTER</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					addNote<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">//load notes initially.</span>
+		loadNotes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> addNote<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> note <span style="color: #339933;">=</span> newSymbolTextBox.<span style="color: #006633;">getText</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">trim</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		newSymbolTextBox.<span style="color: #006633;">setFocus</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		newSymbolTextBox.<span style="color: #006633;">setText</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// Don't add the Note if it's already in the table.</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>NotesNames.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+			<span style="color: #000000; font-weight: bold;">return</span><span style="color: #339933;">;</span>
+&nbsp;
+		addNote<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> addNote<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #666666; font-style: italic;">// (2) Create an asynchronous callback to handle the result.</span>
+		AsyncCallback callback <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> AsyncCallback<span style="color: #339933;">&lt;</span>Void<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onFailure<span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> error<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #666666; font-style: italic;">// do something, when fail</span>
+				<span style="color: #003399;">Window</span>.<span style="color: #006633;">alert</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;failed&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+&nbsp;
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onSuccess<span style="color: #009900;">&#40;</span><span style="color: #003399;">Void</span> ignore<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #666666; font-style: italic;">// when successful, do something, about UI</span>
+				displayNote<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// (3) Make the call. Control flow will continue immediately and later</span>
+		<span style="color: #666666; font-style: italic;">// 'callback' will be invoked when the RPC completes.</span>
+		NoteService.<span style="color: #006633;">addNote</span><span style="color: #009900;">&#40;</span>note, callback<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> displayNote<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #666666; font-style: italic;">// Add the Note to the table.</span>
+		<span style="color: #000066; font-weight: bold;">int</span> row <span style="color: #339933;">=</span> notesFlexTable.<span style="color: #006633;">getRowCount</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		NotesNames.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		notesFlexTable.<span style="color: #006633;">setText</span><span style="color: #009900;">&#40;</span>row, <span style="color: #cc66cc;">0</span>, note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #003399;">Button</span> removeNoteButton <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Button</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;x&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		removeNoteButton.<span style="color: #006633;">addStyleDependentName</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;remove&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		removeNoteButton.<span style="color: #006633;">addClickHandler</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> ClickHandler<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onClick<span style="color: #009900;">&#40;</span>ClickEvent event<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				removeNote<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		notesFlexTable.<span style="color: #006633;">setWidget</span><span style="color: #009900;">&#40;</span>row, <span style="color: #cc66cc;">2</span>, removeNoteButton<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> removeNote<span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">final</span> <span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		NoteService.<span style="color: #006633;">removeNote</span><span style="color: #009900;">&#40;</span>note, <span style="color: #000000; font-weight: bold;">new</span> AsyncCallback<span style="color: #339933;">&lt;</span>Void<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onFailure<span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> error<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #009900;">&#125;</span>
+&nbsp;
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onSuccess<span style="color: #009900;">&#40;</span><span style="color: #003399;">Void</span> ignore<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				undisplayNote<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> undisplayNote<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> removedIndex <span style="color: #339933;">=</span> NotesNames.<span style="color: #006633;">indexOf</span><span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		NotesNames.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>removedIndex<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		notesFlexTable.<span style="color: #006633;">removeRow</span><span style="color: #009900;">&#40;</span>removedIndex <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> loadNotes<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		NoteService.<span style="color: #006633;">getNotes</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> AsyncCallback<span style="color: #339933;">&lt;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onFailure<span style="color: #009900;">&#40;</span><span style="color: #003399;">Throwable</span> error<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #009900;">&#125;</span>
+&nbsp;
+			<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> onSuccess<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> notes<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				displayNotes<span style="color: #009900;">&#40;</span>notes<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">void</span> displayNotes<span style="color: #009900;">&#40;</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> notes<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> note <span style="color: #339933;">:</span> notes<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			displayNote<span style="color: #009900;">&#40;</span>note<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>7. A real application is a good way to show how it works. This example is very basic, more functions can be added, such as login service, access control, etc. </strong></p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../a-example-application-of-gwt-3/index.html" rel="bookmark" title="GWT Tutorial: Example Application (3)">GWT Tutorial: Example Application (3) </a></li>
+<li><a href="../../01/a-example-application-of-gwt/index.html" rel="bookmark" title="GWT Tutorial: Example Application (1)">GWT Tutorial: Example Application (1) </a></li>
+<li><a href="../../../2010/03/a-simple-hibernate-application/index.html" rel="bookmark" title="Struts 2 Tutorial Series: A simple Hibernate application">Struts 2 Tutorial Series: A simple Hibernate application </a></li>
+<li><a href="../../../2009/07/put-database-connection-to-servletcontextlistener/index.html" rel="bookmark" title="Put Database Connection to ServletContextListener">Put Database Connection to ServletContextListener </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/frameworks/gwt/index.html" rel="category tag">Google Web Toolkit</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2011/02/a-example-application-of-gwt-2/" dc:identifier="http://www.programcreek.com/2011/02/a-example-application-of-gwt-2/" dc:title="GWT Tutorial: Example Application (2)" trackback:ping="http://www.programcreek.com/2011/02/a-example-application-of-gwt-2/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-6099">
+<div id="dsq-comment-header-6099" class="dsq-comment-header">
+<cite id="dsq-cite-6099">
+<span id="dsq-author-user-6099">Arturas</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6099" class="dsq-comment-body">
+<div id="dsq-comment-message-6099" class="dsq-comment-message"><p>Seems it wasn&#8217;t because I wasn&#8217;t running it with Google Apps Engine, but because the mapped path was slightly different for me</p>
+<p> noteService<br/>
+/udnotes/note</p>
+<p>mine was supposed to be /udnotes3/note because i called my project udnotes3 I guess</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6098">
+<div id="dsq-comment-header-6098" class="dsq-comment-header">
+<cite id="dsq-cite-6098">
+<span id="dsq-author-user-6098">Arturas</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6098" class="dsq-comment-body">
+<div id="dsq-comment-message-6098" class="dsq-comment-message"><p>I get &#8220;failed&#8221; in a dialog when clicking the add button and running this code. Could it be because I&#8217;m running it without Google Apps Engine? Unfortunately Google Apps Engine doesn&#8217;t work for me at all and I can&#8217;t test it on it&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5446">
+<div id="dsq-comment-header-5446" class="dsq-comment-header">
+<cite id="dsq-cite-5446">
+<span id="dsq-author-user-5446">please</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5446" class="dsq-comment-body">
+<div id="dsq-comment-message-5446" class="dsq-comment-message"><p>i have one urgent question.<br/>
+How do I make a data that persists for every other user that access website?<br/>
+much like comment box for many websites.<br/>
+You write something, it stays on the website for everyone to see.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5286">
+<div id="dsq-comment-header-5286" class="dsq-comment-header">
+<cite id="dsq-cite-5286">
+<span id="dsq-author-user-5286">Nazish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5286" class="dsq-comment-body">
+<div id="dsq-comment-message-5286" class="dsq-comment-message"><p>great work&#8230;. 🙂</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2011/02/a-example-application-of-gwt-2/';
+var disqus_identifier = '2660 http://www.programcreek.com/?p=2660';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "GWT Tutorial: Example Application (2)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=2660';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

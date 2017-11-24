@@ -1,0 +1,730 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Binary Tree Maximum Path Sum (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given a binary tree, find the maximum path sum. The path may start and end at any node in the tree. For example, given the below binary tree 1"/>
+<meta name="keywords" content="leetcode - binary tree maximum path sum (java)"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Binary Tree Maximum Path Sum (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Minimum Depth of Binary Tree (Java)' href='../leetcode-minimum-depth-of-binary-tree-java/index.html'/>
+<link rel='next' title='LeetCode &#8211; Balanced Binary Tree (Java)' href='../leetcode-balanced-binary-tree-java/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=11736.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-binary-tree-maximum-path-sum-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-binary-tree-maximum-path-sum-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-11736"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Binary Tree Maximum Path Sum (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Given a binary tree, find the maximum path sum. The path may start and end at any node in the tree. For example, given the below binary tree</p>
+<pre>
+       1
+      / \
+     2   3
+</pre>
+<p>the result is 6.</p>
+<p><strong>Analysis</strong></p>
+<p>1) Recursively solve this problem<br/>
+2) Get largest left sum and right sum<br/>
+2) Compare to the stored maximum</p>
+<p><strong>Java Solution</strong></p>
+<p>We can also use an array to store value for recursive methods.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> maxPathSum<span style="color: #009900;">&#40;</span><span style="color: #003399;">TreeNode</span> root<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> max<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span> 
+	max<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #003399;">Integer</span>.<span style="color: #006633;">MIN_VALUE</span><span style="color: #339933;">;</span>
+	calculateSum<span style="color: #009900;">&#40;</span>root, max<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> calculateSum<span style="color: #009900;">&#40;</span><span style="color: #003399;">TreeNode</span> root, <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> max<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>root <span style="color: #339933;">==</span> <span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">int</span> left <span style="color: #339933;">=</span> calculateSum<span style="color: #009900;">&#40;</span>root.<span style="color: #006633;">left</span>, max<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> right <span style="color: #339933;">=</span> calculateSum<span style="color: #009900;">&#40;</span>root.<span style="color: #006633;">right</span>, max<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">int</span> current <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>root.<span style="color: #006633;">val</span>, <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>root.<span style="color: #006633;">val</span> <span style="color: #339933;">+</span> left, root.<span style="color: #006633;">val</span> <span style="color: #339933;">+</span> right<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	max<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span>, <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>current, left <span style="color: #339933;">+</span> root.<span style="color: #006633;">val</span> <span style="color: #339933;">+</span> right<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">return</span> current<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../leetcode-balanced-binary-tree-java/index.html" rel="bookmark" title="LeetCode &#8211; Balanced Binary Tree (Java)">LeetCode &#8211; Balanced Binary Tree (Java) </a></li>
+<li><a href="../../../2012/12/leetcode-validate-binary-search-tree-java/index.html" rel="bookmark" title="LeetCode &#8211; Validate Binary Search Tree (Java)">LeetCode &#8211; Validate Binary Search Tree (Java) </a></li>
+<li><a href="../../../2014/04/leetcode-binary-search-tree-iterator-java/index.html" rel="bookmark" title="LeetCode &#8211; Binary Search Tree Iterator (Java)">LeetCode &#8211; Binary Search Tree Iterator (Java) </a></li>
+<li><a href="../../../2014/04/leetcode-binary-tree-level-order-traversal-java/index.html" rel="bookmark" title="LeetCode &#8211; Binary Tree Level Order Traversal  (Java)">LeetCode &#8211; Binary Tree Level Order Traversal (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/02/leetcode-binary-tree-maximum-path-sum-java/" dc:identifier="http://www.programcreek.com/2013/02/leetcode-binary-tree-maximum-path-sum-java/" dc:title="LeetCode &#8211; Binary Tree Maximum Path Sum (Java)" trackback:ping="http://www.programcreek.com/2013/02/leetcode-binary-tree-maximum-path-sum-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-10383">
+<div id="dsq-comment-header-10383" class="dsq-comment-header">
+<cite id="dsq-cite-10383">
+<span id="dsq-author-user-10383">Yesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10383" class="dsq-comment-body">
+<div id="dsq-comment-message-10383" class="dsq-comment-message"><p>even with your given tree, 32 is the correct answer. I fail to see how 42 is the correct answer.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9985">
+<div id="dsq-comment-header-9985" class="dsq-comment-header">
+<cite id="dsq-cite-9985">
+<span id="dsq-author-user-9985">Janardhan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9985" class="dsq-comment-body">
+<div id="dsq-comment-message-9985" class="dsq-comment-message"><p>we can achieve the same without the array[] input</p>
+<p><code> </p>
+<p>private static int maxPathSum(TreeNode node, int maxSum) {</p>
+<p> if(node == null)</p>
+<p> return 0;</p>
+<p> int leftSum = maxPathSum(node.left, maxSum);</p>
+<p> int rightSum = maxPathSum(node.right, maxSum);</p>
+<p> int max = Math.max(node.val, Math.max(node.val+leftSum, node.val+rightSum));</p>
+<p> int maxTemp = Math.max(maxSum, Math.max(max,node.val+leftSum+ rightSum));</p>
+<p> return maxTemp;</p>
+<p>}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9979">
+<div id="dsq-comment-header-9979" class="dsq-comment-header">
+<cite id="dsq-cite-9979">
+<span id="dsq-author-user-9979">Janardhan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9979" class="dsq-comment-body">
+<div id="dsq-comment-message-9979" class="dsq-comment-message"><p>i think we cna achieve the same without array as input </p>
+<p> private static int maxPathSum(TreeNode node, int maxSum) {</p>
+<p> if(node == null)</p>
+<p> return 0;</p>
+<p> int leftSum = maxPathSum(node.left, maxSum);</p>
+<p> int rightSum = maxPathSum(node.right, maxSum);</p>
+<p> int max = Math.max(node.val, Math.max(node.val+leftSum, node.val+rightSum));</p>
+<p> int maxTemp = Math.max(maxSum, Math.max(max,node.val+leftSum+ rightSum));</p>
+<p> return maxTemp;</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9164">
+<div id="dsq-comment-header-9164" class="dsq-comment-header">
+<cite id="dsq-cite-9164">
+<span id="dsq-author-user-9164">Ankit Shah</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9164" class="dsq-comment-body">
+<div id="dsq-comment-message-9164" class="dsq-comment-message"><p>Because of the recursion, if you pass in max instead of max[], given java pass by value, it will still store the result Integer.MIN_VALUE to the new call stack.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7407">
+<div id="dsq-comment-header-7407" class="dsq-comment-header">
+<cite id="dsq-cite-7407">
+<span id="dsq-author-user-7407">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7407" class="dsq-comment-body">
+<div id="dsq-comment-message-7407" class="dsq-comment-message"><p>Your code fails for this tree:<br/>
+Node root = new Node(10);<br/>
+root.left = new Node(2);<br/>
+root.right = new Node(10);<br/>
+root.left.left = new Node(20);<br/>
+root.left.right = new Node(1);<br/>
+root.right.right = new Node(-25);<br/>
+root.right.right.left = new Node(3);<br/>
+root.right.right.right = new Node(4);</p>
+<p>It should return 42, but returns 32 instead.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7406">
+<div id="dsq-comment-header-7406" class="dsq-comment-header">
+<cite id="dsq-cite-7406">
+<span id="dsq-author-user-7406">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7406" class="dsq-comment-body">
+<div id="dsq-comment-message-7406" class="dsq-comment-message"><p>There is only one solution &#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7351">
+<div id="dsq-comment-header-7351" class="dsq-comment-header">
+<cite id="dsq-cite-7351">
+<span id="dsq-author-user-7351">Nitesh Kumar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7351" class="dsq-comment-body">
+<div id="dsq-comment-message-7351" class="dsq-comment-message"><p>I do think the same</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7307">
+<div id="dsq-comment-header-7307" class="dsq-comment-header">
+<cite id="dsq-cite-7307">
+<span id="dsq-author-user-7307">Lean Lee</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7307" class="dsq-comment-body">
+<div id="dsq-comment-message-7307" class="dsq-comment-message"><p>why we need use an array max[], can we use and static int variable to instead?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6949">
+<div id="dsq-comment-header-6949" class="dsq-comment-header">
+<cite id="dsq-cite-6949">
+<span id="dsq-author-user-6949">Dhaval Dave</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6949" class="dsq-comment-body">
+<div id="dsq-comment-message-6949" class="dsq-comment-message"><p>understand why such recurstion lsum, rsum and result is passed with pointer here at with same code and same example : <a href="http://goo.gl/wuatmP" rel="nofollow">http://goo.gl/wuatmP</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6914">
+<div id="dsq-comment-header-6914" class="dsq-comment-header">
+<cite id="dsq-cite-6914">
+<span id="dsq-author-user-6914">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6914" class="dsq-comment-body">
+<div id="dsq-comment-message-6914" class="dsq-comment-message"><p>Not timeout from my side.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6843">
+<div id="dsq-comment-header-6843" class="dsq-comment-header">
+<cite id="dsq-cite-6843">
+<span id="dsq-author-user-6843">sam</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6843" class="dsq-comment-body">
+<div id="dsq-comment-message-6843" class="dsq-comment-message"><p>I get 53 even with the first solution</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6759">
+<div id="dsq-comment-header-6759" class="dsq-comment-header">
+<cite id="dsq-cite-6759">
+<span id="dsq-author-user-6759">aman</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6759" class="dsq-comment-body">
+<div id="dsq-comment-message-6759" class="dsq-comment-message"><p>thanks, nice and easy.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6554">
+<div id="dsq-comment-header-6554" class="dsq-comment-header">
+<cite id="dsq-cite-6554">
+<span id="dsq-author-user-6554">CopperCash</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6554" class="dsq-comment-body">
+<div id="dsq-comment-message-6554" class="dsq-comment-message"><p>Got it. I didn&#8217;t consider negative situation</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6543">
+<div id="dsq-comment-header-6543" class="dsq-comment-header">
+<cite id="dsq-cite-6543">
+<span id="dsq-author-user-6543">CopperCash</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6543" class="dsq-comment-body">
+<div id="dsq-comment-message-6543" class="dsq-comment-message"><p>Why don&#8217;t just find the max sum on left and right, then return (root.value + left_max + right_max)?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6515">
+<div id="dsq-comment-header-6515" class="dsq-comment-header">
+<cite id="dsq-cite-6515">
+<span id="dsq-author-user-6515">rohit_90</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6515" class="dsq-comment-body">
+<div id="dsq-comment-message-6515" class="dsq-comment-message"><p>First solution will work only for positive numbers while second will take care of both(+ve and -ve numbers)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6442">
+<div id="dsq-comment-header-6442" class="dsq-comment-header">
+<cite id="dsq-cite-6442">
+<span id="dsq-author-user-6442">Igal Israilevich</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6442" class="dsq-comment-body">
+<div id="dsq-comment-message-6442" class="dsq-comment-message"><p>Great solution! But It looks that it can be more elegant</p>
+<p> public int getMax(){<br/>
+return getMax(root);<br/>
+} </p>
+<p> private int getMax(Node x){<br/>
+if(x == null){<br/>
+return 0;<br/>
+}<br/>
+int left = getMax(x.left);<br/>
+int right = getMax(x.right);<br/>
+return x.value + (left &gt; right ? left:right);<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6273">
+<div id="dsq-comment-header-6273" class="dsq-comment-header">
+<cite id="dsq-cite-6273">
+<span id="dsq-author-user-6273">czh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6273" class="dsq-comment-body">
+<div id="dsq-comment-message-6273" class="dsq-comment-message"><p>These two solutions are timeout on OJ. How to solve it?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6115">
+<div id="dsq-comment-header-6115" class="dsq-comment-header">
+<cite id="dsq-cite-6115">
+<span id="dsq-author-user-6115">Kevin Lee</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6115" class="dsq-comment-body">
+<div id="dsq-comment-message-6115" class="dsq-comment-message"><p>Shouldn&#8217;t the last line of the first solution be &#8220;return node.value + left + right&#8221; rather than &#8220;return node.value + Math.max(left, right)&#8221;?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6075">
+<div id="dsq-comment-header-6075" class="dsq-comment-header">
+<cite id="dsq-cite-6075">
+<span id="dsq-author-user-6075">Vivek</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6075" class="dsq-comment-body">
+<div id="dsq-comment-message-6075" class="dsq-comment-message"><p>First solution seems to be giving wrong answer.</p>
+<p>TreeNode root = new TreeNode(10);<br/>
+TreeNode left1 = new TreeNode(5);<br/>
+TreeNode left2 = new TreeNode(3);<br/>
+TreeNode right1 = new TreeNode(15);<br/>
+TreeNode right2 = new TreeNode(20);</p>
+<p> root.left = left1;<br/>
+left1.left = left2;<br/>
+root.right = right1;<br/>
+right1.right = right2;</p>
+<p>Answer should be 53 but it is coming out to be 45. Second solution&#8217;s output for the same input is 53.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5960">
+<div id="dsq-comment-header-5960" class="dsq-comment-header">
+<cite id="dsq-cite-5960">
+<a id="dsq-author-user-5960" href="http://www.friv5gamer.com" target="_blank" rel="nofollow">friv 5</a>
+</cite>
+</div>
+<div id="dsq-comment-body-5960" class="dsq-comment-body">
+<div id="dsq-comment-message-5960" class="dsq-comment-message"><p>Thank you for<br/>
+sharing this and I think I need them, the information<br/>
+has been looking for.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5864">
+<div id="dsq-comment-header-5864" class="dsq-comment-header">
+<cite id="dsq-cite-5864">
+<span id="dsq-author-user-5864">Shiya</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5864" class="dsq-comment-body">
+<div id="dsq-comment-message-5864" class="dsq-comment-message"><p>Best solution I&#8217;ve seen so far, thank you!</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/02/leetcode-binary-tree-maximum-path-sum-java/';
+var disqus_identifier = '11736 http://www.programcreek.com/?p=11736';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Binary Tree Maximum Path Sum (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=11736';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

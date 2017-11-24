@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Performance</title>
+
+    <meta name="description" content="Java performance is a kind of Black art. This Java performance tutorial attempts to collect and explain a broad set of useful Java performance tips and techniques.">
+    <meta name="keywords"    content="Java performance tutorial">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Performance">
+    <meta name="twitter:description" content="Java performance is a kind of Black art. This Java performance tutorial attempts to collect and explain a broad set of useful Java performance tips and techniques.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Performance"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/index.html"/>
+    <meta property="og:description" content="Java performance is a kind of Black art. This Java performance tutorial attempts to collect and explain a broad set of useful Java performance tips and techniques."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "";
+var nextArticleInCategory = "/java-performance/modern-hardware.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 8581;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html"><b>Java Performance</b></a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Performance</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#aspects-impacting-performance">Aspects Impacting Performance</a></li><li><a href="#reusable-java-performance-principles">Reusable Java Performance Principles</a><ul><li><a href="#core-java-performance-principles">Core Java Perfomance Principles</a></li></ul></li><li><a href="#java-performance-credits">Java Performance Credits</a></li><li><a href="#the-java-performance-toolkit-and-benchmarks">The Java Performance Toolkit and Benchmarks</a></li><li><a href="#feedback-appreciated">Feedback Appreciated</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-09-30
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Java performance tuning is somewhat of a black art. It is hard to find good information about Java performance tuning,
+    and there are several reasons for this.
+</p>
+
+<p>
+    First of all, performance tuning depends a lot on the system you are building and the hardware your system runs on.
+    Over time your system, the Java virtual machine and the hardware executing your system evolves. With this evolution
+    follows also an evolution in the applicable Java performance techniques.
+</p>
+
+<p>
+    Second, we Java developers have been fed a lot of untrue stories about the Java compiler and the Java Virtual Machine.
+    It is often said that the Java compiler or VM can do a better job of optimizing your code than you can.
+</p>
+
+<p>
+    However, even now with Java 8, this is not correct. Algorithms, data formats, data structures, memory usage patterns, IO usage
+    patterns etc. matter! There are many situations where you can optimize your code better than the Java compiler
+    and JVM, because you know more about what your system is trying to do, its data structures, data usage patterns
+    etc. than Java does.
+</p>
+
+<p>
+    We have heard this false narrative before: "The EJB container knows better when to load and store your entity objects".
+    Only - it turned out to be false. The same is the case with the Java compiler and JVM narrative. That is why I have
+    finally decided to start writing about Java performance tuning.
+</p>
+
+<p>
+    Please note: This Java performance tutorial is a multi page tutorial. This page is only the introduction!
+</p>
+
+
+
+
+<a name="aspects-impacting-performance"></a>
+<h2>Aspects Impacting Performance</h2>
+<p>
+    There are a few recurring aspects of any system that impacts its performance. These aspects are:
+</p>
+
+<ul>
+    <li>Memory Management</li>
+    <li>Data Structures</li>
+    <li>Algorithms</li>
+    <li>Concurrency</li>
+    <li>Network Communication</li>
+    <li>Scalability</li>
+</ul>
+
+<p>
+    Memory management, data structures and algorithms are typically linked closely together. A certain algorithm
+    may require a certain data structure. A certain data structure may impact memory management.
+</p>
+
+<p>
+    Concurrency means how well the system can distribute its load over multiple threads and CPUs. Concurrency may
+    also be linked to data structures, but not always. It depends on the your system's
+    <a href="../java-concurrency/concurrency-models.html">concurrency model</a>.
+</p>
+
+<p>
+    Network communication may impact your system's performance too. Some network protocols are faster than others,
+    and you may sometimes be able to create a faster, custom network protocol for your own specific use case.
+    Also your system's communication patterns impact performance - not just how messages are transported forth
+    and back but also how often, and whether communication is synchronous or asynchronous.
+</p>
+
+<p>
+    The scalability of a system means how well it performs when you scale up or scale out the hardware. Scaling
+    up (vertical scaling) means buying a bigger computer with more memory, more CPUs, faster disks, NIC etc.
+    Scaling out (horizontal scaling) means distributing the system across multiple machines.
+</p>
+
+
+
+
+<a name="reusable-java-performance-principles"></a>
+<h2>Reusable Java Performance Principles</h2>
+<p>
+    Even though a lot of performance optimization is specific to each individual application, there are still
+    Java performance principles, techniques and patterns which can be reused across many different types of
+    applications and situations. This Java performance tutorial will focus mostly on such reusable principles.
+</p>
+
+<p>
+    I may also from time to time dive into a specific system / use case to examplify how this system was optimized. Such
+    example cases can be quite enlightening, though many companies tend to hold their cards close to the body when
+    it comes to something that can be considered a competitive edge (and performance is).
+</p>
+
+
+
+<a name="core-java-performance-principles"></a>
+<h3>Core Java Perfomance Principles</h3>
+<p>
+    The most common core principles of Java performance tuning which the tips in this tutorial are based on, are:
+</p>
+
+<ul>
+    <li>Memory is faster than disk - much faster - and memory is cheap.</li>
+    <li>All storage (memory / disk) works fastest when read from or written to sequentially. Arbitrary access
+        is slower.</li>
+    <li>Object allocation and garbage collection is slow.</li>
+    <li>Data formats and data structures make a big difference in speed.</li>
+    <li>Asynchronous IO scales better than synchronous IO.</li>
+    <li>Singlethreaded performance is a prerequisite for multithreaded performance.</li>
+    <li>Shared memory (or disk) concurrency is bad because it usually leads to lots of contention when the system gets busy.</li>
+</ul>
+
+<p>
+    As you will probably notice, many of the performance tips in this tutorial are based on these same principles.
+</p>
+
+<p>
+    The last one about singlethreaded performance might come as a surprise to some. Parallel computing and parallel
+    programming is all the rage these days (2015), so you might have been told that you should be thinking in breaking
+    down your problem into smaller problems which can be solved in parallel. Unfortunately there are not that many
+    problems that can easily be parallelized.
+</p>
+
+<p>
+    Additionally, if your server works on many tasks at the same time (e.g incoming HTTP requests), the other CPUs in
+    your server may already be busy working on their own tasks. Parallelizing tasks gain you nothing then, as the CPUs
+    are already busy. In fact, it may hurt performance (unless you have way more CPUs than you are using on average).
+</p>
+
+
+
+<a name="java-performance-credits"></a>
+<h2>Java Performance Credits</h2>
+<p>
+    The principles and techniques presented in this Java performance tutorial are not all mine. Far from, actually.
+    These tutorials present work by Java performance master minds who have learned and polished these techniques
+    in real life high performance systems. Here are some of the Java performance master minds who's work have
+    inspired or contributed to this Java performance tutorial (the order is random):
+</p>
+
+
+<ul>
+    <li><a href="http://shipilev.net/">Aleksey Shipil&euml;v</a></li>
+    <li><a href="http://mechanical-sympathy.blogspot.de/">Martin Thompson</a></li>
+    <li><a href="http://www.azulsystems.com/">Azul Systems</a></li>
+    <li><a href="http://vanillajava.blogspot.de/">Peter Lawrey</a></li>
+    <li><a href="http://rick-hightower.blogspot.de/">Rick Hightower</a></li>
+    <li><a href="http://psy-lob-saw.blogspot.de/">The Psy-Lob-Saw Blog</a></li>
+    <li><a href="http://highscalability.com/">The High Scalability Blog</a></li>
+    <li>... more coming ...</li>
+</ul>
+
+<p>
+    My own experiences come from from a mix of Java performance experiments, as well as the design and development
+    of <a href="vstack.co">VStack.co</a> - a fully hosted application backend which I have cofounded with
+    <a href="http://worpcloud.com/">WorpCloud Ltd</a>. The faster our system is, the more, the bigger and the more
+    demanding clients we can serve.
+</p>
+
+
+
+
+<a name="the-java-performance-toolkit-and-benchmarks"></a>
+<h2>The Java Performance Toolkit and Benchmarks</h2>
+
+<p>
+    The code and benchmarks presented in this Java performance tutorial will be made available on GitHub some time
+    in the future. The code and benchmarks will live in separate GitHub repositories.
+</p>
+
+<p>
+    The Java performance toolkit is primarily intended to show implementations of the ideas presented in this tutorial.
+    They may not always be full featured - ready for use in a real application - but may sometimes just serve as
+    proof of concept of some idea. However, feel free to use the toolkit in your apps if you want.
+</p>
+
+<p>
+    The Java performance benchmarks are intended to be runnable on your own hardware, so you can see how a given
+    technique, implementation etc. runs on your specific hardware.
+</p>
+
+
+
+<a name="feedback-appreciated"></a>
+<h2>Feedback Appreciated</h2>
+<p>
+    It is easy to do something wrong - both in a performance idea, its implementation, or the benchmark measuring it.
+    If you have any feedback or suggestions for the ideas, implementations or benchmarks presented here, I would very
+    much appreciate if you send them to me. Techniques, JVMs and hardware evolves all the time. So should this
+    Java performance tutorial + implementations + benchmarks.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="modern-hardware.html">Modern Hardware</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

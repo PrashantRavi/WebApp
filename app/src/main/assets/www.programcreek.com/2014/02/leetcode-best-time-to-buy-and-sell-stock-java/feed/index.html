@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Best Time to Buy and Sell Stock (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: amala rangnekar</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-9951</link>
+		<dc:creator><![CDATA[amala rangnekar]]></dc:creator>
+		<pubDate>Mon, 28 Mar 2016 20:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-9951</guid>
+		<description><![CDATA[Inner for loop of naive solution must start from i and not 0. When buying a stock you can only see future values to sell it :)]]></description>
+		<content:encoded><![CDATA[<p>Inner for loop of naive solution must start from i and not 0. When buying a stock you can only see future values to sell it 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Holden</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-7416</link>
+		<dc:creator><![CDATA[Holden]]></dc:creator>
+		<pubDate>Wed, 23 Sep 2015 03:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-7416</guid>
+		<description><![CDATA[Thanks for the nice post. But first solution fails at &lt;code&gt;int[] price2 = {100, 90, 80, 70, 60};&lt;/code&gt;
+It should be:
+&lt;code&gt;	public static int maxProfit5(int[] array) {
+	    if(array == null &#124;&#124; array.length &#060; 2){
+	        return 0;
+	    } 
+	    int maxProfit = 0;
+	    for(int i = 0; i &#060; array.length-1; i++){
+	        for(int j = i+1; j  array[i] &#038;&#038; maxProfit &#060; array[j] - array[i]){
+	                maxProfit = array[j] - array[i];
+	            }
+	        }
+	    }
+	    return maxProfit;
+	}&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the nice post. But first solution fails at <code>int[] price2 = {100, 90, 80, 70, 60};</code><br />
+It should be:<br />
+<code>	public static int maxProfit5(int[] array) {<br />
+	    if(array == null || array.length &lt; 2){<br />
+	        return 0;<br />
+	    }<br />
+	    int maxProfit = 0;<br />
+	    for(int i = 0; i &lt; array.length-1; i++){<br />
+	        for(int j = i+1; j  array[i] &amp;&amp; maxProfit &lt; array[j] - array[i]){<br />
+	                maxProfit = array[j] - array[i];<br />
+	            }<br />
+	        }<br />
+	    }<br />
+	    return maxProfit;<br />
+	}</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Xiang Li</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-7292</link>
+		<dc:creator><![CDATA[Xiang Li]]></dc:creator>
+		<pubDate>Sat, 15 Aug 2015 21:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-7292</guid>
+		<description><![CDATA[See my solution:
+
+public int maxProfit(int[] p) {
+
+        if(p == null &#124;&#124; p.length&#060;=1) return 0;
+
+        int len = p.length;
+
+        int max = p[0];
+
+        int min = p[0];
+
+        int profit = 0;
+
+        for(int i=1; i max) {
+
+                max = p[i];
+
+            }
+
+            if(p[i] &#060; min) {
+
+                min = p[i];
+
+                max = p[i];
+
+            }
+
+            profit = Math.max(max - min, profit);
+
+        }
+
+        return profit;
+
+    }]]></description>
+		<content:encoded><![CDATA[<p>See my solution:</p>
+<p>public int maxProfit(int[] p) {</p>
+<p>        if(p == null || p.length&lt;=1) return 0;</p>
+<p>        int len = p.length;</p>
+<p>        int max = p[0];</p>
+<p>        int min = p[0];</p>
+<p>        int profit = 0;</p>
+<p>        for(int i=1; i max) {</p>
+<p>                max = p[i];</p>
+<p>            }</p>
+<p>            if(p[i] &lt; min) {</p>
+<p>                min = p[i];</p>
+<p>                max = p[i];</p>
+<p>            }</p>
+<p>            profit = Math.max(max &#8211; min, profit);</p>
+<p>        }</p>
+<p>        return profit;</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Internet Hero</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-7264</link>
+		<dc:creator><![CDATA[Internet Hero]]></dc:creator>
+		<pubDate>Thu, 06 Aug 2015 14:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-7264</guid>
+		<description><![CDATA[But since it is a time series, will you buy when high and sell when low?]]></description>
+		<content:encoded><![CDATA[<p>But since it is a time series, will you buy when high and sell when low?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Burhan COKCA</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-7034</link>
+		<dc:creator><![CDATA[Burhan COKCA]]></dc:creator>
+		<pubDate>Sat, 13 Jun 2015 19:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-7034</guid>
+		<description><![CDATA[Dynamic programming solution. O(n) time complexity, O(n) space
+
+
+
+public int maxProfit(int[] prices) {
+
+        if(prices.length == 0) return 0;
+
+        int[] profit = new int[prices.length];
+
+        for(int i=0; i&#060; profit.length; i++){
+
+            profit[i] = 0;
+
+        }
+
+        int min = prices[0];
+
+        for(int i=1; i&#060; prices.length; i++){
+
+            if(prices[i] &#060; min)  min = prices[i];
+
+            profit[i] = Math.max(profit[i-1], prices[i]-min);
+
+        }
+
+        return profit[prices.length-1];
+
+    }
+
+]]></description>
+		<content:encoded><![CDATA[<p>Dynamic programming solution. O(n) time complexity, O(n) space</p>
+<p>public int maxProfit(int[] prices) {</p>
+<p>        if(prices.length == 0) return 0;</p>
+<p>        int[] profit = new int[prices.length];</p>
+<p>        for(int i=0; i&lt; profit.length; i++){</p>
+<p>            profit[i] = 0;</p>
+<p>        }</p>
+<p>        int min = prices[0];</p>
+<p>        for(int i=1; i&lt; prices.length; i++){</p>
+<p>            if(prices[i] &lt; min)  min = prices[i];</p>
+<p>            profit[i] = Math.max(profit[i-1], prices[i]-min);</p>
+<p>        }</p>
+<p>        return profit[prices.length-1];</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Albert</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/#comment-6917</link>
+		<dc:creator><![CDATA[Albert]]></dc:creator>
+		<pubDate>Sat, 25 Apr 2015 05:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13642#comment-6917</guid>
+		<description><![CDATA[The efficient approach wont&#039; calculate correctly if the fist element in the array has the highest value]]></description>
+		<content:encoded><![CDATA[<p>The efficient approach wont&#8217; calculate correctly if the fist element in the array has the highest value</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

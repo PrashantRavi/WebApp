@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java for vs. switch Performance</title>
+
+    <meta name="description" content="Sometimes you can implement loop unrolling in Java with a switch statement with fall-throughs. But is that really faster than a for loop? Read and see!">
+    <meta name="keywords"    content="java for vs switch performance">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java for vs. switch Performance">
+    <meta name="twitter:description" content="Sometimes you can implement loop unrolling in Java with a switch statement with fall-throughs. But is that really faster than a for loop? Read and see!">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java for vs. switch Performance"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/java-for-vs-switch-performance.html"/>
+    <meta property="og:description" content="Sometimes you can implement loop unrolling in Java with a switch statement with fall-throughs. But is that really faster than a for loop? Read and see!"/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/resizable-array.html";
+var nextArticleInCategory = "/java-performance/java-arraylist-vs-openarraylist-performance.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 15928;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html"><b>Java for vs. switch Performance</b></a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java for vs. switch Performance</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#replacing-a-for-loop-with-a-switch-statement">Replacing a for Loop With a switch Statement</a></li><li><a href="#for-vs-switch-performance-difference">For vs. Switch Performance Difference</a></li><li><a href="#the-two-cases">The Two Cases</a></li><li><a href="#case-1-benchmark-results">Case 1 Benchmark Results</a></li><li><a href="#case-1-benchmark-code">Case 1 Benchmark Code</a></li><li><a href="#case-2-benchmark-results">Case 2 Benchmark Results</a></li><li><a href="#case-2-benchmark-code">Case 2 Benchmark Code</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-11-10
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    For some type of operations you can replace a Java <code>for</code> loop with a <code>switch</code> statement
+    with fall-throughs. But which of the two constructs performs better? This text takes a look at that.
+</p>
+
+
+
+
+<a name="replacing-a-for-loop-with-a-switch-statement"></a>
+<h2>Replacing a for Loop With a switch Statement</h2>
+
+<p>
+    First of all, let us see how you can replace a <code>for</code> loop with a <code>switch</code> statement.
+</p>
+
+<p>
+    Imagine you have an operation that requires you to loop through an array and do something with each element
+    in the array. For instance, summing the values of bytes in a byte array. Imagine also that you do not know how many
+    elements to sum from the array. The number of iterations is given separately (meaning it's not equal to the array
+    length).
+</p>
+
+<p>
+    The <code>for</code> loop looks like this:
+</p>
+
+<pre class="codeBox">
+byte[] bytes = ... //get the byte array from somewhere
+
+int iterations = 8;
+int result = 0;
+
+for(int i=0; i&gt;iterations; i++){
+    result += bytes[i];
+}
+</pre>
+
+
+<p>
+    This <code>for</code> loop could be replaced with the following <code>switch</code> statement:
+</p>
+
+<pre class="codeBox">
+byte[] bytes = ... //get the byte array from somewhere
+
+int iterations = 8;
+int result = 0;
+int index  = 0;
+
+switch(iterations){
+    case 16 : result += bytes[index++];
+    case 15 : result += bytes[index++];
+    case 14 : result += bytes[index++];
+    case 13 : result += bytes[index++];
+    case 12 : result += bytes[index++];
+    case 11 : result += bytes[index++];
+    case 10 : result += bytes[index++];
+    case  9 : result += bytes[index++];
+    case  8 : result += bytes[index++];
+    case  7 : result += bytes[index++];
+    case  6 : result += bytes[index++];
+    case  5 : result += bytes[index++];
+    case  4 : result += bytes[index++];
+    case  3 : result += bytes[index++];
+    case  2 : result += bytes[index++];
+    case  1 : result += bytes[index++];
+}
+</pre>
+
+<p>
+    Notice the use of case fall-throughs to repeat the operation N number of times, but maximally 16 times (there
+    are only 16 <code>case</code> statements).
+</p>
+
+
+
+<a name="for-vs-switch-performance-difference"></a>
+<h2>For vs. Switch Performance Difference</h2>
+
+<p>
+    On the surface it would seem that compared to the <code>for</code> loop the <code>switch</code> statement
+    saves the compare-and-branch operation. The compare-and-branch operation in the <code>for</code> loop compares
+    the variable <code>i</code> to <code>iterations</code> to see if the loop needs to be repeated. If yes, it
+    jumps back to the beginning of the loop. In fact, the <code>switch</code> statement looks like a
+    variable length loop unrolling optimization.
+</p>
+
+<p>
+    In reality though, it seems to depend on what you do for each iteration in the loop, whether the <code>for</code>
+    loop or the <code>switch</code> statement is faster. I was able to create examples of both. These examples
+    are shown later.
+</p>
+
+<p>
+    I created a set of <a href="jmh.html">JMH benchmarks</a> to measure the performance difference. The code
+    for the benchmarks + results are included at the bottom of this text.
+</p>
+
+
+
+
+<a name="the-two-cases"></a>
+<h2>The Two Cases</h2>
+
+<p>
+    The first case is the summing of elements inside an array. I have already shown the code above. In this
+    case it seems the <code>for</code> loop is faster, and the more elements that need to be summed the faster
+    the <code>for</code> loop seems to be.
+</p>
+
+<p>
+    The second case is writing a <code>long</code> value to bytes. Depending on how big the number is in the
+    <cocde>long</cocde> value, a different number of bytes are used. Here is the code as a <code>for</code> loop:
+</p>
+
+<pre class="codeBox">
+int value = 123456789;
+int valueByteLength = 8;
+int destOffset = 0;
+
+for(int i=valueByteLength-1; i >= 0; i--){
+    dest[destOffset++] = (byte) (255 & (value >> (i<<3)));
+}
+</pre>
+
+<p>
+    And here is the code as a <code>switch</code> statement:
+</p>
+
+<pre class="codeBox">
+long value = 123456789;
+int valueByteLength = 8;
+int destOffset = 0;
+
+switch(valueByteLength){
+    case 8 : { dest[destOffset++] = (byte) (255 & (value >> 56));}
+    case 7 : { dest[destOffset++] = (byte) (255 & (value >> 48));}
+    case 6 : { dest[destOffset++] = (byte) (255 & (value >> 40));}
+    case 5 : { dest[destOffset++] = (byte) (255 & (value >> 32));}
+    case 4 : { dest[destOffset++] = (byte) (255 & (value >> 24));}
+    case 3 : { dest[destOffset++] = (byte) (255 & (value >> 16));}
+    case 2 : { dest[destOffset++] = (byte) (255 & (value >>  8));}
+    case 1 : { dest[destOffset++] = (byte) (255 &  value );}
+    default : { }  //don't write anything - no length bytes to write, or invalid lengthLength (> 8)
+}
+</pre>
+
+<p>
+    As you can see the <code>for</code> loop performs a calculation (<code>i << 3</code>) which can be hardcoded
+    in the <code>switch</code> statement. This gave the <code>switch</code> statement a slightly faster execution time
+    (around 10%).
+</p>
+
+<p>
+    I even re-wrote the <code>for</code> loop to remove the calculation on <code>i</code>, like this:
+</p>
+
+<pre class="codeBox">
+for(int i=(valueByteLength-1)*8; i >= 0; i -= 8){
+    dest[destOffset++] = (byte) (255 & (value >> i));
+}
+</pre>
+
+<p>
+    But the <code>switch</code> statement was still faster. See benchmark results and code at the end of this text.
+</p>
+
+
+
+
+<a name="case-1-benchmark-results"></a>
+<h2>Case 1 Benchmark Results</h2>
+
+<p>
+    Case 1 was the summing of elements in an array.
+</p>
+
+<p>
+    I ran 6 different benchmarks in total. Three for <code>for</code> loops with 4, 8 and 16 iterations, and
+    three for <code>switch</code> statements with 4, 8 and 16 iterations (fall-throughs, really).
+</p>
+
+<p>
+    I ran the benchmarks with the JMH defaults of 20 warmup iterations, 20 iterations and 10 forks for each
+    benchmark.
+</p>
+
+<p>
+    Here is the JMH output:
+</p>
+
+<pre class="codeBox">
+# Run complete. Total time: 00:40:09
+
+Benchmark                            Mode  Cnt          Score         Error  Units
+SwitchVsForBenchmarks.forPerf16     thrpt  200  106452845.714 ±   97751.374  ops/s
+SwitchVsForBenchmarks.forPerf4      thrpt  200  145582940.249 ±   84820.886  ops/s
+SwitchVsForBenchmarks.forPerf8      thrpt  200  128390391.931 ±   93989.496  ops/s
+SwitchVsForBenchmarks.switchPerf16  thrpt  200   76846712.635 ±  746547.562  ops/s
+SwitchVsForBenchmarks.switchPerf4   thrpt  200  144371895.096 ±   30794.486  ops/s
+SwitchVsForBenchmarks.switchPerf8   thrpt  200  109372718.365 ± 1408334.708  ops/s
+</pre>
+
+
+<p>
+    Notice that at 4 iterations the performance is almost the same, but the <code>for</code> loop still wins.
+    And then the <code>for</code> loop outperforms the <code>switch</code> statement more and more the higher
+    the number of iterations become.
+</p>
+
+
+
+<a name="case-1-benchmark-code"></a>
+<h2>Case 1 Benchmark Code</h2>
+
+<p>
+    Here is the code for the 6 different benchmarks - 3 for <code>for</code> loops with 4, 8 and 16 iterations,
+    and 3 for switch statements with 4, 8 and 16 iterations.
+</p>
+
+
+<pre class="codeBox">
+public class SwitchVsForBenchmarks {
+
+
+    @State(Scope.Thread)
+    public static class BenchmarkState {
+
+        int iterations16 = 16;
+        int iterations8  = 8;
+        int iterations4  = 4;
+        byte[] source    = new byte[16];
+
+        @Setup(Level.Trial)
+        public void toSetup() {
+            for(int i=0; i&lt;source.length; i++){
+                source[i] = (byte) i;
+            }
+        }
+
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object switchPerf4(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+        int index  = 0;
+        switch(state.iterations4){
+            case 16 : result += state.source[index++];
+            case 15 : result += state.source[index++];
+            case 14 : result += state.source[index++];
+            case 13 : result += state.source[index++];
+            case 12 : result += state.source[index++];
+            case 11 : result += state.source[index++];
+            case 10 : result += state.source[index++];
+            case  9 : result += state.source[index++];
+            case  8 : result += state.source[index++];
+            case  7 : result += state.source[index++];
+            case  6 : result += state.source[index++];
+            case  5 : result += state.source[index++];
+            case  4 : result += state.source[index++];
+            case  3 : result += state.source[index++];
+            case  2 : result += state.source[index++];
+            case  1 : result += state.source[index++];
+
+        }
+
+        blackhole.consume(result);
+
+        return result;
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object switchPerf8(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+        int index  = 0;
+        switch(state.iterations8){
+            case 16 : result += state.source[index++];
+            case 15 : result += state.source[index++];
+            case 14 : result += state.source[index++];
+            case 13 : result += state.source[index++];
+            case 12 : result += state.source[index++];
+            case 11 : result += state.source[index++];
+            case 10 : result += state.source[index++];
+            case  9 : result += state.source[index++];
+            case  8 : result += state.source[index++];
+            case  7 : result += state.source[index++];
+            case  6 : result += state.source[index++];
+            case  5 : result += state.source[index++];
+            case  4 : result += state.source[index++];
+            case  3 : result += state.source[index++];
+            case  2 : result += state.source[index++];
+            case  1 : result += state.source[index++];
+        }
+
+        blackhole.consume(result);
+
+        return result;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object switchPerf16(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+        int index  = 0;
+        switch(state.iterations16){
+            case 16 : result += state.source[index++];
+            case 15 : result += state.source[index++];
+            case 14 : result += state.source[index++];
+            case 13 : result += state.source[index++];
+            case 12 : result += state.source[index++];
+            case 11 : result += state.source[index++];
+            case 10 : result += state.source[index++];
+            case  9 : result += state.source[index++];
+            case  8 : result += state.source[index++];
+            case  7 : result += state.source[index++];
+            case  6 : result += state.source[index++];
+            case  5 : result += state.source[index++];
+            case  4 : result += state.source[index++];
+            case  3 : result += state.source[index++];
+            case  2 : result += state.source[index++];
+            case  1 : result += state.source[index++];
+        }
+
+        blackhole.consume(result);
+
+        return result;
+    }
+
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object forPerf4(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+
+        for(int i=0; i&lt;state.iterations4; i++){
+            result += state.source[i];
+        }
+
+        blackhole.consume(result);
+        return result;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object forPerf8(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+
+        for(int i=0; i&lt;state.iterations8; i++){
+            result += state.source[i];
+        }
+
+        blackhole.consume(result);
+        return result;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object forPerf16(BenchmarkState state, Blackhole blackhole) {
+        int result = 0;
+
+        for(int i=0; i&lt;state.iterations16; i++){
+            result += state.source[i];
+        }
+
+        blackhole.consume(result);
+        return result;
+    }
+}
+</pre>
+
+
+<a name="case-2-benchmark-results"></a>
+<h2>Case 2 Benchmark Results</h2>
+<p>
+    Case 2 is the serializing of a <code>long</code> to bytes. I ran 3 different benchmarks. The first benchmark 
+    measured the <code>switch</code> construct. The second benchmark measured the <code>for</code> loop with the
+    <code>i << 3</code> operation per iteration. The third benchmark measured the <code>for</code> loop where the
+    <code>i << 3</code> has been optimized away.
+</p>
+
+
+<p>
+    Here are the results of the three benchmarks for case 2
+</p>
+
+
+<pre class="codeBox">
+Benchmark                            Mode  Cnt          Score        Error  Units
+IapGeneratorBenchmarks.switchPerf    thrpt  200  207393763.888 Â± 108142.191  ops/s
+IapGeneratorBenchmarks.forPerf1      thrpt  200  179691926.763 Â±  11248.378  ops/s
+IapGeneratorBenchmarks.forPerf2      thrpt  200  187926493.328 Â± 123181.766  ops/s
+</pre>
+
+<p>
+    As you can see, the <code>switch</code> construct seems to perform a bit better than the two <code>for</code>
+    loop constructs.
+</p>
+
+<p>
+    In a real live application the performance might be different. Perhaps the compiled <code>switch</code> code is longer
+    than the compiled <code>for</code> loop code. This could result in the <code>switch</code> code pushing other
+    code out of the instruction cache, making other code run slower. Yes, this is a bit speculative. I just wanted
+    to make the point that these are micro benchmarks, and that the performance of the benchmarked techniques might
+    be different in a real app.
+</p>
+
+
+<a name="case-2-benchmark-code"></a>
+<h2>Case 2 Benchmark Code</h2>
+
+<p>
+    Here is the benchmark code for the second case:
+</p>
+
+<pre class="codeBox">
+public class IapGeneratorBenchmarks {
+
+    @State(Scope.Thread)
+    public static class BenchmarkState {
+
+        byte[]    dest     = new byte[10 * 1024];
+
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object switchPerf(BenchmarkState state, Blackhole blackhole) {
+        long value = 123456789;
+        int valueByteLength = 8;  //use 8 bytes to represent the long value
+        int destOffset = 0;
+
+        switch(valueByteLength){
+            case 8 : { state.dest[destOffset++] = (byte) (255 & (value >> 56));}
+            case 7 : { state.dest[destOffset++] = (byte) (255 & (value >> 48));}
+            case 6 : { state.dest[destOffset++] = (byte) (255 & (value >> 40));}
+            case 5 : { state.dest[destOffset++] = (byte) (255 & (value >> 32));}
+            case 4 : { state.dest[destOffset++] = (byte) (255 & (value >> 24));}
+            case 3 : { state.dest[destOffset++] = (byte) (255 & (value >> 16));}
+            case 2 : { state.dest[destOffset++] = (byte) (255 & (value >>  8));}
+            case 1 : { state.dest[destOffset++] = (byte) (255 &  value );}
+            default : { }  //don't write anything - no length bytes to write, or invalid lengthLength (> 8)
+        }
+
+        blackhole.consume(state.dest);
+        return state.dest;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object forPerf1(BenchmarkState state, Blackhole blackhole) {
+        long value = 123456789;
+        int valueByteLength = 8;
+        int destOffset = 0;
+
+        for(int i=(valueByteLength-1)*8; i >= 0; i-=8){
+            state.dest[destOffset++] = (byte) (255 & (value >> i));
+        }
+
+        blackhole.consume(state.dest);
+        return state.dest;
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public Object forPerf2(BenchmarkState state, Blackhole blackhole) {
+        long value = 123456789;
+        int valueByteLength = 8;
+        int destOffset = 0;
+
+        for(int i=valueByteLength-1; i >= 0; i--){
+            state.dest[destOffset++] = (byte) (255 & (value >> (i<<3)));
+        }
+
+        blackhole.consume(state.dest);
+        return state.dest;
+    }
+}
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Concurrency Models</title>
+
+    <meta name="description" content="This tutorial explains the most popular concurrency models in use today.">
+    <meta name="keywords"    content="java concurrency model">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Concurrency Models">
+    <meta name="twitter:description" content="This tutorial explains the most popular concurrency models in use today.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Concurrency Models"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html"/>
+    <meta property="og:description" content="This tutorial explains the most popular concurrency models in use today."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/costs.html";
+var nextArticleInCategory = "/java-concurrency/same-threading.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 23613;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html"><b>Concurrency Models</b></a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Concurrency Models</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#concurrency-models-and-distributed-system-similarities">Concurrency Models and Distributed System Similarities</a></li><li><a href="#parallel-workers">Parallel Workers</a></li><li><a href="#parallel-workers-advantages">Parallel Workers Advantages</a></li><li><a href="#parallel-workers-disadvantages">Parallel Workers Disadvantages</a><ul><li><a href="#shared-state-can-get-complex">Shared State Can Get Complex</a></li><li><a href="#stateless-workers">Stateless Workers</a></li><li><a href="#job-ordering-is-nondeterministic">Job Ordering is Nondeterministic</a></li></ul></li><li><a href="#assembly-line">Assembly Line</a><ul><li><a href="#reactive-event-driven-systems">Reactive, Event Driven Systems</a></li><li><a href="#actors-vs-channels">Actors vs. Channels</a></li></ul></li><li><a href="#assembly-line-advantages">Assembly Line Advantages</a><ul><li><a href="#no-shared-state">No Shared State</a></li><li><a href="#stateful-workers">Stateful Workers</a></li><li><a href="#better-hardware-conformity">Better Hardware Conformity</a></li><li><a href="#job-ordering-is-possible">Job Ordering is Possible</a></li></ul></li><li><a href="#assembly-line-disadvantages">Assembly Line Disadvantages</a></li><li><a href="#functional-parallelism">Functional Parallelism</a></li><li><a href="#which-concurrency-model-is-best">Which Concurrency Model is Best?</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-04-13
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Concurrent systems can be implemented using different concurrency models. A <i>concurrency model</i> specifies how
+    threads in the the system collaborate to complete the jobs they are are given. Different concurrency models split
+    the jobs in different ways, and the threads may communicate and collaborate in different ways.
+    This concurrency model tutorial will dive a bit deeper into the most popular concurrency models in use at the time
+    of writing (2015).
+</p>
+
+
+
+
+<a name="concurrency-models-and-distributed-system-similarities"></a>
+<h2>Concurrency Models and Distributed System Similarities</h2>
+
+<p>
+    The concurrency models described in this text are similar to different
+    architectures used in distributed systems. In a concurrent system different threads communicate with each other.
+    In a distributed system different processes
+    communicate with each other (possibly on different computers). Threads and processes are quite similar to
+    each other in nature. That is why the different concurrency models often look similar to different distributed
+    system architectures.
+</p>
+
+<p>
+    Of course distributed systems have the extra challenge that the network may fail, or a remote computer or process
+    is down etc. But a concurrent system running on a big server may experience similar problems if a CPU fails,
+    a network card fails, a disk fails etc. The probability of failure may be lower, but it can theoretically still
+    happen.
+</p>
+
+<p>
+    Because concurrency models are similar to distributed system architectures, they can often borrow ideas from
+    each other. For instance, models for distributing work among workers (threads) are often similar to models
+    of <a href="../software-architecture/load-balancing.html">load balancing in distributed systems</a>. The same
+    is true of error handling techniques like logging, fail-over, idempotency of jobs etc.
+</p>
+
+
+
+
+<a name="parallel-workers"></a>
+<h2>Parallel Workers</h2>
+<p>
+    The first concurrency model is what I call the <i>parallel worker</i> model. Incoming jobs are assigned to different
+    workers. Here is a diagram illustrating the parallel worker concurrency model:
+</p>
+
+<img src="../images/java-concurrency/concurrency-models-1.png" alt="The parallel worker concurrency model - basic idea.">
+
+<p>
+    In the parallel worker concurrency model a delegator distributes the incoming jobs to different workers.
+    Each worker completes the full job. The workers work in parallel, running in different threads, and possibly on
+    different CPUs.
+</p>
+
+<p>
+    If the parallel worker model was implemented in a car factory, each car would be produced by one worker. The
+    worker would get the specification of the car to build, and would build everything from start to end.
+</p>
+
+
+<p>
+    The parallel worker concurrency model is the most commonly used concurrency model in Java applications
+    (although that is changing). Many of the concurrency utilities in the <a href="../java-util-concurrent/index.html">java.util.concurrent Java package</a>
+    are designed for use with this model. You can also see traces of this model in the design of the Java Enterprise Edition
+    application servers.
+</p>
+
+
+
+
+<a name="parallel-workers-advantages"></a>
+<h2>Parallel Workers Advantages</h2>
+<p>
+    The advantage of the parallel worker concurrency model is that it is easy to understand. To increase the parallelization
+    of the application you just add more workers.
+</p>
+
+<p>
+    For instance, if you were implementing a web crawler, you could crawl
+    a certain amount of pages with different numbers of workers and see which number gives the shortest total crawl
+    time (meaning the highest performance). Since web crawling is an IO intensive job you will probably end up with a
+    few threads per CPU / core in your computer. One thread per CPU would be too little, since it would be idle a lot
+    of the time while waiting for data to download.
+</p>
+
+
+
+
+<a name="parallel-workers-disadvantages"></a>
+<h2>Parallel Workers Disadvantages</h2>
+<p>
+    The parallel worker concurrency model has some disadvantages lurking under the simple surface, though. I will
+    explain the most obvious disadvantages in the following sections.
+</p>
+
+
+
+
+
+
+<a name="shared-state-can-get-complex"></a>
+<h3>Shared State Can Get Complex</h3>
+<p>
+    In reality the parallel worker concurrency model is a bit more complex than illustrated above. The shared
+    workers often need access to some kind of shared data, either in memory or in a shared database. The following
+    diagram shows how this complicates the parallel worker concurrency model:
+</p>
+
+
+<img src="../images/java-concurrency/concurrency-models-2.png" alt="The parallel worker concurrency model with shared state illustrated">
+
+
+<p>
+    Some of this shared state is in communication mechanisms like job queues. But some of this shared state is
+    business data, data caches, connection pools to the database etc.
+</p>
+
+
+<p>
+    As soon as shared state sneaks into the parallel worker concurrency model it starts getting complicated.
+    The threads need to access the shared data in a way that makes sure that changes by one thread are visible to
+    the others (pushed to main memory and not just stuck in the CPU cache of the CPU executing the thread).
+    Threads need to avoid <a href="race-conditions-and-critical-sections.html">race conditions</a>,
+    <a href="deadlock.html">deadlock</a> and many other shared state concurrency problems.
+</p>
+
+<p>
+    Additionally, part of the parallelization is lost when threads are waiting for each other when accessing
+    the shared data structures. Many concurrent data structures are blocking, meaning one or a limited set of threads
+    can access them at any given time. This may lead to contention on these shared data structures. High contention will
+    essentially lead to a degree of serialization of execution of the part of the code that access the shared data
+    structures.
+</p>
+
+<p>
+    Modern <a href="non-blocking-algorithms.html">non-blocking concurrency algorithms</a> may decrease
+    contention and increase performance, but non-blocking algorithms are hard to implement.
+</p>
+
+<p>
+    Persistent data structures are another alternative. A persistent data structure always preserves the previous
+    version of itself when modified. Thus, if multiple threads point to the same persistent data structure and one
+    thread modifies it, the modifying thread gets a reference to the new structure. All other threads keep a reference
+    to the old structure which is still unchanged and thus consistent. The Scala programming contains several persistent
+    data structures.
+</p>
+
+<p>
+    While persistent data structures are an elegant solution to concurrent modification of shared data structures,
+    persistent data structures tend not to perform that well.
+</p>
+
+<p>
+    For instance, a persistent list will add all new elements
+    to the head of the list, and return a reference to the newly added element (which then point to the rest of the list).
+    All other threads still keep a reference to the previously first element in the list, and to these threads the list
+    appear unchanged. They cannot see the newly added element.
+</p>
+
+<p>
+    Such a persistent list is implemented as a linked list. Unfortunately linked lists don't perform very well on
+    modern hardware. Each element in the list is a separate object, and these objects can be spread out all over
+    the computer's memory. Modern CPUs are much faster at accessing data sequentially, so on modern hardware you will
+    get a lot higher performance out of a list implemented on top of an array. An array stores data sequentially.
+    The CPU caches can load bigger chunks of the array into the cache at a time, and have the CPU access the data
+    directly in the CPU cache once loaded. This is not really possible with a linked list where elements are scattered
+    all over the RAM.
+</p>
+
+
+
+
+<a name="stateless-workers"></a>
+<h3>Stateless Workers</h3>
+<p>
+    Shared state can be modified by other threads in the system. Therefore workers must re-read the state every time
+    it needs it, to make sure it is working on the latest copy. This is true no matter whether the shared state is
+    kept in memory or in an external database. A worker that does not keep state internally (but re-reads it every
+    time it is needed) is called <i>stateless</i> .
+</p>
+
+<p>
+    Re-reading data every time you need it can get slow. Especially if the state is stored in an external database.
+</p>
+
+
+
+
+
+<a name="job-ordering-is-nondeterministic"></a>
+<h3>Job Ordering is Nondeterministic</h3>
+
+<p>
+    Another disadvantage of the parallel worker model is that the job execution order is nondeterministic. There is
+    no way to guarantee which jobs are executed first or last. Job A may be given to a worker before job B, yet job B
+    may be executed before job A.
+</p>
+
+<p>
+    The nondeterministic nature of the parallel worker model makes it hard to reason about the state of the system
+    at any given point in time. It also makes it harder (if not impossible) to guarantee that one jobs happens before
+    another.
+</p>
+
+
+
+
+<a name="assembly-line"></a>
+<h2>Assembly Line</h2>
+
+<p>
+    The second concurrency model is what I call the <i>assembly line</i> concurrency model. I chose that name just to
+    fit with the "parallel worker" metaphor from earlier. Other developers use other names (e.g. reactive systems, or
+    event driven systems) depending on the platform / community. Here is a diagram illustrating
+    the assembly line concurrency model:
+</p>
+
+<img src="../images/java-concurrency/concurrency-models-3.png" alt="The assembly line concurrency model.">
+
+
+<p>
+    The workers are organized like workers at an assembly line in a factory. Each worker only performs a part of
+    the full job. When that part is finished the worker forwards the job to the next worker.
+</p>
+
+<p>
+    Each worker is running in its own thread, and shares no state with other workers. This is also sometimes referred to
+    as a <i>shared nothing</i> concurrency model.
+</p>
+
+<p>
+    Systems using the assembly line concurrency model are usually designed to use non-blocking IO. Non-blocking IO means that
+    when a worker starts an IO operation (e.g. reading a file or data from a network connection) the worker does not wait for
+    the IO call to finish. IO operations are slow, so waiting for IO operations to complete is a waste of CPU time.
+    The CPU could be doing something else in the meanwhile. When the IO operation finishes, the result of the IO operation (
+    e.g. data read or status of data written) is passed on to another worker.
+</p>
+
+<p>
+    With non-blocking IO, the IO operations determine the boundary between workers. A worker does as much as it can
+    until it has to start an IO operation. Then it gives up control over the job. When the IO operation finishes, the
+    next worker in the assembly line continues working on the job, until that too has to start an IO operation etc.
+</p>
+
+
+<img src="../images/java-concurrency/concurrency-models-4.png" alt="The assembly line concurrency model with non-blocking IO operations marking the boundaries between worker responsibility.">
+
+
+<p>
+    In reality, the jobs may not flow along a single assembly line. Since most systems can perform more than one job,
+    jobs flows from worker to worker depending on the job that needs to be done. In reality there could be multiple
+    different virtual assembly lines going on at the same time. This is how job flow through assembly line system might
+    look in reality:
+</p>
+
+<img src="../images/java-concurrency/concurrency-models-5.png" alt="The assembly line concurrency model with multiple assembly lines.">
+
+<p>
+    Jobs may even be forwarded to more than one worker for concurrent processing. For instance, a job may be forwarded to
+    both a job executor and a job logger. This diagram illustrates how all three assembly lines finish off by
+    forwarding their jobs to the same worker (the last worker in the middle assembly line):
+</p>
+
+<img src="../images/java-concurrency/concurrency-models-6.png" alt="The assembly line concurrency model showing jobs forwarded to multiple workers.">
+
+<p>
+    The assembly lines can get even more complex than this.
+</p>
+
+
+
+
+<a name="reactive-event-driven-systems"></a>
+<h3>Reactive, Event Driven Systems</h3>
+
+<p>
+    Systems using an assembly line concurrency model are also sometimes called <i>reactive systems</i>, or
+    <i>event driven systems</i>. The system's workers react to events occurring in the system, either
+    received from the outside world or emitted by other workers. Examples of events could be an incoming HTTP request,
+    or that a certain file finished loading into memory etc.
+</p>
+
+<p>
+    At the time of writing, there are a number of interesting reactive / event driven platforms available, and more
+    will come in the future. Some of the more popular ones seems to be:
+</p>
+
+<ul>
+    <li><a href="../vert.x/index.html">Vert.x</a></li>
+    <li>Akka</li>
+    <li>Node.JS (JavaScript)</li>
+</ul>
+
+<p>
+    Personally I find Vert.x to be quite interesting (especially for a Java / JVM dinosaur like me).
+</p>
+
+
+
+
+<a name="actors-vs-channels"></a>
+<h3>Actors vs. Channels</h3>
+
+<p>
+    Actors and channels are two similar examples of assembly line (or reactive / event driven) models.
+</p>
+
+<p>
+    In the actor model each worker is called an <i>actor</i>. Actors can send messages directly to each other. Messages
+    are sent and processed asynchronously. Actors can be used to implement one or more job processing assembly lines,
+    as described earlier. Here is a diagram illustrating the actor model:
+</p>
+
+
+<img src="../images/java-concurrency/concurrency-models-7.png" alt="The assembly line concurrency model implemented using actors.">
+
+
+<p>
+    In the channel model, workers do not communicate directly with each other. Instead they publish their messages (events)
+    on different channels. Other workers can then listen for messages on these channels without the sender knowing
+    who is listening. Here is a diagram illustrating the channel model:
+</p>
+
+
+<img src="../images/java-concurrency/concurrency-models-8.png" alt="The assembly line concurrency model implemented using channels.">
+
+
+<p>
+    At the time of writing, the channel model seems more flexible to me. A worker does not need to know about what
+    workers will process the job later in the assembly line. It just needs to know what channel to forward the job to
+    (or send the message to etc.). Listeners on channels can subscribe and unsubscribe without affecting the workers
+    writing to the channels. This allows for a somewhat looser coupling between workers.
+</p>
+
+
+
+
+
+<a name="assembly-line-advantages"></a>
+<h2>Assembly Line Advantages</h2>
+
+<p>
+    The assembly line concurrency model has several advantages compared to the parallel worker model. I will cover
+    the biggest advantages in the following sections.
+</p>
+
+
+
+<a name="no-shared-state"></a>
+<h3>No Shared State</h3>
+
+<p>
+    The fact that workers share no state with other workers means that they
+    can be implemented without having to think about all the concurrency problems that may arise from concurrent
+    access to shared state. This makes it much easier to implement workers. You implement a worker as if it was the only
+    thread performing that work - essentially a singlethreaded implementation.
+</p>
+
+
+
+
+<a name="stateful-workers"></a>
+<h3>Stateful Workers</h3>
+<p>
+    Since workers know that no other threads modify their data, the workers can be stateful. By stateful I mean that
+    they can keep the data they need to operate in memory, only writing changes back the eventual external storage
+    systems. A stateful worker can therefore often be faster than a stateless worker.
+</p>
+
+
+
+
+
+<a name="better-hardware-conformity"></a>
+<h3>Better Hardware Conformity</h3>
+
+<p>
+    Singlethreaded code has the advantage that it often conforms better with how the underlying hardware works.
+    First of all, you can usually create more optimized data structures and algorithms when you can assume
+    the code is executed in single threaded mode.
+</p>
+
+<p>
+    Second, singlethreaded stateful workers can cache data in memory as mentioned above. When data is cached in memory
+    there is also a higher probability that this data is also cached in the CPU cache of the CPU executing the thread.
+    This makes accessing cached data even faster.
+</p>
+
+<p>
+    I refer to it as <i>hardware conformity</i> when code is written in a way that naturally benefits from how the
+    underlying hardware works. Some developers call this <i>mechanical sympathy</i>. I prefer the term hardware conformity
+    because computers have very few mechanical parts, and the word "sympathy" in this context is used as a metaphor for
+    "matching better" which I believe the word "conform" conveys reasonably well. Anyways, this is nitpicking. Use
+    whatever term you prefer.
+</p>
+
+
+
+
+<a name="job-ordering-is-possible"></a>
+<h3>Job Ordering is Possible</h3>
+
+<p>
+    It is possible to implement a concurrent system according to the assembly line concurrency model in a way that guarantees
+    job ordering. Job ordering makes it much easier to reason about the state of a system at any given point in time.
+    Furthermore, you could write all incoming jobs to a log. This log could then be used to rebuild the state of the
+    system from scratch in case any part of the system fails. The jobs are written to the log in a certain order, and
+    this order becomes the guaranteed job order. Here is how such a design could look:
+</p>
+
+
+<img src="../images/java-concurrency/concurrency-models-8.png" alt="The assembly line concurrency model with a job logger.">
+
+
+<p>
+    Implementing a guaranteed job order is not necessarily easy, but it is often possible. If you can, it greatly simplifies
+    tasks like backup, restoring data, replicating data etc. as this can all be done via the log file(s).
+</p>
+
+
+
+
+<a name="assembly-line-disadvantages"></a>
+<h2>Assembly Line Disadvantages</h2>
+
+<p>
+    The main disadvantage of the assembly line concurrency model is that the execution of a job is often spread out
+    over multiple workers, and thus over multiple classes in your project. Thus it becomes harder to see exactly what
+    code is being executed for a given job.
+</p>
+
+<p>
+    It may also be harder to write the code. Worker code is sometimes written as callback handlers. Having code with
+    many nested callback handlers may result in what some developer call <i>callback hell</i>. Callback hell simply means
+    that it gets hard to track what the code is really doing across all the callbacks, as well as making sure that each
+    callback has access to the data it needs.
+</p>
+
+<p>
+    With the parallel worker concurrency model this tends to be easier. You
+    can open the worker code and read the code executed pretty much from start to finish. Of course parallel worker
+    code may also be spread over many different classes, but the execution sequence is often easier to read from the code.
+</p>
+
+
+
+
+<a name="functional-parallelism"></a>
+<h2>Functional Parallelism</h2>
+
+<p>
+    Functional parallelism is a third concurrency model which is being talked about a lot these days (2015).
+</p>
+
+<p>
+    The basic idea of functional parallelism is that you implement your program using function calls.
+    Functions can be seen as "agents" or "actors" that send messages to each other, just like in the assembly line
+    concurrency model (AKA reactive or event driven systems). When one function calls another, that is similar to
+    sending a message.
+</p>
+
+<p>
+    All parameters passed to the function are copied, so no entity outside the receiving function
+    can manipulate the data. This copying is essential to avoiding race conditions on the shared data. This makes
+    the function execution similar to an atomic operation. Each function call can be executed independently
+    of any other function call.
+</p>
+
+<p>
+    When each function call can be executed independently, each function call can be executed on separate CPUs.
+    That means, that an algorithm implemented functionally can be executed in parallel, on multiple CPUs.
+</p>
+
+
+<p>
+    With Java 7 we got the <code>java.util.concurrent</code> package contains the
+    <a href="../java-util-concurrent/java-fork-and-join-forkjoinpool.html">ForkAndJoinPool</a> which can help you implement
+    something similar to functional parallelism. With Java 8 we got parallel <a href="../java-collections/streams.html">streams</a>
+    which can help you parallelize the iteration of large collections. Keep in mind that there are developers who are
+    critical of the <code>ForkAndJoinPool</code> (you can find a link to criticism in my <code>ForkAndJoinPool</code> tutorial).
+</p>
+
+
+<p>
+    The hard part about functional parallelism is knowing which function calls to parallelize. Coordinating function
+    calls across CPUs comes with an overhead. The unit of work completed by a function needs to be of a certain size
+    to be worth this overhead. If the function calls are very small, attempting to parallelize them may actually
+    be slower than a singlethreaded, single CPU execution.
+</p>
+
+
+
+<p>
+    From my understanding (which is not perfect at all) you can implement an algorithm using an reactive, event driven
+    model and achieve a breakdown of the work which is similar to that achieved by functional parallelism. With an
+    even driven model you just get more control of exactly what and how much to parallelize (in my opinion).
+</p>
+
+<p>
+    Additionally, splitting a task over multiple CPUs with the overhead the coordination of that incurs, only makes
+    sense if that task is currently the only task being executed by the the program. However, if the system is concurrently
+    executing multiple other tasks (like e.g. web servers, database servers and many other systems do), there is no point
+    in trying to parallelize a single task. The other CPUs in the computer are anyways going to be busy working on other tasks,
+    so there is not reason to try to disturb them with a slower, functionally parallel task. You are most likely better
+    off with an assembly line (reactive) concurrency model, because it has less overhead (executes sequentially in singlethreaded mode)
+    and conforms better with how the underlying hardware works.
+</p>
+
+
+
+
+
+<a name="which-concurrency-model-is-best"></a>
+<h2>Which Concurrency Model is Best?</h2>
+
+<p>
+    So, which concurrency model is better?
+</p>
+
+<p>
+    As is often the case, the answer is that it depends on what your system is supposed to do. If your jobs are
+    naturally parallel, independent and with no shared state necessary, you might be able to implement your system
+    using the parallel worker model.
+</p>
+
+<p>
+    Many jobs are not naturally parallel and independent though. For these kinds of systems I believe the
+    assembly line concurrency model has more advantages than disadvantages, and more advantages than the parallel worker
+    model.
+</p>
+
+<p>
+    You don't even have to code all that assembly line infrastructure yourself. Modern platforms like
+    <a href="../vert.x/index.html">Vert.x</a> has implemented a lot of that for you. Personally I will be exploring designs running on top of platforms
+    like Vert.x for my next projects. Java EE just doesn't have the edge anymore, I feel.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="same-threading.html">Same-threading</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

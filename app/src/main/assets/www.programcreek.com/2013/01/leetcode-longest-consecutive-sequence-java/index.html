@@ -1,0 +1,809 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Longest Consecutive Sequence (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given an unsorted array of integers, find the length of the longest consecutive elements sequence. For example, given , the longest consecutive elements"/>
+<meta name="keywords" content="leetcode longest consecutive sequence java"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Longest Consecutive Sequence (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Search Insert Position (Java)' href='../leetcode-search-insert-position/index.html'/>
+<link rel='next' title='LeetCode &#8211; Valid Palindrome (Java)' href='../leetcode-valid-palindrome-java/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=11488.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_01_leetcode-longest-consecutive-sequence-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_01_leetcode-longest-consecutive-sequence-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-11488"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Longest Consecutive Sequence (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Given an unsorted array of integers, find the length of the longest consecutive elements sequence.</p>
+<p>For example, given <code>[100, 4, 200, 1, 3, 2]</code>, the longest consecutive elements sequence should be <code>[1, 2, 3, 4]</code>. Its length is 4.</p>
+<p>Your algorithm should run in O(n) complexity.</p>
+<p><strong>Java Solution 1</strong></p>
+<p>Because it requires O(n) complexity, we can not solve the problem by sorting the array first. Sorting takes at least O(nlogn) time. </p>
+<p>We can use a HashSet to add and remove elements. HashSet is implemented by using a hash table. Elements are not ordered. The <em>add</em>, <em>remove</em> and <em>contains</em> methods have constant time complexity O(1).</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">int</span> longestConsecutive<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> num<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">// if array is empty, return 0</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>num.<span style="color: #006633;">length</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	Set<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span> set <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HashSet<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> max <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> e <span style="color: #339933;">:</span> num<span style="color: #009900;">&#41;</span>
+		set.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> e <span style="color: #339933;">:</span> num<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> left <span style="color: #339933;">=</span> e <span style="color: #339933;">-</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> right <span style="color: #339933;">=</span> e <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> count <span style="color: #339933;">=</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>set.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>left<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			count<span style="color: #339933;">++;</span>
+			set.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>left<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			left<span style="color: #339933;">--;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>set.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>right<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			count<span style="color: #339933;">++;</span>
+			set.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>right<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			right<span style="color: #339933;">++;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		max <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>count, max<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>Java Solution 2</strong></p>
+<p>We can also project the arrays to a new array with length to be the largest element in the array. Then iterate over the array and get the longest consecutive sequence. If the largest number is too large, then the time would be bad. This is just another thought. </p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/04/leetcode-binary-tree-longest-consecutive-sequence-java/index.html" rel="bookmark" title="LeetCode &#8211; Binary Tree Longest Consecutive Sequence (Java)">LeetCode &#8211; Binary Tree Longest Consecutive Sequence (Java) </a></li>
+<li><a href="../../../2014/07/leetcode-wiggle-subsequence-java/index.html" rel="bookmark" title="LeetCode &#8211; Wiggle Subsequence (Java)">LeetCode &#8211; Wiggle Subsequence (Java) </a></li>
+<li><a href="../../../2014/05/leetcode-longest-increasing-path-in-a-matrix-java/index.html" rel="bookmark" title="LeetCode &#8211; Longest Increasing Path in a Matrix  (Java)">LeetCode &#8211; Longest Increasing Path in a Matrix (Java) </a></li>
+<li><a href="../../02/longest-substring-which-contains-2-unique-characters/index.html" rel="bookmark" title="Longest Substring with At Most K Distinct Characters">Longest Substring with At Most K Distinct Characters </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/01/leetcode-longest-consecutive-sequence-java/" dc:identifier="http://www.programcreek.com/2013/01/leetcode-longest-consecutive-sequence-java/" dc:title="LeetCode &#8211; Longest Consecutive Sequence (Java)" trackback:ping="http://www.programcreek.com/2013/01/leetcode-longest-consecutive-sequence-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-13154">
+<div id="dsq-comment-header-13154" class="dsq-comment-header">
+<cite id="dsq-cite-13154">
+<span id="dsq-author-user-13154">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13154" class="dsq-comment-body">
+<div id="dsq-comment-message-13154" class="dsq-comment-message"><p>For input {8,7,6,5,4,3,2,1}, the first loop time is 8, the second is 1 because [7..1] are removed, same for the left iterations.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-13111">
+<div id="dsq-comment-header-13111" class="dsq-comment-header">
+<cite id="dsq-cite-13111">
+<span id="dsq-author-user-13111">Wang Shuhao</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13111" class="dsq-comment-body">
+<div id="dsq-comment-message-13111" class="dsq-comment-message"><p>what if the array has duplicate numbers?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-13061">
+<div id="dsq-comment-header-13061" class="dsq-comment-header">
+<cite id="dsq-cite-13061">
+<span id="dsq-author-user-13061">rupalph</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13061" class="dsq-comment-body">
+<div id="dsq-comment-message-13061" class="dsq-comment-message"><p>I think a check can be added if max &gt; set.size() then loop should break.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-12943">
+<div id="dsq-comment-header-12943" class="dsq-comment-header">
+<cite id="dsq-cite-12943">
+<span id="dsq-author-user-12943">Vaibhav Gupta</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12943" class="dsq-comment-body">
+<div id="dsq-comment-message-12943" class="dsq-comment-message"><p>for input {8,7,6,5,4,3,2,1} the complexity of this solution will be O(n^2). The second for loop, when run with e=8 will remove all the elements from the set. Thus, for e=8, the while loop that runs, will be of O(n) and after that, the for loop will still iterator for other 7 values (though each time it will return false for set.contains(left)) but still the for loop will run n times nonetheless. The worst case complexity of this solution is thus O(n^2) and not O(n).</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-10315">
+<div id="dsq-comment-header-10315" class="dsq-comment-header">
+<cite id="dsq-cite-10315">
+<span id="dsq-author-user-10315">Matias SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10315" class="dsq-comment-body">
+<div id="dsq-comment-message-10315" class="dsq-comment-message"><p>Is this comment about an old implementation? in the given example m = 1 (not n). And, following the code, what would happen would be that each &#8220;set.contains&#8221; would return false, and the whole array will be iterated once more =&gt; the complexity would be O(N). What am I missing?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-10314">
+<div id="dsq-comment-header-10314" class="dsq-comment-header">
+<cite id="dsq-cite-10314">
+<span id="dsq-author-user-10314">Matias SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10314" class="dsq-comment-body">
+<div id="dsq-comment-message-10314" class="dsq-comment-message"><p>TreeSet is a balanced search tree (guarantees log N cost operations). Thus, the total insertion cost is N log N (required time complexity is O(N)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9503">
+<div id="dsq-comment-header-9503" class="dsq-comment-header">
+<cite id="dsq-cite-9503">
+<span id="dsq-author-user-9503">Eugene Arnatovich</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9503" class="dsq-comment-body">
+<div id="dsq-comment-message-9503" class="dsq-comment-message"><p><code><br/>
+//Longest Consecutive Sequence (Java)<br/>
+// Note: this is longest "consecutive" elements sequence, i.e., 1,2,3,4 is correct since difference<br/>
+// between neighbors is 1, e.g. 4-3=1, 3-2=1, and so<br/>
+public int solution(int[] arr){<br/>
+Set tree = new TreeSet();<br/>
+for (int a : arr) {<br/>
+tree.add(a);<br/>
+}<br/>
+Integer[] newarr = new Integer[myarr.length];<br/>
+tree.toArray(newarr);<br/>
+int ans = 1;<br/>
+int max = ans;<br/>
+for (int i = 1; i ans) {<br/>
+ans = max;<br/>
+}<br/>
+}<br/>
+return ans;<br/>
+}</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9012">
+<div id="dsq-comment-header-9012" class="dsq-comment-header">
+<cite id="dsq-cite-9012">
+<span id="dsq-author-user-9012">Renzo Nuccitelli</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9012" class="dsq-comment-body">
+<div id="dsq-comment-message-9012" class="dsq-comment-message"><p>I took sometime to get in same conclusion of using a hash set. This is my solution in Python: <a href="https://github.com/renzon/code_interview_training/blob/master/longest_consecutive_sequence.py" rel="nofollow">https://github.com/renzon/code_interview_training/blob/master/longest_consecutive_sequence.py</a>. I iterate over set itself and stop once I reach a interval its length is bigger than the number of elements on set.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9011">
+<div id="dsq-comment-header-9011" class="dsq-comment-header">
+<cite id="dsq-cite-9011">
+<span id="dsq-author-user-9011">Renzo Nuccitelli</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9011" class="dsq-comment-body">
+<div id="dsq-comment-message-9011" class="dsq-comment-message"><p>I had the same idea. But for huge number as max and min the running time would be terrible. Imagine [-10ˆ1000000000000000, 10ˆ1000000000000000]. Only two numbers on list and you would take a bunch of time. So it would be O(max-min). It would, but hash seem be better in this case</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7569">
+<div id="dsq-comment-header-7569" class="dsq-comment-header">
+<cite id="dsq-cite-7569">
+<span id="dsq-author-user-7569">animesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7569" class="dsq-comment-body">
+<div id="dsq-comment-message-7569" class="dsq-comment-message"><p>the valid subsequences will [100,200], [4,200], [1,3], [1,2]<br/>
+All these are valid longest increasing sub sequence. But the answer can&#8217;t be 4.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7559">
+<div id="dsq-comment-header-7559" class="dsq-comment-header">
+<cite id="dsq-cite-7559">
+<span id="dsq-author-user-7559">animesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7559" class="dsq-comment-body">
+<div id="dsq-comment-message-7559" class="dsq-comment-message"><p>I don&#8217;t think this was the actual question.</p>
+<p>If you see the example given in leetcode,</p>
+<p>[10, 9, 2, 5, 3, 7, 101, 18],</p>
+<p>for this it takes the longest subsequence as [2, 5, 7, 101]</p>
+<p>It doesn&#8217;t take into account the higher numbers which came previously.</p>
+<p>Have you tried running the code in leetcode?</p>
+<p>the example you have given, [100, 4, 200, 1, 3, 2]</p>
+<p>when run in leetcode, gives the answer as 2 i.e., 100 and 200<br/>
+whereas you say the answer is 4.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7542">
+<div id="dsq-comment-header-7542" class="dsq-comment-header">
+<cite id="dsq-cite-7542">
+<span id="dsq-author-user-7542">coder</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7542" class="dsq-comment-body">
+<div id="dsq-comment-message-7542" class="dsq-comment-message"><p>I seriously doubt the correctness of this code for input array { 4,0,1,2,16,12,13,14,15,5,6,7,8,9,10};</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7210">
+<div id="dsq-comment-header-7210" class="dsq-comment-header">
+<cite id="dsq-cite-7210">
+<span id="dsq-author-user-7210">dawei su</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7210" class="dsq-comment-body">
+<div id="dsq-comment-message-7210" class="dsq-comment-message"><p>why not remove(num) after each checking? It will not affect the result anyway. Then for the extreme case you will also get O(N).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7168">
+<div id="dsq-comment-header-7168" class="dsq-comment-header">
+<cite id="dsq-cite-7168">
+<span id="dsq-author-user-7168">Vimukthi Weerasiri</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7168" class="dsq-comment-body">
+<div id="dsq-comment-message-7168" class="dsq-comment-message"><p>why dont you iterate throw the set, rather than the array? It will avoid checking for the duplicate values in array.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6809">
+<div id="dsq-comment-header-6809" class="dsq-comment-header">
+<cite id="dsq-cite-6809">
+<span id="dsq-author-user-6809">ygw</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6809" class="dsq-comment-body">
+<div id="dsq-comment-message-6809" class="dsq-comment-message"><p>Adding &#8220;if(!set.contains(e)) continue&#8221; after the second &#8220;for&#8221; line appears to make it completely O(n).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6736">
+<div id="dsq-comment-header-6736" class="dsq-comment-header">
+<cite id="dsq-cite-6736">
+<span id="dsq-author-user-6736">Tony Wang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6736" class="dsq-comment-body">
+<div id="dsq-comment-message-6736" class="dsq-comment-message"><p>If &#8216;set.contains(&#8230;)&#8217; is O(1) then whole solution can be considered as O(n).<br/>
+Another solution without using of Hash is do sorting first, the average complexity will be O(NlogN), plus an O(n) to find out longest sequence.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6610">
+<div id="dsq-comment-header-6610" class="dsq-comment-header">
+<cite id="dsq-cite-6610">
+<span id="dsq-author-user-6610">PK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6610" class="dsq-comment-body">
+<div id="dsq-comment-message-6610" class="dsq-comment-message"><p>post <a href="http://codeluli.blogspot.in/2013/02/longest-consecutive-sequence.html" rel="nofollow">http://codeluli.blogspot.in/2013/02/longest-consecutive-sequence.html</a> has a solution with runtime complexity O(N) :).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6605">
+<div id="dsq-comment-header-6605" class="dsq-comment-header">
+<cite id="dsq-cite-6605">
+<span id="dsq-author-user-6605">PK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6605" class="dsq-comment-body">
+<div id="dsq-comment-message-6605" class="dsq-comment-message"><p>for (int e : num)<br/>
+set.add(e);</p>
+<p>Above code will use O(N) time right? where N is number of elements in array num. Yes add operation takes constant time O(1) to add an element in a hash set with perfect hash function, but if we repeat an operation of O(1) in a loop for N times it will have time complexity of O(N) as it time taken will grow/shrink with value of N. Am i understanding it correctly?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6551">
+<div id="dsq-comment-header-6551" class="dsq-comment-header">
+<cite id="dsq-cite-6551">
+<span id="dsq-author-user-6551">rs</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6551" class="dsq-comment-body">
+<div id="dsq-comment-message-6551" class="dsq-comment-message"><p>What do you mean by n == m? It doesn&#8217;t seem to me to be possible unless the whole set contains a whole consecutive sequence, in which case the runtime is still O(n). The example{1,3,5,7,9} in the article doesn&#8217;t seem to satisfy this condition?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6519">
+<div id="dsq-comment-header-6519" class="dsq-comment-header">
+<cite id="dsq-cite-6519">
+<span id="dsq-author-user-6519">Aaron Zhang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6519" class="dsq-comment-body">
+<div id="dsq-comment-message-6519" class="dsq-comment-message"><p>who tells u complexity of contain is O(1)? check this <a href="http://en.wikipedia.org/wiki/Hash_table" rel="nofollow">http://en.wikipedia.org/wiki/Hash_table</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6358">
+<div id="dsq-comment-header-6358" class="dsq-comment-header">
+<cite id="dsq-cite-6358">
+<span id="dsq-author-user-6358">Paul Sun</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6358" class="dsq-comment-body">
+<div id="dsq-comment-message-6358" class="dsq-comment-message"><p>In the first for loop I can get the min and max number of the array, beside put them in hash. Then I can loop through from min through max to see where longest consecutive sequence is. I think this way would be clear. If the number is very scattered, the complexity can not be much bigger than O(n).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6235">
+<div id="dsq-comment-header-6235" class="dsq-comment-header">
+<cite id="dsq-cite-6235">
+<span id="dsq-author-user-6235">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6235" class="dsq-comment-body">
+<div id="dsq-comment-message-6235" class="dsq-comment-message"><p>That is correct. Thanks for pointing it out!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6234">
+<div id="dsq-comment-header-6234" class="dsq-comment-header">
+<cite id="dsq-cite-6234">
+<span id="dsq-author-user-6234">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6234" class="dsq-comment-body">
+<div id="dsq-comment-message-6234" class="dsq-comment-message"><p>I just tested the code using {1,2,4,5,3}, the result is 5, which is correct.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6233">
+<div id="dsq-comment-header-6233" class="dsq-comment-header">
+<cite id="dsq-cite-6233">
+<span id="dsq-author-user-6233">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6233" class="dsq-comment-body">
+<div id="dsq-comment-message-6233" class="dsq-comment-message"><p>Thanks! The code is updated.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6230">
+<div id="dsq-comment-header-6230" class="dsq-comment-header">
+<cite id="dsq-cite-6230">
+<span id="dsq-author-user-6230">Mo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6230" class="dsq-comment-body">
+<div id="dsq-comment-message-6230" class="dsq-comment-message"><p>Just put a check in the beginning before int max=1. </p>
+<p>if(num.length == 0){<br/>
+return 0;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6218">
+<div id="dsq-comment-header-6218" class="dsq-comment-header">
+<cite id="dsq-cite-6218">
+<span id="dsq-author-user-6218">cj</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6218" class="dsq-comment-body">
+<div id="dsq-comment-message-6218" class="dsq-comment-message"><p>wrong answer dude: think about [1 2 4 5 3]</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5792">
+<div id="dsq-comment-header-5792" class="dsq-comment-header">
+<cite id="dsq-cite-5792">
+<span id="dsq-author-user-5792">Dun Liu</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5792" class="dsq-comment-body">
+<div id="dsq-comment-message-5792" class="dsq-comment-message"><p>if num.length==0, it will return max as 1. Which is wrong</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5776">
+<div id="dsq-comment-header-5776" class="dsq-comment-header">
+<cite id="dsq-cite-5776">
+<span id="dsq-author-user-5776">violethaze</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5776" class="dsq-comment-body">
+<div id="dsq-comment-message-5776" class="dsq-comment-message"><p>when n = m, the complexity will be O(n^2)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5694">
+<div id="dsq-comment-header-5694" class="dsq-comment-header">
+<cite id="dsq-cite-5694">
+<span id="dsq-author-user-5694">Wellwisher</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5694" class="dsq-comment-body">
+<div id="dsq-comment-message-5694" class="dsq-comment-message"><p>Nice solution in C# </p>
+<p><a href="http://onestopinterviewprep.blogspot.com/2014/04/longest-consecutive-sequence-of-numbers.html" rel="nofollow">http://onestopinterviewprep.blogspot.com/2014/04/longest-consecutive-sequence-of-numbers.html</a></p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/01/leetcode-longest-consecutive-sequence-java/';
+var disqus_identifier = '11488 http://www.programcreek.com/?p=11488';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Longest Consecutive Sequence (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=11488';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

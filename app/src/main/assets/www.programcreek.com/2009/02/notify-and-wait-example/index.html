@@ -1,0 +1,1219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>Java notify() and wait() examples</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Java notify() and wait() examples"/>
+<meta name="keywords" content="java notify() and wait() examples,java thread,notify and wait example,notify() and wait()"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; Java Thread: notify() and wait() examples Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='4 types of Java inner classes' href='../4-inner-classes-tutorial-examples/index.html'/>
+<link rel='next' title='File Transfer through Java Web Service' href='../file-transfer-through-java-web-service/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=240.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2009_02_notify-and-wait-example_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2009_02_notify-and-wait-example_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-240"> <a href="index.html" rel="bookmark">
+Java Thread: notify() and wait() examples </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>This article contains two code examples to demonstrate <a href="../../../java-threads/index.html">Java concurrency</a>. They stand for very typical usage. By understanding them, you will have a better understanding about notify() and wait(). </p>
+<p><strong>1. Some background knowledge</strong> </p>
+<ol>
+<li><code>synchronized</code> keyword is used for exclusive accessing. </li>
+<li> To make a method synchronized, simply add the synchronized keyword to its declaration. Then no two invocations of synchronized methods on the same object can interleave with each other.</li>
+<li> Synchronized statements must specify the object that provides the intrinsic lock. When synchronized(this) is used, you have to avoid to synchronizing invocations of other objects' methods.</li>
+<li> <code>wait()</code> tells the calling thread to give up the monitor and go to sleep until some other thread enters the same monitor and calls notify( ).</li>
+<li> <code>notify()</code> wakes up the first thread that called <code>wait()</code> on the same object.</li>
+</ol>
+<p><strong>2. notify() and wait() - example 1</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadA <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        ThreadB b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ThreadB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        b.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">synchronized</span><span style="color: #009900;">&#40;</span>b<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">try</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Waiting for b to complete...&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                b.<span style="color: #006633;">wait</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">catch</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+&nbsp;
+            <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Total is: &quot;</span> <span style="color: #339933;">+</span> b.<span style="color: #006633;">total</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> ThreadB <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> total<span style="color: #339933;">;</span>
+    @Override
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">synchronized</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span><span style="color: #cc66cc;">100</span> <span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                total <span style="color: #339933;">+=</span> i<span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+            notify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>In the example above, an object, b, is synchronized. b completes the calculation before Main thread outputs its total value.</p>
+<p>Output: </p>
+<pre>
+Waiting for b to complete...
+Total is: 4950
+</pre>
+<p>If b is not synchonized like the code below:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ThreadA <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		ThreadB b <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ThreadB<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		b.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Total is: &quot;</span> <span style="color: #339933;">+</span> b.<span style="color: #006633;">total</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> ThreadB <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> total<span style="color: #339933;">;</span>
+&nbsp;
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">100</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			total <span style="color: #339933;">+=</span> i<span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>The result would be 0, 10, etc. Because sum is not finished before it is used. </p>
+<p><strong>3. notify() and wait() - example 2</strong> </p>
+<p>The second example is more complex, see the comments.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.Vector</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Producer <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000000; font-weight: bold;">final</span> <span style="color: #000066; font-weight: bold;">int</span> MAXQUEUE <span style="color: #339933;">=</span> <span style="color: #cc66cc;">5</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">Vector</span> messages <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">Vector</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    @Override
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                putMessage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #666666; font-style: italic;">//sleep(5000);</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #000066; font-weight: bold;">void</span> putMessage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>messages.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> MAXQUEUE<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            wait<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+        messages.<span style="color: #006633;">addElement</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> java.<span style="color: #006633;">util</span>.<span style="color: #003399;">Date</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #006633;">toString</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;put message&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        notify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #666666; font-style: italic;">//Later, when the necessary event happens, the thread that is running it calls notify() from a block synchronized on the same object.</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #666666; font-style: italic;">// Called by Consumer</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">synchronized</span> <span style="color: #003399;">String</span> getMessage<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">throws</span> <span style="color: #003399;">InterruptedException</span> <span style="color: #009900;">&#123;</span>
+        notify<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>messages.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            wait<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #666666; font-style: italic;">//By executing wait() from a synchronized block, a thread gives up its hold on the lock and goes to sleep.</span>
+        <span style="color: #009900;">&#125;</span>
+        <span style="color: #003399;">String</span> message <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#41;</span> messages.<span style="color: #006633;">firstElement</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        messages.<span style="color: #006633;">removeElement</span><span style="color: #009900;">&#40;</span>message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> message<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> Consumer <span style="color: #000000; font-weight: bold;">extends</span> <span style="color: #003399;">Thread</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+    Producer producer<span style="color: #339933;">;</span>
+&nbsp;
+    Consumer<span style="color: #009900;">&#40;</span>Producer p<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        producer <span style="color: #339933;">=</span> p<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    @Override
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">try</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">String</span> message <span style="color: #339933;">=</span> producer.<span style="color: #006633;">getMessage</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;Got message: &quot;</span> <span style="color: #339933;">+</span> message<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #666666; font-style: italic;">//sleep(200);</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">catch</span> <span style="color: #009900;">&#40;</span><span style="color: #003399;">InterruptedException</span> e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            e.<span style="color: #006633;">printStackTrace</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> args<span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        Producer producer <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Producer<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        producer.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">new</span> Consumer<span style="color: #009900;">&#40;</span>producer<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">start</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>A possible output sequence:</p>
+<pre>
+Got message: Fri Dec 02 21:37:21 EST 2011
+put message
+put message
+put message
+put message
+put message
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+put message
+put message
+put message
+put message
+put message
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+Got message: Fri Dec 02 21:37:21 EST 2011
+</pre>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/02/how-to-make-a-method-thread-safe-in-java/index.html" rel="bookmark" title="How to make a method thread-safe in Java?">How to make a method thread-safe in Java? </a></li>
+<li><a href="../../../2011/12/monitors-java-synchronization-mechanism/index.html" rel="bookmark" title="Monitors &#8211; The Basic Idea of Java Synchronization">Monitors &#8211; The Basic Idea of Java Synchronization </a></li>
+<li><a href="../a-java-thread-overridding-example-code/index.html" rel="bookmark" title="Java Thread: an overridding example code">Java Thread: an overridding example code </a></li>
+<li><a href="../../../2012/08/interview-question-use-java-thread-to-do-math-calculation/index.html" rel="bookmark" title="Interview Question &#8211; Use Java Thread to Do Math Calculation">Interview Question &#8211; Use Java Thread to Do Math Calculation </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/java-thread/index.html" rel="category tag">Concurrency</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2009/02/notify-and-wait-example/" dc:identifier="http://www.programcreek.com/2009/02/notify-and-wait-example/" dc:title="Java Thread: notify() and wait() examples" trackback:ping="http://www.programcreek.com/2009/02/notify-and-wait-example/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-15064">
+<div id="dsq-comment-header-15064" class="dsq-comment-header">
+<cite id="dsq-cite-15064">
+<span id="dsq-author-user-15064">pl4za</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15064" class="dsq-comment-body">
+<div id="dsq-comment-message-15064" class="dsq-comment-message"><p>My take on the first example. Added a sleep to simulate a notify too before the wait and a condition check to avoid thread lock:</p>
+<p>public class ThreadA {<br/>
+public static void main(String[] args){<br/>
+ThreadB b = new ThreadB();<br/>
+b.start();<br/>
+try {<br/>
+Thread.sleep(1000); // simulate a notify() before the wait()<br/>
+}<br/>
+catch (InterruptedException e) {</p>
+<p> }<br/>
+synchronized(b){<br/>
+try{<br/>
+System.out.println(&#8220;Waiting for b to complete&#8230;&#8221;);<br/>
+while (b.isAlive()) { //condition guarantees no thread lock occurs<br/>
+b.wait();<br/>
+}<br/>
+}catch(InterruptedException e){<br/>
+e.printStackTrace();<br/>
+}</p>
+<p> System.out.println(&#8220;Total is: &#8221; + b.total);<br/>
+}<br/>
+}<br/>
+}</p>
+<p>class ThreadB extends Thread{<br/>
+int total;<br/>
+@Override<br/>
+public void run(){<br/>
+synchronized(this){<br/>
+for(int i=0; i&lt;100 ; i++){<br/>
+total += i;<br/>
+}<br/>
+notify();<br/>
+}<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-15048">
+<div id="dsq-comment-header-15048" class="dsq-comment-header">
+<cite id="dsq-cite-15048">
+<span id="dsq-author-user-15048">Rahul</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15048" class="dsq-comment-body">
+<div id="dsq-comment-message-15048" class="dsq-comment-message"><p>Why we should always call wait method in loop</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-13782">
+<div id="dsq-comment-header-13782" class="dsq-comment-header">
+<cite id="dsq-cite-13782">
+<span id="dsq-author-user-13782">Angelina Lawrence</span>
+</cite>
+</div>
+<div id="dsq-comment-body-13782" class="dsq-comment-body">
+<div id="dsq-comment-message-13782" class="dsq-comment-message"><p>know how to you satisfy <a href="https://www.yahoo.com" rel="nofollow">yahoo</a> offer us an case in point of a accurate instance 1 by means of Runnable?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-12787">
+<div id="dsq-comment-header-12787" class="dsq-comment-header">
+<cite id="dsq-cite-12787">
+<span id="dsq-author-user-12787">Sergey Zaytsev</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12787" class="dsq-comment-body">
+<div id="dsq-comment-message-12787" class="dsq-comment-message"><p>It looks like in example#2 code in getMessage() is broken&#8230; notify() method call is too early which&#8217;ll wake up thread(s) already in m&#8217;s waitSet ( which exactly is thread called putMessage() ). notify() should be places at the end of getMessage() method.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-11912">
+<div id="dsq-comment-header-11912" class="dsq-comment-header">
+<cite id="dsq-cite-11912">
+<span id="dsq-author-user-11912">TSMX</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11912" class="dsq-comment-body">
+<div id="dsq-comment-message-11912" class="dsq-comment-message"><p>Can you please provide us an example of a correct Example 1 using Runnable?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-10273">
+<div id="dsq-comment-header-10273" class="dsq-comment-header">
+<cite id="dsq-cite-10273">
+<span id="dsq-author-user-10273">Ries van Twisk</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10273" class="dsq-comment-body">
+<div id="dsq-comment-message-10273" class="dsq-comment-message"><p>Yes, you can try this example and once a while it will lock up.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7524">
+<div id="dsq-comment-header-7524" class="dsq-comment-header">
+<cite id="dsq-cite-7524">
+<span id="dsq-author-user-7524">Vijay Shankar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7524" class="dsq-comment-body">
+<div id="dsq-comment-message-7524" class="dsq-comment-message"><p>&gt; Below is example of wait notify 1st customer is trying to withdrawal<br/>
+&gt; money 2000 but account is having only 1000 Rs so wait for deposit,<br/>
+&gt; once deposit is completed then customer will able to withdrawal<br/>
+&gt; amount ..till deposit customer is waiting.</p>
+<p>package com.thread.example;</p>
+<p>class Cust{</p>
+<p> private int totalAmount=1000;</p>
+<p> public synchronized void withdrwl(int amount){<br/>
+System.out.println(&#8220;Total amount &#8220;+totalAmount +&#8221; withdrwling amount &#8220;+amount);<br/>
+if(this.totalAmount&lt;amount){<br/>
+System.out.println(&quot;not enogh amount..waiting for deposite..&quot;);<br/>
+try{wait();}catch(Exception e){}<br/>
+}<br/>
+this.totalAmount-=amount;<br/>
+System.out.println(&quot;Withrawl successful..Remaining balance is &quot;+totalAmount); </p>
+<p> }</p>
+<p> public synchronized void deposite(int amount){<br/>
+System.out.println(&quot;Depositing amount &quot;+amount);<br/>
+this.totalAmount+=amount;<br/>
+System.out.println(&quot;deposit completed&#8230;and Now totalAmount is &quot;+this.totalAmount);<br/>
+notify();<br/>
+}<br/>
+}</p>
+<p>class Depo implements Runnable{<br/>
+Cust c; int depo;<br/>
+Depo(Cust c, int depo){<br/>
+this.c=c;<br/>
+this.depo=depo;</p>
+<p> }</p>
+<p> @Override<br/>
+public void run() {<br/>
+c.deposite(depo);</p>
+<p> }</p>
+<p>}<br/>
+class Withdrawl implements Runnable{<br/>
+Cust c; int with;<br/>
+Withdrawl(Cust c, int with){<br/>
+this.c=c;<br/>
+this.with=with;</p>
+<p> }</p>
+<p> @Override<br/>
+public void run() {<br/>
+c.withdrwl(with);</p>
+<p> }</p>
+<p>}</p>
+<p>public class MainClass {</p>
+<p> public static void main(String[] args) {<br/>
+Cust c = new Cust();<br/>
+Thread w = new Thread(new Withdrawl(c, 2000));<br/>
+Thread d= new Thread(new Depo(c, 1000));<br/>
+w.start();<br/>
+d.start();</p>
+<p> }</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7522">
+<div id="dsq-comment-header-7522" class="dsq-comment-header">
+<cite id="dsq-cite-7522">
+<span id="dsq-author-user-7522">Darragh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7522" class="dsq-comment-body">
+<div id="dsq-comment-message-7522" class="dsq-comment-message"><p>I agree. You should use b.join(); which will force the main thread to wait until the calculation is complete</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7451">
+<div id="dsq-comment-header-7451" class="dsq-comment-header">
+<cite id="dsq-cite-7451">
+<a id="dsq-author-user-7451" href="http://bartolay.com/" target="_blank" rel="nofollow">Ryan</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7451" class="dsq-comment-body">
+<div id="dsq-comment-message-7451" class="dsq-comment-message"><p>this is perfect for example #1 to understand more on wait()</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7392">
+<div id="dsq-comment-header-7392" class="dsq-comment-header">
+<cite id="dsq-cite-7392">
+<span id="dsq-author-user-7392">vasanthjegathesan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7392" class="dsq-comment-body">
+<div id="dsq-comment-message-7392" class="dsq-comment-message"><p>Quick hack: In that case, we can avoid wait &#8220;forever&#8221; with &#8220;b.wait(someTime)&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7136">
+<div id="dsq-comment-header-7136" class="dsq-comment-header">
+<cite id="dsq-cite-7136">
+<a id="dsq-author-user-7136" href="http://netjs.blogspot.com" target="_blank" rel="nofollow">infoj</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7136" class="dsq-comment-body">
+<div id="dsq-comment-message-7136" class="dsq-comment-message"><p>call to wait() method should be with in a loop that checks the condition on which the thread is waiting. That&#8217;s a recommendation as per java docs to avoid a scenario known as spurious wakeup. </p>
+<p>Read more about it here &#8211; <a href="http://netjs.blogspot.com/2015/07/inter-thread-communiction-wait-notify-java-multi-thread.html" rel="nofollow">http://netjs.blogspot.com/2015/07/inter-thread-communiction-wait-notify-java-multi-thread.html</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6461">
+<div id="dsq-comment-header-6461" class="dsq-comment-header">
+<cite id="dsq-cite-6461">
+<a id="dsq-author-user-6461" href="http://facebook.com/le.q.ai.9" target="_blank" rel="nofollow">Ai</a>
+</cite>
+</div>
+<div id="dsq-comment-body-6461" class="dsq-comment-body">
+<div id="dsq-comment-message-6461" class="dsq-comment-message"><p>This example won&#8217;t work if notify() is called before wait() is called . If it is the case, then main thread will wait/block forever . To make sure wait() is called 1st then before b.start() , we issue wait() command . Am I right ?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6458">
+<div id="dsq-comment-header-6458" class="dsq-comment-header">
+<cite id="dsq-cite-6458">
+<span id="dsq-author-user-6458">hrkristiansen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6458" class="dsq-comment-body">
+<div id="dsq-comment-message-6458" class="dsq-comment-message"><p>&#8220;b.wait()&#8221; will cause the current thread (i.e. the main thread) to wait until another thread has called one of the notify-methods of &#8220;b&#8221;. Since no other thread has access to &#8220;b&#8221;, other than &#8220;b&#8221; itself, the main thread will wait &#8220;forever&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6457">
+<div id="dsq-comment-header-6457" class="dsq-comment-header">
+<cite id="dsq-cite-6457">
+<span id="dsq-author-user-6457">Ankit</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6457" class="dsq-comment-body">
+<div id="dsq-comment-message-6457" class="dsq-comment-message"><p>Looks fine form me ,<br/>
+main thread will start, then thread b will start and get the lock then completes its calculation. After that second block of synchronization will start and after printing &#8220;waiting for the thread b to complete&#8230;.&#8221; it will call .wait() method to release the lock. Then again normal main thread will execute and prints the total.<br/>
+But I wanted a more complex example so that we can understand more . This is very simple example and not elaborating much</p>
+</div>
+</div>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://tinochan.com/java-2-ocpjp-threads/' rel='external nofollow' class='url'>Java 2 OCPJP – Threads | TinoChan</a>()</p>
+</li>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://efttappingtechniques.com/carol-look-procrastination-interview-info/' rel='external nofollow' class='url'>efttappingtechniques.com</a>()</p>
+</li>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://ifeve.com/think-in-java-monitor/' rel='external nofollow' class='url'>监听器-java同步的基本思想 | 并发编程网 - ifeve.com</a>()</p>
+</li>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6056">
+<div id="dsq-comment-header-6056" class="dsq-comment-header">
+<cite id="dsq-cite-6056">
+<span id="dsq-author-user-6056">ash</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6056" class="dsq-comment-body">
+<div id="dsq-comment-message-6056" class="dsq-comment-message"><p>nope &#8211; UR right on a closer look.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6053">
+<div id="dsq-comment-header-6053" class="dsq-comment-header">
+<cite id="dsq-cite-6053">
+<span id="dsq-author-user-6053">Ash</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6053" class="dsq-comment-body">
+<div id="dsq-comment-message-6053" class="dsq-comment-message"><p>&#8220;It only works if the main thread gets the hold of the monitor for &#8216;b&#8217; before &#8216;b&#8217; itself does.&#8221;<br/>
+I don&#8217;t see how this is true.<br/>
+b.start(); is starting b before main thread gets its lock<br/>
+b finishes its execution, gets into TERMINATED state and releases its lock<br/>
+main thread acquires b&#8217;s lock and gets into the synch&#8217;d block<br/>
+reads the value total and prints it out.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6027">
+<div id="dsq-comment-header-6027" class="dsq-comment-header">
+<cite id="dsq-cite-6027">
+<span id="dsq-author-user-6027">try this one</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6027" class="dsq-comment-body">
+<div id="dsq-comment-message-6027" class="dsq-comment-message"><p>package com.scjp.thread;</p>
+<p>import java.util.LinkedList;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Queue;</p>
+<p>public class SychModification {</p>
+<p> public static void main(String[] args) {</p>
+<p> LinkedList linkedList = new LinkedList();</p>
+<p> AddItem addItem = new AddItem(linkedList, &#8220;Adding Thread&#8221;);</p>
+<p> AddItem addItem1 = new AddItem(linkedList, &#8220;Adding Thread1&#8221;);</p>
+<p>// AddItem addItem2 = new AddItem(linkedList, &#8220;Adding Thread2&#8221;);</p>
+<p> RemoveItem removeItem = new RemoveItem(linkedList,</p>
+<p> &#8220;Removing Item Thread&#8221;);</p>
+<p> removeItem.start();</p>
+<p> addItem.start();</p>
+<p> addItem1.start();</p>
+<p>// addItem2.start();</p>
+<p> }</p>
+<p>}</p>
+<p>class AddItem extends Thread {</p>
+<p> private List list;</p>
+<p> private static int count = 0;</p>
+<p> public AddItem(List list, String name) {</p>
+<p> super(name);</p>
+<p> this.list = list;</p>
+<p> }</p>
+<p> @Override</p>
+<p> public void run() {</p>
+<p> while (true) {</p>
+<p> try {</p>
+<p> synchronized (list) {</p>
+<p> System.out.println(&#8220;Adding value from &#8221; + getName());</p>
+<p> list.add(&#8220;Add ITEM&#8221; + count++);</p>
+<p> list.notifyAll();</p>
+<p> }</p>
+<p> Thread.sleep(5000);</p>
+<p> } catch (InterruptedException ex) {</p>
+<p> ex.printStackTrace();</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+<p>class RemoveItem extends Thread {</p>
+<p> private List list;</p>
+<p> public RemoveItem(List list, String name) {</p>
+<p> super(name);</p>
+<p> this.list = list;</p>
+<p> }</p>
+<p> @Override</p>
+<p> public void run() {</p>
+<p> while (true) {</p>
+<p> try {</p>
+<p> synchronized (list) {</p>
+<p> list.wait();</p>
+<p> if(!list.isEmpty())</p>
+<p> System.out.println(((Queue) list).remove());</p>
+<p> System.out.println(list.size());</p>
+<p> }</p>
+<p> } catch (InterruptedException ex) {</p>
+<p> ex.printStackTrace();</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5895">
+<div id="dsq-comment-header-5895" class="dsq-comment-header">
+<cite id="dsq-cite-5895">
+<span id="dsq-author-user-5895">Amatya</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5895" class="dsq-comment-body">
+<div id="dsq-comment-message-5895" class="dsq-comment-message"><p>what is the name of second program..before psvm their should be a class name.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5894">
+<div id="dsq-comment-header-5894" class="dsq-comment-header">
+<cite id="dsq-cite-5894">
+<span id="dsq-author-user-5894">Amatya</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5894" class="dsq-comment-body">
+<div id="dsq-comment-message-5894" class="dsq-comment-message"><p>what is the name of second program..before psvm their should be a class name&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://itnews.makaidong.com/222.html' rel='external nofollow' class='url'>免费Simple Java (非常简单的英文) - IT新闻</a>()</p>
+</li>
+</li> 
+<li class="post pingback">
+<p>Pingback: <a href='http://wzzblog.sinaapp.com/static/6781.html' rel='external nofollow' class='url'>免费Simple Java (非常简单的英文) | | Evolution Unit 进化Evolution Unit 进化</a>()</p>
+</li>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5766">
+<div id="dsq-comment-header-5766" class="dsq-comment-header">
+<cite id="dsq-cite-5766">
+<span id="dsq-author-user-5766">snamiet</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5766" class="dsq-comment-body">
+<div id="dsq-comment-message-5766" class="dsq-comment-message"><p>Can anyone explain why this program is getting stopped..</p>
+<p>public class ThreadA {</p>
+<p> public static void main(String[] args){</p>
+<p> ThreadB b = new ThreadB();</p>
+<p> b.setName(&#8220;ThreadB&#8221;);</p>
+<p> System.out.println(Thread.currentThread().getName()+&#8221; 1 &#8220;+b.getState());</p>
+<p> b.start();</p>
+<p> try {</p>
+<p> b.join();</p>
+<p> } catch (InterruptedException e1) {</p>
+<p> // TODO Auto-generated catch block</p>
+<p> e1.printStackTrace();</p>
+<p> }</p>
+<p> System.out.println(Thread.currentThread().getName()+&#8221; 2 &#8220;+b.getState());</p>
+<p> synchronized(b){</p>
+<p> try{</p>
+<p> System.out.println(&#8220;Waiting for b to complete&#8230;&#8221;);</p>
+<p> System.out.println(Thread.currentThread().getName()+&#8221; 3 &#8220;+b.getState());</p>
+<p> b.wait();</p>
+<p> System.out.println(Thread.currentThread().getName()+&#8221; 4 &#8220;+b.getState());</p>
+<p> }catch(InterruptedException e){</p>
+<p> e.printStackTrace();</p>
+<p> }</p>
+<p> }</p>
+<p> // System.out.println(&#8220;C Total is: &#8221; + c.total);</p>
+<p> System.out.println(&#8220;B Total is: &#8221; + b.total);</p>
+<p> System.out.println(Thread.currentThread().getName()+&#8221; 5 &#8220;+b.getState());</p>
+<p> }</p>
+<p>}</p>
+<p>class ThreadB extends Thread{</p>
+<p> int total;</p>
+<p> @Override</p>
+<p> public void run(){</p>
+<p> synchronized(this){</p>
+<p> for(int i=0; i&lt;100 ; i++){</p>
+<p> total += i;</p>
+<p> }</p>
+<p> this.notify();</p>
+<p> System.out.println(Thread.currentThread().getName()+&quot; run 3 &quot;+getState());</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+<p>Output: </p>
+<p>main 1 NEW</p>
+<p>Thread-0 run 3 RUNNABLE</p>
+<p>main 2 TERMINATED</p>
+<p>Waiting for b to complete&#8230;</p>
+<p>main 3 TERMINATED</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br/>
+Program is still running but it doesn&#039;t get end.<br/>
+Is it a deadlock?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5554">
+<div id="dsq-comment-header-5554" class="dsq-comment-header">
+<cite id="dsq-cite-5554">
+<span id="dsq-author-user-5554">Stech</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5554" class="dsq-comment-body">
+<div id="dsq-comment-message-5554" class="dsq-comment-message"><p>Easier way to see that is to devide the numbers to pairs in this way:<br/>
+(1+99)+(2+98)&#8230;.+(49+51)+50=49*(100)+50. Just an anakdote i hope you like.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5553">
+<div id="dsq-comment-header-5553" class="dsq-comment-header">
+<cite id="dsq-cite-5553">
+<span id="dsq-author-user-5553">hrkristiansen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5553" class="dsq-comment-body">
+<div id="dsq-comment-message-5553" class="dsq-comment-message"><p>Example 1 is an absolutely hideous example of programming by coincidence: <a href="http://pragprog.com/the-pragmatic-programmer/extracts/coincidence" rel="nofollow">http://pragprog.com/the-pragmatic-programmer/extracts/coincidence</a></p>
+<p>It only works if the main thread gets the hold of the monitor for &#8216;b&#8217; before &#8216;b&#8217; itself does.</p>
+<p>The only way to assure this, is to make ThreadB implement Runnable (or use it as the one it already is) and then run it from a thread started from inside the &#8216;synchronized(b) { &#8230; }&#8217; statement.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5522">
+<div id="dsq-comment-header-5522" class="dsq-comment-header">
+<cite id="dsq-cite-5522">
+<a id="dsq-author-user-5522" href="http://cadmy.ru" target="_blank" rel="nofollow">cadmy</a>
+</cite>
+</div>
+<div id="dsq-comment-body-5522" class="dsq-comment-body">
+<div id="dsq-comment-message-5522" class="dsq-comment-message"><p>Thanks. I knew that the answer is a piece of cake</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5518">
+<div id="dsq-comment-header-5518" class="dsq-comment-header">
+<cite id="dsq-cite-5518">
+<span id="dsq-author-user-5518">ICF</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5518" class="dsq-comment-body">
+<div id="dsq-comment-message-5518" class="dsq-comment-message"><p>int i = 0; i &lt; 100&#8230; this means the range of numbers [0,99]. If you add those numbers together you get 4950&#8230;. using the formula N(N+1)/2 where N is your largest number in this case 99<br/>
+99(99+1)/2 = 4950</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5477">
+<div id="dsq-comment-header-5477" class="dsq-comment-header">
+<cite id="dsq-cite-5477">
+<span id="dsq-author-user-5477">cadmy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5477" class="dsq-comment-body">
+<div id="dsq-comment-message-5477" class="dsq-comment-message"><p>Sorry for damn question but why the result of the first example is 4950? How did it happen?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5462">
+<div id="dsq-comment-header-5462" class="dsq-comment-header">
+<cite id="dsq-cite-5462">
+<a id="dsq-author-user-5462" href="http://digitizormedia.com/" target="_blank" rel="nofollow">Debjit Saha</a>
+</cite>
+</div>
+<div id="dsq-comment-body-5462" class="dsq-comment-body">
+<div id="dsq-comment-message-5462" class="dsq-comment-message"><p>When you have to extend some other class and still use multithreading then you can use implements runnable as in java you wont be able to extend two classes at the same time.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5448">
+<div id="dsq-comment-header-5448" class="dsq-comment-header">
+<cite id="dsq-cite-5448">
+<span id="dsq-author-user-5448">Guest</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5448" class="dsq-comment-body">
+<div id="dsq-comment-message-5448" class="dsq-comment-message"><p>Vishal</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5447">
+<div id="dsq-comment-header-5447" class="dsq-comment-header">
+<cite id="dsq-cite-5447">
+<span id="dsq-author-user-5447">Guest</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5447" class="dsq-comment-body">
+<div id="dsq-comment-message-5447" class="dsq-comment-message"><p>asdasd</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5425">
+<div id="dsq-comment-header-5425" class="dsq-comment-header">
+<cite id="dsq-cite-5425">
+<span id="dsq-author-user-5425">Santhosh S</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5425" class="dsq-comment-body">
+<div id="dsq-comment-message-5425" class="dsq-comment-message"><p>Thank you for the information.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5317">
+<div id="dsq-comment-header-5317" class="dsq-comment-header">
+<cite id="dsq-cite-5317">
+<span id="dsq-author-user-5317">maqsoodkhan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5317" class="dsq-comment-body">
+<div id="dsq-comment-message-5317" class="dsq-comment-message"><p>I have doubt on threads can u tell me please when I have to use extends threads and implements and what is the difference between&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5231">
+<div id="dsq-comment-header-5231" class="dsq-comment-header">
+<cite id="dsq-cite-5231">
+<span id="dsq-author-user-5231">Igor</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5231" class="dsq-comment-body">
+<div id="dsq-comment-message-5231" class="dsq-comment-message"><p>Modified first program:</p>
+<p>public class ThreadA</p>
+<p>{</p>
+<p> public static void main(String[] args) throws InterruptedException</p>
+<p> {</p>
+<p> ThreadB b = new ThreadB();</p>
+<p> b.start();</p>
+<p>// Thread.sleep(500);</p>
+<p> if(!b.finished)</p>
+<p> synchronized (b)</p>
+<p> {</p>
+<p> try</p>
+<p> {</p>
+<p> System.out.println(&#8220;Waiting for b to complete&#8230;&#8221;);</p>
+<p> b.wait();</p>
+<p> }</p>
+<p> catch (InterruptedException e)</p>
+<p> {</p>
+<p> e.printStackTrace();</p>
+<p> }</p>
+<p> }</p>
+<p> System.out.println(&#8220;Total is: &#8221; + b.total);</p>
+<p> }</p>
+<p>}</p>
+<p>class ThreadB extends Thread</p>
+<p>{</p>
+<p> int total;</p>
+<p> boolean finished;</p>
+<p> @Override</p>
+<p> public void run()</p>
+<p> {</p>
+<p> synchronized (this)</p>
+<p> {</p>
+<p> for (int i = 0; i &lt; 100; i++)</p>
+<p> {</p>
+<p> total += i;</p>
+<p> }</p>
+<p> finished = true;</p>
+<p> notify();</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5230">
+<div id="dsq-comment-header-5230" class="dsq-comment-header">
+<cite id="dsq-cite-5230">
+<span id="dsq-author-user-5230">Igor</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5230" class="dsq-comment-body">
+<div id="dsq-comment-message-5230" class="dsq-comment-message"><p>Totally agree, before call to b.wait() there should be a check that will verify whether ThreadB completed its execution.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5147">
+<div id="dsq-comment-header-5147" class="dsq-comment-header">
+<cite id="dsq-cite-5147">
+<span id="dsq-author-user-5147">Krzysiek</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5147" class="dsq-comment-body">
+<div id="dsq-comment-message-5147" class="dsq-comment-message"><p>If ThreadB be will aquire the lock before threadA then notify() will be called before wait() method. Then ThreadB will release the lock and we enter in synchronized block of ThreadA &#8211; wait() method will be called and program will hang cause notify() was already called before&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5031">
+<div id="dsq-comment-header-5031" class="dsq-comment-header">
+<cite id="dsq-cite-5031">
+<a id="dsq-author-user-5031" href="http://www.javaexperience.com/" target="_blank" rel="nofollow">Java Experience</a>
+</cite>
+</div>
+<div id="dsq-comment-body-5031" class="dsq-comment-body">
+<div id="dsq-comment-message-5031" class="dsq-comment-message"><p>Great code example.I want to add that while wait method is present in the object class, sleep method is present in the Thread class. This means that we can&#8217;t invoke sleep() method on any object. Some beginners don&#8217;t understand the locking mechanism used by <a href="http://www.javaexperience.com/wait-and-sleep-methods-difference-in-java/" rel="nofollow">wait and sleep methods in java</a></p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2009/02/notify-and-wait-example/';
+var disqus_identifier = '240 http://www.programcreek.com/?p=240';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "Java Thread: notify() and wait() examples";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=240';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

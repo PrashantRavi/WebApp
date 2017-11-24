@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Flatten Binary Tree to Linked List</title>
+	<atom:link href="http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Bharath Chandra</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-15159</link>
+		<dc:creator><![CDATA[Bharath Chandra]]></dc:creator>
+		<pubDate>Wed, 12 Oct 2016 05:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-15159</guid>
+		<description><![CDATA[
+&lt;code&gt;
+void flatten(struct TreeNode* root) {
+    struct TreeNode *temp = NULL;
+    if(!root)return;
+    if(root-&#062; left){
+        flatten(root-&#062; left);
+        if(root-&#062; right){
+            flatten(root-&#062; right);
+        }
+        temp = root-&#062; left;
+        while(temp-&#062; right){
+            temp = temp-&#062; right;
+        }
+        temp-&#062; right = root-&#062; right;
+        root-&#062; right = root-&#062; left;
+        root-&#062; left = NULL;
+    }
+    else{
+        flatten(root-&#062; right);
+    }
+    
+}
+&lt;/code&gt;
+]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+void flatten(struct TreeNode* root) {<br />
+    struct TreeNode *temp = NULL;<br />
+    if(!root)return;<br />
+    if(root-&gt; left){<br />
+        flatten(root-&gt; left);<br />
+        if(root-&gt; right){<br />
+            flatten(root-&gt; right);<br />
+        }<br />
+        temp = root-&gt; left;<br />
+        while(temp-&gt; right){<br />
+            temp = temp-&gt; right;<br />
+        }<br />
+        temp-&gt; right = root-&gt; right;<br />
+        root-&gt; right = root-&gt; left;<br />
+        root-&gt; left = NULL;<br />
+    }<br />
+    else{<br />
+        flatten(root-&gt; right);<br />
+    }</p>
+<p>}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-13344</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sun, 07 Aug 2016 16:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-13344</guid>
+		<description><![CDATA[Recursive solution. Time complexity O(N), Space complexity O(H) (H: height of the tree)
+
+&lt;code&gt; 
+public class BinTreeNode {
+    public final T value;
+    public BinTreeNode left;
+    public BinTreeNode right;
+}
+
+ void flatten(BinTreeNode root) {
+    flatten(root, null);
+}
+
+ BinTreeNode flatten(BinTreeNode node, BinTreeNode last) {
+    if (node == null) return last;
+    BinTreeNode oldLeft = node.left;
+    BinTreeNode oldRight = node.right;
+    node.left = last;
+    if (last != null) {
+        last.right = node;
+    }
+    last = node;
+    last = flatten(oldLeft, last);
+    last = flatten(oldRight, last);
+    return last;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Recursive solution. Time complexity O(N), Space complexity O(H) (H: height of the tree)</p>
+<p><code><br />
+public class BinTreeNode {<br />
+    public final T value;<br />
+    public BinTreeNode left;<br />
+    public BinTreeNode right;<br />
+}</p>
+<p> void flatten(BinTreeNode root) {<br />
+    flatten(root, null);<br />
+}</p>
+<p> BinTreeNode flatten(BinTreeNode node, BinTreeNode last) {<br />
+    if (node == null) return last;<br />
+    BinTreeNode oldLeft = node.left;<br />
+    BinTreeNode oldRight = node.right;<br />
+    node.left = last;<br />
+    if (last != null) {<br />
+        last.right = node;<br />
+    }<br />
+    last = node;<br />
+    last = flatten(oldLeft, last);<br />
+    last = flatten(oldRight, last);<br />
+    return last;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ashish Pai</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-12329</link>
+		<dc:creator><![CDATA[Ashish Pai]]></dc:creator>
+		<pubDate>Sun, 03 Jul 2016 05:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-12329</guid>
+		<description><![CDATA[Using recursion is not in-place right? You are using the system stack.]]></description>
+		<content:encoded><![CDATA[<p>Using recursion is not in-place right? You are using the system stack.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Almas Daumov</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-10491</link>
+		<dc:creator><![CDATA[Almas Daumov]]></dc:creator>
+		<pubDate>Mon, 18 Apr 2016 00:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-10491</guid>
+		<description><![CDATA[@diegocedrim:disqus your code is good, but missing 1 thing - setting &quot;node.left = nil;&quot; before calling recursion. See http://pastebin.com/ubpZaXqf]]></description>
+		<content:encoded><![CDATA[<p>@diegocedrim:disqus your code is good, but missing 1 thing &#8211; setting &#8220;node.left = nil;&#8221; before calling recursion. See <a href="http://pastebin.com/ubpZaXqf" rel="nofollow">http://pastebin.com/ubpZaXqf</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RoroZoro</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-6846</link>
+		<dc:creator><![CDATA[RoroZoro]]></dc:creator>
+		<pubDate>Fri, 03 Apr 2015 02:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-6846</guid>
+		<description><![CDATA[Had the same doubt. But since the problem is to &quot;flatten&quot; which means, we need to change the links pointed by the node, we need to do like this. But yeah, preorder gives the same answer.]]></description>
+		<content:encoded><![CDATA[<p>Had the same doubt. But since the problem is to &#8220;flatten&#8221; which means, we need to change the links pointed by the node, we need to do like this. But yeah, preorder gives the same answer.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Noobaka</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-flatten-binary-tree-to-linked-list/#comment-6729</link>
+		<dc:creator><![CDATA[Noobaka]]></dc:creator>
+		<pubDate>Mon, 02 Mar 2015 00:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11403#comment-6729</guid>
+		<description><![CDATA[I mean PreOrder Traversal.]]></description>
+		<content:encoded><![CDATA[<p>I mean PreOrder Traversal.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

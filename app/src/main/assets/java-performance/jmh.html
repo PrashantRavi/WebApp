@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>JMH - Java Microbenchmark Harness</title>
+
+    <meta name="description" content="JMH (Java Microbenchmark Harness) is a toolkit that helps you implement Java microbenchmarks
+    correctly. JMH is developed by the same people who implement the Java virtual machine, so these guys know what
+    they are doing. This JMH tutorial will teach you how to implement and run Java microbenchmarks with JMH.">
+    <meta name="keywords"    content="jmh java microbenchmark harness">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="JMH - Java Microbenchmark Harness">
+    <meta name="twitter:description" content="JMH (Java Microbenchmark Harness) is a toolkit that helps you implement Java microbenchmarks
+    correctly. JMH is developed by the same people who implement the Java virtual machine, so these guys know what
+    they are doing. This JMH tutorial will teach you how to implement and run Java microbenchmarks with JMH.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="JMH - Java Microbenchmark Harness"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/jmh.html"/>
+    <meta property="og:description" content="JMH (Java Microbenchmark Harness) is a toolkit that helps you implement Java microbenchmarks
+    correctly. JMH is developed by the same people who implement the Java virtual machine, so these guys know what
+    they are doing. This JMH tutorial will teach you how to implement and run Java microbenchmarks with JMH."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/memory-management.html";
+var nextArticleInCategory = "/java-performance/ring-buffer.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 25282;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html"><b>JMH - Java Microbenchmark Harness</b></a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>JMH - Java Microbenchmark Harness</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#why-are-java-microbenchmarks-hard">Why Are Java Microbenchmarks Hard?</a></li><li><a href="#getting-started-with-jmh">Getting Started With JMH</a></li><li><a href="#your-first-jmh-benchmark">Your First JMH Benchmark</a></li><li><a href="#building-your-jmh-benchmark">Building Your JMH Benchmark</a></li><li><a href="#the-benchmarks-jar-file">The benchmarks.jar File</a></li><li><a href="#running-your-jmh-benchmarks">Running Your JMH Benchmarks</a></li><li><a href="#jmh-benchmark-modes">JMH Benchmark Modes</a></li><li><a href="#benchmark-time-units">Benchmark Time Units</a></li><li><a href="#benchmark-state">Benchmark State</a><ul><li><a href="#state-scope">State Scope</a></li><li><a href="#state-class-requirements">State Class Requirements</a></li><li><a href="#state-setup-and-teardown">State Object @Setup and @TearDown</a></li></ul></li><li><a href="#writing-good-benchmarks">Writing Good Benchmarks</a></li><li><a href="#loop-optimizations">Loop Optimizations</a></li><li><a href="#dead-code-elimination">Dead Code Elimination</a><ul><li><a href="#avoiding-dead-code-elimination">Avoiding Dead Code Elimination</a></li><li><a href="#return-value-from-benchmark-method">Return Value From Benchmark Method</a></li><li><a href="#passing-value-to-a-black-hole">Passing Value to a Black Hole</a></li></ul></li><li><a href="#constant-folding">Constant Folding</a><ul><li><a href="#avoiding-constant-folding">Avoiding Constant Folding</a></li></ul></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-09-16
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    <i>JMH</i> is short for <i>Java Microbenchmark Harness</i>. JMH is a toolkit that helps you implement Java microbenchmarks
+    correctly. JMH is developed by the same people who implement the Java virtual machine, so these guys know what
+    they are doing. This JMH tutorial will teach you how to implement and run Java microbenchmarks with JMH.
+</p>
+
+
+
+<a name="why-are-java-microbenchmarks-hard"></a>
+<h2>Why Are Java Microbenchmarks Hard?</h2>
+
+<p>
+    Writing benchmarks that correctly measure the performance of a small part of a larger application is hard. There are
+    many optimizations that the JVM or underlying hardware may apply to your component when the benchmark executes that
+    component in isolation. These optimizations may not be possible to apply when the component is running as part
+    of a larger application. Badly implemented microbenchmarks may thus make you believe that your component's performance
+    is better than it will be in reality.
+</p>
+
+<p>
+    Writing a correct Java microbenchmark typically entails preventung the optimizations the JVM and hardware may
+    apply during microbenchmark execution which could not have been applied in a real production system.
+    That is what JMH - the Java Microbenchmark Harness - is helping you do.
+</p>
+
+
+
+<a name="getting-started-with-jmh"></a>
+<h2>Getting Started With JMH</h2>
+
+<p>
+    The easiest way to get started with JMH is to generate a new JMH project using the JMH Maven archetype.
+    The JMH Maven archetype will generate a new Java project with a single, example benchmark Java class,
+    and a Maven <code>pom.xml</code> file. The Maven <code>pom.xml</code> file contains the correct dependencies
+    to compile and build your JMH microbenchmark suite.
+</p>
+
+<p>
+    Here is the Maven command line needed to generate a JMH project template:
+</p>
+
+<pre class="codeBox">
+ mvn archetype:generate
+          -DinteractiveMode=false
+          -DarchetypeGroupId=org.openjdk.jmh
+          -DarchetypeArtifactId=jmh-java-benchmark-archetype
+          -DgroupId=com.jenkov
+          -DartifactId=first-benchmark
+          -Dversion=1.0
+</pre>
+
+<p>
+    This is one long command. There should be no line breaks in the command. I just added them to make the command
+    easier to read.
+</p>
+
+<p>
+    This command line will create a new directory named <code>first-benchmark</code> (the <code>artifactId</code> specified
+    in the Maven command). Inside this directory will be generated a new Maven source directory structure
+    (<code>src/main/java</code>). Inside the <code>java</code> source root directory will be generated a single Java
+    packaged named <code>com.jenkov</code> (actually a package named <code>com</code> with a subpackage named <code>jenkov</code>).
+    Inside the <code>com.jenkov</code> package will be a JMH benchmark Java class named <code>MyBenchmark</code>.
+</p>
+
+
+
+<a name="your-first-jmh-benchmark"></a>
+<h2>Your First JMH Benchmark</h2>
+
+<p>
+    It is time to write your first JMH benchmark class, or at least see how it is done.
+</p>
+
+<p>
+    The generated <code>MyBenchmark</code> class is a JMH class template which you can use to implement your
+    JMH benchmarks. You can either implement your benchmarks directly in the generated <code>MyBenchmark</code> class,
+    or create a new class in the same Java package. To make it easy for you to write your first JMH benchmark
+    I will just use the generated class in this example.
+</p>
+
+<p>
+    Here is first how the generated <code>MyBenchmark</code> class looks:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public void testMethod() {
+        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
+        // Put your benchmark code here.
+    }
+
+}
+</pre>
+
+
+<p>
+    You can put the code you want to measure inside the <code>testMethod()</code> method body. Here is an example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public void testMethod() {
+        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
+        // Put your benchmark code here.
+
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+    }
+
+}
+</pre>
+
+<p>
+    Note: This particular example is a bad benchmark implementation, as the JVM can see that <code>sum</code> is
+    never used, and may thus eliminate the sum calculation. Well in fact the whole method body could be removed
+    by JVM dead code elimination. For now, just imagine that the <code>testMethod()</code> body actually contained
+    a good benchmark implementation. I will get back how to implement better benchmarks with JMH later in this tutorial.
+</p>
+
+
+
+<a name="building-your-jmh-benchmark"></a>
+<h2>Building Your JMH Benchmark</h2>
+
+<p>
+    You can now compile and build a benchmark JAR file from your JMH benchmark project using this Maven command:
+</p>
+
+<pre class="codeBox">
+mvn clean install
+</pre>
+
+<p>
+    This Maven command must be executed from inside the generated benchmark project directory (in this example
+    the <code>first-benchmark</code> directory).
+</p>
+
+<p>
+    When this command is executed a JAR file will be created inside the <code>first-benchmark/target</code> directory.
+    The JAR file will be named <code>benchmarks.jar</code>
+</p>
+
+
+
+<a name="the-benchmarks-jar-file"></a>
+<h2>The benchmarks.jar File</h2>
+
+<p>
+    When you build your JMH benchmarks, Maven will always generate a JAR file named <code>benchmarks.jar</code>
+    in the <code>target</code> directory (Maven's standard output directory).
+</p>
+
+<p>
+    The <code>benchmarks.jar</code> file contains everything needed to run your benchmarks. It contains your
+    compiled benchmark classes as well as all JMH classes needed to run the benchmark.
+</p>
+
+<p>
+    If your benchmarks has any external dependencies (JAR files from other projects needed to run your benchmarks), declare these
+    dependencies inside the Maven <code>pom.xml</code>, and they will be included in the <code>benchmarks.jar</code>
+    too.
+</p>
+
+<p>
+    Since <code>benchmarks.jar</code> is fully self contained, you can copy that JAR file to another computer
+    to run your JMH benchmarks on that computer.
+</p>
+
+
+
+
+<a name="running-your-jmh-benchmarks"></a>
+<h2>Running Your JMH Benchmarks</h2>
+
+<p>
+    Once you have built your JMH benchmark code you can run the benchmark using this Java command:
+</p>
+
+<pre class="codeBox">
+java -jar target/benchmarks.jar
+</pre>
+
+<p>
+    This will start JMH on your benchmark classes. JMH will scan through your code and find all benchmarks and run
+    them. JMH will print out the results to the command line.
+</p>
+
+<p>
+    Running the benchmarks will take some time. JMH makes several warm ups, iterations etc. to make sure the results
+    are not completely random. The more runs you have, the better average performance and high / low performance
+    information you get.
+</p>
+
+<p>
+    You should let the computer alone while it runs the benchmarks, and you should close all other applications
+    (if possible). If your computer is running other applications, these applications may take time from the CPU
+    and give incorrect (lower) performance numbers.
+</p>
+
+
+
+
+<a name="jmh-benchmark-modes"></a>
+<h2>JMH Benchmark Modes</h2>
+
+<p>
+    JMH can run your benchmarks in different modes. The benchmark mode tells JMH what you want to measure. JMH offer
+    these benchmark modes:
+</p>
+
+
+<table class="dataTable">
+
+    <tr><td>Throughput</td>
+        <td>Measures the number of operations per second, meaning the number of times per second your benchmark method could be executed.</td>
+    </tr>
+    <tr><td>Average Time</td>
+        <td>Measures the average time it takes for the benchmark method to execute (a single execution).</td>
+    </tr>
+    <tr><td>Sample Time</td>
+        <td>Measures how long time it takes for the benchmark method to execute, including max, min time etc.</td>
+    </tr>
+    <tr><td>Single Shot Time</td>
+        <td>Measures how long time a single benchmark method execution takes to run. This is good to test how it performs under a cold start (no JVM warm up). </td>
+    </tr>
+    <tr><td>All</td>
+        <td>Measures all of the above.</td>
+    </tr>
+</table>
+
+<p>
+    The default benchmark mode is Throughput.
+</p>
+
+<p>
+    You specify what benchmark mode your benchmark should use with the JMH annotation <code>BenchmarkMode</code>.
+    You put the <code>BenchmarkMode</code> annotation on top of your benchmark method. Here is a JMH <code>BenchmarkMode</code>
+    example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+
+public class MyBenchmark {
+
+    @Benchmark @BenchmarkMode(Mode.Throughput)
+    public void testMethod() {
+        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
+        // Put your benchmark code here.
+
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+    }
+
+}
+</pre>
+
+<p>
+    Notice the <code>@BenchmarkMode(Mode.Throughput)</code> annotation above the <code>testMethod()</code>  method.
+    That annotation specifies the benchmark mode. The <code>Mode</code> class contains constants for each possible
+    benchmark mode.
+</p>
+
+
+
+<a name="benchmark-time-units"></a>
+<h2>Benchmark Time Units</h2>
+
+<p>
+    JMH enables you to specify what time units you want the benchmark results printed in. The time unit will be
+    used for all benchmark modes your benchmark is executed in.
+</p>
+
+<p>
+    You specify the benchmark time unit using the JMH annotation <code>@OutputTimeUnit</code>. The <code>@OutputTimeUnit</code>
+    annotation takes a <code>java.util.concurrent.TimeUnit</code> as parameter to specify the actual time unit to use.
+    Here is a JMH <code>@OutputTimeUnit</code> annotation example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+
+import java.util.concurrent.TimeUnit;
+
+public class MyBenchmark {
+
+    @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.MINUTES)
+    public void testMethod() {
+        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
+        // Put your benchmark code here.
+
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+    }
+
+}
+</pre>
+
+<p>
+    In this example the time unit specified is minutes. This means that you want the output shown using the time unit
+    minutes (e.g. operations per minute).
+</p>
+
+<p>
+     The <code>TimeUnit</code> class contains the following time unit
+    constants:
+</p>
+
+<ul>
+    <li>NANOSECONDS</li>
+    <li>MICROSECONDS</li>
+    <li>MILLISECONDS</li>
+    <li>SECONDS</li>
+    <li>MINUTES</li>
+    <li>HOURS</li>
+    <li>DAYS</li>
+</ul>
+
+
+
+
+<a name="benchmark-state"></a>
+<h2>Benchmark State</h2>
+
+<p>
+    Sometimes you way want to initialize some variables that your benchmark code needs, but which you do not want
+    to be part of the code your benchmark measures. Such variables are called "state" variables. State variables
+    are declared in special state classes, and an instance of that state class can then be provided as parameter
+    to the benchmark method. This may sound a bit complicated, so here is a JMH benchmark state example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.*;
+
+import java.util.concurrent.TimeUnit;
+
+
+public class MyBenchmark {
+
+    @State(Scope.Thread)
+    public static class MyState {
+        public int a = 1;
+        public int b = 2;
+        public int sum ;
+    }
+
+
+    @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.MINUTES)
+    public void testMethod(MyState state) {
+        state.sum = state.a + state.b;
+    }
+
+}
+</pre>
+
+<p>
+    In this example I have added a nested static class named <code>MyState</code>. The <code>MyState</code>
+    class is annotated with the JMH <code>@State</code> annotation. This signals to JMH that this is a state class.
+    Notice that the <code>testMethod()</code> benchmark method now takes an instance of <code>MyState</code> as
+    parameter.
+</p>
+
+<p>
+    Notice also that the <code>testMethod()</code> body has now been changed to use the <code>MyState</code> object
+    when performing its sum calculation.
+</p>
+
+
+
+
+<a name="state-scope"></a>
+<h3>State Scope</h3>
+
+<p>
+    A state object can be reused across multiple calls to your benchmark method. JMH provides different "scopes"
+    that the state object can be reused in. There state scope is specified in the parameter of the <code>@State</code>
+    annotation. In the example above the scope chosen was <code>Scope.Thread</code>
+</p>
+
+<p>
+    The <code>Scope</code> class contains the following scope constants:
+</p>
+
+
+
+ <table class="dataTable">
+
+    <tr><td>Thread</td>
+        <td>Each thread running the benchmark will create its own instance of the state object.</td>
+    </tr>
+    <tr><td>Group</td>
+        <td>Each thread group running the benchmark will create its own instance of the state object.</td>
+    </tr>
+    <tr><td>Benchmark</td>
+        <td>All threads running the benchmark share the same state object.</td>
+    </tr>
+</table>
+
+
+
+
+<a name="state-class-requirements"></a>
+<h3>State Class Requirements</h3>
+
+<p>
+    A JMH state class must obey the following rules:
+</p>
+
+<ul>
+    <li>The class must be declared <code>public</code></li>
+    <li>If the class is a nested class, it must be declared <code>static</code> (e.g. <code>public static class ...</code>)</li>
+    <li>The class must have a public no-arg constructor (no parameters to the constructor).</li>
+</ul>
+
+<p>
+    When these rules are obeyed you can annotate the class with the <code>@State</code> annotation to make JMH recognize
+    it as a state class.
+</p>
+
+
+
+
+<a name="state-setup-and-teardown"></a>
+<h3>State Object @Setup and @TearDown</h3>
+
+<p>
+    You can annotate methods in your state class with the <code>@Setup</code> and <code>@TearDown</code> annotations.
+    The <code>@Setup</code> annotation tell JMH that this method should be called to setup the state object before it is
+    passed to the benchmark method. The <code>@TearDown</code> annotation tells JMH that this method should be
+    called to clean up ("tear down") the state object after the benchmark has been executed.
+</p>
+
+<p>
+    The setup and tear down execution time is not included in the benchmark runtime measurements.
+</p>
+
+<p>
+    Here is a JMH state object example that shows the use of the <code>@Setup</code> and <code>@TearDown</code>
+    annotations:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.*;
+
+import java.util.concurrent.TimeUnit;
+
+
+public class MyBenchmark {
+
+    @State(Scope.Thread)
+    public static class MyState {
+
+        @Setup(Level.Trial)
+        public void doSetup() {
+            sum = 0;
+            System.out.println("Do Setup");
+        }
+
+        @TearDown(Level.Trial)
+        public void doTearDown() {
+            System.out.println("Do TearDown");
+        }
+
+        public int a = 1;
+        public int b = 2;
+        public int sum ;
+    }
+
+    @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.MINUTES)
+    public void testMethod(MyState state) {
+        state.sum = state.a + state.b;
+    }
+}
+</pre>
+
+<p>
+    Notice the two new methods in the <code>MyState</code> class named <code>doSetup()</code> and <code>doTearDown()</code>.
+    These methods are annotated with the <code>@Setup</code> and <code>@TearDown</code> annotations. This example
+    only show two methods, but you could have more methods annotated with <code>@Setup</code> and <code>@TearDown</code>.
+</p>
+
+<p>
+    Notice also that the annotations take a parameter. There are three different values this parameter can take.
+    The value you set instruct JMH about when the method should be called. The possible values are:
+</p>
+
+
+<table class="dataTable">
+
+    <tr><td>Level.Trial</td>
+        <td>The method is called once for each time for each full run of the benchmark. A full run means a full "fork"
+            including all warmup and benchmark iterations.
+        </td>
+    </tr>
+
+    <tr><td>Level.Iteration</td>
+        <td>The method is called once for each iteration of the benchmark.</td>
+    </tr>
+    <tr><td>Level.Invocation</td>
+        <td>The method is called once for each call to the benchmark method.</td>
+    </tr>
+
+</table>
+
+
+<p>
+    If you have any doubts about when a setup or tear down method is called, try inserting a <code>System.out.println()</code>
+    statement in the method. Then you will see. Then you can change the <code>@Setup</code> and <code>@TearDown()</code>
+    parameter values until your setup and tear down methods are called at the right time.
+</p>
+
+
+
+
+<a name="writing-good-benchmarks"></a>
+<h2>Writing Good Benchmarks</h2>
+
+<p>
+    Now that you have seen how to use JMH to write benchmarks, it is time to discuss how to write <i>good benchmarks</i>.
+    As mentioned in the beginning of this JMH tutorial there are a couple of pitfalls that you can easily fall into
+    when implementing benchmarks. I will discuss some of these pitfalls in the following sections.
+</p>
+
+<p>
+    One common pitfall is that the JVM may apply optimizations to your components when executed inside the benchmark
+    which could not have been applied if the component was executed inside your real application. Such optimizations
+    will make your code look faster than it will be in reality. I will discuss some of these optimizations later.
+</p>
+
+
+
+
+<a name="loop-optimizations"></a>
+<h2>Loop Optimizations</h2>
+
+<p>
+    It is tempting to put your benchmark code inside a loop in your benchmark methods, in order to repeat it more
+    times per call to the benchmark method (to reduce the overhead of the benchmark method call). However, the JVM
+    is very good at optimizing loops, so you may end up with a different result than what you expected. In general
+    you should avoid loops in your benchmark methods, unless they are part of the code you want to measure 
+    (and not <i>around</i> the code you want to measure).
+</p>
+
+
+
+
+<a name="dead-code-elimination"></a>
+<h2>Dead Code Elimination</h2>
+
+<p>
+    One of the JVM optimizations to avoid when implementing performance benchmarks is dead code elimination.
+    If the JVM detects that the result of some computation is never used, the JVM may consider this computation
+    <i>dead code</i> and eliminate it. Look at this benchmark example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public void testMethod() {
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+    }
+
+}
+</pre>
+
+<p>
+    The JVM can detect that the calculation of <code>a + b</code> which is assigned to <code>sum</code> is never used.
+    Therefore the JVM can remove the calculation of <code>a + b</code> altogether. It is considered dead code.
+    The JVM can then detect that the <code>sum</code> variable is never used, and that subsequently <code>a</code>
+    and <code>b</code> are never used. They too can be eliminated.
+</p>
+
+<p>
+    In the end, there is no code left in the benchmark. The results from running this benchmark are thus highly misleading.
+    The benchmarks do not actually measure the time of adding two variables and assigning the value to a third variable.
+    The benchmarks measure nothing at all.
+</p>
+
+
+
+
+<a name="avoiding-dead-code-elimination"></a>
+<h3>Avoiding Dead Code Elimination</h3>
+
+<p>
+    To avoid dead code elimination you must make sure that the code you want to measure does not look like dead code
+    to the JVM. There are two ways to do that.
+</p>
+
+<ul>
+    <li>Return the result of your code from the benchmark method.</li>
+    <li>Pass the calculated value into a "black hole" provided by JMH.</li>
+</ul>
+
+<p>
+    I will show you examples of both methods in the following sections.
+</p>
+
+
+
+
+<a name="return-value-from-benchmark-method"></a>
+<h3>Return Value From Benchmark Method</h3>
+
+<p>
+    Returning a computed value from the JMH benchmark method could look like this:
+</p>
+
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public int testMethod() {
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+
+        return sum;
+    }
+
+}
+</pre>
+
+<p>
+    Notice how the <code>testMethod()</code> method now returns the <code>sum</code> variable. This way the JVM
+    cannot just eliminate the addition, because the return value might be used by the caller. JMH will take of
+    tricking the JVM into believing that the return value is actually used.
+</p>
+
+<p>
+    If your benchmark method is calculating multiple values that might end up being eliminated as dead code,
+    you can either combine the two values into a single, and return that value (e.g. an object with both values in).
+</p>
+
+
+
+<a name="passing-value-to-a-black-hole"></a>
+<h3>Passing Value to a Black Hole</h3>
+
+<p>
+    An alternative to returning a combined value is to pass the calculated values (or returned / generated objects
+    or whatever the result of your benchmark is) into a JMH <i>black hole</i>. Here is how passing values into
+    a black hole looks:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.infra.Blackhole;
+
+public class MyBenchmark {
+
+    @Benchmark
+   public void testMethod(Blackhole blackhole) {
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+        blackhole.consume(sum);
+    }
+}
+</pre>
+
+<p>
+    Notice how the <code>testMethod()</code> benchmark method now takes a <code>Blackhole</code> object as parameter.
+    This will be provided to the test method by JMH when called.
+</p>
+
+<p>
+    Notice also how the calculated sum in the <code>sum</code> variable is now passed to the <code>consume()</code>
+    method of the <code>Blackhole</code> instance. This will fool the JVM into thinking that the <code>sum</code>
+    variable is actually being used.
+</p>
+
+<p>
+    If your benchmark method produces multiple results you can pass each of these results to a black hole, meaning
+    calling <code>consume()</code> on the <code>Blackhole</code> instance for each value.
+</p>
+
+
+
+
+
+<a name="constant-folding"></a>
+<h2>Constant Folding</h2>
+
+<p>
+    Constant folding is another common JVM optimization. A calculation which is based on constants will often result
+    in the exact same result, regardless of how many times the calculation is performed. The JVM may detect that,
+    and replace the calculation with the result of the calculation.
+</p>
+
+<p>
+    As an example, look at this benchmark:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public int testMethod() {
+        int a = 1;
+        int b = 2;
+        int sum = a + b;
+
+        return sum;
+    }
+
+}
+</pre>
+
+<p>
+    The JVM may detect that the value of <code>sum</code> is based on the two constant values 1 and 2 in <code>a</code>
+    and <code>b</code>. It may thus replace the above code with this:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.Benchmark;
+
+public class MyBenchmark {
+
+    @Benchmark
+    public int testMethod() {
+        int sum = 3;
+
+        return sum;
+    }
+
+}
+</pre>
+
+<p>
+    Or even just <code>return 3;</code> directly. The JVM could even continue and never call the <code>testMethod()</code>
+    because it knows it always returns 3, and just inline the constant 3 wherever the <code>testMethod()</code> was
+    to be called.
+</p>
+
+
+
+
+<a name="avoiding-constant-folding"></a>
+<h3>Avoiding Constant Folding</h3>
+
+<p>
+    To avoid constant folding you must not hardcode constants into your benchmark methods. Instead, the input to
+    your calculations should come from a state object. This makes it harder for the JVM to see that the calculations
+    are based on constant values. Here is an example:
+</p>
+
+<pre class="codeBox">
+package com.jenkov;
+
+import org.openjdk.jmh.annotations.*;
+
+public class MyBenchmark {
+
+    @State(Scope.Thread)
+    public static class MyState {
+        public int a = 1;
+        public int b = 2;
+    }
+
+
+    @Benchmark 
+    public int testMethod(MyState state) {
+        int sum = state.a + state.b;
+        return sum;
+    }
+}
+</pre>
+
+
+<p>
+    Remember, if your benchmark method calculates multiple values you can pass them through a black hole instead
+    of returning them, to also avoid the dead code elimination optimization. For instance:
+</p>
+
+<pre class="codeBox">
+    @Benchmark
+    public void testMethod(MyState state, Blackhole blackhole) {
+        int sum1 = state.a + state.b;
+        int sum2 = state.a + state.a + state.b + state.b;
+
+        blackhole.consume(sum1);
+        blackhole.consume(sum2);
+    }
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="ring-buffer.html">Java Ring Buffer</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

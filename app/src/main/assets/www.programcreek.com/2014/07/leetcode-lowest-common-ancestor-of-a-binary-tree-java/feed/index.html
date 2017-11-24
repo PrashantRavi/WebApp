@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Lowest Common Ancestor of a Binary Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: nidhi pitroda</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-14576</link>
+		<dc:creator><![CDATA[nidhi pitroda]]></dc:creator>
+		<pubDate>Sat, 17 Sep 2016 00:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-14576</guid>
+		<description><![CDATA[Solution 1 doesn&#039;t work for the case when one of the nodes in ancestor of the other. Correct Solution should be as follows :
+&lt;code&gt; 
+
+public class Solution {
+    Boolean flag1,flag2;
+    
+	public int lca(TreeNode a, int val1, int val2) {
+	    
+	    flag1 = flag2 = false;
+	    if(a==null) return -1;
+	    if(a.left == null &#038;&#038; a.right == null)
+	    {
+	        return (a.val == val1 &#038;&#038; val1==val2) ? a.val : -1;
+	    }
+	    
+	    TreeNode temp = find_lca(a,val1,val2);
+	    if(flag1 &#038;&#038; flag2) return temp.val; 
+	    else return -1;
+	}
+	
+	public TreeNode find_lca(TreeNode node,int val1,int val2)
+	{
+	    TreeNode lca=null;
+	    if(node == null) return null;
+	    
+	    if(node.val == val1) 
+	    {
+	        this.flag1 = true;
+	        lca = node;
+	        //return node;
+	    }
+	    if(node.val == val2)
+	    {
+	        this.flag2 = true;
+	        lca = node;
+	      //  return node;
+	    }
+	    
+	    TreeNode l = find_lca(node.left,val1,val2);
+	    TreeNode r = find_lca(node.right,val1,val2);
+	    
+	    if((l != null &#038;&#038; r!=null) &#124;&#124; (lca != null)) return node;
+	    
+	  
+	  return l!=null ? l:r;
+	    
+	    
+	}
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Solution 1 doesn&#8217;t work for the case when one of the nodes in ancestor of the other. Correct Solution should be as follows :<br />
+<code> </p>
+<p>public class Solution {<br />
+    Boolean flag1,flag2;</p>
+<p>	public int lca(TreeNode a, int val1, int val2) {</p>
+<p>	    flag1 = flag2 = false;<br />
+	    if(a==null) return -1;<br />
+	    if(a.left == null &amp;&amp; a.right == null)<br />
+	    {<br />
+	        return (a.val == val1 &amp;&amp; val1==val2) ? a.val : -1;<br />
+	    }</p>
+<p>	    TreeNode temp = find_lca(a,val1,val2);<br />
+	    if(flag1 &amp;&amp; flag2) return temp.val;<br />
+	    else return -1;<br />
+	}</p>
+<p>	public TreeNode find_lca(TreeNode node,int val1,int val2)<br />
+	{<br />
+	    TreeNode lca=null;<br />
+	    if(node == null) return null;</p>
+<p>	    if(node.val == val1)<br />
+	    {<br />
+	        this.flag1 = true;<br />
+	        lca = node;<br />
+	        //return node;<br />
+	    }<br />
+	    if(node.val == val2)<br />
+	    {<br />
+	        this.flag2 = true;<br />
+	        lca = node;<br />
+	      //  return node;<br />
+	    }</p>
+<p>	    TreeNode l = find_lca(node.left,val1,val2);<br />
+	    TreeNode r = find_lca(node.right,val1,val2);</p>
+<p>	    if((l != null &amp;&amp; r!=null) || (lca != null)) return node;</p>
+<p>	  return l!=null ? l:r;</p>
+<p>	}<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hooman</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-14058</link>
+		<dc:creator><![CDATA[Hooman]]></dc:creator>
+		<pubDate>Thu, 25 Aug 2016 19:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-14058</guid>
+		<description><![CDATA[Here&#039;s another solution (java):
+https://gist.github.com/hmny/cbfc98029ae746dbd14a83f96c294ef7]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s another solution (java):<br />
+<a href="https://gist.github.com/hmny/cbfc98029ae746dbd14a83f96c294ef7" rel="nofollow">https://gist.github.com/hmny/cbfc98029ae746dbd14a83f96c294ef7</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Cherry Zhao</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-12462</link>
+		<dc:creator><![CDATA[Cherry Zhao]]></dc:creator>
+		<pubDate>Thu, 07 Jul 2016 15:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-12462</guid>
+		<description><![CDATA[This is a great analysis. I also read an in-depth discussion about this question here http://bit.ly/29kAkXM.]]></description>
+		<content:encoded><![CDATA[<p>This is a great analysis. I also read an in-depth discussion about this question here <a href="http://bit.ly/29kAkXM" rel="nofollow">http://bit.ly/29kAkXM</a>.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ameya Naik</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-11407</link>
+		<dc:creator><![CDATA[Ameya Naik]]></dc:creator>
+		<pubDate>Fri, 27 May 2016 21:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-11407</guid>
+		<description><![CDATA[Good catch.. Alternatively, we could have:
+&lt;code&gt;
+numTotal += (root == p ? 1 : 0) + (root == q ? 1 : 0);
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Good catch.. Alternatively, we could have:<br />
+<code><br />
+numTotal += (root == p ? 1 : 0) + (root == q ? 1 : 0);<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: w4nderlust</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-11248</link>
+		<dc:creator><![CDATA[w4nderlust]]></dc:creator>
+		<pubDate>Sat, 21 May 2016 19:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-11248</guid>
+		<description><![CDATA[Solution 1 doesn&#039;t work in the case of p == q. Should replace
+
+if(root== p &#124;&#124; root == q){
+            numTotal++;
+        }
+
+with
+
+if (root == p) {
+numTotal ++;
+		}
+		if (root == q) {
+numTotal ++;
+		}
+
+or add a check at the beginning.]]></description>
+		<content:encoded><![CDATA[<p>Solution 1 doesn&#8217;t work in the case of p == q. Should replace</p>
+<p>if(root== p || root == q){<br />
+            numTotal++;<br />
+        }</p>
+<p>with</p>
+<p>if (root == p) {<br />
+numTotal ++;<br />
+		}<br />
+		if (root == q) {<br />
+numTotal ++;<br />
+		}</p>
+<p>or add a check at the beginning.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ryanlr</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-tree-java/#comment-10380</link>
+		<dc:creator><![CDATA[ryanlr]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2016 15:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14705#comment-10380</guid>
+		<description><![CDATA[Tried on leetcode online judge, and it didn&#039;t pass.
+&lt;code&gt;
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return findLCA(root, p.val, q.val);
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Tried on leetcode online judge, and it didn&#8217;t pass.<br />
+<code><br />
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {<br />
+        return findLCA(root, p.val, q.val);<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Evaluate Reverse Polish Notation</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: emirpolo</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-15184</link>
+		<dc:creator><![CDATA[emirpolo]]></dc:creator>
+		<pubDate>Thu, 13 Oct 2016 00:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-15184</guid>
+		<description><![CDATA[JavaScript
+
+function ReversePolishNotation(ain) {
+    var out =  [];
+    ain.forEach(function(o){
+       if(!isNaN(o)) {
+           out.push(o);
+       } 
+       else {
+           var a = out.pop();
+           var b = out.pop();
+           out.push(eval(b + o + a));
+       }
+    });
+    return out.pop();
+}]]></description>
+		<content:encoded><![CDATA[<p>JavaScript</p>
+<p>function ReversePolishNotation(ain) {<br />
+    var out =  [];<br />
+    ain.forEach(function(o){<br />
+       if(!isNaN(o)) {<br />
+           out.push(o);<br />
+       }<br />
+       else {<br />
+           var a = out.pop();<br />
+           var b = out.pop();<br />
+           out.push(eval(b + o + a));<br />
+       }<br />
+    });<br />
+    return out.pop();<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Greg Mueller</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-13693</link>
+		<dc:creator><![CDATA[Greg Mueller]]></dc:creator>
+		<pubDate>Mon, 15 Aug 2016 19:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-13693</guid>
+		<description><![CDATA[Thanks Ryan,  I tried this and found an error - in eval_op, you are missing the &#039;:&#039; before each return.  Also you named your main function &#039;eval&#039;, which overwrites the built-in eval function.
+
+I refactored your code down to this.  The main difference is that I am building a string that looks like Python code and then calling eval on that string. Also, I am storing the numbers as strings, since I am not forcing the intergers to flow, or float to integer.
+
+&lt;code&gt; 
+def rpn(expr):
+    s = []
+    expr = expr.split() if type(expr) == type(&#039;&#039;) else expr
+    for item in expr:
+        if item.isnumeric():
+            s.append(int(item))
+        elif item in {&#039;+&#039;, &#039;-&#039;, &#039;*&#039;, &#039;/&#039;}:
+            intermediate_expr = &#039; &#039;.join((str(s.pop()), item, str(s.pop())))
+            s.append(eval(intermediate_expr))
+        else:
+            raise ValueError(&#039;Invalid value: &#039; + item)
+    return s.pop()
+
+rpn(&#039;4 13 5 / +&#039;)
+rpn([&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;])
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Thanks Ryan,  I tried this and found an error &#8211; in eval_op, you are missing the &#8216;:&#8217; before each return.  Also you named your main function &#8216;eval&#8217;, which overwrites the built-in eval function.</p>
+<p>I refactored your code down to this.  The main difference is that I am building a string that looks like Python code and then calling eval on that string. Also, I am storing the numbers as strings, since I am not forcing the intergers to flow, or float to integer.</p>
+<p><code><br />
+def rpn(expr):<br />
+    s = []<br />
+    expr = expr.split() if type(expr) == type('') else expr<br />
+    for item in expr:<br />
+        if item.isnumeric():<br />
+            s.append(int(item))<br />
+        elif item in {'+', '-', '*', '/'}:<br />
+            intermediate_expr = ' '.join((str(s.pop()), item, str(s.pop())))<br />
+            s.append(eval(intermediate_expr))<br />
+        else:<br />
+            raise ValueError('Invalid value: ' + item)<br />
+    return s.pop()</p>
+<p>rpn('4 13 5 / +')<br />
+rpn(["2", "1", "+", "3", "*"])<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bimal prasad pandey</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-13495</link>
+		<dc:creator><![CDATA[bimal prasad pandey]]></dc:creator>
+		<pubDate>Tue, 09 Aug 2016 03:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-13495</guid>
+		<description><![CDATA[thanx for it]]></description>
+		<content:encoded><![CDATA[<p>thanx for it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ryan Shaw</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-7805</link>
+		<dc:creator><![CDATA[Ryan Shaw]]></dc:creator>
+		<pubDate>Thu, 17 Dec 2015 02:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-7805</guid>
+		<description><![CDATA[Python solution:
+&lt;code&gt;
+def eval_op(land, rand, op):
+  if (op == &#039;-&#039;) return land - rand
+  if (op == &#039;+&#039;) return land + rand
+  if (op == &#039;/&#039;) return land / rand
+  if (op == &#039;*&#039;) return land * rand
+  raise ValueError(&#039;unrecognized op: &#039; + op)
+
+
+def is_op(c):
+  return c == &#039;+&#039; or c == &#039;-&#039; or c == &#039;*&#039; or c == &#039;/&#039;
+
+
+def eval(expr):
+  s = []
+  for c in expr:
+    if not is_op(c): s.append(int(c))
+    else:
+      rand, land = s.pop(), s.pop()
+      s.append(eval_op(land, rand, c))
+  return s.pop()
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Python solution:<br />
+<code><br />
+def eval_op(land, rand, op):<br />
+  if (op == '-') return land - rand<br />
+  if (op == '+') return land + rand<br />
+  if (op == '/') return land / rand<br />
+  if (op == '*') return land * rand<br />
+  raise ValueError('unrecognized op: ' + op)</p>
+<p>def is_op(c):<br />
+  return c == '+' or c == '-' or c == '*' or c == '/'</p>
+<p>def eval(expr):<br />
+  s = []<br />
+  for c in expr:<br />
+    if not is_op(c): s.append(int(c))<br />
+    else:<br />
+      rand, land = s.pop(), s.pop()<br />
+      s.append(eval_op(land, rand, c))<br />
+  return s.pop()<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Roy</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-7529</link>
+		<dc:creator><![CDATA[Abhishek Roy]]></dc:creator>
+		<pubDate>Sun, 25 Oct 2015 00:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-7529</guid>
+		<description><![CDATA[This may be due to lowercase &quot;s&quot; in &quot;string&quot;. Try using &quot;String&quot; instead of &quot;string&quot; as shown below,
+Stack stack = new Stack();]]></description>
+		<content:encoded><![CDATA[<p>This may be due to lowercase &#8220;s&#8221; in &#8220;string&#8221;. Try using &#8220;String&#8221; instead of &#8220;string&#8221; as shown below,<br />
+Stack stack = new Stack();</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: srj_michael</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-evaluate-reverse-polish-notation/#comment-7327</link>
+		<dc:creator><![CDATA[srj_michael]]></dc:creator>
+		<pubDate>Wed, 26 Aug 2015 06:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10776#comment-7327</guid>
+		<description><![CDATA[&lt;code&gt; 
+
+ Stack stack = new Stack();&lt;/code&gt;
+Showing error as :type stack does not take parameter]]></description>
+		<content:encoded><![CDATA[<p><code> </p>
+<p> Stack stack = new Stack();</code><br />
+Showing error as :type stack does not take parameter</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

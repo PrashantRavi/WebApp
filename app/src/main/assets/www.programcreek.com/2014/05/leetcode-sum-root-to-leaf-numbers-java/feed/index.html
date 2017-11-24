@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Sum Root to Leaf Numbers (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Juan Carlos Nuño</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/#comment-15316</link>
+		<dc:creator><![CDATA[Juan Carlos Nuño]]></dc:creator>
+		<pubDate>Sun, 16 Oct 2016 21:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14224#comment-15316</guid>
+		<description><![CDATA[Better BFS solution, using only one queue:
+
+&lt;code&gt; 
+public int sumNumbers(TreeNode root) {
+        if (root == null) return 0; 
+        
+        int sum = 0;
+        Queue q = new LinkedList();
+        q.offer(root);
+        
+        while (!q.isEmpty()) {
+            TreeNode temp = q.poll(); 
+            
+            if (temp.left == null &#038;&#038; temp.right == null)
+                sum += temp.val;
+                
+            int num = (temp.val * 10); 
+            
+            if (temp.left != null) {
+                temp.left.val = temp.left.val + num;
+                q.offer (temp.left);
+            }
+            
+            if (temp.right != null) {
+                temp.right.val = temp.right.val + num;
+                q.offer(temp.right);
+            }
+            
+        }
+        
+        return sum; 
+        
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Better BFS solution, using only one queue:</p>
+<p><code><br />
+public int sumNumbers(TreeNode root) {<br />
+        if (root == null) return 0; </p>
+<p>        int sum = 0;<br />
+        Queue q = new LinkedList();<br />
+        q.offer(root);</p>
+<p>        while (!q.isEmpty()) {<br />
+            TreeNode temp = q.poll(); </p>
+<p>            if (temp.left == null &amp;&amp; temp.right == null)<br />
+                sum += temp.val;</p>
+<p>            int num = (temp.val * 10); </p>
+<p>            if (temp.left != null) {<br />
+                temp.left.val = temp.left.val + num;<br />
+                q.offer (temp.left);<br />
+            }</p>
+<p>            if (temp.right != null) {<br />
+                temp.right.val = temp.right.val + num;<br />
+                q.offer(temp.right);<br />
+            }</p>
+<p>        }</p>
+<p>        return sum; </p>
+<p>    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Madhumitha</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/#comment-9942</link>
+		<dc:creator><![CDATA[Madhumitha]]></dc:creator>
+		<pubDate>Sun, 27 Mar 2016 07:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14224#comment-9942</guid>
+		<description><![CDATA[Post order travesal+addition logics
+
+import java.util.Stack;
+
+public class sumToLeaf {
+
+	public static void main(String[] args) {
+
+		TreeNode t = new TreeNode(1);
+
+		t.left = new TreeNode(2);
+
+		t.right = new TreeNode(3);
+
+		t.left.left = new TreeNode(4);
+
+		t.left.right = new TreeNode(5);
+
+		t.left.right.left = new TreeNode(6);
+
+		int s=sum2Leaf(t);
+
+		System.out.println(s);
+
+	}
+
+	
+
+	
+
+private static int sum2Leaf(TreeNode root)
+
+{
+
+	
+
+  Stack stack = new Stack();
+
+  stack.push(root);
+
+  TreeNode prev = null;
+
+  int num=root.val,sum=0;
+
+  int temp=0;
+
+  while(!stack.empty()){
+
+      TreeNode curr = stack.peek();
+
+      if(prev == null &#124;&#124; prev.left == curr &#124;&#124; prev.right == curr)
+
+      {
+
+       
+
+          if(curr.left != null)
+
+          {
+
+          	num=(num*10)+curr.left.val;
+
+            stack.push(curr.left);
+
+          }
+
+          
+
+          else if(curr.right != null)
+
+          {
+
+           sum+=num;
+
+           temp=stack.peek().val;
+
+           num=num-temp+curr.right.val;
+
+           stack.push(curr.right);
+
+          }
+
+          else
+
+          {
+
+          	
+
+             sum+=num;
+
+             temp= stack.pop().val;
+
+             num=num-temp;
+
+             
+
+          }
+
+      }
+
+      else if(curr.left == prev)
+
+      {
+
+          if(curr.right != null)
+
+          {
+
+          	            
+
+          	num=num+curr.right.val;
+
+          
+
+              stack.push(curr.right);
+
+          }else
+
+          {
+
+          	temp= stack.pop().val;
+
+            num=(num-(temp*10))/10;
+
+           
+
+          }
+
+      
+
+      }
+
+      
+
+      else if(curr.right == prev)
+
+      {
+
+      	temp= stack.pop().val;
+
+        num=(num-(temp*10))/10;
+
+         
+
+      }
+
+      prev = curr;
+
+  }
+
+  	
+
+  return sum;
+
+}
+
+  
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Post order travesal+addition logics</p>
+<p>import java.util.Stack;</p>
+<p>public class sumToLeaf {</p>
+<p>	public static void main(String[] args) {</p>
+<p>		TreeNode t = new TreeNode(1);</p>
+<p>		t.left = new TreeNode(2);</p>
+<p>		t.right = new TreeNode(3);</p>
+<p>		t.left.left = new TreeNode(4);</p>
+<p>		t.left.right = new TreeNode(5);</p>
+<p>		t.left.right.left = new TreeNode(6);</p>
+<p>		int s=sum2Leaf(t);</p>
+<p>		System.out.println(s);</p>
+<p>	}</p>
+<p>private static int sum2Leaf(TreeNode root)</p>
+<p>{</p>
+<p>  Stack stack = new Stack();</p>
+<p>  stack.push(root);</p>
+<p>  TreeNode prev = null;</p>
+<p>  int num=root.val,sum=0;</p>
+<p>  int temp=0;</p>
+<p>  while(!stack.empty()){</p>
+<p>      TreeNode curr = stack.peek();</p>
+<p>      if(prev == null || prev.left == curr || prev.right == curr)</p>
+<p>      {</p>
+<p>          if(curr.left != null)</p>
+<p>          {</p>
+<p>          	num=(num*10)+curr.left.val;</p>
+<p>            stack.push(curr.left);</p>
+<p>          }</p>
+<p>          else if(curr.right != null)</p>
+<p>          {</p>
+<p>           sum+=num;</p>
+<p>           temp=stack.peek().val;</p>
+<p>           num=num-temp+curr.right.val;</p>
+<p>           stack.push(curr.right);</p>
+<p>          }</p>
+<p>          else</p>
+<p>          {</p>
+<p>             sum+=num;</p>
+<p>             temp= stack.pop().val;</p>
+<p>             num=num-temp;</p>
+<p>          }</p>
+<p>      }</p>
+<p>      else if(curr.left == prev)</p>
+<p>      {</p>
+<p>          if(curr.right != null)</p>
+<p>          {</p>
+<p>          	num=num+curr.right.val;</p>
+<p>              stack.push(curr.right);</p>
+<p>          }else</p>
+<p>          {</p>
+<p>          	temp= stack.pop().val;</p>
+<p>            num=(num-(temp*10))/10;</p>
+<p>          }</p>
+<p>      }</p>
+<p>      else if(curr.right == prev)</p>
+<p>      {</p>
+<p>      	temp= stack.pop().val;</p>
+<p>        num=(num-(temp*10))/10;</p>
+<p>      }</p>
+<p>      prev = curr;</p>
+<p>  }</p>
+<p>  return sum;</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: disqus_t359ByPNg8</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/#comment-8462</link>
+		<dc:creator><![CDATA[disqus_t359ByPNg8]]></dc:creator>
+		<pubDate>Mon, 18 Jan 2016 05:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14224#comment-8462</guid>
+		<description><![CDATA[Solution using BFS !
+
+An Iterative Solution !
+
+public int sumNumbers(TreeNode root) {
+        
+        if(root == null){
+            return 0;
+            
+        }
+        int sum =0;
+        LinkedList queue = new LinkedList();
+        LinkedList sumQueue = new LinkedList();
+        
+        queue.add(root);
+        sumQueue.add(root.val);
+        while(queue.isEmpty() == false){
+            
+            TreeNode temp = queue.poll();
+            int tempSum = sumQueue.poll();
+            
+            if(temp.left == null &#038;&#038; temp.right == null){
+                sum = sum + tempSum;
+            }
+            
+            if(temp.left!=null){
+                
+                queue.add(temp.left);
+                sumQueue.add(tempSum*10+ temp.left.val);
+                
+            }
+            
+            if(temp.right != null){
+                queue.add(temp.right);
+                sumQueue.add(tempSum *10 + temp.right.val);
+                
+            }
+            
+            
+            
+        }
+        
+        return sum;
+    }]]></description>
+		<content:encoded><![CDATA[<p>Solution using BFS !</p>
+<p>An Iterative Solution !</p>
+<p>public int sumNumbers(TreeNode root) {</p>
+<p>        if(root == null){<br />
+            return 0;</p>
+<p>        }<br />
+        int sum =0;<br />
+        LinkedList queue = new LinkedList();<br />
+        LinkedList sumQueue = new LinkedList();</p>
+<p>        queue.add(root);<br />
+        sumQueue.add(root.val);<br />
+        while(queue.isEmpty() == false){</p>
+<p>            TreeNode temp = queue.poll();<br />
+            int tempSum = sumQueue.poll();</p>
+<p>            if(temp.left == null &amp;&amp; temp.right == null){<br />
+                sum = sum + tempSum;<br />
+            }</p>
+<p>            if(temp.left!=null){</p>
+<p>                queue.add(temp.left);<br />
+                sumQueue.add(tempSum*10+ temp.left.val);</p>
+<p>            }</p>
+<p>            if(temp.right != null){<br />
+                queue.add(temp.right);<br />
+                sumQueue.add(tempSum *10 + temp.right.val);</p>
+<p>            }</p>
+<p>        }</p>
+<p>        return sum;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karim El Shabrawy</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-sum-root-to-leaf-numbers-java/#comment-7410</link>
+		<dc:creator><![CDATA[Karim El Shabrawy]]></dc:creator>
+		<pubDate>Mon, 21 Sep 2015 15:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14224#comment-7410</guid>
+		<description><![CDATA[Hi,
+
+I think I get a better solution :
+
+
+&lt;code&gt; 
+
+    public int sumNumbers(TreeNode root) {
+        
+        return sumNumbers(root, 0);
+    }
+    
+    
+    
+    public int sumNumbers(TreeNode root, int current) {
+        
+        if (root == null) return 0;
+        if (root.left == null &#038;&#038; root.right == null) return root.val+current*10;
+        
+        current = current*10 + root.val;
+        
+        return sumNumbers(root.left, current)+sumNumbers(root.right, current);
+        
+    }
+
+
+&lt;/code&gt;
+What do you think ?
+
+BR,
+
+Karim El Shabrawy
+elshabrawy.karim@gmail.com]]></description>
+		<content:encoded><![CDATA[<p>Hi,</p>
+<p>I think I get a better solution :</p>
+<p><code> </p>
+<p>    public int sumNumbers(TreeNode root) {</p>
+<p>        return sumNumbers(root, 0);<br />
+    }</p>
+<p>    public int sumNumbers(TreeNode root, int current) {</p>
+<p>        if (root == null) return 0;<br />
+        if (root.left == null &amp;&amp; root.right == null) return root.val+current*10;</p>
+<p>        current = current*10 + root.val;</p>
+<p>        return sumNumbers(root.left, current)+sumNumbers(root.right, current);</p>
+<p>    }</p>
+<p></code><br />
+What do you think ?</p>
+<p>BR,</p>
+<p>Karim El Shabrawy<br />
+<a href="mailto:elshabrawy.karim@gmail.com">elshabrawy.karim@gmail.com</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

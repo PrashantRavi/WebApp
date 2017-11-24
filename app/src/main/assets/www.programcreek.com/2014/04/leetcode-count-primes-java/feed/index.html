@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Count Primes (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/04/leetcode-count-primes-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/04/leetcode-count-primes-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: RMFOREVER123</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-count-primes-java/#comment-8560</link>
+		<dc:creator><![CDATA[RMFOREVER123]]></dc:creator>
+		<pubDate>Fri, 22 Jan 2016 04:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14043#comment-8560</guid>
+		<description><![CDATA[ &lt;code&gt;
+
+
+public int countPrimes(int n) {
+	if (n &#060;= 2)
+		return 0;
+ 
+	// init an array to track prime numbers
+	boolean[] primes = new boolean[n];
+	for (int i = 2; i &#060; n; i++)
+		primes[i] = true;
+ 
+	for (int i = 2; i &#060;= Math.sqrt(n - 1); i++) {
+	// or for (int i = 2; i &#060;= n-1; i++) {
+		if (primes[i]) {
+
+
+// j=i*i not i+i
+			for (int j = i * i; j &#060; n; j += i)
+				primes[j] = false;
+		}
+	}
+ 
+	int count = 0;
+	for (int i = 2; i &#060; n; i++) {
+		if (primes[i])
+			count++;
+	}
+ 
+	return count;
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p> <code></p>
+<p>public int countPrimes(int n) {<br />
+	if (n &lt;= 2)<br />
+		return 0;</p>
+<p>	// init an array to track prime numbers<br />
+	boolean[] primes = new boolean[n];<br />
+	for (int i = 2; i &lt; n; i++)<br />
+		primes[i] = true;</p>
+<p>	for (int i = 2; i &lt;= Math.sqrt(n - 1); i++) {<br />
+	// or for (int i = 2; i &lt;= n-1; i++) {<br />
+		if (primes[i]) {</p>
+<p>// j=i*i not i+i<br />
+			for (int j = i * i; j &lt; n; j += i)<br />
+				primes[j] = false;<br />
+		}<br />
+	}</p>
+<p>	int count = 0;<br />
+	for (int i = 2; i &lt; n; i++) {<br />
+		if (primes[i])<br />
+			count++;<br />
+	}</p>
+<p>	return count;<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vj</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-count-primes-java/#comment-6926</link>
+		<dc:creator><![CDATA[Vj]]></dc:creator>
+		<pubDate>Wed, 29 Apr 2015 21:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14043#comment-6926</guid>
+		<description><![CDATA[We can avoid first and last for loop in above code. Refer below code,
+
+public static void countPrimes()
+
+        {
+
+            int n = 20;
+
+            bool[] nums = new bool[n+1];
+
+            int nonPrimeCounter = 0;
+
+            for (int i = 2; i &#060;= 7; i++)
+
+            {
+
+                if (nums[i] == false)
+
+                {
+
+                    for (int j = i+i; j &#060;= n; j = j + i)
+
+                    {
+
+                        if (j%i == 0)
+
+                        {
+
+                            if (nums[j] == false)
+
+                            {
+
+                                nums[j] = true;
+
+                                nonPrimeCounter++;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            int primCounter = n - nonPrimeCounter;
+
+        }]]></description>
+		<content:encoded><![CDATA[<p>We can avoid first and last for loop in above code. Refer below code,</p>
+<p>public static void countPrimes()</p>
+<p>        {</p>
+<p>            int n = 20;</p>
+<p>            bool[] nums = new bool[n+1];</p>
+<p>            int nonPrimeCounter = 0;</p>
+<p>            for (int i = 2; i &lt;= 7; i++)</p>
+<p>            {</p>
+<p>                if (nums[i] == false)</p>
+<p>                {</p>
+<p>                    for (int j = i+i; j &lt;= n; j = j + i)</p>
+<p>                    {</p>
+<p>                        if (j%i == 0)</p>
+<p>                        {</p>
+<p>                            if (nums[j] == false)</p>
+<p>                            {</p>
+<p>                                nums[j] = true;</p>
+<p>                                nonPrimeCounter++;</p>
+<p>                            }</p>
+<p>                        }</p>
+<p>                    }</p>
+<p>                }</p>
+<p>            }</p>
+<p>            int primCounter = n &#8211; nonPrimeCounter;</p>
+<p>        }</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

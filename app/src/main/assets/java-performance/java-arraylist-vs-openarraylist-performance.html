@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java ArrayList vs. OpenArrayList Performance</title>
+
+    <meta name="description" content="Quite often Java apps keep objects in ArrayList instances. Accessing those objects means iterating the ArrayList instances. Thus, ArrayList performance matters. This tutorial looks at the ArrayList performance and compares it to an alternative implementation, an OpenArrayList class.">
+    <meta name="keywords"    content="java arraylist performance">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java ArrayList vs. OpenArrayList Performance">
+    <meta name="twitter:description" content="Quite often Java apps keep objects in ArrayList instances. Accessing those objects means iterating the ArrayList instances. Thus, ArrayList performance matters. This tutorial looks at the ArrayList performance and compares it to an alternative implementation, an OpenArrayList class.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java ArrayList vs. OpenArrayList Performance"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/java-arraylist-vs-openarraylist-performance.html"/>
+    <meta property="og:description" content="Quite often Java apps keep objects in ArrayList instances. Accessing those objects means iterating the ArrayList instances. Thus, ArrayList performance matters. This tutorial looks at the ArrayList performance and compares it to an alternative implementation, an OpenArrayList class."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/java-for-vs-switch-performance.html";
+var nextArticleInCategory = "/java-performance/read-patterns.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 14393;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html"><b>Java ArrayList vs. OpenArrayList Performance</b></a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java ArrayList vs. OpenArrayList Performance</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#three-ways-to-iterate-an-arraylist">Three Ways to Iterate an ArrayList</a><ul><li><a href="#the-for-loop">The for Loop</a></li><li><a href="#the-for-each-loop">The for-each Loop</a></li><li><a href="#the-iterator">The Iterator</a></li></ul></li><li><a href="#arraylist-benchmarks">ArrayList Iteration Benchmarks</a></li><li><a href="#="openarraylist"">OpenArrayList</a></li><li><a href="#openarraylist-iteration-benchmarks">OpenArrayList Iteration Benchmarks</a></li><li><a href="#iteration-benchmark-code">Iteration Benchmark Code</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-11-27
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Quite often Java applications keep objects in data structures that contain <code>java.util.ArrayList</code>
+    instances. When iterating the objects in those data structures we also have to iterate the objects stored
+    in the <code>ArrayList</code> instances. In this Java ArrayList performance tutorial I will take a closer
+    look at the performance of the different ways you can iterate an <code>ArrayList</code>. This tutorial
+    will also look at the performance of the <code>OpenArrayList</code> class - a class that mimics the
+    <code>java.util.ArrayList</code> but designed with performance in mind.
+</p>
+
+
+
+<a name="three-ways-to-iterate-an-arraylist"></a>
+<h2>Three Ways to Iterate an ArrayList</h2>
+
+<p>
+    There are basically three different ways to iterate the objects contained in an <code>ArrayList</code>:
+</p>
+
+<ul>
+    <li>Using a for-loop.</li>
+    <li>Using a for-each-loop.</li>
+    <li>Using an Iterator.</li>
+</ul>
+
+<p>
+    There is not a big performance difference between these three ways of iterating an <code>ArrayList</code>, but
+    there is a little, and it's big enough that if your code is performance critical you might want to gain this
+    almost free performance gain. But first, let me show you the three ways to iterate an <code>ArrayList</code>.
+</p>
+
+
+
+
+<a name="the-for-loop"></a>
+<h3>The for Loop</h3>
+
+<p>
+    Iterating an <code>ArrayList</code> using a standard Java <code>for</code> loop looks like this:
+</p>
+
+<pre class="codeBox">
+ArrayList arrayList = ...//get ArrayList from somewhere
+
+long sum = 0;    
+for(int i=0, n=arrayList.size(); i < n; i++){
+    Object element = arrayList.get(i);
+}
+</pre>
+
+<p>
+    As you can see, the <code>for</code> loop uses a standard counter to count through all the elements stored
+    in the <code>ArrayList</code>. Each element is obtained from the <code>ArrayList</code> instance using the
+    <code>get()</code> method.
+</p>
+
+
+
+
+<a name="the-for-each-loop"></a>
+<h3>The for-each Loop</h3>
+<p>
+    The <code>for-each</code> loop uses the <code>for</code> construct added in Java 5. Here is how iterating an
+    <code>ArrayList</code> using a <code>for-each</code> loop looks:
+</p>
+
+<pre class="codeBox">
+ArrayList arrayList = ...//get ArrayList from somewhere
+
+long sum = 0;
+for(Object obj : arrayList){
+
+}
+</pre>
+
+
+
+
+<a name="the-iterator"></a>
+<h3>The Iterator</h3>
+<p>
+    The third way to iterate an <code>ArrayList</code> is to use an <code>java.util.Iterator</code> obtained from the
+    <code>ArrayList</code>. Here is how iterating an <code>ArrayList</code> using an <code>Iterator</code> looks:
+</p>
+
+<pre class="codeBox">
+ArrayList arrayList = ...//get ArrayList from somewhere
+
+long sum = 0;
+Iterator iterator = arrayList.iterator();
+while(iterator.hasNext()) {
+    Object element = iterator.next();
+}
+</pre>
+
+
+
+
+<a name="arraylist-benchmarks"></a>
+<h2>ArrayList Iteration Benchmarks</h2>
+
+<p>
+    In order to measure the iteration performance difference of the three different ways to iterate an
+    <code>ArrayList</code> I have implemented three different benchmark methods using
+    the <a href="jmh.html">Java Microbenchmark Harness</a> . The code for these benchmarks is included at the end
+    of this text.
+</p>
+
+<p>
+    To get a more precise view of the iteration speed of each technique, I have measured the speed of iterating
+    an <code>ArrayList</code> of 10 and 100 elements. That way I believe I would get more nuanced picture of
+    the performance.
+</p>
+
+<p>
+    The elements in the <code>ArrayList</code> are <code>Long</code> elements which are summed. Thus, the benchmarks
+    really measure both the iteration and summation of 10 and 100 <code>Long</code> elements stored in an <code>ArrayList</code>.
+</p>
+
+
+<p>
+    The benchmarks were executed using JDK 1.8.0_u60 on a Intel Core i7-4770 Haswell server which was doing nothing but 
+    the benchmarks. The benchmarks were executed using the JMH defaults, meaning 20 warmup iterations, 20 iterations and 
+    10 forks of each. Here are the benchmark results (the output from JMH):    
+</p>
+
+
+<pre class="codeBox">
+Benchmark                                                Mode  Cnt         Score        Error  Units
+OpenArrayListBenchmark.jdkArrayList100SumUsingGet       thrpt  200  15838998.503 Â±   1017.752  ops/s
+OpenArrayListBenchmark.jdkArrayList100SumUsingForEach   thrpt  200  14068898.854 Â±    946.976  ops/s
+OpenArrayListBenchmark.jdkArrayList100SumUsingIterator  thrpt  200  14069990.330 Â±    512.600  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingGet        thrpt  200  77320532.538 Â±   7421.267  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingForEach    thrpt  200  69926532.927 Â± 732112.779  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingIterator   thrpt  200  69879781.630 Â± 727551.844  ops/s
+</pre>
+
+<p>
+    As you can see, iterating an <code>ArrayList</code> using the <code>for-each</code> loop and <code>Iterator</code>
+    yields pretty much the same performance. This was expected, as the <code>for-each</code> loop is probably
+    compiled into an iteration using an <code>Iterator</code> by the Java compiler.
+</p>
+
+<p>
+    You can also see that iterating an <code>ArrayList</code> using a standard Java <code>for</code> loop with a
+    counter, and obtaining each element by calling the <code>ArrayList</code> <code>get()</code> method is about
+    10% faster for an <code>ArrayList</code> with 10 elements, and around 12,5% faster when the <code>ArrayList</code>
+    contains 100 elements. 
+</p>
+
+<p>
+    Exactly why there is such performance difference is hard to tell. Part of the difference is probably caused by
+    the creation of an <code>Iterator</code> object per iteration. However, you would expect that overhead to be
+    evened out (less noticeable) when the <code>ArrayList</code> contains more elements. But, instead it seems the
+    performance difference grows (from 10% at 10 elements to 12,5% at 100 elements). This might be caused by a more
+    optimized loop execution by the CPU for the <code>for</code> loop version, but I cannot say for sure. 
+</p>
+
+
+
+
+<a name=="openarraylist"></a>
+<h2>OpenArrayList</h2>
+
+<p>
+    The <code>OpenArrayList</code> class is a very simple imitation of the <code>ArrayList</code> which I have 
+    implemented to see if it could iterate a collection of elements faster than an <code>ArrayList</code> .
+    Here is a scraped version of the <code>OpenArrayList</code> implementation:
+</p>
+
+<pre class="codeBox">
+    public Object[] elements = null;
+
+    public int capacity = 0;
+    public int size     = 0;
+
+    public OpenArrayList(){
+
+    }
+
+    public OpenArrayList(int capacity){
+        this.capacity = capacity;
+        this.elements = new Object[capacity];
+    }
+
+    public OpenArrayList(Object[] elements){
+        this.elements = elements;
+        this.capacity = elements.length;
+    }
+
+
+    public void add(Object element){
+        this.elements[this.size++] = element;
+    }
+
+    public boolean addIfCapacity(Object element){
+        if(this.size < this.capacity){
+            this.elements[this.size++] = element;
+            return true;
+        }
+        return false;
+    }
+}
+</pre>
+
+<p>
+    The first thing to notice is that all the <code>OpenArrayList</code> member variables are public. That is why
+    I have called it "Open". Its member variables are open to the outside world. I have made
+    the member variables public so that you can access the <code>elements</code> array directly when iterating the elements in the <code>OpenArrayList</code>.
+    This should be a tiny bit faster than calling the <code>ArrayList</code> <code>get()</code> method, although the JVM
+    could optimize the <code>get()</code> method call away.
+</p>
+
+<p>
+    Another advantage of making the <code>elements</code> array public is that you can write to it or copy from
+    it using <code>System.arraycopy()</code> which is very fast.
+</p>
+
+
+
+
+<a name="openarraylist-iteration-benchmarks"></a>
+<h2>OpenArrayList Iteration Benchmarks</h2>
+
+<p>
+    As with the <code>ArrayList</code> I have measured the summation of 10 and 100 <code>Long</code> objects stored
+    in an <code>OpenArrayList</code>. The benchmarks were executed using the same setup as the <code>ArrayList</code>
+    benchmarks.
+</p>
+
+<p>
+    Here are the <code>OpenArrayList</code> iteration benchmarks (with the <code>ArrayList</code> benchmarks below for
+    easy comparison):
+</p>
+
+<pre class="codeBox">
+
+Benchmark                                                Mode  Cnt         Score        Error  Units
+OpenArrayListBenchmark.openArrayList100Sum              thrpt  200  16040305.970 Â±   1490.153  ops/s
+OpenArrayListBenchmark.openArrayList10Sum               thrpt  200  81301297.431 Â±  15104.301  ops/s
+
+OpenArrayListBenchmark.jdkArrayList100SumUsingGet       thrpt  200  15838998.503 Â±   1017.752  ops/s
+OpenArrayListBenchmark.jdkArrayList100SumUsingForEach   thrpt  200  14068898.854 Â±    946.976  ops/s
+OpenArrayListBenchmark.jdkArrayList100SumUsingIterator  thrpt  200  14069990.330 Â±    512.600  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingGet        thrpt  200  77320532.538 Â±   7421.267  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingForEach    thrpt  200  69926532.927 Â± 732112.779  ops/s
+OpenArrayListBenchmark.jdkArrayList10SumUsingIterator   thrpt  200  69879781.630 Â± 727551.844  ops/s
+</pre>
+
+<p>
+    As you can see, the <code>OpenArrayList</code> iteration is about 1% faster when the <code>ArrayList</code>
+    contains 100 elements, and around 5% faster with 10 elements. Exactly why that performance difference exists
+    I cannot say for sure. The fact that the performance is so close is probably a sign that the JVM has
+    optimized the <code>get()</code> call away. But still interesting that there seems to be a larger performance
+    difference for smaller numbers of elements.
+</p>
+
+
+
+<a name="iteration-benchmark-code"></a>
+<h2>Iteration Benchmark Code</h2>
+
+<p>
+    Here is the benchmark code used to measure the iteration speed of the different iteration techniques for both
+    <code>ArrayList</code> and <code>OpenArrayList</code>.
+</p>
+
+<pre class="codeBox">
+public class OpenArrayListBenchmark {
+
+
+    @State(Scope.Thread)
+    public static class BenchmarkState {
+
+        public ArrayList&lt;Long&gt; jdkArrayList10 = new ArrayList&lt;&gt;();
+        public ArrayList&lt;Long&gt; jdkArrayList100 = new ArrayList&lt;&gt;();
+        public OpenArrayList openArrayList10 = new OpenArrayList(10);
+        public OpenArrayList openArrayList100 = new OpenArrayList(100);
+
+        @Setup(Level.Trial)
+        public void toSetup() {
+            Object[] elements = openArrayList10.elements;
+            for(int i=0; i &lt; openArrayList10.capacity; i++){
+                elements[i] = new Long(i);
+                jdkArrayList10.add(new Long(i));
+            }
+            openArrayList10.size = openArrayList10.capacity;
+    
+            elements = openArrayList100.elements;
+            for(int i=0; i &lt; openArrayList100.capacity; i++){
+                elements[i] = new Long(i);
+                jdkArrayList100.add(new Long(i));
+            }
+            openArrayList100.size = openArrayList100.capacity;
+        }
+
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long openArrayList10Sum(BenchmarkState state, Blackhole blackhole) {
+
+        long sum = 0;
+        Object[] elements = state.openArrayList10.elements;
+        for(int i=0; i&lt;state.openArrayList10.size; i++){
+            sum += ((Long) elements[i]).longValue();
+        }
+    
+        blackhole.consume(sum);
+    
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long openArrayList100Sum(BenchmarkState state, Blackhole blackhole) {
+
+        long sum = 0;
+        Object[] elements = state.openArrayList100.elements;
+        for(int i=0; i&lt;state.openArrayList100.size; i++){
+            sum += ((Long) elements[i]).longValue();
+        }
+    
+        blackhole.consume(sum);
+
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList10SumUsingGet(BenchmarkState state, Blackhole blackhole) {
+    
+        long sum = 0;
+        ArrayList arrayList = state.jdkArrayList10;
+        for(int i=0, n=state.jdkArrayList10.size(); i &lt; n; i++){
+            sum += ((Long) arrayList.get(i)).longValue();
+        }
+    
+        blackhole.consume(sum);
+    
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList100SumUsingGet(BenchmarkState state, Blackhole blackhole) {
+
+        long sum = 0;
+        ArrayList arrayList = state.jdkArrayList100;
+        for(int i=0, n=state.jdkArrayList100.size(); i &lt; n; i++){
+            sum += ((Long) arrayList.get(i)).longValue();
+        }
+    
+        blackhole.consume(sum);
+    
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList10SumUsingForEach(BenchmarkState state, Blackhole blackhole) {
+    
+        long sum = 0;
+    
+        for(Long element : state.jdkArrayList10){
+            sum += element.longValue();
+        }
+    
+        blackhole.consume(sum);
+    
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList100SumUsingForEach(BenchmarkState state, Blackhole blackhole) {
+
+        long sum = 0;
+    
+        for(Long element : state.jdkArrayList100){
+            sum += element.longValue();
+        }
+    
+        blackhole.consume(sum);
+    
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList10SumUsingIterator(BenchmarkState state, Blackhole blackhole) {
+
+    long sum = 0;
+    Iterator&lt;Long&gt; iterator = state.jdkArrayList10.iterator();
+        while(iterator.hasNext()){
+            sum += iterator.next().longValue();
+        }
+
+        blackhole.consume(sum);
+
+        return sum;
+    }
+
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public long jdkArrayList100SumUsingIterator(BenchmarkState state, Blackhole blackhole) {
+
+        long sum = 0;
+        Iterator&lt;Long&gt; iterator = state.jdkArrayList100.iterator();
+        while(iterator.hasNext()){
+            sum += iterator.next().longValue();
+        }
+
+        blackhole.consume(sum);
+
+        return sum;
+    }
+}
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="read-patterns.html">Java High Performance Read Patterns</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,1483 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example java.io.BufferedReader</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for java.io.BufferedReader. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, java.io.BufferedReader" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5622 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=java.io.FileReader.php.html">java.io.FileReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.PrintWriter.php.html">java.io.PrintWriter</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.FileNotFoundException.php.html">java.io.FileNotFoundException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.FileInputStream.php.html">java.io.FileInputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStreamReader.php.html">java.io.InputStreamReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.StringReader.php.html">java.io.StringReader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.BufferedWriter.php.html">java.io.BufferedWriter</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStream.php.html">java.io.InputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.net.URL.php.html">java.net.URL</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.Reader.php.html">java.io.Reader</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=readLine.php.html">
+                                    readLine                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=close.php.html">
+                                    close                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=read.php.html">
+                                    read                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=ready.php.html">
+                                    ready                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=mark.php.html">
+                                    mark                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=reset.php.html">
+                                    reset                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=skip.php.html">
+                                    skip                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=java.io.BufferedReader&method=markSupported.php.html">
+                                    markSupported                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for java.io.BufferedReader</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">java.io.BufferedReader</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+							<div class="click_button" style="float:right; margin-left:10px;">
+				<span style="font-weight: 900;">&rarr;</span><a>
+				<a href="https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html">Go to Official Java Doc</a>
+			</div>
+				
+		<div id="saveClass"
+			 class="click_button"
+			 classname="java.io.BufferedReader"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">arduino-android</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">WebServer.java</span>
+								<a href="index-source_dir=arduino-android-master_HomeAutomation_src_com_simonmonk_home_WebServer.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2votes">8</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void handleRequest(BufferedReader input, DataOutputStream output, ResponseHelper helper) throws Exception 
+{
+ // todo - make bullet proof !!!!!!
+  String request = input.readLine(); 
+  // GET /page?arg1=fred&amp;arg2=smith HTTP/1.1
+  int indexOfSlash = request.indexOf('/');
+  int indexOfQ = request.indexOf('?');
+  String page = null;
+  String paramsString = null;
+  String response = &quot;&quot;;
+  if (indexOfSlash &lt; 0 || indexOfQ &lt;= indexOfSlash)
+  {
+  	response = generateError(&quot;No page specified&quot;);
+  }
+  else 
+  {
+  	int indexOfSpace = request.indexOf(&quot;HTTP&quot;)-1;
+  	if (indexOfSpace &gt;= indexOfQ)
+  	{
+  		page = request.substring(indexOfSlash+1, indexOfQ);	   
+  		paramsString = request.substring(indexOfQ+1, indexOfSpace); 		
+  		response = helper.generateResponse(page, mActivity.URL, parseParams(paramsString));
+  	}
+  }
+  output.writeBytes(constructHttpHeader());
+  output.writeBytes(response);
+ 	 
+  output.close();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">iswc2012metadata</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ToolIO.java</span>
+								<a href="index-source_dir=iswc2012metadata-master_src_main_java_sw4j_util_ToolIO.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="5823votes">8</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="5823==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="5823==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * pipe stuff to String  (we can just use new String(byte[]) because it uses the heap and may cause outOfMemory exception 
+ * 
+ * @param inputReader
+ * @return
+ * @throws Sw4jException
+ */
+public static String pipeInputStreamToString(InputStream in) throws Sw4jException{
+	// TODO: need charset detector if processing non-English stuff
+	// we assume default charset
+	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+	StringBuffer fileData = new StringBuffer(1000);
+	char[] buf = new char[1024];
+	int numRead=0;
+	try{
+		while((numRead=reader.read(buf)) != -1){
+			fileData.append(buf, 0, numRead);
+		}
+		reader.close();
+		return fileData.toString();
+	} catch (IOException e) {
+		Sw4jException e1 = new Sw4jException(Sw4jMessage.STATE_FATAL, e);
+		getLogger().error(e1.getMessage());
+		throw e1;
+	}
+
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">jena</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DumpServlet.java</span>
+								<a href="index-source_dir=jena-master_jena-fuseki1_src_main_java_org_apache_jena_fuseki_servlets_DumpServlet.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="16737votes">8</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="16737==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="16737==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >static void printBody(PrintWriter pw, HttpServletRequest req) throws IOException
+{
+    BufferedReader in = req.getReader() ;
+    if ( req.getContentLength() &gt; 0 )
+        // Need +2 because last line may not have a CR/LF on it.
+        in.mark(req.getContentLength()+2) ;
+    else
+        // This is a dump - try to do something that works, even if inefficient.
+        in.mark(100*1024) ;
+
+    while(true)
+    {
+        String x = in.readLine() ;
+        if ( x == null )
+            break ;
+        x = x.replaceAll(&quot;&amp;&quot;, &quot;&amp;amp;&quot;) ;
+        x = x.replaceAll(&quot;&lt;&quot;, &quot;&amp;lt;&quot;) ;
+        x = x.replaceAll(&quot;&gt;&quot;, &quot;&amp;gt;&quot;) ;
+        pw.println(x) ;
+    }
+    try { in.reset() ;} catch (IOException e) { System.out.println(&quot;DumpServlet: Reset of content failed: &quot;+e) ; }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">iot-server-appliances</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">SidhdhiQuery.java</span>
+								<a href="index-source_dir=iot-server-appliances-master_RaspberryCEPAgent_FireAlarm_src_main_java_org_wso2_devicemgt_raspberry_agent_SidhdhiQuery.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2020votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2020==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2020==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Read sonar data from API URL
+ * @param sonarAPIUrl
+ * @return
+ */
+private String readSonarData(String sonarAPIUrl) {
+    HttpClient client = new DefaultHttpClient();
+    HttpGet request = new HttpGet(sonarAPIUrl);
+    String responseStr = null;
+    try {
+        HttpResponse response = client.execute(request);
+        log.debug(&quot;Response Code : &quot; + response);
+        InputStream input = response.getEntity().getContent();
+        BufferedReader br = new BufferedReader(new InputStreamReader(input, &quot;UTF-8&quot;));
+        responseStr = String.valueOf(br.readLine());
+        br.close();
+
+    } catch (IOException e) {
+        //log.error(&quot;Exception encountered while trying to make get request.&quot;);
+        log.error(&quot;Error while reading sonar reading from file!&quot;);
+        return responseStr;
+    }
+    return responseStr;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">mobile-mba-androidapp</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">TestResultsManager.java</span>
+								<a href="index-source_dir=mobile-mba-androidapp-master_AndroidAppLibrary_src_com_samknows_measurement_test_TestResultsManager.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="186319votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="186319==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="186319==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static void verifyReduceSize(File logFile) {
+	if (logFile.length() &gt; Constants.SUBMITED_LOGS_MAX_SIZE) {
+		File temp = new File(logFile.getAbsolutePath() + &quot;_tmp&quot;);
+		BufferedReader reader = null;
+		FileWriter writer = null;
+		try {
+			reader = new BufferedReader(new FileReader(logFile));
+			reader.skip(logFile.length() - Constants.SUBMITED_LOGS_MAX_SIZE / 2);
+			reader.readLine();
+			
+			writer = new FileWriter(temp);
+			IOUtils.copy(reader, writer);
+			writer.close();
+			reader.close();
+			
+			logFile.delete();
+			temp.renameTo(logFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(reader);
+			IOUtils.closeQuietly(writer);
+		}
+	}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">h2-bitmap</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">Csv.java</span>
+								<a href="index-source_dir=h2-bitmap-master_h2_src_main_org_h2_tools_Csv.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="599269votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="599269==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="599269==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void initRead() throws IOException {
+    if (input == null) {
+        try {
+            InputStream in = FileUtils.newInputStream(fileName);
+            in = new BufferedInputStream(in, Constants.IO_BUFFER_SIZE);
+            input = new InputStreamReader(in, characterSet);
+        } catch (IOException e) {
+            close();
+            throw e;
+        }
+    }
+    if (!input.markSupported()) {
+        input = new BufferedReader(input);
+    }
+    input.mark(1);
+    int bom = input.read();
+    if (bom != 0xfeff) {
+        // Microsoft Excel compatibility
+        // ignore pseudo-BOM
+        input.reset();
+    }
+    inputBuffer = new char[Constants.IO_BUFFER_SIZE * 2];
+    if (columnNames == null) {
+        readHeader();
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">ArubaSyslog</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">PPEFilter.java</span>
+								<a href="index-source_dir=ArubaSyslog-master_SyslogCleanser_src_main_java_cn_edu_sjtu_omnilab_syslogcleanser_apps_PPEFilter.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="5667votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="5667==java.io.BufferedReader">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="5667==java.io.BufferedReader">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void main(String[] args) throws IOException{
+	
+   	// Initial options
+       String input_file_location = &quot;&quot;;
+       String output_file_location = &quot;&quot;;
+       
+       // fetch command line options 
+       int optSetting = 0;  
+       for (; optSetting &lt; args.length; optSetting++) {  
+           if (&quot;-i&quot;.equals(args[optSetting])) {  
+               input_file_location = args[++optSetting];  
+           } else if (&quot;-o&quot;.equals(args[optSetting])) {  
+               output_file_location = args[++optSetting];  
+           }
+       }
+
+       if(input_file_location.length() == 0 || output_file_location.length() == 0) {
+           System.out.println(&quot;Usage: PPEFilter -i &lt;source&gt; -o &lt;destination&gt;&quot;);
+           System.exit(-1);
+       }
+       
+       // prepare for reading files one by one
+ 		File input_folder = null;  
+ 		input_folder = new File(input_file_location);  
+ 		File[] files = input_folder.listFiles(); 
+ 		
+ 		// String input_file_path = &quot;&quot;;
+ 		String uid = &quot;&quot;;
+ 		String input_file_name = &quot;&quot;;
+ 		String output_file = &quot;&quot;;
+ 		
+ 		// Skip invalid files without name format \d+.mv
+ 		String filename_regex = &quot;[\\d\\w.]+.mv$&quot;;
+ 		Pattern p = Pattern.compile(filename_regex);
+ 		Matcher m = null;
+	
+ 		for (File input_file : files) {
+ 			
+ 			// extract input_file_name as output_file_name
+ 			// input_file_path = input_file.getAbsolutePath();
+ 		    input_file_name = input_file.getName();
+ 		    
+ 		    // Skip invalid files without name format \d+.mv
+ 		    m = p.matcher(input_file_name);
+ 		    if ( m.find() == false)
+ 		    	continue;
+ 		    
+ 		    uid = input_file_name.split(&quot;\\.&quot;)[0];
+ 		    output_file = output_file_location + uid;
+ 		    
+ 		    // Input stream
+ 			FileReader ifr = new FileReader(input_file);
+ 			BufferedReader ibr = new BufferedReader(ifr);
+ 			
+ 			// Create parent directories if they are not available.
+ 			File output_folder = new File(output_file_location);
+ 			if ( !output_folder.exists() )
+ 				output_folder.mkdirs();
+ 			
+ 			// Output stream
+ 			File file = new File(output_file);	
+           if(!file.exists()) {
+               if(!file.createNewFile()) {
+               	System.out.println(&quot;Can't create file.&quot;);
+               }
+           }
+           
+ 			FileWriter ofr = new FileWriter(file);
+ 			BufferedWriter obr = new BufferedWriter(ofr);
+ 			
+ 			// Processing one file for a user
+ 			String line =&quot;&quot;;
+ 			String [] ap_info;
+ 			ConvSession cs = null;
+ 			
+ 			while ((line = ibr.readLine()) != null) {
+			
+ 				line = line.replaceAll(&quot;[\\n\\r]*&quot;,&quot;&quot;);
+ 				
+ 				// Read the conversation sessions
+ 				// Each session ends with &quot;OFF&quot; flag.
+ 				// Each file will be split into sessions as 
+ 				// count of &quot;OFF&quot;'s
+ 				if ( cs == null )
+ 					cs = new ConvSession(uid);
+			ap_info = line.split(&quot;\\t&quot;);
+			
+			if ( ap_info[1].equals(&quot;OFF&quot;) == false &amp;&amp; ibr.ready() == true) {
+				// If the last line is without OFF
+				// Add a fake OFF signs to the session records
+				cs.addRecord(Long.parseLong(ap_info[0]), ap_info[1]);
+				continue;
+			}
+			cs.addRecord(Long.parseLong(ap_info[0]), &quot;OFF&quot;);
+			
+			// Filter the Ping-Pong Effect on the basis of each session,
+			// and write the new session into an output file.
+			List&lt;APRecord&gt; final_records = cs.removePingPongEffect();
+			SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+			TimeZone tz = TimeZone.getTimeZone(&quot;GMT-04:00&quot;);	//New York timezone
+			df.setTimeZone(tz);
+			
+			for ( APRecord r : final_records) {
+				Date start = new Date(r.start_time*1000);
+				Date end = new Date((r.start_time+r.duration)*1000);
+				obr.write(r.name+&quot;\t&quot;+df.format(start)+&quot;\t&quot;+r.duration+&quot;\t&quot;+df.format(end)+&quot;\n&quot;);
+				//System.out.println(r.name+&quot;\t&quot;+r.start_time+&quot;\t&quot;+r.duration);
+			}
+			//obr.write(&quot;OFF\n&quot;);
+			
+			// Reset to start a new session
+			cs = null;
+ 			}
+		
+ 			ibr.close();
+ 			ifr.close();
+		obr.close();
+		ofr.close();
+ 		}
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("BufferedReader", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(BufferedReader, "ig") ,'<div style="background-color:red">' + BufferedReader + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

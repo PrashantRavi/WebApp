@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; 3Sum</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-3sum/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-3sum/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Lasha K</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-15424</link>
+		<dc:creator><![CDATA[Lasha K]]></dc:creator>
+		<pubDate>Wed, 19 Oct 2016 21:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-15424</guid>
+		<description><![CDATA[if(i==0 &#124;&#124; nums[i] &#062; nums[i-1])
+
+why do you need this condition? isn&#039;t it always true for sorted array?]]></description>
+		<content:encoded><![CDATA[<p>if(i==0 || nums[i] &gt; nums[i-1])</p>
+<p>why do you need this condition? isn&#8217;t it always true for sorted array?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Cherry Zhao</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-12765</link>
+		<dc:creator><![CDATA[Cherry Zhao]]></dc:creator>
+		<pubDate>Thu, 21 Jul 2016 15:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-12765</guid>
+		<description><![CDATA[Thanks for the solution, it&#039;s really helpful. This article http://bit.ly/29YmZI4 also has a in-depth analysis of 3sum question with variations.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the solution, it&#8217;s really helpful. This article <a href="http://bit.ly/29YmZI4" rel="nofollow">http://bit.ly/29YmZI4</a> also has a in-depth analysis of 3sum question with variations.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gurpreet singh</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-12547</link>
+		<dc:creator><![CDATA[Gurpreet singh]]></dc:creator>
+		<pubDate>Sun, 10 Jul 2016 17:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-12547</guid>
+		<description><![CDATA[Not the best or fasted but cleaner and easier to understand
+&lt;code&gt; 
+ public static List&#060;List&#062; threeSum(int[] nums) {
+	        List&#060;List&#062; result = new ArrayList&#060;List&#062;();
+	        if(nums == null &#124;&#124; nums.length == 0) {
+	            return result;
+	        }
+	        
+	        Arrays.sort(nums);
+	        Map tripMap = new HashMap();
+	        dumpArray(nums);
+	        
+	        for(int i = 0; i &#060; nums.length - 2; i++){
+	            int j = i + 1;
+	            int k = nums.length - 1;
+	            
+	            while ( j &#060; k) {
+	                if(nums[i] + nums[j] + nums[k] == 0){
+	                    List trip = new ArrayList(Arrays.asList(new Integer[]{nums[i], nums[j] , nums[k]}));
+	                    String tripKey = nums[i] + &quot;&quot; + nums[j] + &quot;&quot; + nums[k];
+	                    if(!tripMap.containsKey(tripKey)) { 
+	                        result.add(trip);
+	                        tripMap.put(tripKey, true);
+	                    }
+	                    j++;
+	                    k--;
+	                    
+	                }else if(nums[i] + nums[j] + nums[k] &#060; 0) {
+	                    j++;
+	                } else {
+	                    k--;
+	                }
+	            }
+	        }
+	        
+	        return result;
+	        
+	    }
+	
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Not the best or fasted but cleaner and easier to understand<br />
+<code><br />
+ public static List&lt;List&gt; threeSum(int[] nums) {<br />
+	        List&lt;List&gt; result = new ArrayList&lt;List&gt;();<br />
+	        if(nums == null || nums.length == 0) {<br />
+	            return result;<br />
+	        }</p>
+<p>	        Arrays.sort(nums);<br />
+	        Map tripMap = new HashMap();<br />
+	        dumpArray(nums);</p>
+<p>	        for(int i = 0; i &lt; nums.length - 2; i++){<br />
+	            int j = i + 1;<br />
+	            int k = nums.length - 1;</p>
+<p>	            while ( j &lt; k) {<br />
+	                if(nums[i] + nums[j] + nums[k] == 0){<br />
+	                    List trip = new ArrayList(Arrays.asList(new Integer[]{nums[i], nums[j] , nums[k]}));<br />
+	                    String tripKey = nums[i] + "" + nums[j] + "" + nums[k];<br />
+	                    if(!tripMap.containsKey(tripKey)) {<br />
+	                        result.add(trip);<br />
+	                        tripMap.put(tripKey, true);<br />
+	                    }<br />
+	                    j++;<br />
+	                    k--;</p>
+<p>	                }else if(nums[i] + nums[j] + nums[k] &lt; 0) {<br />
+	                    j++;<br />
+	                } else {<br />
+	                    k--;<br />
+	                }<br />
+	            }<br />
+	        }</p>
+<p>	        return result;</p>
+<p>	    }</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CP</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-10049</link>
+		<dc:creator><![CDATA[CP]]></dc:creator>
+		<pubDate>Sun, 03 Apr 2016 00:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-10049</guid>
+		<description><![CDATA[public static boolean is3SumArray(int [] arr1, int sum1){
+          Arrays.sort(arr1);
+          for(int i=0; i&#060;arr1.length-2; i++)
+          {
+              int left = i+1;
+              int right = arr1.length-1;
+             while(left&#060;right)
+             {
+               int result = arr1[i] + arr1[left] + arr1[right];
+               if(result==sum1)
+                      return true;
+               else if(resultsum1)
+                      right--;
+               }
+           }
+       return false;
+	}]]></description>
+		<content:encoded><![CDATA[<p>public static boolean is3SumArray(int [] arr1, int sum1){<br />
+          Arrays.sort(arr1);<br />
+          for(int i=0; i&lt;arr1.length-2; i++)<br />
+          {<br />
+              int left = i+1;<br />
+              int right = arr1.length-1;<br />
+             while(left&lt;right)<br />
+             {<br />
+               int result = arr1[i] + arr1[left] + arr1[right];<br />
+               if(result==sum1)<br />
+                      return true;<br />
+               else if(resultsum1)<br />
+                      right&#8211;;<br />
+               }<br />
+           }<br />
+       return false;<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: boyhou</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-7612</link>
+		<dc:creator><![CDATA[boyhou]]></dc:creator>
+		<pubDate>Sat, 21 Nov 2015 07:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-7612</guid>
+		<description><![CDATA[The method below has any error? Or it just becauses that the complexity is n^3 ,so it cannot pass the leetcode.
+
+public class Solution {
+
+    public List&#060;List&#062; threeSum(int[] nums) {
+
+        List&#060;List&#062; result = new ArrayList&#060;List&#062;();
+
+        List list = new ArrayList();
+
+        if(nums == null &#124;&#124; nums.length == 0){
+
+            return result;
+
+        }
+
+        Arrays.sort(nums);
+
+        dfs(result, list, nums, 0, 0);
+
+        return result;
+
+    }
+
+    
+
+    private void dfs(List&#060;List&#062; result, List list, int[] nums, int cur, int sum){
+
+        if(list.size() == 3 &#038;&#038; sum == 0){
+
+            result.add(new ArrayList(list));
+
+            return;
+
+        }
+
+        if(list.size() &#062; 3 &#124;&#124; cur &#062;= nums.length){
+
+            return;
+
+        }
+
+        for(int i=cur; icur &#038;&#038; nums[i]==nums[i-1])      
+
+            //     continue; 
+
+            list.add(nums[i]);
+
+            dfs(result, list, nums, i+1, sum+nums[i]);
+
+            list.remove(list.size()-1);
+
+        }
+
+    }
+
+    
+
+}]]></description>
+		<content:encoded><![CDATA[<p>The method below has any error? Or it just becauses that the complexity is n^3 ,so it cannot pass the leetcode.</p>
+<p>public class Solution {</p>
+<p>    public List&lt;List&gt; threeSum(int[] nums) {</p>
+<p>        List&lt;List&gt; result = new ArrayList&lt;List&gt;();</p>
+<p>        List list = new ArrayList();</p>
+<p>        if(nums == null || nums.length == 0){</p>
+<p>            return result;</p>
+<p>        }</p>
+<p>        Arrays.sort(nums);</p>
+<p>        dfs(result, list, nums, 0, 0);</p>
+<p>        return result;</p>
+<p>    }</p>
+<p>    private void dfs(List&lt;List&gt; result, List list, int[] nums, int cur, int sum){</p>
+<p>        if(list.size() == 3 &amp;&amp; sum == 0){</p>
+<p>            result.add(new ArrayList(list));</p>
+<p>            return;</p>
+<p>        }</p>
+<p>        if(list.size() &gt; 3 || cur &gt;= nums.length){</p>
+<p>            return;</p>
+<p>        }</p>
+<p>        for(int i=cur; icur &amp;&amp; nums[i]==nums[i-1])      </p>
+<p>            //     continue; </p>
+<p>            list.add(nums[i]);</p>
+<p>            dfs(result, list, nums, i+1, sum+nums[i]);</p>
+<p>            list.remove(list.size()-1);</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gireesh</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-3sum/#comment-7595</link>
+		<dc:creator><![CDATA[Gireesh]]></dc:creator>
+		<pubDate>Sat, 14 Nov 2015 15:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11043#comment-7595</guid>
+		<description><![CDATA[Here&#039;s my accepted solution. 
+Reviews are welcome: https://github.com/mgireesh05/leetcode/blob/master/3sum/src/com/mgireesh/Solution.java
+
+&lt;code&gt;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Solution {
+
+	public List&#060;List&#062; threeSum(int[] nums) {
+
+		List&#060;List&#062; answer = new LinkedList&#060;List&#062;();
+
+		if (nums.length &#060; 3) {
+
+			return answer;
+
+		}
+
+		Arrays.sort(nums);
+
+		int find = 0;
+
+		int prev_i = nums[0] - 1;
+
+		for (int i = 0; i &#060; nums.length - 2; i++) {
+
+			if ((prev_i != nums[0] - 1) &#038;&#038; (nums[i] == prev_i)) {
+
+				continue;
+
+			}
+
+			prev_i = nums[i];
+
+			int prev_j = nums[0] - 1;
+
+			for (int j = i + 1; j  j; k--) {
+
+					if ((prev_k != nums[0] - 1) &#038;&#038; (find == prev_k)) {
+
+						continue;
+
+					}
+
+					if (nums[k] == find) {
+
+						List solSet = new LinkedList();
+
+						solSet.add(nums[i]);
+
+						solSet.add(nums[j]);
+
+						solSet.add(nums[k]);
+
+						answer.add(solSet);
+
+						prev_k = find;
+
+					} else if (find &#062; nums[k]) {
+
+						break;
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return answer;
+
+	}
+
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s my accepted solution.<br />
+Reviews are welcome: <a href="https://github.com/mgireesh05/leetcode/blob/master/3sum/src/com/mgireesh/Solution.java" rel="nofollow">https://github.com/mgireesh05/leetcode/blob/master/3sum/src/com/mgireesh/Solution.java</a></p>
+<p><code></p>
+<p>import java.util.Arrays;<br />
+import java.util.LinkedList;<br />
+import java.util.List;</p>
+<p>public class Solution {</p>
+<p>	public List&lt;List&gt; threeSum(int[] nums) {</p>
+<p>		List&lt;List&gt; answer = new LinkedList&lt;List&gt;();</p>
+<p>		if (nums.length &lt; 3) {</p>
+<p>			return answer;</p>
+<p>		}</p>
+<p>		Arrays.sort(nums);</p>
+<p>		int find = 0;</p>
+<p>		int prev_i = nums[0] - 1;</p>
+<p>		for (int i = 0; i &lt; nums.length - 2; i++) {</p>
+<p>			if ((prev_i != nums[0] - 1) &amp;&amp; (nums[i] == prev_i)) {</p>
+<p>				continue;</p>
+<p>			}</p>
+<p>			prev_i = nums[i];</p>
+<p>			int prev_j = nums[0] - 1;</p>
+<p>			for (int j = i + 1; j  j; k--) {</p>
+<p>					if ((prev_k != nums[0] - 1) &amp;&amp; (find == prev_k)) {</p>
+<p>						continue;</p>
+<p>					}</p>
+<p>					if (nums[k] == find) {</p>
+<p>						List solSet = new LinkedList();</p>
+<p>						solSet.add(nums[i]);</p>
+<p>						solSet.add(nums[j]);</p>
+<p>						solSet.add(nums[k]);</p>
+<p>						answer.add(solSet);</p>
+<p>						prev_k = find;</p>
+<p>					} else if (find &gt; nums[k]) {</p>
+<p>						break;</p>
+<p>					}</p>
+<p>				}</p>
+<p>			}</p>
+<p>		}</p>
+<p>		return answer;</p>
+<p>	}</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

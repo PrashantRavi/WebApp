@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Ring Buffer</title>
+
+    <meta name="description" content="A ring buffer is a bounded queue - like data structure, implemented on top of an array. This tutorial explains how a ring buffer works, and how to implement a ring buffer in Java.">
+    <meta name="keywords"    content="java ring buffer implementation">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Ring Buffer">
+    <meta name="twitter:description" content="A ring buffer is a bounded queue - like data structure, implemented on top of an array. This tutorial explains how a ring buffer works, and how to implement a ring buffer in Java.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Ring Buffer"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/ring-buffer.html"/>
+    <meta property="og:description" content="A ring buffer is a bounded queue - like data structure, implemented on top of an array. This tutorial explains how a ring buffer works, and how to implement a ring buffer in Java."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/jmh.html";
+var nextArticleInCategory = "/java-performance/resizable-array.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 22792;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html"><b>Java Ring Buffer</b></a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Ring Buffer</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#how-a-ring-buffer-works">How a Ring Buffer Works</a></li><li><a href="#ring-buffers-are-fast">Ring Buffers Are Fast</a></li><li><a href="#ring-buffer-use-cases">Ring Buffer Use Cases</a></li><li><a href="#ring-buffer-implementation-techniques">Ring Buffer Implementation Techniques</a></li><li><a href="#ring-buffer-using-fill-count">Ring Buffer Using Fill Count</a></li><li><a href="#ring-buffer-using-flip-marker">Ring Buffer Using Flip Marker</a></li><li><a href="#ring-buffer-performance">Ring Buffer Performance</a><ul><li><a href="#batch-modes">Batch Modes</a></li><li><a href="#concurrency">Concurrency</a></li></ul></li><li><a href="#ring-buffer-using-fill-count-incl-batch">Ring Buffer Using Fill Count - Including Batch Operations</a></li><li><a href="#ring-buffer-flip-marker-including-batch-operations">Ring Buffer Using Flip Marker - Including Batch Operations</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-09-30
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    A <i>ring buffer</i> is an array which is used as a queue. The ring buffer has a read position and a write position
+    which marks the next position to read from and write to the ring buffer. When the write position reaches the
+    end of the array, the write position is set back to 0. The same is true for the read position.
+</p>
+
+<p>
+    Setting the read and write position back to zero when they reach then end of the array is also sometimes referred to
+    as "wrapping around". It is this behaviour which turns the array into a ring buffer. When the read and write position
+    reaches the end of the array they continue from the beginning of the array, just as if the array was a ring.
+    Hence the name ring buffer.
+</p>
+
+<p>
+    This ring buffer tutorial will explain how a ring buffer works and show two Java ring buffer implementations.
+</p>
+
+
+
+
+<a name="how-a-ring-buffer-works"></a>
+<h2>How a Ring Buffer Works</h2>
+
+<p>
+    A ring buffer is an array with a fixed size, just like a bounded queue. The array contains the elements stored
+    in the ring buffer.
+</p>
+
+<p>
+    In addition to the array containing the elements,  a ring buffer contains a write position which points to the
+    position in the array where the next element is to be inserted into.
+</p>
+
+<p>
+    A ring buffer also needs to keep track of the read position - the next position in the array to read an element
+    from.
+</p>
+
+<p>
+    A ring buffer also needs to keep track of the free and used space in the element array. When the write position
+    has not wrapped around, the used space is between the write position and the read position. All the rest is
+    free space. The diagram below illustrates a ring buffer in this situation:
+</p>
+
+
+<img src="../images/java-performance/ring-buffer-1.png" alt="A ring buffer with read and write position displayed.">
+
+
+
+<p>
+    When the write position has wrapped around the situation is different. All of a sudden the free space is the
+    space between the write position and the read position. All the rest is used space.
+    Here is a diagram illustrating the same ring buffer after the write position has wrapped around:
+</p>
+
+<img src="../images/java-performance/ring-buffer-2.png" alt="A ring buffer where the write position has wrapped around.">
+
+<p>
+    There are different ways to keep track of the read position (and thus used and free space) in a ring buffer.
+    Later in this tutorial I will explain two different ways to implement a ring buffer in Java.
+</p>
+
+
+
+
+<a name="ring-buffers-are-fast"></a>
+<h2>Ring Buffers Are Fast</h2>
+<p>
+    Ring buffers are a fast way to implement queue-like structures. By "fast" I mean both that they are reasonably
+    easy to implement, and that they perform quite well.
+</p>
+
+
+
+
+<a name="ring-buffer-use-cases"></a>
+<h2>Ring Buffer Use Cases</h2>
+
+<p>
+    Ring buffers are useful both for actual queues,
+    like a queue of messages, or for producing data which is later consumed in a streaming-like fashion.
+</p>
+
+<p>
+    Ring buffers are especially useful when you need a hard upper bound for how much data can be in the ring buffer
+    (in the queue).
+</p>
+
+<p>
+    If you don't want an upper bound on your queue structure, perhaps you should be using a linked list, or a
+    ring buffer that can resize itself (allocate a new, bigger array when it is full, and move all elements to that array).
+</p>
+
+<p>
+    In this tutorial I will only focus on the bounded ring buffer implementations.
+</p>
+
+
+
+<a name="ring-buffer-implementation-techniques"></a>
+<h2>Ring Buffer Implementation Techniques</h2>
+
+<p>
+    There are many ways to implement ring buffers. In this ring buffer tutorial I will show you two of the easiest
+    techniques to implement a ring buffer. These techniques are:
+</p>
+
+<ul>
+    <li>Using a fill count</li>
+    <li>Using a flip marker</li>
+</ul>
+
+<p>
+    I will explain both techniques in the following sections.
+</p>
+
+
+
+
+<a name="ring-buffer-using-fill-count"></a>
+<h2>Ring Buffer Using Fill Count</h2>
+
+<p>
+    One way to keep track of write position, read position and the number of elements in the ring buffer is to use
+    a write position and a fill count. The write position marks the next position in the ring buffer to write an
+    element to. The fill count tells how many elements are currently stored in the buffer.
+</p>
+
+<p>
+    When writing elements to the ring buffer it just has to check the fill count to see if it is full or not.
+    If it is not full the element can be inserted at the write position and the write position advanced to the next
+    free slot.
+</p>
+
+<p>
+    Similarly, when reading elements from the ring buffer it just has to check the fill count to see if the ring
+    buffer is empty. The read position is calculated by subtracting the fill count from the write position. If the result of
+    that calculation is negative, the write position has wrapped around, and you need to add the size of the
+    buffer (array) to the read position to get the correct read position.
+</p>
+
+
+<p>
+    Below is a ring buffer implementation that uses a fill count. Notice that it does not track the read position
+    explicitly, but calculates the read position based on the write position and the fill count. Notice also,
+    that the fill count field is called <code>available</code> (not <code>fillCount</code>).
+</p>
+
+
+<pre class="codeBox">
+public class RingBufferFillCount {
+    public Object[] elements = null;
+
+    private int capacity  = 0;
+    private int writePos  = 0;
+    private int available = 0;
+
+    public RingBufferFillCount(int capacity) {
+        this.capacity = capacity;
+        this.elements = new Object[capacity];
+    }
+
+    public void reset() {
+        this.writePos = 0;
+        this.available = 0;
+    }
+
+    public int capacity() { return this.capacity; }
+    public int available(){ return this.available; }
+
+    public int remainingCapacity() {
+        return this.capacity - this.available;
+    }
+
+    public boolean put(Object element){
+
+        if(available &lt; capacity){
+            if(writePos &gt;= capacity){
+                writePos = 0;
+            }
+            elements[writePos] = element;
+            writePos++;
+            available++;
+            return true;
+        }
+
+        return false;
+    }
+
+    public Object take() {
+        if(available == 0){
+            return null;
+        }
+        int nextSlot = writePos - available;
+        if(nextSlot &lt; 0){
+            nextSlot += capacity;
+        }
+        Object nextObj = elements[nextSlot];
+        available--;
+        return nextObj;
+    }
+}
+</pre>
+
+
+
+
+<a name="ring-buffer-using-flip-marker"></a>
+<h2>Ring Buffer Using Flip Marker</h2>
+
+<p>
+    Another option to keep track of read position, write position and how many elements are in the buffer, is to
+    simply keep a read position in addition to the write position.
+</p>
+
+<p>
+    How many elements are in the buffer is calculated based on the write and read position. How the calculation looks
+    depends on whether the write position has flipped (wrapped around) or not.
+</p>
+
+<p>
+    If the write position has not wrapped around  you can simply subtract the read position from the write position
+    to know how many elements are in the buffer. If the write position has wrapped around (flipped) then the available
+    space is equal to the capacity minus the read position plus the write position.
+</p>
+
+<p>
+    To keep track of whether the write position has flipped or not a special "flip marker" is used. That is where
+    the name of the implementation comes from. Actually, in most cases you could just check if the write position
+    is larger or smaller than the read position to detect if the write position has wrapped around. But, that doesn't
+    work when write position and read position are equal (the ring buffer is either completely full or completely empty).
+</p>
+
+<p> Below is an implementation of a ring buffer that uses a flip marker
+    and read position.
+</p>
+
+
+<pre class="codeBox">
+public class RingBufferFlipMarker {
+
+    public Object[] elements = null;
+
+    public int capacity = 0;
+    public int writePos = 0;
+    public int readPos  = 0;
+    public boolean flipped = false;   //the flip marker
+
+    public RingBufferFlipMarker(int capacity) {
+        this.capacity = capacity;
+        this.elements = new Object[capacity];
+    }
+
+    public void reset() {
+        this.writePos = 0;
+        this.readPos  = 0;
+        this.flipped  = false;
+    }
+
+    public int available() {
+        if(!flipped){
+            return writePos - readPos;
+        }
+        return capacity - readPos + writePos;
+    }
+
+    public int remainingCapacity() {
+        if(!flipped){
+            return capacity - writePos;
+        }
+        return readPos - writePos;
+    }
+
+    public boolean put(Object element){
+        if(!flipped){
+            if(writePos == capacity){
+                writePos = 0;
+                flipped = true;
+
+                if(writePos &lt; readPos){
+                    elements[writePos++] = element;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                elements[writePos++] = element;
+                return true;
+            }
+        } else {
+            if(writePos &lt; readPos ){
+                elements[writePos++] = element;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+    public Object take() {
+        if(!flipped){
+            if(readPos &lt; writePos){
+                return elements[readPos++];
+            } else {
+                return null;
+            }
+        } else {
+            if(readPos == capacity){
+                readPos = 0;
+                flipped = false;
+
+                if(readPos &lt; writePos){
+                    return elements[readPos++];
+                } else {
+                    return null;
+                }
+            } else {
+                return elements[readPos++];
+            }
+        }
+    }
+}
+</pre>
+
+
+
+
+<a name="ring-buffer-performance"></a>
+<h2>Ring Buffer Performance</h2>
+
+<p>
+    My benchmarks have shown that the ring buffer using a fill count is a little bit faster than the ring buffer
+    using a flip marker. But - the difference is so small that it is almost insignificant.
+</p>
+
+
+
+<a name="batch-modes"></a>
+<h3>Batch Modes</h3>
+
+<p>
+    I have implemented batch mode <code>put()</code> and <code>take()</code> operations for both ring buffer
+    implementations. The implementations with batch operations are listed later in this tutorial. Putting and getting
+    several elements at a time is significantly faster than putting and getting a single element at a time.
+</p>
+
+
+<p>
+    My benchmarks showed that batch <code>put()</code> and <code>take()</code> operations provides up to 4 times
+    the throughput of putting and taking a single element at a time. Precisely how much depends on the batch size. L
+    arger batches yields a higher throughput than smaller batches because more time is spent in tight array copy loops.
+</p>
+
+<p>
+    The batch operations of the ring buffer implementation using a read position + flip marker was
+    around 15% faster than the batch operations of the ring buffer using a fill count.
+</p>
+
+
+
+<a name="concurrency"></a>
+<h3>Concurrency</h3>
+
+<p>
+    Neither of the two implementations shown above are thread safe. They can only be used from the same thread.
+</p>
+
+<p>
+    It is my impression that the implementation using a read position and flip marker is easier to implement in
+    thread safe version for the single reader, single writer case. The single reader, single writer case means
+    that only one thread is putting elements to the ring buffer. And I mean only one thread ever. Not at the same time.
+    Only that one same thread. The same principle goes for the writing thread. Only that one and same thread only
+    ever writes to the ring buffer. The reading thread does not have to be the same as the writing thread though.
+</p>
+
+<p>
+    I have not yet implemented any single reader, single writer version of the ring buffer, so I don't actually
+    know. I will update this tutorial if I one day do.
+</p>
+
+
+
+
+<a name="ring-buffer-using-fill-count-incl-batch"></a>
+<h2>Ring Buffer Using Fill Count - Including Batch Operations</h2>
+
+<p>
+    Here is an implementation of the ring buffer that uses a fill count including the batch <code>put()</code>
+    and <code>take()</code> operations.
+</p>
+
+
+<pre class="codeBox">
+public class RingBufferFillCount {
+    public Object[] elements = null;
+
+    public int capacity  = 0;
+    public int writePos  = 0;
+    public int available = 0;
+
+    public RingBufferFillCount(int capacity) {
+        this.capacity = capacity;
+        this.elements = new Object[capacity];
+    }
+
+    public void reset() {
+        this.writePos = 0;
+        this.available = 0;
+    }
+
+    public int remainingCapacity() {
+        return this.capacity - this.available;
+    }
+
+
+
+    public boolean put(Object element){
+
+        if(available &lt; capacity){
+            if(writePos &gt;= capacity){
+                writePos = 0;
+            }
+            elements[writePos] = element;
+            writePos++;
+            available++;
+            return true;
+        }
+
+        return false;
+    }
+
+    public int put(Object[] newElements){
+        return put(newElements, newElements.length);
+    }
+
+    public int put(Object[] newElements, int length){
+        int readPos = 0;
+        if(this.writePos &gt; this.available){
+            //space above writePos is all empty
+
+            if(length &lt;= this.capacity - this.writePos){
+                //space above writePos is sufficient to insert batch
+
+                for(;  readPos &lt; length; readPos++){
+                    this.elements[this.writePos++] = newElements[readPos];
+                }
+                this.available += readPos;
+                return length;
+
+            } else {
+                //both space above writePos and below writePos is necessary to use
+                //to insert batch.
+
+                int lastEmptyPos = writePos - available;
+
+                for(; this.writePos &lt; this.capacity; this.writePos++){
+                    this.elements[this.writePos] = newElements[readPos++];
+                }
+
+                //fill into bottom of array too.
+                this.writePos = 0;
+
+                int endPos = Math.min(length - readPos, capacity - available - readPos);
+                for(;this.writePos &lt; endPos; this.writePos++){
+                    this.elements[this.writePos] = newElements[readPos++];
+                }
+                this.available += readPos;
+                return readPos;
+            }
+        } else {
+            int endPos = this.capacity - this.available + this.writePos;
+
+            for(; this.writePos &lt; endPos; this.writePos++){
+                this.elements[this.writePos] = newElements[readPos++];
+            }
+            this.available += readPos;
+
+            return readPos;
+        }
+
+    }
+
+
+    public Object take() {
+        if(available == 0){
+            return null;
+        }
+        int nextSlot = writePos - available;
+        if(nextSlot &lt; 0){
+            nextSlot += capacity;
+        }
+        Object nextObj = elements[nextSlot];
+        available--;
+        return nextObj;
+    }
+
+
+    public int take(Object[] into){
+        return take(into, into.length);
+    }
+
+
+    public int take(Object[] into, int length){
+        int intoPos = 0;
+
+        if(available &lt;= writePos){
+            int nextPos= writePos - available;
+            int endPos   = nextPos + Math.min(available, length);
+
+            for(;nextPos &lt; endPos; nextPos++){
+                into[intoPos++] = this.elements[nextPos];
+            }
+            this.available -= intoPos;
+            return intoPos;
+        } else {
+            int nextPos = writePos - available + capacity;
+
+            int leftInTop = capacity - nextPos;
+            if(length &lt;= leftInTop){
+                //copy directly
+                for(; intoPos &lt; length; intoPos++){
+                    into[intoPos] = this.elements[nextPos++];
+                }
+                this.available -= length;
+                return length;
+
+            } else {
+                //copy top
+                for(; nextPos &lt; capacity; nextPos++){
+                    into[intoPos++] = this.elements[nextPos];
+                }
+
+                //copy bottom - from 0 to writePos
+                nextPos = 0;
+                int leftToCopy = length - intoPos;
+                int endPos = Math.min(writePos, leftToCopy);
+
+                for(;nextPos &lt; endPos; nextPos++){
+                    into[intoPos++] = this.elements[nextPos];
+                }
+
+                this.available -= intoPos;
+
+                return intoPos;
+            }
+        }
+    }
+}
+</pre>
+
+
+
+
+<a name="ring-buffer-flip-marker-including-batch-operations"></a>
+<h2>Ring Buffer Using Flip Marker - Including Batch Operations</h2>
+
+<p>
+    Here is an implementation of the ring buffer that uses a read position and flip marker, including the
+    batch <code>put()</code> and <code>take()</code> operations.
+</p>
+
+
+<pre class="codeBox">
+public class RingBufferFlip {
+
+    public Object[] elements = null;
+
+    public int capacity = 0;
+    public int writePos = 0;
+    public int readPos  = 0;
+    public boolean flipped = false;
+
+    public RingBufferFlip(int capacity) {
+        this.capacity = capacity;
+        this.elements = new Object[capacity];
+    }
+
+    public void reset() {
+        this.writePos = 0;
+        this.readPos  = 0;
+        this.flipped  = false;
+    }
+
+    public int available() {
+        if(!flipped){
+            return writePos - readPos;
+        }
+        return capacity - readPos + writePos;
+    }
+
+    public int remainingCapacity() {
+        if(!flipped){
+            return capacity - writePos;
+        }
+        return readPos - writePos;
+    }
+
+    public boolean put(Object element){
+        if(!flipped){
+            if(writePos == capacity){
+                writePos = 0;
+                flipped = true;
+
+                if(writePos &lt; readPos){
+                    elements[writePos++] = element;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                elements[writePos++] = element;
+                return true;
+            }
+        } else {
+            if(writePos &lt; readPos ){
+                elements[writePos++] = element;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public int put(Object[] newElements, int length){
+        int newElementsReadPos = 0;
+        if(!flipped){
+            //readPos lower than writePos - free sections are:
+            //1) from writePos to capacity
+            //2) from 0 to readPos
+
+            if(length &lt;= capacity - writePos){
+                //new elements fit into top of elements array - copy directly
+                for(; newElementsReadPos &lt; length; newElementsReadPos++){
+                    this.elements[this.writePos++] = newElements[newElementsReadPos];
+                }
+
+                return newElementsReadPos;
+            } else {
+                //new elements must be divided between top and bottom of elements array
+
+                //writing to top
+                for(;this.writePos &lt; capacity; this.writePos++){
+                    this.elements[this.writePos] = newElements[newElementsReadPos++];
+                }
+
+                //writing to bottom
+                this.writePos = 0;
+                this.flipped  = true;
+                int endPos = Math.min(this.readPos, length - newElementsReadPos);
+                for(; this.writePos &lt; endPos; this.writePos++){
+                    this.elements[writePos] = newElements[newElementsReadPos++];
+                }
+
+
+                return newElementsReadPos;
+            }
+
+        } else {
+            //readPos higher than writePos - free sections are:
+            //1) from writePos to readPos
+
+            int endPos = Math.min(this.readPos, this.writePos + length);
+
+            for(; this.writePos &lt; endPos; this.writePos++){
+                this.elements[this.writePos] = newElements[newElementsReadPos++];
+            }
+
+            return newElementsReadPos;
+        }
+    }
+
+
+    public Object take() {
+        if(!flipped){
+            if(readPos &lt; writePos){
+                return elements[readPos++];
+            } else {
+                return null;
+            }
+        } else {
+            if(readPos == capacity){
+                readPos = 0;
+                flipped = false;
+
+                if(readPos &lt; writePos){
+                    return elements[readPos++];
+                } else {
+                    return null;
+                }
+            } else {
+                return elements[readPos++];
+            }
+        }
+    }
+
+    public int take(Object[] into, int length){
+        int intoWritePos = 0;
+        if(!flipped){
+            //writePos higher than readPos - available section is writePos - readPos
+
+            int endPos = Math.min(this.writePos, this.readPos + length);
+            for(; this.readPos &lt; endPos; this.readPos++){
+                into[intoWritePos++] = this.elements[this.readPos];
+            }
+            return intoWritePos;
+        } else {
+            //readPos higher than writePos - available sections are
+            //top + bottom of elements array
+
+            if(length &lt;= capacity - readPos){
+                //length is lower than the elements available at the top
+                //of the elements array - copy directly
+                for(; intoWritePos &lt; length; intoWritePos++){
+                    into[intoWritePos] = this.elements[this.readPos++];
+                }
+
+                return intoWritePos;
+            } else {
+                //length is higher than elements available at the top of the elements array
+                //split copy into a copy from both top and bottom of elements array.
+
+                //copy from top
+                for(; this.readPos &lt; capacity; this.readPos++){
+                    into[intoWritePos++] = this.elements[this.readPos];
+                }
+
+                //copy from bottom
+                this.readPos = 0;
+                this.flipped = false;
+                int endPos = Math.min(this.writePos, length - intoWritePos);
+                for(; this.readPos &lt; endPos; this.readPos++){
+                    into[intoWritePos++] = this.elements[this.readPos];
+                }
+
+                return intoWritePos;
+            }
+        }
+    }
+}
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="resizable-array.html">Java Resizable Array</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

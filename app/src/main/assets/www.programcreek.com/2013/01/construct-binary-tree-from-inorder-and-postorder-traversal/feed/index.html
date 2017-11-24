@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construct Binary Tree from Inorder and Postorder Traversal</title>
+	<atom:link href="http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Darewreck</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-13669</link>
+		<dc:creator><![CDATA[Darewreck]]></dc:creator>
+		<pubDate>Mon, 15 Aug 2016 05:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-13669</guid>
+		<description><![CDATA[int k = 0;  
+    for (int i = 0; i &#060; inorder.length; i++) {
+		if (inorder[i] == rootValue) {
+			k = i;
+			break;
+		}
+	}
+
+i should be = to instart and not 0.]]></description>
+		<content:encoded><![CDATA[<p>int k = 0;<br />
+    for (int i = 0; i &lt; inorder.length; i++) {<br />
+		if (inorder[i] == rootValue) {<br />
+			k = i;<br />
+			break;<br />
+		}<br />
+	}</p>
+<p>i should be = to instart and not 0.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-13361</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sun, 07 Aug 2016 21:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-13361</guid>
+		<description><![CDATA[A solution for the case where duplicated values are admitted.
+Note: I used sub list for clarity may/should be changed to indexed &quot;sublists&quot; for efficiency.
+
+&lt;code&gt; 
+TreeNode reconstruct(List inOrder, List postOrder) {
+    int rootValue = postOrder.get(postOrder.size() - 1);
+    TreeNode root = new TreeNode(rootValue);
+    for (int i = 0; i  0) {
+                TreeNode left =
+                    reconstruct(inOrder.subList(0, i), postOrder.subList(0, postOrder.size() - rightSize - 1));
+                if (left == null) continue; //wasn&#039;t the root what we found
+                root.left = left;
+            }
+            if (rightSize &#062; 0) {
+                TreeNode right =
+                    reconstruct(
+                        inOrder.subList(i + 1, inOrder.size()),
+                        postOrder.subList(postOrder.size() - rightSize - 1, postOrder.size() - 1));
+                if (right == null) continue; //wasn&#039;t the root what we found
+                root.right = right;
+            }
+            return root; //both subtrees succeeded
+        }
+    }
+    return null;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>A solution for the case where duplicated values are admitted.<br />
+Note: I used sub list for clarity may/should be changed to indexed &#8220;sublists&#8221; for efficiency.</p>
+<p><code><br />
+TreeNode reconstruct(List inOrder, List postOrder) {<br />
+    int rootValue = postOrder.get(postOrder.size() - 1);<br />
+    TreeNode root = new TreeNode(rootValue);<br />
+    for (int i = 0; i  0) {<br />
+                TreeNode left =<br />
+                    reconstruct(inOrder.subList(0, i), postOrder.subList(0, postOrder.size() - rightSize - 1));<br />
+                if (left == null) continue; //wasn't the root what we found<br />
+                root.left = left;<br />
+            }<br />
+            if (rightSize &gt; 0) {<br />
+                TreeNode right =<br />
+                    reconstruct(<br />
+                        inOrder.subList(i + 1, inOrder.size()),<br />
+                        postOrder.subList(postOrder.size() - rightSize - 1, postOrder.size() - 1));<br />
+                if (right == null) continue; //wasn't the root what we found<br />
+                root.right = right;<br />
+            }<br />
+            return root; //both subtrees succeeded<br />
+        }<br />
+    }<br />
+    return null;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mohamed Yakout</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-8898</link>
+		<dc:creator><![CDATA[Mohamed Yakout]]></dc:creator>
+		<pubDate>Thu, 04 Feb 2016 05:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-8898</guid>
+		<description><![CDATA[This code is working only if all elements are unique, But I tried this method on the following: 
+
+int[] inorder = {4,1,5,1,6,7,3,8};
+		int[] postorder = {4,5,1,6,7,8,3,1};
+
+I got this error Exception in thread &quot;main&quot; java.lang.ArrayIndexOutOfBoundsException: -1]]></description>
+		<content:encoded><![CDATA[<p>This code is working only if all elements are unique, But I tried this method on the following: </p>
+<p>int[] inorder = {4,1,5,1,6,7,3,8};<br />
+		int[] postorder = {4,5,1,6,7,8,3,1};</p>
+<p>I got this error Exception in thread &#8220;main&#8221; java.lang.ArrayIndexOutOfBoundsException: -1</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: DivyaJyoti Rajdev</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-7516</link>
+		<dc:creator><![CDATA[DivyaJyoti Rajdev]]></dc:creator>
+		<pubDate>Wed, 21 Oct 2015 17:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-7516</guid>
+		<description><![CDATA[Arrays.asList does not work as expected for primitives, only Objects. that change would give you the wrong answer]]></description>
+		<content:encoded><![CDATA[<p>Arrays.asList does not work as expected for primitives, only Objects. that change would give you the wrong answer</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Zheyu Jin</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-6984</link>
+		<dc:creator><![CDATA[Zheyu Jin]]></dc:creator>
+		<pubDate>Thu, 28 May 2015 06:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-6984</guid>
+		<description><![CDATA[Nice. 
+Just some suggestions for more readable code:
+
+1. use inclusive start index and exclusive end index. [start, end) so that you don&#039;t need hairy +1 and -1.
+2.give these expressions a name: postStart+k-(inStart+1); postStart+k-inStart.]]></description>
+		<content:encoded><![CDATA[<p>Nice.<br />
+Just some suggestions for more readable code:</p>
+<p>1. use inclusive start index and exclusive end index. [start, end) so that you don&#8217;t need hairy +1 and -1.<br />
+2.give these expressions a name: postStart+k-(inStart+1); postStart+k-inStart.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Burhan COKCA</title>
+		<link>http://www.programcreek.com/2013/01/construct-binary-tree-from-inorder-and-postorder-traversal/#comment-6930</link>
+		<dc:creator><![CDATA[Burhan COKCA]]></dc:creator>
+		<pubDate>Sun, 03 May 2015 01:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11464#comment-6930</guid>
+		<description><![CDATA[int k=0;
+
+        for(int i=0; i&#060; inorder.length; i++){
+            if(inorder[i]==rootValue){
+                k = i;
+                break;
+            } 
+
+        } 
+
+can be simplified as
+
+int k = java.util.Arrays.asList(inorder).indexOf(rootValue)]]></description>
+		<content:encoded><![CDATA[<p>int k=0;</p>
+<p>        for(int i=0; i&lt; inorder.length; i++){<br />
+            if(inorder[i]==rootValue){<br />
+                k = i;<br />
+                break;<br />
+            } </p>
+<p>        } </p>
+<p>can be simplified as</p>
+<p>int k = java.util.Arrays.asList(inorder).indexOf(rootValue)</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Meeting Rooms II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-meeting-rooms-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-meeting-rooms-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Ankur</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-meeting-rooms-ii-java/#comment-14389</link>
+		<dc:creator><![CDATA[Ankur]]></dc:creator>
+		<pubDate>Wed, 07 Sep 2016 05:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=15528#comment-14389</guid>
+		<description><![CDATA[Instead of Priority Queue take simple queue to store elements but just sort by endTime .
+
+&lt;code&gt;
+private static int minMeetingRoomsQueue(Interval[] inte) {
+		int c = 0;
+		Arrays.sort(inte,new Comparator(){
+
+			@Override
+			public int compare(Interval o1, Interval o2) {
+				return o1.eTime - o2.eTime;
+			}
+			
+		});
+		Queue q = new LinkedList();
+		q.add(inte[0].eTime);
+		c++;
+		for(int i=1;i&#060;inte.length;i++){
+			if(inte[i].sTime &#060; q.peek()){
+				c++;
+			}else{
+				q.poll();
+			}
+			q.add(inte[i].eTime);
+		}
+		return c;
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Instead of Priority Queue take simple queue to store elements but just sort by endTime .</p>
+<p><code><br />
+private static int minMeetingRoomsQueue(Interval[] inte) {<br />
+		int c = 0;<br />
+		Arrays.sort(inte,new Comparator(){</p>
+<p>			@Override<br />
+			public int compare(Interval o1, Interval o2) {<br />
+				return o1.eTime - o2.eTime;<br />
+			}</p>
+<p>		});<br />
+		Queue q = new LinkedList();<br />
+		q.add(inte[0].eTime);<br />
+		c++;<br />
+		for(int i=1;i&lt;inte.length;i++){<br />
+			if(inte[i].sTime &lt; q.peek()){<br />
+				c++;<br />
+			}else{<br />
+				q.poll();<br />
+			}<br />
+			q.add(inte[i].eTime);<br />
+		}<br />
+		return c;<br />
+	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

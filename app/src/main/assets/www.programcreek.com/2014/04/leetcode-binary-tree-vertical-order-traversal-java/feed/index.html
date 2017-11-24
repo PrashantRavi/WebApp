@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Binary Tree Vertical Order Traversal (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/04/leetcode-binary-tree-vertical-order-traversal-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-vertical-order-traversal-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-vertical-order-traversal-java/#comment-13068</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sun, 31 Jul 2016 18:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=15226#comment-13068</guid>
+		<description><![CDATA[Same idea, alternate implementation (recursive). Note: I print the result, but returning a level list as shown in the example is trivially done with the same logic.
+
+Note: this is also a Time O(N) impl and Space O(N). 
+Note 2: recursive implementation IMHO is way cleaner and will probably require less memory since we don&#039;t have extra lists. Stack size shouldn&#039;t be an issue considering that it only requires O(H) recursions (H = height of the tree)
+
+&lt;code&gt; 
+class BinTreeNode {
+    public final T value;
+    public BinTreeNode left;
+    public BinTreeNode right;
+}
+
+ void columnOrder(BinTreeNode n) {
+    Map&#060;Integer, List&#060;BinTreeNode&#062;&#062; columns = new HashMap();
+    columnOrder(n , columns, 0);
+    for (Integer idx : columns.keySet().stream().sorted().collect(Collectors.toList())) {
+        List&#060;BinTreeNode&#062; column = columns.get(idx);
+        for (BinTreeNode c : column) {
+            System.out.println(c.value);
+        }
+    }
+}
+
+ void columnOrder(BinTreeNode n, Map&#060;Integer, List&#060;BinTreeNode&#062;&#062; columns, int column)
+{
+    List&#060;BinTreeNode&#062; l = columns.computeIfAbsent(column, i -&#062; new LinkedList());
+    l.add(n);
+    if (n.left != null) columnOrder(n.left , columns, column - 1);
+    if (n.right != null) columnOrder(n.right , columns, column + 1);
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Same idea, alternate implementation (recursive). Note: I print the result, but returning a level list as shown in the example is trivially done with the same logic.</p>
+<p>Note: this is also a Time O(N) impl and Space O(N).<br />
+Note 2: recursive implementation IMHO is way cleaner and will probably require less memory since we don&#8217;t have extra lists. Stack size shouldn&#8217;t be an issue considering that it only requires O(H) recursions (H = height of the tree)</p>
+<p><code><br />
+class BinTreeNode {<br />
+    public final T value;<br />
+    public BinTreeNode left;<br />
+    public BinTreeNode right;<br />
+}</p>
+<p> void columnOrder(BinTreeNode n) {<br />
+    Map&lt;Integer, List&lt;BinTreeNode&gt;&gt; columns = new HashMap();<br />
+    columnOrder(n , columns, 0);<br />
+    for (Integer idx : columns.keySet().stream().sorted().collect(Collectors.toList())) {<br />
+        List&lt;BinTreeNode&gt; column = columns.get(idx);<br />
+        for (BinTreeNode c : column) {<br />
+            System.out.println(c.value);<br />
+        }<br />
+    }<br />
+}</p>
+<p> void columnOrder(BinTreeNode n, Map&lt;Integer, List&lt;BinTreeNode&gt;&gt; columns, int column)<br />
+{<br />
+    List&lt;BinTreeNode&gt; l = columns.computeIfAbsent(column, i -&gt; new LinkedList());<br />
+    l.add(n);<br />
+    if (n.left != null) columnOrder(n.left , columns, column - 1);<br />
+    if (n.right != null) columnOrder(n.right , columns, column + 1);<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

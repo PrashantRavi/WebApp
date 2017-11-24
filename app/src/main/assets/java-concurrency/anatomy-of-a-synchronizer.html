@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Anatomy of a Synchronizer</title>
+
+    <meta name="description" content="This tutorial discusses the anatomy of a synchronizer, a synchronization mechanims like a lock, read / write lock, semaphore etc.">
+    <meta name="keywords"    content="Java concurrency anatomy synchronizer">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Anatomy of a Synchronizer">
+    <meta name="twitter:description" content="This tutorial discusses the anatomy of a synchronizer, a synchronization mechanims like a lock, read / write lock, semaphore etc.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Anatomy of a Synchronizer"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/anatomy-of-a-synchronizer.html"/>
+    <meta property="og:description" content="This tutorial discusses the anatomy of a synchronizer, a synchronization mechanims like a lock, read / write lock, semaphore etc."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/compare-and-swap.html";
+var nextArticleInCategory = "/java-concurrency/non-blocking-algorithms.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 13861;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html"><b>Anatomy of a Synchronizer</b></a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Anatomy of a Synchronizer</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#state">State</a></li><li><a href="#accesscondition">Access Condition</a></li><li><a href="#statechanges">State Changes</a></li><li><a href="#notificationstrategy">Notification Strategy</a></li><li><a href="#testandset">Test and Set Method</a></li><li><a href="#set">Set Method</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-10-01
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Even if many synchronizers (locks, semaphores, blocking queue etc.) are different in function, they are
+    often not that different in their internal design. In other words, they consist of the same (or similar)
+    basic parts internally. Knowing these basic parts can be a great help when designing synchronizers. It is these parts
+    this text looks closer at.
+</p>
+
+<p>
+    <b>Note:</b> The content of this text is a part result of a M.Sc. student project at the IT University of Copenhagen in
+    the spring 2004 by Jakob Jenkov, Toke Johansen and Lars Bj&oslash;rn. During this project we asked Doug Lea if he knew of similar work. Interestingly
+    he had come up with similar conclusions independently of this project during the development of the Java 5 concurrency
+    utilities. Doug Lea's work, I believe, is described in the book
+    <a href="http://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601/ref=pd_bbs_sr_1?ie=UTF8&s=books&qid=1215418711&sr=8-1" target="_blank">"Java Concurrency in Practice"</a>.
+    This book also contains a chapter with the title "Anatomy of a Synchronizer" with content similar to this text, though
+    not exactly the same.
+</p>
+
+<p>
+    The purpose of most (if not all) synchronizers is to guard some area of the code (critical section)
+    from concurrent access by threads. To do this the following parts are often needed in a synchronizer:
+</p>
+
+<ol>
+    <li><a href="#state">State</a></li>
+    <li><a href="#accesscondition">Access Condition</a></li>
+    <li><a href="#statechanges">State Changes</a></li>
+    <li><a href="#notificationstrategy">Notification Strategy</a></li>
+    <li><a href="#testandset">Test and Set Method</a></li>
+    <li><a href="#set">Set Method</a></li>
+</ol>
+
+<p>
+    Not all synchronizers have all of these parts, and those that have may not have them
+    exactly as they are described here. Usually you can find one or more of these parts, though.
+</p>
+
+
+<a name="state"></a>
+<h2>State</h2>
+<p>
+    The state of a synchronizer is used by the access condition to determine if a thread can be granted access.
+    In a <a href="locks.html">Lock</a> the state is kept in a <code>boolean</code> saying whether the <code>Lock</code> is locked
+    or not. In a <a href="semaphores.html#bounded">Bounded Semaphore</a> the internal state is kept in a
+    counter (int) and an upper bound (int) which state the current number of "takes" and the maximum number
+    of "takes". In a <a href="blocking-queues.html">Blocking Queue</a> the state is kept in the <code>List</code>
+    of elements in the queue and the maximum queue size (int) member (if any).
+</p>
+
+<p>
+    Here are two code snippets from both <code>Lock</code> and a <code>BoundedSemaphore</code>. The state
+    code is marked in bold.
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  <b>//state is kept here</b>
+  <b>private boolean isLocked = false; </b>
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){
+      wait();
+    }
+    isLocked = true;
+  }
+
+  ...
+}
+</pre>
+
+<pre class="codeBox">
+public class BoundedSemaphore {
+
+  <b>//state is kept here
+      private int signals = 0;
+      private int bound   = 0;
+  </b>    
+  public BoundedSemaphore(int upperBound){
+    this.bound = upperBound;
+  }
+
+  public synchronized void take() throws InterruptedException{
+    while(this.signals == bound) wait();
+    this.signal++;
+    this.notify();
+  }
+  ...
+}
+</pre>
+
+<a name="accesscondition"></a>
+<h2>Access Condition</h2>
+<p>
+    The access conditions is what determines if a thread calling a test-and-set-state method can be allowed
+    to set the state or not. The access condition is typically based on the <a href="#state">state</a> of the synchronizer.
+    The access condition is typically checked in a while loop to guard against
+    <a href="thread-signaling.html#spuriouswakeups">Spurious Wakeups</a>. When the access condition is
+    evaluated it is either true or false.
+</p>
+
+<p>
+    In a <a href="locks.html">Lock</a> the access condition simply checks the value of the
+    <code>isLocked</code> member variable. In a <a href="semaphores.html#bounded">Bounded Semaphore</a>
+    there are actually two access conditions depending on whether you are trying to "take" or "release"
+    the semaphore. If a thread tries to take the semaphore the <code>signals</code> variable is checked
+    against the upper bound. If a thread tries to release the semaphore the <code>signals</code> variable
+    is checked against 0.
+</p>
+
+<p>
+    Here are two code snippets of a <code>Lock</code> and a <code>BoundedSemaphore</code> with the
+    access condition marked in bold. Notice how the conditions is always checked inside a while loop.
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  private boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    <b>//access condition</b>
+    while(<b>isLocked</b>){
+      wait();
+    }
+    isLocked = true;
+  }
+
+  ...
+}
+</pre>
+
+<pre class="codeBox">
+public class BoundedSemaphore {
+  private int signals = 0;
+  private int bound   = 0;
+
+  public BoundedSemaphore(int upperBound){
+    this.bound = upperBound;
+  }
+
+  public synchronized void take() throws InterruptedException{
+    <b>//access condition</b>
+    while(<b>this.signals == bound</b>) wait();
+    this.signals++;
+    this.notify();
+  }
+
+  public synchronized void release() throws InterruptedException{
+    <b>//access condition</b>
+    while(<b>this.signals == 0</b>) wait();
+    this.signals--;
+    this.notify();
+  }
+}
+</pre>
+
+
+<a name="statechanges"></a>
+<h2>State Changes</h2>
+<p>
+    Once a thread gains access to the critical section it has to change the state of the synchronizer
+    to (possibly) block other threads from entering it. In other words, the state needs to reflect
+    the fact that a thread is now executing inside the critical section. This should affect the
+    access conditions of other threads attempting to gain access.
+</p>
+
+<p>
+    In a <a href="locks.html">Lock</a> the state change is the code setting <code>isLocked = true</code>.
+    In a semaphore it is either the code <code>signals--</code> or <code>signals++</code>;
+</p>
+
+<p>
+    Here are two code snippets with the state change code marked in bold:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  private boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){
+      wait();
+    }
+    <b>//state change</b>
+    <b>isLocked = true;</b>
+  }
+
+  public synchronized void unlock(){
+    <b>//state change</b>
+    <b>isLocked = false;</b>
+    notify();
+  }
+}
+</pre>
+
+<pre class="codeBox">
+public class BoundedSemaphore {
+  private int signals = 0;
+  private int bound   = 0;
+
+  public BoundedSemaphore(int upperBound){
+    this.bound = upperBound;
+  }
+
+  public synchronized void take() throws InterruptedException{
+    while(this.signals == bound) wait();
+    <b>//state change</b>
+    <b>this.signals++;</b>
+    this.notify();
+  }
+
+  public synchronized void release() throws InterruptedException{
+    while(this.signals == 0) wait();
+    <b>//state change</b>
+    <b>this.signals--;</b>
+    this.notify();
+  }
+}
+</pre>
+
+
+<a name="notificationstrategy"></a>
+<h2>Notification Strategy</h2>
+<p>
+    Once a thread has changed the state of a synchronizer it may sometimes need to notify other
+    waiting threads about the state change. Perhaps this state change might turn the access
+    condition true for other threads.
+</p>
+
+<p>
+    Notification Strategies typically fall into three categories.
+</p>
+
+<ol>
+    <li>Notify all waiting threads.</li>
+    <li>Notify 1 random of N waiting threads.</li>
+    <li>Notify 1 specific of N waiting thread.</li>
+</ol>
+
+<p>
+    Notifying all waiting threads is pretty easy. All waiting threads call <code>wait()</code> on the
+    same object. Once a thread want to notify the waiting threads it calls <code>notifyAll()</code> on
+    the object the waiting threads called <code>wait()</code> on.
+</p>
+
+<p>
+    Notifying a single random waiting thread is also pretty easy. Just have the notifying thread
+    call <code>notify()</code> on the object the waiting threads have called <code>wait()</code>
+    on. Calling <code>notify</code> makes no guarantee about which of the waiting threads will
+    be notified. Hence the term "random waiting thread".
+</p>
+
+<p>
+    Sometimes you may need to notify a specific rather than a random waiting thread. For instance
+    if you need to guarantee that waiting threads are notified in a specific order, be it the
+    order they called the synchronizer in, or some prioritized order. To achive this each waiting
+    thread must call <code>wait()</code> on its own, separate object. When the notifying thread
+    wants to notify a specific waiting thread it will call <code>notify()</code> on the object
+    this specific thread has called <code>wait()</code> on. An example of this can be found
+    in the text <a href="starvation-and-fairness.html">Starvation and Fairness</a>.
+</p>
+
+<p>
+    Below is a code snippet with the notification strategy (notify 1 random waiting thread) marked
+    in bold:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  private boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){
+      <b>//wait strategy - related to notification strategy</b>
+      <b>wait();</b>
+    }
+    isLocked = true;
+  }
+
+  public synchronized void unlock(){
+    isLocked = false;
+    <b>notify(); //notification strategy</b>
+  }
+}
+</pre>
+
+
+<a name="testandset"></a>
+<h2>Test and Set Method</h2>
+
+<p>
+    Synchronizer most often have two types of methods of which <code>test-and-set</code> is the first type (<a href="#set"><code>set</code></a> is the other).
+    Test-and-set means that the thread calling this method <b>tests</b> the internal state of the synchronizer against the
+    access condition. If the condition is met the thread <b>sets</b> the internal state of the synchronizer to reflect
+    that the thread has gained access.
+</p>
+
+<p>
+    The state transition usually results in the access condition turning false for
+    other threads trying to gain access, but may not always do so. For instance, in a <a href="read-write-locks.html">Read - Write Lock</a>
+    a thread gaining read access will update the state of the read-write lock to reflect this, but other threads requesting
+    read access will also be granted access as long as no threads has requested write access.
+</p>
+
+<p>
+    It is imperative that the test-and-set operations are executed atomically meaning no other threads are allowed
+    to execute in the test-and-set method in between the test and the setting of the state.
+</p>
+
+<p>
+    The program flow of a test-and-set method is usually something along the lines of:
+</p>
+
+<ol>
+    <li>Set state before test if necessary</li>
+    <li>Test state against access condition</li>
+    <li>If access condition is not met, wait</li>
+    <li>If access condition is met, set state, and notify waiting threads if necessary</li>
+</ol>
+
+
+<p>
+    The <code>lockWrite()</code> method of a <a href="read-write-locks.html">ReadWriteLock</a> class shown below is an example of a test-and-set method.
+    Threads calling <code>lockWrite()</code> first sets the state before the test (<code>writeRequests++</code>).
+    Then it tests the internal state against the access condition in the <code>canGrantWriteAccess()</code> method.
+    If the test succeeds the internal state is set again before the method is exited. Notice that this method
+    does not notify waiting threads.
+</p>
+
+
+<pre class="codeBox">
+public class ReadWriteLock{
+    private Map&lt;Thread, Integer&gt; readingThreads =
+        new HashMap&lt;Thread, Integer&gt();
+
+    private int writeAccesses    = 0;
+    private int writeRequests    = 0;
+    private Thread writingThread = null;
+
+    ...
+
+    <b>
+        public synchronized void lockWrite() throws InterruptedException{
+        writeRequests++;
+        Thread callingThread = Thread.currentThread();
+        while(! canGrantWriteAccess(callingThread)){
+        wait();
+        }
+        writeRequests--;
+        writeAccesses++;
+        writingThread = callingThread;
+        }
+    </b>
+
+    ...
+}
+</pre>
+
+<p>
+    The <code>BoundedSemaphore</code> class shown below has two test-and-set methods: <code>take()</code> and
+    <br/><code>release()</code>. Both methods test and sets the internal state.
+</p>
+
+<pre class="codeBox">
+public class BoundedSemaphore {
+  private int signals = 0;
+  private int bound   = 0;
+
+  public BoundedSemaphore(int upperBound){
+    this.bound = upperBound;
+  }
+
+  <b>
+      public synchronized void take() throws InterruptedException{
+      while(this.signals == bound) wait();
+      this.signals++;
+      this.notify();
+      }
+
+      public synchronized void release() throws InterruptedException{
+      while(this.signals == 0) wait();
+      this.signals--;
+      this.notify();
+      }
+  </b>
+}
+</pre>
+
+
+<a name="set"></a>
+<h2>Set Method</h2>
+
+<p>
+    The set method is the second type of method that synchronizers often contain. The set method
+    just sets the internal state of the synchronizer without testing it first. A typical example
+    of a set method is the <code>unlock()</code> method of a <code>Lock</code> class. A thread
+    holding the lock can always unlock it without having to test if the <code>Lock</code> is
+    unlocked.
+</p>
+
+<p>
+    The program flow of a set method is usually along the lines of:
+</p>
+
+<ol>
+    <li>Set internal state</li>
+    <li>Notify waiting threads</li>
+</ol>
+
+
+<p>
+    Here is an example <code>unlock()</code> method:
+</p>
+
+<pre class="codeBox">
+public class Lock{
+
+  private boolean isLocked = false;
+  <b>
+      public synchronized void unlock(){
+      isLocked = false;
+      notify();
+      }
+  </b>
+}
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

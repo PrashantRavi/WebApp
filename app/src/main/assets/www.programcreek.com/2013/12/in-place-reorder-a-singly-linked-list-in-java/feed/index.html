@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Reorder List (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: kd</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6786</link>
+		<dc:creator><![CDATA[kd]]></dc:creator>
+		<pubDate>Sun, 15 Mar 2015 06:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6786</guid>
+		<description><![CDATA[Here&#039;s my solution for reorder list which I think is correct. Please let me know if I&#039;m wrong.
+
+
+
+public node reorderList( node l)
+
+{
+
+         node head = l;
+
+	node reOrdered = null;
+
+if ( l == null &#124;&#124; l.next == null)
+{
+
+} return l;
+
+while ( head.next != null)
+{
+
+  reOrdered = head.next;
+
+    while ( reOrdered.next != null)
+
+     {
+
+       reOrdered = reOrdered.next;
+
+     }
+
+reOrdered.next=head.next;
+
+head.next = reOrdered;
+
+head = reOrdered.next;
+
+}
+
+return l;
+
+}
+
+
+
+]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s my solution for reorder list which I think is correct. Please let me know if I&#8217;m wrong.</p>
+<p>public node reorderList( node l)</p>
+<p>{</p>
+<p>         node head = l;</p>
+<p>	node reOrdered = null;</p>
+<p>if ( l == null || l.next == null)<br />
+{</p>
+<p>} return l;</p>
+<p>while ( head.next != null)<br />
+{</p>
+<p>  reOrdered = head.next;</p>
+<p>    while ( reOrdered.next != null)</p>
+<p>     {</p>
+<p>       reOrdered = reOrdered.next;</p>
+<p>     }</p>
+<p>reOrdered.next=head.next;</p>
+<p>head.next = reOrdered;</p>
+<p>head = reOrdered.next;</p>
+<p>}</p>
+<p>return l;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Salil Surendran</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6732</link>
+		<dc:creator><![CDATA[Salil Surendran]]></dc:creator>
+		<pubDate>Mon, 02 Mar 2015 08:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6732</guid>
+		<description><![CDATA[If we can create a new list this solution would work:
+
+
+
+package com.salil.problemsolving;
+
+import com.salil.problemsolving.common.Node;
+
+/**
+ * Created by salilsurendran on 3/1/2015.
+ */
+public class ReorderList {
+
+    public static void main(String[] args) {
+        Node root = new Node(0);
+        Node parentNode = root;
+        for(int i=1;i&#060;=10;i++){
+            Node node = new Node(i);
+            parentNode.child = node;
+            parentNode = node;
+        }
+
+        Node reorderedNode = reOrderList(root);
+        printList(reorderedNode);
+        printList(reOrderList(new Node(0)));
+        root = new Node(0);
+        root.child = new Node(1);
+        printList(reOrderList(root));
+
+    }
+
+    private static void printList(Node reorderedNode){
+        while(reorderedNode != null){
+            System.out.print(reorderedNode.value + &#034; , &#034;);
+            reorderedNode = reorderedNode.child;
+        }
+        System.out.println();
+    }
+
+    private static Node reOrderList(Node root) {
+        Node node = root;
+        Node reverseRoot = null;
+        Node childNode = null;
+        int count = 0;
+        while(node != null){
+            reverseRoot = new Node(node.value);
+            reverseRoot.child = childNode;
+            childNode = reverseRoot;
+            node = node.child;
+            count++;
+        }
+
+        Node node1 = root;
+        Node node2 = reverseRoot;
+        Node childNode1 = null;
+        Node childNode2 = null;
+        Node previousNode2 = null;
+        for(int i=0;i&#060;count/2;i++){
+            childNode1 = node1.child;
+            childNode2 = node2.child;
+            node1.child = node2;
+            node2.child = childNode1;
+            previousNode2 = node2;
+            node2 = childNode2;
+            node1 = childNode1;
+        }
+
+        if(count % 2 == 1)
+            node1.child = null;
+        else
+            previousNode2.child = null;
+
+         return root;
+
+    }
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p>If we can create a new list this solution would work:</p>
+<p>package com.salil.problemsolving;</p>
+<p>import com.salil.problemsolving.common.Node;</p>
+<p>/**<br />
+ * Created by salilsurendran on 3/1/2015.<br />
+ */<br />
+public class ReorderList {</p>
+<p>    public static void main(String[] args) {<br />
+        Node root = new Node(0);<br />
+        Node parentNode = root;<br />
+        for(int i=1;i&lt;=10;i++){<br />
+            Node node = new Node(i);<br />
+            parentNode.child = node;<br />
+            parentNode = node;<br />
+        }</p>
+<p>        Node reorderedNode = reOrderList(root);<br />
+        printList(reorderedNode);<br />
+        printList(reOrderList(new Node(0)));<br />
+        root = new Node(0);<br />
+        root.child = new Node(1);<br />
+        printList(reOrderList(root));</p>
+<p>    }</p>
+<p>    private static void printList(Node reorderedNode){<br />
+        while(reorderedNode != null){<br />
+            System.out.print(reorderedNode.value + &quot; , &quot;);<br />
+            reorderedNode = reorderedNode.child;<br />
+        }<br />
+        System.out.println();<br />
+    }</p>
+<p>    private static Node reOrderList(Node root) {<br />
+        Node node = root;<br />
+        Node reverseRoot = null;<br />
+        Node childNode = null;<br />
+        int count = 0;<br />
+        while(node != null){<br />
+            reverseRoot = new Node(node.value);<br />
+            reverseRoot.child = childNode;<br />
+            childNode = reverseRoot;<br />
+            node = node.child;<br />
+            count++;<br />
+        }</p>
+<p>        Node node1 = root;<br />
+        Node node2 = reverseRoot;<br />
+        Node childNode1 = null;<br />
+        Node childNode2 = null;<br />
+        Node previousNode2 = null;<br />
+        for(int i=0;i&lt;count/2;i++){<br />
+            childNode1 = node1.child;<br />
+            childNode2 = node2.child;<br />
+            node1.child = node2;<br />
+            node2.child = childNode1;<br />
+            previousNode2 = node2;<br />
+            node2 = childNode2;<br />
+            node1 = childNode1;<br />
+        }</p>
+<p>        if(count % 2 == 1)<br />
+            node1.child = null;<br />
+        else<br />
+            previousNode2.child = null;</p>
+<p>         return root;</p>
+<p>    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Crazy</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6723</link>
+		<dc:creator><![CDATA[Crazy]]></dc:creator>
+		<pubDate>Sun, 01 Mar 2015 10:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6723</guid>
+		<description><![CDATA[Excellent :) Thanks a ton!]]></description>
+		<content:encoded><![CDATA[<p>Excellent 🙂 Thanks a ton!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Zhisheng Zhou</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6560</link>
+		<dc:creator><![CDATA[Zhisheng Zhou]]></dc:creator>
+		<pubDate>Tue, 13 Jan 2015 03:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6560</guid>
+		<description><![CDATA[Thanks for this great solution.
+
+For this line:
+  while (fast != null &#038;&#038; fast.next != null &#038;&#038; fast.next.next!= null) 
+
+fast != null is not necessary.
+
+Best.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for this great solution.</p>
+<p>For this line:<br />
+  while (fast != null &amp;&amp; fast.next != null &amp;&amp; fast.next.next!= null) </p>
+<p>fast != null is not necessary.</p>
+<p>Best.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Isaac</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6275</link>
+		<dc:creator><![CDATA[Isaac]]></dc:creator>
+		<pubDate>Mon, 03 Nov 2014 11:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6275</guid>
+		<description><![CDATA[import java.util.*;
+
+public class ReorderList{
+
+        public static void main(String[] args){
+
+                 ReorderList main = new ReorderList();
+
+         ListNode list = new ListNode(1);
+         list.next = new ListNode(2);
+         list.next.next = new ListNode(3);
+         list.next.next.next = new ListNode(4);
+
+         main.reorderList(list);
+
+         System.out.println(list.val + &quot; &quot; + list.next.val + &quot; &quot; + 
+         list.next.next.val + &quot; &quot; + list.next.next.next.val);
+
+         }
+
+	public void reorderList(ListNode node){
+
+		ListNode current = node;
+
+		// empty list or one-node list
+		if(current == null &#124;&#124; current.next == null) return; 
+
+		ListNode currentNext = current.next;
+		ListNode l = currentNext; 
+
+		//base case
+		if(currentNext.next == current &#124;&#124; currentNext.next.next == current){
+currentNext.next = null;
+return;
+
+		}
+
+		//Use l to find the &quot;next&quot; node for current case
+//i.e., the node at position (list length - n)		
+while(l.next != null){
+if(l.next.next == null)
+l = l.next;
+else if(l.next.next.next != current)
+l = l.next;
+}
+
+		l.next = currentNext;
+current.next = l;
+
+		reorderList(currentNext); //recursive call
+	}
+}
+
+class ListNode{
+public int val;
+public ListNode next;
+
+	public ListNode(int i){
+val = i;
+next = null;
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>import java.util.*;</p>
+<p>public class ReorderList{</p>
+<p>        public static void main(String[] args){</p>
+<p>                 ReorderList main = new ReorderList();</p>
+<p>         ListNode list = new ListNode(1);<br />
+         list.next = new ListNode(2);<br />
+         list.next.next = new ListNode(3);<br />
+         list.next.next.next = new ListNode(4);</p>
+<p>         main.reorderList(list);</p>
+<p>         System.out.println(list.val + &#8221; &#8221; + list.next.val + &#8221; &#8221; +<br />
+         list.next.next.val + &#8221; &#8221; + list.next.next.next.val);</p>
+<p>         }</p>
+<p>	public void reorderList(ListNode node){</p>
+<p>		ListNode current = node;</p>
+<p>		// empty list or one-node list<br />
+		if(current == null || current.next == null) return; </p>
+<p>		ListNode currentNext = current.next;<br />
+		ListNode l = currentNext; </p>
+<p>		//base case<br />
+		if(currentNext.next == current || currentNext.next.next == current){<br />
+currentNext.next = null;<br />
+return;</p>
+<p>		}</p>
+<p>		//Use l to find the &#8220;next&#8221; node for current case<br />
+//i.e., the node at position (list length &#8211; n)<br />
+while(l.next != null){<br />
+if(l.next.next == null)<br />
+l = l.next;<br />
+else if(l.next.next.next != current)<br />
+l = l.next;<br />
+}</p>
+<p>		l.next = currentNext;<br />
+current.next = l;</p>
+<p>		reorderList(currentNext); //recursive call<br />
+	}<br />
+}</p>
+<p>class ListNode{<br />
+public int val;<br />
+public ListNode next;</p>
+<p>	public ListNode(int i){<br />
+val = i;<br />
+next = null;<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Isaac</title>
+		<link>http://www.programcreek.com/2013/12/in-place-reorder-a-singly-linked-list-in-java/#comment-6274</link>
+		<dc:creator><![CDATA[Isaac]]></dc:creator>
+		<pubDate>Mon, 03 Nov 2014 10:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10639#comment-6274</guid>
+		<description><![CDATA[import java.util.*;
+
+public class ReorderList{
+
+	public static void main(String[] args){
+
+		ReorderList main = new ReorderList();
+
+		ListNode list = new ListNode(1);
+
+		list.next = new ListNode(2);
+
+		list.next.next = new ListNode(3);
+
+		list.next.next.next = new ListNode(4);
+
+		main.reorderList(list);
+
+		
+
+			System.out.println(list.val + &quot; &quot; + list.next.val + &quot; &quot; + 
+
+							   list.next.next.val + &quot; &quot; + list.next.next.next.val);
+
+	}
+
+	public void reorderList(ListNode node){
+
+		ListNode current = node;
+
+		
+
+		if(current == null &#124;&#124; current.next == null) return;
+
+		ListNode currentNext = current.next;
+
+		ListNode l = currentNext;
+
+		if(currentNext.next == current &#124;&#124; currentNext.next.next == current){
+
+			currentNext.next = null;
+
+			return;
+
+		}
+
+		while(l.next != null){
+
+			if(l.next.next == null)
+
+				l = l.next;
+
+			else if(l.next.next.next != current)
+
+				l = l.next;
+
+		}
+
+		l.next = currentNext;
+
+		current.next = l;
+
+		reorderList(currentNext);
+
+	}
+
+}
+
+class ListNode{
+
+	public int val;
+
+	public ListNode next;
+
+	public ListNode(int i){
+
+		val = i;
+
+		next = null;
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>import java.util.*;</p>
+<p>public class ReorderList{</p>
+<p>	public static void main(String[] args){</p>
+<p>		ReorderList main = new ReorderList();</p>
+<p>		ListNode list = new ListNode(1);</p>
+<p>		list.next = new ListNode(2);</p>
+<p>		list.next.next = new ListNode(3);</p>
+<p>		list.next.next.next = new ListNode(4);</p>
+<p>		main.reorderList(list);</p>
+<p>			System.out.println(list.val + &#8221; &#8221; + list.next.val + &#8221; &#8221; + </p>
+<p>							   list.next.next.val + &#8221; &#8221; + list.next.next.next.val);</p>
+<p>	}</p>
+<p>	public void reorderList(ListNode node){</p>
+<p>		ListNode current = node;</p>
+<p>		if(current == null || current.next == null) return;</p>
+<p>		ListNode currentNext = current.next;</p>
+<p>		ListNode l = currentNext;</p>
+<p>		if(currentNext.next == current || currentNext.next.next == current){</p>
+<p>			currentNext.next = null;</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		while(l.next != null){</p>
+<p>			if(l.next.next == null)</p>
+<p>				l = l.next;</p>
+<p>			else if(l.next.next.next != current)</p>
+<p>				l = l.next;</p>
+<p>		}</p>
+<p>		l.next = currentNext;</p>
+<p>		current.next = l;</p>
+<p>		reorderList(currentNext);</p>
+<p>	}</p>
+<p>}</p>
+<p>class ListNode{</p>
+<p>	public int val;</p>
+<p>	public ListNode next;</p>
+<p>	public ListNode(int i){</p>
+<p>		val = i;</p>
+<p>		next = null;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

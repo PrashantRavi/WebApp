@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Delete Node in a Linked List (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/07/leetcode-delete-node-in-a-linked-list-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/07/leetcode-delete-node-in-a-linked-list-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: chintan thakker</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-delete-node-in-a-linked-list-java/#comment-14473</link>
+		<dc:creator><![CDATA[chintan thakker]]></dc:creator>
+		<pubDate>Mon, 12 Sep 2016 17:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14718#comment-14473</guid>
+		<description><![CDATA[Your code is correct for somewhat different Question i.e remove elements if access to head is given but somewhat duplicated. There is no need to have seperate condition for last node, Change while(curr.next != null) to while(curr!=null). It works perfectly. Also check if Head is null(i.e if the list is empty otherwise curr = head.next; will throw a null pointer exception) 
+
+1st Method:-
+&lt;code&gt;
+
+public void deleteNode(ListNode n) {
+	
+if(head ==null){
+    System.out.println(&quot;List is Empty&quot;);
+}
+if(head.val == n){ //Check if the first node is the one to be deleted 
+    head=head.next;
+}
+if(head == null){ // Check if there was only one element on Original list
+return;
+}
+
+ListNode prev = head;
+ListNode curr = head.next;
+
+while (curr != null){
+         if(curr.val == n.val){
+             prev.next = curr.next;
+          }else{
+             prev = prev.next;
+             curr = curr.next // no null pointer exception will be shown even if curr.next is null
+          }
+  }
+
+}
+
+&lt;/code&gt;
+
+2nd method:-
+
+&lt;code&gt;
+public void deleteNode(ListNode n) {
+	
+	if(head ==null){
+	    System.out.println(&quot;List is Empty&quot;);
+	}
+	if(head.val == n){
+	    head=head.next;
+	}
+	if(head == null){ // Check if there was only one element in Original list
+	return;
+	}
+ListNode curr = head;
+while (curr.next != null) {
+			if (curr.next.val == n) {
+                                curr.next= curr.next.next;	
+			} else  {
+				curr = curr.next;
+			}
+		}
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Your code is correct for somewhat different Question i.e remove elements if access to head is given but somewhat duplicated. There is no need to have seperate condition for last node, Change while(curr.next != null) to while(curr!=null). It works perfectly. Also check if Head is null(i.e if the list is empty otherwise curr = head.next; will throw a null pointer exception) </p>
+<p>1st Method:-<br />
+<code></p>
+<p>public void deleteNode(ListNode n) {</p>
+<p>if(head ==null){<br />
+    System.out.println("List is Empty");<br />
+}<br />
+if(head.val == n){ //Check if the first node is the one to be deleted<br />
+    head=head.next;<br />
+}<br />
+if(head == null){ // Check if there was only one element on Original list<br />
+return;<br />
+}</p>
+<p>ListNode prev = head;<br />
+ListNode curr = head.next;</p>
+<p>while (curr != null){<br />
+         if(curr.val == n.val){<br />
+             prev.next = curr.next;<br />
+          }else{<br />
+             prev = prev.next;<br />
+             curr = curr.next // no null pointer exception will be shown even if curr.next is null<br />
+          }<br />
+  }</p>
+<p>}</p>
+<p></code></p>
+<p>2nd method:-</p>
+<p><code><br />
+public void deleteNode(ListNode n) {</p>
+<p>	if(head ==null){<br />
+	    System.out.println("List is Empty");<br />
+	}<br />
+	if(head.val == n){<br />
+	    head=head.next;<br />
+	}<br />
+	if(head == null){ // Check if there was only one element in Original list<br />
+	return;<br />
+	}<br />
+ListNode curr = head;<br />
+while (curr.next != null) {<br />
+			if (curr.next.val == n) {<br />
+                                curr.next= curr.next.next;<br />
+			} else  {<br />
+				curr = curr.next;<br />
+			}<br />
+		}<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aditya Vutukuri</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-delete-node-in-a-linked-list-java/#comment-9322</link>
+		<dc:creator><![CDATA[Aditya Vutukuri]]></dc:creator>
+		<pubDate>Sat, 27 Feb 2016 07:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14718#comment-9322</guid>
+		<description><![CDATA[You need to take care if this is a head and tail. 
+
+public void deleteNode(ListNode n) {
+
+  node.next = node.next.next;
+}]]></description>
+		<content:encoded><![CDATA[<p>You need to take care if this is a head and tail. </p>
+<p>public void deleteNode(ListNode n) {</p>
+<p>  node.next = node.next.next;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CRH</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-delete-node-in-a-linked-list-java/#comment-7941</link>
+		<dc:creator><![CDATA[CRH]]></dc:creator>
+		<pubDate>Fri, 25 Dec 2015 04:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14718#comment-7941</guid>
+		<description><![CDATA[This is easy, BUT needs edge cases handling in code/talking to your interviewer. Did you wonder how this will work if the node is the last in the list? :)]]></description>
+		<content:encoded><![CDATA[<p>This is easy, BUT needs edge cases handling in code/talking to your interviewer. Did you wonder how this will work if the node is the last in the list? 🙂</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

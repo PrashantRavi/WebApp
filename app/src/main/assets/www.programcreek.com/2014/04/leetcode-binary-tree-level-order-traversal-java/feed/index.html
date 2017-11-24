@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Binary Tree Level Order Traversal  (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/04/leetcode-binary-tree-level-order-traversal-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-level-order-traversal-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Randman Null</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-level-order-traversal-java/#comment-14837</link>
+		<dc:creator><![CDATA[Randman Null]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 02:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14023#comment-14837</guid>
+		<description><![CDATA[Dont need 2 queues. One is enough.
+
+Key is to have a good exit condition.
+
+&lt;code&gt; 
+    public List&#060;List&#062; levelOrder(TreeNode root) {
+        List&#060;List&#062; list = new ArrayList&#060;List&#062;();
+        List l1 = new ArrayList();
+        
+        if(null == root){
+            return list;
+        }
+        
+        Queue q = new LinkedList();
+        
+        q.offer(root);
+        q.offer(null);
+        
+        while(!q.isEmpty()){
+            TreeNode top = q.poll();
+            if(null != top){
+                l1.add(top.val);
+                if(null != top.left){
+                    q.offer(top.left);
+                }
+                if(null != top.right ){
+                    q.offer(top.right);
+                }
+            }else{
+                list.add(l1);
+                l1 = new ArrayList();
+                q.offer(null);
+            }
+            
+            if (null == top &#038;&#038; null == q.peek()){
+                break;
+            }
+        }
+        return list;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Dont need 2 queues. One is enough.</p>
+<p>Key is to have a good exit condition.</p>
+<p><code><br />
+    public List&lt;List&gt; levelOrder(TreeNode root) {<br />
+        List&lt;List&gt; list = new ArrayList&lt;List&gt;();<br />
+        List l1 = new ArrayList();</p>
+<p>        if(null == root){<br />
+            return list;<br />
+        }</p>
+<p>        Queue q = new LinkedList();</p>
+<p>        q.offer(root);<br />
+        q.offer(null);</p>
+<p>        while(!q.isEmpty()){<br />
+            TreeNode top = q.poll();<br />
+            if(null != top){<br />
+                l1.add(top.val);<br />
+                if(null != top.left){<br />
+                    q.offer(top.left);<br />
+                }<br />
+                if(null != top.right ){<br />
+                    q.offer(top.right);<br />
+                }<br />
+            }else{<br />
+                list.add(l1);<br />
+                l1 = new ArrayList();<br />
+                q.offer(null);<br />
+            }</p>
+<p>            if (null == top &amp;&amp; null == q.peek()){<br />
+                break;<br />
+            }<br />
+        }<br />
+        return list;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venu Bp</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-level-order-traversal-java/#comment-14458</link>
+		<dc:creator><![CDATA[Venu Bp]]></dc:creator>
+		<pubDate>Sun, 11 Sep 2016 21:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14023#comment-14458</guid>
+		<description><![CDATA[Another solution with one queue
+
+
+public List&#060;List&#062; levelOrder(TreeNode root) {
+        List&#060;List&#062; results = new ArrayList&#060;List&#062;();
+        if(root == null)
+            return results;
+
+        List levelResult = new ArrayList();
+        
+        Queue queue = new LinkedList();
+        queue.offer(root);
+        queue.offer(null);
+        
+        TreeNode node = null;
+        while(! queue.isEmpty()){
+            node = queue.poll();
+            if(node != null){
+                levelResult.add(node.val);
+            }
+            if(queue.size() &#062; 0 &#038;&#038; node == null){
+                results.add(levelResult);
+                levelResult = new ArrayList();
+                queue.offer(null);
+            }
+            if(node!=null &#038;&#038; node.left != null){
+                queue.offer(node.left);
+            }
+            
+            if(node != null &#038;&#038; node.right != null){
+                queue.offer(node.right);
+            }
+        }
+        results.add(levelResult);
+        return results;
+    }
+]]></description>
+		<content:encoded><![CDATA[<p>Another solution with one queue</p>
+<p>public List&lt;List&gt; levelOrder(TreeNode root) {<br />
+        List&lt;List&gt; results = new ArrayList&lt;List&gt;();<br />
+        if(root == null)<br />
+            return results;</p>
+<p>        List levelResult = new ArrayList();</p>
+<p>        Queue queue = new LinkedList();<br />
+        queue.offer(root);<br />
+        queue.offer(null);</p>
+<p>        TreeNode node = null;<br />
+        while(! queue.isEmpty()){<br />
+            node = queue.poll();<br />
+            if(node != null){<br />
+                levelResult.add(node.val);<br />
+            }<br />
+            if(queue.size() &gt; 0 &amp;&amp; node == null){<br />
+                results.add(levelResult);<br />
+                levelResult = new ArrayList();<br />
+                queue.offer(null);<br />
+            }<br />
+            if(node!=null &amp;&amp; node.left != null){<br />
+                queue.offer(node.left);<br />
+            }</p>
+<p>            if(node != null &amp;&amp; node.right != null){<br />
+                queue.offer(node.right);<br />
+            }<br />
+        }<br />
+        results.add(levelResult);<br />
+        return results;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Burhan COKCA</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-binary-tree-level-order-traversal-java/#comment-7008</link>
+		<dc:creator><![CDATA[Burhan COKCA]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2015 04:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14023#comment-7008</guid>
+		<description><![CDATA[Solution with one queue only. 
+
+public List&#060;List&#062; levelOrder(TreeNode root) {
+
+        //queue will handle this
+        List&#060;List&#062; result = new ArrayList();
+        Queue q = new LinkedList();
+        if(root == null) return result;
+
+        List list = new ArrayList();
+        q.add(root);
+
+        TreeNode rightMost = root;
+        //this is for the case that the right most doesnt have child nodes, so we need to keep track of the
+        TreeNode b = null;
+
+        while(!q.isEmpty()){
+            TreeNode t = q.remove();
+            list.add(t.val);
+
+            if(t == rightMost){
+
+                result.add(list);
+                list = new ArrayList();
+                if(t.right != null) rightMost = t.right;
+                else if(t.left != null) rightMost = t.left;
+                else rightMost = b;
+
+            }
+
+            if(t.left != null){
+                q.add(t.left);
+                b = t.left;
+            }
+
+            if(t.right != null){
+                q.add(t.right);
+                b = t.right;
+            }
+        }
+        return result;
+    }]]></description>
+		<content:encoded><![CDATA[<p>Solution with one queue only. </p>
+<p>public List&lt;List&gt; levelOrder(TreeNode root) {</p>
+<p>        //queue will handle this<br />
+        List&lt;List&gt; result = new ArrayList();<br />
+        Queue q = new LinkedList();<br />
+        if(root == null) return result;</p>
+<p>        List list = new ArrayList();<br />
+        q.add(root);</p>
+<p>        TreeNode rightMost = root;<br />
+        //this is for the case that the right most doesnt have child nodes, so we need to keep track of the<br />
+        TreeNode b = null;</p>
+<p>        while(!q.isEmpty()){<br />
+            TreeNode t = q.remove();<br />
+            list.add(t.val);</p>
+<p>            if(t == rightMost){</p>
+<p>                result.add(list);<br />
+                list = new ArrayList();<br />
+                if(t.right != null) rightMost = t.right;<br />
+                else if(t.left != null) rightMost = t.left;<br />
+                else rightMost = b;</p>
+<p>            }</p>
+<p>            if(t.left != null){<br />
+                q.add(t.left);<br />
+                b = t.left;<br />
+            }</p>
+<p>            if(t.right != null){<br />
+                q.add(t.right);<br />
+                b = t.right;<br />
+            }<br />
+        }<br />
+        return result;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

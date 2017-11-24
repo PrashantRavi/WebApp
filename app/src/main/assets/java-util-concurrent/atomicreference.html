@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>AtomicReference</title>
+
+    <meta name="description" content="The AtomicReference class in Java provides an atomic (thread safe) reference which can be read and written by multiple threads without ending up in an inconsistent state.">
+    <meta name="keywords"    content="java util concurrent atomicreference">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="AtomicReference">
+    <meta name="twitter:description" content="The AtomicReference class in Java provides an atomic (thread safe) reference which can be read and written by multiple threads without ending up in an inconsistent state.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="AtomicReference"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-util-concurrent/atomicreference.html"/>
+    <meta property="og:description" content="The AtomicReference class in Java provides an atomic (thread safe) reference which can be read and written by multiple threads without ending up in an inconsistent state."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-util-concurrent/atomiclong.html";
+var nextArticleInCategory = "/java-util-concurrent/atomicstampedreference.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 6684;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>java.util.concurrency - Java Concurrency Utilities</div><ol><li><a href="index.html">java.util.concurrent - Java Concurrency Utilities</a></li><li><a href="blockingqueue.html">BlockingQueue</a></li><li><a href="arrayblockingqueue.html">ArrayBlockingQueue</a></li><li><a href="delayqueue.html">DelayQueue</a></li><li><a href="linkedblockingqueue.html">LinkedBlockingQueue</a></li><li><a href="priorityblockingqueue.html">PriorityBlockingQueue</a></li><li><a href="synchronousqueue.html">SynchronousQueue</a></li><li><a href="blockingdeque.html">BlockingDeque</a></li><li><a href="linkedblockingdeque.html">LinkedBlockingDeque</a></li><li><a href="concurrentmap.html">ConcurrentMap</a></li><li><a href="concurrentnavigablemap.html">ConcurrentNavigableMap</a></li><li><a href="countdownlatch.html">CountDownLatch</a></li><li><a href="cyclicbarrier.html">CyclicBarrier</a></li><li><a href="exchanger.html">Exchanger</a></li><li><a href="semaphore.html">Semaphore</a></li><li><a href="executorservice.html">ExecutorService</a></li><li><a href="threadpoolexecutor.html">ThreadPoolExecutor</a></li><li><a href="scheduledexecutorservice.html">ScheduledExecutorService</a></li><li><a href="java-fork-and-join-forkjoinpool.html">Java Fork and Join using ForkJoinPool</a></li><li><a href="lock.html">Lock</a></li><li><a href="readwritelock.html">ReadWriteLock</a></li><li><a href="atomicboolean.html">AtomicBoolean</a></li><li><a href="atomicinteger.html">AtomicInteger</a></li><li><a href="atomiclong.html">AtomicLong</a></li><li><a href="atomicreference.html"><b>AtomicReference</b></a></li><li><a href="atomicstampedreference.html">AtomicStampedReference</a></li><li><a href="atomicintegerarray.html">AtomicIntegerArray</a></li><li><a href="atomiclongarray.html">AtomicLongArray</a></li><li><a href="atomicreferencearray.html">AtomicReferenceArray</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>AtomicReference</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#creating-an-atomicreference">Creating an AtomicReference</a><ul><li><a href="#creating-a-typed-atomicreference">Creating a Typed AtomicReference</a></li></ul></li><li><a href="#getting-the-atomicreference-reference">Getting the AtomicReference Reference</a></li><li><a href="#setting-the-atomicreference-reference">Setting the AtomicReference Reference</a></li><li><a href="#comparing-and-setting-the-atomicreference-reference">Comparing and Setting the AtomicReference Reference</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2016-01-26
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The <code>AtomicReference</code> class provides an object reference variable which can be read and written atomically.
+    By atomic is meant that multiple threads attempting to change the same <code>AtomicReference</code> (e.g. with a
+    compare-and-swap operation) will not make
+    the <code>AtomicReference</code> end up in an inconsistent state. <code>AtomicReference</code> even has an advanced
+    <code>compareAndSet()</code> method which lets you compare the reference to an expected value (reference) and if
+    they are equal, set a new reference inside the <code>AtomicReference</code> object.
+</p>
+
+
+<a name="creating-an-atomicreference"></a>
+<h2>Creating an AtomicReference</h2>
+
+<p>
+    You can create an <code>AtomicReference</code> instance like this:
+</p>
+
+<pre class="codeBox">
+AtomicReference atomicReference = new AtomicReference();
+</pre>
+
+<p>
+    If you need to create the <code>AtomicReference</code> with an initial reference, you can do so like this:
+</p>
+
+<pre class="codeBox">
+String initialReference = "the initially referenced string";
+AtomicReference atomicReference = new AtomicReference(initialReference);
+</pre>
+
+
+<a name="creating-a-typed-atomicreference"></a>
+<h3>Creating a Typed AtomicReference</h3>
+
+<p>
+    You can use Java generics to create a typed <code>AtomicReference</code>. Here is a typed
+    <code>AtomicReference</code> example:
+</p>
+
+<pre class="codeBox">
+AtomicReference&lt;String&gt; atomicStringReference =
+    new AtomicReference&lt;String&gt;();
+</pre>
+
+<p>
+    You can also set an initial value for a typed <code>AtomicReference</code>. Here is a typed <code>AtomicReference</code>
+    instantiation example with an initial value:
+</p>
+
+<pre class="codeBox">
+String initialReference = "the initially referenced string";
+AtomicReference&lt;String&gt; atomicStringReference =
+    new AtomicReference&lt;String&gt;(initialReference);
+</pre>
+
+
+
+
+<a name="getting-the-atomicreference-reference"></a>
+<h2>Getting the AtomicReference Reference</h2>
+
+<p>
+    You can get the reference stored in an <code>AtomicReference</code> using the <code>AtomicReference</code>'s
+    <code>get()</code> method. If you have an untyped <code>AtomicReference</code> then the <code>get()</code> method
+    returns an <code>Object</code> reference. If you have a typed <code>AtomicReference</code> then <code>get()</code> returns
+    a reference to the type you declared on the <code>AtomicReference</code> variable when you created it.
+</p>
+
+<p>
+    Here is first an untyped <code>AtomicReference</code> <code>get()</code> example:
+</p>
+
+
+<pre class="codeBox">
+AtomicReference atomicReference = new AtomicReference("first value referenced");
+
+String reference = (String) atomicReference.get();
+</pre>
+
+<p>
+    Notice how it is necessary to cast the reference returned by <code>get()</code> to a <code>String</code> because
+    <code>get()</code> returns an <code>Object</code> reference when the <code>AtomicReference</code> is untyped.
+</p>
+
+<p>
+    Here is a typed <code>AtomicReference</code> example:
+</p>
+
+
+<pre class="codeBox">
+AtomicReference&lt;String&gt; atomicReference = 
+     new AtomicReference&lt;String&gt;("first value referenced");
+
+String reference = atomicReference.get();
+</pre>
+
+<p>
+    Notice how it is no longer necessary to cast the referenced returned by <code>get()</code> because the compiler
+    knows it will return a <code>String</code> reference.
+</p>
+
+
+
+
+<a name="setting-the-atomicreference-reference"></a>
+<h2>Setting the AtomicReference Reference</h2>
+
+<p>
+    You can set the reference stored in an <code>AtomicReference</code> instance using its <code>set()</code> method.
+    In an untyped <code>AtomicReference</code> instance the <code>set()</code> method takes an <code>Object</code>
+    reference as parameter. In a typed <code>AtomicReference</code> the <code>set()</code> method takes whatever
+    type as parameter you declared as its type when you declared the <code>AtomicReference</code>.
+</p>
+
+<p>
+    Here is an <code>AtomicReference</code> <code>set()</code> example:
+</p>
+
+
+<pre class="codeBox">
+AtomicReference atomicReference = 
+     new AtomicReference();
+    
+atomicReference.set("New object referenced");
+</pre>
+
+<p>
+    There is no difference to see in the use of the <code>set()</code> method for an untyped or typed reference.
+    The only real difference you will experience is that the compiler will restrict the types you can set on a typed
+    <code>AtomicReference</code>.
+</p>
+
+
+
+
+
+<a name="comparing-and-setting-the-atomicreference-reference"></a>
+<h2>Comparing and Setting the AtomicReference Reference</h2>
+
+<p>
+    The <code>AtomicReference</code> class contains a useful method named <code>compareAndSet()</code>. The
+    <code>compareAndSet()</code> method can compare the reference stored in the <code>AtomicReference</code>  instance
+    with an expected reference, and if they two references are the same (not equal as in <code>equals()</code> but
+    same as in <code>==</code>), then a new reference can be set on the <code>AtomicReference</code> instance.
+</p>
+
+<p>
+    If <code>compareAndSet()</code> sets a new reference in the <code>AtomicReference</code> the <code>compareAndSet()</code>
+    method returns <code>true</code>. Otherwise <code>compareAndSet()</code> returns <code>false</code>.
+</p>
+
+<p>
+    Here is an <code>AtomicReference</code> <code>compareAndSet()</code> example:
+</p>
+
+<pre class="codeBox">
+String initialReference = "initial value referenced";
+
+AtomicReference&lt;String&gt; atomicStringReference =
+    new AtomicReference&lt;String&gt;(initialReference);
+
+String newReference = "new value referenced";
+boolean exchanged = atomicStringReference.compareAndSet(initialReference, newReference);
+System.out.println("exchanged: " + exchanged);
+
+exchanged = atomicStringReference.compareAndSet(initialReference, newReference);
+System.out.println("exchanged: " + exchanged);
+</pre>
+
+
+<p>
+    This example creates a typed <code>AtomicReference</code> with an initial reference. Then it calls <code>comparesAndSet()</code>
+    two times to compare the stored reference to the initial reference, and set a new reference if the stored reference is
+    equal to the initial reference. The first time the two references are the same, so a new reference is set on the
+    <code>AtomicReference</code>. The second time the stored reference is the new reference just set in the call to
+    <code>compareAndSet()</code> before, so the stored reference is of course not equal to the initial reference. Thus,
+    a new reference is not set on the <code>AtomicReference</code> and the <code>compareAndSet()</code> method returns
+    <code>false</code>.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="atomicstampedreference.html">AtomicStampedReference</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Reflection - Arrays</title>
+
+    <meta name="description" content="This text explains how to create arrays and obtain their Class objects at runtime via Java Reflection">
+    <meta name="keywords"    content="java reflection arrays">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Reflection - Arrays">
+    <meta name="twitter:description" content="This text explains how to create arrays and obtain their Class objects at runtime via Java Reflection">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Reflection - Arrays"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-reflection/arrays.html"/>
+    <meta property="og:description" content="This text explains how to create arrays and obtain their Class objects at runtime via Java Reflection"/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-reflection/generics.html";
+var nextArticleInCategory = "/java-reflection/dynamic-proxies.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 6209;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Reflection</div><ol><li><a href="index.html">Java Reflection Tutorial</a></li><li><a href="classes.html">Java Reflection - Classes</a></li><li><a href="constructors.html">Java Reflection - Constructors</a></li><li><a href="fields.html">Java Reflection - Fields</a></li><li><a href="methods.html">Java Reflection - Methods</a></li><li><a href="getters-setters.html">Java Reflection - Getters and Setters</a></li><li><a href="private-fields-and-methods.html">Java Reflection - Private Fields and Methods</a></li><li><a href="annotations.html">Java Reflection - Annotations</a></li><li><a href="generics.html">Java Reflection - Generics</a></li><li><a href="arrays.html"><b>Java Reflection - Arrays</b></a></li><li><a href="dynamic-proxies.html">Java Reflection - Dynamic Proxies</a></li><li><a href="dynamic-class-loading-reloading.html">Java Reflection - Dynamic Class Loading and Reloading</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Reflection - Arrays</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#Array">java.lang.reflect.Array</a></li><li><a href="#creating">Creating Arrays</a></li><li><a href="#accessing">Accessing Arrays</a></li><li><a href="#class">Obtaining the Class Object of an Array</a></li><li><a href="#componenttype">Obtaining the Component Type of an Array</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-05-21
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Working with arrays in Java Reflection can be a bit tricky at times. Especially if you need to
+    obtain the Class object for a certain type of array, like <code>int[]</code> etc. This
+    text will discuss how to both create arrays and get their class objects via Java Reflection.
+</p>
+
+<p>
+    Note: This text has been updated after reading Eyal Lupu's blog post <br/>
+    <a target="_blank" href="http://jroller.com/eyallupu/entry/two_side_notes_about_arrays">"Two Side Notes About Arrays and Reflection"</a>
+    which commented on the first edition of this text. The current edition takes his comments into
+    consideration.
+
+</p>
+
+
+
+
+<a name="Array"></a>
+<h2>java.lang.reflect.Array</h2>
+
+<p>
+    Working with arrays via Java Reflection is done using the <code>java.lang.reflect.Array</code> class.
+    Do not confuse this class with the <code>java.util.Arrays</code> class in the Java Collections
+    suite, which contains utility methods for sorting arrays, converting them to collections etc.
+</p>
+
+
+
+
+<a name="creating"></a>
+<h2>Creating Arrays</h2>
+
+<p>
+    Creating arrays via Java Reflection is done using the <code>java.lang.reflect.Array</code> class.
+    Here is an example showing how to create an array:
+</p>
+
+<pre class="codeBox">
+int[] intArray = (int[]) Array.newInstance(int.class, 3);
+</pre>
+
+<p>
+    This code sample creates an array of <code>int</code>. The first parameter <code>int.class</code> given
+    to the <code>Array.newInstance()</code> method tells what type each element in the array should
+    be of. The second parameter states how many elements the array should have space for.
+</p>
+
+
+
+<a name="accessing"></a>
+<h2>Accessing Arrays</h2>
+
+<p>
+    It is also possible to access the elements of an array using Java Reflection. This is done via
+    the <code>Array.get(...)</code> and <code>Array.set(...)</code> methods. Here is an example:
+</p>
+
+<pre class="codeBox">
+int[] intArray = (int[]) Array.newInstance(int.class, 3);
+
+Array.set(intArray, 0, 123);
+Array.set(intArray, 1, 456);
+Array.set(intArray, 2, 789);
+
+System.out.println("intArray[0] = " + Array.get(intArray, 0));
+System.out.println("intArray[1] = " + Array.get(intArray, 1));
+System.out.println("intArray[2] = " + Array.get(intArray, 2));
+</pre>
+
+<p>
+    This code sample will print out this:
+</p>
+
+<pre class="codeBox">
+intArray[0] = 123
+intArray[1] = 456
+intArray[2] = 789
+</pre>
+
+
+
+
+<a name="class"></a>
+<h2>Obtaining the Class Object of an Array</h2>
+<p>
+    One of the problems I ran into when implementing the script language in
+    <a href="http://butterfly.jenkov.com">Butterfly DI Container</a> was how to obtain the <code>Class</code> object
+    for arrays via Java Reflection. Using non-reflection code you can do like this:
+</p>
+
+<pre class="codeBox">
+Class stringArrayClass = String[].class;
+</pre>
+
+<p>
+    Doing this using <code>Class.forName()</code> is not quite straightforward. For instance, you can access the
+    primitive <code>int</code> array class object like this:
+</p>
+
+<pre class="codeBox">
+Class intArray = Class.forName("[I");
+</pre>
+
+<p>
+    The JVM represents an int via the letter <code>I</code>. The <code>[</code> on the left means
+    it is the class of an <code>int</code> array I am interested in. This works for all other
+    primitives too.
+</p>
+
+<p>
+    For objects you need to use a slightly different notation:
+</p>
+
+<pre class="codeBox">
+Class stringArrayClass = Class.forName("[Ljava.lang.String;");
+</pre>
+
+<p>
+    Notice the <code>[L</code> to the left of the class name, and the <code>;</code>
+    to the right. This means an array of objects with the given type.
+</p>
+
+
+<p>
+    As a side note, you cannot obtain the class object of primitives using <code>Class.forName()</code>.
+    Both of the examples below result in a <code>ClassNotFoundException</code>:
+</p>
+
+<pre class="codeBox">
+Class intClass1 = Class.forName("I");
+Class intClass2 = Class.forName("int");
+</pre>
+
+<p>
+    I usually do something like this to obtain the class name for primitives as well as objects:
+</p>
+
+<pre class="codeBox">
+public Class getClass(String className){
+  if("int" .equals(className)) return int .class;
+  if("long".equals(className)) return long.class;
+  ...
+  return Class.forName(className);
+}
+</pre>
+
+
+<p>
+    Once you have obtained the <code>Class</code> object of a type there is a simple way to obtain
+    the <code>Class</code> of an array of that type.
+    The solution, or workaround as you might call it, is to create an empty array of the desired type and
+    obtain the class object from that empty array. It's a bit of a cheat, but it works. Here is how that looks:
+</p>
+
+<pre class="codeBox">
+Class theClass = getClass(theClassName);
+Class stringArrayClass = Array.newInstance(theClass, 0).getClass();
+</pre>
+
+<p> This presents a single, uniform method to access the array class of arrays of any type. No fiddling with
+    class names etc.
+</p>
+
+<p>
+    To make sure that the <code>Class</code> object really is an array, you can call the
+    <code>Class.isArray()</code> method to check:
+</p>
+
+<pre class="codeBox">
+Class stringArrayClass = Array.newInstance(String.class, 0).getClass();
+System.out.println("is array: " + stringArrayClass.isArray());
+</pre>
+
+
+<a name="componenttype"></a>
+<h2>Obtaining the Component Type of an Array</h2>
+<p>
+    Once you have obtained the <code>Class</code> object for an array you can access its component type
+    via the <code>Class.getComponentType()</code> method. The component type is the type of the items in
+    the array. For instance, the component type of an <code>int[]</code> array is the <code>int.class</code>
+    <code>Class</code> object. The component type of a <code>String[]</code> array is the <code>java.lang.String</code>
+    <code>Class</code> object.
+</p>
+
+<p>Here is an example of accessing the component type array:</p>
+
+<pre class="codeBox">
+String[] strings = new String[3];
+Class stringArrayClass = strings.getClass();
+Class stringArrayComponentType = stringArrayClass.getComponentType();
+System.out.println(stringArrayComponentType);
+</pre>
+
+<p>
+    This example will print out the text "java.lang.String" which is the component type
+    of the <code>String</code> array.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="dynamic-proxies.html">Java Reflection - Dynamic Proxies</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

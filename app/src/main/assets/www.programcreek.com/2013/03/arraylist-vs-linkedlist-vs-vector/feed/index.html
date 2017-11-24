@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: ArrayList vs. LinkedList vs. Vector</title>
+	<atom:link href="http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: lgtiamo</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-8338</link>
+		<dc:creator><![CDATA[lgtiamo]]></dc:creator>
+		<pubDate>Wed, 13 Jan 2016 04:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-8338</guid>
+		<description><![CDATA[&lt;code&gt; 
+String foo = &quot;bar&quot;;
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+String foo = "bar";<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ryanlr</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-7020</link>
+		<dc:creator><![CDATA[ryanlr]]></dc:creator>
+		<pubDate>Tue, 09 Jun 2015 13:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-7020</guid>
+		<description><![CDATA[fixed.]]></description>
+		<content:encoded><![CDATA[<p>fixed.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sameer Jauhari</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-6945</link>
+		<dc:creator><![CDATA[Sameer Jauhari]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 10:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-6945</guid>
+		<description><![CDATA[&quot;ArrayList&quot; is a better choice if your program is thread-safe  - i believe here it should be Vector]]></description>
+		<content:encoded><![CDATA[<p>&#8220;ArrayList&#8221; is a better choice if your program is thread-safe  &#8211; i believe here it should be Vector</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lavanya</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-6808</link>
+		<dc:creator><![CDATA[lavanya]]></dc:creator>
+		<pubDate>Sun, 22 Mar 2015 01:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-6808</guid>
+		<description><![CDATA[i love this site]]></description>
+		<content:encoded><![CDATA[<p>i love this site</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Chris Lehoczki</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-6802</link>
+		<dc:creator><![CDATA[Chris Lehoczki]]></dc:creator>
+		<pubDate>Wed, 18 Mar 2015 10:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-6802</guid>
+		<description><![CDATA[&quot;The difference of their performance is obvious. LinkedList is faster in add and remove, but slower in get. Based on the complexity table and testing results, we can figure out when to use ArrayList or LinkedList. In brief, LinkedList should be preferred if:..&quot;
+
+It isn&#039;t obvious. You didn&#039;t mentioned which Java version did you use for the benchmark. It was true in Java 1.5 and under.
+
+You made a fatal mistake here. Put your whole benchmark code in a procedure and call it 2-4 times. You will get completely different numbers:
+
+First call with max value 13 (it&#039;s higher than the default capacity of the ArrayList):
+
+ArrayList add:    324103 (OMG)
+LinkedList add:      8608
+
+ArrayList get:   3311 (2x faster)
+LinkedList get: 6621 
+
+ArrayList get iterate:   101634 (slightly faster)
+LinkedList get iterate: 128119
+
+ArrayList remove:   4966 (moderately faster)
+LinkedList remove: 7283
+
+---------------------------------------------
+
+4th call with max 13:
+
+ArrayList add:   3973 (OMG2 it&#039;s like a magic)
+LinkedList add: 5297
+
+ArrayList get:     993 (2x faster)
+LinkedList get: 2318
+
+ArrayList get iterate:   3642 (almost the same)
+LinkedList get iterate: 3641
+
+ArrayList remove:   1656 (2x faster)
+LinkedList remove: 3311
+
+------------------------------------------
+
+4th call with max 10000
+
+ArrayList add:   131098 (moderately faster)
+LinkedList add: 189032
+
+ArrayList get:       305233 (15x faster)
+LinkedList get: 43127889
+
+ArrayList get iterate:   37409 (almost 2x faster)
+LinkedList get iterate: 68859
+
+ArrayList remove:   45355 (almost 2x faster)
+LinkedList remove: 85743
+
+The magic what happens is called bytecode optimalization. Java is fast today.
+
+-----------------------------------------------------------------------------------------------------------------------------
+Conclusion:
+1) Always use ArrayList except you need to insert always at the front
+2) Benchmark your application if it is slow
+3) Don&#039;t use premature optimalization because you don&#039;t know what happens under the hood in the JVM]]></description>
+		<content:encoded><![CDATA[<p>&#8220;The difference of their performance is obvious. LinkedList is faster in add and remove, but slower in get. Based on the complexity table and testing results, we can figure out when to use ArrayList or LinkedList. In brief, LinkedList should be preferred if:..&#8221;</p>
+<p>It isn&#8217;t obvious. You didn&#8217;t mentioned which Java version did you use for the benchmark. It was true in Java 1.5 and under.</p>
+<p>You made a fatal mistake here. Put your whole benchmark code in a procedure and call it 2-4 times. You will get completely different numbers:</p>
+<p>First call with max value 13 (it&#8217;s higher than the default capacity of the ArrayList):</p>
+<p>ArrayList add:    324103 (OMG)<br />
+LinkedList add:      8608</p>
+<p>ArrayList get:   3311 (2x faster)<br />
+LinkedList get: 6621 </p>
+<p>ArrayList get iterate:   101634 (slightly faster)<br />
+LinkedList get iterate: 128119</p>
+<p>ArrayList remove:   4966 (moderately faster)<br />
+LinkedList remove: 7283</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>4th call with max 13:</p>
+<p>ArrayList add:   3973 (OMG2 it&#8217;s like a magic)<br />
+LinkedList add: 5297</p>
+<p>ArrayList get:     993 (2x faster)<br />
+LinkedList get: 2318</p>
+<p>ArrayList get iterate:   3642 (almost the same)<br />
+LinkedList get iterate: 3641</p>
+<p>ArrayList remove:   1656 (2x faster)<br />
+LinkedList remove: 3311</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>4th call with max 10000</p>
+<p>ArrayList add:   131098 (moderately faster)<br />
+LinkedList add: 189032</p>
+<p>ArrayList get:       305233 (15x faster)<br />
+LinkedList get: 43127889</p>
+<p>ArrayList get iterate:   37409 (almost 2x faster)<br />
+LinkedList get iterate: 68859</p>
+<p>ArrayList remove:   45355 (almost 2x faster)<br />
+LinkedList remove: 85743</p>
+<p>The magic what happens is called bytecode optimalization. Java is fast today.</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+Conclusion:<br />
+1) Always use ArrayList except you need to insert always at the front<br />
+2) Benchmark your application if it is slow<br />
+3) Don&#8217;t use premature optimalization because you don&#8217;t know what happens under the hood in the JVM</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hououin Kyouma</title>
+		<link>http://www.programcreek.com/2013/03/arraylist-vs-linkedlist-vs-vector/#comment-6675</link>
+		<dc:creator><![CDATA[Hououin Kyouma]]></dc:creator>
+		<pubDate>Tue, 24 Feb 2015 01:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=8148#comment-6675</guid>
+		<description><![CDATA[not bad...gonna look into this later!
+BOOKMARKED!!!!]]></description>
+		<content:encoded><![CDATA[<p>not bad&#8230;gonna look into this later!<br />
+BOOKMARKED!!!!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

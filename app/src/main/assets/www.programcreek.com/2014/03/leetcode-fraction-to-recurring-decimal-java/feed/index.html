@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Fraction to Recurring Decimal (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/03/leetcode-fraction-to-recurring-decimal-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/03/leetcode-fraction-to-recurring-decimal-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Sreeparna Mukherjee</title>
+		<link>http://www.programcreek.com/2014/03/leetcode-fraction-to-recurring-decimal-java/#comment-11342</link>
+		<dc:creator><![CDATA[Sreeparna Mukherjee]]></dc:creator>
+		<pubDate>Wed, 25 May 2016 11:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13793#comment-11342</guid>
+		<description><![CDATA[Time limit is getting exceeded in the above code. 
+
+&lt;code&gt;
+
+ long nume = Math.abs((long)numerator);
+
+        long deno = Math.abs((long)denominator);
+
+        String sign = (numerator &#060; 0) ^ (denominator &#060; 0) ? &#034;-&#034; : &#034;&#034;;
+
+        if (deno == 0) {
+
+        	return &#034;&#034;;
+
+        } else if (nume == 0) {
+
+        	return &#034;0&#034;;
+
+        } else if (nume % deno == 0) {
+
+        	return sign + nume/deno + &#034;&#034;;
+
+        }
+
+        
+
+        HashMap map = new HashMap();
+
+        StringBuffer rst = new StringBuffer(sign + nume/deno + &quot;.&quot;);
+
+        long end = nume%deno * 10;//The decimal portion of the value, after decimal point
+
+  		int i = 0;
+
+        while (end != 0){
+
+			if (map.containsKey(end)) {
+
+				rst.insert(rst.indexOf(&quot;.&quot;) + map.get(end) + 1, &quot;(&quot;);
+
+				rst.append(&quot;)&quot;);
+
+				return rst.toString();
+
+			}
+
+			rst.append(end/deno);
+
+        	map.put(end, i++);
+
+        	end = (end % deno) * 10;
+
+        }
+
+        return rst.toString();
+
+}
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Time limit is getting exceeded in the above code. </p>
+<p><code></p>
+<p> long nume = Math.abs((long)numerator);</p>
+<p>        long deno = Math.abs((long)denominator);</p>
+<p>        String sign = (numerator &lt; 0) ^ (denominator &lt; 0) ? &quot;-&quot; : &quot;&quot;;</p>
+<p>        if (deno == 0) {</p>
+<p>        	return &quot;&quot;;</p>
+<p>        } else if (nume == 0) {</p>
+<p>        	return &quot;0&quot;;</p>
+<p>        } else if (nume % deno == 0) {</p>
+<p>        	return sign + nume/deno + &quot;&quot;;</p>
+<p>        }</p>
+<p>        HashMap map = new HashMap();</p>
+<p>        StringBuffer rst = new StringBuffer(sign + nume/deno + ".");</p>
+<p>        long end = nume%deno * 10;//The decimal portion of the value, after decimal point</p>
+<p>  		int i = 0;</p>
+<p>        while (end != 0){</p>
+<p>			if (map.containsKey(end)) {</p>
+<p>				rst.insert(rst.indexOf(".") + map.get(end) + 1, "(");</p>
+<p>				rst.append(")");</p>
+<p>				return rst.toString();</p>
+<p>			}</p>
+<p>			rst.append(end/deno);</p>
+<p>        	map.put(end, i++);</p>
+<p>        	end = (end % deno) * 10;</p>
+<p>        }</p>
+<p>        return rst.toString();</p>
+<p>}<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

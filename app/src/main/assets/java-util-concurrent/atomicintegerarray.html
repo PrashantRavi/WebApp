@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>AtomicIntegerArray</title>
+
+    <meta name="description" content="The java.util.concurrent.atomic.AtomicIntegerArray class represents an int array which can be updated atomically. This tutorial explains how to use the basic functionality of the AtomicIntegerArray.">
+    <meta name="keywords"    content="java util concurrent atomicintegerarray atomic array">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="AtomicIntegerArray">
+    <meta name="twitter:description" content="The java.util.concurrent.atomic.AtomicIntegerArray class represents an int array which can be updated atomically. This tutorial explains how to use the basic functionality of the AtomicIntegerArray.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="AtomicIntegerArray"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-util-concurrent/atomicintegerarray.html"/>
+    <meta property="og:description" content="The java.util.concurrent.atomic.AtomicIntegerArray class represents an int array which can be updated atomically. This tutorial explains how to use the basic functionality of the AtomicIntegerArray."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/teaser500-300-tutorials.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-util-concurrent/atomicstampedreference.html";
+var nextArticleInCategory = "/java-util-concurrent/atomiclongarray.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7586;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>java.util.concurrency - Java Concurrency Utilities</div><ol><li><a href="index.html">java.util.concurrent - Java Concurrency Utilities</a></li><li><a href="blockingqueue.html">BlockingQueue</a></li><li><a href="arrayblockingqueue.html">ArrayBlockingQueue</a></li><li><a href="delayqueue.html">DelayQueue</a></li><li><a href="linkedblockingqueue.html">LinkedBlockingQueue</a></li><li><a href="priorityblockingqueue.html">PriorityBlockingQueue</a></li><li><a href="synchronousqueue.html">SynchronousQueue</a></li><li><a href="blockingdeque.html">BlockingDeque</a></li><li><a href="linkedblockingdeque.html">LinkedBlockingDeque</a></li><li><a href="concurrentmap.html">ConcurrentMap</a></li><li><a href="concurrentnavigablemap.html">ConcurrentNavigableMap</a></li><li><a href="countdownlatch.html">CountDownLatch</a></li><li><a href="cyclicbarrier.html">CyclicBarrier</a></li><li><a href="exchanger.html">Exchanger</a></li><li><a href="semaphore.html">Semaphore</a></li><li><a href="executorservice.html">ExecutorService</a></li><li><a href="threadpoolexecutor.html">ThreadPoolExecutor</a></li><li><a href="scheduledexecutorservice.html">ScheduledExecutorService</a></li><li><a href="java-fork-and-join-forkjoinpool.html">Java Fork and Join using ForkJoinPool</a></li><li><a href="lock.html">Lock</a></li><li><a href="readwritelock.html">ReadWriteLock</a></li><li><a href="atomicboolean.html">AtomicBoolean</a></li><li><a href="atomicinteger.html">AtomicInteger</a></li><li><a href="atomiclong.html">AtomicLong</a></li><li><a href="atomicreference.html">AtomicReference</a></li><li><a href="atomicstampedreference.html">AtomicStampedReference</a></li><li><a href="atomicintegerarray.html"><b>AtomicIntegerArray</b></a></li><li><a href="atomiclongarray.html">AtomicLongArray</a></li><li><a href="atomicreferencearray.html">AtomicReferenceArray</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>AtomicIntegerArray</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#creating-an-atomicintgerarray">Creating an AtomicIntegerArray</a></li><li><a href="#getting-values">get()</a></li><li><a href="#set">set()</a></li><li><a href="#compareandset">compareAndSet()</a></li><li><a href="#addandget">addAndGet()</a></li><li><a href="#getandadd">getAndAdd()</a></li><li><a href="#incrementandget">incrementAndGet()</a></li><li><a href="#getandincrement">getAndIncrement()</a></li><li><a href="#decrementandget">decrementAndGet()</a></li><li><a href="#getanddecrement">getAndDecrement()</a></li><li><a href="#additional-methods">Additional Methods</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-05-21
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The Java <code>AtomicIntegerArray</code> class (<code>java.util.concurrent.atomic.AtomicIntegerArray</code>)
+    represents an array of <code>int</code> . The <code>int</code> elements in the <code>AtomicIntegerArray</code>
+    can be updated atomically. The <code>AtomicIntegerArray</code> also supports
+    <a href="../java-concurrency/compare-and-swap.html">compare-and-swap</a> functionality.
+</p>
+
+
+
+<a name="creating-an-atomicintgerarray"></a>
+<h2>Creating an AtomicIntegerArray</h2>
+
+<p>
+    You can create an <code>AtomicIntegerArray</code> using one of its two constructors.
+</p>
+
+<p>
+    The first constructor takes an <code>int</code> as parameter. This <code>int</code> specifies the length of the
+    <code>AtomicIntegerArray</code> to create, meaning how many elements it should have space for. Here is a Java
+    example of creating an <code>AtomicIntegerArray</code> using this constructor:
+</p>
+
+<pre class="codeBox">
+AtomicIntegerArray array = new AtomicIntegerArray(10);
+</pre>
+
+<p>
+    This example creates a <code>AtomicIntegerArray</code> with a capacity of 10 <code>ints</code> (it has space for
+    10 <code>int</code> elements).
+</p>
+
+
+<p>
+    The second constructor takes an <code>int[]</code> array as parameter. The <code>AtomicIntegerArray</code> created
+    using this constructor will have the same capacity as the array parameter, and all elements from the array parameter
+    will be copied into the <code>AtomicIntegerArray</code>. Here is a Java example of creating an <code>AtomicIntegerArray</code>
+    using this constructor:
+</p>
+
+<pre class="codeBox">
+int[] ints = new int[10];
+
+ints[5] = 123;
+
+AtomicIntegerArray array = new AtomicIntegerArray(ints);
+
+</pre>
+
+<p>
+    This example first creates an <code>int[]</code> array and sets a value into the element with index 5.
+    Then it creates an <code>AtomicIntegerArray</code> with the <code>int[]</code> array as parameter.
+</p>
+
+
+
+
+<a name="getting-values"></a>
+<h2>get()</h2>
+<p>
+    You can get the value of a given element using the <code>get()</code> method on the <code>AtomicIntegerArray</code>.
+    Here is an example showing how calling the <code>get()</code> method looks:
+</p>
+
+<pre class="codeBox">
+int value = array.get(5);
+</pre>
+
+
+
+
+<a name="set"></a>
+<h2>set()</h2>
+<p>
+    You can set the value of a given element using the <code>set()</code> method on the <code>AtomicIntegerArray</code>.
+    Here is an example showing how calling the <code>set()</code> method looks:
+</p>
+
+<pre class="codeBox">
+array.set(5, 999);
+</pre>
+
+
+
+
+<a name="compareandset"></a>
+<h2>compareAndSet()</h2>
+<p>
+    The <code>compareAndSet()</code> method is used to compare the value of a given element with a specified value,
+    and if the two values are equal, set a new value for that element. This is an example of the atomic compare-and-swap
+    functionality support by the <code>AtomicIntegerArray</code>. Only one thread at a time can execute the
+    <code>compareAndSet()</code> method.
+</p>
+
+<p>
+    Here is how calling the <code>compareAndSet()</code>
+    method of the <code>AtomicIntegerArray</code>:
+</p>
+
+<pre class="codeBox">
+boolean swapped = array.compareAndSet(5, 999, 123);
+</pre>
+
+<p>
+    This example compares the element with index 5 to the expected value 999, and if equal, sets the new value 123
+    for the element with index 5. The <code>compareAndSet()</code> method returns a <code>boolean</code> with the value
+    <code>true</code> if the element had a new value set, and <code>false</code> if not (if the element did not have the
+    expected value).
+</p>
+
+
+
+
+<a name="addandget"></a>
+<h2>addAndGet()</h2>
+
+<p>
+    The <code>AtomicIntegerArray</code> also contains a method that can be used to add a value to a given element,
+    and return the new value of the element. Calling <code>addAndGet()</code> is also an atomic operation (like all
+    operations on the <code>AtomicIntegerArray</code>). Here is an example of calling <code>addAndGet()</code> :
+</p>
+
+<pre class="codeBox">
+int newValue = array.addAndGet(5, 3);
+</pre>
+
+<p>
+    After executing this code the <code>newValue</code> variable would contain the value of the element with index 5
+    with 3 added to it.
+</p>
+
+
+
+
+<a name="getandadd"></a>
+<h2>getAndAdd()</h2>
+
+<p>
+    The <code>AtomicIntegerArray</code> class also contains a method named <code>getAndAdd()</code>. The <code>getAndAdd()</code>
+    method does the same as the <code>addAndGet()</code> method, except the <code>getAndAdd()</code> method returns the
+    value of the element <i>before</i> a value is added to it. Here is a <code>getAndAdd()</code> example:
+</p>
+
+<pre class="codeBox">
+int oldValue = array.getAndAdd(5, 3);
+</pre>
+
+<p>
+    After executing this code the <code>oldValue</code> variable would contain the old value of the element with index 5,
+    before the value 3 was added to it.
+</p>
+
+
+
+
+<a name="incrementandget"></a>
+<h2>incrementAndGet()</h2>
+
+<p>
+    The <code>incrementAndGet()</code> method increments (adds 1) to the value of a given element and returns the new
+    value of that element. Here is a <code>incrementAndGet()</code> example:
+</p>
+
+<pre class="codeBox">
+int newValue = array.incrementAndGet(5);
+</pre>
+
+<p>
+    After executing this code the <code>newValue</code> variable would contain the value of the element with index 5
+    with 1 added to it.
+</p>
+
+
+
+
+<a name="getandincrement"></a>
+<h2>getAndIncrement()</h2>
+
+<p>
+    The <code>AtomicIntegerArray</code> class also contains a method named <code>getAndIncrement()</code>. The
+    <code>getAndIncrement()</code>
+    method does the same as the <code>incrementAndGet()</code> method, except the <code>getAndIncrement()</code> method returns the
+    value of the element <i>before</i> it is incremented. Here is a <code>getAndIncrement()</code> example:
+</p>
+
+<pre class="codeBox">
+int oldValue = array.getAndIncrement(5);
+</pre>
+
+<p>
+    After executing this code the <code>oldValue</code> variable would contain the old value of the element with index 5,
+    before it was incremented (1 was added to it).
+</p>
+
+
+
+
+<a name="decrementandget"></a>
+<h2>decrementAndGet()</h2>
+
+<p>
+    The <code>decrementAndGet()</code> method decrements (subtracts 1) to the value of a given element and returns the new
+    value of that element. Here is a <code>decrementAndGet()</code> example:
+</p>
+
+<pre class="codeBox">
+int newValue = array.decrementAndGet(5);
+</pre>
+
+<p>
+    After executing this code the <code>newValue</code> variable would contain the value of the element with index 5
+    with 1 subtracted from it.
+</p>
+
+
+
+
+<a name="getanddecrement"></a>
+<h2>getAndDecrement()</h2>
+
+<p>
+    The <code>AtomicIntegerArray</code> class also contains a method named <code>getAndDecrement()</code>. The
+    <code>getAndDecrement()</code>
+    method does the same as the <code>decrementAndGet()</code> method, except the <code>getAndDecrement()</code> method returns the
+    value of the element <i>before</i> it is decremented. Here is a <code>getAndDecrement()</code> example:
+</p>
+
+<pre class="codeBox">
+int oldValue = array.getAndDecrement(5);
+</pre>
+
+<p>
+    After executing this code the <code>oldValue</code> variable would contain the old value of the element with index 5,
+    before it was decremented (1 was subtracted from it).
+</p>
+
+
+
+          
+<a name="additional-methods"></a>
+<h2>Additional Methods</h2>
+
+<p>
+    The <code>AtomicIntegerArray</code> has several more methods that you can use for special purposes. You should
+    check out the JavaDoc for the <code>AtomicIntegerArray</code> class to learn more about those methods.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="atomiclongarray.html">AtomicLongArray</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,1463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>Comparable vs. Comparator in Java</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Comparable and Comparator are two interfaces provided by Java Core API. From their names, we can tell they may be used for comparing stuff in some way. But what"/>
+<meta name="keywords" content="comparable and comparator example,comparable vs comparator,comparator and comparable in java"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; Comparable vs. Comparator in Java Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='How an IP-PDU is sent from one host to another' href='../how-an-ip-pdu-is-sent-from-one-host-to-another/index.html'/>
+<link rel='next' title='Java and Computer Science Courses' href='../java-and-computer-science-courses/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=5378.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2011_12_examples-to-demonstrate-comparable-vs-comparator-in-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2011_12_examples-to-demonstrate-comparable-vs-comparator-in-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-5378"> <a href="index.html" rel="bookmark">
+Comparable vs. Comparator in Java </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p><code>Comparable</code> and <code>Comparator</code> are two interfaces provided by Java Core API. From their names, we can tell they may be used for comparing stuff in some way. But what exactly are they and what is the difference between them? The following are two examples for answering this question. The simple examples compare two HDTV's size. How to use Comparable vs. Comparator is obvious after reading the code. </p>
+<p><strong>1. Comparable </strong> </p>
+<p><code>Comparable</code> is implemented by a class in order to be able to comparing object of itself with some other objects. The class itself must implement the interface in order to be able to compare its instance(s). The method required for implementation is <code>compareTo()</code>. Here is an example:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> HDTV <span style="color: #000000; font-weight: bold;">implements</span> Comparable<span style="color: #339933;">&lt;</span>HDTV<span style="color: #339933;">&gt;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> brand<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> size, <span style="color: #003399;">String</span> brand<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">size</span> <span style="color: #339933;">=</span> size<span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">brand</span> <span style="color: #339933;">=</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getSize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> size<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setSize<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">size</span> <span style="color: #339933;">=</span> size<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getBrand<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setBrand<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> brand<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">brand</span> <span style="color: #339933;">=</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compareTo<span style="color: #009900;">&#40;</span>HDTV tv<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;</span> tv.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">else</span> <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&lt;</span> tv.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">else</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Main <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		HDTV tv1 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">55</span>, <span style="color: #0000ff;">&quot;Samsung&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		HDTV tv2 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">60</span>, <span style="color: #0000ff;">&quot;Sony&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>tv1.<span style="color: #006633;">compareTo</span><span style="color: #009900;">&#40;</span>tv2<span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>tv1.<span style="color: #006633;">getBrand</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; is better.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>tv2.<span style="color: #006633;">getBrand</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">+</span> <span style="color: #0000ff;">&quot; is better.&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<pre>
+Sony is better.
+</pre>
+<p><strong>2. Comparator</strong> </p>
+<p>In some situations, you may not want to change a class and make it comparable. In such cases, <code>Comparator</code> can be used if you want to compare objects based on certain attributes/fields. For example, 2 persons can be compared based on `height` or `age` etc. (this can not be done using comparable.)</p>
+<p>The method required to implement is <em>compare()</em>. Now let's use another way to compare those TV by size. One common use of <code>Comparator</code> is sorting. Both <code>Collections</code> and <code>Arrays</code> classes provide a sort method which use a <code>Comparator</code>.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.ArrayList</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.Collections</span><span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">java.util.Comparator</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> HDTV <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> brand<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> size, <span style="color: #003399;">String</span> brand<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">size</span> <span style="color: #339933;">=</span> size<span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">brand</span> <span style="color: #339933;">=</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> getSize<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> size<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setSize<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">size</span> <span style="color: #339933;">=</span> size<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getBrand<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setBrand<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> brand<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">brand</span> <span style="color: #339933;">=</span> brand<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> SizeComparator <span style="color: #000000; font-weight: bold;">implements</span> Comparator<span style="color: #339933;">&lt;</span>HDTV<span style="color: #339933;">&gt;</span> <span style="color: #009900;">&#123;</span>
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compare<span style="color: #009900;">&#40;</span>HDTV tv1, HDTV tv2<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> tv1Size <span style="color: #339933;">=</span> tv1.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">int</span> tv2Size <span style="color: #339933;">=</span> tv2.<span style="color: #006633;">getSize</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>tv1Size <span style="color: #339933;">&gt;</span> tv2Size<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>tv1Size <span style="color: #339933;">&lt;</span> tv2Size<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Main <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		HDTV tv1 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">55</span>, <span style="color: #0000ff;">&quot;Samsung&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		HDTV tv2 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">60</span>, <span style="color: #0000ff;">&quot;Sony&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		HDTV tv3 <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HDTV<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">42</span>, <span style="color: #0000ff;">&quot;Panasonic&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		ArrayList<span style="color: #339933;">&lt;</span>HDTV<span style="color: #339933;">&gt;</span> al <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ArrayList<span style="color: #339933;">&lt;</span>HDTV<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>tv1<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>tv2<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>tv3<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+		<span style="color: #003399;">Collections</span>.<span style="color: #006633;">sort</span><span style="color: #009900;">&#40;</span>al, <span style="color: #000000; font-weight: bold;">new</span> SizeComparator<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>HDTV a <span style="color: #339933;">:</span> al<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>a.<span style="color: #006633;">getBrand</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Output:</p>
+<pre>
+Panasonic
+Samsung
+Sony
+</pre>
+<p>Often we may use <code>Collections.reverseOrder()</code> method to get a descending order Comparator. Like the following:</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;">ArrayList<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span> al <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ArrayList<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">3</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+al.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>al<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">Collections</span>.<span style="color: #006633;">sort</span><span style="color: #009900;">&#40;</span>al<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>al<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+Comparator<span style="color: #339933;">&lt;</span>Integer<span style="color: #339933;">&gt;</span> comparator <span style="color: #339933;">=</span> <span style="color: #003399;">Collections</span>.<span style="color: #006633;">reverseOrder</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">Collections</span>.<span style="color: #006633;">sort</span><span style="color: #009900;">&#40;</span>al,comparator<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #003399;">System</span>.<span style="color: #006633;">out</span>.<span style="color: #006633;">println</span><span style="color: #009900;">&#40;</span>al<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+<p>Output:</p>
+<pre>
+[3,1,2]
+[1,2,3]
+[3,2,1]
+</pre>
+<p><strong>3. When to use Which?</strong></p>
+<p>In brief, a class that implements <code>Comparable</code> will be comparable, which means it instances can be compared with each other. </p>
+<p>A class that implements <code>Comparator</code> will be used in mainly two situations: 1) It can be passed to a sort method, such as <code>Collections.sort()</code> or <code>Arrays.sort()</code>, to allow precise control over the sort order and 2) It can also be used to control the order of certain data structures, such as sorted sets (e.g. <code>TreeSet</code>) or sorted maps (e.g., <code>TreeMap</code>). </p>
+<p>For example, to create a <code>TreeSet</code>. We can either pass the constructor a comparator or make the object class comparable. </p>
+<p>Approach 1 - TreeSet(Comparator<? super E> comparator)</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> Dog <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+&nbsp;
+	Dog<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		size <span style="color: #339933;">=</span> s<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">class</span> SizeComparator <span style="color: #000000; font-weight: bold;">implements</span> Comparator<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> <span style="color: #009900;">&#123;</span>
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compare<span style="color: #009900;">&#40;</span>Dog d1, Dog d2<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> d1.<span style="color: #006633;">size</span> <span style="color: #339933;">-</span> d2.<span style="color: #006633;">size</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ImpComparable <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> d <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> SizeComparator<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">// pass comparator</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+<p>Approach 2 - Implement Comparable</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> Dog <span style="color: #000000; font-weight: bold;">implements</span> Comparable<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> size<span style="color: #339933;">;</span>
+&nbsp;
+	Dog<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		size <span style="color: #339933;">=</span> s<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	@Override
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compareTo<span style="color: #009900;">&#40;</span>Dog o<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> o.<span style="color: #006633;">size</span> <span style="color: #339933;">-</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">size</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> ImpComparable <span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">static</span> <span style="color: #000066; font-weight: bold;">void</span> main<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span> d <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> TreeSet<span style="color: #339933;">&lt;</span>Dog<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		d.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> Dog<span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+<p>References:<br />
+1. <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Comparable.html">Comparable</a><br />
+2. <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html">Comparator</a></p>
+<!-- end of each post -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="6344454412"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2013/01/sort-linkedlist-of-user-defined-objects-in-java/index.html" rel="bookmark" title="Sort LinkedList of User-Defined Objects in Java">Sort LinkedList of User-Defined Objects in Java </a></li>
+<li><a href="../../../2009/02/implement-comparable-for-a-treeset/index.html" rel="bookmark" title="Implement Comparable for a TreeSet">Implement Comparable for a TreeSet </a></li>
+<li><a href="../../../2014/03/how-developers-sort-in-java/index.html" rel="bookmark" title="How Developers Sort in Java?">How Developers Sort in Java? </a></li>
+<li><a href="../../../2013/03/java-sort-map-by-value/index.html" rel="bookmark" title="Java &#8211; Sort Map By Value">Java &#8211; Sort Map By Value </a></li>
+</ol>
+</div>
+	
+
+<!-- agoodone -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- 
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="2834525210"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+	 -->   
+			<div class="sociable"></div>
+	    </div>
+	    
+	    
+	    <!--single-bottom-ads-->	
+<!--
+		<div style="width:100%; margin:0 0;">
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<ins class="adsbygoogle"
+						     style="display:inline-block;width:336px;height:280px"
+						     data-ad-client="ca-pub-5732630628268628"
+						     data-ad-slot="8668090404"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+		</div>
+	-->
+    
+	 
+	    
+	    Category >>  <a href="../../../category/java-2/common-methods/index.html" rel="category tag">Common Methods</a> >> <a href="../../../category/versus/index.html" rel="category tag">Versus</a> &nbsp; 
+	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			xmlns:dc="http://purl.org/dc/elements/1.1/"
+			xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+		<rdf:Description rdf:about="http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/"
+    dc:identifier="http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/"
+    dc:title="Comparable vs. Comparator in Java"
+    trackback:ping="http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/trackback/" />
+</rdf:RDF>
+	
+
+	
+
+
+	
+  </div>
+ 
+ 
+ <!-- 
+<div id="author">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="1182236812"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+-->
+  
+<font color="green">If you want someone to read your code, 
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>  
+and 
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+ tags.  For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+
+  
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-14812">
+        <div id="dsq-comment-header-14812" class="dsq-comment-header">
+            <cite id="dsq-cite-14812">
+                <span id="dsq-author-user-14812">appu</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14812" class="dsq-comment-body">
+            <div id="dsq-comment-message-14812" class="dsq-comment-message"><p>TestArraylist.java<br />
+===================================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Arrays;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using collections<br />
+ *<br />
+ * */<br />
+public class TestArraylist {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub<br />
+		ArrayList ar=new ArrayList();<br />
+		 ar.add(11);<br />
+		ar.add(22);<br />
+		ar.add(2);<br />
+		ar.add(23);<br />
+		ar.add(5);</p>
+<p>		int searchval=23;<br />
+		//  sorting List<br />
+		Collections.sort(ar);</p>
+<p>		for(int arr:ar){<br />
+			System.out.print(&#8220;arrrr  &#8220;+arr);<br />
+		}</p>
+<p>		// method call<br />
+		int  result=TestUtil.BinarySrchArrayList(ar,searchval);<br />
+		System.out.println(&#8220;result outside &#8220;+result);</p>
+<p>		if(result&gt;=0){<br />
+			System.out.println(&#8220;result  &#8220;+result);<br />
+		}<br />
+		else{<br />
+			System.out.println(&#8220;result Not exist  &#8220;);<br />
+		}</p>
+<p>	}</p>
+<p>}</p>
+<p>TestComparableSrch.java<br />
+============================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using comparable<br />
+ *<br />
+ * */<br />
+public class TestComparableSrch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		int searchval=2;<br />
+		EmployeeComp e1= new EmployeeComp(4, &#8220;john&#8221;, 24);<br />
+		EmployeeComp e2= new EmployeeComp(3, &#8220;muir&#8221;, 20);<br />
+		EmployeeComp e3= new EmployeeComp(5, &#8220;rose&#8221;, 21);<br />
+		EmployeeComp e4= new EmployeeComp(1, &#8220;victor&#8221;, 22);</p>
+<p>		ArrayList arrlist=new ArrayList();<br />
+		arrlist.add(e1);<br />
+		arrlist.add(e2);<br />
+		arrlist.add(e3);<br />
+		arrlist.add(e4);</p>
+<p>		// sorting<br />
+		Collections.sort(arrlist);</p>
+<p>		for(EmployeeComp e:arrlist){<br />
+			System.out.println(&#8220;eeee  &#8220;+e.getEmpName());<br />
+		}<br />
+		String result=TestUtil.BinaryComparableArrayList(arrlist,searchval);<br />
+		System.out.println(&#8220;result  &#8220;+result);</p>
+<p>	}</p>
+<p>}</p>
+<p>TestComparatorSrch.java<br />
+======================================<br />
+package Compare;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.Collections;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary Search using comparator<br />
+ *<br />
+ * */<br />
+public class TestComparatorSrch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		String searchval=&#8221;muirs&#8221;;<br />
+		EmployeeComparator e1= new EmployeeComparator(4, &#8220;john&#8221;, 24);<br />
+		EmployeeComparator e2= new EmployeeComparator(3, &#8220;rose&#8221;, 20);<br />
+		EmployeeComparator e3= new EmployeeComparator(5, &#8220;muir&#8221;, 21);<br />
+		EmployeeComparator e4= new EmployeeComparator(1, &#8220;victor&#8221;, 22);</p>
+<p>		ArrayList arrlist=new ArrayList();<br />
+		arrlist.add(e1);<br />
+		arrlist.add(e2);<br />
+		arrlist.add(e3);<br />
+		arrlist.add(e4);</p>
+<p>		// sorting<br />
+		Collections.sort(arrlist,new EmployeeComparator());<br />
+		for(EmployeeComparator e:arrlist){<br />
+			System.out.println(&#8220;eeee  &#8220;+e.getEmpName());<br />
+		}<br />
+		String result=TestUtil.BinaryComparatorArrayList(arrlist,searchval);<br />
+		System.out.println(&#8220;result  &#8220;+result);</p>
+<p>	}</p>
+<p>}</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14811">
+        <div id="dsq-comment-header-14811" class="dsq-comment-header">
+            <cite id="dsq-cite-14811">
+                <span id="dsq-author-user-14811">appu</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14811" class="dsq-comment-body">
+            <div id="dsq-comment-message-14811" class="dsq-comment-message"><p>TestUtil.java<br />
+====================<br />
+package Util;<br />
+import java.util.ArrayList;<br />
+import Compare.EmployeeComp;<br />
+import Compare.EmployeeComparator;<br />
+//Util method for the business logic<br />
+public class TestUtil {<br />
+	static int RecordNotExist=-1;<br />
+	public static int BinarySrchArray(int[]arr,int searchval){<br />
+//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+		if(arr!=null){<br />
+			//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+		int low=0;<br />
+		int high=arr.length-1;<br />
+		int mid=(low+high)/2;<br />
+		int out;</p>
+<p>		while(low&lt;=high){<br />
+		if(arr[mid]==searchval){<br />
+			//System.out.println(&quot;hi  &quot;+searchval);<br />
+			out=arr[mid];<br />
+			return mid;<br />
+		}<br />
+		else if(arr[mid]&lt;searchval){</p>
+<p>			low=mid+1;<br />
+		}<br />
+		else{<br />
+			high=mid-1;<br />
+		}<br />
+		mid=(low+high)/2;</p>
+<p>		}</p>
+<p>		}</p>
+<p>		return RecordNotExist;</p>
+<p>	}</p>
+<p>	//arraylist<br />
+	public static int BinarySrchArrayList(ArrayList arr,int searchval){<br />
+//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+		if(arr!=null){<br />
+			//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+		int low=0;<br />
+		int high=arr.size()-1;<br />
+		int mid=(low+high)/2;<br />
+		int out;</p>
+<p>		while(low&lt;=high){<br />
+		if(arr.get(mid)==searchval){<br />
+			//System.out.println(&quot;hi  &quot;+searchval);<br />
+			out=arr.get(mid);<br />
+			return mid;<br />
+		}<br />
+		else if(arr.get(mid)&lt;searchval){</p>
+<p>			low=mid+1;<br />
+		}<br />
+		else{<br />
+			high=mid-1;<br />
+		}<br />
+		mid=(low+high)/2;</p>
+<p>		}</p>
+<p>		}</p>
+<p>		return RecordNotExist;</p>
+<p>	}</p>
+<p>	// comparable</p>
+<p>	public static String BinaryComparableArrayList(ArrayList arr,int searchval){<br />
+		//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+				if(arr!=null){<br />
+					//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+				int low=0;<br />
+				int high=arr.size()-1;<br />
+				int mid=(low+high)/2;<br />
+				int out;</p>
+<p>				while(low&lt;=high){<br />
+				if(arr.get(mid).getEmpId()==searchval){<br />
+					//System.out.println(&quot;hi  &quot;+searchval);<br />
+					out=arr.get(mid).getEmpId();<br />
+					return arr.get(mid).getEmpName();<br />
+				}<br />
+				else if(arr.get(mid).getEmpId()&lt;searchval){</p>
+<p>					low=mid+1;<br />
+				}<br />
+				else{<br />
+					high=mid-1;<br />
+				}<br />
+				mid=(low+high)/2;</p>
+<p>				}</p>
+<p>				}</p>
+<p>				return &quot;RecordNotExist&quot;;</p>
+<p>			}<br />
+	//Comparator</p>
+<p>	public static String BinaryComparatorArrayList(ArrayList arr,String searchval){<br />
+		//System.out.println(&#8220;searchval&#8221;+searchval);<br />
+				if(arr!=null){<br />
+					//System.out.println(&#8220;arr.length&#8221;+arr.length);<br />
+				int low=0;<br />
+				int high=arr.size()-1;<br />
+				int mid=(low+high)/2;<br />
+				int out;</p>
+<p>				while(low&lt;=high){<br />
+				if(arr.get(mid).getEmpName().equals(searchval)){<br />
+					//System.out.println(&quot;hi  &quot;+searchval);<br />
+					out=arr.get(mid).getEmpId();<br />
+					System.out.println(&quot;hi  &quot;+out);<br />
+					return arr.get(mid).getEmpName();<br />
+				}<br />
+				else if(arr.get(mid).getEmpName().compareTo(searchval)&lt;0){</p>
+<p>					low=mid+1;<br />
+				}<br />
+				else{<br />
+					high=mid-1;<br />
+				}<br />
+				mid=(low+high)/2;</p>
+<p>				}</p>
+<p>				}</p>
+<p>				return &quot;NameNotExist&quot;;</p>
+<p>			}<br />
+}</p>
+<p>EmployeeComp.java<br />
+============================<br />
+package Compare;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Implementation using comparable interface for sorting employee objects<br />
+ *<br />
+ * */<br />
+public class EmployeeComp implements Comparable {</p>
+<p>	private int empId;<br />
+	private String empName;<br />
+	private int age;</p>
+<p>	public EmployeeComp(int id,String name,int age){<br />
+		this.empId=id;<br />
+		this.empName=name;<br />
+		this.age=age;<br />
+	}</p>
+<p>	public int getEmpId() {<br />
+		return empId;<br />
+	}</p>
+<p>	public void setEmpId(int empId) {<br />
+		this.empId = empId;<br />
+	}</p>
+<p>	public String getEmpName() {<br />
+		return empName;<br />
+	}</p>
+<p>	public void setEmpName(String empName) {<br />
+		this.empName = empName;<br />
+	}</p>
+<p>	public int getAge() {<br />
+		return age;<br />
+	}</p>
+<p>	public void setAge(int age) {<br />
+		this.age = age;<br />
+	}</p>
+<p>	@Override<br />
+	public int compareTo(EmployeeComp o) {<br />
+		// TODO Auto-generated method stub<br />
+		return this.empId-o.empId;<br />
+	}</p>
+<p>}</p>
+<p>EmployeeComparator.java<br />
+==============================<br />
+package Compare;</p>
+<p>import java.util.Comparator;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Implementation using comparator interface for sorting employee objects<br />
+ *<br />
+ * */<br />
+public class EmployeeComparator implements Comparator {</p>
+<p>	private int empId;<br />
+	private String empName;<br />
+	private int age;</p>
+<p>	public EmployeeComparator(){</p>
+<p>	}</p>
+<p>public EmployeeComparator(int id,String name,int age){<br />
+	this.empId=id;<br />
+	this.empName=name;<br />
+	this.age=age;<br />
+}</p>
+<p>public int getEmpId() {<br />
+	return empId;<br />
+}<br />
+public void setEmpId(int empId) {<br />
+	this.empId = empId;<br />
+}<br />
+public String getEmpName() {<br />
+	return empName;<br />
+}<br />
+public void setEmpName(String empName) {<br />
+	this.empName = empName;<br />
+}<br />
+public int getAge() {<br />
+	return age;<br />
+}<br />
+public void setAge(int age) {<br />
+	this.age = age;<br />
+}<br />
+@Override<br />
+public int compare(EmployeeComparator object1, EmployeeComparator object2) {<br />
+	// TODO Auto-generated method stub<br />
+	return object1.getEmpName().compareTo(object2.getEmpName());<br />
+}</p>
+<p>}</p>
+<p>TestBinaryArraySearch:<br />
+================================<br />
+package Compare;</p>
+<p>import java.util.Arrays;</p>
+<p>import Util.TestUtil;<br />
+/*<br />
+ * author:<br />
+ * date:<br />
+ * purpose:<br />
+ * Binary search using Arrays<br />
+ *<br />
+ * */<br />
+public class TestBinaryArraySearch {</p>
+<p>	/**<br />
+	 * @param args<br />
+	 */<br />
+	public static void main(String[] args) {<br />
+		// TODO Auto-generated method stub</p>
+<p>		int [] arr={1,22,6,3,9};<br />
+		int searchval=1;<br />
+		//  sorting array<br />
+		Arrays.sort(arr);<br />
+		for(int i=0;i=0){<br />
+			System.out.println(&#8220;result  &#8220;+result);<br />
+		}<br />
+		else{<br />
+			System.out.println(&#8220;result Not exist  &#8220;);<br />
+		}</p>
+<p>	}</p>
+<p>}</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-14808">
+        <div id="dsq-comment-header-14808" class="dsq-comment-header">
+            <cite id="dsq-cite-14808">
+                <span id="dsq-author-user-14808">appu</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14808" class="dsq-comment-body">
+            <div id="dsq-comment-message-14808" class="dsq-comment-message"><p>thank for the detailed explanation,,i was able to get the following</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14706">
+        <div id="dsq-comment-header-14706" class="dsq-comment-header">
+            <cite id="dsq-cite-14706">
+                <span id="dsq-author-user-14706">Yishagerew lulie</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-14706" class="dsq-comment-body">
+            <div id="dsq-comment-message-14706" class="dsq-comment-message"><p>As approach #3, we can implement the comparator as an anonymous class for the treemap. Its more reasonable if the only place we will use the comparator is one time only.<br />
+TreeSet d = new TreeSet(new Comparator(){<br />
+        @Override<br />
+	public int compare(Dog d1, Dog d2) {<br />
+		return d1.size &#8211; d2.size;<br />
+	}<br />
+});</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-10573">
+        <div id="dsq-comment-header-10573" class="dsq-comment-header">
+            <cite id="dsq-cite-10573">
+                <span id="dsq-author-user-10573">Venu Sabbani</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-10573" class="dsq-comment-body">
+            <div id="dsq-comment-message-10573" class="dsq-comment-message"><p>we can add comparator logic with ananymous method way .. </p>
+<p>package com.venu.comparator;</p>
+<p>import java.util.*;  </p>
+<p>import java.io.*;  </p>
+<p>class Simple{  </p>
+<p>public static void main(String args[]){  </p>
+<p>ArrayList al=new ArrayList();  </p>
+<p>al.add(new Student(101,&#8221;Vijay&#8221;,23));  </p>
+<p>al.add(new Student(106,&#8221;Ajay&#8221;,27));  </p>
+<p>al.add(new Student(105,&#8221;Jai&#8221;,21));  </p>
+<p>System.out.println(&#8220;Sorting by Name&#8230;&#8221;);  </p>
+<p>Collections.sort(al,new Comparator() {</p>
+<p>	@Override</p>
+<p>	public int compare(Student o1, Student o2) {</p>
+<p>		// TODO Auto-generated method stub</p>
+<p>		return o1.name.compareTo(o2.name);</p>
+<p>	}</p>
+<p>});</p>
+<p>Iterator abs = al.iterator();</p>
+<p>while(abs.hasNext()){</p>
+<p>Student x = 	(Student) abs.next();</p>
+<p>System.out.println(&#8220;the values &#8221; + x.age + &#8220;the names&#8221; + x.name + &#8220;the roll no&#8221; + x.rollno);</p>
+<p>}</p>
+<p>Collections.sort(al,new Comparator() {</p>
+<p>	@Override</p>
+<p>	public int compare(Student o1, Student o2) {</p>
+<p>		// TODO Auto-generated method stub</p>
+<p>		if(o1.age == o2.age)</p>
+<p>		return 0;</p>
+<p>		else if(o1.age &gt;o2.age)</p>
+<p>		return 1;</p>
+<p>		else </p>
+<p>		return -1;</p>
+<p>	}</p>
+<p>});</p>
+<p>Iterator agecmp = al.iterator();</p>
+<p>while(agecmp.hasNext()){</p>
+<p>Student x = 	(Student) agecmp.next();</p>
+<p>System.out.println(x.rollno+&#8221; &#8220;+x.name+&#8221; &#8220;+x.age);</p>
+<p>}</p>
+<p>}  </p>
+<p>}</p>
+<p>//POJO Class </p>
+<p>package com.venu.comparator;<br />
+class Student{<br />
+int rollno;<br />
+String name;<br />
+int age; </p>
+<p>public int getRollno() {<br />
+	return rollno;<br />
+}</p>
+<p>public void setRollno(int rollno) {<br />
+	this.rollno = rollno;<br />
+}</p>
+<p>public String getName() {<br />
+	return name;<br />
+}</p>
+<p>public void setName(String name) {<br />
+	this.name = name;<br />
+}</p>
+<p>public int getAge() {<br />
+	return age;<br />
+}</p>
+<p>public void setAge(int age) {<br />
+	this.age = age;<br />
+}</p>
+<p>Student(int rollno,String name,int age){<br />
+this.rollno=rollno;<br />
+this.name=name;<br />
+this.age=age;<br />
+}  </p>
+<p>}  </p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7578">
+        <div id="dsq-comment-header-7578" class="dsq-comment-header">
+            <cite id="dsq-cite-7578">
+                <a id="dsq-author-user-7578" href="http://netjs.blogspot.com" target="_blank" rel="nofollow">infoj</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7578" class="dsq-comment-body">
+            <div id="dsq-comment-message-7578" class="dsq-comment-message"><p>Comparable defines the natural ordering for the class objects&#8230;.If we need any other ordering then we have to define comparator. Since comparator is not tied to a class so we can have several comparators depicting different sort (based on the fields) sequences for the same class&#8230; </p>
+<p>See a post about differences here &#8211; <a href="http://netjs.blogspot.com/2015/10/difference-between-comparable-and-comparator-java.html" rel="nofollow">http://netjs.blogspot.com/2015/10/difference-between-comparable-and-comparator-java.html</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-7347">
+        <div id="dsq-comment-header-7347" class="dsq-comment-header">
+            <cite id="dsq-cite-7347">
+                <a id="dsq-author-user-7347" href="http://www.mindstick.com/" target="_blank" rel="nofollow">ashish</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7347" class="dsq-comment-body">
+            <div id="dsq-comment-message-7347" class="dsq-comment-message"><p>thank you it is useful post.i also refer very helpful and useful article about&#8211;Sorting using Comparator in Java<br />
+Please visit this article&#8212;&#8212;&#8212;-</p>
+<p><a href="http://www.mindstick.com/Articles/a4872d1a-6316-42b8-b431-7b48107cb7db/Sorting%20using%20Comparator%20in%20Java#.VekynJc0Xcc" rel="nofollow">http://www.mindstick.com/Articles/a4872d1a-6316-42b8-b431-7b48107cb7db/Sorting%20using%20Comparator%20in%20Java#.VekynJc0Xcc</a><br />
+<a href="http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/" rel="nofollow">http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7019">
+        <div id="dsq-comment-header-7019" class="dsq-comment-header">
+            <cite id="dsq-cite-7019">
+                <span id="dsq-author-user-7019">Raghavendra Madipakkam</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-7019" class="dsq-comment-body">
+            <div id="dsq-comment-message-7019" class="dsq-comment-message"><p>Hi</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-6101">
+        <div id="dsq-comment-header-6101" class="dsq-comment-header">
+            <cite id="dsq-cite-6101">
+                <span id="dsq-author-user-6101">Anurag Chaturvedi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-6101" class="dsq-comment-body">
+            <div id="dsq-comment-message-6101" class="dsq-comment-message"><p>What I feel, that when you are creating new class and which needs to be sorted or compared, it should be implemented by Comparable and if we have some pre-developed class and need to add functinality for compare or sorting, then we need to create a class implemented by Comprator and use this class as a parameter in sort method.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5954">
+        <div id="dsq-comment-header-5954" class="dsq-comment-header">
+            <cite id="dsq-cite-5954">
+                <span id="dsq-author-user-5954">Anil Nivargi</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5954" class="dsq-comment-body">
+            <div id="dsq-comment-message-5954" class="dsq-comment-message"><p>Thanks good explaination&#8230;.Here another blog also explained nice please go through this blog <a href="http://adnjavainterview.blogspot.in/2014/06/difference-between-comparable.html" rel="nofollow">http://adnjavainterview.blogspot.in/2014/06/difference-between-comparable.html</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5824">
+        <div id="dsq-comment-header-5824" class="dsq-comment-header">
+            <cite id="dsq-cite-5824">
+                <span id="dsq-author-user-5824">Micheal</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5824" class="dsq-comment-body">
+            <div id="dsq-comment-message-5824" class="dsq-comment-message"><p>hi and one more doubt is Collections.sort(al, new SizeComparator());<br />
+what is this actually doing<br />
+my guess sizecomparatorobject.compare(obj1 of al,obj2 of al)<br />
+by the use of result returned by the above compare method (i.e)1,-1,0  how sorting will  be done?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5823">
+        <div id="dsq-comment-header-5823" class="dsq-comment-header">
+            <cite id="dsq-cite-5823">
+                <span id="dsq-author-user-5823">Micheal</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5823" class="dsq-comment-body">
+            <div id="dsq-comment-message-5823" class="dsq-comment-message"><p>hi my doubt about this tutorial is</p>
+<p>why we are going for comparator/comparable interface? it is possible for us to define such comparision method inside our class and can call it by the use of instance of its own.</p>
+<p>class SizeComparator implements Comparator {<br />
+	@Override<br />
+	public int compare(HDTV tv1, HDTV tv2) {<br />
+		int tv1Size = tv1.getSize();<br />
+		int tv2Size = tv2.getSize();</p>
+<p>		if (tv1Size &gt; tv2Size) {<br />
+			return 1;<br />
+		} else if (tv1Size &lt; tv2Size) {<br />
+			return -1;<br />
+		} else {<br />
+			return 0;<br />
+		}<br />
+	}<br />
+}<br />
+instead of this it is possible to have our own method?</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5744">
+        <div id="dsq-comment-header-5744" class="dsq-comment-header">
+            <cite id="dsq-cite-5744">
+                <span id="dsq-author-user-5744">om</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5744" class="dsq-comment-body">
+            <div id="dsq-comment-message-5744" class="dsq-comment-message"><p>good example</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5684">
+        <div id="dsq-comment-header-5684" class="dsq-comment-header">
+            <cite id="dsq-cite-5684">
+                <span id="dsq-author-user-5684">n</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5684" class="dsq-comment-body">
+            <div id="dsq-comment-message-5684" class="dsq-comment-message"><p>alert(0);</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5543">
+        <div id="dsq-comment-header-5543" class="dsq-comment-header">
+            <cite id="dsq-cite-5543">
+                <span id="dsq-author-user-5543">ryanlr</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5543" class="dsq-comment-body">
+            <div id="dsq-comment-message-5543" class="dsq-comment-message"><p>True. Changed.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5540">
+        <div id="dsq-comment-header-5540" class="dsq-comment-header">
+            <cite id="dsq-cite-5540">
+                <span id="dsq-author-user-5540">kk</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5540" class="dsq-comment-body">
+            <div id="dsq-comment-message-5540" class="dsq-comment-message"><p>Under Heading 2.Comparator<br />
+&#8220;Comparator is capable of comparing two DIFFERENT types of objects.&#8221;<br />
+EDIT: Comparator is capable if comparing objects based on different attributes. e.g. 2 men can be compared based on `name` or `age` etc. (this can not be done using comparable. ) Even in the example shown above, author provides example where object of SAME type (HDTV) is being used.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-5464">
+        <div id="dsq-comment-header-5464" class="dsq-comment-header">
+            <cite id="dsq-cite-5464">
+                <span id="dsq-author-user-5464">Sachin P</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5464" class="dsq-comment-body">
+            <div id="dsq-comment-message-5464" class="dsq-comment-message"><p>Two ways for sorting &#8211; using comparator and comparable. For detailed explanation is <a href="http://sachinpatiljavablog.blogspot.in/2014/01/sorting-with-comparable-and-comparator.html" rel="nofollow">here</a></p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5294">
+        <div id="dsq-comment-header-5294" class="dsq-comment-header">
+            <cite id="dsq-cite-5294">
+                <span id="dsq-author-user-5294">ven</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-5294" class="dsq-comment-body">
+            <div id="dsq-comment-message-5294" class="dsq-comment-message"><p>Nice one.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2011/12/examples-to-demonstrate-comparable-vs-comparator-in-java/';
+var disqus_identifier = '5378 http://www.programcreek.com/?p=5378';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "Comparable vs. Comparator in Java";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=5378';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+    <p>
+      </p>
+
+
+</div>
+<div id="sidebar">
+
+
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="28" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+
+
+
+
+	
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<div class="sidebarsep"></div>
+
+<!--  	
+		<a href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		<img src="http://www.programcreek.com/aspose.gif" alt="" style="width:300px;height:250px;border:none;">
+		</a>
+		
+		
+		<div class="sidebarsep"></div>
+-->
+		
+		
+<!-- side-bar-1 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+<!-- sidebar-12 -->
+<div class="sidebarsep"></div>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+<div class="sidebarsep"></div>
+
+ 
+<!-- side-bar-3rd-square -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<!-- 
+<div class="sidebarsep"></div>
+
+<div style="width:300px; text-align: center;">
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="8266003615"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+-->
+
+
+
+<div class="sidebarsep"></div>
+
+
+
+<!-- side-bar-2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-5732630628268628"
+     data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="sidebarsep"></div>
+
+	
+	<div class="side-bar-block"><h2>Archives</h2>		<ul>
+			<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+	<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+	<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+	<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+	<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+	<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+	<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+	<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+	<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+	<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+	<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+	<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+	<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+	<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+	<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+	<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+	<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+	<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+	<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+	<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+	<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+	<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+	<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+	<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+	<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+	<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+	<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+	<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+	<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+	<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+	<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+	<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+	<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+	<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+	<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+	<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+	<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+	<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+	<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+	<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+	<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+	<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+	<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+	<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+	<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+	<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+	<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+	<li><a href='../index.html'>December 2011</a>&nbsp;(7)</li>
+	<li><a href='../../11/index.html'>November 2011</a>&nbsp;(6)</li>
+	<li><a href='../../10/index.html'>October 2011</a>&nbsp;(9)</li>
+	<li><a href='../../09/index.html'>September 2011</a>&nbsp;(15)</li>
+	<li><a href='../../08/index.html'>August 2011</a>&nbsp;(17)</li>
+	<li><a href='../../07/index.html'>July 2011</a>&nbsp;(19)</li>
+	<li><a href='../../06/index.html'>June 2011</a>&nbsp;(1)</li>
+	<li><a href='../../05/index.html'>May 2011</a>&nbsp;(4)</li>
+	<li><a href='../../04/index.html'>April 2011</a>&nbsp;(3)</li>
+	<li><a href='../../03/index.html'>March 2011</a>&nbsp;(7)</li>
+	<li><a href='../../02/index.html'>February 2011</a>&nbsp;(9)</li>
+	<li><a href='../../01/index.html'>January 2011</a>&nbsp;(10)</li>
+	<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+	<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+	<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+	<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+	<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+	<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+	<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+	<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+	<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+	<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+	<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+	<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+	<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+	<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+	<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+	<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+	<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+	<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+	<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+	<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+	<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+	<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+		</ul>
+		</div>
+</div></div>
+</div>
+
+
+<div id="footer">
+
+  <p> Copyright &copy;&nbsp;2008 - 2016 
+Program Creek 
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+        <link rel='stylesheet' id='yarppRelatedCss-css'  href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+
+
+
+
+
+
+
+
+
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+
+
+<!-- javascript for menu -->
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+
+
+
+</body>
+
+
+
+</html>
+<!-- Localized -->

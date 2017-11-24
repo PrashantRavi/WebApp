@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Thread Safety and Shared Resources</title>
+
+    <meta name="description" content="This tutorial explains the concept of thread safety, and what thread safety means in Java.">
+    <meta name="keywords"    content="Java thread safety concurrency">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Thread Safety and Shared Resources">
+    <meta name="twitter:description" content="This tutorial explains the concept of thread safety, and what thread safety means in Java.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Thread Safety and Shared Resources"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/thread-safety.html"/>
+    <meta property="og:description" content="This tutorial explains the concept of thread safety, and what thread safety means in Java."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/race-conditions-and-critical-sections.html";
+var nextArticleInCategory = "/java-concurrency/thread-safety-and-immutability.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 6676;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html"><b>Thread Safety and Shared Resources</b></a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Thread Safety and Shared Resources</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#local-variables">Local Variables</a></li><li><a href="#local-object-references">Local Object References</a></li><li><a href="#object-member-variables">Object Member Variables</a></li><li><a href="#thread-control-escape-rule">The Thread Control Escape Rule</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-10-01
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    Code that is safe to call by multiple threads simultaneously is called <i>thread safe</i>.
+    If a piece of code is thread safe, then it contains no <a href="race-conditions-and-critical-sections.html">race conditions</a>.
+    Race condition only occur when multiple threads update shared resources.
+    Therefore it is important to know what resources Java threads share when executing.
+</p>
+
+
+
+
+<a name="local-variables"></a>
+<h2>Local Variables</h2>
+<p>
+    Local variables are stored in each thread's own stack. That means that local
+    variables are never shared between threads. That also means that all local primitive
+    variables are thread safe. Here is an example of a thread safe local primitive variable:
+</p>
+
+<pre class="codeBox">
+public void someMethod(){
+
+  long threadSafeInt = 0;
+
+  threadSafeInt++;
+}
+</pre>
+
+
+
+
+<a name="local-object-references"></a>
+<h2>Local Object References</h2>
+<p>
+    Local references to objects are a bit different.
+    The reference itself is not shared. The object referenced however, is not stored
+    in each threads's local stack. All objects are stored in the shared heap.
+</p>
+
+<p>
+    If an object created locally never escapes the method it was created in, it is
+    thread safe. In fact you can also pass it on to other methods and objects as long
+    as none of these methods or objects make the passed object available to other threads.
+</p>
+
+<p>
+    Here is an example of a thread safe local object:
+</p>
+
+<pre class="codeBox">
+public void someMethod(){
+
+  LocalObject localObject = new LocalObject();
+
+  localObject.callMethod();
+  method2(localObject);
+}
+
+public void method2(LocalObject localObject){
+  localObject.setValue("value");
+}
+
+</pre>
+
+<p>
+    The <code>LocalObject</code> instance in this example is not returned from the method, nor is it
+    passed to any other objects that are accessible from outside the <code>someMethod()</code> method.
+    Each thread executing the <code>someMethod()</code> method will create its own <code>LocalObject</code>
+    instance and assign it to the <code>localObject</code> reference. Therefore the use of the <code>LocalObject</code> here
+    is thread safe.
+</p>
+
+<p>
+    In fact, the whole method <code>someMethod()</code> is thread safe. Even if the
+    <code>LocalObject</code> instance is passed as parameter to other methods in the same class, or
+    in other classes, the use of it is thread safe.
+</p>
+
+<p>
+    The only exception is of course,
+    if one of the methods called with the <code>LocalObject</code> as parameter, stores the <code>LocalObject</code>
+    instance in a way that allows access to it from other threads.
+</p>
+
+
+
+<a name="object-member-variables"></a>
+<h2>Object Member Variables</h2>
+<p>
+    Object member variables (fields) are stored on the heap along with the object. Therefore, if two threads call a
+    method on the same object instance and this method updates object member variables, the method is not thread
+    safe. Here is an example of a method that is not thread safe:
+</p>
+
+<pre class="codeBox">
+
+public class NotThreadSafe{
+    StringBuilder builder = new StringBuilder();
+
+    public add(String text){
+        this.builder.append(text);
+    }
+}
+</pre>
+
+<p>
+    If two threads call the <code>add()</code> method simultaneously <b>on the same NotThreadSafe instance</b> then it
+    leads to race conditions. For instance:
+</p>
+
+<pre class="codeBox">
+NotThreadSafe sharedInstance = new NotThreadSafe();
+
+new Thread(new MyRunnable(sharedInstance)).start();
+new Thread(new MyRunnable(sharedInstance)).start();
+
+public class MyRunnable implements Runnable{
+  NotThreadSafe instance = null;
+
+  public MyRunnable(NotThreadSafe instance){
+    this.instance = instance;
+  }
+
+  public void run(){
+    this.instance.add("some text");
+  }
+}
+</pre>
+
+<p>Notice how the two <code>MyRunnable</code> instances share the same <code>NotThreadSafe</code> instance. Therefore,
+    when they call the <code>add()</code> method on the <code>NotThreadSafe</code> instance it leads to race condition.
+</p>
+
+<p>
+    However, if two threads call the <code>add()</code> method simultaneously
+    <b>on different instances</b> then it does not lead to race condition. Here is the example
+    from before, but slightly modified:
+</p>
+
+<pre class="codeBox">
+new Thread(new MyRunnable(new NotThreadSafe())).start();
+new Thread(new MyRunnable(new NotThreadSafe())).start();
+</pre>
+
+<p>
+    Now the two threads have each their own instance of <code>NotThreadSafe</code> so their calls
+    to the add method doesn't interfere with each other. The code does not have
+    race condition anymore. So, even if an object is not thread safe it can still
+    be used in a way that doesn't lead to race condition.
+</p>
+
+
+
+<a name="thread-control-escape-rule"></a>
+<h2>The Thread Control Escape Rule</h2>
+<p>
+    When trying to determine if your code's access of a certain resource is thread safe
+    you can use the thread control escape rule:
+</p>
+
+<pre class="codeBox">
+If a resource is created, used and disposed within
+the control of the same thread,
+and never escapes the control of this thread,
+the use of that resource is thread safe.
+</pre>
+
+<p>
+    Resources can be any shared resource like an object, array, file, database connection, socket etc.
+    In Java you do not always explicitly dispose objects, so "disposed" means losing or null'ing the reference
+    to the object.
+</p>
+
+<p>
+    Even if the use of an object is thread safe, if that object points to a shared resource like
+    a file or database, your application as a whole may not be thread safe. For instance,
+    if thread 1 and thread 2 each create their own database connections, connection 1 and connection 2,
+    the use of each connection itself is thread safe. But the use of the database the connections
+    point to may not be thread safe. For example, if both threads execute code like this:
+</p>
+
+<pre class="codeBox">
+check if record X exists
+if not, insert record X
+</pre>
+
+<p>
+    If two threads execute this simultaneously, and the record X they are checking for
+    happens to be the same record, there is a risk that both of the threads end up
+    inserting it. This is how:
+</p>
+
+<pre class="codeBox">
+Thread 1 checks if record X exists. Result = no
+Thread 2 checks if record X exists. Result = no
+Thread 1 inserts record X
+Thread 2 inserts record X
+</pre>
+
+<p>
+    This could also happen with threads operating on files or other shared resources.
+    Therefore it is important to distinguish between whether an object controlled by
+    a thread <b>is</b> the resource, or if it merely <b>references</b> the
+    resource (like a database connection does).
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

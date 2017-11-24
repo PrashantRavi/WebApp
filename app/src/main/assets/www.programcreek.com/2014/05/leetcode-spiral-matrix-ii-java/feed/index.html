@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Spiral Matrix II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-spiral-matrix-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-spiral-matrix-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Alexander Zagniotov</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-spiral-matrix-ii-java/#comment-10796</link>
+		<dc:creator><![CDATA[Alexander Zagniotov]]></dc:creator>
+		<pubDate>Sun, 01 May 2016 06:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14268#comment-10796</guid>
+		<description><![CDATA[The following is another solution using recursion, which is based on one of the solutions provided for Spiral Matrix 1:
+
+&lt;code&gt;
+void spiral(final int rows, final int cols) {
+        final int[][] matrix = new int[rows][cols];
+        spiralRecurse(matrix, 0, 0, rows, cols, 0);
+        // stdOut the matrix
+    }
+
+    private void spiralRecurse(final int[][] matrix, int currentRow, int currentCol, int rows, int cols, int value) {
+        if (rows &#060;= 0 &#124;&#124; cols &#060;= 0) {
+            return;
+        }
+
+        //only one element left
+        if (rows == 1 &#038;&#038; cols == 1) {
+            matrix[currentRow][currentCol] = ++value;
+            return;
+        }
+
+        //Top side: Move from left to right
+        for (int idx = 0; idx &#060; cols - 1; idx++) {
+            matrix[currentRow][currentCol++] = ++value;
+        }
+
+        //Right side: Move from top to bottom
+        for (int idx = 0; idx &#060; rows - 1; idx++) {
+            matrix[currentRow++][currentCol] = ++value;
+        }
+
+        //Bottom side: Move from right to left
+        for (int idx = 0; idx &#060; cols - 1; idx++) {
+            matrix[currentRow][currentCol--] = ++value;
+        }
+
+        //Left side: Move from bottom to top
+        for (int idx = 0; idx &#060; rows - 1; idx++) {
+            matrix[currentRow--][currentCol] = ++value;
+        }
+
+        // By the time we reached here, we finished walking the external &#039;circle&#039;,
+        // the currentRow &#038; currentCol are back to zeroes.
+        //
+        // Now, we want to start walking the next inner circle, by incrementing
+        // currentRow &#038; currentCol and adjusting the matrix limits
+        spiralRecurse(matrix, currentRow + 1, currentCol + 1, rows - 2, cols - 2, value);
+    }
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>The following is another solution using recursion, which is based on one of the solutions provided for Spiral Matrix 1:</p>
+<p><code><br />
+void spiral(final int rows, final int cols) {<br />
+        final int[][] matrix = new int[rows][cols];<br />
+        spiralRecurse(matrix, 0, 0, rows, cols, 0);<br />
+        // stdOut the matrix<br />
+    }</p>
+<p>    private void spiralRecurse(final int[][] matrix, int currentRow, int currentCol, int rows, int cols, int value) {<br />
+        if (rows &lt;= 0 || cols &lt;= 0) {<br />
+            return;<br />
+        }</p>
+<p>        //only one element left<br />
+        if (rows == 1 &amp;&amp; cols == 1) {<br />
+            matrix[currentRow][currentCol] = ++value;<br />
+            return;<br />
+        }</p>
+<p>        //Top side: Move from left to right<br />
+        for (int idx = 0; idx &lt; cols - 1; idx++) {<br />
+            matrix[currentRow][currentCol++] = ++value;<br />
+        }</p>
+<p>        //Right side: Move from top to bottom<br />
+        for (int idx = 0; idx &lt; rows - 1; idx++) {<br />
+            matrix[currentRow++][currentCol] = ++value;<br />
+        }</p>
+<p>        //Bottom side: Move from right to left<br />
+        for (int idx = 0; idx &lt; cols - 1; idx++) {<br />
+            matrix[currentRow][currentCol--] = ++value;<br />
+        }</p>
+<p>        //Left side: Move from bottom to top<br />
+        for (int idx = 0; idx &lt; rows - 1; idx++) {<br />
+            matrix[currentRow--][currentCol] = ++value;<br />
+        }</p>
+<p>        // By the time we reached here, we finished walking the external &#039;circle&#039;,<br />
+        // the currentRow &amp; currentCol are back to zeroes.<br />
+        //<br />
+        // Now, we want to start walking the next inner circle, by incrementing<br />
+        // currentRow &amp; currentCol and adjusting the matrix limits<br />
+        spiralRecurse(matrix, currentRow + 1, currentCol + 1, rows - 2, cols - 2, value);<br />
+    }</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CRH</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-spiral-matrix-ii-java/#comment-7566</link>
+		<dc:creator><![CDATA[CRH]]></dc:creator>
+		<pubDate>Fri, 06 Nov 2015 20:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14268#comment-7566</guid>
+		<description><![CDATA[Similar but probably little more simple to read. Accepted in leetcode.
+
+&lt;code&gt;
+public class Solution {
+
+    public int[][] generateMatrix(int n) {
+
+        
+
+        int[][] ret = new int[n][n];
+
+        
+
+        int x=0,y=0;
+
+        int step=1;
+
+        for(int i=1;i&#060;=n*n;){
+
+            
+
+            if(i==n*n){
+
+        		ret[x][y] = i;
+
+        		break;
+
+        	}
+
+            while(y&#060;n-step){
+
+                ret[x][y++] = i++;
+
+            }
+
+            
+
+            while(x=0+step){
+
+                ret[x][y--] = i++;
+
+            }
+
+            
+
+            while(x&#062;=0+step){
+
+                ret[x--][y] = i++;
+
+            }
+
+            x++;
+
+            y++;
+
+            step++;
+
+        }
+
+        return ret;
+
+    }
+
+}
+ &lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Similar but probably little more simple to read. Accepted in leetcode.</p>
+<p><code><br />
+public class Solution {</p>
+<p>    public int[][] generateMatrix(int n) {</p>
+<p>        int[][] ret = new int[n][n];</p>
+<p>        int x=0,y=0;</p>
+<p>        int step=1;</p>
+<p>        for(int i=1;i&lt;=n*n;){</p>
+<p>            if(i==n*n){</p>
+<p>        		ret[x][y] = i;</p>
+<p>        		break;</p>
+<p>        	}</p>
+<p>            while(y&lt;n-step){</p>
+<p>                ret[x][y++] = i++;</p>
+<p>            }</p>
+<p>            while(x=0+step){</p>
+<p>                ret[x][y--] = i++;</p>
+<p>            }</p>
+<p>            while(x&gt;=0+step){</p>
+<p>                ret[x--][y] = i++;</p>
+<p>            }</p>
+<p>            x++;</p>
+<p>            y++;</p>
+<p>            step++;</p>
+<p>        }</p>
+<p>        return ret;</p>
+<p>    }</p>
+<p>}<br />
+ </code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

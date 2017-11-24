@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; LRU Cache (Java)</title>
+	<atom:link href="http://www.programcreek.com/2013/03/leetcode-lru-cache-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: matthew_gagliardi</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-14977</link>
+		<dc:creator><![CDATA[matthew_gagliardi]]></dc:creator>
+		<pubDate>Tue, 04 Oct 2016 09:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-14977</guid>
+		<description><![CDATA[You certainly can do this with a LinkedList, or even a LinkedList, as you rightly have suggested. However, this ends up being super slow. The probem lies with the fact that there is no &quot;remove(N n) method in the api. There are only removeFirstOccurrence(Object o) (which entails a linear search) and remove(int index), which is useful only if you know the index of the node in question. The first option costs O(n) time and the second sounds nightmarish to implement. 
+
+The benefit to using your own home-grown nodes is that you can allow them to keep references to their buddies and thus have O(1) removal time.  But, by way of example, the following will work, but will time-out on leetcode when you get to the huge test cases
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+public class LRUCache {
+
+    private int capacity;
+    private Map lookUp;
+    private LinkedList nodes;
+    
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        lookUp = new HashMap();
+        nodes = new LinkedList();
+    }
+    
+    public int get(int key) {
+    	Integer val = lookUp.get(key) ;
+    	if(val == null){
+    		return -1;
+    	}else{
+            nodes.removeFirstOccurrence(key);
+            nodes.addFirst(key);
+    		return val;
+    	}
+    }
+    
+    public void set(int key, int value) {
+        if(lookUp.get(key)==null){
+	        if(nodes.size()==capacity){
+	        	int last = nodes.removeLast();
+	        	lookUp.remove(last);
+	        }
+	        nodes.addFirst(key);
+        }else{
+            get(key);
+        }
+        lookUp.put(key, value);
+        
+    }
+   
+}]]></description>
+		<content:encoded><![CDATA[<p>You certainly can do this with a LinkedList, or even a LinkedList, as you rightly have suggested. However, this ends up being super slow. The probem lies with the fact that there is no &#8220;remove(N n) method in the api. There are only removeFirstOccurrence(Object o) (which entails a linear search) and remove(int index), which is useful only if you know the index of the node in question. The first option costs O(n) time and the second sounds nightmarish to implement. </p>
+<p>The benefit to using your own home-grown nodes is that you can allow them to keep references to their buddies and thus have O(1) removal time.  But, by way of example, the following will work, but will time-out on leetcode when you get to the huge test cases</p>
+<p>import java.util.HashMap;<br />
+import java.util.LinkedList;<br />
+import java.util.Map;</p>
+<p>public class LRUCache {</p>
+<p>    private int capacity;<br />
+    private Map lookUp;<br />
+    private LinkedList nodes;</p>
+<p>    public LRUCache(int capacity) {<br />
+        this.capacity = capacity;<br />
+        lookUp = new HashMap();<br />
+        nodes = new LinkedList();<br />
+    }</p>
+<p>    public int get(int key) {<br />
+    	Integer val = lookUp.get(key) ;<br />
+    	if(val == null){<br />
+    		return -1;<br />
+    	}else{<br />
+            nodes.removeFirstOccurrence(key);<br />
+            nodes.addFirst(key);<br />
+    		return val;<br />
+    	}<br />
+    }</p>
+<p>    public void set(int key, int value) {<br />
+        if(lookUp.get(key)==null){<br />
+	        if(nodes.size()==capacity){<br />
+	        	int last = nodes.removeLast();<br />
+	        	lookUp.remove(last);<br />
+	        }<br />
+	        nodes.addFirst(key);<br />
+        }else{<br />
+            get(key);<br />
+        }<br />
+        lookUp.put(key, value);</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rc</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-14669</link>
+		<dc:creator><![CDATA[rc]]></dc:creator>
+		<pubDate>Thu, 22 Sep 2016 08:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-14669</guid>
+		<description><![CDATA[Hi,
+
+Your algorithm is actually quite good.
+
+There is only a few details to make it better.
+
+1) When the cache is reaches its max capacity you only remove the end of the list. You should also remove the entry from the hash table.
+
+ if(map.size()&#062;=capacity)
+{
+ map.remove(end.key);
+  remove(end);
+  setHead(newnode);
+  }
+
+2) Don&#039;t forget to update capacity every time you add a new node.
+
+Cheers,
+
+RC]]></description>
+		<content:encoded><![CDATA[<p>Hi,</p>
+<p>Your algorithm is actually quite good.</p>
+<p>There is only a few details to make it better.</p>
+<p>1) When the cache is reaches its max capacity you only remove the end of the list. You should also remove the entry from the hash table.</p>
+<p> if(map.size()&gt;=capacity)<br />
+{<br />
+ map.remove(end.key);<br />
+  remove(end);<br />
+  setHead(newnode);<br />
+  }</p>
+<p>2) Don&#8217;t forget to update capacity every time you add a new node.</p>
+<p>Cheers,</p>
+<p>RC</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Alan</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-14615</link>
+		<dc:creator><![CDATA[Alan]]></dc:creator>
+		<pubDate>Sun, 18 Sep 2016 20:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-14615</guid>
+		<description><![CDATA[Would I be penalized if I just used an ArrayList instead of creating a doubly linked list?  Is there a reason why a double linked list is used in terms of efficiency?  Is it because the ArrayList remove function takes O(n) time?
+
+public class LRUCache {
+   HashMap LRU = new HashMap();
+   private int Capacity;
+   private ArrayList leastRecent = new ArrayList();
+
+   public LRUCache(int capacity) {
+      this.Capacity = capacity;
+   }
+
+   public int get(int key) {
+      if(LRU.get(key) == null){
+         return -1;
+      }
+      else{
+         leastRecent.remove((Integer) key);
+         leastRecent.add(key);
+         return LRU.get(key);
+      }
+   }
+
+   public void set(int key, int value) {
+      if(LRU.get(key) == null){
+         if(LRU.size() &#060; Capacity){
+            LRU.put(key, value);
+            leastRecent.add(key);
+         }
+         else{
+            int remove = leastRecent.remove(0);
+            LRU.remove(remove);
+            LRU.put(key, value);
+            leastRecent.add(key);
+         }
+      }
+      else{
+         if(LRU.size() &#060; Capacity){
+            leastRecent.remove((Integer) key);
+            LRU.put(key, value);
+            leastRecent.add(key);
+         }
+         else{
+            leastRecent.remove((Integer) key);
+            LRU.put(key, value);
+            leastRecent.add(key);
+         }
+      }
+   }
+}]]></description>
+		<content:encoded><![CDATA[<p>Would I be penalized if I just used an ArrayList instead of creating a doubly linked list?  Is there a reason why a double linked list is used in terms of efficiency?  Is it because the ArrayList remove function takes O(n) time?</p>
+<p>public class LRUCache {<br />
+   HashMap LRU = new HashMap();<br />
+   private int Capacity;<br />
+   private ArrayList leastRecent = new ArrayList();</p>
+<p>   public LRUCache(int capacity) {<br />
+      this.Capacity = capacity;<br />
+   }</p>
+<p>   public int get(int key) {<br />
+      if(LRU.get(key) == null){<br />
+         return -1;<br />
+      }<br />
+      else{<br />
+         leastRecent.remove((Integer) key);<br />
+         leastRecent.add(key);<br />
+         return LRU.get(key);<br />
+      }<br />
+   }</p>
+<p>   public void set(int key, int value) {<br />
+      if(LRU.get(key) == null){<br />
+         if(LRU.size() &lt; Capacity){<br />
+            LRU.put(key, value);<br />
+            leastRecent.add(key);<br />
+         }<br />
+         else{<br />
+            int remove = leastRecent.remove(0);<br />
+            LRU.remove(remove);<br />
+            LRU.put(key, value);<br />
+            leastRecent.add(key);<br />
+         }<br />
+      }<br />
+      else{<br />
+         if(LRU.size() &lt; Capacity){<br />
+            leastRecent.remove((Integer) key);<br />
+            LRU.put(key, value);<br />
+            leastRecent.add(key);<br />
+         }<br />
+         else{<br />
+            leastRecent.remove((Integer) key);<br />
+            LRU.put(key, value);<br />
+            leastRecent.add(key);<br />
+         }<br />
+      }<br />
+   }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Miral</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-9624</link>
+		<dc:creator><![CDATA[Miral]]></dc:creator>
+		<pubDate>Sun, 13 Mar 2016 03:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-9624</guid>
+		<description><![CDATA[LinkedHashMap - keeps track of the order in which each entry is added.
+By default, it removes the oldest entry when reached to a threshold.
+
+1. In constructor - true flag - we are saying that, we want to remove the oldest element based on its access. (the one that was least accessed, should be removed)
+
+2. In overridden method, we are saying that, remove entry only when we have reached cacheSize.
+
+Hope this helps.]]></description>
+		<content:encoded><![CDATA[<p>LinkedHashMap &#8211; keeps track of the order in which each entry is added.<br />
+By default, it removes the oldest entry when reached to a threshold.</p>
+<p>1. In constructor &#8211; true flag &#8211; we are saying that, we want to remove the oldest element based on its access. (the one that was least accessed, should be removed)</p>
+<p>2. In overridden method, we are saying that, remove entry only when we have reached cacheSize.</p>
+<p>Hope this helps.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sagar Dafle</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-9559</link>
+		<dc:creator><![CDATA[Sagar Dafle]]></dc:creator>
+		<pubDate>Wed, 09 Mar 2016 03:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-9559</guid>
+		<description><![CDATA[Hi, Can you please explain how the above code works exactly?]]></description>
+		<content:encoded><![CDATA[<p>Hi, Can you please explain how the above code works exactly?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sagar Dafle</title>
+		<link>http://www.programcreek.com/2013/03/leetcode-lru-cache-java/#comment-9560</link>
+		<dc:creator><![CDATA[Sagar Dafle]]></dc:creator>
+		<pubDate>Wed, 09 Mar 2016 03:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12029#comment-9560</guid>
+		<description><![CDATA[Hi, Can you please explain how the above code works ?]]></description>
+		<content:encoded><![CDATA[<p>Hi, Can you please explain how the above code works ?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

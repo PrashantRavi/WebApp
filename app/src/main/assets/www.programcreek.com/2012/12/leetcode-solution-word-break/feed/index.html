@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Leetcode &#8211; Word Break (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-solution-word-break/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Nicole</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-15690</link>
+		<dc:creator><![CDATA[Nicole]]></dc:creator>
+		<pubDate>Thu, 27 Oct 2016 07:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-15690</guid>
+		<description><![CDATA[if Approach 1 and Approach 3 both are O(N^2), why is 3 so much better than one?]]></description>
+		<content:encoded><![CDATA[<p>if Approach 1 and Approach 3 both are O(N^2), why is 3 so much better than one?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Milan</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-14333</link>
+		<dc:creator><![CDATA[Milan]]></dc:creator>
+		<pubDate>Mon, 05 Sep 2016 04:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-14333</guid>
+		<description><![CDATA[slight improvement on solution 3, use boolean, instead in int to avoid confusion.
+&lt;code&gt; 
+public boolean wordBreak(String s, Set wordDict) {
+        boolean[] pos = new boolean[s.length()+1];
+        pos[0] = true;
+        for(int i = 0; i &#060; s.length(); i++){
+            for(int j = i+1; pos[i] &#038;&#038; j &#060;= s.length(); j++){
+                if (wordDict.contains(s.substring(i, j)))
+                    pos[j] = true;
+            }
+        }
+        return pos[s.length()];
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>slight improvement on solution 3, use boolean, instead in int to avoid confusion.<br />
+<code><br />
+public boolean wordBreak(String s, Set wordDict) {<br />
+        boolean[] pos = new boolean[s.length()+1];<br />
+        pos[0] = true;<br />
+        for(int i = 0; i &lt; s.length(); i++){<br />
+            for(int j = i+1; pos[i] &amp;&amp; j &lt;= s.length(); j++){<br />
+                if (wordDict.contains(s.substring(i, j)))<br />
+                    pos[j] = true;<br />
+            }<br />
+        }<br />
+        return pos[s.length()];<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: KARTHIKEYAN DEVENDRAN</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-12480</link>
+		<dc:creator><![CDATA[KARTHIKEYAN DEVENDRAN]]></dc:creator>
+		<pubDate>Fri, 08 Jul 2016 05:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-12480</guid>
+		<description><![CDATA[&lt;code&gt; 
+public  boolean wordBreak(String s,Set dict){
+		HashMap map = new HashMap();
+		return wordBreak(s, dict,map);
+	}
+	
+	public  boolean wordBreak(String s,Set dict,HashMap map){
+
+		if(map.containsKey(s)){
+			return map.get(s);
+		}
+		
+		for (int i = 0; i &#060;= s.length(); i++) {
+			String prefix = s.substring(0,i);
+			if(dict.contains(prefix)){
+				if(i == s.length()){
+					return true;
+				}
+				if(wordBreak(s.substring(i),dict,map)){
+					map.put(s.substring(i), true);
+					return true;
+				}
+			}
+		}
+		map.put(s, false);
+		return false;
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+public  boolean wordBreak(String s,Set dict){<br />
+		HashMap map = new HashMap();<br />
+		return wordBreak(s, dict,map);<br />
+	}</p>
+<p>	public  boolean wordBreak(String s,Set dict,HashMap map){</p>
+<p>		if(map.containsKey(s)){<br />
+			return map.get(s);<br />
+		}</p>
+<p>		for (int i = 0; i &lt;= s.length(); i++) {<br />
+			String prefix = s.substring(0,i);<br />
+			if(dict.contains(prefix)){<br />
+				if(i == s.length()){<br />
+					return true;<br />
+				}<br />
+				if(wordBreak(s.substring(i),dict,map)){<br />
+					map.put(s.substring(i), true);<br />
+					return true;<br />
+				}<br />
+			}<br />
+		}<br />
+		map.put(s, false);<br />
+		return false;<br />
+	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jangku</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-11870</link>
+		<dc:creator><![CDATA[Jangku]]></dc:creator>
+		<pubDate>Tue, 14 Jun 2016 22:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-11870</guid>
+		<description><![CDATA[This implementation looks neat. But the complexity is exponential so I would choose polynomial implementation for my case.]]></description>
+		<content:encoded><![CDATA[<p>This implementation looks neat. But the complexity is exponential so I would choose polynomial implementation for my case.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul Shukla</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-7777</link>
+		<dc:creator><![CDATA[Rahul Shukla]]></dc:creator>
+		<pubDate>Mon, 14 Dec 2015 19:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-7777</guid>
+		<description><![CDATA[http://www.ideserve.co.in/learn/word-break-problem
+Here is a detailed explanation of the algorithm.]]></description>
+		<content:encoded><![CDATA[<p><a href="http://www.ideserve.co.in/learn/word-break-problem" rel="nofollow">http://www.ideserve.co.in/learn/word-break-problem</a><br />
+Here is a detailed explanation of the algorithm.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Stephen Boesch</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-solution-word-break/#comment-6879</link>
+		<dc:creator><![CDATA[Stephen Boesch]]></dc:creator>
+		<pubDate>Sun, 12 Apr 2015 02:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=10623#comment-6879</guid>
+		<description><![CDATA[Yes, i had commented that a Trie were a better solution - before seeing you have already posted it.]]></description>
+		<content:encoded><![CDATA[<p>Yes, i had commented that a Trie were a better solution &#8211; before seeing you have already posted it.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

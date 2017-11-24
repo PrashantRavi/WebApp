@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>CyclicBarrier</title>
+
+    <meta name="description" content="This tutorial explains how to use Java's CyclicBarrier.">
+    <meta name="keywords"    content="java util concurrent cyclicbarrier">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="CyclicBarrier">
+    <meta name="twitter:description" content="This tutorial explains how to use Java's CyclicBarrier.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="CyclicBarrier"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-util-concurrent/cyclicbarrier.html"/>
+    <meta property="og:description" content="This tutorial explains how to use Java's CyclicBarrier."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency-utils/java.util.concurrent-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-util-concurrent/countdownlatch.html";
+var nextArticleInCategory = "/java-util-concurrent/exchanger.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 5214;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>java.util.concurrency - Java Concurrency Utilities</div><ol><li><a href="index.html">java.util.concurrent - Java Concurrency Utilities</a></li><li><a href="blockingqueue.html">BlockingQueue</a></li><li><a href="arrayblockingqueue.html">ArrayBlockingQueue</a></li><li><a href="delayqueue.html">DelayQueue</a></li><li><a href="linkedblockingqueue.html">LinkedBlockingQueue</a></li><li><a href="priorityblockingqueue.html">PriorityBlockingQueue</a></li><li><a href="synchronousqueue.html">SynchronousQueue</a></li><li><a href="blockingdeque.html">BlockingDeque</a></li><li><a href="linkedblockingdeque.html">LinkedBlockingDeque</a></li><li><a href="concurrentmap.html">ConcurrentMap</a></li><li><a href="concurrentnavigablemap.html">ConcurrentNavigableMap</a></li><li><a href="countdownlatch.html">CountDownLatch</a></li><li><a href="cyclicbarrier.html"><b>CyclicBarrier</b></a></li><li><a href="exchanger.html">Exchanger</a></li><li><a href="semaphore.html">Semaphore</a></li><li><a href="executorservice.html">ExecutorService</a></li><li><a href="threadpoolexecutor.html">ThreadPoolExecutor</a></li><li><a href="scheduledexecutorservice.html">ScheduledExecutorService</a></li><li><a href="java-fork-and-join-forkjoinpool.html">Java Fork and Join using ForkJoinPool</a></li><li><a href="lock.html">Lock</a></li><li><a href="readwritelock.html">ReadWriteLock</a></li><li><a href="atomicboolean.html">AtomicBoolean</a></li><li><a href="atomicinteger.html">AtomicInteger</a></li><li><a href="atomiclong.html">AtomicLong</a></li><li><a href="atomicreference.html">AtomicReference</a></li><li><a href="atomicstampedreference.html">AtomicStampedReference</a></li><li><a href="atomicintegerarray.html">AtomicIntegerArray</a></li><li><a href="atomiclongarray.html">AtomicLongArray</a></li><li><a href="atomicreferencearray.html">AtomicReferenceArray</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>CyclicBarrier</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#creating-a-cyclicbarrier">Creating a CyclicBarrier</a></li><li><a href="#waiting-at-a-cyclicbarrier">Waiting at a CyclicBarrier</a></li><li><a href="#cyclicbarrier-action">CyclicBarrier Action</a></li><li><a href="#cyclicbarrier-example">CyclicBarrier Example</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The <code>java.util.concurrent.CyclicBarrier</code> class is a synchronization mechanism that can synchronize threads
+    progressing through some algorithm. In other words, it is a barrier that all threads must wait at, until all threads
+    reach it, before any of the threads can continue. Here is a diagram illustrating that:
+</p>
+
+<table style="padding:10px;" align="center">
+    <tr><td align="center"><img src="../images/java-concurrency-utils/cyclic-barrier.png" alt="Two threads waiting for each other at CyclicBarriers." /></td></tr>
+    <tr><td align="center"><b>Two threads waiting for each other at CyclicBarriers.</b></td></tr>
+</table>
+
+
+<p>
+    The threads wait for each other by calling the <code>await()</code> method on the <code>CyclicBarrier</code>.
+    Once N threads are waiting at the <code>CyclicBarrier</code>, all threads are released and can continue running.
+</p>
+
+
+
+<a name="creating-a-cyclicbarrier"></a>
+<h2>Creating a CyclicBarrier</h2>
+<p>
+    When you create a <code>CyclicBarrier</code> you specify how many threads are to wait at it, before releasing them.
+    Here is how you create a <code>CyclicBarrier</code>:
+</p>
+
+<pre class="codeBox">
+CyclicBarrier barrier = new CyclicBarrier(2);
+</pre>
+
+
+
+<a name="waiting-at-a-cyclicbarrier"></a>
+<h2>Waiting at a CyclicBarrier</h2>
+<p>
+    Here is how a thread waits at a <code>CyclicBarrier</code>:
+</p>
+
+<pre class="codeBox">
+barrier.await();
+</pre>
+
+<p>
+    You can also specify a timeout for the waiting thread. When the timeout has passed the thread
+    is also released, even if not all N threads are waiting at the <code>CyclicBarrier</code>.
+    Here is how you specify a timeout:
+</p>
+
+<pre class="codeBox">
+barrier.await(10, TimeUnit.SECONDS);
+</pre>
+
+<p>
+    The waiting threads waits at the <code>CyclicBarrier</code> until either:
+</p>
+
+<ul>
+    <li>The last thread arrives (calls await() )</li>
+    <li>The thread is interrupted by another thread (another thread calls its interrupt() method)</li>
+    <li>Another waiting thread is interrupted</li>
+    <li>Another waiting thread times out while waiting at the <code>CyclicBarrier</code></li>
+    <li>The <code>CyclicBarrier.reset()</code> method is called by some external thread.</li>
+</ul>
+
+
+
+<a name="cyclicbarrier-action"></a>
+<h2>CyclicBarrier Action</h2>
+<p>
+    The <code>CyclicBarrier</code> supports a barrier action, which is a <code>Runnable</code> that is executed
+    once the last thread arrives. You pass the <code>Runnable</code> barrier action to the <code>CyclicBarrier</code>
+    in its constructor, like this:
+</p>
+
+
+<pre class="codeBox">
+Runnable      barrierAction = ... ;
+CyclicBarrier barrier       = new CyclicBarrier(2, barrierAction);
+</pre>
+
+
+
+<a name="cyclicbarrier-example"></a>
+<h2>CyclicBarrier Example</h2>
+
+<p>
+    Here is a code example that shows you how to use a <code>CyclicBarrier</code>:
+</p>
+
+<pre class="codeBox">
+Runnable barrier1Action = new Runnable() {
+    public void run() {
+        System.out.println("BarrierAction 1 executed ");
+    }
+};
+Runnable barrier2Action = new Runnable() {
+    public void run() {
+        System.out.println("BarrierAction 2 executed ");
+    }
+};
+
+CyclicBarrier barrier1 = new CyclicBarrier(2, barrier1Action);
+CyclicBarrier barrier2 = new CyclicBarrier(2, barrier2Action);
+
+CyclicBarrierRunnable barrierRunnable1 =
+        new CyclicBarrierRunnable(barrier1, barrier2);
+
+CyclicBarrierRunnable barrierRunnable2 =
+        new CyclicBarrierRunnable(barrier1, barrier2);
+
+new Thread(barrierRunnable1).start();
+new Thread(barrierRunnable2).start();
+</pre>
+
+<p>
+    Here is the <code>CyclicBarrierRunnable</code> class:
+</p>
+
+<pre class="codeBox">
+public class CyclicBarrierRunnable implements Runnable{
+
+    CyclicBarrier barrier1 = null;
+    CyclicBarrier barrier2 = null;
+
+    public CyclicBarrierRunnable(
+            CyclicBarrier barrier1,
+            CyclicBarrier barrier2) {
+
+        this.barrier1 = barrier1;
+        this.barrier2 = barrier2;
+    }
+
+    public void run() {
+        try {
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread().getName() +
+                                " waiting at barrier 1");
+            this.barrier1.await();
+
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread().getName() +
+                                " waiting at barrier 2");
+            this.barrier2.await();
+
+            System.out.println(Thread.currentThread().getName() +
+                                " done!");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</pre>
+
+<p>
+    Here is the console output for an execution of the above code. Note that the sequence in which
+    the threads gets to write to the console may vary from execution to execution. Sometimes
+    <code>Thread-0</code> prints first, sometimes <code>Thread-1</code> prints first etc.
+</p>
+
+<pre class="codeBox">
+Thread-0 waiting at barrier 1
+Thread-1 waiting at barrier 1
+BarrierAction 1 executed
+Thread-1 waiting at barrier 2
+Thread-0 waiting at barrier 2
+BarrierAction 2 executed
+Thread-0 done!
+Thread-1 done!
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="exchanger.html">Exchanger</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

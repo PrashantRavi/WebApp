@@ -1,0 +1,1273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Word Ladder</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that only one letter can be"/>
+<meta name="keywords" content="leetcode word ladder java,leetcode word ladder solution"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Word Ladder Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='面试10大算法汇总＋常见题目解答' href='../%E9%9D%A2%E8%AF%9510%E5%A4%A7%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB%EF%BC%8B%E5%B8%B8%E8%A7%81%E9%A2%98%E7%9B%AE%E8%A7%A3%E7%AD%94/index.html'/>
+<link rel='next' title='LeetCode &#8211; Clone Graph (Java)' href='../leetcode-clone-graph-java/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=10798.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-word-ladder_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-word-ladder_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-10798"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Word Ladder </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that only one letter can be changed at a time and each intermediate word must exist in the dictionary. For example, given:</p>
+<pre>
+start = "hit"
+end = "cog"
+dict = ["hot","dot","dog","lot","log"]
+</pre>
+<p>One shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", the program should return its length 5.</p>
+<p><strong>Analysis</strong></p>
+<p>UPDATED on 06/07/2015. </p>
+<p>So we quickly realize that this is a search problem, and breath-first search guarantees the optimal solution. </p>
+<p><img src="../../../wp-content/uploads/2012/12/word-ladder-400x183.jpg" alt="word-ladder" width="350" height="150" class="alignleft size-medium wp-image-14547"/></p>
+<p><strong>Java Solution</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">class</span> WordNode<span style="color: #009900;">&#123;</span>
+    <span style="color: #003399;">String</span> word<span style="color: #339933;">;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> numSteps<span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> WordNode<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> word, <span style="color: #000066; font-weight: bold;">int</span> numSteps<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">word</span> <span style="color: #339933;">=</span> word<span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">numSteps</span> <span style="color: #339933;">=</span> numSteps<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> ladderLength<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> beginWord, <span style="color: #003399;">String</span> endWord, Set<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> wordDict<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        LinkedList<span style="color: #339933;">&lt;</span>WordNode<span style="color: #339933;">&gt;</span> queue <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> LinkedList<span style="color: #339933;">&lt;</span>WordNode<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        queue.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> WordNode<span style="color: #009900;">&#40;</span>beginWord, <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        wordDict.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>endWord<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>queue.<span style="color: #006633;">isEmpty</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            WordNode top <span style="color: #339933;">=</span> queue.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #003399;">String</span> word <span style="color: #339933;">=</span> top.<span style="color: #006633;">word</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>word.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>endWord<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> top.<span style="color: #006633;">numSteps</span><span style="color: #339933;">;</span>
+            <span style="color: #009900;">&#125;</span>
+&nbsp;
+            <span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> arr <span style="color: #339933;">=</span> word.<span style="color: #006633;">toCharArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>arr.<span style="color: #006633;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">char</span> c<span style="color: #339933;">=</span><span style="color: #0000ff;">'a'</span><span style="color: #339933;">;</span> c<span style="color: #339933;">&lt;=</span><span style="color: #0000ff;">'z'</span><span style="color: #339933;">;</span> c<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">char</span> temp <span style="color: #339933;">=</span> arr<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>arr<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">!=</span>c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                        arr<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span>c<span style="color: #339933;">;</span>
+                    <span style="color: #009900;">&#125;</span>
+&nbsp;
+                    <span style="color: #003399;">String</span> newWord <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #003399;">String</span><span style="color: #009900;">&#40;</span>arr<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>wordDict.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>newWord<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                        queue.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">new</span> WordNode<span style="color: #009900;">&#40;</span>newWord, top.<span style="color: #006633;">numSteps</span><span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        wordDict.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>newWord<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                    <span style="color: #009900;">&#125;</span>
+&nbsp;
+                    arr<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span>temp<span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/06/leetcode-word-ladder-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Ladder II (Java)">LeetCode &#8211; Word Ladder II (Java) </a></li>
+<li><a href="../../../2014/06/leetcode-word-search-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Search (Java)">LeetCode &#8211; Word Search (Java) </a></li>
+<li><a href="../../../2014/06/leetcode-word-search-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Search II (Java)">LeetCode &#8211; Word Search II (Java) </a></li>
+<li><a href="../../../2014/05/leetcode-add-and-search-word-data-structure-design-java/index.html" rel="bookmark" title="LeetCode &#8211; Add and Search Word &#8211; Data structure design (Java)">LeetCode &#8211; Add and Search Word &#8211; Data structure design (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-word-ladder/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-word-ladder/" dc:title="LeetCode &#8211; Word Ladder" trackback:ping="http://www.programcreek.com/2012/12/leetcode-word-ladder/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-15085">
+<div id="dsq-comment-header-15085" class="dsq-comment-header">
+<cite id="dsq-cite-15085">
+<span id="dsq-author-user-15085">lekzeey</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15085" class="dsq-comment-body">
+<div id="dsq-comment-message-15085" class="dsq-comment-message"><p>This can definitely be better. You should include visited words and make sure you are not adding visited words back to the graph.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14591">
+<div id="dsq-comment-header-14591" class="dsq-comment-header">
+<cite id="dsq-cite-14591">
+<span id="dsq-author-user-14591">Steve Dyson</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14591" class="dsq-comment-body">
+<div id="dsq-comment-message-14591" class="dsq-comment-message"><p>any c# code?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-14573">
+<div id="dsq-comment-header-14573" class="dsq-comment-header">
+<cite id="dsq-cite-14573">
+<span id="dsq-author-user-14573">Steve Dyson</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14573" class="dsq-comment-body">
+<div id="dsq-comment-message-14573" class="dsq-comment-message"><p>this is not working, returns 0</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-11923">
+<div id="dsq-comment-header-11923" class="dsq-comment-header">
+<cite id="dsq-cite-11923">
+<span id="dsq-author-user-11923">Sohrab Ahmad</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11923" class="dsq-comment-body">
+<div id="dsq-comment-message-11923" class="dsq-comment-message"><p>for the same input as yours with dictionary changed to below:</p>
+<p>dict = [&#8220;hot&#8221;,&#8221;dot&#8221;,&#8221;dog&#8221;,&#8221;lot&#8221;,&#8221;aog&#8221;,&#8221;log&#8221;]</p>
+<p>answer will change like : &#8220;hit&#8221; -&gt; &#8220;hot&#8221; -&gt; &#8220;dot&#8221; -&gt; &#8220;dog&#8221; -&gt; &#8220;aog&#8221;-&gt;&#8221;cog&#8221;,</p>
+<p>but from dog to cog also we can go directly, how will you avoid that?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9478">
+<div id="dsq-comment-header-9478" class="dsq-comment-header">
+<cite id="dsq-cite-9478">
+<span id="dsq-author-user-9478">Eugene Arnatovich</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9478" class="dsq-comment-body">
+<div id="dsq-comment-message-9478" class="dsq-comment-message"><p>Solution just using 2 HashMaps and 1 ArrayList<br/>
+<code> </p>
+<p>package leetcode;</p>
+<p>import java.util.ArrayList;</p>
+<p>import java.util.HashMap;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>public class Solution {</p>
+<p> private static int min = Integer.MAX_VALUE;</p>
+<p> private static List visitedkeys = new ArrayList();</p>
+<p> public void wordladder(String start, String end, String[] dict) {</p>
+<p> //Word ladder </p>
+<p> Map map2 = new HashMap();</p>
+<p> Map&lt;String, List&gt; map = new HashMap();</p>
+<p> int i=0;</p>
+<p> map2.put(i++, start);</p>
+<p> map.put(start, new ArrayList());</p>
+<p> for (String d : dict) {</p>
+<p> map2.put(i++, d);</p>
+<p> map.put(d, new ArrayList());</p>
+<p> }</p>
+<p> map2.put(i, end);</p>
+<p> map.put(end, new ArrayList());</p>
+<p> int n = map2.size();</p>
+<p> for (i=0; i &lt; n; i++) {</p>
+<p> for (int j=0; j &lt; n; j++) { </p>
+<p> if (isConvertible(map2.get(i), map2.get(j))) {</p>
+<p> map.get(map2.get(i)).add(map2.get(j));</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> length(map, start, end, 1);</p>
+<p> if (min != Integer.MAX_VALUE){</p>
+<p> System.out.println(min);</p>
+<p> }</p>
+<p> else {</p>
+<p> System.out.println(&quot;no path&quot;);</p>
+<p> }</p>
+<p> }</p>
+<p> private boolean isConvertible(String s1, String s2) {</p>
+<p> if (s1.length() != s2.length()) {</p>
+<p> return false;</p>
+<p> }</p>
+<p> int diff = 0;</p>
+<p> for (int i = 0; i &lt; s1.length(); i++) {</p>
+<p> if (s1.charAt(i) != s2.charAt(i)) {</p>
+<p> diff += 1;</p>
+<p> }</p>
+<p> }</p>
+<p> return (diff == 1) ? true : false;</p>
+<p> }</p>
+<p> private void length(Map&lt;String, List&gt; map, String key, String end, int len) { </p>
+<p> if (key == end) {</p>
+<p> if (len &lt; min) </p>
+<p> min = len;</p>
+<p> return;</p>
+<p> }</p>
+<p> List lst = map.get(key);</p>
+<p> for (String v : lst) {</p>
+<p> if (!visitedkeys.contains(v)){</p>
+<p> visitedkeys.add(v);</p>
+<p> length(map, v, end, len+1);</p>
+<p> visitedkeys.remove(visitedkeys.size()-1);</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8910">
+<div id="dsq-comment-header-8910" class="dsq-comment-header">
+<cite id="dsq-cite-8910">
+<span id="dsq-author-user-8910">Dhanaraj D</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8910" class="dsq-comment-body">
+<div id="dsq-comment-message-8910" class="dsq-comment-message"><p>Does this solution give length of shortest transformation sequence or length of first sequence found ?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-8454">
+<div id="dsq-comment-header-8454" class="dsq-comment-header">
+<cite id="dsq-cite-8454">
+<span id="dsq-author-user-8454">Surbhi Motghare</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8454" class="dsq-comment-body">
+<div id="dsq-comment-message-8454" class="dsq-comment-message"><p>Can you please tell me the complexity for both the methods?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7722">
+<div id="dsq-comment-header-7722" class="dsq-comment-header">
+<cite id="dsq-cite-7722">
+<span id="dsq-author-user-7722">subash sethy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7722" class="dsq-comment-body">
+<div id="dsq-comment-message-7722" class="dsq-comment-message"><p>can you tell me what is the complexity of this method</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7718">
+<div id="dsq-comment-header-7718" class="dsq-comment-header">
+<cite id="dsq-cite-7718">
+<span id="dsq-author-user-7718">Roman</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7718" class="dsq-comment-body">
+<div id="dsq-comment-message-7718" class="dsq-comment-message"><p>Solution posted in the task is not correct.</p>
+<p>Here is mine:</p>
+<p>Test.java file:<br/>
+<code><br/>
+import java.util.*;<br/>
+public class Test {<br/>
+public static void main(String argv[]){<br/>
+String start = "hit";<br/>
+String end = "cog";<br/>
+String[] dict = {"cot","hot","dot","cit","dog","lot","log"};<br/>
+// "hit" -&gt; "cit" -&gt; "cot" -&gt; "cog"<br/>
+// length = 4<br/>
+int minDistance = getDistance(start, end);<br/>
+List nodesToCheck = new ArrayList();<br/>
+List newNodes = new ArrayList();<br/>
+List winners = new ArrayList();<br/>
+nodesToCheck.add(new TreeElem(start, null, minDistance, 1));<br/>
+do {<br/>
+for (TreeElem node : nodesToCheck) {<br/>
+for (int i = 0; i 0);<br/>
+if (winners.size() == 0) {<br/>
+System.out.println("No solution found.");<br/>
+return;<br/>
+}<br/>
+TreeElem winner = null;<br/>
+int minLength = -1;</p>
+<p> for (TreeElem e : winners) {<br/>
+if (winner == null) {<br/>
+winner = e;<br/>
+minLength = e.distanceFromTop;<br/>
+}</p>
+<p> if (e.distanceFromTop = 0; i--) {<br/>
+System.out.print("[" + steps[i] + "] -&gt; ");<br/>
+}<br/>
+System.out.println("[" + end + "]");<br/>
+}<br/>
+public static int getDistance(String str1, String str2) {<br/>
+int dist = 0;<br/>
+for (int i = 0; i &lt; str1.length(); i++) {<br/>
+if (str1.charAt(i) != str2.charAt(i)) {<br/>
+dist++;<br/>
+}<br/>
+}<br/>
+return dist;<br/>
+}<br/>
+public static boolean isUsed(TreeElem node, String value) {<br/>
+while (node.parent != null) {<br/>
+if (node.value.equals(value)) {<br/>
+return true;<br/>
+}<br/>
+node = node.parent;<br/>
+}<br/>
+return false;<br/>
+}<br/>
+}<br/>
+</code></p>
+<p>TreeElem.java file:</p>
+<p><code><br/>
+import java.util.*;<br/>
+public class TreeElem{<br/>
+public String value;<br/>
+public TreeElem parent;<br/>
+List childs;<br/>
+public int distanceToEnd;<br/>
+public int distanceFromTop;<br/>
+public TreeElem(String value, TreeElem parent, int distanceToEnd, int distanceFromTop) {<br/>
+this.value = value;<br/>
+this.parent = parent;<br/>
+this.childs = new ArrayList();<br/>
+this.distanceToEnd = distanceToEnd;<br/>
+this.distanceFromTop = distanceFromTop;<br/>
+}<br/>
+public void addChild(TreeElem child) {<br/>
+childs.add(child);<br/>
+}<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7654">
+<div id="dsq-comment-header-7654" class="dsq-comment-header">
+<cite id="dsq-cite-7654">
+<span id="dsq-author-user-7654">CRH</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7654" class="dsq-comment-body">
+<div id="dsq-comment-message-7654" class="dsq-comment-message"><p>Without using a queue. Please let me know if you see any issues with this?</p>
+<p><code></p>
+<p> public int getCount(String start, String end, Set dict){</p>
+<p> // Basic edge cases</p>
+<p> if(start==null || end==null || start.length()!=end.length()) return -1;</p>
+<p> if(dict.isEmpty()) return -1;</p>
+<p> dict.add(end);</p>
+<p> int count = 0;</p>
+<p> int i = 0;</p>
+<p> while(i&lt;start.length()){</p>
+<p> boolean found = false;</p>
+<p> char[] arr = start.toCharArray();</p>
+<p> char tmp = arr[i];</p>
+<p> for(int j=97;j&lt;=122;j++){</p>
+<p> arr[i] = (char)j;</p>
+<p> String checker = new String(arr);</p>
+<p> if(dict.contains(checker)){</p>
+<p> count++;</p>
+<p> dict.remove(checker);</p>
+<p> if(checker.equals(end)) {</p>
+<p> return count;</p>
+<p> }</p>
+<p> else {</p>
+<p> start = checker;</p>
+<p> found = true;</p>
+<p> i = 0;</p>
+<p> break;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> if(!found){</p>
+<p> arr[i] = tmp;</p>
+<p> i++;</p>
+<p> }</p>
+<p> }</p>
+<p> return -1;</p>
+<p> }</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7550">
+<div id="dsq-comment-header-7550" class="dsq-comment-header">
+<cite id="dsq-cite-7550">
+<a id="dsq-author-user-7550" href="http://www.allenlipeng47.com" target="_blank" rel="nofollow">peng li</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7550" class="dsq-comment-body">
+<div id="dsq-comment-message-7550" class="dsq-comment-message"><p>Can be solved by Dijkstra.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7504">
+<div id="dsq-comment-header-7504" class="dsq-comment-header">
+<cite id="dsq-cite-7504">
+<a id="dsq-author-user-7504" href="http://javabypatel.blogspot.in" target="_blank" rel="nofollow">Jayesh</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7504" class="dsq-comment-body">
+<div id="dsq-comment-message-7504" class="dsq-comment-message"><p>If anyone interested for both BFS and DFS approach:<br/>
+<a href="http://javabypatel.blogspot.in/2015/10/word-ladder-doublets-word-links-word-golf.html" rel="nofollow">http://javabypatel.blogspot.in/2015/10/word-ladder-doublets-word-links-word-golf.html</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7429">
+<div id="dsq-comment-header-7429" class="dsq-comment-header">
+<cite id="dsq-cite-7429">
+<a id="dsq-author-user-7429" href="http://twitter.com/lscampos" target="_blank" rel="nofollow">Leonardo Campos</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7429" class="dsq-comment-body">
+<div id="dsq-comment-message-7429" class="dsq-comment-message"><p>Too much code for an interview or competition problem.<br/>
+Try to keep it as simple and small as possible 😉</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7373">
+<div id="dsq-comment-header-7373" class="dsq-comment-header">
+<cite id="dsq-cite-7373">
+<a id="dsq-author-user-7373" href="http://facebook.com/alibek.datbayev" target="_blank" rel="nofollow">Alibek Datbayev</a>
+</cite>
+</div>
+<div id="dsq-comment-body-7373" class="dsq-comment-body">
+<div id="dsq-comment-message-7373" class="dsq-comment-message"><p>BFS is a really good way of solving this problem</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6892">
+<div id="dsq-comment-header-6892" class="dsq-comment-header">
+<cite id="dsq-cite-6892">
+<span id="dsq-author-user-6892">Dado</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6892" class="dsq-comment-body">
+<div id="dsq-comment-message-6892" class="dsq-comment-message"><p>Hi<br/>
+I have solved this problem using Graph of word and then run on it BFS.</p>
+<p>package Questions;</p>
+<p>import java.util.HashMap;<br/>
+import java.util.Queue;<br/>
+import java.util.HashSet;<br/>
+import java.util.LinkedList;</p>
+<p>public class WordLadder {</p>
+<p> //solution function<br/>
+public static int ladderLength(String start, String end,<br/>
+HashSet dict) {<br/>
+// saving the graph nodes on hash map.<br/>
+HashMap nodes = new HashMap();<br/>
+// adding the start and the end words to the dict<br/>
+dict.add(start);<br/>
+dict.add(end);<br/>
+for (String word : dict) {<br/>
+nodes.put(word, new GraphNode(word));<br/>
+}<br/>
+// update each node&#8217;s adjacents according to one character different relation<br/>
+Object[] dictArray = dict.toArray();<br/>
+for (int i = 0; i &lt; dictArray.length; i++) {<br/>
+for (int j = i + 1; j &lt; dictArray.length; j++) {<br/>
+if (isNeighbor((String) dictArray[i], (String) dictArray[j])) {<br/>
+nodes.get((String) dictArray[i]).childs.add(nodes<br/>
+.get((String) dictArray[j]));<br/>
+nodes.get((String) dictArray[j]).childs.add(nodes<br/>
+.get((String) dictArray[i]));<br/>
+}<br/>
+}<br/>
+}</p>
+<p> // Run BFS on the Graph and take the dist generated as result<br/>
+HashMap result = BFS(nodes, start);</p>
+<p> // Return the distance of the end word node from the start word node<br/>
+return result.get(end);</p>
+<p> }</p>
+<p> // BFS function<br/>
+public static HashMap BFS(<br/>
+HashMap nodes, String start) {</p>
+<p> HashMap visited = new HashMap();<br/>
+HashMap dist = new HashMap();<br/>
+for (String key : nodes.keySet()) {<br/>
+visited.put(key, 0);<br/>
+dist.put(key, 0);<br/>
+}<br/>
+Queue q = new LinkedList();<br/>
+q.add(start);<br/>
+visited.put(start, 1);<br/>
+while (!q.isEmpty()) {<br/>
+String dequeued = q.remove();<br/>
+GraphNode curNode = nodes.get(dequeued);<br/>
+LinkedList currAdjs = curNode.childs;<br/>
+for (int i = 0; i &lt; currAdjs.size(); i++) {<br/>
+GraphNode adj = (GraphNode) currAdjs.get(i);<br/>
+if (visited.get(adj.word) == 0) {<br/>
+visited.put(adj.word, 1);<br/>
+dist.put(adj.word, dist.get(dequeued) + 1);<br/>
+q.add(adj.word);<br/>
+}</p>
+<p> }<br/>
+}<br/>
+return dist;</p>
+<p> }</p>
+<p> // check if two words differ by one character<br/>
+public static boolean isNeighbor(String a, String b) {<br/>
+assert a.length() == b.length();<br/>
+int differ = 0;<br/>
+for (int i = 0; i <a> 1)<br/>
+return false;<br/>
+}<br/>
+return true;<br/>
+}</p>
+<p> public static void main(String[] args) {<br/>
+// dict = [&#8220;hot&#8221;,&#8221;dot&#8221;,&#8221;dog&#8221;,&#8221;lot&#8221;,&#8221;log&#8221;] result 5;<br/>
+HashSet dict = new HashSet();<br/>
+dict.add(&#8220;hot&#8221;);<br/>
+dict.add(&#8220;dot&#8221;);<br/>
+dict.add(&#8220;dog&#8221;);<br/>
+dict.add(&#8220;lot&#8221;);<br/>
+dict.add(&#8220;log&#8221;);<br/>
+System.out.println(ladderLength(&#8220;hit&#8221;, &#8220;cog&#8221;, dict));<br/>
+}</p>
+<p>}</p>
+<p>class GraphNode {<br/>
+String word;<br/>
+LinkedList childs;</p>
+<p> public GraphNode(String word) {<br/>
+this.word = word;<br/>
+childs = new LinkedList();<br/>
+}<br/>
+}<br/>
+I would like to have feedback on my code ?<br/>
+Thanks</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6877">
+<div id="dsq-comment-header-6877" class="dsq-comment-header">
+<cite id="dsq-cite-6877">
+<span id="dsq-author-user-6877">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6877" class="dsq-comment-body">
+<div id="dsq-comment-message-6877" class="dsq-comment-message"><p>That&#8217;s nice idea to keep only the actual existing letters at each index.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6876">
+<div id="dsq-comment-header-6876" class="dsq-comment-header">
+<cite id="dsq-cite-6876">
+<span id="dsq-author-user-6876">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6876" class="dsq-comment-body">
+<div id="dsq-comment-message-6876" class="dsq-comment-message"><p>suboptimal solutions. Better would be 1-grams.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6781">
+<div id="dsq-comment-header-6781" class="dsq-comment-header">
+<cite id="dsq-cite-6781">
+<span id="dsq-author-user-6781">dwelo</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6781" class="dsq-comment-body">
+<div id="dsq-comment-message-6781" class="dsq-comment-message"><p>You also don&#8217;t necessarily need two queues. You could create a WordNode class inside the method and have a word field and a distance field. Then you can create a queue of &#8220;WordNode&#8221;s. Also, I think there is no need to compare the distance to previously recorded one, since breadth search will reach the end word in the shortest path. Whenever you reach the end word, that is the shortest distance.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6727">
+<div id="dsq-comment-header-6727" class="dsq-comment-header">
+<cite id="dsq-cite-6727">
+<span id="dsq-author-user-6727">Nooby</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6727" class="dsq-comment-body">
+<div id="dsq-comment-message-6727" class="dsq-comment-message"><p>Thanks a ton!! You rock!! Keep it up 🙂</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6711">
+<div id="dsq-comment-header-6711" class="dsq-comment-header">
+<cite id="dsq-cite-6711">
+<span id="dsq-author-user-6711">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6711" class="dsq-comment-body">
+<div id="dsq-comment-message-6711" class="dsq-comment-message"><p>The problem is fixed.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6710">
+<div id="dsq-comment-header-6710" class="dsq-comment-header">
+<cite id="dsq-cite-6710">
+<span id="dsq-author-user-6710">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6710" class="dsq-comment-body">
+<div id="dsq-comment-message-6710" class="dsq-comment-message"><p>Thanks! Changed. And you are welcome:)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6706">
+<div id="dsq-comment-header-6706" class="dsq-comment-header">
+<cite id="dsq-cite-6706">
+<span id="dsq-author-user-6706">zhuoran</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6706" class="dsq-comment-body">
+<div id="dsq-comment-message-6706" class="dsq-comment-message"><p>You just need to add end to dict. Then it will be correct.<br/>
+Btw, thanks a lot for ur code:)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6664">
+<div id="dsq-comment-header-6664" class="dsq-comment-header">
+<cite id="dsq-cite-6664">
+<span id="dsq-author-user-6664">Curious Guy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6664" class="dsq-comment-body">
+<div id="dsq-comment-message-6664" class="dsq-comment-message"><p>You can create a separate list that stores words when found in the dictionary.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6630">
+<div id="dsq-comment-header-6630" class="dsq-comment-header">
+<cite id="dsq-cite-6630">
+<span id="dsq-author-user-6630">Cong</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6630" class="dsq-comment-body">
+<div id="dsq-comment-message-6630" class="dsq-comment-message"><p>Yes, you are right. Surprisingly, the seoncd one can be acceptted by leetcode.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6553">
+<div id="dsq-comment-header-6553" class="dsq-comment-header">
+<cite id="dsq-cite-6553">
+<span id="dsq-author-user-6553">hdante</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6553" class="dsq-comment-body">
+<div id="dsq-comment-message-6553" class="dsq-comment-message"><p>shortest path problem with dictionary extended to include start and end and weight equals to 1 if distance(a, b) == 1, else weight equals infinite</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6521">
+<div id="dsq-comment-header-6521" class="dsq-comment-header">
+<cite id="dsq-cite-6521">
+<span id="dsq-author-user-6521">BK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6521" class="dsq-comment-body">
+<div id="dsq-comment-message-6521" class="dsq-comment-message"><p>we stop at the first time we find the target word and return &#8220;length&#8221;. All the words that will be added in the stack after that will be &gt; length as we push words in stack after length +1 .</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6520">
+<div id="dsq-comment-header-6520" class="dsq-comment-header">
+<cite id="dsq-cite-6520">
+<span id="dsq-author-user-6520">BK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6520" class="dsq-comment-body">
+<div id="dsq-comment-message-6520" class="dsq-comment-message"><p>We can add a condition that if (newword.equals(target)) return currDistance +1;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6320">
+<div id="dsq-comment-header-6320" class="dsq-comment-header">
+<cite id="dsq-cite-6320">
+<span id="dsq-author-user-6320">dfgd</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6320" class="dsq-comment-body">
+<div id="dsq-comment-message-6320" class="dsq-comment-message"><p>yeah second algo is wrong</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6302">
+<div id="dsq-comment-header-6302" class="dsq-comment-header">
+<cite id="dsq-cite-6302">
+<span id="dsq-author-user-6302">Guanting</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6302" class="dsq-comment-body">
+<div id="dsq-comment-message-6302" class="dsq-comment-message"><p>Hi! I think you were oversimplifying the problem. the edge cannot be weighted just based on the number of characters in common. And an edge cannot even be determined between two words just because they have common characters. You have to factor in what are included the dictionary. One simple example, &#8216;good&#8217; and &#8216;doom&#8217; have two common characters and suppose the dictionary only contains &#8216;good&#8217; and &#8216;doom&#8217;&#8230;Apparently no edge of path could be established between the two words.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6297">
+<div id="dsq-comment-header-6297" class="dsq-comment-header">
+<cite id="dsq-cite-6297">
+<span id="dsq-author-user-6297">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6297" class="dsq-comment-body">
+<div id="dsq-comment-message-6297" class="dsq-comment-message"><p>Why? And how does a correct one look like?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6286">
+<div id="dsq-comment-header-6286" class="dsq-comment-header">
+<cite id="dsq-cite-6286">
+<span id="dsq-author-user-6286">Shaochen Huang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6286" class="dsq-comment-body">
+<div id="dsq-comment-message-6286" class="dsq-comment-message"><p>Agree with most of the comments here:</p>
+<p>First: the dictionary here needs to include the end word </p>
+<p>Second: the second solution does not find the optimal shortest path, it only finds the first valid path.</p>
+<p>I have come up with my own solution which does the following: </p>
+<p>1. Instead of trying to iterate through all chars from a to z, it parses the dictionary and maintains a map between index and possible chars for that index in the dictionary, so flipping a character only flipped to possible dictionary words. </p>
+<p>2. recursive Graph depth first search which keeps tracks of all sub path size and choose the shortest one. </p>
+<p>Please kindly review and comment to help improve the algo</p>
+<p><a href="https://github.com/ifwonderland/leetcode/blob/master/src/main/java/leetcode/string/WordLadder.java" rel="nofollow">https://github.com/ifwonderland/leetcode/blob/master/src/main/java/leetcode/string/WordLadder.java</a><br/>
+<a href="https://github.com/ifwonderland/leetcode/blob/master/src/main/java/leetcode/util/WordFlipperUtils.java" rel="nofollow">https://github.com/ifwonderland/leetcode/blob/master/src/main/java/leetcode/util/WordFlipperUtils.java</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6132">
+<div id="dsq-comment-header-6132" class="dsq-comment-header">
+<cite id="dsq-cite-6132">
+<span id="dsq-author-user-6132">Yifan Peng</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6132" class="dsq-comment-body">
+<div id="dsq-comment-message-6132" class="dsq-comment-message"><p>I think this solution is totally wrong.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6092">
+<div id="dsq-comment-header-6092" class="dsq-comment-header">
+<cite id="dsq-cite-6092">
+<span id="dsq-author-user-6092">Sole</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6092" class="dsq-comment-body">
+<div id="dsq-comment-message-6092" class="dsq-comment-message"><p>I think there should be a check on the currWord and the end to stop the search in the dict:</p>
+<p>/*if(currWord.equals(end)){<br/>
+return currDistance;<br/>
+}*/<br/>
+if(isLastWord(currWord,end)){<br/>
+break;<br/>
+}<br/>
+where isLastWord is something like this:</p>
+<p>private boolean isLastWord(String current, String end){<br/>
+int count = 0;<br/>
+boolean isLastWord = true;<br/>
+for(int i=0; i1){<br/>
+isLastWord = false;<br/>
+break;<br/>
+}<br/>
+}<br/>
+}<br/>
+return isLastWord;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6063">
+<div id="dsq-comment-header-6063" class="dsq-comment-header">
+<cite id="dsq-cite-6063">
+<span id="dsq-author-user-6063">AlgorithmFreak</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6063" class="dsq-comment-body">
+<div id="dsq-comment-message-6063" class="dsq-comment-message"><p>The second solution doesn&#8217;t work. Try with input: &#8220;hit&#8221;, &#8220;lag&#8221;, [&#8220;hot&#8221;,&#8221;hog&#8221;,&#8221;dot&#8221;,&#8221;dog&#8221;,&#8221;lot&#8221;,&#8221;log&#8221;]<br/>
+Example sequence: hit &gt; hot &gt; hog &gt; log &gt; lag The answer should be 5. But, it shows 0</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6052">
+<div id="dsq-comment-header-6052" class="dsq-comment-header">
+<cite id="dsq-cite-6052">
+<span id="dsq-author-user-6052">Tex</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6052" class="dsq-comment-body">
+<div id="dsq-comment-message-6052" class="dsq-comment-message"><p>I mean first</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6051">
+<div id="dsq-comment-header-6051" class="dsq-comment-header">
+<cite id="dsq-cite-6051">
+<span id="dsq-author-user-6051">Tex</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6051" class="dsq-comment-body">
+<div id="dsq-comment-message-6051" class="dsq-comment-message"><p>Priest solution is obviously wrong even if don&#8217;t consider if it&#8217;s optimally</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5948">
+<div id="dsq-comment-header-5948" class="dsq-comment-header">
+<cite id="dsq-cite-5948">
+<span id="dsq-author-user-5948">ajay</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5948" class="dsq-comment-body">
+<div id="dsq-comment-message-5948" class="dsq-comment-message"><p>how it will accepted?? as it will not return as cog is not inside in dict, so currWord.equals(end) will false and return 0.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5821">
+<div id="dsq-comment-header-5821" class="dsq-comment-header">
+<cite id="dsq-cite-5821">
+<span id="dsq-author-user-5821">hbrong</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5821" class="dsq-comment-body">
+<div id="dsq-comment-message-5821" class="dsq-comment-message"><p>The algorithm can&#8217;t guarantee find the shortest transformation sequence.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5797">
+<div id="dsq-comment-header-5797" class="dsq-comment-header">
+<cite id="dsq-cite-5797">
+<span id="dsq-author-user-5797">Dun Liu</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5797" class="dsq-comment-body">
+<div id="dsq-comment-message-5797" class="dsq-comment-message"><p>Nice!!!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5789">
+<div id="dsq-comment-header-5789" class="dsq-comment-header">
+<cite id="dsq-cite-5789">
+<span id="dsq-author-user-5789">Kae Pajunar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5789" class="dsq-comment-body">
+<div id="dsq-comment-message-5789" class="dsq-comment-message"><p>How can I print the world ladder answers, after getting the distance.? Thanks for the answers.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5600">
+<div id="dsq-comment-header-5600" class="dsq-comment-header">
+<cite id="dsq-cite-5600">
+<span id="dsq-author-user-5600">jason</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5600" class="dsq-comment-body">
+<div id="dsq-comment-message-5600" class="dsq-comment-message"><p>This should be a shortest path problem: if two words has common character, they are connected by edge. The weight of the edge is the number of character in common. So the problem becomes shortest path problem.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5578">
+<div id="dsq-comment-header-5578" class="dsq-comment-header">
+<cite id="dsq-cite-5578">
+<span id="dsq-author-user-5578">elvalord</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5578" class="dsq-comment-body">
+<div id="dsq-comment-message-5578" class="dsq-comment-message"><p>That&#8217;s right. A sentence should be added &#8220;dict.add(end)&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5457">
+<div id="dsq-comment-header-5457" class="dsq-comment-header">
+<cite id="dsq-cite-5457">
+<span id="dsq-author-user-5457">74s0nf</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5457" class="dsq-comment-body">
+<div id="dsq-comment-message-5457" class="dsq-comment-message"><p>hey guess for the &#8220;a&#8221;, &#8220;c&#8221; dict = {a,b,c} example the correct ans should be 1 😉</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5453">
+<div id="dsq-comment-header-5453" class="dsq-comment-header">
+<cite id="dsq-cite-5453">
+<span id="dsq-author-user-5453">Csnerds</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5453" class="dsq-comment-body">
+<div id="dsq-comment-message-5453" class="dsq-comment-message"><p>Also, &#8220;int result = 0;&#8221; This sentence seems redundant..</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5452">
+<div id="dsq-comment-header-5452" class="dsq-comment-header">
+<cite id="dsq-cite-5452">
+<span id="dsq-author-user-5452">Csnerds</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5452" class="dsq-comment-body">
+<div id="dsq-comment-message-5452" class="dsq-comment-message"><p>The second algo has a bug. What the problem says is that &#8220;Each intermediate word must exist in the dictionary&#8221;. However, this solution assumes the last one(&#8220;cog&#8221;) also need to be in the dict, which is not necessary..</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-word-ladder/';
+var disqus_identifier = '10798 http://www.programcreek.com/?p=10798';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Word Ladder";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=10798';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

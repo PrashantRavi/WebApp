@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Search for a Range (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: lekzeey</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-15086</link>
+		<dc:creator><![CDATA[lekzeey]]></dc:creator>
+		<pubDate>Mon, 10 Oct 2016 03:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-15086</guid>
+		<description><![CDATA[I think the solution is fine, because the number of work required to find the left and right border using binary search is just the same as finding the element itself and scanning for the left and right borders.]]></description>
+		<content:encoded><![CDATA[<p>I think the solution is fine, because the number of work required to find the left and right border using binary search is just the same as finding the element itself and scanning for the left and right borders.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suresh</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-13590</link>
+		<dc:creator><![CDATA[Suresh]]></dc:creator>
+		<pubDate>Fri, 12 Aug 2016 08:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-13590</guid>
+		<description><![CDATA[True... I got the same doubt when I saw those two loops.]]></description>
+		<content:encoded><![CDATA[<p>True&#8230; I got the same doubt when I saw those two loops.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gdragon</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-7545</link>
+		<dc:creator><![CDATA[Gdragon]]></dc:creator>
+		<pubDate>Fri, 30 Oct 2015 16:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-7545</guid>
+		<description><![CDATA[Great answer! But you should make the change from right - 1 to mid - 1 in: 
+
+else if(arr[mid] &#062; target) return solution(arr, target, left, mid-1);]]></description>
+		<content:encoded><![CDATA[<p>Great answer! But you should make the change from right &#8211; 1 to mid &#8211; 1 in: </p>
+<p>else if(arr[mid] &gt; target) return solution(arr, target, left, mid-1);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jason Zhu</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-7076</link>
+		<dc:creator><![CDATA[Jason Zhu]]></dc:creator>
+		<pubDate>Sun, 21 Jun 2015 09:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-7076</guid>
+		<description><![CDATA[What&#039;s wrong with the above examplary solution? The question has explicitly required the time complexity to be O(logN), which obviously is not the correct answer.
+
+&lt;code&gt;
+public static int[] solution(int[] arr, int target, int left, int right) {
+    //parameter check
+    if(arr == null &#124;&#124; arr.length == 0) return new int[]{-1, -1};
+
+    //boundary check
+    if(left &#062; right) return new int[]{-1, -1};
+
+    int mid = (left+right)/2;
+    if(arr[mid]  target) return solution(arr, target, left, right-1);
+    else    {
+        int[] leftRange = solution(arr, target, left, mid-1);
+        int[] rightRange = solution(arr, target, mid+1, right);
+        int leftEnd = (leftRange[0] == -1 ? mid : leftRange[0]);
+        int rightEnd = (rightRange[1] == -1 ? mid : rightRange[1]);
+        return new int[]{leftEnd, rightEnd};
+    }
+}
+
+
+public static void main(String[] args) {
+    System.out.println(Arrays.toString(solution(new int[]{1,8,8,8,9}, 8, 0, 4)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,8,8,8,9}, 8, 0, 5)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,8,8,8,9}, 8, 0, 6)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,8,8,8,9}, 8, 0, 7)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,5,8,8,9}, 8, 0, 7)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,5,6,8,9}, 8, 0, 7)));
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,8,8,8,9}, 7, 0, 7)));
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>What&#8217;s wrong with the above examplary solution? The question has explicitly required the time complexity to be O(logN), which obviously is not the correct answer.</p>
+<p><code><br />
+public static int[] solution(int[] arr, int target, int left, int right) {<br />
+    //parameter check<br />
+    if(arr == null || arr.length == 0) return new int[]{-1, -1};</p>
+<p>    //boundary check<br />
+    if(left &gt; right) return new int[]{-1, -1};</p>
+<p>    int mid = (left+right)/2;<br />
+    if(arr[mid]  target) return solution(arr, target, left, right-1);<br />
+    else    {<br />
+        int[] leftRange = solution(arr, target, left, mid-1);<br />
+        int[] rightRange = solution(arr, target, mid+1, right);<br />
+        int leftEnd = (leftRange[0] == -1 ? mid : leftRange[0]);<br />
+        int rightEnd = (rightRange[1] == -1 ? mid : rightRange[1]);<br />
+        return new int[]{leftEnd, rightEnd};<br />
+    }<br />
+}</p>
+<p>public static void main(String[] args) {<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,8,8,8,9}, 8, 0, 4)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,8,8,8,9}, 8, 0, 5)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,8,8,8,9}, 8, 0, 6)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,8,8,8,9}, 8, 0, 7)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,5,8,8,9}, 8, 0, 7)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,5,6,8,9}, 8, 0, 7)));<br />
+    System.out.println(Arrays.toString(solution(new int[]{1,2,3,4,8,8,8,9}, 7, 0, 7)));<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vijaya</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-6922</link>
+		<dc:creator><![CDATA[Vijaya]]></dc:creator>
+		<pubDate>Wed, 29 Apr 2015 02:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-6922</guid>
+		<description><![CDATA[We can use below code which has O(log N) complexity. This is initial structure, we can even modify further to clean it. (This is C# code)
+
+public int[] searchRange(int[] nums, int target)
+{
+     int[] result = new int[2];
+     int startIndex = 0;
+     int endIndex = nums.Length - 1;
+     int mid = -1;
+     bool foundTarget = false;
+
+     if (nums.Length &#062; 0)
+     {
+        while (startIndex &#060; endIndex)
+        {
+            mid = (startIndex + endIndex)/2;
+
+            if (target == nums[mid])
+            {
+                 foundTarget = true;
+                 break;
+            }
+
+           if (target  nums[mid])
+                   startIndex = mid+1;
+        }
+
+       if (foundTarget)
+       {
+              startIndex = mid;
+              endIndex = mid;
+
+              while ((startIndex - 1) &#062;= 0 &#038;&#038; (nums[startIndex - 1] == target))
+                          startIndex--;
+
+              while ((endIndex + 1) &#060;= nums.Length &#038;&#038; (nums[endIndex + 1] == target))
+                          endIndex++;
+
+              result[0] = startIndex;
+              result[1] = endIndex;
+        }
+   }
+
+   return result;
+}]]></description>
+		<content:encoded><![CDATA[<p>We can use below code which has O(log N) complexity. This is initial structure, we can even modify further to clean it. (This is C# code)</p>
+<p>public int[] searchRange(int[] nums, int target)<br />
+{<br />
+     int[] result = new int[2];<br />
+     int startIndex = 0;<br />
+     int endIndex = nums.Length &#8211; 1;<br />
+     int mid = -1;<br />
+     bool foundTarget = false;</p>
+<p>     if (nums.Length &gt; 0)<br />
+     {<br />
+        while (startIndex &lt; endIndex)<br />
+        {<br />
+            mid = (startIndex + endIndex)/2;</p>
+<p>            if (target == nums[mid])<br />
+            {<br />
+                 foundTarget = true;<br />
+                 break;<br />
+            }</p>
+<p>           if (target  nums[mid])<br />
+                   startIndex = mid+1;<br />
+        }</p>
+<p>       if (foundTarget)<br />
+       {<br />
+              startIndex = mid;<br />
+              endIndex = mid;</p>
+<p>              while ((startIndex &#8211; 1) &gt;= 0 &amp;&amp; (nums[startIndex &#8211; 1] == target))<br />
+                          startIndex&#8211;;</p>
+<p>              while ((endIndex + 1) &lt;= nums.Length &amp;&amp; (nums[endIndex + 1] == target))<br />
+                          endIndex++;</p>
+<p>              result[0] = startIndex;<br />
+              result[1] = endIndex;<br />
+        }<br />
+   }</p>
+<p>   return result;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mark Law</title>
+		<link>http://www.programcreek.com/2014/04/leetcode-search-for-a-range-java/#comment-6920</link>
+		<dc:creator><![CDATA[Mark Law]]></dc:creator>
+		<pubDate>Sun, 26 Apr 2015 23:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14037#comment-6920</guid>
+		<description><![CDATA[this solution above time complexity is not log N, it clearly is N, which does not match the requirements.]]></description>
+		<content:encoded><![CDATA[<p>this solution above time complexity is not log N, it clearly is N, which does not match the requirements.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

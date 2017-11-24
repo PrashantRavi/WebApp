@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Thread Pooled Server</title>
+
+    <meta name="description" content="This tutorial explains how to implement a simple thread pooled server in Java.">
+    <meta name="keywords"    content="java threadpooled server">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Thread Pooled Server">
+    <meta name="twitter:description" content="This tutorial explains how to implement a simple thread pooled server in Java.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Thread Pooled Server"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-multithreaded-servers/thread-pooled-server.html"/>
+    <meta property="og:description" content="This tutorial explains how to implement a simple thread pooled server in Java."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-multithreaded-servers/multithreaded-server.html";
+var nextArticleInCategory = "";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7217;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Multithreaded Servers</div><ol><li><a href="index.html">Multithreaded Servers in Java</a></li><li><a href="singlethreaded-server.html">Singlethreaded Server in Java</a></li><li><a href="multithreaded-server.html">Multithreaded Server in Java</a></li><li><a href="thread-pooled-server.html"><b>Thread Pooled Server</b></a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Thread Pooled Server</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#advantages">Thread Pooled Server Advantages</a></li><li><a href="#fullcode">Thread Pooled Server Code</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-12-19
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    This text describes a simple thread pooled server implemented in Java. The code is based on the multithreaded
+    server desbribed in the text on <a href="multithreaded-server.html">Multithreaded Servers</a>. The main
+    difference is the server loop. Rather than starting a new thread per incoming connection, the connection
+    is wrapped in a <code>Runnable</code> and handed off to a thread poool with a fixed number of threads.
+    The <code>Runnable</code>'s are kept in a queue in the thread pool. When a thread in the thread pool
+    is idle it will take a <code>Runnable</code> from the queue and execute it.
+</p>
+
+<p>
+    Note: Thread pools are discussed in more detail in the text <a href="../java-concurrency/thread-pools.html">Thread Pools</a>.
+</p>
+
+
+
+<p>
+    Here is how the server loop looks in the thread pooled edition (the full code is shown at the bottom of this text):
+</p>
+
+<pre class="codeBox">
+    while(! isStopped()){
+         Socket clientSocket = null;
+         try {
+             clientSocket = this.serverSocket.accept();
+         } catch (IOException e) {
+             if(isStopped()) {
+                 System.out.println("Server Stopped.") ;
+                 break;
+             }
+             throw new RuntimeException(
+                "Error accepting client connection", e);
+         }
+        <b>
+            this.threadPool.execute(
+            new WorkerRunnable(clientSocket, "Thread Pooled Server"));
+        </b>
+     }
+ </pre>
+
+<p>
+    The only change in the loop from the multithreaded server to here is the code in bold:
+</p>
+
+<pre class="codeBox">
+this.threadPool.execute(
+   new WorkerRunnable(clientSocket, "Thread Pooled Server"));
+</pre>
+
+<p>
+    Rather than starting a new thread per incoming connection, the <code>WorkerRunnable</code> is passed
+    to the thread pool for execution when a thread in the pool becomes idle.
+</p>
+
+<p>Here is the code for the <code>WorkerRunnable</code> class, which is passed to the
+    worker thread constructor:
+</p>
+
+<pre class="codeBox">
+package servers;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
+
+public class WorkerRunnable implements Runnable{
+
+    protected Socket clientSocket = null;
+    protected String serverText   = null;
+
+    public WorkerRunnable(Socket clientSocket, String serverText) {
+        this.clientSocket = clientSocket;
+        this.serverText   = serverText;
+    }
+
+    public void run() {
+        try {
+            InputStream input  = clientSocket.getInputStream();
+            OutputStream output = clientSocket.getOutputStream();
+            long time = System.currentTimeMillis();
+            output.write(("HTTP/1.1 200 OK\n\n<html><body>WorkerRunnable: " +
+this.serverText + " - " +
+time +
+"</body></html>").getBytes());
+            output.close();
+            input.close();
+            System.out.println("Request processed: " + time);
+        } catch (IOException e) {
+            //report exception somewhere.
+            e.printStackTrace();
+        }
+    }
+}
+</pre>
+
+
+<br/>
+<a name="advantages"></a>
+<h2>Thread Pooled Server Advantages</h2>
+<p>
+    The advantages of a thread pooled server compared to a multithreaded server is that
+    you can control the maximum number of threads running at the same time. This has
+    certain advantages.
+</p>
+
+<p>
+    First of all if the requests require a lot of CPU time, RAM or
+    network bandwidth, this may slow down the server if many requests
+    are processed at the same time. For instance, if memory consumption
+    causes the server to swap memory in and out of disk, this will result
+    in a serious performance penalty. By controlling the maximum number of threads
+    you can minimize the risk of resource depletion, both due to limiting the
+    memory taken by the processing of the requests, but also due to the limitation
+    and reuse of the threads. Each thread take up a certain amount of memory too,
+    just to represent the thread itself.
+</p>
+
+<p> Additionally,
+    executing many requests concurrently will slow down all requests
+    processed.
+    For instance, if you process 1.000 requests concurrently and each request
+    takes 1 second, then all requests will take 1.000 seconds to complete. If you
+    instead queue the requests up and process them say 10 at a time, the first
+    10 requests will complete after 10 seconds, the next 10 will complete after 20
+    seconds etc. Only the last 10 requests will complete after 1.000 seconds.
+    This gives a better service to the clients.
+</p>
+
+
+
+<br/>
+<a name="fullcode"></a>
+<h2>Thread Pooled Server Code</h2>
+<p>
+    Here is the full code for the <code>ThreadPooledServer</code>:
+</p>
+
+<pre class="codeBox">
+package servers;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPooledServer implements Runnable{
+
+    protected int          serverPort   = 8080;
+    protected ServerSocket serverSocket = null;
+    protected boolean      isStopped    = false;
+    protected Thread       runningThread= null;
+    protected ExecutorService threadPool =
+        Executors.newFixedThreadPool(10);
+
+    public ThreadPooledServer(int port){
+        this.serverPort = port;
+    }
+
+    public void run(){
+        synchronized(this){
+            this.runningThread = Thread.currentThread();
+        }
+        openServerSocket();
+        while(! isStopped()){
+            Socket clientSocket = null;
+            try {
+                clientSocket = this.serverSocket.accept();
+            } catch (IOException e) {
+                if(isStopped()) {
+                    System.out.println("Server Stopped.") ;
+                    break;
+                }
+                throw new RuntimeException(
+                    "Error accepting client connection", e);
+            }
+            this.threadPool.execute(
+                new WorkerRunnable(clientSocket,
+                    "Thread Pooled Server"));
+        }
+        this.threadPool.shutdown();
+        System.out.println("Server Stopped.") ;
+    }
+
+
+    private synchronized boolean isStopped() {
+        return this.isStopped;
+    }
+
+    public synchronized void stop(){
+        this.isStopped = true;
+        try {
+            this.serverSocket.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Error closing server", e);
+        }
+    }
+
+    private void openServerSocket() {
+        try {
+            this.serverSocket = new ServerSocket(this.serverPort);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot open port 8080", e);
+        }
+    }
+}
+</pre>
+
+<p>
+    And here is the code to run it:
+</p>
+
+<pre class="codeBox">
+ThreadPooledServer server = new ThreadPooledServer(9000);
+new Thread(server).start();
+
+try {
+    Thread.sleep(20 * 1000);
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}
+System.out.println("Stopping Server");
+server.stop();
+</pre>
+
+<p>When the server is running you can access it using an ordinary web browser. Use the address
+    <a href="http://localhost/" target="_blank">http://localhost:9000/</a>
+</p>
+
+                <div>
+                </div>
+
+                <div id="next"></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

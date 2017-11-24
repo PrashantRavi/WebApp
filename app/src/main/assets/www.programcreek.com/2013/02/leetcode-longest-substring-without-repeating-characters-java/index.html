@@ -1,0 +1,1867 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Longest Substring Without Repeating Characters (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given a string, find the length of the longest substring without repeating characters. For example, the longest substring without repeating letters for"/>
+<meta name="keywords" content="leetcode - longest substring without repeating characters (java)"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Longest Substring Without Repeating Characters (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Permutations II (Java)' href='../leetcode-permutations-ii-java/index.html'/>
+<link rel='next' title='LeetCode &#8211; Palindrome Number (Java)' href='../leetcode-palindrome-number-java/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=11784.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-longest-substring-without-repeating-characters-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2013_02_leetcode-longest-substring-without-repeating-characters-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-11784"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Longest Substring Without Repeating Characters (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Given a string, find the length of the longest substring without repeating characters. For example, the longest substring without repeating letters for "abcabcbb" is "abc", which the length is 3. For "bbbbb" the longest substring is "b", with the length of 1.</p>
+<p><strong>Java Solution 1</strong></p>
+<p>The first solution is like the problem of "determine if a string has all unique characters" in CC 150. We can use a flag array to track the existing characters for the longest substring without repeating characters.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> lengthOfLongestSubstring<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s<span style="color: #339933;">==</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">boolean</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> flag <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">boolean</span><span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">256</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">int</span> result <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">int</span> start <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #000066; font-weight: bold;">char</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> arr <span style="color: #339933;">=</span> s.<span style="color: #006633;">toCharArray</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> arr.<span style="color: #006633;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">char</span> current <span style="color: #339933;">=</span> arr<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>flag<span style="color: #009900;">&#91;</span>current<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			result <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>result, i <span style="color: #339933;">-</span> start<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+			<span style="color: #666666; font-style: italic;">// the loop update the new start point</span>
+			<span style="color: #666666; font-style: italic;">// and reset flag array</span>
+			<span style="color: #666666; font-style: italic;">// for example, abccab, when it comes to 2nd c,</span>
+			<span style="color: #666666; font-style: italic;">// it update start from 0 to 3, reset flag for a,b</span>
+			<span style="color: #000000; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> k <span style="color: #339933;">=</span> start<span style="color: #339933;">;</span> k <span style="color: #339933;">&lt;</span> i<span style="color: #339933;">;</span> k<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>arr<span style="color: #009900;">&#91;</span>k<span style="color: #009900;">&#93;</span> <span style="color: #339933;">==</span> current<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+					start <span style="color: #339933;">=</span> k <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> 
+					<span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>
+				<span style="color: #009900;">&#125;</span>
+				flag<span style="color: #009900;">&#91;</span>arr<span style="color: #009900;">&#91;</span>k<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			flag<span style="color: #009900;">&#91;</span>current<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	result <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>arr.<span style="color: #006633;">length</span> <span style="color: #339933;">-</span> start, result<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">return</span> result<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>Java Solution 2 - HashSet</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> lengthOfLongestSubstring<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s<span style="color: #339933;">==</span><span style="color: #000066; font-weight: bold;">null</span> <span style="color: #339933;">||</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+    HashSet<span style="color: #339933;">&lt;</span>Character<span style="color: #339933;">&gt;</span> set <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HashSet<span style="color: #339933;">&lt;</span>Character<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">int</span> max<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> start<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">char</span> c <span style="color: #339933;">=</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>set.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            set.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+            max <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max, set.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span>start<span style="color: #339933;">&lt;</span>i<span style="color: #339933;">&amp;&amp;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>start<span style="color: #009900;">&#41;</span><span style="color: #339933;">!=</span>c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                set.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>start<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                start<span style="color: #339933;">++;</span>
+            <span style="color: #009900;">&#125;</span>
+            start<span style="color: #339933;">++;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        i<span style="color: #339933;">++;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    max <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max, set.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>or</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> lengthOfLongestSubstring<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s<span style="color: #339933;">==</span><span style="color: #000066; font-weight: bold;">null</span> <span style="color: #339933;">||</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">int</span> start<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+    <span style="color: #000066; font-weight: bold;">int</span> max <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+    HashSet<span style="color: #339933;">&lt;</span>Character<span style="color: #339933;">&gt;</span> set <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> HashSet<span style="color: #339933;">&lt;</span>Character<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">char</span> c <span style="color: #339933;">=</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>set.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            set.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+            max <span style="color: #339933;">=</span> <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>max, i<span style="color: #339933;">-</span>start<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> j<span style="color: #339933;">=</span>start<span style="color: #339933;">;</span> j<span style="color: #339933;">&lt;</span>i<span style="color: #339933;">;</span> j<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                set.<span style="color: #006633;">remove</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>j<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>j<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span>c<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                    start<span style="color: #339933;">=</span>j<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+                    <span style="color: #000000; font-weight: bold;">break</span><span style="color: #339933;">;</span>    
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>        
+&nbsp;
+            set.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>c<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">return</span> max<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/09/leetcode-longest-substring-with-at-least-k-repeating-characters-java/index.html" rel="bookmark" title="LeetCode &#8211; Longest Substring with At Least K Repeating Characters (Java)">LeetCode &#8211; Longest Substring with At Least K Repeating Characters (Java) </a></li>
+<li><a href="../longest-substring-which-contains-2-unique-characters/index.html" rel="bookmark" title="Longest Substring with At Most K Distinct Characters">Longest Substring with At Most K Distinct Characters </a></li>
+<li><a href="../../../2014/06/leetcode-substring-with-concatenation-of-all-words-java/index.html" rel="bookmark" title="LeetCode &#8211; Substring with Concatenation of All Words (Java)">LeetCode &#8211; Substring with Concatenation of All Words (Java) </a></li>
+<li><a href="../../12/leetcode-solution-of-longest-palindromic-substring-java/index.html" rel="bookmark" title="Leetcode &#8211; Longest Palindromic Substring (Java)">Leetcode &#8211; Longest Palindromic Substring (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeating-characters-java/" dc:identifier="http://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeating-characters-java/" dc:title="LeetCode &#8211; Longest Substring Without Repeating Characters (Java)" trackback:ping="http://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeating-characters-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-14810">
+<div id="dsq-comment-header-14810" class="dsq-comment-header">
+<cite id="dsq-cite-14810">
+<span id="dsq-author-user-14810">vuqar dadalov</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14810" class="dsq-comment-body">
+<div id="dsq-comment-message-14810" class="dsq-comment-message"><p>This is My Solution</p>
+<p>public class Solution {<br/>
+public int lengthOfLongestSubstring(String s) {</p>
+<p> if(s.trim().length() == 0) {<br/>
+return 0;<br/>
+}</p>
+<p> char [] strArr = s.toCharArray();</p>
+<p> HashMap map = new HashMap();<br/>
+int maxLen = 0;<br/>
+int firstIndex = 0;<br/>
+int lastIndex = 0;</p>
+<p> for(int i=0; i maxLen){<br/>
+maxLen = i &#8211; firstIndex;<br/>
+}</p>
+<p> if(map.get(strArr[i]) &gt;= firstIndex){<br/>
+firstIndex = map.get(strArr[i]) + 1;<br/>
+}</p>
+<p> map.remove(map.get(strArr[i]));<br/>
+}<br/>
+map.put(strArr[i],i);<br/>
+lastIndex = i;<br/>
+}</p>
+<p> if((lastIndex &#8211; firstIndex + 1) &gt; maxLen){<br/>
+maxLen = lastIndex &#8211; firstIndex + 1;<br/>
+}</p>
+<p> return maxLen;<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14521">
+<div id="dsq-comment-header-14521" class="dsq-comment-header">
+<cite id="dsq-cite-14521">
+<span id="dsq-author-user-14521">Mel</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14521" class="dsq-comment-body">
+<div id="dsq-comment-message-14521" class="dsq-comment-message"><p><code><br/>
+static int lengthOfLongestSubstring(String s){<br/>
+if(s==null || s.length()==0)<br/>
+return 0;</p>
+<p> boolean []flag=new boolean[256];<br/>
+int count=0;<br/>
+int max=Integer.MIN_VALUE;<br/>
+for(int i=0;i<s>max){<br/>
+max=count;<br/>
+}<br/>
+flag[c]=false;<br/>
+count=0;<br/>
+}</p>
+<p> }<br/>
+return max;<br/>
+}<br/>
+</s></code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-14353">
+<div id="dsq-comment-header-14353" class="dsq-comment-header">
+<cite id="dsq-cite-14353">
+<span id="dsq-author-user-14353">Badrinath</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14353" class="dsq-comment-body">
+<div id="dsq-comment-message-14353" class="dsq-comment-message"><p>simple Solution is to add every character to Hash set and get the size of it. As Set doesn&#8217;t store duplicates this is the easiest and simple way to get the count.</p>
+<p>below is the code<br/>
+<code><br/>
+static int longest(String s){<br/>
+int result = 0;<br/>
+int a = s.length();<br/>
+Set set = new HashSet();<br/>
+for(int i=0; i&lt;a-1 ; i++){<br/>
+set.add(s.charAt(i));<br/>
+}<br/>
+System.out.println(&quot;Length of the string is&quot; + set.size());<br/>
+return result;<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14128">
+<div id="dsq-comment-header-14128" class="dsq-comment-header">
+<cite id="dsq-cite-14128">
+<span id="dsq-author-user-14128">Milan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14128" class="dsq-comment-body">
+<div id="dsq-comment-message-14128" class="dsq-comment-message"><p>//time : O(n) space : O(n)<br/>
+<code><br/>
+public class Solution {<br/>
+public int lengthOfLongestSubstring(String s) {<br/>
+int start = 0,max = 0,i =0;<br/>
+Map lookup = new HashMap();<br/>
+for (;i<s>= start) {<br/>
+max=Math.max(max,i-start);<br/>
+start=lookup.get(ch)+1;<br/>
+}<br/>
+lookup.put(ch,i);<br/>
+}<br/>
+max=Math.max(max,i-start);<br/>
+return max;<br/>
+}<br/>
+}<br/>
+</s></code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-12989">
+<div id="dsq-comment-header-12989" class="dsq-comment-header">
+<cite id="dsq-cite-12989">
+<span id="dsq-author-user-12989">jeevs</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12989" class="dsq-comment-body">
+<div id="dsq-comment-message-12989" class="dsq-comment-message"><p>public class longestsubstring {</p>
+<p> public static void main(String[] args) {<br/>
+// TODO Auto-generated method stub<br/>
+Scanner in=new Scanner(System.in);<br/>
+ArrayList a=new ArrayList();<br/>
+String s=in.next();<br/>
+String temp=&#8221;&#8221;;<br/>
+String target=&#8221;&#8221;;<br/>
+for(int i=0;i<s>target.length())<br/>
+target=temp;<br/>
+a.clear();<br/>
+temp=&#8221;&#8221;;<br/>
+}<br/>
+}<br/>
+System.out.print(target);<br/>
+}</s></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9722">
+<div id="dsq-comment-header-9722" class="dsq-comment-header">
+<cite id="dsq-cite-9722">
+<span id="dsq-author-user-9722">Eugene Arnatovich</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9722" class="dsq-comment-body">
+<div id="dsq-comment-message-9722" class="dsq-comment-message"><p>Yep. That was my misunderstanding&#8230; Hope now it is better&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9718">
+<div id="dsq-comment-header-9718" class="dsq-comment-header">
+<cite id="dsq-cite-9718">
+<span id="dsq-author-user-9718">Larry Okeke</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9718" class="dsq-comment-body">
+<div id="dsq-comment-message-9718" class="dsq-comment-message"><p>simple solution</p>
+<p><code></p>
+<p>import java.util.*;</p>
+<p>public class longest_substring{</p>
+<p>/*</p>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p> For example, the longest substring without repeating letters for "abcabcbb" is "abc",</p>
+<p> which the length is 3. For "bbbbb" the longest substring is "b", </p>
+<p> with the length of 1. </p>
+<p>*/</p>
+<p> public static void main(String[] args){</p>
+<p> System.out.println("longest " +get_longest(args[0]));</p>
+<p> }</p>
+<p> public static int get_longest(String str){</p>
+<p> HashSet wordSet = new HashSet();</p>
+<p> int longest = 0;</p>
+<p> for(int i = 0; i &lt; str.length(); i++){</p>
+<p> for(int j = i; j longest){</p>
+<p> longest = wordSet.size();</p>
+<p> }</p>
+<p> wordSet.clear();</p>
+<p> break;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> return longest;</p>
+<p> }</p>
+<p>}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9715">
+<div id="dsq-comment-header-9715" class="dsq-comment-header">
+<cite id="dsq-cite-9715">
+<span id="dsq-author-user-9715">Larry Okeke</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9715" class="dsq-comment-body">
+<div id="dsq-comment-message-9715" class="dsq-comment-message"><p>Lol! Are you kidding?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-9500">
+<div id="dsq-comment-header-9500" class="dsq-comment-header">
+<cite id="dsq-cite-9500">
+<span id="dsq-author-user-9500">Eugene Arnatovich</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9500" class="dsq-comment-body">
+<div id="dsq-comment-message-9500" class="dsq-comment-message"><p>Simplest solution:<br/>
+<code><br/>
+//Longest Substring Without Repeating Characters (Java)<br/>
+public int solution(String s) {<br/>
+Set set = new LinkedHashSet();<br/>
+for (char c : s.toCharArray()) {<br/>
+set.add(c);<br/>
+}<br/>
+return set.size();<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-8756">
+<div id="dsq-comment-header-8756" class="dsq-comment-header">
+<cite id="dsq-cite-8756">
+<span id="dsq-author-user-8756">Adrian</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8756" class="dsq-comment-body">
+<div id="dsq-comment-message-8756" class="dsq-comment-message"><p>Following code is O(N) time complexity and constant space complexity O(1). </p>
+<p><code></p>
+<p>public int LongestSubstringWithoutRepeatingCharacters(String src)<br/>
+{<br/>
+if (src == null || src.Length == 0)<br/>
+return 0;</p>
+<p> // v[j] stores i position of the src[i] character, where j = src[i]<br/>
+int[] v = new int[256];<br/>
+// Initialize visited state<br/>
+for (int i = 0; i &lt; 256; ++i)<br/>
+v[i] = -1;</p>
+<p> v[src[0]] = 0;</p>
+<p> // start position of the longest string of non repeating characters<br/>
+int start = 0;<br/>
+// max length of string with non repeating characters so far<br/>
+int max_len = 1;</p>
+<p> for (int i = 1; i &lt; src.Length; ++i)<br/>
+{<br/>
+if (v[src[i]] == -1)<br/>
+{<br/>
+v[src[i]] = i;<br/>
+++max_len;<br/>
+}<br/>
+else<br/>
+{<br/>
+int cur_len = i - start;<br/>
+if (max_len &lt; cur_len)<br/>
+max_len = cur_len;</p>
+<p> // move start of the substring with non repeating characters<br/>
+// after already visited(repeated) character<br/>
+start = v[src[i]] + 1;<br/>
+}<br/>
+}</p>
+<p> return max_len;<br/>
+}</code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-8641">
+<div id="dsq-comment-header-8641" class="dsq-comment-header">
+<cite id="dsq-cite-8641">
+<span id="dsq-author-user-8641">Truong Khanh Nguyen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8641" class="dsq-comment-body">
+<div id="dsq-comment-message-8641" class="dsq-comment-message"><p>Here is my O(N) time solution in Java <a href="http://www.capacode.com/string/longest-substring-without-repeating-characters/" rel="nofollow">http://www.capacode.com/string/longest-substring-without-repeating-characters/</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7930">
+<div id="dsq-comment-header-7930" class="dsq-comment-header">
+<cite id="dsq-cite-7930">
+<span id="dsq-author-user-7930">Ankit Shah</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7930" class="dsq-comment-body">
+<div id="dsq-comment-message-7930" class="dsq-comment-message"><p>Following works and it also prints the substring</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7883">
+<div id="dsq-comment-header-7883" class="dsq-comment-header">
+<cite id="dsq-cite-7883">
+<span id="dsq-author-user-7883">CRH</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7883" class="dsq-comment-body">
+<div id="dsq-comment-message-7883" class="dsq-comment-message"><p>Why is the time complexity mentioned as n^3 for Java Solution 2 above? It should be O(n). The first loop is O(n) and in that main loop i is getting pushed back to an already visited location. So effectively we may end up looping through the whole loop 2n times. That still means O(n), then why n^3 is mentioned.</p>
+<p>Please help!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7627">
+<div id="dsq-comment-header-7627" class="dsq-comment-header">
+<cite id="dsq-cite-7627">
+<span id="dsq-author-user-7627">pm</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7627" class="dsq-comment-body">
+<div id="dsq-comment-message-7627" class="dsq-comment-message"><p>public class LCSWIthoutRepeating{<br/>
+public static void main(String args[]){<br/>
+String str = &#8220;aaaaapritikamehta&#8221;;<br/>
+LinkedHashMap hash = new LinkedHashMap();<br/>
+int maxLen =0;<br/>
+int max =0;<br/>
+int num =0;<br/>
+int arr[] = new int[26];<br/>
+for(int i =0;i&lt;str.length();i++){<br/>
+char c = str.charAt(i);<br/>
+if(hash.get(c) == null){<br/>
+hash.put(c, i);<br/>
+max++;<br/>
+}else{<br/>
+maxLen = i &#8211; hash.get(c)max?maxLen:max);<br/>
+}</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7592">
+<div id="dsq-comment-header-7592" class="dsq-comment-header">
+<cite id="dsq-cite-7592">
+<span id="dsq-author-user-7592">southie</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7592" class="dsq-comment-body">
+<div id="dsq-comment-message-7592" class="dsq-comment-message"><p>O(n) solution with LinkedHashSet JAVA !</p>
+<p>public class LongestPalindromeWithoutRepChar {</p>
+<p> public static int lengthOfLongestSubstring(String s) {<br/>
+int maxCount=0;<br/>
+if(s.length() &lt; 2) return s.length();<br/>
+Set hs = new LinkedHashSet();</p>
+<p> for(int i=0;i maxCount) maxCount = hs.size();<br/>
+Iterator itr = hs.iterator();<br/>
+Character curr = null;<br/>
+while(c!=curr)<br/>
+{<br/>
+curr = itr.next();<br/>
+itr.remove();<br/>
+}<br/>
+}<br/>
+}</p>
+<p> return maxCount;<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7394">
+<div id="dsq-comment-header-7394" class="dsq-comment-header">
+<cite id="dsq-cite-7394">
+<span id="dsq-author-user-7394">Holden</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7394" class="dsq-comment-body">
+<div id="dsq-comment-message-7394" class="dsq-comment-message"><p>Why time complexity of second approach is O(n^3)?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7383">
+<div id="dsq-comment-header-7383" class="dsq-comment-header">
+<cite id="dsq-cite-7383">
+<span id="dsq-author-user-7383">NB****</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7383" class="dsq-comment-body">
+<div id="dsq-comment-message-7383" class="dsq-comment-message"><p><code><br/>
+void LargestNonRepeatedSubStr() {<br/>
+string str = "abcabcbb";<br/>
+int max_length = 0;<br/>
+int i = 0;<br/>
+while (i &lt; str.length()) {<br/>
+set check_set;<br/>
+int j = i;<br/>
+int length = 0;<br/>
+while (j &lt; str.length()) {<br/>
+if (check_set.find(str[j]) != check_set.end()) {<br/>
+break;<br/>
+} else {<br/>
+check_set.insert(str[j]);<br/>
+length++;<br/>
+}<br/>
+j++;<br/>
+}<br/>
+check_set.clear();<br/>
+max_length = std::max(max_length, length);<br/>
+i++;<br/>
+}<br/>
+cout &lt;&lt; &quot;The max length is: &quot; &lt;&lt; max_length &lt;&lt; &quot;n&quot;;<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7323">
+<div id="dsq-comment-header-7323" class="dsq-comment-header">
+<cite id="dsq-cite-7323">
+<span id="dsq-author-user-7323">Sahil Singla</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7323" class="dsq-comment-body">
+<div id="dsq-comment-message-7323" class="dsq-comment-message"><p>It is required. Consider the case &#8220;dabcabcde&#8221;. If &#8216;map.get(arr[i]) &lt; j&#039; is not done then, for the iteration with &quot;i=7&quot; it would be computed that &quot;d&quot; has already contained in the HashMap and also the logic inside the &quot;else&quot; will fail and compute to give &#039;curr=7&#039;.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7272">
+<div id="dsq-comment-header-7272" class="dsq-comment-header">
+<cite id="dsq-cite-7272">
+<span id="dsq-author-user-7272">dtReloaded</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7272" class="dsq-comment-body">
+<div id="dsq-comment-message-7272" class="dsq-comment-message"><p>List list = new ArrayList();</p>
+<p>for(int i=0 ; i&lt;a.length();i++){</p>
+<p>if(!list.contains(a.charAt(i))){</p>
+<p> list.add(a.charAt(i));</p>
+<p> }</p>
+<p> else</p>
+<p> break;</p>
+<p> }</p>
+<p> System.out.println(&quot;The String Lengtht&quot; +a.length());</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7257">
+<div id="dsq-comment-header-7257" class="dsq-comment-header">
+<cite id="dsq-cite-7257">
+<span id="dsq-author-user-7257">Satish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7257" class="dsq-comment-body">
+<div id="dsq-comment-message-7257" class="dsq-comment-message"><p>public static String uniqueCharSubstring(String str) {<br/>
+String result = &#8220;&#8221;;<br/>
+int len = str.length();<br/>
+HashMap map = new HashMap();<br/>
+char[] c = str.toCharArray();<br/>
+int right = 0, max = 0;<br/>
+for (int left = 0; left &lt; len; left++) {<br/>
+while (right max) {<br/>
+max = right &#8211; left;<br/>
+result = str.substring(left, right + 1);<br/>
+}<br/>
+right++;<br/>
+}<br/>
+}<br/>
+return result;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7183">
+<div id="dsq-comment-header-7183" class="dsq-comment-header">
+<cite id="dsq-cite-7183">
+<span id="dsq-author-user-7183">Vimukthi Weerasiri</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7183" class="dsq-comment-body">
+<div id="dsq-comment-message-7183" class="dsq-comment-message"><p>Thanks. Agree. Updated the code with some refactoring 🙂 Intention was to initialize it one prior to the rightPointer. Comments are welcome!</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7180">
+<div id="dsq-comment-header-7180" class="dsq-comment-header">
+<cite id="dsq-cite-7180">
+<span id="dsq-author-user-7180">test</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7180" class="dsq-comment-body">
+<div id="dsq-comment-message-7180" class="dsq-comment-message"><p>second = -1 is pretty weird.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7169">
+<div id="dsq-comment-header-7169" class="dsq-comment-header">
+<cite id="dsq-cite-7169">
+<span id="dsq-author-user-7169">Vimukthi Weerasiri</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7169" class="dsq-comment-body">
+<div id="dsq-comment-message-7169" class="dsq-comment-message"><p>A simpler O(n) solution.</p>
+<p>public int lengthOfLongestSubstring(String s) {<br/>
+HashMap map = new HashMap();<br/>
+if (s == null || s.length() == 0) return 0;<br/>
+int first = 0, second = -1, answer = 0;<br/>
+while (first != s.length()) {<br/>
+Integer previousOccurrence = map.put(s.charAt(first), first);<br/>
+if (previousOccurrence != null) second = Math.max(second, previousOccurrence);<br/>
+answer = Math.max(answer, first &#8211; second);<br/>
+first++;<br/>
+}<br/>
+return answer;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7151">
+<div id="dsq-comment-header-7151" class="dsq-comment-header">
+<cite id="dsq-cite-7151">
+<span id="dsq-author-user-7151">Edmond Hong</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7151" class="dsq-comment-body">
+<div id="dsq-comment-message-7151" class="dsq-comment-message"><p>I don&#8217;t think you need add the statement: &#8216;map.get(arr[i]) &lt; j&#039;</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7086">
+<div id="dsq-comment-header-7086" class="dsq-comment-header">
+<cite id="dsq-cite-7086">
+<span id="dsq-author-user-7086">Sahil Singla</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7086" class="dsq-comment-body">
+<div id="dsq-comment-message-7086" class="dsq-comment-message"><p>I believe this is O(n):</p>
+<p>public static int lengthOfLongestSubstring(String s) {<br/>
+if(s==null)<br/>
+return 0;<br/>
+char[] arr = s.toCharArray();<br/>
+int pre = 0;<br/>
+HashMap map = new HashMap();<br/>
+int j = 0;<br/>
+int curr = 0;<br/>
+for (int i = 0; i &lt; arr.length; i++) {<br/>
+if (!map.containsKey(arr[i]) || map.get(arr[i]) &lt; j) {<br/>
+map.put(arr[i], i);<br/>
+curr++;<br/>
+} else {<br/>
+pre = Math.max(pre, curr);<br/>
+j = map.get(arr[i]) + 1;<br/>
+curr = i + 1 &#8211; j;<br/>
+map.put(arr[i], i);<br/>
+}<br/>
+}<br/>
+return Math.max(pre, curr);<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7072">
+<div id="dsq-comment-header-7072" class="dsq-comment-header">
+<cite id="dsq-cite-7072">
+<span id="dsq-author-user-7072">Adil qureshi</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7072" class="dsq-comment-body">
+<div id="dsq-comment-message-7072" class="dsq-comment-message"><p>can you explain why second one in On3 .. i cant get it &#8230; thanks</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6872">
+<div id="dsq-comment-header-6872" class="dsq-comment-header">
+<cite id="dsq-cite-6872">
+<a id="dsq-author-user-6872" href="http://users.encs.concordia.ca/~t_bdiri/" target="_blank" rel="nofollow">Taoufik Bdiri</a>
+</cite>
+</div>
+<div id="dsq-comment-body-6872" class="dsq-comment-body">
+<div id="dsq-comment-message-6872" class="dsq-comment-message"><p>For the solution using the HashMap, I think the following line :<br/>
+i = map.get(arr[i]);<br/>
+should be changed to :<br/>
+i = map.get(arr[i])+1;<br/>
+Otherwise you will get an infinite loop ?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6847">
+<div id="dsq-comment-header-6847" class="dsq-comment-header">
+<cite id="dsq-cite-6847">
+<span id="dsq-author-user-6847">Parag Chaudhari</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6847" class="dsq-comment-body">
+<div id="dsq-comment-message-6847" class="dsq-comment-message"><p>Better solution: <a href="http://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/" rel="nofollow">http://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6762">
+<div id="dsq-comment-header-6762" class="dsq-comment-header">
+<cite id="dsq-cite-6762">
+<span id="dsq-author-user-6762">Mehmet</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6762" class="dsq-comment-body">
+<div id="dsq-comment-message-6762" class="dsq-comment-message"><p>What is the time and space complexity of first solution?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6712">
+<div id="dsq-comment-header-6712" class="dsq-comment-header">
+<cite id="dsq-cite-6712">
+<span id="dsq-author-user-6712">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6712" class="dsq-comment-body">
+<div id="dsq-comment-message-6712" class="dsq-comment-message"><p>No, it doesn&#8217;t. For example, given &#8220;abac&#8221;, when it meets the second &#8220;a&#8221;, aux should not be set to &#8220;a&#8221;, instead it should be set to &#8220;ba&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6707">
+<div id="dsq-comment-header-6707" class="dsq-comment-header">
+<cite id="dsq-cite-6707">
+<span id="dsq-author-user-6707">Tiago</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6707" class="dsq-comment-body">
+<div id="dsq-comment-message-6707" class="dsq-comment-message"><p>I think the following works too:</p>
+<p>static public String nonRepeated(String input){</p>
+<p> char[] charAInput = input.toCharArray();<br/>
+String aux = &#8220;&#8221;;<br/>
+String resultSubStr = &#8220;&#8221;;</p>
+<p> if(input.length() == 1)<br/>
+return input;</p>
+<p> for(int i =0; i &lt; charAInput.length; i++ ){</p>
+<p> if(!aux.contains(&quot;&quot; + charAInput[i])){</p>
+<p> aux = aux.concat(&quot;&quot; + charAInput[i]);</p>
+<p> }<br/>
+else<br/>
+aux = &quot;&quot; + charAInput[i];</p>
+<p> if(resultSubStr.length() &lt; aux.length())<br/>
+resultSubStr = aux;<br/>
+}</p>
+<p> System.out.println(resultSubStr); </p>
+<p> return resultSubStr;</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6695">
+<div id="dsq-comment-header-6695" class="dsq-comment-header">
+<cite id="dsq-cite-6695">
+<span id="dsq-author-user-6695">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6695" class="dsq-comment-body">
+<div id="dsq-comment-message-6695" class="dsq-comment-message"><p>You solution is wrong. maxStart is not updated correctly.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6694">
+<div id="dsq-comment-header-6694" class="dsq-comment-header">
+<cite id="dsq-cite-6694">
+<span id="dsq-author-user-6694">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6694" class="dsq-comment-body">
+<div id="dsq-comment-message-6694" class="dsq-comment-message"><p>Your code is not right, for example, &#8220;aab&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6693">
+<div id="dsq-comment-header-6693" class="dsq-comment-header">
+<cite id="dsq-cite-6693">
+<span id="dsq-author-user-6693">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6693" class="dsq-comment-body">
+<div id="dsq-comment-message-6693" class="dsq-comment-message"><p>Thanks. I think the problem is fixed now.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6692">
+<div id="dsq-comment-header-6692" class="dsq-comment-header">
+<cite id="dsq-cite-6692">
+<span id="dsq-author-user-6692">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6692" class="dsq-comment-body">
+<div id="dsq-comment-message-6692" class="dsq-comment-message"><p>Your code only compares the two consecutive characters, it can not handle case like &#8220;a&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6656">
+<div id="dsq-comment-header-6656" class="dsq-comment-header">
+<cite id="dsq-cite-6656">
+<span id="dsq-author-user-6656">Arpit Pandey</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6656" class="dsq-comment-body">
+<div id="dsq-comment-message-6656" class="dsq-comment-message"><p>&#8220;bbabceabcdbb&#8221; fails with this string returns a wrong string</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6557">
+<div id="dsq-comment-header-6557" class="dsq-comment-header">
+<cite id="dsq-cite-6557">
+<span id="dsq-author-user-6557">Tarun Singh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6557" class="dsq-comment-body">
+<div id="dsq-comment-message-6557" class="dsq-comment-message"><p>I think Following is O(n) Solution 😀</p>
+<p>public static int lengthOfLongestSubstring(String s) {</p>
+<p> char[] arr = s.toCharArray();</p>
+<p> int pre = 0;</p>
+<p> int k=0;</p>
+<p> boolean flag = true;</p>
+<p> HashMap map = new HashMap();</p>
+<p> for (int i = 0; i pre)</p>
+<p> pre=l;</p>
+<p> k = map.get(arr[i]);</p>
+<p> map.put(arr[i],i);</p>
+<p> k++;</p>
+<p> }</p>
+<p> }</p>
+<p> if(flag) pre = arr.length;</p>
+<p> return pre;</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6512">
+<div id="dsq-comment-header-6512" class="dsq-comment-header">
+<cite id="dsq-cite-6512">
+<span id="dsq-author-user-6512">neckBeardThePirate</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6512" class="dsq-comment-body">
+<div id="dsq-comment-message-6512" class="dsq-comment-message"><p>how is solution two O(n^3)?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6486">
+<div id="dsq-comment-header-6486" class="dsq-comment-header">
+<cite id="dsq-cite-6486">
+<span id="dsq-author-user-6486">Zaga</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6486" class="dsq-comment-body">
+<div id="dsq-comment-message-6486" class="dsq-comment-message"><p>So I came up with an O(n) solution in python, please help me detect in what cases it can possibly fail </p>
+<p>#put test string here</p>
+<p>string = &#8220;eadsabcadcfef&#8221;</p>
+<p>indexOfSubsequence = 0</p>
+<p>tempIndexOfSubsequence = 0</p>
+<p>lenghtOfSubsequence = 0</p>
+<p>tempLenghtOfSubsequence = 0</p>
+<p>tableOfCharsIndex = [-1] * 26</p>
+<p>for i in xrange(0, len(string)):</p>
+<p> indexOfChar = ord(string[i]) &#8211; 97</p>
+<p> if tableOfCharsIndex[ indexOfChar ] == -1 or tableOfCharsIndex[ indexOfChar ] lenghtOfSubsequence :</p>
+<p> lenghtOfSubsequence = tempLenghtOfSubsequence</p>
+<p> indexOfSubsequence = tempIndexOfSubsequence</p>
+<p> else:</p>
+<p> if tempLenghtOfSubsequence &gt; lenghtOfSubsequence :</p>
+<p> lenghtOfSubsequence = tempLenghtOfSubsequence</p>
+<p> indexOfSubsequence = tempIndexOfSubsequence</p>
+<p> tempIndexOfSubsequence = i </p>
+<p> tempLenghtOfSubsequence = 1</p>
+<p> tableOfCharsIndex[ indexOfChar ] = i</p>
+<p>print string[ indexOfSubsequence : indexOfSubsequence + lenghtOfSubsequence ]</p>
+<p>print lenghtOfSubsequence</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6456">
+<div id="dsq-comment-header-6456" class="dsq-comment-header">
+<cite id="dsq-cite-6456">
+<span id="dsq-author-user-6456">Zy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6456" class="dsq-comment-body">
+<div id="dsq-comment-message-6456" class="dsq-comment-message"><p>Hi Ryan, </p>
+<p>I like your site a lot, but I noticed that the recently-added social area on every post is blocking the sight.</p>
+<p>Hopefully this can be fixed and I can enjoy reading your site again.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6405">
+<div id="dsq-comment-header-6405" class="dsq-comment-header">
+<cite id="dsq-cite-6405">
+<span id="dsq-author-user-6405">Wally Osmond</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6405" class="dsq-comment-body">
+<div id="dsq-comment-message-6405" class="dsq-comment-message"><p>public static int getNoRepeatLen (String str) {</p>
+<p> int max=0,tLen=0;</p>
+<p> for(int i=1;i&lt;str.length();i++) {</p>
+<p> if(str.charAt(i-1) == str.charAt(i)){</p>
+<p> max=Math.max(tLen+1,max);</p>
+<p> tLen=0;</p>
+<p> } else {</p>
+<p> tLen++;</p>
+<p> }</p>
+<p> }</p>
+<p> return Math.max(max,tLen);</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6404">
+<div id="dsq-comment-header-6404" class="dsq-comment-header">
+<cite id="dsq-cite-6404">
+<span id="dsq-author-user-6404">Wally Osmond</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6404" class="dsq-comment-body">
+<div id="dsq-comment-message-6404" class="dsq-comment-message"><p>Hey guys,</p>
+<p>Isn&#8217;t the best solution just a simple for loop with an if and some counters? Perhaps my solution is too simple and crashes or returns the results incorrectly somehow??? I tested it for the longest string and the beginning/end/middle and I believe it works.</p>
+<p> public static int getNoRepeatLen (String str) {</p>
+<p> int max=0,tLen=0;</p>
+<p> for(int i=1;i&lt;str.length();i++) {</p>
+<p> if(str.charAt(i-1) == str.charAt(i)){</p>
+<p> max=Math.max(tLen+1,max);</p>
+<p> tLen=0;</p>
+<p> } else {</p>
+<p> tLen++;</p>
+<p> }</p>
+<p> }</p>
+<p> return Math.max(max,tLen);</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6340">
+<div id="dsq-comment-header-6340" class="dsq-comment-header">
+<cite id="dsq-cite-6340">
+<span id="dsq-author-user-6340">Jianwei Chen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6340" class="dsq-comment-body">
+<div id="dsq-comment-message-6340" class="dsq-comment-message"><p>this is simpler.<br/>
+public static lls(String s) {<br/>
+HashMap map = new HashMap();</p>
+<p> int maxStart = 0;</p>
+<p> int pre = 0;</p>
+<p> for(int i = 0; i pre) {</p>
+<p> pre = map.size();</p>
+<p> maxStart = map.get(c);</p>
+<p> }</p>
+<p> }</p>
+<p> map.put(c, i);</p>
+<p> }</p>
+<p>return s.substring(maxStart, maxStart+pre);<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6333">
+<div id="dsq-comment-header-6333" class="dsq-comment-header">
+<cite id="dsq-cite-6333">
+<span id="dsq-author-user-6333">Krzysztof Rajda</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6333" class="dsq-comment-body">
+<div id="dsq-comment-message-6333" class="dsq-comment-message"><p>Proposed solution could be improved. You don&#8217;t need to clear the whole map and change i.</p>
+<p>private static String calculateFast(String text) {<br/>
+Map map = new HashMap();</p>
+<p> int maxStart = 0;<br/>
+int maxEnd = 1;<br/>
+int currentStart = 0;</p>
+<p> for (int i = 0; i maxEnd &#8211; maxStart) {<br/>
+maxStart = currentStart;<br/>
+maxEnd = i;<br/>
+}<br/>
+currentStart = firstOccurrenceIndex + 1;<br/>
+}<br/>
+map.put(c, i);<br/>
+}</p>
+<p> if (text.length() &#8211; currentStart &gt; maxEnd &#8211; maxStart) {<br/>
+maxStart = currentStart;<br/>
+maxEnd = text.length();<br/>
+}</p>
+<p> return text.substring(maxStart, maxEnd);<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6315">
+<div id="dsq-comment-header-6315" class="dsq-comment-header">
+<cite id="dsq-cite-6315">
+<span id="dsq-author-user-6315">chitti</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6315" class="dsq-comment-body">
+<div id="dsq-comment-message-6315" class="dsq-comment-message"><p>this code handles:</p>
+<p> public String getLongestSubStringWithoutRepeatedChar (String str) {<br/>
+{<br/>
+List list = new ArrayList();<br/>
+String longestSoFar =&#8221;&#8221;;<br/>
+int count = 0;<br/>
+int longestSize=0;</p>
+<p> //str.length()+1 for capturing longest string at the end.<br/>
+for (int i = 0; i &lt; str.length()+1; i++) {<br/>
+if (i longestSize) {<br/>
+longestSize=count;<br/>
+longestSoFar = getLongestString(list);<br/>
+System.out.println(longestSoFar);<br/>
+}<br/>
+count=0;<br/>
+list.clear();</p>
+<p> }<br/>
+}</p>
+<p> return longestSoFar;<br/>
+}<br/>
+}</p>
+<p> private String getLongestString (List list) {<br/>
+StringBuilder sb = new StringBuilder();<br/>
+for (Character c : list) {<br/>
+sb.append(c);<br/>
+}<br/>
+return sb.toString();<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6314">
+<div id="dsq-comment-header-6314" class="dsq-comment-header">
+<cite id="dsq-cite-6314">
+<span id="dsq-author-user-6314">chitti</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6314" class="dsq-comment-body">
+<div id="dsq-comment-message-6314" class="dsq-comment-message"><p>corrected one:</p>
+<p> public String getLongestSubStringWithoutRepeatedChar (String str) {<br/>
+{<br/>
+List list = new ArrayList();<br/>
+String longestSoFar =&#8221;&#8221;;<br/>
+int count = 0;<br/>
+int longestSize=0;</p>
+<p> for (int i = 0; i longestSize) {<br/>
+longestSize=count;<br/>
+longestSoFar = getLongestString(list);<br/>
+System.out.println(longestSoFar);<br/>
+}<br/>
+count=0;<br/>
+list.clear();</p>
+<p> }<br/>
+}<br/>
+return longestSoFar;<br/>
+}<br/>
+}</p>
+<p> private String getLongestString (List list) {<br/>
+StringBuilder sb = new StringBuilder();<br/>
+for (Character c : list) {<br/>
+sb.append(c);<br/>
+}<br/>
+return sb.toString();<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6313">
+<div id="dsq-comment-header-6313" class="dsq-comment-header">
+<cite id="dsq-cite-6313">
+<span id="dsq-author-user-6313">chitti</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6313" class="dsq-comment-body">
+<div id="dsq-comment-message-6313" class="dsq-comment-message"><p>Does not work for string &#8220;eadsabcadcfef&#8221;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6311">
+<div id="dsq-comment-header-6311" class="dsq-comment-header">
+<cite id="dsq-cite-6311">
+<span id="dsq-author-user-6311">Alex</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6311" class="dsq-comment-body">
+<div id="dsq-comment-message-6311" class="dsq-comment-message"><p>How about this O(n) solution? It&#8217;s easy to understand and allows for the retrieval of the longest substring as well:</p>
+<p>public static int lengthOfLongestSubstring(String word) {</p>
+<p> int start = 0;</p>
+<p> int end = 0;</p>
+<p> int maxStart = 0;</p>
+<p> int maxEnd = 0;</p>
+<p> int[] seen = new int[256];</p>
+<p> for (int i = 0; i &lt; 256; i++) {</p>
+<p> seen[i] = -1;</p>
+<p> }</p>
+<p> for (int i = 0; i = start) {</p>
+<p> start = seen[c] + 1;</p>
+<p> }</p>
+<p> end++;</p>
+<p> seen[c] = i;</p>
+<p> if (end &#8211; start &gt; maxEnd &#8211; maxStart) {</p>
+<p> maxEnd = end;</p>
+<p> maxStart = start;</p>
+<p> }</p>
+<p> }</p>
+<p> // Return word.substring(maxStart, maxEnd) for actual substring</p>
+<p> return maxEnd &#8211; maxStart; </p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6202">
+<div id="dsq-comment-header-6202" class="dsq-comment-header">
+<cite id="dsq-cite-6202">
+<span id="dsq-author-user-6202">santhoshvai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6202" class="dsq-comment-body">
+<div id="dsq-comment-message-6202" class="dsq-comment-message"><p>I am sorry.. i misunderstood LIS.. this <a href="http://ideone.com/hcLYgy" rel="nofollow">http://ideone.com/hcLYgy</a> should fix it</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6201">
+<div id="dsq-comment-header-6201" class="dsq-comment-header">
+<cite id="dsq-cite-6201">
+<span id="dsq-author-user-6201">Jonathan Young</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6201" class="dsq-comment-body">
+<div id="dsq-comment-message-6201" class="dsq-comment-message"><p>abcadeftgh ==&gt; bcadeftgh (this is the longest substring without repeating element, and its length is 9)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6199">
+<div id="dsq-comment-header-6199" class="dsq-comment-header">
+<cite id="dsq-cite-6199">
+<span id="dsq-author-user-6199">santhoshvai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6199" class="dsq-comment-body">
+<div id="dsq-comment-message-6199" class="dsq-comment-message"><p>I found the mistake, see this <a href="http://ideone.com/WMXFOw" rel="nofollow">http://ideone.com/WMXFOw</a></p>
+<p>the LIS for &#8220;abcadeftgh&#8221; is 7</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6198">
+<div id="dsq-comment-header-6198" class="dsq-comment-header">
+<cite id="dsq-cite-6198">
+<span id="dsq-author-user-6198">Jonathan Young</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6198" class="dsq-comment-body">
+<div id="dsq-comment-message-6198" class="dsq-comment-message"><p>This doesn&#8217;t work if you pass &#8220;abcadeftgh&#8221; to your method. It should output 9 instead of 6</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6127">
+<div id="dsq-comment-header-6127" class="dsq-comment-header">
+<cite id="dsq-cite-6127">
+<span id="dsq-author-user-6127">santhoshvai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6127" class="dsq-comment-body">
+<div id="dsq-comment-message-6127" class="dsq-comment-message"><p>I have written a much simpler version than version 2 (python).. easier to understand. its here, <a href="http://ideone.com/BHJlvS" rel="nofollow">http://ideone.com/BHJlvS</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6126">
+<div id="dsq-comment-header-6126" class="dsq-comment-header">
+<cite id="dsq-cite-6126">
+<span id="dsq-author-user-6126">santhoshvai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6126" class="dsq-comment-body">
+<div id="dsq-comment-message-6126" class="dsq-comment-message"><p>whats the need for &#8221; i = h.get(target[i]); &#8221; ? It should work without it</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6084">
+<div id="dsq-comment-header-6084" class="dsq-comment-header">
+<cite id="dsq-cite-6084">
+<span id="dsq-author-user-6084">sudhansu jena</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6084" class="dsq-comment-body">
+<div id="dsq-comment-message-6084" class="dsq-comment-message"><p>Hi guys My solution simple and works fine.</p>
+<p>public String getLongestSubStringWithoutRepeatedChar(String str){</p>
+<p> ArrayList list=new ArrayList();</p>
+<p> String longestSoFar=&#8221;&#8221;;</p>
+<p> int count=0;</p>
+<p> for(int i=0;i&lt;str.length();i++){</p>
+<p> if(!list.contains(str.charAt(i))){</p>
+<p> list.add(str.charAt(i));</p>
+<p> }else{</p>
+<p> if(count&lt;list.size()){</p>
+<p> count=list.size();</p>
+<p> longestSoFar=getLongestString(list);</p>
+<p> list.clear();</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> return longestSoFar;</p>
+<p> }</p>
+<p> private String getLongestString(ArrayList list) {</p>
+<p> StringBuilder sb=new StringBuilder();</p>
+<p> for(Character c:list){</p>
+<p> sb.append(c);</p>
+<p> }</p>
+<p> return sb.toString();</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6059">
+<div id="dsq-comment-header-6059" class="dsq-comment-header">
+<cite id="dsq-cite-6059">
+<span id="dsq-author-user-6059">Cheng Wang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6059" class="dsq-comment-body">
+<div id="dsq-comment-message-6059" class="dsq-comment-message"><p>My solution but no idea why it is not correct:</p>
+<p>public class Solution {</p>
+<p> public int lengthOfLongestSubstring(String s) {</p>
+<p> // if the string is empty or has only one character</p>
+<p> if (s.length() &lt; 2) return s.length();</p>
+<p> HashMap hashMap = new HashMap();</p>
+<p> int j = 0;</p>
+<p> int maxLen = 1;</p>
+<p> for (int i = 0; i &lt; s.length(); i++) {</p>
+<p> if (!hashMap.containsKey(s.charAt(i))) {</p>
+<p> hashMap.put(s.charAt(i), i);</p>
+<p> } else {</p>
+<p> maxLen = Math.max(maxLen, i &#8211; j);</p>
+<p> j = hashMap.get(s.charAt(i)) + 1;</p>
+<p> hashMap.put(s.charAt(i), i);</p>
+<p> } </p>
+<p> }</p>
+<p> return Math.max(maxLen, s.length() &#8211; j);</p>
+<p> }</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5991">
+<div id="dsq-comment-header-5991" class="dsq-comment-header">
+<cite id="dsq-cite-5991">
+<span id="dsq-author-user-5991">Coder</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5991" class="dsq-comment-body">
+<div id="dsq-comment-message-5991" class="dsq-comment-message"><p>Solution 2 cannot pass the OJ because of the Time limit.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5985">
+<div id="dsq-comment-header-5985" class="dsq-comment-header">
+<cite id="dsq-cite-5985">
+<span id="dsq-author-user-5985">amit malik</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5985" class="dsq-comment-body">
+<div id="dsq-comment-message-5985" class="dsq-comment-message"><p>Updated Tia solution to </p>
+<p>1. Find all patterns with no repeating characters.</p>
+<p>2. Find the longest pattern and its size.</p>
+<p>public static void printPatternWithNoReaptingCharsInString(String s) {</p>
+<p> char[] arr = s.toCharArray();</p>
+<p> Map charMap = new HashMap();</p>
+<p> int size = 0;</p>
+<p> List uniquePatterns = new ArrayList();</p>
+<p> StringBuilder str = new StringBuilder();</p>
+<p> for (int i = 0; i &lt; arr.length; i++) {</p>
+<p> if (!charMap.containsKey(arr[i])) {</p>
+<p> charMap.put(arr[i], i);</p>
+<p> } else {</p>
+<p> if (size &lt;= charMap.size()) {</p>
+<p> size = charMap.size();</p>
+<p> if (str.length() &lt;= size) {</p>
+<p> str.delete(0, str.length()).append(</p>
+<p> s.substring(i &#8211; size, i));</p>
+<p> uniquePatterns.add(str.toString());</p>
+<p> }</p>
+<p> }</p>
+<p> i = charMap.get(arr[i]);</p>
+<p> charMap.clear();</p>
+<p> }</p>
+<p> }</p>
+<p> System.out.println(&quot;Longest Pattern with no repeating characters:&quot;</p>
+<p> + str.toString() + &quot; with size &quot; + size);</p>
+<p> System.out.println(&quot;There are in total &quot; + uniquePatterns.size()</p>
+<p> + &quot; patterns with no repeating characters.&quot;);</p>
+<p> }</p>
+<p>Below method call:</p>
+<p>printUniquePatterninString(&quot;abcdaaabcdaabcdebbpqrstuvaaa&quot;);</p>
+<p>will print:</p>
+<p>Longest Pattern with no repeating characters:bpqrstuva with size 9</p>
+<p>There are in total 6 patterns with no repeating characters.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5978">
+<div id="dsq-comment-header-5978" class="dsq-comment-header">
+<cite id="dsq-cite-5978">
+<span id="dsq-author-user-5978">play_boy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5978" class="dsq-comment-body">
+<div id="dsq-comment-message-5978" class="dsq-comment-message"><p>Tia&#8217;s solution is good.<br/>
+I have the same solution but something different.<br/>
+The time : O(n)<br/>
+The space may be : O(n)<br/>
+and it can output the maxlength substring. (you need to delete the comment tag, and run it)<br/>
+like this:</p>
+<p>public static int lengthOfLongestSubstring(String s) {<br/>
+char[] arr = s.toCharArray();<br/>
+int maxlength = 0;<br/>
+int oldstart = 0;<br/>
+int newstart = 0;<br/>
+// int compare_times = 0; // compare times</p>
+<p> HashMap num = new HashMap(); // recode char and the char index<br/>
+HashMap map = new HashMap(); // recode index and the index of char</p>
+<p> for (int i = 0; i &lt; arr.length; i++) {<br/>
+// compare_times++; //<br/>
+if (num.get(arr[i]) != null) {<br/>
+int end = num.get(arr[i]) + 1;<br/>
+for (int j = newstart; j &lt; end; j++)<br/>
+{ // compare times will less than s.length()<br/>
+num.remove(map.get(j));<br/>
+map.remove(j);<br/>
+}<br/>
+newstart = end;<br/>
+if (maxlength &lt; num.size()) {<br/>
+maxlength = num.size();<br/>
+oldstart = newstart;<br/>
+}<br/>
+}<br/>
+num.put(arr[i], i);<br/>
+map.put(i, arr[i]);<br/>
+}<br/>
+if (maxlength &lt; num.size()) {<br/>
+maxlength = num.size();<br/>
+oldstart = newstart;<br/>
+}<br/>
+// System.out.println(&quot;compare_times:&quot; + compare_times); // output the compare times<br/>
+// System.out.println(s.substring(oldstart, oldstart + maxlength)); // output the longest substring<br/>
+return maxlength;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5929">
+<div id="dsq-comment-header-5929" class="dsq-comment-header">
+<cite id="dsq-cite-5929">
+<span id="dsq-author-user-5929">neal</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5929" class="dsq-comment-body">
+<div id="dsq-comment-message-5929" class="dsq-comment-message"><p>this solution has time limited issue in leetcode.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5756">
+<div id="dsq-comment-header-5756" class="dsq-comment-header">
+<cite id="dsq-cite-5756">
+<span id="dsq-author-user-5756">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5756" class="dsq-comment-body">
+<div id="dsq-comment-message-5756" class="dsq-comment-message"><p>good solution, thanks.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5755">
+<div id="dsq-comment-header-5755" class="dsq-comment-header">
+<cite id="dsq-cite-5755">
+<span id="dsq-author-user-5755">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5755" class="dsq-comment-body">
+<div id="dsq-comment-message-5755" class="dsq-comment-message"><p>It&#8217;s the same.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5754">
+<div id="dsq-comment-header-5754" class="dsq-comment-header">
+<cite id="dsq-cite-5754">
+<span id="dsq-author-user-5754">lee</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5754" class="dsq-comment-body">
+<div id="dsq-comment-message-5754" class="dsq-comment-message"><p>string longestStr = string.Empty;</p>
+<p> int length = str.Length;</p>
+<p> int i = 0;</p>
+<p> Loop:</p>
+<p> string tempLongestStr = string.Empty;</p>
+<p> for (int j = i; j longestStr.Length)</p>
+<p> {</p>
+<p> longestStr = tempLongestStr;</p>
+<p> }</p>
+<p> i = i + tempLongestStr.IndexOf(temp) + 1;</p>
+<p> goto Loop;</p>
+<p> }</p>
+<p> else</p>
+<p> {</p>
+<p> tempLongestStr += temp;</p>
+<p> if (tempLongestStr.Length &gt; longestStr.Length)</p>
+<p> {</p>
+<p> longestStr = tempLongestStr;</p>
+<p> }<br/>
+}</p>
+<p> }</p>
+<p>Console.WriteLine(longestStr);<br/>
+Console.ReadLine();</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5628">
+<div id="dsq-comment-header-5628" class="dsq-comment-header">
+<cite id="dsq-cite-5628">
+<span id="dsq-author-user-5628">junmin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5628" class="dsq-comment-body">
+<div id="dsq-comment-message-5628" class="dsq-comment-message"><p>public static int LongestSubStrWithUniqueChars(String s){<br/>
+if(s==null || s.isEmpty())<br/>
+return 0;</p>
+<p> char[] chars = s.toCharArray();</p>
+<p> int current = 0;//current pos in string<br/>
+int length = 0; //current longest substr length<br/>
+int pos = 0; //current longest substr starting pos</p>
+<p> for(current =0 ; current&lt;s.length(); current++){<br/>
+pos = current;<br/>
+boolean[] found = new boolean[256];<br/>
+while(current&lt;s.length() &amp;&amp; !found[chars[current]]){<br/>
+found[chars[current]] = true;<br/>
+current++;<br/>
+}<br/>
+length = Math.max(length, current &#8211; pos);<br/>
+current = pos;<br/>
+}<br/>
+return length;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5565">
+<div id="dsq-comment-header-5565" class="dsq-comment-header">
+<cite id="dsq-cite-5565">
+<span id="dsq-author-user-5565">tia</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5565" class="dsq-comment-body">
+<div id="dsq-comment-message-5565" class="dsq-comment-message"><p>Here is my solution with hash:</p>
+<p><code><br/>
+public int solution(String s) {</p>
+<p> // IMPORTANT: Please reset any member data you declared, as</p>
+<p> // the same Solution instance will be reused for each test case.</p>
+<p> char[] target = s.toCharArray();</p>
+<p> int pre = 0;</p>
+<p> Hashtable h = new Hashtable();</p>
+<p> for(int i =0; i h.size() ? pre : h.size();</p>
+<p> i = h.get(target[i]);</p>
+<p> h.clear();<br/>
+}<br/>
+}<br/>
+return Math.max(pre, h.size());<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2013/02/leetcode-longest-substring-without-repeating-characters-java/';
+var disqus_identifier = '11784 http://www.programcreek.com/?p=11784';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Longest Substring Without Repeating Characters (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=11784';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

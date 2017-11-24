@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Micro Batching</title>
+
+    <meta name="description" content="">
+    <meta name="keywords"    content="Java high performance micro batching">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Micro Batching">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Micro Batching"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/micro-batching.html"/>
+    <meta property="og:description" content=""/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/read-patterns.html";
+var nextArticleInCategory = "";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 15313;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html">Modern Hardware</a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html"><b>Micro Batching</b></a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Micro Batching</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#micro-batching-video-tutorial">Micro Batching Video Tutorial</a></li><li><a href="#the-latency-vs-throughput-trade-off">The Latency vs Throughput Trade-off</a><ul><li><a href="#latency">Latency</a></li><li><a href="#throughput">Throughput</a></li></ul></li><li><a href="#batching">Batching</a></li><li><a href="#micro-batching-to-the-rescue">Micro Batching to the Rescue</a><ul><li><a href="#variable-duration-batch-cycles">Variable Duration Batch Cycles</a></li></ul></li><li><a href="#micro-batching-use-cases">Micro Batching Use Cases</a><ul><li><a href="#file-persistence">File Persistence</a></li><li><a href="#inter-thread-communication">Inter-thread Communication</a></li><li><a href="#inter-process-communication">Inter-process Communication</a></li><li><a href="#single-threaded-servers">Single-threaded Servers</a></li><li><a href="#traversing-large-data-structures">Traversing Large Data Structures</a></li></ul></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2016-04-28
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    <i>Micro batching</i> is a technique where incoming tasks to be executed are grouped into small batches to achieve
+    some of the performance advantage of batch processing, without increasing the latency for each task completion
+    too much. Micro batching is typically applied in systems where the amount of incoming tasks is variable.
+    The system will grab whatever incoming tasks have been received and execute them in a batch. This process
+    is executed repeatedly.
+</p>
+
+
+<img src="../images/java-performance/micro-batching-0.png" alt="Micro batching illustrated with a batch size of 4.">
+
+<p>
+    The batch size can thus vary from 1 to a maximum upper limit set by the system, e.g. 64, 128, 1024 or whatever maximum
+    batch size is appropriate for the system. Typically the maximum batch size is small for reasons I will explain
+    below - hence the term <i>micro batching</i>.
+</p>
+
+
+
+<a name="micro-batching-video-tutorial"></a>
+<h2>Micro Batching Video Tutorial</h2>
+
+<p>
+    Here is a video version of this tutorial:
+</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bozAoSIoQpU" frameborder="0" allowfullscreen></iframe>
+
+
+
+<a name="the-latency-vs-throughput-trade-off"></a>
+<h2>The Latency vs Throughput Trade-off</h2>
+
+<p>
+    Service oriented systems often need both low latency and high throughput. This is not always possible though.
+    Some techniques to decrease latency also decreases throughput, and some techniques to increase throughput
+    also increases latency. In the following sections I will explain this in more detail.
+</p>
+
+
+
+<a name="latency"></a>
+<h3>Latency</h3>
+
+<p>
+    Latency is a measure of time delay in a system. In a client - server system latency can mean several things.
+    The network latency is the time it takes for a message sent by the client until it reaches the server.
+    The server latency is the time it takes for the server to process the request and generate a response.
+    Both types of latency are illustrated below:
+</p>
+
+<img src="../images/java-performance/micro-batching-1.png" alt="The latencies involved in client server systems.">
+
+<p>
+    The full round-trip time of a single request until the client receives a response will be
+</p>
+
+<pre class="codeBox">
+network latency + server latency + network latency  =
+
+2 * network latency + server latency
+</pre>
+
+<p>
+    First the request has to be sent to the server, then the server has to process the request and generate a response,
+    and then the response has to be sent back over the network to the client.
+</p>
+
+<p>
+    For a system to have a fast response time both network latency and server latency must be low. Just exactly
+    what "fast" and "slow" response times, or "high" and "low" latencies depends on the concrete system. For some
+    systems a response time less than 1 second is good. And for some systems it has to be less than 10 milliseconds
+    to be good.
+</p>
+
+
+
+
+<a name="throughput"></a>
+<h3>Throughput</h3>
+
+<p>
+    Throughput is a measure for how much work a system can perform in a given time interval. In the case of a client - server
+    system the server throughput measures how many requests per time interval (typically per second) the server can
+    process. This number means the total number of requests per second the server can process from all connected
+    clients - not just from a single client.
+</p>
+
+<p>
+    The throughput as seen by the client means how many requests per time interval that particular client can
+    send and receive responses for. Both types of throughput are illustrated below:
+</p>
+
+<img src="../images/java-performance/micro-batching-2.png" alt="The server throughput of a client server system.">
+
+<img src="../images/java-performance/micro-batching-3.png" alt="The client-server throughput of a client server system.">
+
+
+
+
+<a name="batching"></a>
+<h2>Batching</h2>
+
+<p>
+    Batching is a technique to increase the throughput of a system. Instead of executing each task separately,
+    the tasks are grouped into big batches and executed all together.
+</p>
+
+<p>
+    Batching makes sense in situations where the overhead associated with executing each task is high - if that
+    overhead can be reduced by batching execution. To see how, let is look at an example:
+</p>
+
+<p>
+    Imagine a client has 10 requests it needs to send to the server. The client can send 1 request at a time,
+    receive a response and then send the next request. The total time it will take to process those messages will
+    be:
+</p>
+
+<pre class="codeBox">
+10 * (network latency + server latency + network latency) =
+
+20 * network latency + 10 * server latency
+</pre>
+
+
+<p>
+    If instead the client sends all 10 requests in a single message to the server, and the server processes them
+    all sequentially, and sends back 10 responses, the total time it will take to process those requests will be:
+</p>
+
+
+<pre class="codeBox">
+network latency + 10 * server latency + network latency =
+
+2 * network latency + 10 * server latency
+</pre>
+
+
+<p>
+    As you can see, batching has greatly reduced the network latency involved in processing 10 requests - from
+    20 * network latency to just 2 * network latency. This means that the total throughput of the client-server
+    system as seen by the client has increased.
+</p>
+
+
+<p>
+    The disadvantage of batching is the time it takes to collect the tasks to batch. If it takes the client 2 hours
+    to collect those 10 tasks, then the latency of the system as a whole has become quite high. The first task needs to wait
+    2 hours before there are enough tasks to send a batch, meaning it will take 2 hours from the first tasks is
+    collected until the client gets a response for it.
+</p>
+
+<p>
+    Similarly, once the batch is sent it takes the server 10 * server latency to process the batch. This further
+    increases the latency of the first request, since it has to wait for all 10 requests to be processed before
+    a response is received for the first request.
+</p>
+
+<p>
+    As you can see, batching is a technique that increases throughput but which also increases latency.
+</p>
+
+
+
+
+<a name="micro-batching-to-the-rescue"></a>
+<h2>Micro Batching to the Rescue</h2>
+
+<p>
+    Micro batching is a variant of batching which attempts to strike a better compromise between latency and throughput
+    than batching does. The way micro batching does this is by waiting short time intervals to batch up tasks
+    before processing them. I refer to this interval as a <i>batch cycle</i>. This short batch cycle principle
+    is illustrated here:
+</p>
+
+<img src="../images/java-performance/micro-batching-4.png" alt="Micro batching with fixed duration batch cycles.">
+
+<p>
+    How long the duration of a batch cycle should be depends on the system. For some systems 1 second might be sufficient.
+    For other systems 50 - 100 milliseconds might be fine. And for other systems even less.
+</p>
+
+<p>
+    If there is a high load on the system it will receive more tasks ready for processing within each batch cycle.
+    Thus, as the load on the system goes up, the batch size goes up, and throughput increases. The price in terms of
+    higher latency when batch size increases is minimal.
+</p>
+
+
+
+
+<a name="variable-duration-batch-cycles"></a>
+<h3>Variable Duration Batch Cycles</h3>
+
+<p>
+    For systems that require low response time, even a 50 millisecond batch cycle duration can be too long.
+    Such systems might need to use a variable batch cycle length instead.
+</p>
+
+<p>
+    To achieve lower latency, yet allowing for micro batching to happen, you can loop over the input channels
+    (inbound network connections, directories etc.) and check them all for incoming tasks (requests, messages etc.).
+    Whatever tasks you find you execute in a micro batch. Each iteration through this loop becomes a single
+    batch cycle.
+</p>
+
+<p>
+    Once the micro batch is executed, you repeat the loop immediately. This means, that the time between each
+    batch cycle depends entirely on the amount of incoming tasks. For low load the batch size will be small, and
+    thus the batch cycle will be shorter. For high load the batch size will grow, and thus the batch cycle duration
+    will grow.
+</p>
+
+<p>
+    Variable duration batch cycles are illustrated here:
+</p>
+
+<img src="../images/java-performance/micro-batching-5.png" alt="Micro batching with variable duration batch cycles.">
+
+
+
+
+
+<a name="micro-batching-use-cases"></a>
+<h2>Micro Batching Use Cases</h2>
+
+<p>
+    Micro batching can be used in many of the situations where batching can be used, but where lower response times
+    are required. I will cover some of these use cases in the following sections, but these use cases are not the only
+    ones. From these use cases you should be able to get the general picture, and be able to determine when micro batching
+    might be useful in your own systems.
+</p>
+
+
+
+<a name="file-persistence"></a>
+<h3>File Persistence</h3>
+
+<p>
+    Writing data to disk usually comes with a significant overhead. If your system needs to write a block of data to disk
+    for each task executed, the total overhead can be significant.
+</p>
+
+<img src="../images/java-performance/micro-batching-6.png" alt="Writing blocks of data to disk individually.">
+
+<p>
+    If you batch up the writes and thus only write the combined block of data to disk, the overhead associated with
+    writing a larger block of data is usually smaller than the combined overheads of making the writes individually.
+    The result is a system which can handle larger throughput (more data written per time unit).
+</p>
+
+<img src="../images/java-performance/micro-batching-7.png" alt="Writing blocks of data to disk in micro batches.">
+
+
+<p>
+    Using micro batching for file persistence usually requires that the rest of the system is designed to use
+    micro batching too. If the data blocks arrives one at a time at the file persistence component, the only way to
+    group them into batches is to wait a short time interval before writing them to disk. If the data blocks
+    arrive in micro batches because they are the result of micro batch processing elsewhere, grouping them into
+    to micro batches for writing them to disk is much easier.
+</p>
+
+
+
+
+<a name="inter-thread-communication"></a>
+<h3>Inter-thread Communication</h3>
+
+<p>
+    When threads communicate they usually do so via concurrent data structures. An often used structure for this
+    purpose is a concurrent queue. This is illustrated here:
+</p>
+
+<img src="../images/java-performance/micro-batching-8.png" alt="Inter-thread communication via a queue.">
+
+
+<p>
+    Reading and writing elements in a queue one element at a time is often associated with a higher overhead
+    per element than when reading or writing batches of elements. You can read more about that in my tutorial about the
+    <a href="ring-buffer.html">Java Ring Buffer</a>. Ring buffers can also be used as queues. Sending batches
+    of messages via queues is illustrated here:
+</p>
+
+<img src="../images/java-performance/micro-batching-9.png" alt="Inter-thread communication via a queue using batch reads and writes.">
+
+
+
+
+
+<a name="inter-process-communication"></a>
+<h3>Inter-process Communication</h3>
+
+<p>
+    Inter-process communication is in many ways similar to inter-thread communication. When processes communicate
+    there is often an overhead associated with sending data outside the process - for instance to disk, unix sockets
+    or network sockets. Therefore it can be beneficial to batch up data sent outside a process to minimize the
+    overhead per data block (e.g. per request, message, task etc.).
+</p>
+
+<p>
+    I have already earlier in this tutorial explained how batching can help in a client-server scenario, which is
+    a common case of inter-process communication.
+</p>
+
+<p>
+    As an additional testament to that truth, database batch updates are typically much faster than sending each update to
+    the database separately. With a batch update more updates are sent over the network in a batch, and the database
+    may also have the opportunity to write the updates to disk as a batch operation.
+</p>
+
+
+
+
+<a name="single-threaded-servers"></a>
+<h3>Single-threaded Servers</h3>
+
+<p>
+    The single-threaded server architecture is regaining popularity these days because of its very simple concurrency
+    model (everything runs in the same thread), and therefore its ability to utilize the CPU caches better in many
+    cases than multithreaded concurrency models. This is also mentioned in my tutorial about
+    <a href="../java-concurrency/concurrency-models.html">concurrency models</a>.
+</p>
+
+<p>
+    Single-threaded servers typically poll all open inbound connections for data to read. If an inbound connection
+    has inbound data it is read and processed.
+</p>
+
+<p>
+    Single-threaded servers can benefit from micro batching. Instead of reading and processing one message from one
+    connection at a time, the single-threaded server reads all full messages from all inbound connections and processes
+    them in a batch.
+</p>
+
+<p>
+    Using a micro batching design in a single-threaded server makes it easier for other parts of that system
+    (running inside the same server) to also use micro batching.
+</p>
+
+<img src="../images/java-performance/micro-batching-10.png" alt="Single-threaded server polling inbound connections and executing received messages in micro batches.">
+
+
+
+
+
+<a name="traversing-large-data-structures"></a>
+<h3>Traversing Large Data Structures</h3>
+
+<p>
+    Some applications may need to traverse large data structures stored in memory or on disk. For instance, a
+    database table, or a tree structure. There is a certain overhead associated with traversing large data structures.
+    For memory based data structures the data has to be brought into the CPU L1 cache from main memory, and
+    for disk based data structures the data has to be brought into main memory from disk, and then from main
+    memory into the L1 cache.
+</p>
+
+<p>
+    Instead of traversing the whole data structure to serve just one "request" (task, message etc.) you can batch
+    up a few requests or tasks. When traversing the data structure, each "record" or "node" in the data structure
+    can be examined according to a batch of requests, and not just a single request.
+</p>
+
+<p>
+    In case any of these requests make changes to the data structure, the requests should get access to the data structure
+    in the same order they were received from the client. That way request 2 will see each record / node of the
+    data structure as request 1 would have left it, even if request 1 is not yet fully finished updating the whole
+    data structure.
+</p>
+
+
+<img src="../images/java-performance/micro-batching-11.png" alt="A batch of queries accessing each item of a large data structure as the data structure is being traversed.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div>
+                </div>
+
+                <div id="next"></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Collections - NavigableSet</title>
+
+    <meta name="description" content="Explains how Java's NavigableSet interface works which is part of the Java Collection API.">
+    <meta name="keywords"    content="java collection collections NavigableSet java.util.NavigableSet API framework">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Collections - NavigableSet">
+    <meta name="twitter:description" content="Explains how Java's NavigableSet interface works which is part of the Java Collection API.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Collections - NavigableSet"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-collections/navigableset.html"/>
+    <meta property="og:description" content="Explains how Java's NavigableSet interface works which is part of the Java Collection API."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-collections/java-collections-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-collections/sortedset.html";
+var nextArticleInCategory = "/java-collections/map.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 5476;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Collections</div><ol><li><a href="index.html">Java Collections Tutorial</a></li><li><a href="overview.html">Java Collections - Overview</a></li><li><a href="iterable.html">Java Collections - Iterable</a></li><li><a href="collection.html">Java Collections - Collection</a></li><li><a href="generic-collections.html">Java Collections - Generic Collections</a></li><li><a href="list.html">Java Collections - List</a></li><li><a href="set.html">Java Collections - Set</a></li><li><a href="sortedset.html">Java Collections - SortedSet</a></li><li><a href="navigableset.html"><b>Java Collections - NavigableSet</b></a></li><li><a href="map.html">Java Collections - Map</a></li><li><a href="sortedmap.html">Java Collections - SortedMap</a></li><li><a href="navigablemap.html">Java Collections - NavigableMap</a></li><li><a href="queue.html">Java Collections - Queue</a></li><li><a href="deque.html">Java Collections - Deque</a></li><li><a href="stack.html">Java Collections - Stack</a></li><li><a href="hashcode-equals.html">Java Collections - hashCode() and equals()</a></li><li><a href="sorting.html">Java Collections - Sorting</a></li><li><a href="streams.html">Java Collections - Streams</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Collections - NavigableSet</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#iterator">descendingIterator() and descendingSet()</a></li><li><a href="#headset">headSet(), tailSet() and subSet()</a></li><li><a href="#ceiling">ceiling(), floor(), higher(), and lower()</a></li><li><a href="#pollFirst">pollFirst() and pollLast()</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-09-20
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The <code>java.util.NavigableSet</code> interface is a subtype of the
+    <a href="set.html"><code>java.util.SortedSet</code></a> interface. It behaves like
+    a <code>SortedSet</code> with the exception you have navigation methods available in
+    addition to the sorting mechanisms of the <code>SortedSet</code>. In this text
+    I will look closer at some of these navigation methods.
+</p>
+
+<p>
+    In Java 6 there is only one implementation of the <code>NavigableSet</code> interface
+    in the <code>java.util</code> package: <code>java.util.TreeSet</code>
+ There is an implementation in the <code>java.util.concurrent</code> package
+    but that is outside the scope of this trail.    
+</p>
+
+<p>
+    Here is a list of the topics covered in this text:
+</p>
+
+<ol>
+    <li><a href="#iterator">descendingIterator() and descendingSet()</a></li>
+    <li><a href="#headset">headSet(), tailSet() and subSet()</a></li>
+    <li><a href="#ceiling">ceiling(), floor(), higher() and lower()</a></li>
+    <li><a href="#pollFirst">pollFirst() and pollLast()</a></li>
+</ol>
+
+
+<a name="iterator"></a>
+<br/>
+<h2>descendingIterator() and descendingSet()</h2>
+<p>
+    The first interesting navigation methods are the <code>descendingIterator()</code> and <code>descendingSet()</code>
+    methods.
+</p>
+
+<p>
+    The <code>descendingSet()</code> method returns a <code>NavigableSet</code> in which the order of the
+    elements is reversed compared to this one. The returned "view" is backed by the original <code>NavigableSet</code>,
+    so changes to the descending set are also reflected in the original set.
+</p>
+
+<p>
+    Here is a simple example:
+</p>
+
+<pre class="codeBox">
+NavigableSet reverse = original.descendingSet();
+</pre>
+
+<p>
+    The <code>descendingIterator()</code> method allows you to iterate the elements of the <code>NavigableSet</code>
+    (which is also a <code>SortedSet</code>) in reverse order, without changing the order of the elements internally.
+</p>
+
+<pre class="codeBox">
+Iterator reverse = original.descendingIterator();    
+</pre>
+
+
+<a name="headset"></a>
+<br/>
+<h2>headSet(), tailSet() and subSet()</h2>
+<p>
+    The <code>headSet()</code> method returns a view of the original <code>NavigableSet</code> which
+    only contains elements that are "less than" the given element. Here is an example:
+</p>
+
+<pre class="codeBox">
+NavigableSet original = new TreeSet();
+original.add("1");
+original.add("2");
+original.add("3");
+
+//this headset will contain "1" and "2"
+SortedSet headset = original.headSet("3");
+
+//this headset will contain "1", "2", and "3" because "inclusive"=true
+NavigableSet headset = original.headSet("3", true);
+</pre>
+
+<p>
+    The <code>tailSet()</code> method works the same way, except it returns all elements that are
+    <b>higher</b> than the given parameter element.
+</p>
+
+<p>
+    The <code>subSet()</code> allows you to pass two parameters demarcating the boundaries of the
+    view set to return. The elements matching the first boundary is included, where as elements
+    matching the last boundary are not. Here is an example:
+</p>
+
+<pre class="codeBox">
+NavigableSet original = new TreeSet();
+original.add("1");
+original.add("2");
+original.add("3");
+original.add("4");
+original.add("5");
+
+//this subset will contain "2" and "3"
+SortedSet    subset  = original.subSet("2", "4");
+
+//this subset will contain "2", "3" and "4" because
+//    fromInclusive=true, and toInclusive=true 
+NavigableSet subset = original.subSet("2", true, "4", true);
+</pre>
+
+
+
+<a name="ceiling"></a>
+<br/>
+<h2>ceiling(), floor(), higher(), and lower()</h2>
+<p>
+    The <code>ceiling()</code> method returns the least (smallest) element in this
+    set that is greater than or equal to the element passed as parameter to the
+    <code>ceiling()</code> method. Here is an example:
+</p>
+
+<pre class="codeBox">
+NavigableSet original = new TreeSet();
+original.add("1");
+original.add("2");
+original.add("3");
+
+
+//ceiling will be "2".
+Object ceiling = original.ceiling("2");
+
+//floor will be "2".
+Object floor = original.floor("2");
+</pre>
+
+<p>
+    The <code>floor()</code> method does the opposite of <code>ceiling()</code>
+</p>
+
+<p>
+    The <code>higher()</code> method returns the least (smallest) element in this
+    set that is greater than (not equal too) the element passed as parameter to
+    the <code>higher()</code> method. Here is an example:
+</p>
+
+<pre class="codeBox">
+NavigableSet original = new TreeSet();
+original.add("1");
+original.add("2");
+original.add("3");
+
+
+//higher will be "3".
+Object higher = original.higher("2");
+
+//lower will be "1"
+Object lower = original.lower("2");
+</pre>
+
+<p>
+    The <code>lower()</code> method does the opposite of the <code>higher()</code> method.
+</p>
+
+
+
+<a name="pollFirst"></a>
+<br/>
+<h2>pollFirst() and pollLast()</h2>
+
+<p>
+   The <code>pollFirst()</code> method returns and removes the "first" element in the <code>NavigableSet</code>
+   or null if the set is empty. The <code>pollLast()</code> returns and removes the "last" element in the set
+    or null if the set is empty. "First" means smallest element according to the sort order of the set.
+    "Last" means largest according to teh element sorting order of the set.
+</p>
+
+<p>
+    Here are two examples:
+</p>
+
+<pre class="codeBox">
+NavigableSet original = new TreeSet();
+original.add("1");
+original.add("2");
+original.add("3");
+
+
+//first is "1"
+Object first = original.pollFirst();
+
+//last is "3"
+Object last = original.pollLast();
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="map.html">Java Collections - Map</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

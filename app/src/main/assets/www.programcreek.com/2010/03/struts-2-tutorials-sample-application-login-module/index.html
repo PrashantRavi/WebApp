@@ -1,0 +1,943 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>Struts 2 Tutorial Series: Sample Application &#8211; Login Module</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Welcome to Struts 2 Tutorial series where we will explore how to create web application by using Struts 2. In this tutorial, we will first make a very"/>
+<meta name="keywords" content="code download,login,sample appliation,struts2,struts2 login example"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; Struts 2 Tutorial Series: Sample Application &#8211; Login Module Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Restore MySQL database after accident uninstallation of MySQL' href='../../02/restore-mysql-database-after-accident-uninstallation-of-mysql/index.html'/>
+<link rel='next' title='Struts 2 Tutorial Series: A simple Hibernate application' href='../a-simple-hibernate-application/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=1498.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2010_03_struts-2-tutorials-sample-application-login-module_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2010_03_struts-2-tutorials-sample-application-login-module_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../../2012/11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-1498"> <a href="index.html" rel="bookmark">
+Struts 2 Tutorial Series: Sample Application &#8211; Login Module </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p> <br/>
+Welcome to <a href="../../05/the-best-free-struts-2-tutorial/index.html">Struts 2 Tutorial series</a> where we will explore how to create web application by using Struts 2. </p>
+<p>In this tutorial, we will first make a very simple Login module, then add features of Hibernate and Tiles, Ajax, Interceptor, Validator, etc. Finally, it will be a fully functional Struts 2 web application - "Quick Memo".</p>
+<p>Before you get started, you may want to watch a 10-minute video to get a basic idea of <a href="../../../2012/03/struts-2-video-tutorial-hello-world/index.html">how to use Struts 2</a>. </p>
+<p><strong>1. Goal of this sample app</strong></p>
+<p>Goal: login module.</p>
+<p>Finally, it looks like this.</p>
+<p><img class="alignnone size-full wp-image-1500" title="6" src="../../../wp-content/uploads/2010/03/6.jpg" alt="" width="300" height="144"/></p>
+<p>When Login successfully, it shows:</p>
+<p><img class="alignnone size-full wp-image-1501" title="7" src="../../../wp-content/uploads/2010/03/7.jpg" alt="" width="269" height="103"/></p>
+<p>When Login fails, it shows: </p>
+<p><img class="alignnone size-full wp-image-1502" title="struts 2 login" src="../../../wp-content/uploads/2010/03/8.jpg" alt="" width="333" height="187" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/8.jpg 333w, http://www.programcreek.com/wp-content/uploads/2010/03/8-300x168.jpg 300w" sizes="(max-width: 333px) 100vw, 333px"/></p>
+<p><strong>2. Tools and Libraries required</strong></p>
+<p>Before we start our example, we need several tools and libraries. The following are what I’m using. Of course, you can use higher version. 1) JDK 1.5 or above. 2) Tomcat 6.0 3) Eclipse IDE for Java EE Developers. 4) Struts 2.0.14. JAR files required for this application. </p>
+<ul>
+<li>commons-logging-1.0.4.jar</li>
+<li>freemarker-2.3.8.jar</li>
+<li>ognl-2.6.11.jar</li>
+<li>struts2-core-2.0.12.jar</li>
+<li>xwork-2.0.6.jar</li>
+</ul>
+<p><strong>3. Getting Started</strong></p>
+<p>Create a Dynamic Web Project.</p>
+<p><img class="alignnone size-full wp-image-1504" title="Create a dynamic web project" src="../../../wp-content/uploads/2010/03/3-13-2010-2-04-09-PM.jpg" alt="" width="495" height="563" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/3-13-2010-2-04-09-PM.jpg 495w, http://www.programcreek.com/wp-content/uploads/2010/03/3-13-2010-2-04-09-PM-263x300.jpg 263w" sizes="(max-width: 495px) 100vw, 495px"/></p>
+<p>#notice my project directory is: C:\eclipseworkspace\Struts2Login<br/>
+Copy the required JAR files to WebContent-&gt;WEB-INF-&gt;lib folder under project directory. Now, you project should like this.</p>
+<p><img class="alignnone size-full wp-image-1505" title="Struts 2 sample application" src="../../../wp-content/uploads/2010/03/2.jpg" alt="" width="265" height="307" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/2.jpg 265w, http://www.programcreek.com/wp-content/uploads/2010/03/2-258x300.jpg 258w" sizes="(max-width: 265px) 100vw, 265px"/></p>
+<p><strong>4. Config web.xml file</strong></p>
+<p>Set Struts2 as filter in web.xml file. If you don’t understand why set it as a filter, check out <a href="http://download.oracle.com/docs/cd/B32110_01/web.1013/b28959/filters.htm">here</a>.</p>
+<p>web.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span><span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;web-app</span> <span style="color: #000066;">xmlns:xsi</span>=<span style="color: #ff0000;">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">xmlns</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span style="color: #000066;">xmlns:web</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">xsi:schemaLocation</span>=<span style="color: #ff0000;">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span></span>
+<span style="color: #009900;">	<span style="color: #000066;">id</span>=<span style="color: #ff0000;">&quot;WebApp_ID&quot;</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;2.5&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;display-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>Struts2 Login<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/display-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>struts2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>org.apache.struts2.dispatcher.FilterDispatcher<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-class<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>struts2<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-name<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>/*<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/url-pattern<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/filter-mapping<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>Login.jsp<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/welcome-file-list<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/web-app<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p><strong>5. Create Login Action Class</strong></p>
+<p>Note that, the above action class contains two fields, username and password. They will hold values passed from form, and also contains an authenticate() method that will authenticate users. Normally, this can be setup with LDAP or Database. But here for a simple demonstration, we are simply check if username is “admin” and password is “admin”. The authenticate() method returns a string which determines the result page.</p>
+<p>LoginAction.java</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">package</span> <span style="color: #006699;">com.programcreek.struts2</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #006699;">com.opensymphony.xwork2.ActionSupport</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> LoginAction <span style="color: #000000; font-weight: bold;">extends</span> ActionSupport<span style="color: #009900;">&#123;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> username<span style="color: #339933;">;</span>
+	<span style="color: #000000; font-weight: bold;">private</span> <span style="color: #003399;">String</span> password<span style="color: #339933;">;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> authenticate<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">username</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;admin&quot;</span><span style="color: #009900;">&#41;</span>
+				<span style="color: #339933;">&amp;&amp;</span> <span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">password</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;admin&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #0000ff;">&quot;success&quot;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			addActionError<span style="color: #009900;">&#40;</span>getText<span style="color: #009900;">&#40;</span><span style="color: #0000ff;">&quot;error.login&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                        <span style="color: #666666; font-style: italic;">//a function from ActionSupport, to get properties values from properties file</span>
+                        <span style="color: #666666; font-style: italic;">//we will explore this below.</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #0000ff;">&quot;error&quot;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getUsername<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> username<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setUsername<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> username<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">username</span> <span style="color: #339933;">=</span> username<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #003399;">String</span> getPassword<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> password<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">void</span> setPassword<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> password<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">this</span>.<span style="color: #006633;">password</span> <span style="color: #339933;">=</span> password<span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>6. Create ResourceBundle</strong></p>
+<p>ResourceBundle is a very useful Java entity that helps separating static contents from source code. It can hold some static messages such as names for form elements. We define an ApplicationResources.properties file for our application. This file should be present in WEB-INF/classes folder.</p>
+<p><img class="alignnone size-full wp-image-1506" title="source folder" src="../../../wp-content/uploads/2010/03/3.jpg" alt="" width="595" height="555" srcset="http://www.programcreek.com/wp-content/uploads/2010/03/3.jpg 595w, http://www.programcreek.com/wp-content/uploads/2010/03/3-300x279.jpg 300w" sizes="(max-width: 595px) 100vw, 595px"/></p>
+<p>Now we create a source folder called resources like this.</p>
+<p><img class="alignnone size-full wp-image-1507" title="applicationresources.properties" src="../../../wp-content/uploads/2010/03/4.jpg" alt="" width="271" height="138"/></p>
+<p>ApplicationResources.properties</p>
+<pre>
+label.username= Username
+label.password= Password
+label.login= Login
+error.login= Invalid Username/Password. Please try again.
+</pre>
+<p><strong>7. JSP Pages</strong></p>
+<p>JSP files should be put under the <em>WebContent</em> directory. </p>
+<p>Login.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Struts 2 - Login Application&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Struts 2 - Login Application&lt;/h2&gt;
+&lt;s:actionerror /&gt;
+&lt;s:form action=&quot;login.action&quot; method=&quot;post&quot;&gt;
+	&lt;s:textfield name=&quot;username&quot; key=&quot;label.username&quot; size=&quot;20&quot; /&gt;
+	&lt;s:password name=&quot;password&quot; key=&quot;label.password&quot; size=&quot;20&quot; /&gt;
+	&lt;s:submit method=&quot;execute&quot; key=&quot;label.login&quot; align=&quot;center&quot; /&gt;
+&lt;/s:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></td></tr></table></div>
+<p>Welcome.jsp</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="jsp" style="font-family:monospace;">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;
+&lt;html&gt;
+&nbsp;
+&lt;head&gt;
+&lt;title&gt;Welcome Page - Struts 2 - Login Application&lt;/title&gt;
+&lt;/head&gt;
+&nbsp;
+&lt;body&gt;
+	&lt;h2&gt;Congratulations, &lt;s:property value=&quot;username&quot; /&gt;!&lt;/h2&gt;
+	Welcome to Struts 2 world.
+&lt;/body&gt;
+&lt;/html&gt;</pre></td></tr></table></div>
+<p><strong>8. struts.xml file</strong></p>
+<p>Create struts.xml file under resources directory like the ApplicationResources.properties file.</p>
+<p><img class="alignnone size-full wp-image-1508" title="struts.xml" src="../../../wp-content/uploads/2010/03/5.jpg" alt="" width="279" height="152"/></p>
+<p>struts.xml</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="xml" style="font-family:monospace;"><span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;?xml</span> <span style="color: #000066;">version</span>=<span style="color: #ff0000;">&quot;1.0&quot;</span> <span style="color: #000066;">encoding</span>=<span style="color: #ff0000;">&quot;UTF-8&quot;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span></span>
+<span style="color: #00bbdd;">&lt;!DOCTYPE struts PUBLIC</span>
+<span style="color: #00bbdd;">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot;</span>
+<span style="color: #00bbdd;">    &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;</span>
+&nbsp;
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;struts<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.enable.DynamicMethodInvocation&quot;</span></span>
+<span style="color: #009900;">		<span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;false&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.devMode&quot;</span> <span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;false&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;constant</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;struts.custom.i18n.resources&quot;</span></span>
+<span style="color: #009900;">		<span style="color: #000066;">value</span>=<span style="color: #ff0000;">&quot;ApplicationResources&quot;</span> <span style="color: #000000; font-weight: bold;">/&gt;</span></span>
+&nbsp;
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;package</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;default&quot;</span> <span style="color: #000066;">extends</span>=<span style="color: #ff0000;">&quot;struts-default&quot;</span> <span style="color: #000066;">namespace</span>=<span style="color: #ff0000;">&quot;/&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+&nbsp;
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;action</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;login&quot;</span> <span style="color: #000066;">method</span>=<span style="color: #ff0000;">&quot;authenticate&quot;</span></span>
+<span style="color: #009900;">			<span style="color: #000066;">class</span>=<span style="color: #ff0000;">&quot;com.programcreek.struts2.LoginAction&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;success&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>Welcome.jsp<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+			<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;result</span> <span style="color: #000066;">name</span>=<span style="color: #ff0000;">&quot;error&quot;</span><span style="color: #000000; font-weight: bold;">&gt;</span></span>Login.jsp<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/result<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+&nbsp;
+		<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/action<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+	<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/package<span style="color: #000000; font-weight: bold;">&gt;</span></span></span>
+<span style="color: #009900;"><span style="color: #000000; font-weight: bold;">&lt;/struts<span style="color: #000000; font-weight: bold;">&gt;</span></span></span></pre></td></tr></table></div>
+<p><strong>9. Done</strong></p>
+<p>Run the project now.</p>
+<p><img class="alignnone size-full wp-image-1512" title="struts2 login" src="../../../wp-content/uploads/2010/03/61.jpg" alt="" width="300" height="144"/></p>
+<p><strong>Next Step</strong><br/>
+Once a user is authenticated, the website content will be displayed. Normally, the content is from database, so the next step is to make a simple database app with Hibernate. </p>
+<p>-> <a href="../../05/the-best-free-struts-2-tutorial/index.html">Back to Index</a>. </p>
+<p>References:<br/>
+<a href="http://bredelet.com/Denis/FreeMarker%20first%20steps.html">Freemarker</a></p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../struts-2-tutorial-series-how-to-insert-tiles-to-your-project/index.html" rel="bookmark" title="Struts 2 Tutorial Series &#8211; How to insert Tiles to your project">Struts 2 Tutorial Series &#8211; How to insert Tiles to your project </a></li>
+<li><a href="../a-simple-hibernate-application/index.html" rel="bookmark" title="Struts 2 Tutorial Series: A simple Hibernate application">Struts 2 Tutorial Series: A simple Hibernate application </a></li>
+<li><a href="../../../2011/08/some-notes-about-struts-2-actions/index.html" rel="bookmark" title="Struts 2 Tutorial Series: Some notes about Struts 2 Actions">Struts 2 Tutorial Series: Some notes about Struts 2 Actions </a></li>
+<li><a href="../../05/the-best-free-struts-2-tutorial/index.html" rel="bookmark" title="The Best Struts 2 Tutorial Index">The Best Struts 2 Tutorial Index </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/frameworks/struts-2/index.html" rel="category tag">Struts 2</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2010/03/struts-2-tutorials-sample-application-login-module/" dc:identifier="http://www.programcreek.com/2010/03/struts-2-tutorials-sample-application-login-module/" dc:title="Struts 2 Tutorial Series: Sample Application &#8211; Login Module" trackback:ping="http://www.programcreek.com/2010/03/struts-2-tutorials-sample-application-login-module/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-6357">
+<div id="dsq-comment-header-6357" class="dsq-comment-header">
+<cite id="dsq-cite-6357">
+<span id="dsq-author-user-6357">Nancy</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6357" class="dsq-comment-body">
+<div id="dsq-comment-message-6357" class="dsq-comment-message"><p>Hi, How to retrieve multiple files from db using struts</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5915">
+<div id="dsq-comment-header-5915" class="dsq-comment-header">
+<cite id="dsq-cite-5915">
+<span id="dsq-author-user-5915">tia</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5915" class="dsq-comment-body">
+<div id="dsq-comment-message-5915" class="dsq-comment-message"><p>Thanks you for sharing this, very clear for beginners like me. </p>
+<p>There are two small mistake: one in login.jsp page, the method name should be &#8220;authenticate&#8221;, &#8220;execute&#8221; is the method name in video tutorial. :))</p>
+<p>second, in struts.xml file, if I add namespace=&#8221;/&#8221; in package tag, it can not find the action, I don&#8217;t know why.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5101">
+<div id="dsq-comment-header-5101" class="dsq-comment-header">
+<cite id="dsq-cite-5101">
+<span id="dsq-author-user-5101">John</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5101" class="dsq-comment-body">
+<div id="dsq-comment-message-5101" class="dsq-comment-message"><p>jsp should be put under WebContent directory. You can take a look at the following short video to see how to run the project: <a href="../../../2012/03/struts-2-video-tutorial-hello-world/index.html" rel="nofollow">http://www.programcreek.com/2012/03/struts-2-video-tutorial-hello-world/</a>.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5100">
+<div id="dsq-comment-header-5100" class="dsq-comment-header">
+<cite id="dsq-cite-5100">
+<span id="dsq-author-user-5100">prateek</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5100" class="dsq-comment-body">
+<div id="dsq-comment-message-5100" class="dsq-comment-message"><p>Where to put the jsp ?? how to run the project ?? Please elaborate.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4877">
+<div id="dsq-comment-header-4877" class="dsq-comment-header">
+<cite id="dsq-cite-4877">
+<span id="dsq-author-user-4877">nitin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4877" class="dsq-comment-body">
+<div id="dsq-comment-message-4877" class="dsq-comment-message"><p>Hi, I am getting FreeMarker template error, whenever i do validate=true in my jsp and i am having FirstAction-validation.xml file. Please help me.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4779">
+<div id="dsq-comment-header-4779" class="dsq-comment-header">
+<cite id="dsq-cite-4779">
+<span id="dsq-author-user-4779">sathish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4779" class="dsq-comment-body">
+<div id="dsq-comment-message-4779" class="dsq-comment-message"><p>Hi</p>
+<p>I tried this and i&#8217;m get the http status 404 error<br/>
+The requested resource is not available.</p>
+<p>I&#8217;m using apache tomcat 7.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4750">
+<div id="dsq-comment-header-4750" class="dsq-comment-header">
+<cite id="dsq-cite-4750">
+<span id="dsq-author-user-4750">a</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4750" class="dsq-comment-body">
+<div id="dsq-comment-message-4750" class="dsq-comment-message"><p>Hi I tried this and I am getting 404 error</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4748">
+<div id="dsq-comment-header-4748" class="dsq-comment-header">
+<cite id="dsq-cite-4748">
+<span id="dsq-author-user-4748">narendra</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4748" class="dsq-comment-body">
+<div id="dsq-comment-message-4748" class="dsq-comment-message"><p>thanks buddy it was of great help, i done a struts 2 simple hello world example but now after doing this tutorial i am grabbing the struts2 workflow in a very convinient manner. Thanks for ur help buddy and do come back wioth similar tutorials especially the validations one</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4732">
+<div id="dsq-comment-header-4732" class="dsq-comment-header">
+<cite id="dsq-cite-4732">
+<span id="dsq-author-user-4732">sweety</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4732" class="dsq-comment-body">
+<div id="dsq-comment-message-4732" class="dsq-comment-message"><p>I tried the above example but I got the following error help me ro resolve this error:</p>
+<p>HTTP Status 500 &#8211; </p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>type Exception report</p>
+<p>message </p>
+<p>description The server encountered an internal error () that prevented it from fulfilling this request.</p>
+<p>exception </p>
+<p>There is no Action mapped for namespace / and action name login. &#8211; [unknown location]<br/>
+com.opensymphony.xwork2.DefaultActionProxy.prepare(DefaultActionProxy.java:186)<br/>
+org.apache.struts2.impl.StrutsActionProxyFactory.createActionProxy(StrutsActionProxyFactory.java:41)<br/>
+org.apache.struts2.dispatcher.Dispatcher.serviceAction(Dispatcher.java:497)<br/>
+org.apache.struts2.dispatcher.FilterDispatcher.doFilter(FilterDispatcher.java:421)</p>
+<p>note The full stack trace of the root cause is available in the Apache Tomcat/6.0.14 logs.</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>Apache Tomcat/6.0.14</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4729">
+<div id="dsq-comment-header-4729" class="dsq-comment-header">
+<cite id="dsq-cite-4729">
+<span id="dsq-author-user-4729">krishnan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4729" class="dsq-comment-body">
+<div id="dsq-comment-message-4729" class="dsq-comment-message"><p>Excellent tutorial</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4690">
+<div id="dsq-comment-header-4690" class="dsq-comment-header">
+<cite id="dsq-cite-4690">
+<span id="dsq-author-user-4690">appu</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4690" class="dsq-comment-body">
+<div id="dsq-comment-message-4690" class="dsq-comment-message"><p>its not at all a good tut. ther is nothing in this.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-4670">
+<div id="dsq-comment-header-4670" class="dsq-comment-header">
+<cite id="dsq-cite-4670">
+<span id="dsq-author-user-4670">Naveen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4670" class="dsq-comment-body">
+<div id="dsq-comment-message-4670" class="dsq-comment-message"><p>great work dude&#8230; Please keep on posting!!!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-4657">
+<div id="dsq-comment-header-4657" class="dsq-comment-header">
+<cite id="dsq-cite-4657">
+<span id="dsq-author-user-4657">Tarkeshwar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-4657" class="dsq-comment-body">
+<div id="dsq-comment-message-4657" class="dsq-comment-message"><p>This application is very helpful. In this program very simple mistakes are there place the struts.xml in src and in login.jsp page &lt;s:submit method=&quot;execute&quot;is given please change is to method=&quot;authenticate&quot; it will work properly.Changing the method=&quot;authenticate&quot; because in LoginAction class he has used authenticate method.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-3800">
+<div id="dsq-comment-header-3800" class="dsq-comment-header">
+<cite id="dsq-cite-3800">
+<a id="dsq-author-user-3800" href="http://yahoo.co.in" target="_blank" rel="nofollow">Vineet</a>
+</cite>
+</div>
+<div id="dsq-comment-body-3800" class="dsq-comment-body">
+<div id="dsq-comment-message-3800" class="dsq-comment-message"><p>Connection to DB is same as in any DAO ,jus call a method from the action which will take care of the dtabase activity and then capture the returned data in an bean onject .You can then use this bean in you JSP to display the required data using the tag .</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-2385">
+<div id="dsq-comment-header-2385" class="dsq-comment-header">
+<cite id="dsq-cite-2385">
+<span id="dsq-author-user-2385">kiran kumar</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2385" class="dsq-comment-body">
+<div id="dsq-comment-message-2385" class="dsq-comment-message"><p>Hi, thanks for giving this example, this is very use full to me,can u plz suggest me how to connect to DB and need some more example.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-2350">
+<div id="dsq-comment-header-2350" class="dsq-comment-header">
+<cite id="dsq-cite-2350">
+<a id="dsq-author-user-2350" href="index.html" target="_blank" rel="nofollow">Its is really help full</a>
+</cite>
+</div>
+<div id="dsq-comment-body-2350" class="dsq-comment-body">
+<div id="dsq-comment-message-2350" class="dsq-comment-message"><p>Hi can you tell me how to diaply list value in jsp using struts-tag without using scriplet<br/>
+like if value is hard coded and i want to display those value using loop so how to display</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-2308">
+<div id="dsq-comment-header-2308" class="dsq-comment-header">
+<cite id="dsq-cite-2308">
+<span id="dsq-author-user-2308">Rajeswari</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2308" class="dsq-comment-body">
+<div id="dsq-comment-message-2308" class="dsq-comment-message"><p>Thanks for the tutorial. It works for me after changing the struts.xml to the src directory. What ever user id is entered, it shows the welcome page always.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-2191">
+<div id="dsq-comment-header-2191" class="dsq-comment-header">
+<cite id="dsq-cite-2191">
+<span id="dsq-author-user-2191">Rajesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2191" class="dsq-comment-body">
+<div id="dsq-comment-message-2191" class="dsq-comment-message"><p>Hi,<br/>
+Thanx for the Tutorial,</p>
+<p>It is def.an eyeopener for me in Struts.</p>
+<p>But when i run the app given above it always goes to the success page and not the failure page.</p>
+<p>Can u tell me why.</p>
+<p>Appreciate ur help.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-2126">
+<div id="dsq-comment-header-2126" class="dsq-comment-header">
+<cite id="dsq-cite-2126">
+<span id="dsq-author-user-2126">kiruthika</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2126" class="dsq-comment-body">
+<div id="dsq-comment-message-2126" class="dsq-comment-message"><p>hi,<br/>
+i followed this tutorial.But when i run it i get 404 requested resource(/strutslogin/) not found. i dont know how to correct this error as i am completely new to struts. please help.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-2114">
+<div id="dsq-comment-header-2114" class="dsq-comment-header">
+<cite id="dsq-cite-2114">
+<span id="dsq-author-user-2114">sandeep</span>
+</cite>
+</div>
+<div id="dsq-comment-body-2114" class="dsq-comment-body">
+<div id="dsq-comment-message-2114" class="dsq-comment-message"><p>Hi,<br/>
+you cannot put struts.xml file in resourse directory<br/>
+This example gives error on running because struts.xml should be in class path</p>
+</div>
+</div>
+</li> 
+<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="dsq-comment-1934">
+<div id="dsq-comment-header-1934" class="dsq-comment-header">
+<cite id="dsq-cite-1934">
+<span id="dsq-author-user-1934">Admin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1934" class="dsq-comment-body">
+<div id="dsq-comment-message-1934" class="dsq-comment-message"><p>I&#8217;m not able to find the answer for you now. Try to google this problem. <a href="http://www.google.com/search?sourceid=chrome&ie=UTF-8&q=error+500%E2%80%93internal+server+error+java.lang.RuntimeException:+Cannot+find+FacesContext" rel="nofollow">http://www.google.com/search?sourceid=chrome&#038;ie=UTF-8&#038;q=error+500%E2%80%93internal+server+error+java.lang.RuntimeException%3A+Cannot+find+FacesContext</a>.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1933">
+<div id="dsq-comment-header-1933" class="dsq-comment-header">
+<cite id="dsq-cite-1933">
+<span id="dsq-author-user-1933">w</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1933" class="dsq-comment-body">
+<div id="dsq-comment-message-1933" class="dsq-comment-message"><p>Hi I am very new &#8230;.<br/>
+When I tried the following error appeared: error 500&#8211;internal server error java.lang.RuntimeException: Cannot find FacesContext</p>
+<p>No idea what the error is and how to resolve the issue.</p>
+<p>If possible then pleas help.</p>
+<p>waiting for reply.<br/>
+regards</p>
+</div>
+</div>
+</li> 
+<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="dsq-comment-1780">
+<div id="dsq-comment-header-1780" class="dsq-comment-header">
+<cite id="dsq-cite-1780">
+<span id="dsq-author-user-1780">admin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1780" class="dsq-comment-body">
+<div id="dsq-comment-message-1780" class="dsq-comment-message"><p>It should be under WebContent.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1779">
+<div id="dsq-comment-header-1779" class="dsq-comment-header">
+<cite id="dsq-cite-1779">
+<span id="dsq-author-user-1779">Tom Tshitangano</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1779" class="dsq-comment-body">
+<div id="dsq-comment-message-1779" class="dsq-comment-message"><p>Hi,</p>
+<p>I have deployed the Application, I am using the following url to access the deployed application</p>
+<p><a href="http://localhost/OnlineGeneralLedger/Login.jsp" rel="nofollow">http://localhost:8080/OnlineGeneralLedger/Login.jsp</a></p>
+<p>I changed the project name to OnlineGeneralLedger. Where do we put the jsp&#8217;s?</p>
+<p>Regards,<br/>
+Tom Tshitangano</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1648">
+<div id="dsq-comment-header-1648" class="dsq-comment-header">
+<cite id="dsq-cite-1648">
+<span id="dsq-author-user-1648">Jagdish</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1648" class="dsq-comment-body">
+<div id="dsq-comment-message-1648" class="dsq-comment-message"><p>hi<br/>
+its a very good tutorial&#8230;i never did program on struts 1 or 2 so really helpful. one thin would like to comment is that i tried few other tuts as well bt none work without a bit modification but this one was really working at no change.<br/>
+thanks again&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1608">
+<div id="dsq-comment-header-1608" class="dsq-comment-header">
+<cite id="dsq-cite-1608">
+<span id="dsq-author-user-1608">Phani</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1608" class="dsq-comment-body">
+<div id="dsq-comment-message-1608" class="dsq-comment-message"><p>such a nice tutorial keep it up</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1602">
+<div id="dsq-comment-header-1602" class="dsq-comment-header">
+<cite id="dsq-cite-1602">
+<span id="dsq-author-user-1602">praneet</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1602" class="dsq-comment-body">
+<div id="dsq-comment-message-1602" class="dsq-comment-message"><p>hi,<br/>
+Thanks 4 gr8 tutorial with the help of this tutorial i developed a login app with database connectivity and sign up page..its workin fi9 thans for ur support</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-1600">
+<div id="dsq-comment-header-1600" class="dsq-comment-header">
+<cite id="dsq-cite-1600">
+<span id="dsq-author-user-1600">tara</span>
+</cite>
+</div>
+<div id="dsq-comment-body-1600" class="dsq-comment-body">
+<div id="dsq-comment-message-1600" class="dsq-comment-message"><p>helpful for the beginners..</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-1590">
+<div id="dsq-comment-header-1590" class="dsq-comment-header">
+<cite id="dsq-cite-1590">
+<a id="dsq-author-user-1590" href="http://www.free-jsp-tutorials.com/" target="_blank" rel="nofollow">JSP Tutorials</a>
+</cite>
+</div>
+<div id="dsq-comment-body-1590" class="dsq-comment-body">
+<div id="dsq-comment-message-1590" class="dsq-comment-message"><p>Great tutorial, love the print screens!</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2010/03/struts-2-tutorials-sample-application-login-module/';
+var disqus_identifier = '1498 http://www.programcreek.com/?p=1498';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "Struts 2 Tutorial Series: Sample Application &#8211; Login Module";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=1498';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../../../2012/12/index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../../2012/11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../../2012/10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../../2012/07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../../2012/06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../../2012/05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2012/04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../../2012/03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../../2012/02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../../2012/01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

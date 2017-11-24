@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Java &#8211; Sort Map By Value</title>
+	<atom:link href="http://www.programcreek.com/2013/03/java-sort-map-by-value/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Oleksandra Sopova</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-14046</link>
+		<dc:creator><![CDATA[Oleksandra Sopova]]></dc:creator>
+		<pubDate>Thu, 25 Aug 2016 13:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-14046</guid>
+		<description><![CDATA[In &quot;2. More General Solution&quot;, why are you passing unsorted map essentially TWO times?
+
+here (1):
+
+Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
+
+and here(2):
+sortedMap.putAll(unsortedMap);
+Why do you do (2) ? To rely (while comparing) on whatever values there are in the initial unsortedMap? But..isn&#039;t this solution error-prone? Who guarantees that in (2) the map that you pass will contain the same keys? Also, isn&#039;t this solution making the client of the code remember that they also need to pass in .putAll() an unsortedMap once again?]]></description>
+		<content:encoded><![CDATA[<p>In &#8220;2. More General Solution&#8221;, why are you passing unsorted map essentially TWO times?</p>
+<p>here (1):</p>
+<p>Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));</p>
+<p>and here(2):<br />
+sortedMap.putAll(unsortedMap);<br />
+Why do you do (2) ? To rely (while comparing) on whatever values there are in the initial unsortedMap? But..isn&#8217;t this solution error-prone? Who guarantees that in (2) the map that you pass will contain the same keys? Also, isn&#8217;t this solution making the client of the code remember that they also need to pass in .putAll() an unsortedMap once again?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Saleh Traboulsi</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-10658</link>
+		<dc:creator><![CDATA[Saleh Traboulsi]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2016 17:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-10658</guid>
+		<description><![CDATA[The provided solution will return a NullPointerException if we tried to get a object using invalid (not found) key. Since the get method internally calls the compare method which tries to get the value from the map using the invalid key.]]></description>
+		<content:encoded><![CDATA[<p>The provided solution will return a NullPointerException if we tried to get a object using invalid (not found) key. Since the get method internally calls the compare method which tries to get the value from the map using the invalid key.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bharat Savani</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-7985</link>
+		<dc:creator><![CDATA[Bharat Savani]]></dc:creator>
+		<pubDate>Sat, 26 Dec 2015 18:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-7985</guid>
+		<description><![CDATA[Hi, you can also use a generic version for sorting HashMap by values. I have discussed it here http://goo.gl/WvOBfZ]]></description>
+		<content:encoded><![CDATA[<p>Hi, you can also use a generic version for sorting HashMap by values. I have discussed it here <a href="http://goo.gl/WvOBfZ" rel="nofollow">http://goo.gl/WvOBfZ</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Carlos H. M. Moreira</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-7184</link>
+		<dc:creator><![CDATA[Carlos H. M. Moreira]]></dc:creator>
+		<pubDate>Sat, 18 Jul 2015 15:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-7184</guid>
+		<description><![CDATA[Thanks, I think this is the most simple way to sort Hashmap by value, you only need to worry about classes which do not implement comparator.]]></description>
+		<content:encoded><![CDATA[<p>Thanks, I think this is the most simple way to sort Hashmap by value, you only need to worry about classes which do not implement comparator.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Naresh</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-6921</link>
+		<dc:creator><![CDATA[Naresh]]></dc:creator>
+		<pubDate>Tue, 28 Apr 2015 14:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-6921</guid>
+		<description><![CDATA[Note: below code will work to sort HashMap values.. no need to worry about generics.
+
+import java.util.*;
+
+public class SortHashMapValues{
+ public static void main(String []args){
+  Map map=new HashMap();
+  map.put(&quot;one&quot;,1);
+  map.put(&quot;ten&quot;,10);
+  map.put(&quot;three&quot;,3);
+  map.put(&quot;two&quot;,2);
+
+  List list=new ArrayList(map.entrySet());
+    
+  Collections.sort(list,new Comparator(){
+   public int compare(Object obj1, Object obj2){
+   return ((Comparable)((Map.Entry)(obj1)).getValue
+
+()).compareTo(((Map.Entry)(obj2)).getValue()); 
+   }
+  });
+  System.out.println(list);
+ }
+}]]></description>
+		<content:encoded><![CDATA[<p>Note: below code will work to sort HashMap values.. no need to worry about generics.</p>
+<p>import java.util.*;</p>
+<p>public class SortHashMapValues{<br />
+ public static void main(String []args){<br />
+  Map map=new HashMap();<br />
+  map.put(&#8220;one&#8221;,1);<br />
+  map.put(&#8220;ten&#8221;,10);<br />
+  map.put(&#8220;three&#8221;,3);<br />
+  map.put(&#8220;two&#8221;,2);</p>
+<p>  List list=new ArrayList(map.entrySet());</p>
+<p>  Collections.sort(list,new Comparator(){<br />
+   public int compare(Object obj1, Object obj2){<br />
+   return ((Comparable)((Map.Entry)(obj1)).getValue</p>
+<p>()).compareTo(((Map.Entry)(obj2)).getValue());<br />
+   }<br />
+  });<br />
+  System.out.println(list);<br />
+ }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guillaume Bersac</title>
+		<link>http://www.programcreek.com/2013/03/java-sort-map-by-value/#comment-6316</link>
+		<dc:creator><![CDATA[Guillaume Bersac]]></dc:creator>
+		<pubDate>Fri, 14 Nov 2014 16:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=12078#comment-6316</guid>
+		<description><![CDATA[This is interesting but there is many warning because there is no generic type. This is a version of More General Solution with all the generic type :
+
+
+package misc;
+
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class ArrayTools
+{
+    private static class ValueComparator&#060;K , V extends Comparable&#062; implements Comparator
+    {
+        Map map;
+
+        public ValueComparator(Map map) {
+            this.map = map;
+        }
+
+        @Override
+        public int compare(K keyA, K keyB) {
+            Comparable valueA = map.get(keyA);
+            V valueB = map.get(keyB);
+            return valueA.compareTo(valueB);
+        }
+
+    }
+
+    public static&#060;K, V extends Comparable&#062; Map sortByValue(Map unsortedMap)
+    {
+        Map sortedMap = new
+                TreeMap(new ValueComparator(unsortedMap));
+        sortedMap.putAll(unsortedMap);
+        return sortedMap;
+    }
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p>This is interesting but there is many warning because there is no generic type. This is a version of More General Solution with all the generic type :</p>
+<p>package misc;</p>
+<p>import java.util.Comparator;<br />
+import java.util.Map;<br />
+import java.util.TreeMap;</p>
+<p>public class ArrayTools<br />
+{<br />
+    private static class ValueComparator&lt;K , V extends Comparable&gt; implements Comparator<br />
+    {<br />
+        Map map;</p>
+<p>        public ValueComparator(Map map) {<br />
+            this.map = map;<br />
+        }</p>
+<p>        @Override<br />
+        public int compare(K keyA, K keyB) {<br />
+            Comparable valueA = map.get(keyA);<br />
+            V valueB = map.get(keyB);<br />
+            return valueA.compareTo(valueB);<br />
+        }</p>
+<p>    }</p>
+<p>    public static&lt;K, V extends Comparable&gt; Map sortByValue(Map unsortedMap)<br />
+    {<br />
+        Map sortedMap = new<br />
+                TreeMap(new ValueComparator(unsortedMap));<br />
+        sortedMap.putAll(unsortedMap);<br />
+        return sortedMap;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

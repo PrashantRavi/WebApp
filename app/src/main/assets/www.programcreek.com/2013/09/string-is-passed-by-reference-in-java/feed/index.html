@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: String is passed by &#8220;reference&#8221; in Java</title>
+	<atom:link href="http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: xbai</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-7473</link>
+		<dc:creator><![CDATA[xbai]]></dc:creator>
+		<pubDate>Mon, 12 Oct 2015 07:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-7473</guid>
+		<description><![CDATA[You can modify the method like this instead of using StringBuilder which is not intuitive:
+
+&lt;code&gt; 
+
+public static void main(String[] args) {
+    String x = new String(&quot;ab&quot;);
+     x = change(x);
+    System.out.println(x);
+
+}
+
+public static String  change(String x) {
+       x = new String(&quot;cd&quot;);
+       return x;
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>You can modify the method like this instead of using StringBuilder which is not intuitive:</p>
+<p><code> </p>
+<p>public static void main(String[] args) {<br />
+    String x = new String("ab");<br />
+     x = change(x);<br />
+    System.out.println(x);</p>
+<p>}</p>
+<p>public static String  change(String x) {<br />
+       x = new String("cd");<br />
+       return x;<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Don</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-6642</link>
+		<dc:creator><![CDATA[Don]]></dc:creator>
+		<pubDate>Thu, 12 Feb 2015 19:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-6642</guid>
+		<description><![CDATA[He basically said the same thing you mentioned in your second paragraph just that he explained it using the java pass-by-value concept which makes a lot more sense.
+
+
+Your suggested solution does not address the concern of not changing the reference to the original object while changing the state of the object!(i.e. We want to modify the &quot;ab&quot; string instance to an instance that is &quot;cd&quot; WITHOUT creating another &quot;cd&quot; string object in the string pool/heap. Hence the use of StringBuilder.) Changing x to an instance variable does nothing to prevent a new object from being created in the change() method.]]></description>
+		<content:encoded><![CDATA[<p>He basically said the same thing you mentioned in your second paragraph just that he explained it using the java pass-by-value concept which makes a lot more sense.</p>
+<p>Your suggested solution does not address the concern of not changing the reference to the original object while changing the state of the object!(i.e. We want to modify the &#8220;ab&#8221; string instance to an instance that is &#8220;cd&#8221; WITHOUT creating another &#8220;cd&#8221; string object in the string pool/heap. Hence the use of StringBuilder.) Changing x to an instance variable does nothing to prevent a new object from being created in the change() method.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Zsolt Káli</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-6534</link>
+		<dc:creator><![CDATA[Zsolt Káli]]></dc:creator>
+		<pubDate>Tue, 06 Jan 2015 15:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-6534</guid>
+		<description><![CDATA[That&#039;s why using final keyword for the parameter(s) of a method is a good practice.]]></description>
+		<content:encoded><![CDATA[<p>That&#8217;s why using final keyword for the parameter(s) of a method is a good practice.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: yqj2065</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-6179</link>
+		<dc:creator><![CDATA[yqj2065]]></dc:creator>
+		<pubDate>Wed, 01 Oct 2014 21:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-6179</guid>
+		<description><![CDATA[I don&#039;t with you.&quot;x stores the reference which points to the &quot;ab&quot; string in the heap.&quot;is  incorrect.
+x stores &quot;ab&quot;  which points to a string in the heap. &quot;ab&quot; itself is a reference of String object.]]></description>
+		<content:encoded><![CDATA[<p>I don&#8217;t with you.&#8221;x stores the reference which points to the &#8220;ab&#8221; string in the heap.&#8221;is  incorrect.<br />
+x stores &#8220;ab&#8221;  which points to a string in the heap. &#8220;ab&#8221; itself is a reference of String object.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Daniel Gurianov</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-5804</link>
+		<dc:creator><![CDATA[Daniel Gurianov]]></dc:creator>
+		<pubDate>Thu, 22 May 2014 12:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-5804</guid>
+		<description><![CDATA[I`ve never thought about it as pass-by-smth case. I used to think about this as scope of visibility case. Change method has its own X variable that can take any value you like without affecting outer X variable. I have no idea how pass-by-ref(value) is related to this example.]]></description>
+		<content:encoded><![CDATA[<p>I`ve never thought about it as pass-by-smth case. I used to think about this as scope of visibility case. Change method has its own X variable that can take any value you like without affecting outer X variable. I have no idea how pass-by-ref(value) is related to this example.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: newbie</title>
+		<link>http://www.programcreek.com/2013/09/string-is-passed-by-reference-in-java/#comment-5261</link>
+		<dc:creator><![CDATA[newbie]]></dc:creator>
+		<pubDate>Mon, 18 Nov 2013 15:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=9153#comment-5261</guid>
+		<description><![CDATA[I don&#039;t know much about c or c++. But for java this post helped me a lot. For those of you who are still struggling to understand this concept refer to http://www.youtube.com/watch?v=W8nNdNZ40EQ. combined with this post should make things lot clear.]]></description>
+		<content:encoded><![CDATA[<p>I don&#8217;t know much about c or c++. But for java this post helped me a lot. For those of you who are still struggling to understand this concept refer to <a href="http://www.youtube.com/watch?v=W8nNdNZ40EQ" rel="nofollow">http://www.youtube.com/watch?v=W8nNdNZ40EQ</a>. combined with this post should make things lot clear.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

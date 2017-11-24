@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Validate Binary Search Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Udaydeep Thota</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-14358</link>
+		<dc:creator><![CDATA[Udaydeep Thota]]></dc:creator>
+		<pubDate>Tue, 06 Sep 2016 02:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-14358</guid>
+		<description><![CDATA[If I want to validate the BST allowing duplicates in the tree (say right node can contain elements greater  than or EQUAL to root, how could any of the recursive solution be modified ?]]></description>
+		<content:encoded><![CDATA[<p>If I want to validate the BST allowing duplicates in the tree (say right node can contain elements greater  than or EQUAL to root, how could any of the recursive solution be modified ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-13340</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sun, 07 Aug 2016 15:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-13340</guid>
+		<description><![CDATA[A recursive implementation for any type (not restricted to numbers):
+
+&lt;code&gt; 
+ boolean isBst(BinTreeNode root, Comparator cmp) {
+    return isBst(root, Optional.empty(), Optional.empty(), cmp);
+}
+
+ boolean isBst(BinTreeNode root, Optional minValue, Optional maxValue, Comparator cmp) {
+    if (root == null) return true;
+    if (minValue.map(min -&#062; cmp.compare(root.value, min) &#062; 0).orElse(Boolean.TRUE) &#038;&#038;
+        maxValue.map(max -&#062; cmp.compare(root.value, max) &#060; 0).orElse(Boolean.TRUE))
+    {
+        return isBst(root.left, minValue, Optional.of(root.value), cmp) &#038;&#038;
+            isBst(root.right, Optional.of(root.value), maxValue, cmp);
+    }
+    return false;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>A recursive implementation for any type (not restricted to numbers):</p>
+<p><code><br />
+ boolean isBst(BinTreeNode root, Comparator cmp) {<br />
+    return isBst(root, Optional.empty(), Optional.empty(), cmp);<br />
+}</p>
+<p> boolean isBst(BinTreeNode root, Optional minValue, Optional maxValue, Comparator cmp) {<br />
+    if (root == null) return true;<br />
+    if (minValue.map(min -&gt; cmp.compare(root.value, min) &gt; 0).orElse(Boolean.TRUE) &amp;&amp;<br />
+        maxValue.map(max -&gt; cmp.compare(root.value, max) &lt; 0).orElse(Boolean.TRUE))<br />
+    {<br />
+        return isBst(root.left, minValue, Optional.of(root.value), cmp) &amp;&amp;<br />
+            isBst(root.right, Optional.of(root.value), maxValue, cmp);<br />
+    }<br />
+    return false;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-13339</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sun, 07 Aug 2016 15:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-13339</guid>
+		<description><![CDATA[Note to avoid bad generalizations. A BST _can_ have duplicated values (if required). However, according to this exercise, it can&#039;t (strict order is required as defined by the rules).
+
+&quot;...Whether duplicates, i.e. different elements with same key, shall be allowed in the tree or not, does not depend on the order relation, but on the application only...&quot;
+https://en.wikipedia.org/wiki/Binary_search_tree]]></description>
+		<content:encoded><![CDATA[<p>Note to avoid bad generalizations. A BST _can_ have duplicated values (if required). However, according to this exercise, it can&#8217;t (strict order is required as defined by the rules).</p>
+<p>&#8220;&#8230;Whether duplicates, i.e. different elements with same key, shall be allowed in the tree or not, does not depend on the order relation, but on the application only&#8230;&#8221;<br />
+<a href="https://en.wikipedia.org/wiki/Binary_search_tree" rel="nofollow">https://en.wikipedia.org/wiki/Binary_search_tree</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rush</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-12962</link>
+		<dc:creator><![CDATA[Rush]]></dc:creator>
+		<pubDate>Thu, 28 Jul 2016 03:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-12962</guid>
+		<description><![CDATA[if(root.val=high)  return false;
+
+&#039;=&#039;  in condition confirms that no node value appear more than once.]]></description>
+		<content:encoded><![CDATA[<p>if(root.val=high)  return false;</p>
+<p>&#8216;=&#8217;  in condition confirms that no node value appear more than once.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rush</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-12961</link>
+		<dc:creator><![CDATA[Rush]]></dc:creator>
+		<pubDate>Thu, 28 Jul 2016 03:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-12961</guid>
+		<description><![CDATA[BST can&#039;t have duplicate values. Hence, while checking we include equal condition.]]></description>
+		<content:encoded><![CDATA[<p>BST can&#8217;t have duplicate values. Hence, while checking we include equal condition.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: BruceLee</title>
+		<link>http://www.programcreek.com/2012/12/leetcode-validate-binary-search-tree-java/#comment-11889</link>
+		<dc:creator><![CDATA[BruceLee]]></dc:creator>
+		<pubDate>Wed, 15 Jun 2016 06:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11374#comment-11889</guid>
+		<description><![CDATA[it will not work for 
+
+10
+
+/ 
+
+5 12
+
+/ 
+
+4 11
+
+which is NOT a valid BST, but your solution may return true,]]></description>
+		<content:encoded><![CDATA[<p>it will not work for </p>
+<p>10</p>
+<p>/ </p>
+<p>5 12</p>
+<p>/ </p>
+<p>4 11</p>
+<p>which is NOT a valid BST, but your solution may return true,</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

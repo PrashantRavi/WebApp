@@ -1,0 +1,2104 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Java Code Example org.apache.commons.io.IOUtils</title>
+<link type="text/css" rel="stylesheet" media="screen" href="includes/css/main.css">
+<script src="includes/js/dist/libs/jquery.js"></script>
+<script language="javaScript"src="includes/js/jquery.highlight-3.js"></script>
+
+
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/google-code-prettify/prettify.css">
+<script language="javaScript"	src="includes/js/google-code-prettify/prettify.js"></script>
+
+     		<meta name="description" content="This page provides Java code examples for org.apache.commons.io.IOUtils. 
+		The examples are extracted from open source Java projects from GitHub. " />
+		<meta name="keywords" content="Java code examples, org.apache.commons.io.IOUtils" />
+						
+		
+	</head>
+
+<body onload="prettyPrint()">
+
+	<!-- BuySellAds Ad Code 
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+End BuySellAds Ad Code -->
+
+	<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-7639629-4', 'auto');
+			  ga('send', 'pageview');
+			
+	</script>
+
+<div id="header">
+	<div id="header-center">
+
+
+		<span id="navigation"> 
+		
+	
+			<!-- <img alt="Program Creek" src="./includes/images/pc-logo.png" width="80px" /> &nbsp;&nbsp; -->
+			<a	href="index.php.html">Search</a> 
+			&nbsp;&nbsp;
+			<a	href="index-action=index.php.html">Top APIs</a>
+			&nbsp;&nbsp;
+			<a href="../2015/12/top-10-java-utility-classes/index.html">Top 16 Utility Classes</a>
+			<!--   &nbsp; &nbsp; 
+	     	<a href="http://www.programcreek.com/2015/12/top-10-api-related-questions-from-stack-overflow/">Top 10 API Questions</a>
+ 			-->
+	     	&nbsp; &nbsp; 
+	     	<a href="../index.html">Program Creek</a>
+ 
+ &nbsp; &nbsp; 
+	     	<a href="../simple-java/index.html">Simple Java</a>
+ 
+
+		</span> 
+		
+				<span id="login">
+			
+							<a href="index-action=login.php.html">Log in</a>
+				&nbsp; &nbsp;
+				<a href="index-action=register.php.html">Sign up</a>
+				<span style="font-size:11px; color:#FA7070; ">(Free now!)</span>
+			
+			&nbsp; &nbsp;
+			<span style="font-size:12px; color:grey; ">5621 users</span>
+				
+		</span>
+
+
+		<!-- 
+		<span style="float:right; margin-top: 4px;">
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:15px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="9596194014"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		
+		</span>
+		
+		-->
+
+		<!-- 
+		<div class="addthis_toolbox addthis_default_style" style="width:50%">
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e1a385f21c923c3"></script>
+	-->
+
+
+
+		<!--
+	<span style="width:200px;float:left;">
+	<table width="20%">
+	<tr>
+	<td width="50%"><div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div></td>
+	<td width="20%"><div class="g-plusone" data-size="medium"></div></td>
+	<td width="30%"><a href="https://twitter.com/share" class="twitter-share-button" data-via="ProgramCreek">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
+	</tr>
+	</table>
+	</span>
+	-->
+
+
+	</div>
+</div>
+
+<div style="clear: both; width: 100%;"></div>
+
+ 
+    
+
+		 
+<link type="text/css" rel="stylesheet" media="screen"	href="includes/js/qtip/jquery.qtip.min.css">
+<script language="javaScript" src="includes/js/qtip/jquery.qtip.min.js"></script>
+
+<style>
+.myCustomClass{
+	border-color: #d8d8d8;
+	background-color: #ffffff;
+	font-size: 14px;
+}
+</style>
+
+
+
+<div id="content">
+
+
+<style>
+ .sidebarbox{
+ 	border: 1px solid #d8d8d8;
+    border-radius: 3px;
+     /*e0dcbf*/
+ 	padding: 0px;
+    word-wrap: break-word;
+ }
+ 
+ .sidebarbox li{
+ 	 list-style-image: url('includes/images/c2.png');
+ }
+ 
+ .sidebarboxheader{
+ 	font-size: 17px; 
+ 	padding: 5px 0 5px 10px; 
+ 	border-bottom: 1px solid #d8d8d8;
+     background-color: #f7f7f7;
+ }
+ 
+ .sidebarboxbody{
+ 	margin: 2px 0px 0px 18px; 
+ 	padding: 5px;
+ }
+
+ #view_complete_list:hover{
+     cursor:pointer;
+     cursor:hand;
+ }
+
+</style>
+
+<script language="javaScript">
+    $(document).ready(function(){
+        //$('#memo').focus();
+        //click to delete
+        $('#view_complete_list').click(function(){
+
+            $(this).hide();
+            //alert(item_id);
+           $(".memberList").show();
+        });
+
+        $('#commentMethod').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for common methods or constants'
+            },
+
+            style: { classes: 'myCustomClass' },
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+
+        })
+
+        $('#relatedClass').qtip({ // Grab some elements to apply the tooltip to
+            content: {
+                text: 'View examples for related classes'
+            },
+
+            style: { classes: 'myCustomClass' },
+
+            position: {
+
+                at: 'bottom center', // at the bottom right of...
+
+            }
+        })
+
+    });
+</script>
+
+<div id="sidebar-example">
+
+	<div style="height: 25px;clear:both;"></div>
+
+ 		
+      
+    
+	
+   <!-- BuySellAds Zone Code 
+            <div style="height: 10px;clear:both;"></div>
+			<div id="bsap_1299825" class="bsarocks bsap_ad707c165f518838b76571b6022c3c68"></div>
+			 <div style="height: 10px;clear:both;"></div>
+			End BuySellAds Zone Code -->
+
+        <!--aspose 
+		 
+		<a id="aspose" href="http://www.aspose.com/total-component-suite.aspx?utm_source=ProgramCreek&utm_medium=banner&utm_campaign=ProgramCreek-1">
+		 <img src="../aspose.gif" alt="" style="width:300px;height:250px;"> 
+		</a>
+		
+		<div style="height: 10px;clear:both;"></div>
+		-->  
+		
+		
+		
+		  
+		  <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+        <div style="height: 10px;clear:both;"></div>
+
+
+
+
+
+
+       
+            <!-- Related Classes -->
+            <div class="sidebarbox">
+                <div class="sidebarboxheader" id="relatedClass"><b>Top Related Classes</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li>
+                                <a href="index-api=java.io.ByteArrayInputStream.php.html">java.io.ByteArrayInputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.ByteArrayOutputStream.php.html">java.io.ByteArrayOutputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.junit.Test.php.html">org.junit.Test</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.FileInputStream.php.html">java.io.FileInputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.OutputStream.php.html">java.io.OutputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.apache.http.HttpResponse.php.html">org.apache.http.HttpResponse</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=org.apache.commons.io.FileUtils.php.html">org.apache.commons.io.FileUtils</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.IOException.php.html">java.io.IOException</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.FileOutputStream.php.html">java.io.FileOutputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.InputStream.php.html">java.io.InputStream</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.net.URL.php.html">java.net.URL</a>
+                            </li>
+                                                        <li>
+                                <a href="index-api=java.io.File.php.html">java.io.File</a>
+                            </li>
+                            
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END Related Classes -->
+           
+                       
+            <!-- Ad after Related Classes -->
+            	<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="1961849215"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+             <!-- END Ad after Related Classes -->   
+       		            
+                    
+        
+
+        
+        
+               
+                   <!-- Common Methods --> 
+           <div style="height: 10px;clear:both;"></div>
+             
+           <div class="sidebarbox">
+                <div class="sidebarboxheader" id="commentMethod"><b>Frequently Used Methods</b></div>
+                <div class="sidebarboxbody">
+                    <ul>
+                                                    <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=closeQuietly.php.html">
+                                    closeQuietly                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=toString.php.html">
+                                    toString                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=copy.php.html">
+                                    copy                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=toByteArray.php.html">
+                                    toByteArray                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=write.php.html">
+                                    write                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=toInputStream.php.html">
+                                    toInputStream                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=readLines.php.html">
+                                    readLines                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=copyLarge.php.html">
+                                    copyLarge                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=lineIterator.php.html">
+                                    lineIterator                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=readFully.php.html">
+                                    readFully                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=read.php.html">
+                                    read                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=toCharArray.php.html">
+                                    toCharArray                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=writeLines.php.html">
+                                    writeLines                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                                                        <li class="memberList" >
+                                <a href="index-class=org.apache.commons.io.IOUtils&method=contentEquals.php.html">
+                                    contentEquals                                        ( )
+                                                                        </a>
+
+                            </li>
+
+                            
+                      
+                    </ul>
+
+                    <!--
+                    <span style="font-size: 11px">
+                            <a href="http://www.programcreek.com/java-api-examples/index.php?action=register">Sign up to view the complete list</a>
+                    </span>
+                    -->
+                </div>
+            </div>
+            
+             <!-- 
+             <div style="height: 10px;clear:both;"></div>
+               
+	         <ins class="adsbygoogle"
+	                     style="display:inline-block;width:300px;height:250px"
+	                     data-ad-client="ca-pub-5732630628268628"
+	                     data-ad-slot="3672680817"></ins>
+	         <script>
+	                (adsbygoogle = window.adsbygoogle || []).push({});
+	         </script>
+			-->
+               
+              
+             
+        
+        
+       
+
+               
+		
+                
+        <!-- 
+         		<div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+		
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+        
+        		<div style="height: 10px;clear:both;"></div>
+
+
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="3672680817"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
+                <div style="height: 10px;clear:both;"></div>
+
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="5172936410"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+       -->         
+                <div style="height: 10px;clear:both;"></div>
+                
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:600px"
+                     data-ad-client="ca-pub-5732630628268628"
+                     data-ad-slot="6392048811"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+           
+           
+           
+            
+            
+         
+           
+                
+                
+        
+        
+    
+
+
+ 
+
+          
+</div>
+<div id="main">
+
+
+
+<script language="javaScript">
+$(document).ready(function(){
+	//$('#memo').focus();
+	//click to delete
+	$('.vote_up').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)+1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "vote",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+
+	$('.vote_down').click(function(){
+		var item_id = $(this).attr("id");
+		//$(this).text("thanks");
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		var realId = item_id.split("=")[0];
+		//alert("good".concat(realId));
+		var oldVotes = $('#'.concat(realId).concat("votes")).text();
+		var newVotes = parseInt(oldVotes)-1;
+
+		//alert(newVotes);
+		$('#'.concat(realId).concat("votes")).text(newVotes);
+		//alert(item_id);
+		$.post('./back.php',
+		{
+			todo: "dislike",
+			method_id: item_id 
+			
+		},function(data){
+			//$('#memo_list').text(data);
+		});	
+	});
+	
+	$('#saveClass').click(function(){
+
+
+		var className = $(this).attr("classname");
+		var userId = $(this).attr("userid");
+
+		if(!userId){
+			alert("Sign up first to save API classes");
+			exit();
+		}
+
+
+
+		//$(this).prop("disabled",true);
+		$(this).fadeOut();
+
+
+		//alert(item_id);
+		$.post('./back.php',
+				{
+					todo: "saveClass",
+					className: className,
+					userId:userId
+
+				},function(data){
+					//$('#memo_list').text(data);
+				});
+	});
+
+
+
+	$('.vote_up').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is very useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+	$('.vote_down').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'This example is not useful.'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+	
+		$('#saveClass').qtip({ // Grab some elements to apply the tooltip to
+		content: {
+			text: 'Sign up first to save API classes'
+		},
+
+		style: { classes: 'myCustomClass' }
+	})
+
+	
+});
+</script>
+
+
+<h1 style="font-weight:100;
+	color:#333333;
+	font-size: 24px;
+    line-height: 34px;
+	letter-spacing:0px;
+	text-align:center;
+	margin-bottom:10px;">
+	Java Code Examples for org.apache.commons.io.IOUtils</h1>
+	
+
+
+		
+	<div style="margin-top:10px;">
+		<p>
+			The following are top voted examples for showing how to use
+			<span style="color:#3A5099;">org.apache.commons.io.IOUtils</span>. These examples are extracted from open source projects.
+			You can vote up the examples you like and your votes will be used in our system to product
+			more good examples.  <br>
+		</p>
+	</div>
+
+	<div style="margin: 20px 0; width;100%;">
+		
+						
+		<div id="saveClass"
+			 class="click_button"
+			 classname="org.apache.commons.io.IOUtils"
+			 userid=""
+			 style="float:right;">
+			<span style="font-weight: 900;">+</span><a> Save this class to your library</a>
+		</div>
+		
+	</div>
+	<div style=" height: 5px;">
+
+	</div>
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 1</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">aws-toolkit-eclipse</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ZipUtils.java</span>
+								<a href="index-source_dir=aws-toolkit-eclipse-master_com.amazonaws.eclipse.opsworks_src_com_amazonaws_eclipse_opsworks_deploy_util_ZipUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2638votes">33</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2638==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2638==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void createZipFileOfDirectory(File srcDir, File zipOutput) throws IOException {
+    if ( !srcDir.exists() || !srcDir.isDirectory() ) {
+        throw new IllegalArgumentException(
+                srcDir.getAbsolutePath() + &quot; is not a directory!&quot;);
+    }
+    if ( zipOutput.exists() &amp;&amp; !zipOutput.isFile() ) {
+        throw new IllegalArgumentException(
+                zipOutput.getAbsolutePath() + &quot; exists but is not a file!&quot;);
+    }
+
+    ZipOutputStream zipOutputStream = null;
+    String baseName = srcDir.getAbsolutePath() + File.pathSeparator;
+
+    try {
+        zipOutputStream = new ZipOutputStream(new FileOutputStream(zipOutput));
+        addDirToZip(srcDir, zipOutputStream, baseName);
+
+    } finally {
+        IOUtils.closeQuietly(zipOutputStream);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 2</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">aws-toolkit-eclipse</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ZipUtils.java</span>
+								<a href="index-source_dir=aws-toolkit-eclipse-master_com.amazonaws.eclipse.opsworks_src_com_amazonaws_eclipse_opsworks_deploy_util_ZipUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2640votes">13</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2640==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2640==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private static void addDirToZip(File dir, ZipOutputStream zip, String baseName) throws IOException {
+    File[] files = dir.listFiles();
+
+    for (File file : files) {
+        if (file.isDirectory()) {
+            addDirToZip(file, zip, baseName);
+
+        } else {
+            String entryName = file.getAbsolutePath().substring(
+                    baseName.length());
+            ZipEntry zipEntry = new ZipEntry(entryName);
+            zip.putNextEntry(zipEntry);
+
+            FileInputStream fileInput = new FileInputStream(file);
+            try {
+                IOUtils.copy(fileInput, zip);
+                zip.closeEntry();
+
+            } finally {
+                IOUtils.closeQuietly(fileInput);
+            }
+        }
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- java api examples -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:728px;height:90px"
+				     data-ad-client="ca-pub-5732630628268628"
+				     data-ad-slot="8058070175"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+
+
+								
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 3</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">aws-toolkit-eclipse</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">InvokeFunctionInputDialog.java</span>
+								<a href="index-source_dir=aws-toolkit-eclipse-master_com.amazonaws.eclipse.lambda_src_com_amazonaws_eclipse_lambda_invoke_ui_InvokeFunctionInputDialog.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="2455votes">10</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="2455==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="2455==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private void onJsonFileSelectionChange() {
+    IFile file = (IFile) jsonInputFileCombo.getData(jsonInputFileCombo.getText());
+    if (file == null) {
+        return;
+    }
+    try {
+        String fileContent = IOUtils.toString(file.getContents());
+        inputBox.setText(fileContent);
+        suggestedInputBoxContent = fileContent;
+        inputBoxContent = fileContent;
+    } catch (Exception ignored) {
+        return;
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 4</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">WPS</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FlatFileDatabase.java</span>
+								<a href="index-source_dir=WPS-master_52n-wps-database_src_main_java_org_n52_wps_server_database_FlatFileDatabase.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="465585votes">7</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="465585==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="465585==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public String storeComplexValue(String id, InputStream resultInputStream, String type, String mimeType) {
+
+    String resultId = JOINER.join(id, UUID.randomUUID().toString());
+    try {
+        File resultFile = generateComplexDataFile(resultId, mimeType, gzipComplexValues);
+        File mimeTypeFile = generateComplexDataMimeTypeFile(resultId);
+        File contentLengthFile = generateComplexDataContentLengthFile(resultId);
+
+        LOGGER.debug(&quot;initiating storage of complex value for {} as {}&quot;, id, resultFile.getPath());
+
+        long contentLength = -1;
+
+        OutputStream resultOutputStream = null;
+        try {
+            resultOutputStream = gzipComplexValues ? new GZIPOutputStream(new FileOutputStream(resultFile))
+                                                  : new BufferedOutputStream(new FileOutputStream(resultFile));
+            contentLength = IOUtils.copyLarge(resultInputStream, resultOutputStream);
+        }
+        finally {
+            IOUtils.closeQuietly(resultInputStream);
+            IOUtils.closeQuietly(resultOutputStream);
+        }
+
+        OutputStream mimeTypeOutputStream = null;
+        try {
+            mimeTypeOutputStream = new BufferedOutputStream(new FileOutputStream(mimeTypeFile));
+            IOUtils.write(mimeType, mimeTypeOutputStream);
+        }
+        finally {
+            IOUtils.closeQuietly(mimeTypeOutputStream);
+        }
+
+        OutputStream contentLengthOutputStream = null;
+        try {
+            contentLengthOutputStream = new BufferedOutputStream(new FileOutputStream(contentLengthFile));
+            IOUtils.write(Long.toString(contentLength), contentLengthOutputStream);
+        }
+        finally {
+            IOUtils.closeQuietly(contentLengthOutputStream);
+        }
+
+        LOGGER.debug(&quot;completed storage of complex value for {} as {}&quot;, id, resultFile.getPath());
+
+    }
+    catch (IOException e) {
+        throw new RuntimeException(&quot;Error storing complex value for &quot; + resultId, e);
+    }
+    return generateRetrieveResultURL(resultId);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 5</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">play-tests</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">JacocoPlugin.java</span>
+								<a href="index-source_dir=play-tests-master_src_play_test_coverage_JacocoPlugin.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="18403votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="18403==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="18403==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+  public void enhance(ApplicationClass applicationClass) throws IOException, ClassNotFoundException {
+    if (enabled &amp;&amp; !isExcluded(applicationClass.name)) {
+//      Logger.info(&quot;JacocoPlugin: enhance &quot; + applicationClass);
+
+      byte[] originalBytecode = applicationClass.enhancedByteCode;
+      File classFile = new File(Play.tmpDir, &quot;orig-classes/&quot; + applicationClass.name.replace('.', '/') + &quot;.class&quot;);
+      classFile.getParentFile().mkdirs();
+      IOUtils.write(originalBytecode, new FileOutputStream(classFile));
+      applicationClass.enhancedByteCode = instrumenter().instrument(originalBytecode, applicationClass.name);
+      instrumentedClasses.put(applicationClass, originalBytecode);
+    }
+  }
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 6</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Magnolia</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">DefaultContentTest.java</span>
+								<a href="index-source_dir=Magnolia-master_magnolia-core_src_test_java_info_magnolia_cms_core_DefaultContentTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="47816votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="47816==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="47816==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >private Content getTestContent() throws IOException, RepositoryException {
+    String contentProperties =
+        &quot;/mycontent.@type=mgnl:content\n&quot; +
+        &quot;/mycontent.nd1=hello&quot;;
+
+    HierarchyManager hm = MgnlContext.getHierarchyManager(RepositoryConstants.WEBSITE);
+    new PropertiesImportExport().createContent(hm.getRoot(), IOUtils.toInputStream(contentProperties));
+    hm.save();
+    Content content = hm.getContent(&quot;/mycontent&quot;);
+    return content;
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 7</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">apache-james-mime4j-groundhog</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MessageTest.java</span>
+								<a href="index-source_dir=apache-james-mime4j-groundhog-master_src_test_java_org_apache_james_mime4j_message_MessageTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="4343votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="4343==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="4343==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testAddHeaderWriteTo() throws Exception {
+    String headerName = &quot;testheader&quot;;
+    String headerValue = &quot;testvalue&quot;;
+    String testheader = headerName + &quot;: &quot; + headerValue;
+
+    byte[] inputByte = getRawMessageAsByteArray();
+
+    Message m = new Message(new ByteArrayInputStream(inputByte));
+    m.getHeader().addField(AbstractField.parse(testheader));
+
+    assertEquals(&quot;header added&quot;, m.getHeader().getField(headerName)
+            .getBody(), headerValue);
+
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    m.writeTo(out);
+    List&lt;?&gt; lines = IOUtils.readLines((new BufferedReader(
+            new InputStreamReader(new ByteArrayInputStream(out
+                    .toByteArray())))));
+
+    assertTrue(&quot;header added&quot;, lines.contains(testheader));
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 8</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">Katari</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">HtmlValidationFilter.java</span>
+								<a href="index-source_dir=Katari-master_dev_katari-core_src_main_java_com_globant_katari_core_web_HtmlValidationFilter.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="120032votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="120032==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="120032==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/** Prepares the content to be shown in an html page, escaping html tags,
+ * adding line numbers and line breaks.
+ *
+ * @return the formatted content, never null.
+ */
+public String getFormattedContent() {
+  StringBuilder result = new StringBuilder(output.size());
+  try {
+
+    InputStream capturedOutput;
+    capturedOutput = new ByteArrayInputStream(output.toByteArray());
+    LineIterator lines;
+    lines = IOUtils.lineIterator(capturedOutput, getCharacterEncoding());
+
+    try {
+      int lineNumber = 0;
+      while (lines.hasNext()) {
+        String line = lines.nextLine();
+        lineNumber ++;
+        /// do something with line
+        result.append(String.valueOf(lineNumber));
+        result.append(&quot;: &quot;);
+        result.append(StringEscapeUtils.escapeHtml(line));
+        result.append(&quot;&lt;br&gt;&quot;);
+      }
+    } finally {
+      LineIterator.closeQuietly(lines);
+    }
+  } catch (IOException e) {
+    throw new RuntimeException(&quot;Error reading output&quot;, e);
+  }
+  return result.toString();
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 9</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">peernetic</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ReplayMessageSource.java</span>
+								<a href="index-source_dir=peernetic-master_core_src_main_java_com_offbynull_peernetic_core_simulator_ReplayMessageSource.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="736279votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="736279==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="736279==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+public SourceMessage readNextMessage() throws IOException {
+    if (msgIt == null || !msgIt.hasNext()) {
+        boolean hasMore = dis.readBoolean();
+        if (!hasMore) {
+            return null; // signals that the source is done and should be removed
+        }
+
+        int size = dis.readInt();
+        byte[] data = new byte[size];
+
+        IOUtils.readFully(dis, data);
+        RecordedBlock recordedBlock = (RecordedBlock) serializer.deserialize(data);
+
+        Instant newLastTime = recordedBlock.getTime();
+        if (lastTime == null) {
+            duration = Duration.ZERO;
+        } else {
+            duration = Duration.between(lastTime, newLastTime);
+            Validate.validState(!duration.isNegative(), &quot;Next message from source is sent before previous message from source&quot;);
+        }
+        lastTime = newLastTime;
+
+        msgIt = recordedBlock.getMessages().iterator();
+        Validate.isTrue(msgIt.hasNext()); // An empty recordedBlock should never get written! There should always be something to read
+                                          // at the end of this if block, because as soon as we come out of it we'll try to call .next()
+    }
+
+    RecordedMessage recordedMessage = msgIt.next();
+    Validate.notNull(recordedMessage.getSrcAddress());
+    // recordedMessage.dstsuffix may be null
+    Validate.notNull(recordedMessage.getMessage());
+    Address dstSuffix = recordedMessage.getDstSuffix();
+    return new SourceMessage(
+            recordedMessage.getSrcAddress(),
+            dstSuffix == null ? destinationPrefix : destinationPrefix.appendSuffix(dstSuffix),
+            duration,
+            recordedMessage.getMessage());
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 10</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">xwiki-store-datanucleus</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">BlobSaveTransactionRunnable.java</span>
+								<a href="index-source_dir=xwiki-store-datanucleus-master_xwiki-platform-store-datanucleus_xwiki-platform-store-datanucleus-blob_src_main_java_org_xwiki_store_blob_datanucleus_internal_BlobSaveTransactionRunnable.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="1208622votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="1208622==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="1208622==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >@Override
+protected void onRun() throws IOException
+{
+    final long version = this.blob.getActiveVersion();
+    final PersistenceManager pm = this.getContext();
+    final byte[] chunkBuff = new byte[CHUNK_SIZE];
+    long totalLength = 0;
+    for (int i = 0;; i++) {
+        int length = IOUtils.read(this.copyFrom, chunkBuff);
+        final BlobChunk bc = new BlobChunk(this.key, version, i);
+        if (length &gt; 0) {
+            totalLength += length;
+            if (length &lt; CHUNK_SIZE) {
+                // The last (incomplete) chunk needs to have a shorter array.
+                byte[] smallBuff = new byte[length];
+                System.arraycopy(chunkBuff, 0, smallBuff, 0, length);
+                bc.setContent(smallBuff);
+            } else {
+                bc.setContent(chunkBuff);
+            }
+            pm.makePersistent(bc);
+            pm.flush();
+        }
+        if (length &lt; CHUNK_SIZE) {
+            break;
+        }
+    }
+    pm.makePersistent(this.blob);
+    this.deleteOldEntries(version);
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 11</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">milton2</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">FileUtils.java</span>
+								<a href="index-source_dir=milton2-master_milton-api_src_main_java_io_milton_common_FileUtils.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="316064votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="316064==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="316064==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public static void writeLines(File f, List&lt;String&gt; lines) {
+    FileOutputStream fout = null;
+    try {
+        fout = new FileOutputStream(f);
+        IOUtils.writeLines(lines, null, fout);
+    } catch (Exception e) {
+        throw new RuntimeException(f.getAbsolutePath(), e);
+    } finally {
+        IOUtils.closeQuietly(fout);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 12</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">SOLR</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">ContentStreamTest.java</span>
+								<a href="index-source_dir=SOLR-master_src_test_org_apache_solr_common_util_ContentStreamTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="70441votes">6</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="70441==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="70441==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testFileStream() throws IOException 
+{
+  File file = new File( &quot;README&quot; );
+  assertTrue( file.exists() ); // &quot;make sure you are running from: solr\src\test\test-files&quot;
+  
+  ContentStreamBase stream = new ContentStreamBase.FileStream( file );
+  assertEquals( file.length(), stream.getSize().intValue() );
+  assertTrue( IOUtils.contentEquals( new FileInputStream( file ), stream.getStream() ) );
+  assertTrue( IOUtils.contentEquals( new FileReader(      file ), stream.getReader() ) );
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 13</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">apache-james-mime4j-groundhog</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MimeEntityTest.java</span>
+								<a href="index-source_dir=apache-james-mime4j-groundhog-master_src_test_java_org_apache_james_mime4j_parser_MimeEntityTest.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="4296votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="4296==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="4296==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >public void testMaxContentLimitCheck() throws Exception {
+    String message = 
+        &quot;To: Road Runner &lt;<a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="ff8d8a91919a8dbf9a879e928f939ad1908d98">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;\r\n&quot; +
+        &quot;From: Wile E. Cayote &lt;<a class="__cf_email__" href="../cdn-cgi/l/email-protection/index.html" data-cfemail="f5829c9990b5908d9498859990db9a8792">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;\r\n&quot; +
+        &quot;Date: Tue, 12 Feb 2008 17:34:09 +0000 (GMT)\r\n&quot; +
+        &quot;Subject: Mail\r\n&quot; +
+        &quot;Content-Type: text/plain\r\n&quot; +
+        &quot;\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot; +
+        &quot;DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS DoS\r\n&quot;;
+    byte[] raw = message.getBytes(&quot;US-ASCII&quot;);
+    ByteArrayInputStream instream = new ByteArrayInputStream(raw);
+    LineNumberInputStream lineInput = new LineNumberInputStream(instream); 
+    BufferedLineReaderInputStream rawstream = new BufferedLineReaderInputStream(lineInput, 12); 
+    
+    MimeEntityConfig config = new MimeEntityConfig();
+    config.setMaxContentLen(100);
+    MimeEntity entity = new MimeEntity(
+            lineInput,
+            rawstream,
+            null,
+            EntityStates.T_START_MESSAGE,
+            EntityStates.T_END_MESSAGE,
+            config);
+    
+    assertEquals(EntityStates.T_START_MESSAGE, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_START_HEADER, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_FIELD, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_FIELD, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_FIELD, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_FIELD, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_FIELD, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_END_HEADER, entity.getState());
+    entity.advance();
+    assertEquals(EntityStates.T_BODY, entity.getState());
+    try {
+        IOUtils.toByteArray(entity.getContentStream());
+        fail(&quot;IOException should have been thrown&quot;);
+    } catch (IOException expected) {
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+		<!-- 1. example number -->
+		<div  style="margin:20px 2px; color:#424345; font-weight:bold;">Example 14</div>
+
+		<div class="examplebox" >
+
+				<!-- 2. description -->
+				<div class="exampleboxheader">
+					<table width="100%">
+
+						<tr >
+
+							<td width="80%" style="padding: 2px; font-size:14px;line-height: 25px;">
+								Project: <span style="font-style:italic;">literate-api</span>&nbsp;&nbsp;
+								File:  <span style="font-style:italic;">MarkdownProjectModelBuilder.java</span>
+								<a href="index-source_dir=literate-api-master_src_main_java_org_cloudbees_literate_impl_MarkdownProjectModelBuilder.java.php.html">
+																			<span style="font-style:italic; margin-left:10px;">View source code</span>
+										 
+									
+								</a>
+							</td>
+
+							<td width="10%" align="right" style="padding-right:5px; font-size:14px; color:#0088cc;">
+								<span style="color:#0088cc;" id="404143votes">5</span>
+								votes
+							</td>
+							
+							<td width="12%" align="right" style="padding-right:5px; font-size:14px;">
+
+																	
+									
+									
+									<span class="vote vote_down click_button" style="float:right; padding-bottom:-2px;border-radius: 2px; border:1px solid #d8d8d8;"
+										  id="404143==org.apache.commons.io.IOUtils">
+									<img alt="vote down" src="includes/images/dislike.png" width="26"/> 
+									</span>
+									
+									
+									<span class="vote vote_up click_button" style="float:left;padding-top:-2px;border-radius: 2px;	border:1px solid #d8d8d8;"
+										  id="404143==org.apache.commons.io.IOUtils">
+									<!-- Vote up -->
+									<img alt="vote up" src="includes/images/like.png" width="26"/> 
+									</span>
+									
+							</td>
+
+
+							
+						</tr>
+					</table>
+
+
+
+
+				</div>
+
+
+				<!-- 3. code -->	
+				<div class="exampleboxbody">
+						<pre class="prettyprint" >/**
+ * Parses the model.
+ *
+ * @param repository the repository.
+ * @param filePath   the file to parse.
+ * @return the model.
+ * @throws IOException when things go wrong.
+ */
+private ProjectModel parseProjectModel(ProjectRepository repository, String filePath)
+        throws IOException, ProjectModelValidationException {
+    InputStream stream = repository.get(filePath);
+    try {
+        char[] chars = IOUtils.toCharArray(stream);
+        RootNode document = chars.length &lt; minLength ? null : new PegDownProcessor(GITHUB).parseMarkdown(chars);
+        ProjectModel.Builder builder = ProjectModel.builder();
+        if (document != null &amp;&amp; !document.getChildren().isEmpty()) {
+            Iterator&lt;Node&gt; iterator = document.getChildren().iterator();
+
+            consumeEnvironmentSection(iterator, builder);
+
+            iterator = document.getChildren().iterator();
+            if (discardTo(iterator, isBuildHeader)) {
+                consumeBuild(iterator, builder);
+            }
+
+            for (Map.Entry&lt;String, Matcher&lt;Node&gt;&gt; entry : isTaskHeader.entrySet()) {
+                iterator = document.getChildren().iterator();
+                if (discardTo(iterator, entry.getValue())) {
+                    consumeTask(iterator, builder, entry.getKey());
+                }
+            }
+        }
+        ProjectModel model;
+        boolean isFallbackFile = FALLBACK_FILE.equals(filePath);
+        try {
+            model = builder.build();
+        } catch (ProjectModelBuildingException e) {
+            if (!isFallbackFile) {
+                model = null;
+            } else {
+                throw new ProjectModelValidationException(&quot;Unable to turn &quot; + filePath + &quot; into a valid model&quot;, e);
+            }
+        }
+        if (model == null || model.getBuild().getCommands().isEmpty() &amp;&amp; model.getTaskIds().isEmpty()) {
+            if (!isFallbackFile &amp;&amp; repository.isFile(FALLBACK_FILE)) {
+                // try the fall-back
+                return parseProjectModel(repository, FALLBACK_FILE);
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append(&quot;Unable to turn &quot; + filePath + &quot; into a valid model. Please check that it contains a valid build section.\n&quot;);
+            sb.append(&quot;Valid build sections include :\n&quot;);
+            sb.append(&quot;- verbatim (starts by 4 spaces or tab)\n&quot;);
+            sb.append(&quot;- bullet list (starts by *, +, -, or a number)\n&quot;);
+            sb.append(&quot;- definition list&quot;);
+            throw new ProjectModelValidationException(sb.toString());
+        }
+        return model;
+    } finally {
+        IOUtils.closeQuietly(stream);
+    }
+}
+ </pre>
+				</div>
+
+
+		</div>	
+		
+		
+							
+
+
+<script type="text/javascript">
+		$('.vote').hover(
+			function () {
+				$(this).addClass("hover");
+			},
+			function () {
+				$(this).removeClass("hover");
+			}
+		);
+		
+		
+		$("pre").highlight("IOUtils", {caseSensitive:true});
+		
+		//$(this).html().replace( new RegExp(IOUtils, "ig") ,'<div style="background-color:red">' + IOUtils + '</div>')
+		
+</script>
+
+</div>
+
+<div style="height: 1px; width: 100%; clear:both;"></div>
+
+
+	<!-- footer -->
+
+	<div id="footer">
+	
+		
+		<div style="width: 800px; margin:0 auto;">
+		
+			<!--The examples above are mined from open source projects. Each example
+			has a reference to <br> its resource, but the http link may not be
+			provided due to the evoluation of the project.
+			-->
+			<style>
+				#footer-list li{
+					font-size: 13px;
+					display: inline-block;
+
+					padding:3px;
+					text-align: center;
+				}
+
+			</style>
+			<ul id="footer-list">
+
+				<li><a href="index-action=privacy.php.html">Terms of Use</a></li>
+				<li><a href="index-action=privacy.php.html">Privacy</a></li>
+				<li><a href="index-action=privacy.php.html"> Support & Contact</a></li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<div style="margin-top:15px;">
+		<a href="../index.html"><img alt="Program Creek" src="includes/images/pc-logo.png" width="100" /></a>
+		</div>
+		
+		
+		
+	</div>
+
+
+</body>
+</html>
+
+
+</div>
+	
+
+
+	
+	
+
+<!-- Localized -->

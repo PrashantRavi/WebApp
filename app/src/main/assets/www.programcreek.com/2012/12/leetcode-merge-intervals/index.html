@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Merge Intervals</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given a collection of intervals, merge all overlapping intervals. For example, Given ,,,, return ,,. Analysis The key to solve this problem is"/>
+<meta name="keywords" content="leetcode - merge intervals java"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Merge Intervals Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='LeetCode &#8211; Regular Expression Matching in Java' href='../leetcode-regular-expression-matching-in-java/index.html'/>
+<link rel='next' title='LeetCode &#8211; 3Sum' href='../leetcode-3sum/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=11036.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-merge-intervals_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-merge-intervals_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-11036"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Merge Intervals </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Given a collection of intervals, merge all overlapping intervals.</p>
+<p>For example,<br/>
+Given [1,3],[2,6],[8,10],[15,18],<br/>
+return [1,6],[8,10],[15,18].</p>
+<p><strong>Analysis</strong></p>
+<p>The key to solve this problem is defining a Comparator first to sort the arraylist of Intevals. </p>
+<p><strong>Java Solution</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> List<span style="color: #339933;">&lt;</span>Interval<span style="color: #339933;">&gt;</span> merge<span style="color: #009900;">&#40;</span>List<span style="color: #339933;">&lt;</span>Interval<span style="color: #339933;">&gt;</span> intervals<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    List<span style="color: #339933;">&lt;</span>Interval<span style="color: #339933;">&gt;</span> result <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> ArrayList<span style="color: #339933;">&lt;</span>Interval<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>intervals<span style="color: #339933;">==</span><span style="color: #000066; font-weight: bold;">null</span><span style="color: #339933;">||</span>intervals.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+        <span style="color: #000000; font-weight: bold;">return</span> result<span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #003399;">Collections</span>.<span style="color: #006633;">sort</span><span style="color: #009900;">&#40;</span>intervals, <span style="color: #000000; font-weight: bold;">new</span> Comparator<span style="color: #339933;">&lt;</span>Interval<span style="color: #339933;">&gt;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">int</span> compare<span style="color: #009900;">&#40;</span>Interval i1, Interval i2<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>i1.<span style="color: #006633;">start</span><span style="color: #339933;">!=</span>i2.<span style="color: #006633;">start</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> i1.<span style="color: #006633;">start</span><span style="color: #339933;">-</span>i2.<span style="color: #006633;">start</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">else</span>
+                <span style="color: #000000; font-weight: bold;">return</span> i1.<span style="color: #006633;">end</span><span style="color: #339933;">-</span>i2.<span style="color: #006633;">end</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    Interval pre <span style="color: #339933;">=</span> intervals.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>intervals.<span style="color: #006633;">size</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        Interval curr <span style="color: #339933;">=</span> intervals.<span style="color: #006633;">get</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>curr.<span style="color: #006633;">start</span><span style="color: #339933;">&gt;</span>pre.<span style="color: #006633;">end</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            result.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>pre<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            pre <span style="color: #339933;">=</span> curr<span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+            Interval merged <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Interval<span style="color: #009900;">&#40;</span>pre.<span style="color: #006633;">start</span>, <span style="color: #003399;">Math</span>.<span style="color: #006633;">max</span><span style="color: #009900;">&#40;</span>pre.<span style="color: #006633;">end</span>, curr.<span style="color: #006633;">end</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            pre <span style="color: #339933;">=</span> merged<span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+    result.<span style="color: #006633;">add</span><span style="color: #009900;">&#40;</span>pre<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">return</span> result<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../leetcode-insert-interval/index.html" rel="bookmark" title="LeetCode &#8211; Insert Interval">LeetCode &#8211; Insert Interval </a></li>
+<li><a href="../leetcode-merge-two-sorted-lists-java/index.html" rel="bookmark" title="LeetCode &#8211; Merge Two Sorted Lists (Java)">LeetCode &#8211; Merge Two Sorted Lists (Java) </a></li>
+<li><a href="../../11/leetcode-solution-merge-sort-linkedlist-in-java/index.html" rel="bookmark" title="LeetCode &#8211; Sort List (Java)">LeetCode &#8211; Sort List (Java) </a></li>
+<li><a href="../../../2014/03/leetcode-excel-sheet-column-number-java/index.html" rel="bookmark" title="LeetCode &#8211; Excel Sheet Column Number (Java)">LeetCode &#8211; Excel Sheet Column Number (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-merge-intervals/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-merge-intervals/" dc:title="LeetCode &#8211; Merge Intervals" trackback:ping="http://www.programcreek.com/2012/12/leetcode-merge-intervals/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-10062">
+<div id="dsq-comment-header-10062" class="dsq-comment-header">
+<cite id="dsq-cite-10062">
+<span id="dsq-author-user-10062">Matias SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10062" class="dsq-comment-body">
+<div id="dsq-comment-message-10062" class="dsq-comment-message"><p>Just a comment (for extra points in an interview and to improve the proposed solution). The proposed comparator implementation:<br/>
+<code><br/>
+public int compare(Interval i1, Interval i2) {<br/>
+return i1.start - i2.start;<br/>
+}<br/>
+</code></p>
+<p>is discouraged since nowhere it is said that start must be positive and that logic may cause under/overflow.</p>
+<p>It is better to use Integer.compare (<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html#compare(int,%20int)" rel="nofollow">https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html#compare(int,%20int)</a>)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-10061">
+<div id="dsq-comment-header-10061" class="dsq-comment-header">
+<cite id="dsq-cite-10061">
+<span id="dsq-author-user-10061">Matias SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10061" class="dsq-comment-body">
+<div id="dsq-comment-message-10061" class="dsq-comment-message"><p>This is a guaranteed Time complexity O(N log S) where N is the length of the input and S is the number of different starting (interval) values. It requires O(S) space though.</p>
+<p>I think it can be optimized to O(S log S) if we use a hashMap for sToInt and an additional TreeSet (or min heap) to have the starting values ordered increasingly. The space complexity would remain the same (with a higher constant factor).</p>
+<p><code><br/>
+class Interval {<br/>
+final int s;<br/>
+final int e;</p>
+<p> Interval(int s, int e) { this.s = s; this.e = e; }</p>
+<p> /** Assumes there exists an overlap */<br/>
+Interval merge(Interval o) {<br/>
+return new Interval(Math.min(s, o.s), Math.max(e, o.e));<br/>
+}<br/>
+}</p>
+<p>Collection merge(List intervals) {<br/>
+Map sToInt = new TreeMap();</p>
+<p> for (Interval i : intervals) {<br/>
+Interval prev = sToInt.put(i.s, i);<br/>
+if (prev != null) { //same start as i, can merge<br/>
+sToInt.put(i.s, i.merge(prev));<br/>
+}<br/>
+}</p>
+<p> //Merge intervals<br/>
+if (sToInt.size() &lt;= 1) sToInt.values(); //nothing to merge</p>
+<p> List result = new ArrayList();<br/>
+Interval prev = null;<br/>
+for (Interval i : sToInt.values()) { //iterate (sorted by s)<br/>
+if (prev != null &amp;&amp; i.s &lt;= prev.e) {<br/>
+prev = prev.merge(i);<br/>
+} else {<br/>
+if (prev != null) result.add(prev);<br/>
+prev = i;<br/>
+}<br/>
+}</p>
+<p> if (prev != null) result.add(prev);<br/>
+return result;<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-8811">
+<div id="dsq-comment-header-8811" class="dsq-comment-header">
+<cite id="dsq-cite-8811">
+<span id="dsq-author-user-8811">Ankit Shah</span>
+</cite>
+</div>
+<div id="dsq-comment-body-8811" class="dsq-comment-body">
+<div id="dsq-comment-message-8811" class="dsq-comment-message"><p>Dear Author of this solution, the above code certainly works and thanks for giving the solution, I took liberty to enhance your code which will print and work for the following output as well: Basically the idea is in the second test case if there are more than one merging intervals, you will need to remove the last element from the result and add a new one.</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br/>
+Input: [[8,10], [1,3], [2,6], [15,18]]<br/>
+sorted list: [[1,3], [2,6], [8,10], [15,18]]<br/>
+merged interval: [[1,6], [8,10], [15,18]]<br/>
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br/>
+Input: [[8,10], [1,3], [2,6], [3,9], [15,18]]<br/>
+sorted list: [[1,3], [2,6], [3,9], [8,10], [15,18]]<br/>
+merged interval: [[1,10], [15,18]]<br/>
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p><code></p>
+<p>import java.util.*;<br/>
+class Interval {<br/>
+int lo;<br/>
+int hi;<br/>
+Interval() {<br/>
+lo = 0;<br/>
+hi = 0;<br/>
+}</p>
+<p> Interval(int lo, int hi) {<br/>
+this.lo = lo;<br/>
+this.hi = hi;<br/>
+}</p>
+<p> @Override<br/>
+public String toString() {<br/>
+return "[" + lo + "," + hi + "]";<br/>
+}<br/>
+}</p>
+<p>public class MergeIntervals {<br/>
+public static ArrayList merge(ArrayList list) {<br/>
+Collections.sort(list, new Comparator() {<br/>
+public int compare(Interval i1, Interval i2) {<br/>
+if (i1.lo == i2.lo) {<br/>
+return i1.hi - i2.hi;<br/>
+}<br/>
+return i1.lo - i2.lo;<br/>
+}<br/>
+});<br/>
+System.out.println("Sorted Input: " + list);</p>
+<p> ArrayList result = new ArrayList();<br/>
+Interval prev = list.get(0);<br/>
+for (int i = 1; i = current.lo) {<br/>
+Interval interval = new Interval(prev.lo, Math.max(prev.hi, current.hi));<br/>
+prev = interval;<br/>
+} else {<br/>
+prev = current;<br/>
+}<br/>
+removeIfExist(result, prev);<br/>
+result.add(prev);<br/>
+}<br/>
+return result;<br/>
+}</p>
+<p> private static void removeIfExist(ArrayList result, Interval prev) {<br/>
+if (result.size() &gt; 0) {<br/>
+Interval existing = result.get(result.size() - 1);<br/>
+if (existing.lo == prev.lo) {<br/>
+result.remove(result.size() - 1);<br/>
+}<br/>
+}<br/>
+}</p>
+<p> public static void main(String[] args) {<br/>
+ArrayList list = new ArrayList();<br/>
+list.add(new Interval(8, 10));<br/>
+list.add(new Interval(1, 3));<br/>
+list.add(new Interval(2, 6));<br/>
+list.add(new Interval(15, 18));<br/>
+System.out.println("Input: " + list);<br/>
+System.out.println("merged interval: " + merge(list));<br/>
+System.out.println("-----------------------------------------------------");<br/>
+list = new ArrayList();<br/>
+list.add(new Interval(8, 10));<br/>
+list.add(new Interval(1, 3));<br/>
+list.add(new Interval(2, 6));<br/>
+list.add(new Interval(3, 9));<br/>
+list.add(new Interval(15, 18));<br/>
+System.out.println("Input: " + list);<br/>
+System.out.println("merged interval: " + merge(list));<br/>
+System.out.println("-----------------------------------------------------");<br/>
+}<br/>
+}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-7382">
+<div id="dsq-comment-header-7382" class="dsq-comment-header">
+<cite id="dsq-cite-7382">
+<span id="dsq-author-user-7382">Omar Edgardo Lugo Sánchez</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7382" class="dsq-comment-body">
+<div id="dsq-comment-message-7382" class="dsq-comment-message"><p>my solution, im the same lol </p>
+<p>ArrayList input = new ArrayList();</p>
+<p> ArrayList r = new ArrayList();</p>
+<p> //Given [1,3],[2,6],[8,10],[15,18],</p>
+<p> input.add(new invervalo(1,3));</p>
+<p> input.add(new invervalo(8,10));</p>
+<p> input.add(new invervalo(15,18));</p>
+<p> input.add(new invervalo(2,6));</p>
+<p> Collections.sort(input);</p>
+<p> // compare items</p>
+<p> for(int i=0;i=obj2.I){</p>
+<p> obj2.I = obj1.I; // merge invertals</p>
+<p> }else{</p>
+<p> r.add(obj1); // could not be merged so add to Result</p>
+<p> }</p>
+<p> }</p>
+<p> // add last item</p>
+<p> r.add((invervalo)input.get(input.size()-1));</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7087">
+<div id="dsq-comment-header-7087" class="dsq-comment-header">
+<cite id="dsq-cite-7087">
+<span id="dsq-author-user-7087">Travis Kaufman</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7087" class="dsq-comment-body">
+<div id="dsq-comment-message-7087" class="dsq-comment-message"><p>Assuming that each interval is unique (e.g. non-repeated numbers in different intervals, such as in the example above), you can do better than O(nlogn) by using a &#8220;bucket sort&#8221; like operation on the intervals, such that given an array you assign the interval index to the indices in the array corresponding to each number. You can then iterate through the bucketed array, keeping track of the which intervals are open or closed and only spit out intervals in which the parent interval to be opened is also the one closed. This works because the bucket sort guarantees that the previous number iterated over is less than the current number iterated over, so you never have to compare start and end intervals. This can run in O(n) time/space since bucket sort is linear, although will probably perform bad if one of the interval values is a very large number. Here&#8217;s a link to a javascript (es6/es2015) implementation: <a href="https://gist.github.com/traviskaufman/08847d4cdf7c42bc4d84" rel="nofollow">https://gist.github.com/traviskaufman/08847d4cdf7c42bc4d84</a></p>
+<p>I think in order to have it support multiple instances of numbers, you could assign interval indices to a list instead of just having one value for each in the bucketed array, and tweak the business logic of the bucketed array iteration to handle this case. Thoughts?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5904">
+<div id="dsq-comment-header-5904" class="dsq-comment-header">
+<cite id="dsq-cite-5904">
+<span id="dsq-author-user-5904">melonhead</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5904" class="dsq-comment-body">
+<div id="dsq-comment-message-5904" class="dsq-comment-message"><p>In English the logic is, sort them all by their left end. For each as-yet &#8216;unlumped&#8217; one (&#8216;prev&#8217;), lump into it all that come after whose left end is less than our &#8216;lumping one&#8217;s&#8217; right end (we know that &#8216;prev&#8217;s left end is &lt; the later ones&#039; left ends because we&#039;re visiting in left-end sorted order). When we&#039;ve caught all we can with this lumper, output it and the next unlumped interval becomes the new &#039;prev&#039; ie the lumper.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-merge-intervals/';
+var disqus_identifier = '11036 http://www.programcreek.com/?p=11036';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Merge Intervals";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=11036';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

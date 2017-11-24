@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Min Stack (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/02/leetcode-min-stack-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: mukthar ahmed</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-9538</link>
+		<dc:creator><![CDATA[mukthar ahmed]]></dc:creator>
+		<pubDate>Mon, 07 Mar 2016 05:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-9538</guid>
+		<description><![CDATA[I felt the code is all good, delivering to what is required. At a given point of time,/node leve, we need the min-value in the stack and every node carrying a property (Node.min) is satisfied O(1)]]></description>
+		<content:encoded><![CDATA[<p>I felt the code is all good, delivering to what is required. At a given point of time,/node leve, we need the min-value in the stack and every node carrying a property (Node.min) is satisfied O(1)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Taoufik Bdiri</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-6901</link>
+		<dc:creator><![CDATA[Taoufik Bdiri]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2015 20:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-6901</guid>
+		<description><![CDATA[Here is my code. I guess it works fine ! 
+&lt;code&gt;
+class MinStack {
+    Node head; 
+    
+    public void push(int x) {
+        if(head == null) {
+            head = new Node(x);
+            head.min = x;
+        }
+        else {
+            Node temp = new Node(x); 
+            if(temp.min &#062; head.min) temp.min = head.min; 
+            temp.next = head; 
+            head = temp; 
+        }
+    }
+
+    public void pop() {
+        if(head == null ) return ; 
+        head = head.next; 
+    }
+
+    public int top() {
+        if(head == null ) return Integer.MAX_VALUE; 
+        return head.value; 
+    }
+
+    public int getMin() {
+        if(head == null ) return Integer.MAX_VALUE; 
+        return head.min; 
+    }
+}
+
+class Node {
+    int value; 
+    int min; 
+    Node next; 
+    Node(int x) { value = x; next = null; min = x;}
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here is my code. I guess it works fine !<br />
+<code><br />
+class MinStack {<br />
+    Node head; </p>
+<p>    public void push(int x) {<br />
+        if(head == null) {<br />
+            head = new Node(x);<br />
+            head.min = x;<br />
+        }<br />
+        else {<br />
+            Node temp = new Node(x);<br />
+            if(temp.min &gt; head.min) temp.min = head.min;<br />
+            temp.next = head;<br />
+            head = temp;<br />
+        }<br />
+    }</p>
+<p>    public void pop() {<br />
+        if(head == null ) return ;<br />
+        head = head.next;<br />
+    }</p>
+<p>    public int top() {<br />
+        if(head == null ) return Integer.MAX_VALUE;<br />
+        return head.value;<br />
+    }</p>
+<p>    public int getMin() {<br />
+        if(head == null ) return Integer.MAX_VALUE;<br />
+        return head.min;<br />
+    }<br />
+}</p>
+<p>class Node {<br />
+    int value;<br />
+    int min;<br />
+    Node next;<br />
+    Node(int x) { value = x; next = null; min = x;}<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tank</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-6871</link>
+		<dc:creator><![CDATA[Tank]]></dc:creator>
+		<pubDate>Sat, 11 Apr 2015 14:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-6871</guid>
+		<description><![CDATA[Actually, this works: 
+
+class MinStack {
+
+    int[] arr = new int [100];
+
+    int index = -1;
+
+    int[] min = new int [100];
+
+    
+
+    public void push(int x) {
+
+        if (index == arr.length - 1) {
+
+            arr = Arrays.copyOf(arr, 2*arr.length);
+
+            min = Arrays.copyOf(min, 2*min.length);
+
+        }
+
+        index++;
+
+        arr[index] = x;
+
+        min[index] = index == 0 ? x : Math.min(x, min[index-1]);
+
+    }
+
+    public void pop() {
+
+        if(index == arr.length/2 - 1 &#038;&#038; arr.length &#062; 100) {
+
+            arr = Arrays.copyOf(arr, arr.length/2);
+
+            min = Arrays.copyOf(min, min.length/2);
+
+        }
+
+        index--;
+
+    }
+
+    public int top() {
+
+        if (index &#062; -1) {
+
+            return arr[index];
+
+        }
+
+        else {
+
+            return -1;
+
+        }
+
+    }
+
+    public int getMin() {
+
+        if(index &#062; -1) {
+
+            return min[index];
+
+        }
+
+        else {
+
+            return -1;
+
+        }
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Actually, this works: </p>
+<p>class MinStack {</p>
+<p>    int[] arr = new int [100];</p>
+<p>    int index = -1;</p>
+<p>    int[] min = new int [100];</p>
+<p>    public void push(int x) {</p>
+<p>        if (index == arr.length &#8211; 1) {</p>
+<p>            arr = Arrays.copyOf(arr, 2*arr.length);</p>
+<p>            min = Arrays.copyOf(min, 2*min.length);</p>
+<p>        }</p>
+<p>        index++;</p>
+<p>        arr[index] = x;</p>
+<p>        min[index] = index == 0 ? x : Math.min(x, min[index-1]);</p>
+<p>    }</p>
+<p>    public void pop() {</p>
+<p>        if(index == arr.length/2 &#8211; 1 &amp;&amp; arr.length &gt; 100) {</p>
+<p>            arr = Arrays.copyOf(arr, arr.length/2);</p>
+<p>            min = Arrays.copyOf(min, min.length/2);</p>
+<p>        }</p>
+<p>        index&#8211;;</p>
+<p>    }</p>
+<p>    public int top() {</p>
+<p>        if (index &gt; -1) {</p>
+<p>            return arr[index];</p>
+<p>        }</p>
+<p>        else {</p>
+<p>            return -1;</p>
+<p>        }</p>
+<p>    }</p>
+<p>    public int getMin() {</p>
+<p>        if(index &gt; -1) {</p>
+<p>            return min[index];</p>
+<p>        }</p>
+<p>        else {</p>
+<p>            return -1;</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tank</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-6854</link>
+		<dc:creator><![CDATA[Tank]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2015 17:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-6854</guid>
+		<description><![CDATA[I guess you could add it to a HashMap, along with the number of times that min value appears.. so if the min value gets popped, you either remove it from the hash map if its value is 1, or decrement the # of times it appears]]></description>
+		<content:encoded><![CDATA[<p>I guess you could add it to a HashMap, along with the number of times that min value appears.. so if the min value gets popped, you either remove it from the hash map if its value is 1, or decrement the # of times it appears</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MyCat</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-6853</link>
+		<dc:creator><![CDATA[MyCat]]></dc:creator>
+		<pubDate>Sun, 05 Apr 2015 22:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-6853</guid>
+		<description><![CDATA[Just keep the min value is not enough, if your next pop removes the min value, then you need know the new min value, which still needs O(n) time to search]]></description>
+		<content:encoded><![CDATA[<p>Just keep the min value is not enough, if your next pop removes the min value, then you need know the new min value, which still needs O(n) time to search</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tank</title>
+		<link>http://www.programcreek.com/2014/02/leetcode-min-stack-java/#comment-6848</link>
+		<dc:creator><![CDATA[Tank]]></dc:creator>
+		<pubDate>Sat, 04 Apr 2015 13:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13610#comment-6848</guid>
+		<description><![CDATA[you&#039;re right.  You should have a minimum value declared in this class, and every time you push a new number to the stack, check if it is a lower value than the current min, and update that way, so when you call getMin it&#039;s 0(1)]]></description>
+		<content:encoded><![CDATA[<p>you&#8217;re right.  You should have a minimum value declared in this class, and every time you push a new number to the stack, check if it is a lower value than the current min, and update that way, so when you call getMin it&#8217;s 0(1)</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

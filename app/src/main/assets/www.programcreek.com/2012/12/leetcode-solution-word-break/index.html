@@ -1,0 +1,1516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>Leetcode &#8211; Word Break (Java)</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words. For example"/>
+<meta name="keywords" content="leetcode,word break"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; Leetcode &#8211; Word Break (Java) Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Leetcode &#8211; Add Two Numbers (Java)' href='../add-two-numbers/index.html'/>
+<link rel='next' title='Leetcode &#8211; Linked List Cycle' href='../leetcode-linked-list-cycle/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=10623.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-solution-word-break_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-solution-word-break_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-10623"> <a href="index.html" rel="bookmark">
+Leetcode &#8211; Word Break (Java) </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<blockquote><p>
+Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.</p>
+<p>For example, given<br/>
+s = "leetcode",<br/>
+dict = ["leet", "code"].</p>
+<p>Return true because "leetcode" can be segmented as "leet code".
+</p></blockquote>
+<p><strong>1. Naive Approach</strong></p>
+<p>This problem can be solve by using a naive approach, which is trivial. A discussion can always start from that though.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> wordBreak<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, Set<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> dict<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+             <span style="color: #000000; font-weight: bold;">return</span> wordBreakHelper<span style="color: #009900;">&#40;</span>s, dict, <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> wordBreakHelper<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, Set<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> dict, <span style="color: #000066; font-weight: bold;">int</span> start<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>start <span style="color: #339933;">==</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> 
+            <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> a<span style="color: #339933;">:</span> dict<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">int</span> len <span style="color: #339933;">=</span> a.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            <span style="color: #000066; font-weight: bold;">int</span> end <span style="color: #339933;">=</span> start<span style="color: #339933;">+</span>len<span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #666666; font-style: italic;">//end index should be &lt;= string length</span>
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>end <span style="color: #339933;">&gt;</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> 
+                <span style="color: #000000; font-weight: bold;">continue</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>start, start<span style="color: #339933;">+</span>len<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>wordBreakHelper<span style="color: #009900;">&#40;</span>s, dict, start<span style="color: #339933;">+</span>len<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Time is O(n^2) and exceeds the time limit. </p>
+<p><strong>2. Dynamic Programming</strong></p>
+<p>The key to solve this problem by using dynamic programming approach: </p>
+<ul>
+<li>Define an array t[] such that t[i]==true => 0-(i-1) can be segmented using dictionary</li>
+<li>Initial state t[0] == true</li>
+</ul>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> wordBreak<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, Set<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> dict<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">boolean</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> t <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">boolean</span><span style="color: #009900;">&#91;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+        t<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span> <span style="color: #666666; font-style: italic;">//set first to be true, why?</span>
+        <span style="color: #666666; font-style: italic;">//Because we need initial state</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #666666; font-style: italic;">//should continue from match position</span>
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>t<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> 
+                <span style="color: #000000; font-weight: bold;">continue</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> a<span style="color: #339933;">:</span> dict<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">int</span> len <span style="color: #339933;">=</span> a.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000066; font-weight: bold;">int</span> end <span style="color: #339933;">=</span> i <span style="color: #339933;">+</span> len<span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>end <span style="color: #339933;">&gt;</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000000; font-weight: bold;">continue</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#91;</span>end<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span> <span style="color: #000000; font-weight: bold;">continue</span><span style="color: #339933;">;</span>
+&nbsp;
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>i, end<span style="color: #009900;">&#41;</span>.<span style="color: #006633;">equals</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                    t<span style="color: #009900;">&#91;</span>end<span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">return</span> t<span style="color: #009900;">&#91;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p>Time: O(string length * dict size). </p>
+<p><strong>3. Java Solution 3 - Simple and Efficient</strong></p>
+<p>In Solution 2, if the size of the dictionary is very large, the time is bad. Instead we can solve the problem in O(n^2) time (n is the length of the string).</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> wordBreak<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, Set<span style="color: #339933;">&lt;</span>String<span style="color: #339933;">&gt;</span> wordDict<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span> pos <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> <span style="color: #000066; font-weight: bold;">int</span><span style="color: #009900;">&#91;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #003399;">Arrays</span>.<span style="color: #006633;">fill</span><span style="color: #009900;">&#40;</span>pos, <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+    pos<span style="color: #009900;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> i<span style="color: #339933;">=</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span> i<span style="color: #339933;">&lt;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>pos<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">int</span> j<span style="color: #339933;">=</span>i<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> j<span style="color: #339933;">&lt;=</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> j<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #003399;">String</span> sub <span style="color: #339933;">=</span> s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>i, j<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>wordDict.<span style="color: #006633;">contains</span><span style="color: #009900;">&#40;</span>sub<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                    pos<span style="color: #009900;">&#91;</span>j<span style="color: #009900;">&#93;</span><span style="color: #339933;">=</span>i<span style="color: #339933;">;</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span> 
+        <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    <span style="color: #000000; font-weight: bold;">return</span> pos<span style="color: #009900;">&#91;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">!=-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>4. The More Interesting Problem</strong></p>
+<p>The dynamic solution can tell us whether the string can be broken to words, but can not tell us what words the string is broken to. So how to get those words? </p>
+<p>Check out <a href="../../../2014/03/leetcode-word-break-ii-java/index.html" title="LeetCode – Word Break II (Java)" target="_blank">Word Break II</a>.</p>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2014/03/leetcode-word-break-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Break II (Java)">LeetCode &#8211; Word Break II (Java) </a></li>
+<li><a href="../../../2014/06/leetcode-word-ladder-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Ladder II (Java)">LeetCode &#8211; Word Ladder II (Java) </a></li>
+<li><a href="../leetcode-word-ladder/index.html" rel="bookmark" title="LeetCode &#8211; Word Ladder">LeetCode &#8211; Word Ladder </a></li>
+<li><a href="../../../2014/06/leetcode-word-search-ii-java/index.html" rel="bookmark" title="LeetCode &#8211; Word Search II (Java)">LeetCode &#8211; Word Search II (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-solution-word-break/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-solution-word-break/" dc:title="Leetcode &#8211; Word Break (Java)" trackback:ping="http://www.programcreek.com/2012/12/leetcode-solution-word-break/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-15690">
+<div id="dsq-comment-header-15690" class="dsq-comment-header">
+<cite id="dsq-cite-15690">
+<span id="dsq-author-user-15690">Nicole</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15690" class="dsq-comment-body">
+<div id="dsq-comment-message-15690" class="dsq-comment-message"><p>if Approach 1 and Approach 3 both are O(N^2), why is 3 so much better than one?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-14333">
+<div id="dsq-comment-header-14333" class="dsq-comment-header">
+<cite id="dsq-cite-14333">
+<span id="dsq-author-user-14333">Milan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-14333" class="dsq-comment-body">
+<div id="dsq-comment-message-14333" class="dsq-comment-message"><p>slight improvement on solution 3, use boolean, instead in int to avoid confusion.<br/>
+<code><br/>
+public boolean wordBreak(String s, Set wordDict) {<br/>
+boolean[] pos = new boolean[s.length()+1];<br/>
+pos[0] = true;<br/>
+for(int i = 0; i &lt; s.length(); i++){<br/>
+for(int j = i+1; pos[i] &amp;&amp; j &lt;= s.length(); j++){<br/>
+if (wordDict.contains(s.substring(i, j)))<br/>
+pos[j] = true;<br/>
+}<br/>
+}<br/>
+return pos[s.length()];<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-12480">
+<div id="dsq-comment-header-12480" class="dsq-comment-header">
+<cite id="dsq-cite-12480">
+<span id="dsq-author-user-12480">KARTHIKEYAN DEVENDRAN</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12480" class="dsq-comment-body">
+<div id="dsq-comment-message-12480" class="dsq-comment-message"><p><code><br/>
+public boolean wordBreak(String s,Set dict){<br/>
+HashMap map = new HashMap();<br/>
+return wordBreak(s, dict,map);<br/>
+}</p>
+<p> public boolean wordBreak(String s,Set dict,HashMap map){</p>
+<p> if(map.containsKey(s)){<br/>
+return map.get(s);<br/>
+}</p>
+<p> for (int i = 0; i &lt;= s.length(); i++) {<br/>
+String prefix = s.substring(0,i);<br/>
+if(dict.contains(prefix)){<br/>
+if(i == s.length()){<br/>
+return true;<br/>
+}<br/>
+if(wordBreak(s.substring(i),dict,map)){<br/>
+map.put(s.substring(i), true);<br/>
+return true;<br/>
+}<br/>
+}<br/>
+}<br/>
+map.put(s, false);<br/>
+return false;<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-11870">
+<div id="dsq-comment-header-11870" class="dsq-comment-header">
+<cite id="dsq-cite-11870">
+<span id="dsq-author-user-11870">Jangku</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11870" class="dsq-comment-body">
+<div id="dsq-comment-message-11870" class="dsq-comment-message"><p>This implementation looks neat. But the complexity is exponential so I would choose polynomial implementation for my case.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7777">
+<div id="dsq-comment-header-7777" class="dsq-comment-header">
+<cite id="dsq-cite-7777">
+<span id="dsq-author-user-7777">Rahul Shukla</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7777" class="dsq-comment-body">
+<div id="dsq-comment-message-7777" class="dsq-comment-message"><p><a href="http://www.ideserve.co.in/learn/word-break-problem" rel="nofollow">http://www.ideserve.co.in/learn/word-break-problem</a><br/>
+Here is a detailed explanation of the algorithm.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6879">
+<div id="dsq-comment-header-6879" class="dsq-comment-header">
+<cite id="dsq-cite-6879">
+<span id="dsq-author-user-6879">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6879" class="dsq-comment-body">
+<div id="dsq-comment-message-6879" class="dsq-comment-message"><p>Yes, i had commented that a Trie were a better solution &#8211; before seeing you have already posted it.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6878">
+<div id="dsq-comment-header-6878" class="dsq-comment-header">
+<cite id="dsq-cite-6878">
+<span id="dsq-author-user-6878">Stephen Boesch</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6878" class="dsq-comment-body">
+<div id="dsq-comment-message-6878" class="dsq-comment-message"><p>A Trie is a better solution than DP for this problem.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6778">
+<div id="dsq-comment-header-6778" class="dsq-comment-header">
+<cite id="dsq-cite-6778">
+<span id="dsq-author-user-6778">Abhay</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6778" class="dsq-comment-body">
+<div id="dsq-comment-message-6778" class="dsq-comment-message"><p>The dynamic solution fails for the case<br/>
+s = &#8220;aaaab&#8221;<br/>
+dict = [&#8220;a&#8221;, &#8220;aa&#8221;, &#8220;ac&#8221;]</p>
+<p>It returns true but should return false.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6760">
+<div id="dsq-comment-header-6760" class="dsq-comment-header">
+<cite id="dsq-cite-6760">
+<span id="dsq-author-user-6760">Puneet</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6760" class="dsq-comment-body">
+<div id="dsq-comment-message-6760" class="dsq-comment-message"><p>how about this?</p>
+<p>import java.util.*;</p>
+<p>public class WordBreak {<br/>
+static Set dictionary = new HashSet();<br/>
+public static void main (String[] args) {<br/>
+initializeDictionary();<br/>
+System.out.println(wordBreak(&#8220;leetcodesamsung&#8221;));<br/>
+}</p>
+<p> private static Boolean wordBreak(String s) {<br/>
+Boolean[] memo = new Boolean[s.length()];<br/>
+Arrays.fill(memo, Boolean.FALSE);<br/>
+int startIndex = 0;<br/>
+for (int i = 0; i &lt; s.length(); i++) {<br/>
+int endIndex = i+1;<br/>
+if (!memo[i] &amp;&amp; dictionary.contains(s.substring(startIndex,endIndex)))<br/>
+{<br/>
+memo[i] = true;<br/>
+startIndex = endIndex;<br/>
+}<br/>
+}</p>
+<p> return memo[s.length() &#8211; 1];<br/>
+}</p>
+<p> private static void initializeDictionary() {<br/>
+dictionary.add(&quot;le&quot;);<br/>
+dictionary.add(&quot;et&quot;);<br/>
+dictionary.add(&quot;code&quot;);<br/>
+dictionary.add(&quot;samsun&quot;);<br/>
+dictionary.add(&quot;g&quot;);<br/>
+}<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6752">
+<div id="dsq-comment-header-6752" class="dsq-comment-header">
+<cite id="dsq-cite-6752">
+<span id="dsq-author-user-6752">Pan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6752" class="dsq-comment-body">
+<div id="dsq-comment-message-6752" class="dsq-comment-message"><p>Yes, the wordBreak(s.substring(i), dict) should put in the if condition. However, my solution cannot pass the latched online judge.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6742">
+<div id="dsq-comment-header-6742" class="dsq-comment-header">
+<cite id="dsq-cite-6742">
+<span id="dsq-author-user-6742">burdz</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6742" class="dsq-comment-body">
+<div id="dsq-comment-message-6742" class="dsq-comment-message"><p>I think instead of returning wordBreak(s.substring(i), dict) you need to have that in the if statement with dict.contains(sstr). Otherwise your function returns to early in some cases</p>
+<p>if (dict.contains(sstr) &amp;&amp; wordBreak(s.substring(i), dict)) return true;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6704">
+<div id="dsq-comment-header-6704" class="dsq-comment-header">
+<cite id="dsq-cite-6704">
+<span id="dsq-author-user-6704">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6704" class="dsq-comment-body">
+<div id="dsq-comment-message-6704" class="dsq-comment-message"><p>Your solution does not pass leetcode online judge.</p>
+<p>Input: &#8220;goalspecial&#8221;, [&#8220;go&#8221;,&#8221;goal&#8221;,&#8221;goals&#8221;,&#8221;special&#8221;]<br/>
+Output: false<br/>
+Expected: true</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6684">
+<div id="dsq-comment-header-6684" class="dsq-comment-header">
+<cite id="dsq-cite-6684">
+<span id="dsq-author-user-6684">Truong Khanh Nguyen</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6684" class="dsq-comment-body">
+<div id="dsq-comment-message-6684" class="dsq-comment-message"><p>Thanks for your nice &amp; complete post. Verify the validity of a string is easy. It is more complex to split a valid string into words. My discussion and java program can be found here <a href="http://www.capacode.com/?p=335" rel="nofollow">http://www.capacode.com/?p=335</a></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6602">
+<div id="dsq-comment-header-6602" class="dsq-comment-header">
+<cite id="dsq-cite-6602">
+<span id="dsq-author-user-6602">Andrey Sh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6602" class="dsq-comment-body">
+<div id="dsq-comment-message-6602" class="dsq-comment-message"><p>Very short Python solution, also using trie:</p>
+<p>class WordSplitTreeNode:</p>
+<p> def __init__(self):</p>
+<p> self.children = [None for i in range(ord(&#8220;z&#8221;) &#8211; ord(&#8220;a&#8221;) + 1)]</p>
+<p> self.final = False</p>
+<p>class WordSplitTree:</p>
+<p> def __init__(self):</p>
+<p> self.root = WordSplitTreeNode()</p>
+<p> def addWord(self, word):</p>
+<p> node = self.root</p>
+<p> for c in word:</p>
+<p> i = ord(c) &#8211; ord(&#8220;a&#8221;)</p>
+<p> if node.children[i] is None:</p>
+<p> node.children[i] = WordSplitTreeNode()</p>
+<p> node = node.children[i]</p>
+<p> node.final = True</p>
+<p> def iterate(self, word, pos, node):</p>
+<p> if node.final and pos == len(word):</p>
+<p> yield &#8220;&#8221;</p>
+<p> return</p>
+<p> nextNodes = []</p>
+<p> i = ord(word[pos]) &#8211; ord(&#8220;a&#8221;)</p>
+<p> if node.final:</p>
+<p> nextNodes.append(self.root.children[i])</p>
+<p> nextNodes.append(node.children[i])</p>
+<p> for nextNode in nextNodes:</p>
+<p> if not nextNode is None:</p>
+<p> for s in self.iterate(word, pos + 1, nextNode):</p>
+<p> yield (&#8221; &#8221; if node.final and nextNode is self.root.children[i] else &#8220;&#8221;) + word[pos] + s</p>
+<p>def checkWordCanBeSplit(word, dictWords):</p>
+<p> tree = WordSplitTree()</p>
+<p> for w in dictWords:</p>
+<p> tree.addWord(w)</p>
+<p> return [splitWord for splitWord in tree.iterate(word, 0, tree.root)]</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6552">
+<div id="dsq-comment-header-6552" class="dsq-comment-header">
+<cite id="dsq-cite-6552">
+<span id="dsq-author-user-6552">hdante</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6552" class="dsq-comment-body">
+<div id="dsq-comment-message-6552" class="dsq-comment-message"><p>The problem is supposed to be equivalent to matching the regexp (leet|code)*, which means that it can be solved by building a DFA in O(2^m) and executing it in O(n)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6529">
+<div id="dsq-comment-header-6529" class="dsq-comment-header">
+<cite id="dsq-cite-6529">
+<span id="dsq-author-user-6529">Dhaval Dave</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6529" class="dsq-comment-body">
+<div id="dsq-comment-message-6529" class="dsq-comment-message"><p>DP and Recursive Solution with working code at <a href="http://www.gohired.in/2014/12/word-break-problem.html" rel="nofollow">http://www.gohired.in/2014/12/word-break-problem.html</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6517">
+<div id="dsq-comment-header-6517" class="dsq-comment-header">
+<cite id="dsq-cite-6517">
+<span id="dsq-author-user-6517">Aaron Zhang</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6517" class="dsq-comment-body">
+<div id="dsq-comment-message-6517" class="dsq-comment-message"><p>not true if dict = {&#8220;a&#8221;, &#8220;ab&#8221;}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6492">
+<div id="dsq-comment-header-6492" class="dsq-comment-header">
+<cite id="dsq-cite-6492">
+<span id="dsq-author-user-6492">JY</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6492" class="dsq-comment-body">
+<div id="dsq-comment-message-6492" class="dsq-comment-message"><p>Can anyone clarify the complexity of naïve?</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6421">
+<div id="dsq-comment-header-6421" class="dsq-comment-header">
+<cite id="dsq-cite-6421">
+<span id="dsq-author-user-6421">apricot</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6421" class="dsq-comment-body">
+<div id="dsq-comment-message-6421" class="dsq-comment-message"><p>Because you skipped the last IF condition if t[end] is already true, now all possibilities are not given. </p>
+<p>For INPUT: &#8220;leetcode&#8221;, [&#8220;leetcode&#8221;,&#8221;leet&#8221;,&#8221;code&#8221;]. </p>
+<p>matches are : leetcode leet</p>
+<p>code is not given as t[end] is made true by match leetcode.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6300">
+<div id="dsq-comment-header-6300" class="dsq-comment-header">
+<cite id="dsq-cite-6300">
+<span id="dsq-author-user-6300">nikhil rao</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6300" class="dsq-comment-body">
+<div id="dsq-comment-message-6300" class="dsq-comment-message"><p>/* package whatever; // don&#8217;t place package name! */</p>
+<p>import java.util.*;</p>
+<p>import java.lang.*;</p>
+<p>import java.io.*;</p>
+<p>class Wordbreak</p>
+<p>{</p>
+<p> public static boolean wordBreak(String s, String[] dict){</p>
+<p> int counter = 0;</p>
+<p> System.out.println(&#8220;Given string to beak :&#8221;+ s);</p>
+<p> for(String ds : dict){</p>
+<p> //System.out.println(&#8220;dict string :&#8221;+ ds);</p>
+<p> if(s.contains(ds)){</p>
+<p> counter = counter +1;</p>
+<p> //System.out.println(&#8220;Index of :&#8221;+ ds +&#8221; &#8221; + s.indexOf(ds));</p>
+<p> int strtindex = s.indexOf(ds);</p>
+<p> int len = ds.length();</p>
+<p> String sb = s.substring( strtindex, strtindex+len);</p>
+<p> //System.out.println(&#8220;Am der &#8220;+ sb);</p>
+<p> //System.out.println(&#8220;dict string :&#8221;+ ds);</p>
+<p> }</p>
+<p> }</p>
+<p> if (counter&gt;0){</p>
+<p> return true;</p>
+<p> }</p>
+<p> return false;</p>
+<p> }</p>
+<p> public static void main (String[] args) throws java.lang.Exception</p>
+<p> { </p>
+<p> String s = &#8220;programcreek&#8221;;</p>
+<p> String[] dict = new String[]{&#8220;programcree&#8221;,&#8221;program&#8221;,&#8221;creek&#8221;};</p>
+<p> boolean b = wordBreak(s, dict);</p>
+<p> if(b){</p>
+<p> System.out.println(&#8220;Can be done&#8221;);</p>
+<p> }</p>
+<p> else{</p>
+<p> System.out.println(&#8220;Not possible!!&#8221;);</p>
+<p> }</p>
+<p> }</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6271">
+<div id="dsq-comment-header-6271" class="dsq-comment-header">
+<cite id="dsq-cite-6271">
+<span id="dsq-author-user-6271">Guest</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6271" class="dsq-comment-body">
+<div id="dsq-comment-message-6271" class="dsq-comment-message"><p>{</p>
+<p>if (s == null || s.length() == 0 || dict.isEmpty()) {</p>
+<p> return false;</p>
+<p> }</p>
+<p> for (String w : dict) {</p>
+<p> if (s.equals(w)) {</p>
+<p> return true;</p>
+<p> } else if (s.startsWith(w)) {</p>
+<p> String newS = new String(s);</p>
+<p> do {</p>
+<p> newS = newS.replace(w, &#8220;&#8221;);</p>
+<p> } while (newS.startsWith(w));</p>
+<p> if (newS.equals(&#8220;&#8221;)) {</p>
+<p> return true;</p>
+<p> }</p>
+<p> boolean result = this.wordBreak(newS, dict);</p>
+<p> if (result) {</p>
+<p> return true;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> return false;</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6145">
+<div id="dsq-comment-header-6145" class="dsq-comment-header">
+<cite id="dsq-cite-6145">
+<span id="dsq-author-user-6145">german</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6145" class="dsq-comment-body">
+<div id="dsq-comment-message-6145" class="dsq-comment-message"><p>Another solution , O(n^3), being n the length() of s. I assume that the set is a hashSet.</p>
+<p>public boolean wordBreak(String s, Set dict) {</p>
+<p> if(s == null || s.length() == 0){</p>
+<p> return true;</p>
+<p> }</p>
+<p> boolean[] arr = new boolean[s.length()];</p>
+<p> if(dict.contains(s.charAt(0)+&#8221;&#8221;)){</p>
+<p> arr[0] = true; </p>
+<p> }</p>
+<p> for(int i = 1;i&lt;arr.length;i++){</p>
+<p> if (dict.contains(s.substring(0, i + 1))) {</p>
+<p> arr[i] = true;</p>
+<p> }</p>
+<p> for (int j = 0; j &lt; i; j++) {</p>
+<p> int a = i &#8211; j + 1;</p>
+<p> String subWord = s.substring(j + 1, j + a);</p>
+<p> if (dict.contains(subWord) &amp;&amp; arr[j]) {</p>
+<p> arr[i] = true;</p>
+<p> j = i;</p>
+<p> break;</p>
+<p> }</p>
+<p> }</p>
+<p> }</p>
+<p> return arr[arr.length-1];</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6144">
+<div id="dsq-comment-header-6144" class="dsq-comment-header">
+<cite id="dsq-cite-6144">
+<span id="dsq-author-user-6144">german</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6144" class="dsq-comment-body">
+<div id="dsq-comment-message-6144" class="dsq-comment-message"><p>One of the questions will be: Can we use the same dictionary word more than once? For example, if we have the word &#8220;leetcodeleetcode&#8221; and the dictionary have the words {&#8220;leet&#8221;, &#8220;code&#8221;}, the result will be true?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6062">
+<div id="dsq-comment-header-6062" class="dsq-comment-header">
+<cite id="dsq-cite-6062">
+<span id="dsq-author-user-6062">AlgorithmFreak</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6062" class="dsq-comment-body">
+<div id="dsq-comment-message-6062" class="dsq-comment-message"><p>Not true for post java7. From Java 7, substring() is a O(n) operation!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5984">
+<div id="dsq-comment-header-5984" class="dsq-comment-header">
+<cite id="dsq-cite-5984">
+<span id="dsq-author-user-5984">ravio</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5984" class="dsq-comment-body">
+<div id="dsq-comment-message-5984" class="dsq-comment-message"><p>Apparetly, this algorithm is not correct.</p>
+<p>If you use this dictory</p>
+<p>dict.add(&#8220;leet&#8221;);</p>
+<p> dict.add(&#8220;code&#8221;);</p>
+<p> dict.add(&#8220;lee&#8221;);</p>
+<p> dict.add(&#8220;programcree&#8221;);</p>
+<p> dict.add(&#8220;program&#8221;);</p>
+<p> dict.add(&#8220;creek&#8221;);</p>
+<p>, then if will not recognize &#8220;leetcode&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5972">
+<div id="dsq-comment-header-5972" class="dsq-comment-header">
+<cite id="dsq-cite-5972">
+<span id="dsq-author-user-5972">Vivek Venkatesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5972" class="dsq-comment-body">
+<div id="dsq-comment-message-5972" class="dsq-comment-message"><p>I guess this can be solved by using Tries also. </p>
+<p>Time Complexity : O(n) + O(m)<br/>
+Space Complexity : O(m) </p>
+<p>Let me know if the following code will work for all cases. </p>
+<p>import java.util.*;<br/>
+import java.lang.*;<br/>
+import java.io.*;</p>
+<p>class TrieNode {<br/>
+char val;<br/>
+boolean isRoot;<br/>
+boolean isLeaf;<br/>
+TrieNode children[]; // There can be atmost 26 children (english alphabets)<br/>
+TrieNode() {<br/>
+val = &#8216;^&#8217;;<br/>
+isRoot = true;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}<br/>
+TrieNode(char val) {<br/>
+this.val = val;<br/>
+isRoot = false;<br/>
+isLeaf = false;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}</p>
+<p> void initializeChildren() {<br/>
+for(int i=0;i&lt;children.length;i++) {<br/>
+children[i] = null;<br/>
+}<br/>
+}<br/>
+}</p>
+<p>class Trie {<br/>
+TrieNode root;<br/>
+Trie() {<br/>
+root = new TrieNode();<br/>
+}</p>
+<p> void insert(String input) {<br/>
+int start = &#8216;A&#8217;;<br/>
+TrieNode current = root;</p>
+<p> for(int i=0;i&lt;input.length();i++) {<br/>
+int val = Character.toUpperCase(input.charAt(i));<br/>
+int index = val &#8211; start;</p>
+<p> if(current.children[index] == null)<br/>
+current.children[index] = new TrieNode(input.charAt(i));</p>
+<p> current = current.children[index];<br/>
+}<br/>
+current.isLeaf = true;<br/>
+}<br/>
+}</p>
+<p>class Example {</p>
+<p> boolean wordBreak(String s, Set&lt;String&gt; dict) {<br/>
+// First Construct Trie from the dictionary</p>
+<p> Trie a = new Trie();<br/>
+for(String i : dict) {<br/>
+a.insert(i);<br/>
+}</p>
+<p> TrieNode current = a.root;<br/>
+int start = &#8216;A&#8217;;</p>
+<p> boolean result = false;</p>
+<p> for(int i=0; i&lt;s.length();i++) {<br/>
+int val = Character.toUpperCase(s.charAt(i));<br/>
+int index = val &#8211; start;</p>
+<p> if(current.children[index] == null) {<br/>
+// Word is not in the dictionary<br/>
+current = a.root;<br/>
+result = false;<br/>
+break;<br/>
+}<br/>
+current = current.children[index];<br/>
+if(current.isLeaf == true) {<br/>
+// Start from the beginning for the next character<br/>
+current = a.root;<br/>
+result = true;<br/>
+}<br/>
+}</p>
+<p> return result;</p>
+<p> }</p>
+<p> public static void main(String[] args) {<br/>
+Example temp = new Example() ;<br/>
+Set&lt;String&gt; dict = new HashSet&lt;String&gt;();<br/>
+dict.add(&#8220;leet&#8221;);<br/>
+dict.add(&#8220;code&#8221;);<br/>
+dict.add(&#8220;programcree&#8221;);<br/>
+dict.add(&#8220;program&#8221;);<br/>
+dict.add(&#8220;creek&#8221;);<br/>
+System.out.println(&#8220;Wordbreak (programcreek) = &#8221; + temp.wordBreak(&#8220;programcreek&#8221;, dict));<br/>
+System.out.println(&#8220;Wordbreak (leetcode) = &#8221; + temp.wordBreak(&#8220;programcreek&#8221;, dict));<br/>
+}</p>
+<p>}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5971">
+<div id="dsq-comment-header-5971" class="dsq-comment-header">
+<cite id="dsq-cite-5971">
+<span id="dsq-author-user-5971">Guest</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5971" class="dsq-comment-body">
+<div id="dsq-comment-message-5971" class="dsq-comment-message"><p><code></p>
+<p>import java.util.*;<br/>
+import java.lang.*;<br/>
+import java.io.*;</p>
+<p>class TrieNode {<br/>
+char val;<br/>
+boolean isRoot;<br/>
+boolean isLeaf;<br/>
+TrieNode children[]; // There can be atmost 26 children (english alphabets)<br/>
+TrieNode() {<br/>
+val = '^';<br/>
+isRoot = true;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}<br/>
+TrieNode(char val) {<br/>
+this.val = val;<br/>
+isRoot = false;<br/>
+isLeaf = false;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}</p>
+<p> void initializeChildren() {<br/>
+for(int i=0;i&lt;children.length;i++) {<br/>
+children[i] = null;<br/>
+}<br/>
+}<br/>
+}</p>
+<p>class Trie {<br/>
+TrieNode root;<br/>
+Trie() {<br/>
+root = new TrieNode();<br/>
+}</p>
+<p> void insert(String input) {<br/>
+int start = &#039;A&#039;;<br/>
+TrieNode current = root;</p>
+<p> for(int i=0;i&lt;input.length();i++) {<br/>
+int val = Character.toUpperCase(input.charAt(i));<br/>
+int index = val - start;</p>
+<p> if(current.children[index] == null)<br/>
+current.children[index] = new TrieNode(input.charAt(i));</p>
+<p> current = current.children[index];<br/>
+}<br/>
+current.isLeaf = true;<br/>
+}<br/>
+}</p>
+<p>class Example {</p>
+<p>boolean wordBreak(String s, Set dict) {<br/>
+// First Construct Trie from the dictionary</p>
+<p> Trie a = new Trie();<br/>
+for(String i : dict) {<br/>
+a.insert(i);<br/>
+}</p>
+<p> TrieNode current = a.root;<br/>
+int start = 'A';</p>
+<p> boolean result = false;</p>
+<p> for(int i=0; i&lt;s.length();i++) {<br/>
+int val = Character.toUpperCase(s.charAt(i));<br/>
+int index = val - start;</p>
+<p> if(current.children[index] == null) {<br/>
+// Word is not in the dictionary<br/>
+current = a.root;<br/>
+result = false;<br/>
+break;<br/>
+}<br/>
+current = current.children[index];<br/>
+if(current.isLeaf == true) {<br/>
+// Start from the beginning for the next character<br/>
+current = a.root;<br/>
+result = true;<br/>
+}<br/>
+}</p>
+<p> return result;</p>
+<p>}</p>
+<p>public static void main(String[] args) {<br/>
+Example temp = new Example() ;<br/>
+Set dict = new HashSet();<br/>
+dict.add("leet");<br/>
+dict.add("code");<br/>
+dict.add("programcree");<br/>
+dict.add("program");<br/>
+dict.add("creek");<br/>
+System.out.println("Wordbreak (programcreek) = " + temp.wordBreak("programcreek", dict));<br/>
+System.out.println("Wordbreak (leetcode) = " + temp.wordBreak("programcreek", dict));<br/>
+}</p>
+<p>}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5970">
+<div id="dsq-comment-header-5970" class="dsq-comment-header">
+<cite id="dsq-cite-5970">
+<span id="dsq-author-user-5970">Vivek Venkatesh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5970" class="dsq-comment-body">
+<div id="dsq-comment-message-5970" class="dsq-comment-message"><p>I can think of trie based solution:</p>
+<p>Time Complexity = O(n) + O(m)</p>
+<p>Space Complexity = O(m) </p>
+<p>Let me if this will work:</p>
+<p><code></p>
+<p>import java.util.*;<br/>
+import java.lang.*;<br/>
+import java.io.*;</p>
+<p>class TrieNode {<br/>
+char val;<br/>
+boolean isRoot;<br/>
+boolean isLeaf;<br/>
+TrieNode children[]; // There can be atmost 26 children (english alphabets)<br/>
+TrieNode() {<br/>
+val = '^';<br/>
+isRoot = true;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}</p>
+<p> TrieNode(char val) {<br/>
+this.val = val;<br/>
+isRoot = false;<br/>
+isLeaf = false;<br/>
+children = new TrieNode[26];<br/>
+initializeChildren();<br/>
+}<br/>
+void initializeChildren() {<br/>
+for(int i=0;i&lt;children.length;i++) {<br/>
+children[i] = null;<br/>
+}<br/>
+}<br/>
+}</p>
+<p>class Trie {<br/>
+TrieNode root;<br/>
+Trie() {<br/>
+root = new TrieNode();<br/>
+}</p>
+<p> void insert(String input) {<br/>
+int start = &#039;A&#039;;<br/>
+TrieNode current = root;</p>
+<p> for(int i=0;i&lt;input.length();i++) {<br/>
+int val = Character.toUpperCase(input.charAt(i));<br/>
+int index = val - start;</p>
+<p> if(current.children[index] == null)<br/>
+current.children[index] = new TrieNode(input.charAt(i));<br/>
+current = current.children[index];<br/>
+}<br/>
+current.isLeaf = true;<br/>
+}</p>
+<p>}</p>
+<p>public class Example {<br/>
+boolean wordBreak(String s, Set dict) {</p>
+<p> // First Construct Trie from the dictionary</p>
+<p> Trie a = new Trie();<br/>
+for(String i : dict) {<br/>
+a.insert(i);</p>
+<p> }</p>
+<p> TrieNode current = a.root;<br/>
+int start = 'A';<br/>
+boolean result = false;</p>
+<p> for(int i=0; i&lt;s.length();i++) {</p>
+<p> int val = Character.toUpperCase(s.charAt(i));<br/>
+int index = val - start;</p>
+<p> if(current.children[index] == null) {<br/>
+// Word is not in the dictionary<br/>
+current = a.root;<br/>
+result = false;<br/>
+break;<br/>
+}</p>
+<p> current = current.children[index];<br/>
+if(current.isLeaf == true) {<br/>
+// Start from the beginning for the next character<br/>
+current = a.root;<br/>
+result = true;<br/>
+}<br/>
+}<br/>
+return result;</p>
+<p> }</p>
+<p> public static void main(String[] args) {<br/>
+Example temp = new Example() ;<br/>
+Set dict = new HashSet();<br/>
+dict.add("leet");<br/>
+dict.add("code");<br/>
+dict.add("programcree");<br/>
+dict.add("program");<br/>
+dict.add("creek");</p>
+<p> System.out.println("Wordbreak (programcreek) = " + temp.wordBreak("programcreek", dict));<br/>
+System.out.println("Wordbreak (leetcode) = " + temp.wordBreak("leetcode", dict));</p>
+<p> System.out.println("Wordbreak (lesscode) = " + temp.wordBreak("lesscode", dict));</p>
+<p> }</p>
+<p>}</p>
+<p></code></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5916">
+<div id="dsq-comment-header-5916" class="dsq-comment-header">
+<cite id="dsq-cite-5916">
+<span id="dsq-author-user-5916">Andrei</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5916" class="dsq-comment-body">
+<div id="dsq-comment-message-5916" class="dsq-comment-message"><p>Small correction of complexity in the 2nd case.</p>
+<p>It&#8217;s mentioned that &#8220;Time: O(string length * dict size)&#8221; but you also run equals (and substring is not constant for Java &gt; 1.6) for every word in dictionary so it&#8217;s more like O(string length * dict size * length of the longest word in dict).</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5893">
+<div id="dsq-comment-header-5893" class="dsq-comment-header">
+<cite id="dsq-cite-5893">
+<span id="dsq-author-user-5893">codingfacts</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5893" class="dsq-comment-body">
+<div id="dsq-comment-message-5893" class="dsq-comment-message"><p>complexity of naïve is O(n^2) not O(2^n)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5803">
+<div id="dsq-comment-header-5803" class="dsq-comment-header">
+<cite id="dsq-cite-5803">
+<span id="dsq-author-user-5803">SK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5803" class="dsq-comment-body">
+<div id="dsq-comment-message-5803" class="dsq-comment-message"><p>Use a HasMap can reduce repeated calculation</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5802">
+<div id="dsq-comment-header-5802" class="dsq-comment-header">
+<cite id="dsq-cite-5802">
+<span id="dsq-author-user-5802">SK</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5802" class="dsq-comment-body">
+<div id="dsq-comment-message-5802" class="dsq-comment-message"><p>Recursion with hashMap:</p>
+<p>class Solution:</p>
+<p> def __init__(self):</p>
+<p> self.table = {}</p>
+<p> def wordBreak(self, s, dict):</p>
+<p> if len(s) == 0:</p>
+<p> return True</p>
+<p> if len(s) == 1:</p>
+<p> return s in dict</p>
+<p> if s in self.table:</p>
+<p> return self.table[s]</p>
+<p> isBreakable = False</p>
+<p> for i in range(len(s)):</p>
+<p> word = s[:i+1]</p>
+<p> if word in dict:</p>
+<p> subFlag = self.wordBreak(s[i+1:], dict)</p>
+<p> if s[i+1:] not in self.table:</p>
+<p> self.table[s[i+1:]] = subFlag</p>
+<p> isBreakable |= subFlag</p>
+<p> return isBreakable</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5746">
+<div id="dsq-comment-header-5746" class="dsq-comment-header">
+<cite id="dsq-cite-5746">
+<span id="dsq-author-user-5746">Pan</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5746" class="dsq-comment-body">
+<div id="dsq-comment-message-5746" class="dsq-comment-message"><p>recursive solution</p>
+<p>public static boolean wordBreak(String s, Set dict){</p>
+<p> //input validation</p>
+<p> //Base case</p>
+<p> if(dict.contains(s))</p>
+<p> return true;</p>
+<p> else {</p>
+<p> for(int i = 0; i &lt; s.length(); i++){</p>
+<p> String sstr = s.substring(0, i);</p>
+<p> if(dict.contains(sstr))</p>
+<p> return wordBreak(s.substring(i), dict);</p>
+<p> }</p>
+<p> }</p>
+<p> return false;</p>
+<p> }</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5630">
+<div id="dsq-comment-header-5630" class="dsq-comment-header">
+<cite id="dsq-cite-5630">
+<span id="dsq-author-user-5630">shreyas KN</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5630" class="dsq-comment-body">
+<div id="dsq-comment-message-5630" class="dsq-comment-message"><p>we can do it in O(n) right , assuming if Set dic is actually a Hashset, so the retrival on Hashset is always O(1)</p>
+<p>List arr;<br/>
+StringBuilder sb = new StringBuilder();<br/>
+int i=0;<br/>
+int wordIndex=0;<br/>
+while(i&gt;s.length){</p>
+<p> if(dic.get(sb.substring(wordIndex,i) != null){<br/>
+wordIndex=i+1;<br/>
+}else{<br/>
+arr.add(sb.substring(wordIndex, i));<br/>
+}<br/>
+i++;<br/>
+}</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5599">
+<div id="dsq-comment-header-5599" class="dsq-comment-header">
+<cite id="dsq-cite-5599">
+<span id="dsq-author-user-5599">jason</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5599" class="dsq-comment-body">
+<div id="dsq-comment-message-5599" class="dsq-comment-message"><p>Another approach<br/>
+package test;</p>
+<p>import java.util.HashSet;<br/>
+import java.util.Set;</p>
+<p>public class WordBreak2 {</p>
+<p> public static boolean wordBreak(String s,Set dict) {<br/>
+if (s.length()==0) {<br/>
+return true;<br/>
+}<br/>
+for(int i=1; i&lt;=s.length(); i++) {<br/>
+String firstWord=s.substring(0, i);<br/>
+String remaing=s.substring(i);<br/>
+if (dict.contains(firstWord) &amp;&amp; wordBreak(remaing, dict) ) {<br/>
+System.out.print(&quot; &quot;);<br/>
+System.out.print(firstWord);</p>
+<p> return true;<br/>
+}<br/>
+}<br/>
+return false;<br/>
+}<br/>
+public static void main(String[] args) {<br/>
+Set dict=new HashSet(5);<br/>
+dict.add(&#8220;program&#8221;);<br/>
+if (wordBreak(&#8220;pprogram&#8221;, dict)) {<br/>
+System.out.println(&#8221; YES&#8221;);<br/>
+} else {<br/>
+System.out.println(&#8221; NO&#8221;);<br/>
+}</p>
+<p> dict=new HashSet(5);<br/>
+dict.add(&#8220;ab&#8221;);<br/>
+dict.add(&#8220;abc&#8221;);<br/>
+dict.add(&#8220;de&#8221;);<br/>
+if (wordBreak(&#8220;abcde&#8221;, dict)) {<br/>
+System.out.println(&#8221; YES&#8221;);<br/>
+} else {<br/>
+System.out.println(&#8221; NO&#8221;);<br/>
+}</p>
+<p> }</p>
+<p>}</p>
+<p>This is more efficient if dict is big which is usually</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5545">
+<div id="dsq-comment-header-5545" class="dsq-comment-header">
+<cite id="dsq-cite-5545">
+<span id="dsq-author-user-5545">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5545" class="dsq-comment-body">
+<div id="dsq-comment-message-5545" class="dsq-comment-message"><p>Seems good to me, I will try later. Thanks!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5542">
+<div id="dsq-comment-header-5542" class="dsq-comment-header">
+<cite id="dsq-cite-5542">
+<span id="dsq-author-user-5542">jk451</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5542" class="dsq-comment-body">
+<div id="dsq-comment-message-5542" class="dsq-comment-message"><p>Thanks for these solutions. Just starting to go through the problems but looks like very useful website.</p>
+<p>As for how to get the words that the string breaks up to:<br/>
+Change the &#8220;t&#8221; array to integer instead of boolean.</p>
+<p>Replacing setting t[end] to true (i.e. saying you have found a break up of 0..end substring] with setting t[end] to i, thus saying you have found a break up of 0..end substring and the last word in that break up is substring i..end of the main string.</p>
+<p>Then at the end if I can break up the string, I check t[s.length()]. THe last word in the break up will substring starting at t[s.length()] and ending at s.length()-1. And you repeate this procedure to get the other words.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5512">
+<div id="dsq-comment-header-5512" class="dsq-comment-header">
+<cite id="dsq-cite-5512">
+<span id="dsq-author-user-5512">ryanlr</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5512" class="dsq-comment-body">
+<div id="dsq-comment-message-5512" class="dsq-comment-message"><p>I don&#8217;t get what you mean, can you explain in more detail? Thanks.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5511">
+<div id="dsq-comment-header-5511" class="dsq-comment-header">
+<cite id="dsq-cite-5511">
+<span id="dsq-author-user-5511">Dynkin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5511" class="dsq-comment-body">
+<div id="dsq-comment-message-5511" class="dsq-comment-message"><p>You should skip the string comparison in the last IF condition if t[end] is already true.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-5498">
+<div id="dsq-comment-header-5498" class="dsq-comment-header">
+<cite id="dsq-cite-5498">
+<span id="dsq-author-user-5498">Kizzle</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5498" class="dsq-comment-body">
+<div id="dsq-comment-message-5498" class="dsq-comment-message"><p>Do you know if a better one exists? Can you provide a better solution? Appreciate it!</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5449">
+<div id="dsq-comment-header-5449" class="dsq-comment-header">
+<cite id="dsq-cite-5449">
+<span id="dsq-author-user-5449">Callus</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5449" class="dsq-comment-body">
+<div id="dsq-comment-message-5449" class="dsq-comment-message"><p>I don&#8217;t think looping through the dic is a good idea.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-solution-word-break/';
+var disqus_identifier = '10623 http://www.programcreek.com/?p=10623';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "Leetcode &#8211; Word Break (Java)";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=10623';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

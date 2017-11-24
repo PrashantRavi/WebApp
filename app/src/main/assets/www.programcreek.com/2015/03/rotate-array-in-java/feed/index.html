@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Rotate Array in Java</title>
+	<atom:link href="http://www.programcreek.com/2015/03/rotate-array-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2015/03/rotate-array-in-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Jesse Drogin</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-15479</link>
+		<dc:creator><![CDATA[Jesse Drogin]]></dc:creator>
+		<pubDate>Thu, 20 Oct 2016 21:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-15479</guid>
+		<description><![CDATA[here&#039;s an O(n) time, O(1) space where you rotate forward k spots.  If you return to the current starting point, increment the starting point by 1 and repeat.  Keep track of the number of moves, when number of moves equals n you are done.
+
+ &lt;code&gt;
+        static void Rotate(int[] arr, int k)
+        {
+            int n = arr.Length;
+            k = k % n;
+            int count = 0;
+            int start = k;
+
+            while (count &#060; n)
+            {
+                int index = start;
+                int prev = arr[(start - k + n) % n];
+                do
+                {
+                    int temp = arr[index];
+                    arr[index] = prev;
+                    prev = temp;
+                    index = (index + k) % n;
+                    count++;
+                }
+                while (index != start &#038;&#038; count &#060; n);
+
+                start = (start + 1) % n;
+            }
+        }
+
+&lt;/code&gt; ]]></description>
+		<content:encoded><![CDATA[<p>here&#8217;s an O(n) time, O(1) space where you rotate forward k spots.  If you return to the current starting point, increment the starting point by 1 and repeat.  Keep track of the number of moves, when number of moves equals n you are done.</p>
+<p> <code><br />
+        static void Rotate(int[] arr, int k)<br />
+        {<br />
+            int n = arr.Length;<br />
+            k = k % n;<br />
+            int count = 0;<br />
+            int start = k;</p>
+<p>            while (count &lt; n)<br />
+            {<br />
+                int index = start;<br />
+                int prev = arr[(start - k + n) % n];<br />
+                do<br />
+                {<br />
+                    int temp = arr[index];<br />
+                    arr[index] = prev;<br />
+                    prev = temp;<br />
+                    index = (index + k) % n;<br />
+                    count++;<br />
+                }<br />
+                while (index != start &amp;&amp; count &lt; n);</p>
+<p>                start = (start + 1) % n;<br />
+            }<br />
+        }</p>
+<p></code> </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bpgen</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-14844</link>
+		<dc:creator><![CDATA[bpgen]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 06:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-14844</guid>
+		<description><![CDATA[int[] arr = {1,2,3,4,5,6,7};
+int firstIndex = 0;
+int k = 3;
+int[] newArr = new int[arr.length];
+for (int i = 0; i &#060;arr.length ; i++) {
+    newArr[i]=arr[(++firstIndex + k)%arr.length];
+}
+Arrays.stream(newArr).forEach(System.out::println);]]></description>
+		<content:encoded><![CDATA[<p>int[] arr = {1,2,3,4,5,6,7};<br />
+int firstIndex = 0;<br />
+int k = 3;<br />
+int[] newArr = new int[arr.length];<br />
+for (int i = 0; i &lt;arr.length ; i++) {<br />
+    newArr[i]=arr[(++firstIndex + k)%arr.length];<br />
+}<br />
+Arrays.stream(newArr).forEach(System.out::println);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bpgen</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-14843</link>
+		<dc:creator><![CDATA[bpgen]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 06:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-14843</guid>
+		<description><![CDATA[
+&lt;code&gt;
+
+        int[] arr = {1,2,3,4,5,6,7};
+        int firstIndex = 0;
+        int k = 3;
+
+        int[] newArr = new int[arr.length];
+        for (int i = 0; i &#060;arr.length ; i++) {
+            newArr[i]=arr[(++firstIndex + k)%arr.length];
+        }
+       Arrays.stream(newArr).forEach(System.out::println);
+
+&lt;/code&gt;
+]]></description>
+		<content:encoded><![CDATA[<p><code></p>
+<p>        int[] arr = {1,2,3,4,5,6,7};<br />
+        int firstIndex = 0;<br />
+        int k = 3;</p>
+<p>        int[] newArr = new int[arr.length];<br />
+        for (int i = 0; i &lt;arr.length ; i++) {<br />
+            newArr[i]=arr[(++firstIndex + k)%arr.length];<br />
+        }<br />
+       Arrays.stream(newArr).forEach(System.out::println);</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bpgen</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-14842</link>
+		<dc:creator><![CDATA[bpgen]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 06:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-14842</guid>
+		<description><![CDATA[int[] arr = {1,2,3,4,5,6,7};
+        int firstIndex = 0;
+        int k = 3;
+
+        int[] newArr = new int[arr.length];
+        for (int i = 0; i &#060;arr.length ; i++) {
+            newArr[i]=arr[(++firstIndex + k)%arr.length];
+        }
+       Arrays.stream(newArr).forEach(System.out::println);]]></description>
+		<content:encoded><![CDATA[<p>int[] arr = {1,2,3,4,5,6,7};<br />
+        int firstIndex = 0;<br />
+        int k = 3;</p>
+<p>        int[] newArr = new int[arr.length];<br />
+        for (int i = 0; i &lt;arr.length ; i++) {<br />
+            newArr[i]=arr[(++firstIndex + k)%arr.length];<br />
+        }<br />
+       Arrays.stream(newArr).forEach(System.out::println);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bpgen</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-14841</link>
+		<dc:creator><![CDATA[bpgen]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 05:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-14841</guid>
+		<description><![CDATA[int[] arr = {1,2,3,4,5,6,7};
+        int firstIndex = 0;
+        int k = 3;
+
+        int[] newArr = new int[arr.length];
+        for (int i = 0; i &#060;arr.length ; i++) {
+            newArr[i]=arr[(++firstIndex + k)%arr.length];
+        }
+       Arrays.stream(newArr).forEach(System.out::println);]]></description>
+		<content:encoded><![CDATA[<p>int[] arr = {1,2,3,4,5,6,7};<br />
+        int firstIndex = 0;<br />
+        int k = 3;</p>
+<p>        int[] newArr = new int[arr.length];<br />
+        for (int i = 0; i &lt;arr.length ; i++) {<br />
+            newArr[i]=arr[(++firstIndex + k)%arr.length];<br />
+        }<br />
+       Arrays.stream(newArr).forEach(System.out::println);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bpgen</title>
+		<link>http://www.programcreek.com/2015/03/rotate-array-in-java/#comment-14840</link>
+		<dc:creator><![CDATA[bpgen]]></dc:creator>
+		<pubDate>Thu, 29 Sep 2016 05:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=13726#comment-14840</guid>
+		<description><![CDATA[int[] arr = {1,2,3,4,5,6,7};
+ int firstIndex = 0;
+ int k = 3;
+ 
+ int[] newArr = new int[arr.length];
+ for (int i = 0; i &#060;arr.length ; i++) {
+     newArr[i]=arr[(++firstIndex + k)%arr.length];
+ }
+ Arrays.stream(newArr).forEach(System.out::println);]]></description>
+		<content:encoded><![CDATA[<p>int[] arr = {1,2,3,4,5,6,7};<br />
+ int firstIndex = 0;<br />
+ int k = 3;</p>
+<p> int[] newArr = new int[arr.length];<br />
+ for (int i = 0; i &lt;arr.length ; i++) {<br />
+     newArr[i]=arr[(++firstIndex + k)%arr.length];<br />
+ }<br />
+ Arrays.stream(newArr).forEach(System.out::println);</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Isomorphic Strings (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Greg Mueller</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-13719</link>
+		<dc:creator><![CDATA[Greg Mueller]]></dc:creator>
+		<pubDate>Tue, 16 Aug 2016 14:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-13719</guid>
+		<description><![CDATA[Here&#039;s what I came up with:
+
+&lt;code&gt; 
+def is_isomorphic(source, target):
+    if type(source) != type(&#039;&#039;) or type(target) != type(&#039;&#039;):
+        raise ValueError(&#039;Source and Target must be of type string.&#039;)
+    char_map = {}
+    for s, t in zip(source, target):
+        if t != char_map.setdefault(s, t):
+            return False
+    return True if len(source) == len(target) else False
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s what I came up with:</p>
+<p><code><br />
+def is_isomorphic(source, target):<br />
+    if type(source) != type('') or type(target) != type(''):<br />
+        raise ValueError('Source and Target must be of type string.')<br />
+    char_map = {}<br />
+    for s, t in zip(source, target):<br />
+        if t != char_map.setdefault(s, t):<br />
+            return False<br />
+    return True if len(source) == len(target) else False<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Udaydeep Thota</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-13627</link>
+		<dc:creator><![CDATA[Udaydeep Thota]]></dc:creator>
+		<pubDate>Sat, 13 Aug 2016 08:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-13627</guid>
+		<description><![CDATA[You code doesn&#039;t work for &quot;ab&quot; and &quot;aa&quot;]]></description>
+		<content:encoded><![CDATA[<p>You code doesn&#8217;t work for &#8220;ab&#8221; and &#8220;aa&#8221;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Samir</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-13178</link>
+		<dc:creator><![CDATA[Samir]]></dc:creator>
+		<pubDate>Thu, 04 Aug 2016 12:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-13178</guid>
+		<description><![CDATA[Hi,
+Below code runs fine for given input s=&quot;ab&quot;,t=&quot;aa&quot; ; on eclipse but not on leetcode&#039;s compliter.
+Please help me to explore the reason.
+However this code was able to pass 26/30 test case and takes 3ms of execution time.
+thanx in advance
+
+
+&lt;code&gt;
+public boolean isIsomorphic(String s, String t) {
+      if(s.equals(&quot;&quot;) &#124;&#124; t.equals(&quot;&quot;)){
+    		return true;
+    	}
+    	
+    	String sArray[] = s.split(&quot;&quot;);
+		String tArray[] = t.split(&quot;&quot;);
+		Map sMap= new HashMap();
+		Map tMap= new HashMap();
+		Set sSet = new HashSet();
+		Set tSet = new HashSet();
+		
+			for(int i=1;i&#060;sArray.length;i++){
+				sMap.put(i, sArray[i]);
+			}
+			for(int i=1;i&#060;sArray.length;i++){
+				tMap.put(i, tArray[i]);
+			}
+	 for(Integer key1 : sMap.keySet()){
+		 sSet.add(sMap.get(key1));
+	 }
+	 for(Integer key2 : tMap.keySet()){
+		 tSet.add(tMap.get(key2));
+	 }
+	  System.out.println(sSet+&#034;  &#034;+tSet);
+		if(sSet.size() == tSet.size() ){
+			return true;
+		}else{
+			return false;
+		}
+    }	
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi,<br />
+Below code runs fine for given input s=&#8221;ab&#8221;,t=&#8221;aa&#8221; ; on eclipse but not on leetcode&#8217;s compliter.<br />
+Please help me to explore the reason.<br />
+However this code was able to pass 26/30 test case and takes 3ms of execution time.<br />
+thanx in advance</p>
+<p><code><br />
+public boolean isIsomorphic(String s, String t) {<br />
+      if(s.equals("") || t.equals("")){<br />
+    		return true;<br />
+    	}</p>
+<p>    	String sArray[] = s.split("");<br />
+		String tArray[] = t.split("");<br />
+		Map sMap= new HashMap();<br />
+		Map tMap= new HashMap();<br />
+		Set sSet = new HashSet();<br />
+		Set tSet = new HashSet();</p>
+<p>			for(int i=1;i&lt;sArray.length;i++){<br />
+				sMap.put(i, sArray[i]);<br />
+			}<br />
+			for(int i=1;i&lt;sArray.length;i++){<br />
+				tMap.put(i, tArray[i]);<br />
+			}<br />
+	 for(Integer key1 : sMap.keySet()){<br />
+		 sSet.add(sMap.get(key1));<br />
+	 }<br />
+	 for(Integer key2 : tMap.keySet()){<br />
+		 tSet.add(tMap.get(key2));<br />
+	 }<br />
+	  System.out.println(sSet+&quot;  &quot;+tSet);<br />
+		if(sSet.size() == tSet.size() ){<br />
+			return true;<br />
+		}else{<br />
+			return false;<br />
+		}<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Samir</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-13169</link>
+		<dc:creator><![CDATA[Samir]]></dc:creator>
+		<pubDate>Thu, 04 Aug 2016 06:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-13169</guid>
+		<description><![CDATA[For input String str1=&quot;aba&quot;, str2=&quot;baa&quot;; this code will not work]]></description>
+		<content:encoded><![CDATA[<p>For input String str1=&#8221;aba&#8221;, str2=&#8221;baa&#8221;; this code will not work</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Samir</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-13166</link>
+		<dc:creator><![CDATA[Samir]]></dc:creator>
+		<pubDate>Thu, 04 Aug 2016 06:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-13166</guid>
+		<description><![CDATA[Very easy solution
+
+
+&lt;code&gt;
+public boolean isIsomorphic(String s, String t) {
+	    if(s==null&#124;&#124;t==null)
+	        return false;
+	 
+	    String sArray[] = s.split(&quot;&quot;);
+		String tArray[] = t.split(&quot;&quot;);
+		Set sSet= new HashSet(Arrays.asList(sArray));
+		Set tSet= new HashSet(Arrays.asList(tArray));
+		System.out.println(sSet.size()+&quot; &quot;+tSet.size());
+		if(sSet.size() == tSet.size()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	 
+	}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Very easy solution</p>
+<p><code><br />
+public boolean isIsomorphic(String s, String t) {<br />
+	    if(s==null||t==null)<br />
+	        return false;</p>
+<p>	    String sArray[] = s.split("");<br />
+		String tArray[] = t.split("");<br />
+		Set sSet= new HashSet(Arrays.asList(sArray));<br />
+		Set tSet= new HashSet(Arrays.asList(tArray));<br />
+		System.out.println(sSet.size()+" "+tSet.size());<br />
+		if(sSet.size() == tSet.size()){<br />
+			return true;<br />
+		}<br />
+		else{<br />
+			return false;<br />
+		}</p>
+<p>	}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nakeer</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-isomorphic-strings-java/#comment-12628</link>
+		<dc:creator><![CDATA[Nakeer]]></dc:creator>
+		<pubDate>Thu, 14 Jul 2016 22:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14091#comment-12628</guid>
+		<description><![CDATA[should be (s1 != null &#038;&#038; s2 != null &#038;&#038; s1.length() == s2.length() ) {
+}
+return false;]]></description>
+		<content:encoded><![CDATA[<p>should be (s1 != null &amp;&amp; s2 != null &amp;&amp; s1.length() == s2.length() ) {<br />
+}<br />
+return false;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

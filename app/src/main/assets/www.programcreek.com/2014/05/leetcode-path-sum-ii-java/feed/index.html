@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Path Sum II (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/05/leetcode-path-sum-ii-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/05/leetcode-path-sum-ii-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Mandy Lin</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-path-sum-ii-java/#comment-9474</link>
+		<dc:creator><![CDATA[Mandy Lin]]></dc:creator>
+		<pubDate>Fri, 04 Mar 2016 02:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14135#comment-9474</guid>
+		<description><![CDATA[I wrote a solution but it was wrong. Someone could help?
+
+/**
+
+ * Definition for a binary tree node.
+
+ * public class TreeNode {
+
+ *     int val;
+
+ *     TreeNode left;
+
+ *     TreeNode right;
+
+ *     TreeNode(int x) { val = x; }
+
+ * }
+
+ */
+
+public class Solution {
+
+    public List&#060;List&#062; pathSum(TreeNode root, int sum) {
+
+        List&#060;List&#062; list = new ArrayList();
+
+        List sublist = new ArrayList();
+
+        Record record =  new Record(0, sublist);
+
+        record = DFS(root, sum, record);
+
+        if(record.hasPath()) {
+
+            list.add(record.getList());
+
+        }
+
+        return list;
+
+    }
+
+    
+
+    public Record DFS(TreeNode node, int sum, Record record) {
+
+            if(node == null) {
+
+                return null;
+
+            }
+
+            if(node.left == null &#038;&#038; node.right == null) {
+
+                if(record.getVal() + node.val == sum) {
+
+                    record.hasPath();
+
+                    record.add(node.val);
+
+                    return record;
+
+                } else {
+
+                    return record;
+
+                }
+
+            }
+
+            record.hasPath();
+
+            record.add(node.val);
+
+            record.updateVal(node.val);
+
+            return (DFS(node.left, sum, record) &#124;&#124; DFS(node.right, sum, record));
+
+            //return DFS(node.left, sum, record);
+
+    }
+
+}
+
+class Record {
+
+    private int calculatedVal;
+
+    private List sublist;
+
+    private boolean foundPath;
+
+    
+
+    public Record(int c, List s) {
+
+        this.calculatedVal = c;
+
+        this.sublist = s;
+
+        this.foundPath = false;
+
+    }
+
+    
+
+    public int getVal() {
+
+        return calculatedVal;
+
+    }
+
+    
+
+    public void updateVal(int val) {
+
+        calculatedVal += val;
+
+        
+
+    }
+
+    
+
+    public List getList() {
+
+        return sublist;
+
+    }
+
+    
+
+    public void add(int val) {
+
+        sublist.add(val);
+
+    }
+
+    
+
+    public boolean hasPath() {
+
+        foundPath = true;
+
+        return foundPath;
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I wrote a solution but it was wrong. Someone could help?</p>
+<p>/**</p>
+<p> * Definition for a binary tree node.</p>
+<p> * public class TreeNode {</p>
+<p> *     int val;</p>
+<p> *     TreeNode left;</p>
+<p> *     TreeNode right;</p>
+<p> *     TreeNode(int x) { val = x; }</p>
+<p> * }</p>
+<p> */</p>
+<p>public class Solution {</p>
+<p>    public List&lt;List&gt; pathSum(TreeNode root, int sum) {</p>
+<p>        List&lt;List&gt; list = new ArrayList();</p>
+<p>        List sublist = new ArrayList();</p>
+<p>        Record record =  new Record(0, sublist);</p>
+<p>        record = DFS(root, sum, record);</p>
+<p>        if(record.hasPath()) {</p>
+<p>            list.add(record.getList());</p>
+<p>        }</p>
+<p>        return list;</p>
+<p>    }</p>
+<p>    public Record DFS(TreeNode node, int sum, Record record) {</p>
+<p>            if(node == null) {</p>
+<p>                return null;</p>
+<p>            }</p>
+<p>            if(node.left == null &amp;&amp; node.right == null) {</p>
+<p>                if(record.getVal() + node.val == sum) {</p>
+<p>                    record.hasPath();</p>
+<p>                    record.add(node.val);</p>
+<p>                    return record;</p>
+<p>                } else {</p>
+<p>                    return record;</p>
+<p>                }</p>
+<p>            }</p>
+<p>            record.hasPath();</p>
+<p>            record.add(node.val);</p>
+<p>            record.updateVal(node.val);</p>
+<p>            return (DFS(node.left, sum, record) || DFS(node.right, sum, record));</p>
+<p>            //return DFS(node.left, sum, record);</p>
+<p>    }</p>
+<p>}</p>
+<p>class Record {</p>
+<p>    private int calculatedVal;</p>
+<p>    private List sublist;</p>
+<p>    private boolean foundPath;</p>
+<p>    public Record(int c, List s) {</p>
+<p>        this.calculatedVal = c;</p>
+<p>        this.sublist = s;</p>
+<p>        this.foundPath = false;</p>
+<p>    }</p>
+<p>    public int getVal() {</p>
+<p>        return calculatedVal;</p>
+<p>    }</p>
+<p>    public void updateVal(int val) {</p>
+<p>        calculatedVal += val;</p>
+<p>    }</p>
+<p>    public List getList() {</p>
+<p>        return sublist;</p>
+<p>    }</p>
+<p>    public void add(int val) {</p>
+<p>        sublist.add(val);</p>
+<p>    }</p>
+<p>    public boolean hasPath() {</p>
+<p>        foundPath = true;</p>
+<p>        return foundPath;</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Burhan COKCA</title>
+		<link>http://www.programcreek.com/2014/05/leetcode-path-sum-ii-java/#comment-7011</link>
+		<dc:creator><![CDATA[Burhan COKCA]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2015 05:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14135#comment-7011</guid>
+		<description><![CDATA[It still can be solved with bfs. By using the Path Sum solution, you will need extra list collections and a queue to store the lists while you traversing
+
+
+
+public class Solution {
+    public List&#060;List&#062; pathSum(TreeNode root, int sum) {
+        List&#060;List&#062; result = new ArrayList&#060;List&#062;();
+        if(root == null) return result;
+        LinkedList nodes = new LinkedList();
+        LinkedList sumValues = new LinkedList();
+
+        nodes.add(root);
+        sumValues.add(root.val);
+
+        LinkedList&#060;List&#062; l = new LinkedList&#060;List&#062;();
+        List a = new ArrayList();
+a.add(root.val);
+l.add(a);
+
+
+while(!nodes.isEmpty()){
+
+Integer sumValue = sumValues.poll();
+TreeNode t = nodes.poll();
+a = l.poll();
+
+if(t.left == null &#038;&#038; t.right == null &#038;&#038; sumValue == sum){
+result.add(a);
+}
+else{
+if(t.right != null) {
+nodes.add(t.right);
+sumValues.add(t.right.val + sumValue);
+List r = new ArrayList();
+r.addAll(a);
+r.add(t.right.val);
+l.add(r);
+}
+
+                if(t.left != null) {
+nodes.add(t.left);
+sumValues.add(t.left.val + sumValue);
+List le = new ArrayList();
+le.addAll(a);
+le.add(t.left.val);
+l.add(le);
+}    
+}
+}
+return result;
+}
+}
+
+]]></description>
+		<content:encoded><![CDATA[<p>It still can be solved with bfs. By using the Path Sum solution, you will need extra list collections and a queue to store the lists while you traversing</p>
+<p>public class Solution {<br />
+    public List&lt;List&gt; pathSum(TreeNode root, int sum) {<br />
+        List&lt;List&gt; result = new ArrayList&lt;List&gt;();<br />
+        if(root == null) return result;<br />
+        LinkedList nodes = new LinkedList();<br />
+        LinkedList sumValues = new LinkedList();</p>
+<p>        nodes.add(root);<br />
+        sumValues.add(root.val);</p>
+<p>        LinkedList&lt;List&gt; l = new LinkedList&lt;List&gt;();<br />
+        List a = new ArrayList();<br />
+a.add(root.val);<br />
+l.add(a);</p>
+<p>while(!nodes.isEmpty()){</p>
+<p>Integer sumValue = sumValues.poll();<br />
+TreeNode t = nodes.poll();<br />
+a = l.poll();</p>
+<p>if(t.left == null &amp;&amp; t.right == null &amp;&amp; sumValue == sum){<br />
+result.add(a);<br />
+}<br />
+else{<br />
+if(t.right != null) {<br />
+nodes.add(t.right);<br />
+sumValues.add(t.right.val + sumValue);<br />
+List r = new ArrayList();<br />
+r.addAll(a);<br />
+r.add(t.right.val);<br />
+l.add(r);<br />
+}</p>
+<p>                if(t.left != null) {<br />
+nodes.add(t.left);<br />
+sumValues.add(t.left.val + sumValue);<br />
+List le = new ArrayList();<br />
+le.addAll(a);<br />
+le.add(t.left.val);<br />
+l.add(le);<br />
+}<br />
+}<br />
+}<br />
+return result;<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

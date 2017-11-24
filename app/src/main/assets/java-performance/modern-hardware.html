@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Modern Hardware</title>
+
+    <meta name="description" content="Understanding how modern hardware works is essential for Java performance tuning. This tutorial therefore explains the parts of modern hardware you should know.">
+    <meta name="keywords"    content="modern hardware architecture">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Modern Hardware">
+    <meta name="twitter:description" content="Understanding how modern hardware works is essential for Java performance tuning. This tutorial therefore explains the parts of modern hardware you should know.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Modern Hardware"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-performance/modern-hardware.html"/>
+    <meta property="og:description" content="Understanding how modern hardware works is essential for Java performance tuning. This tutorial therefore explains the parts of modern hardware you should know."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-performance/java-performance-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-performance/index.html";
+var nextArticleInCategory = "/java-performance/memory-management.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7240;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Performance</div><ol><li><a href="index.html">Java Performance</a></li><li><a href="modern-hardware.html"><b>Modern Hardware</b></a></li><li><a href="memory-management.html">Memory Management for Performance</a></li><li><a href="jmh.html">JMH - Java Microbenchmark Harness</a></li><li><a href="ring-buffer.html">Java Ring Buffer</a></li><li><a href="resizable-array.html">Java Resizable Array</a></li><li><a href="java-for-vs-switch-performance.html">Java for vs. switch Performance</a></li><li><a href="java-arraylist-vs-openarraylist-performance.html">Java ArrayList vs. OpenArrayList Performance</a></li><li><a href="read-patterns.html">Java High Performance Read Patterns</a></li><li><a href="micro-batching.html">Micro Batching</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Modern Hardware</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#modern-hardware-architecture">Modern Hardware Architecture</a><ul><li><a href="#cpus">CPUs</a></li><li><a href="#l1-l2-cache">L1 and L2 Cache</a></li><li><a href="#l3-cache">L3 Cache</a></li><li><a href="#hard-disks">Hard Disks</a></li><li><a href="#3d-xpoint-memory">3D XPoint Memory</a></li><li><a href="#network-interface-cards-nic">Network Interface Cards (NIC)</a></li></ul></li><li><a href="#sequential-data-access-is-faster">Sequential Data Access is Faster</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-09-09
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    In order to get maximum performance out of your Java application you need to understand the hardware it is running
+    on. When you write code that conforms with how the hardware works, you get higher performance.
+    <a href="http://mechanical-sympathy.blogspot.de/">Martin Thompson</a> calls this "Mechanical Sympathy".
+</p>
+
+<p>
+    Of course you don't need to understand every little detail of your hardware. Therefore this tutorial focuses
+    on the parts you should know.
+</p>
+
+
+
+<a name="modern-hardware-architecture"></a>
+<h2>Modern Hardware Architecture</h2>
+
+<p>
+    Modern computers tend to have the following components:
+</p>
+
+<ul>
+    <li>CPU - One or more.</li>
+    <li>L1 Cache</li>
+    <li>L2 Cache</li>
+    <li>L3 Cache</li>
+    <li>Main Memory (RAM)</li>
+    <li>Disk (HD)</li>
+    <li>Network Card (NIC)</li>
+</ul>
+
+<p>
+    L1, L2 and L3 are short for "Level 1", "Level 2" and "Level 3".
+</p>
+
+<p>
+    The above mentioned hardware components are illustrated here:
+</p>
+
+<img src="../images/java-performance/modern-hardware-1.png" alt="Modern hardware architecture showing CPUs, L1, L2 and L3 cache, main memory (RAM) and hard disks and network cards.">
+
+
+<p>
+    Each part will be explained in more detail below.
+</p>
+
+
+<a name="cpus"></a>
+<h3>CPUs</h3>
+<p>
+    A modern computer may have more than one CPU. In fact this is more the rule than the exception that computers
+    have multiple CPUs.
+</p>
+
+<p>
+    CPUs have an instruction cache and data cache (L1). The instruction cache is used to read the instructions 
+    of your program. When the CPU executes tight loops, it is faster to read the instructions inside the loop
+    from the instruction cache, than read the instructions from main memory. Thus, small, tight loops are faster
+    than larger loops that do not fit in the instruction cache.
+</p>
+
+
+
+
+<a name="l1-l2-cache"></a>
+<h3>L1 and L2 Cache</h3>
+
+<p>
+    Each CPU has a L1 and L2 memory cache. The L1 cache is typically small but very fast for the CPU to read from.
+    The L2 cache is typically larger, but also slower to read from than the L1 cache.
+</p>
+
+<p>
+    When a CPU reads data from the main memory it reads a block of data into its L2 and L1 caches. It is faster
+    to read bigger blocks of memory at a time from main memory than one byte (or 64 bit) at a time. Once the data
+    is inside the L1 and L2 caches the CPU can access them much faster. If the CPU changes any of the data in the
+    CPU caches that data need to be written back to main memory at some point.
+</p>
+
+
+
+<a name="l3-cache"></a>
+<h3>L3 Cache</h3>
+
+<p>
+    The L3 (Level 3) cache is typically a cache layer that sits on top of the main memory. The L3 cache is thus
+    shared by all CPUs on the motherboard. Whenever data is needed by a CPU from main memory, a bigger block of
+    data is read into the L3 cache. In case a CPU needs more data stored consecutively after the memory it requested
+    previously, chances are that memory can be found in the L3 cache.
+</p>
+
+
+
+
+<a name="hard-disks"></a>
+<h3>Hard Disks</h3>
+<p>
+    Hard disks are used to store data which is to survive a server reboot. Hard disks are much, much slower than
+    memory (although this is about to change). But the storage capacity of hard disks are also much much bigger than
+    memory.
+</p>
+
+<p>
+    Hard disks fall into two categories: The spinning hard disk and the SSD (Solid State Drive). The spinning hard
+    disk is typically cheaper and bigger than SSD's, but typically also slower.
+</p>
+
+
+
+<a name="3d-xpoint-memory"></a>
+<h3>3D XPoint Memory</h3>
+<p>
+    In 2015 Intel announced a new type of memory called "3D XPoint Memory" (pronounced "cross point"). This memory
+    is almost as fast as DRAM is today, but it's durable, meaning data stored to it survives a server reboot just like
+    data written to a hard disk.
+</p>
+
+<p>
+    3D XPoint Memory should also be reasonably cheap, so you can get big memory blocks - the size of a hard disk -
+    at an affordable price. 3D XPoint memory will, hopefully, revolutionize the speed of software that needs to 
+    read and write big amounts of data.
+</p>
+
+
+
+
+<a name="network-interface-cards-nic"></a>
+<h3>Network Interface Cards (NIC)</h3>
+
+<p>
+    The network interface card (NIC) is used to send and receive data over the network. The speed of the network
+    card in your computer(s) impact how fast you can communicate with other computers.
+</p>
+
+<p>
+    The speed may impact the need for caching etc. of data locally, either in memory or on disk. The faster NIC you have (and the other end
+    of the connection has), the less need for caching. Of course, if the data needs to pass through several other
+    computers on the way, like data sent over the internet, then the speed of all these intermediate computers + NICs also
+    matters.
+</p>
+
+<p>
+    Often when you read data from a network card, the data is first read from the network into the OS memory, and
+    from OS memory into the memory of your application. However, some types of network card technologies can copy
+    data directly from the network card into the memory of your application, bypassing the OS memory copy step.
+    Some of these technologies are "Infiniband" and "RDMA Over Converged Ethernet".
+</p>
+
+
+
+
+<a name="sequential-data-access-is-faster"></a>
+<h2>Sequential Data Access is Faster</h2>
+
+<p>
+    Because of all the caching layers, and how ordinary hard disks work, sequential data access is faster than
+    arbitrary data access. The reason is, that all caching strategies are based on the assumption that your program
+    will access data sequentially. Let me explain a bit more how.
+</p>
+
+<p>
+    When a CPU requests a piece of data from main memory, the hardware assumes that the CPU will probably soon request
+    the next byte (or 64 bit block) after that etc. Since many memory and disk technologies are fast at reading larger
+    blocks of memory at a time, it makes sense for the hardware to just copy such bigger blocks of memory at a time.
+    If the CPU actually processes the memory sequentially, accessing the next address in the data block is faster
+    because it is already present in the cache.
+</p>
+
+<p>
+   Here is a diagram illustrating the caching principle in L1, L2 and L3:
+</p>
+
+<img src="../images/java-performance/modern-hardware-2.png" alt="Cache behaviour - reading bigger consecutively stored blocks of data into the cache.">
+
+<p>
+    This kind of big-block-loading behaviour is true for all cache layers, all the way down to the hard disk. Even the
+    hard disk can read bigger blocks of data from the disk faster than reading the data one byte at a time.
+</p>
+
+<p>
+    This caching behaviour means that accessing data sequentially is much faster than accessing data at arbitrary
+    addresses. That means, that data structures like the Java <code>ArrayList</code> is faster than the
+    <code>LinkedList</code> .
+</p>
+
+<p>
+    When you access data at arbitrary addresses in memory (or on disk) it is much slower because the data requested
+    is seldomly located in a cache. That means that the data has to be loaded in from disk, main memory, another
+    cache layer etc. which is slower than accessing directly in the closest cache (L1 preferably).
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="memory-management.html">Memory Management for Performance</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

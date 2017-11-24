@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Logging Exceptions: Where to Log Exceptions?</title>
+
+    <meta name="description" content="This tutorial discusses where to log an exception in your Java applications.">
+    <meta name="keywords"    content="java exception handling logging where">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Logging Exceptions: Where to Log Exceptions?">
+    <meta name="twitter:description" content="This tutorial discusses where to log an exception in your Java applications.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-exception-handling/java-exception-handling-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Logging Exceptions: Where to Log Exceptions?"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-exception-handling/logging-where-to-log-exceptions.html"/>
+    <meta property="og:description" content="This tutorial discusses where to log an exception in your Java applications."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-exception-handling/java-exception-handling-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-exception-handling/pluggable-exception-handlers.html";
+var nextArticleInCategory = "/java-exception-handling/validation-throw-exceptions-early.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7248;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Exception Handling</div><ol><li><a href="index.html">Java Exception Handling</a></li><li><a href="basic-try-catch-finally.html">Basic try-catch-finally Exception Handling in Java</a></li><li><a href="try-with-resources.html">Try-with-resources in Java 7</a></li><li><a href="catching-multiple-exceptions.html">Catching Multiple Exceptions in Java 7</a></li><li><a href="exception-hierarchies.html">Exception Hierarchies</a></li><li><a href="checked-or-unchecked-exceptions.html">Checked or Unchecked Exceptions?</a></li><li><a href="exception-wrapping.html">Exception Wrapping</a></li><li><a href="fail-safe-exception-handling.html">Fail Safe Exception Handling</a></li><li><a href="pluggable-exception-handlers.html">Pluggable Exception Handlers</a></li><li><a href="logging-where-to-log-exceptions.html"><b>Logging Exceptions: Where to Log Exceptions?</b></a></li><li><a href="validation-throw-exceptions-early.html">Validation - Throw Exceptions Early</a></li><li><a href="validation-throw-exception-or-return-false.html">Validation - Throw Exception or Return False?</a></li><li><a href="exception-handling-templates.html">Exception Handling Templates in Java</a></li><li><a href="exception-enrichment.html">Exception Enrichment in Java</a></li><li><a href="../exception-handling-strategies/execution-context.html">Execution Context</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Logging Exceptions: Where to Log Exceptions?</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#bottom-level-logging">Bottom Level Logging</a></li><li><a href="#mid-level-logging">Mid Level Logging</a></li><li><a href="#top-level-logging">Top Level Logging</a></li><li><a href="#exception-enrichment">Exception Enrichment</a></li><li><a href="#summary-recommendation">Summary and Recommendation</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    It is often a requirement that exceptions occurring in business
+    applications must be logged,
+    so they can be further examined by a human if necessary. Especially in
+    web or server applications where the console output may not be available for
+    examination. The exception log can be helpful at determining what went wrong,
+    by either containing enough information to reveal the cause of the error,
+    or aid in reproducing the exception.
+</p>
+
+<p>
+    When designing the logging of an application the question often arise:
+    Where in the code should the exceptions be logged? Basically you have three different options:
+</p>
+
+<ol>
+    <li>Bottom Level Logging<br/>
+        Logging in the component where the exception occurs<br/><br/></li>
+    <li>Mid Level Logging<br/>
+        Logging somewhere in the middle of the call stack, where
+        sufficient information is available
+        (the context of the component call)<br/><br/></li>
+    <li>Top Level Logging<br/>
+        Logging centrally at the top of the call stack<br/><br/></li>
+
+</ol>
+
+<p>
+    The listing below shows a call stack where component A calls B. B calls other
+    components, which in turn call the component F.
+    Component A is the top level component, B etc. are a mid level components, and F is a bottom
+    level component.
+</p>
+
+<pre class="codeBox">
+    A
+      B
+        ...
+          F
+</pre>
+
+
+
+<a name="bottom-level-logging"></a>
+<h2>Bottom Level Logging</h2>
+<p>
+    The first option you have is to log the exception in the component where it
+    occurs. If you cannot alter the source of that component, then you will log
+    as close as possible to the component method call throwing the exception.
+    At first glance it may seem like a good design choice to encapsulate logging inside
+    the component that throws the exception. However, this approach has a few drawbacks.
+</p>
+
+<p>
+    First of all logging has to be coded into every component capable of throwing an
+    exception or calling a third party component that throws exceptions. This is
+    a lot of logging code to write and maintain.
+</p>
+
+<p>
+    Second, if the component is to be reused across different applications, the
+    component has no way of knowing how exceptions is to be logged in each application.
+    You will have to let the logging strategy be pluggable in the component, and
+    then the logging isn't really encapsulated anyways.
+</p>
+
+<p>
+    Third the component that throws the exception may not really have sufficient information
+    available to write a detailed and sensible log message. Say you have a component that
+    writes an object to
+    database. An exception is thrown because one of the fields is null. Can the component
+    tell exactly what field was null in the log? Can it tell why this field was null?
+    Perhaps
+    the object was loaded with that field as null, or some action taken by the user caused
+    it to become null. Or perhaps a bug in some code caused the field to become null.
+    Does the component know
+    what user was logged in when the exception ocurred?
+    All this information might be needed for logging. The bottom level
+    component may not have all that information available.
+    The rest of the needed
+    information may be available further up the call stack. This information cannot be logged if
+    the logging is done inside the component, at bottom level.
+</p>
+
+
+
+<a name="mid-level-logging"></a>
+<h2>Mid Level Logging</h2>
+
+<p>
+    As alternative to logging at the bottom level, you can log at the mid level wherever
+    enough information is available to write a satisfactory log message. This keeps the
+    bottom level components free of logging code, but it has some drawbacks too.
+</p>
+
+<p>
+    At mid level you may not have all details available from the bottom level
+    component that threw the exception. The
+    bottom level component must then supply a detailed error text and
+    perhaps error code, to make sensible logging possible at the mid level.
+</p>
+
+<p>
+    When logging at the mid level there is still a lot of logging code to write. At every
+    place you catch and log an exception, you will have to insert
+    almost the same logging code. If you later need to change the logging strategy it will take
+    a lot of work. A shortcut would be to inject the logging code using aspect oriented programming,
+    but I won't get into that here.
+</p>
+
+
+<a name="top-level-logging"></a>
+<h2>Top Level Logging</h2>
+
+<p>Logging at the top level means that you have a single, central place in the code that
+    catches all thrown exceptions and logs them. In a Java web application that could be
+    a control servlet or perhaps a servlet filter. In a desktop application perhaps you
+    your event handlers would extend a base event handler capable of catching and logging
+    all exceptions thrown.
+</p>
+
+<p>The advantage of top level logging is that you only have a single spot in the application
+    where logging code is written and maintained. In addition to being easier to implement,
+    this also makes it easier to postpone the logging
+    implementation until later in the development process if needed. The logging code will only
+    have to be implemented in one place, and most likely won't change the total application
+    call structure.
+</p>
+
+<p>
+    The disadvantage of top level logging is of course that this single central
+    place doesn't know anything about what went wrong in the bottom level component that threw the
+    exception, or what the mid level code calling that component was trying to do. That makes
+    writing sensible log messages somewhat harder.
+</p>
+
+
+
+<a name="exception-enrichment"></a>
+<h2>Exception Enrichment</h2>
+
+<p>
+    To overcome the lack of details available at the top level
+    (and also to some degree at the mid level), you can
+    enrich the exceptions as they propagate up the call stack towards the top level.
+    Enriching exceptions is done by catching them, adding extra information and
+    rethrowing them again. Rethrowing a caught Java exception will not change
+    the embedded stack trace. The stack trace remains the same as when the exception
+    was thrown first, by the bottom level component.
+</p>
+
+<p>
+    You will have to code your own exception class in order to make exception enrichment
+    possible. Either that, or you'll have to wrap the caught exception in a new exception
+    and throw the new exception.
+</p>
+
+
+
+<a name="summary-recommendation"></a>
+<h2>Summary and Recommendation</h2>
+<p>
+    We have looked at three different logging strategies: Bottom, mid and top level logging.
+</p>
+
+<p>
+    I recommend using top level logging wherever possible, since it is easiest to
+    code and maintain, and also to add later in the development process if you do not
+    want to be bothered with it in the beginning. You may run into situations where
+    an exception must be caught and dealt with at a lower level, but these situations
+    don't happen often in my experience. Most often, when an exception occurs that request
+    or event handling is just skipped, and the exception logged along with sufficient
+    information to determine the cause of the error, or reproduce it at least.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="validation-throw-exceptions-early.html">Validation - Throw Exceptions Early</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

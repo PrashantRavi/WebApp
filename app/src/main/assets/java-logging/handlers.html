@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Logging: Handlers</title>
+
+    <meta name="description" content="Handlers in Java Logging are the components that take care of the actual logging to the outside world.">
+    <meta name="keywords"    content="java logging handlers">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Logging: Handlers">
+    <meta name="twitter:description" content="Handlers in Java Logging are the components that take care of the actual logging to the outside world.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-logging/java-logging-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Logging: Handlers"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-logging/handlers.html"/>
+    <meta property="og:description" content="Handlers in Java Logging are the components that take care of the actual logging to the outside world."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-logging/java-logging-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-logging/filters.html";
+var nextArticleInCategory = "/java-logging/logrecord.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 11665;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Logging</div><ol><li><a href="index.html">Java Logging</a></li><li><a href="overview.html">Java Logging: Overview</a></li><li><a href="basic-usage.html">Java Logging: Basic Usage</a></li><li><a href="logger.html">Java Logging: Logger</a></li><li><a href="logger-hierarchy.html">Java Logging: Logger Hierarchy</a></li><li><a href="levels.html">Java Logging: Log Levels</a></li><li><a href="formatters.html">Java Logging: Formatters</a></li><li><a href="filters.html">Java Logging: Filters</a></li><li><a href="handlers.html"><b>Java Logging: Handlers</b></a></li><li><a href="logrecord.html">Java Logging: LogRecord</a></li><li><a href="configuration.html">Java Logging: Configuration</a></li><li><a href="logmanager.html">Java Logging: LogManager</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Logging: Handlers</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#handlers-and-formatters">Handlers and Formatters</a></li><li><a href="#built-in-handlers">Built-in Handlers</a></li><li><a href="#consolehandler">ConsoleHandler</a></li><li><a href="#filehandler">FileHandler</a><ul><li><a href="#file-name-pattern">File Name Pattern</a></li></ul></li><li><a href="#streamhandler">StreamHandler</a></li><li><a href="#sockethandler">SocketHandler</a></li><li><a href="#memoryhandler">MemoryHandler</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2014-06-23
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    A <code>Handler</code> is a component that takes care of the actual logging to the outside world.
+</p>
+
+<p>
+    You can add one or more <code>Handler</code>'s to a <code>Logger</code>. When messages are logged
+    via the <code>Logger</code>, the messages are eventually forwarded to the <code>Handler</code>'s,
+    if not rejected by a <code>Filter</code> or the minimum log level of the <code>Logger</code>.
+</p>
+
+<p>
+    Here is how you add a <code>Handler</code> to a <code>Logger</code>:
+</p>
+
+<pre class="codeBox">
+logger.addHandler(new ConsoleHandler());
+</pre>
+
+
+<a name="handlers-and-formatters"></a>
+<h2>Handlers and Formatters</h2>
+<p>
+    A <code>Handler</code> typically uses a <code>Formatter</code> to format the message before logging it.
+    You can either create your own <code>Formatter</code> or use one of the two built-in <code>Formatter</code>'s.
+    To learn more about <code>Formatter</code>'s see the text on <a href="formatters.html">Formatters</a>.
+</p>
+
+<p>
+    Here is how you get and set a formatter on a <code>Handler</code>:
+</p>
+
+<pre class="codeBox">
+ConsoleHandler handler = new ConsoleHandler();
+
+handler.setFormatter(new SimpleFormatter());
+
+Formatter formatter = handler.getFormatter();
+</pre>
+
+<p>
+    For some built-in <code>Handler's</code> the formatter can also be set via the configuration file.
+    See the text on <a href="configuration.html">configuration</a> for more details.
+</p>
+
+<a name="built-in-handlers"></a>
+<h2>Built-in Handlers</h2>
+<p>
+    You can create your own <code>Handler</code> if you want, but Java comes with 4 built-in
+    <code>Handler's</code> already:
+</p>
+
+<ol>
+    <li>ConsoleHandler</li>
+    <li>FileHandler</li>
+    <li>StreamHandler</li>
+    <li>SocketHandler</li>
+    <li>MemoryHandler</li>
+</ol>
+
+<p>
+    You will most often use the <code>FileHandler</code>, but
+    each of these built-in <code>Handler</code>'s are explained briefly in the following sections.
+</p>
+
+
+<a name="consolehandler"></a>
+<h2>ConsoleHandler</h2>
+<p>
+    The <code>ConsoleHandler</code> logs all messages to <code>System.err</code>. By default the
+    <code>ConsoleHandler</code> uses a <code>SimpleFormatter</code> to format the messages before
+    writing them to <code>System.err</code>. Here is how you create a <code>ConsoleHandler</code>:
+</p>
+
+<pre class="codeBox">
+ConsoleHandler handler = new ConsoleHandler();
+</pre>
+
+
+<a name="filehandler"></a>
+<h2>FileHandler</h2>
+<p>
+    The <code>FileHandler</code> writes all messages to file. This can either be a single file, or a set of rotated
+    files. If rotated files are used, each file is filled to a certain size limit, after which a new file is created.
+    Each file name is composed of a base name and a sequence number. For instance <code>mylog.0.txt</code>, <code>mylog.1.txt</code>
+    etc.
+</p>
+
+<p>
+    By default the <code>FileHandler</code> uses the <code>XMLFormatter</code> to format all messages before writing them
+    to a file.
+</p>
+
+<p>
+    Here are the various constructors you can use to create a <code>FileHandler</code>:
+</p>
+
+<pre class="codeBox">
+FileHandler handler = new FileHandler();
+FileHandler handler = new FileHandler(String pattern);
+FileHandler handler = new FileHandler(String pattern, boolean append);
+FileHandler handler = new FileHandler(String pattern, int limit, int count);
+FileHandler handler = new FileHandler(String pattern, int limit, int count,
+    boolean append);
+</pre>
+
+<p>
+    The first constructor creates a default <code>FileHandler</code>. This <code>FileHandler</code> is fully
+    configured via the configuration file.
+</p>
+
+<p>
+    The second constructor creates a <code>FileHandler</code> with a predefined pattern for generating file names
+    for the log files.
+</p>
+
+<p>
+    The third constructor creates a <code>FileHandler</code> with a file name pattern, and a boolean telling whether
+    the <code>FileHandler</code> should append to any existing files or not. There is no file size limit, and file
+    count is set to 1.
+</p>
+
+<p>
+    The fourth constructor creates a <code>FileHandler</code> with a file name pattern, a file size limit, and
+    a file count. When the log files reach the given file size limit a new file is created, until the maximum of
+    the file count is reached. Then the <code>FileHandler</code> starts over with the first file again, deleting
+    it and logging to it from scratch.
+</p>
+
+<p>
+    The fifth constructor creates a <code>FileHandler</code> with a file name pattern, a file size limit,
+    a file count, and a boolean telling whether the <code>FileHandler</code> should append to any existing
+    files or not.
+</p>
+
+<p>
+    Here are a few examples:
+</p>
+
+<pre class="codeBox">
+FileHandler handler = new FileHandler("myapp-log.%u.%g.txt");
+
+FileHandler handler = new FileHandler("myapp-log.%u.%g.txt",
+    true);
+
+FileHandler handler = new FileHandler("myapp-log.%u.%g.txt",
+    1024 * 1024, 10);
+
+FileHandler handler = new FileHandler("myapp-log.%u.%g.txt",
+    1024 * 1024, 10, true);
+
+</pre>
+
+<a name="file-name-pattern"></a>
+<h3>File Name Pattern</h3>
+
+<p>
+    The file name pattern is a string containing a file name plus one or more special codes, telling the
+    <code>FileHandler</code> how to generate the file names. The special codes you can use are:
+</p>
+
+<table class="dataTable">
+    <tr>
+        <td>Code</td>
+        <td>Meaning</td>
+    </tr>
+
+    <tr>
+        <td>/</td>
+        <td>The file name separator of the system. Typically either \ or / .</td>
+    </tr>
+    <tr>
+        <td>%t</td>
+        <td>The temp directory of the system.</td>
+    </tr>
+    <tr>
+        <td>%h</td>
+        <td>The user home directory of the system.</td>
+    </tr>
+    <tr>
+        <td>%g</td>
+        <td>The generation number that distinguishes the rotated log files from each other.</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>A unique number to avoid naming conflicts.</td>
+    </tr>
+    <tr>
+        <td>%%</td>
+        <td>A single percent sign, in case you want to use that in your file name.</td>
+    </tr>
+</table>
+
+<p>
+    If no %g code has been specified and the file count of the <code>FileHandler</code> is greater than 1,
+    then the generation number (file sequence number) will be appended to the end of the file name, after
+    a dot (.) .
+</p>
+
+<p>
+    The %u code is usually set to 0. If a file already exists with that name which is in use by another process,
+    the %u code is set to 1, 2 etc. until an unused base file name is found. If no %u code is used in the file
+    name pattern, and a conflict over the file name is found with another process, the unique number is appended
+    to the end of the file name, after any automatically added generation number. Note: The use of %u to generate
+    unique numbers for base file names is only guaranteed to work on a local file system.
+</p>
+
+<p>
+    Here are a few examples:
+</p>
+
+<table class="dataTable" cellpadding="5">
+    <tr><td valign="top"><nobr>File Name Pattern</nobr></td>
+        <td valign="top">Meaning</td>
+    </tr>
+    <tr>
+        <td valign="top"><code>logfile.txt</code></td>
+        <td valign="top">The file is called logfile, and is located in the current directory of the application.</td>
+    </tr>
+    <tr>
+        <td valign="top"><code>logfile%g.txt</code></td>
+        <td valign="top">The file is called logfile, and is located in the current directory of the application.
+            A generation number is inserted after the text "logfile" in the file name. For instance,
+            <code>logfile0.txt</code>, <code>logfile1.txt</code> etc.
+        </td>
+    </tr>
+    <tr>
+        <td valign="top"><code><nobr>logfile%u.%g.txt</nobr></code></td>
+        <td valign="top">The file is called logfile, and is located in the current directory of the application.
+            A unique number and a generation number is inserted after the text "logfile" in the file name. For instance,
+            <code>logfile0.0.txt</code>, <code>logfile0.1.txt</code> etc.
+        </td>
+    </tr>
+</table>
+
+
+<a name="streamhandler"></a>
+<h2>StreamHandler</h2>
+<p>
+    The <code>StreamHandler</code> writes the log messages to an <code>OutputStream</code>. Here is an example
+    of how you create a <code>StreamHandler</code>:
+</p>
+
+<pre class="codeBox">
+StreamHandler handler = new StreamHandler();
+StreamHandler handler = new StreamHandler(outputStream, formatter);
+</pre>
+
+<p>
+    The first constructor creates an empty <code>StreamHandler</code> with no <code>OutputStream</code>.
+    You must set one using the method <code>setOutputStream()</code> before using the handler.
+</p>
+
+<p>
+    The second constructor creates a <code>StreamHandler</code> with an <code>OutputStream</code> and
+    a <code>Formatter</code>
+    The <code>outputStream</code> parameter should be some <code>OutputStream</code> you either create or
+    obtain from some other object. For instance, it could be a FileOutputStream.
+</p>
+
+<p>
+    The <code>Formatter</code> should be whatever formatter (built-in or custom implementation) you want
+    to use. The <code>StreamHandler</code> uses a <code>SimpleFormatter</code> by default (if you use
+    the zero-arg constructor).
+</p>
+
+
+<a name="sockethandler"></a>
+<h2>SocketHandler</h2>
+<p>
+    A <code>SocketHandler</code> writes the log messages to some network address via a socket. The log messages
+    are sent across the network raw (as text). They are not wrapped in an HTTP request or anything like that.
+</p>
+
+<p>
+    Here is how you create a <code>SocketHandler</code>:
+</p>
+
+<pre class="codeBox">
+SocketHandler socketHandler = new SocketHandler(host, port);
+</pre>
+
+<p>
+    The <code>host</code> parameter should be a string pointing to a domain name (host).
+    The <code>port</code> parameter should be the TCP port to connect to.
+</p>
+
+<p>
+    Here is an example that uses concrete values in the constructor:
+</p>
+
+<pre class="codeBox">
+SocketHandler socketHandler = new SocketHandler("jenkov.com", 80);
+</pre>
+
+
+
+<a name="memoryhandler"></a>
+<h2>MemoryHandler</h2>
+<p>
+    A <code>MemoryHandler</code> is a handler that keeps the <code>LogRecords</code> internally in a buffer.
+    When the internal buffer is full, new <code>LogRecords</code> start overwriting the oldest ones in the buffer.
+</p>
+
+<p>
+    When a certain trigger event occurs, the <code>LogRecord</code>'s in the internal buffer are flushed to
+    a target <code>Handler</code> which will write the <code>LogRecords</code> to an external system.
+    For instance, when a <code>LogRecord</code> of some minimum log level is logged, the whole buffer
+    of <code>LogRecord</code>'s could get pushed.
+</p>
+
+<p>
+    You can also call the <code>push()</code> method to force the <code>LogRecord</code>'s in the buffer
+    to be flushed to the target <code>Handler</code>.
+</p>
+
+<p>
+    Here are two examples creating a <code>MemoryHandler</code>:
+</p>
+
+<pre class="codeBox">
+MemoryHandler handler = MemoryHandler();
+
+MemoryHandler handler = MemoryHandler(
+    targetHandler, bufferSize, pushLevel);
+</pre>
+
+<p>
+    The first constructor creates a <code>MemoryHandler</code> that uses the configuration obtained from
+    the configuration file.
+</p>
+
+<p>
+    The second constructor creates <code>MemoryHandler</code> with a target <code>Handler</code>,
+    a specific internal buffer size, and a minimum push level that gets <code>LogRecord</code>'s
+    pushed to the target <code>Handler</code>.
+</p>
+
+<p>
+    Here is an example using concrete values for the buffer size and push level parameters in second constructor:
+</p>
+
+<pre class="codeBox">
+MemoryHandler handler = MemoryHandler(
+    targetHandler, 10, Level.WARNING);
+</pre>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="logrecord.html">Java Logging: LogRecord</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

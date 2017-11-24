@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Substring with Concatenation of All Words (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/06/leetcode-substring-with-concatenation-of-all-words-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/06/leetcode-substring-with-concatenation-of-all-words-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Larry Okeke</title>
+		<link>http://www.programcreek.com/2014/06/leetcode-substring-with-concatenation-of-all-words-java/#comment-9766</link>
+		<dc:creator><![CDATA[Larry Okeke]]></dc:creator>
+		<pubDate>Wed, 16 Mar 2016 16:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14616#comment-9766</guid>
+		<description><![CDATA[A simple to understand soluton.
+
+ Just get every possible concatenation of words in words array, and check whether each occurs in the main string.
+if the result is not -1, we have an index of substring! 
+
+
+&lt;code&gt;
+
+import java.util.*;
+
+public class duplicate_substring{
+
+public static ArrayList allPossibleArrangements = new ArrayList();
+
+	public static void main(String[] args){
+
+ 		String[] arr = new String[] {&quot;chinelo&quot;, &quot;arukwe&quot;, &quot;larry&quot;};
+
+ 		
+
+ 		ArrayList words = new ArrayList(Arrays.asList(arr)); 
+
+ 		String s = &quot;chineloarukwelarryokekearukwechinelolarrytestinglarryarukwechinelo&quot;;
+
+ 		
+
+ 		permutate(words, new Stack(), arr.length);
+
+ 
+
+ 		List solution = solution(allPossibleArrangements.toArray(new String[0]), s);
+
+			
+
+		System.out.println(solution.toString());
+
+	}
+
+	public static List solution(String[] words, String s){
+
+		//use combinatorial algorithm to get every possible concatenation of words
+
+		//find the index of each derived word in s.
+
+		StringBuilder build = new StringBuilder();
+
+		ArrayList result = new ArrayList();
+
+		for(int i = 0; i &#060; words.length; i++){
+
+ 
+
+	  		String currentConcatenation = words[i];
+
+			if(s.indexOf(currentConcatenation)!=-1){ 
+
+					result.add(s.indexOf(currentConcatenation));  
+
+			}
+
+			build.setLength(0);
+
+		}
+
+		return result;
+
+	}
+
+	public static void permutate(List items, Stack permutation, int size) {
+
+    /* permutation stack has become equal to size that we require */
+
+    if(permutation.size() == size) {
+
+        /* print the permutation */
+
+        //System.out.println(Arrays.toString(permutation.toArray(new Integer[0])));
+
+        String s = &quot;&quot;;
+
+        for(String str: permutation){
+
+       		s+=str;
+
+        }
+
+        allPossibleArrangements.add(s);
+
+    }
+
+    /* items available for permutation */
+
+    String[] availableItems = items.toArray(new String[0]);
+
+    for(String i : availableItems) {
+
+        /* add current item */
+
+        permutation.push(i);
+
+        /* remove item from available item set */
+
+        items.remove(i);
+
+        /* pass it on for next permutation */
+
+        permutate(items, permutation, size);
+
+        /* pop and put the removed item back */
+
+        items.add(permutation.pop());
+
+    }
+
+}
+
+}
+
+&lt;/code&gt;
+]]></description>
+		<content:encoded><![CDATA[<p>A simple to understand soluton.</p>
+<p> Just get every possible concatenation of words in words array, and check whether each occurs in the main string.<br />
+if the result is not -1, we have an index of substring! </p>
+<p><code></p>
+<p>import java.util.*;</p>
+<p>public class duplicate_substring{</p>
+<p>public static ArrayList allPossibleArrangements = new ArrayList();</p>
+<p>	public static void main(String[] args){</p>
+<p> 		String[] arr = new String[] {"chinelo", "arukwe", "larry"};</p>
+<p> 		ArrayList words = new ArrayList(Arrays.asList(arr)); </p>
+<p> 		String s = "chineloarukwelarryokekearukwechinelolarrytestinglarryarukwechinelo";</p>
+<p> 		permutate(words, new Stack(), arr.length);</p>
+<p> 		List solution = solution(allPossibleArrangements.toArray(new String[0]), s);</p>
+<p>		System.out.println(solution.toString());</p>
+<p>	}</p>
+<p>	public static List solution(String[] words, String s){</p>
+<p>		//use combinatorial algorithm to get every possible concatenation of words</p>
+<p>		//find the index of each derived word in s.</p>
+<p>		StringBuilder build = new StringBuilder();</p>
+<p>		ArrayList result = new ArrayList();</p>
+<p>		for(int i = 0; i &lt; words.length; i++){</p>
+<p>	  		String currentConcatenation = words[i];</p>
+<p>			if(s.indexOf(currentConcatenation)!=-1){ </p>
+<p>					result.add(s.indexOf(currentConcatenation));  </p>
+<p>			}</p>
+<p>			build.setLength(0);</p>
+<p>		}</p>
+<p>		return result;</p>
+<p>	}</p>
+<p>	public static void permutate(List items, Stack permutation, int size) {</p>
+<p>    /* permutation stack has become equal to size that we require */</p>
+<p>    if(permutation.size() == size) {</p>
+<p>        /* print the permutation */</p>
+<p>        //System.out.println(Arrays.toString(permutation.toArray(new Integer[0])));</p>
+<p>        String s = "";</p>
+<p>        for(String str: permutation){</p>
+<p>       		s+=str;</p>
+<p>        }</p>
+<p>        allPossibleArrangements.add(s);</p>
+<p>    }</p>
+<p>    /* items available for permutation */</p>
+<p>    String[] availableItems = items.toArray(new String[0]);</p>
+<p>    for(String i : availableItems) {</p>
+<p>        /* add current item */</p>
+<p>        permutation.push(i);</p>
+<p>        /* remove item from available item set */</p>
+<p>        items.remove(i);</p>
+<p>        /* pass it on for next permutation */</p>
+<p>        permutate(items, permutation, size);</p>
+<p>        /* pop and put the removed item back */</p>
+<p>        items.add(permutation.pop());</p>
+<p>    }</p>
+<p>}</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Path Sum</title>
+	<atom:link href="http://www.programcreek.com/2013/01/leetcode-path-sum/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2013/01/leetcode-path-sum/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Sandip Sinha</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-10714</link>
+		<dc:creator><![CDATA[Sandip Sinha]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2016 09:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-10714</guid>
+		<description><![CDATA[C# implementation:
+
+public static bool IsPathExists(TreeNode root, int sum, out List numbers)
+        {
+            if (root == null)
+            {
+                numbers = null;
+                return false;
+            }
+            else
+            {
+                List tempList = new List();
+                var op = IsPathExistRecurse(root, sum, ref tempList);
+                numbers = tempList;
+                return op;
+            }
+        }
+
+        private static bool IsPathExistRecurse(TreeNode root, int sum, ref List numbers)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+            else
+            {
+                numbers.Add(root.Data);
+                if (root.Data == sum &#038;&#038; (root.Left == null &#038;&#038; root.Right == null))
+                    return true;
+                else
+                {
+                    if (IsPathExistRecurse(root.Left, sum - root.Data, ref numbers))
+                    {
+                        return true;
+                    }
+                    else if (null != root.Left &#038;&#038; numbers.Contains(root.Left.Data))
+                    {
+                        numbers.Remove(root.Left.Data);
+                    }
+                    if (IsPathExistRecurse(root.Right, sum - root.Data, ref numbers))
+                    {
+                        return true;
+                    }
+                    else if (null != root.Right &#038;&#038; numbers.Contains(root.Right.Data))
+                    {
+                        numbers.Remove(root.Right.Data);
+                    }
+                }
+                return false;
+            }
+        }]]></description>
+		<content:encoded><![CDATA[<p>C# implementation:</p>
+<p>public static bool IsPathExists(TreeNode root, int sum, out List numbers)<br />
+        {<br />
+            if (root == null)<br />
+            {<br />
+                numbers = null;<br />
+                return false;<br />
+            }<br />
+            else<br />
+            {<br />
+                List tempList = new List();<br />
+                var op = IsPathExistRecurse(root, sum, ref tempList);<br />
+                numbers = tempList;<br />
+                return op;<br />
+            }<br />
+        }</p>
+<p>        private static bool IsPathExistRecurse(TreeNode root, int sum, ref List numbers)<br />
+        {<br />
+            if (root == null)<br />
+            {<br />
+                return false;<br />
+            }<br />
+            else<br />
+            {<br />
+                numbers.Add(root.Data);<br />
+                if (root.Data == sum &amp;&amp; (root.Left == null &amp;&amp; root.Right == null))<br />
+                    return true;<br />
+                else<br />
+                {<br />
+                    if (IsPathExistRecurse(root.Left, sum &#8211; root.Data, ref numbers))<br />
+                    {<br />
+                        return true;<br />
+                    }<br />
+                    else if (null != root.Left &amp;&amp; numbers.Contains(root.Left.Data))<br />
+                    {<br />
+                        numbers.Remove(root.Left.Data);<br />
+                    }<br />
+                    if (IsPathExistRecurse(root.Right, sum &#8211; root.Data, ref numbers))<br />
+                    {<br />
+                        return true;<br />
+                    }<br />
+                    else if (null != root.Right &amp;&amp; numbers.Contains(root.Right.Data))<br />
+                    {<br />
+                        numbers.Remove(root.Right.Data);<br />
+                    }<br />
+                }<br />
+                return false;<br />
+            }<br />
+        }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shalini Ravi</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-8282</link>
+		<dc:creator><![CDATA[Shalini Ravi]]></dc:creator>
+		<pubDate>Sat, 09 Jan 2016 21:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-8282</guid>
+		<description><![CDATA[What is the time complexity ?]]></description>
+		<content:encoded><![CDATA[<p>What is the time complexity ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Patrick Maruska</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-7721</link>
+		<dc:creator><![CDATA[Patrick Maruska]]></dc:creator>
+		<pubDate>Fri, 11 Dec 2015 03:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-7721</guid>
+		<description><![CDATA[You can make this a bit more efficient if you also check if root.val &#062; sum and just return false there because you know you&#039;ll just get more and more negative, assuming they&#039;re all positive integers.  That way you cut out all the calls along that path which you know can&#039;t return true.  This only work if you only have positive integers, though, since if you allow negative ones you can pull yourself back up to the desired value.]]></description>
+		<content:encoded><![CDATA[<p>You can make this a bit more efficient if you also check if root.val &gt; sum and just return false there because you know you&#8217;ll just get more and more negative, assuming they&#8217;re all positive integers.  That way you cut out all the calls along that path which you know can&#8217;t return true.  This only work if you only have positive integers, though, since if you allow negative ones you can pull yourself back up to the desired value.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ryanlr</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-6697</link>
+		<dc:creator><![CDATA[ryanlr]]></dc:creator>
+		<pubDate>Fri, 27 Feb 2015 04:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-6697</guid>
+		<description><![CDATA[I think it is o(n).]]></description>
+		<content:encoded><![CDATA[<p>I think it is o(n).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Luis</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-6691</link>
+		<dc:creator><![CDATA[Luis]]></dc:creator>
+		<pubDate>Thu, 26 Feb 2015 23:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-6691</guid>
+		<description><![CDATA[What was your runtime for this solution?]]></description>
+		<content:encoded><![CDATA[<p>What was your runtime for this solution?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dongdong Li</title>
+		<link>http://www.programcreek.com/2013/01/leetcode-path-sum/#comment-6244</link>
+		<dc:creator><![CDATA[Dongdong Li]]></dc:creator>
+		<pubDate>Thu, 23 Oct 2014 20:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=11415#comment-6244</guid>
+		<description><![CDATA[genius]]></description>
+		<content:encoded><![CDATA[<p>genius</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

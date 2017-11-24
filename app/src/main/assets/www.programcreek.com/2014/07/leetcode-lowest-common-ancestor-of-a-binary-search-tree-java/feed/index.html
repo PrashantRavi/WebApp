@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: LeetCode &#8211; Lowest Common Ancestor of a Binary Search Tree (Java)</title>
+	<atom:link href="http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-search-tree-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-search-tree-java/</link>
+	<description>More Pictures, Less Words</description>
+	<lastBuildDate>Fri, 28 Oct 2016 02:57:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.5.4</generator>
+	<item>
+		<title>By: Matias SM</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-search-tree-java/#comment-13825</link>
+		<dc:creator><![CDATA[Matias SM]]></dc:creator>
+		<pubDate>Sat, 20 Aug 2016 15:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14702#comment-13825</guid>
+		<description><![CDATA[Non-recursive solution:
+&lt;code&gt; 
+TreeNode lowestCommonAncestor(TreeNode bst, int v1, int v2) {
+    if (bst == null) return null;
+    int small = Math.min(v1, v2);
+    int great = Math.max(v1, v2);
+
+    TreeNode n = bst;
+    while (n != null &#038;&#038; (n.value &#062; great &#124;&#124; n.value  great) {
+            n = n.left;
+        } else {
+            n = n.right;
+        }
+    }
+    return n;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Non-recursive solution:<br />
+<code><br />
+TreeNode lowestCommonAncestor(TreeNode bst, int v1, int v2) {<br />
+    if (bst == null) return null;<br />
+    int small = Math.min(v1, v2);<br />
+    int great = Math.max(v1, v2);</p>
+<p>    TreeNode n = bst;<br />
+    while (n != null &amp;&amp; (n.value &gt; great || n.value  great) {<br />
+            n = n.left;<br />
+        } else {<br />
+            n = n.right;<br />
+        }<br />
+    }<br />
+    return n;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Long Jiao</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-search-tree-java/#comment-7403</link>
+		<dc:creator><![CDATA[Long Jiao]]></dc:creator>
+		<pubDate>Sat, 19 Sep 2015 17:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14702#comment-7403</guid>
+		<description><![CDATA[can be shorted as
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root.val&#062;p.val &#038;&#038; root.val &#062; q.val){
+            return lowestCommonAncestor(root.left, p, q);
+        }else if(root.val&#060;p.val &#038;&#038; root.val &lt;q&gt; root.val &#038;&#038; root.val &#060; q.val)
+        return root;
+    }]]></description>
+		<content:encoded><![CDATA[<p>can be shorted as<br />
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {<br />
+        if(root.val&gt;p.val &amp;&amp; root.val &gt; q.val){<br />
+            return lowestCommonAncestor(root.left, p, q);<br />
+        }else if(root.val&lt;p.val &amp;&amp; root.val <q> root.val &amp;&amp; root.val &lt; q.val)<br />
+        return root;<br />
+    }</q></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: NB****</title>
+		<link>http://www.programcreek.com/2014/07/leetcode-lowest-common-ancestor-of-a-binary-search-tree-java/#comment-7379</link>
+		<dc:creator><![CDATA[NB****]]></dc:creator>
+		<pubDate>Sat, 12 Sep 2015 20:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.programcreek.com/?p=14702#comment-7379</guid>
+		<description><![CDATA[&lt;code&gt;
+
+Node*  FindLCA_BST(Node* root, Node* node1, Node* node2) {
+  if (root == nullptr) {
+    return nullptr;
+  }
+
+  if (root-&#062;data data &#038;&#038; root-&#062;data data) {
+    return FindLCA_BST(root-&#062;right, node1, node2);
+  } else if (root-&#062;data &#062; node1-&#062;data &#038;&#038; root-&#062;data &#062; node2-&#062;data) {
+    return FindLCA_BST(root-&#062;left, node1, node2);
+  }
+  return root;
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code></p>
+<p>Node*  FindLCA_BST(Node* root, Node* node1, Node* node2) {<br />
+  if (root == nullptr) {<br />
+    return nullptr;<br />
+  }</p>
+<p>  if (root-&gt;data data &amp;&amp; root-&gt;data data) {<br />
+    return FindLCA_BST(root-&gt;right, node1, node2);<br />
+  } else if (root-&gt;data &gt; node1-&gt;data &amp;&amp; root-&gt;data &gt; node2-&gt;data) {<br />
+    return FindLCA_BST(root-&gt;left, node1, node2);<br />
+  }<br />
+  return root;<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Localized -->

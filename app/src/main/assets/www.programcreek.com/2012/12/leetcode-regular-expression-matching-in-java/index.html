@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="index, follow"/>
+<meta name="language" content="en, sv"/>
+<title>LeetCode &#8211; Regular Expression Matching in Java</title>
+<meta name="distribution" content="global"/>
+<meta name="robots" content="follow, all"/>
+<meta name="language" content="en, sv"/>
+<meta name="generator" content="WordPress 4.5.4"/>
+ 
+<meta name="verify-v1" content="eku39xbVyAqZRVnfCQB7rGSk7S567b6gw5ZZxV6HZrc="/>
+<meta name="msvalidate.01" content="C80190E357C320626147430BA5BA9A69"/>
+<meta name="google-site-verification" content="qUNffY7hZLX1Gvj4EiuBShmtW33Nr8XaEtoxjeDvOpI"/>
+<meta name="msvalidate.01" content="C6D2CC4CE9EDF63204585F013CB34CC9"/>
+ 
+<link rel="shortcut icon" href="../../../wp-content/themes/light/images/icon.ico"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="../../../feed/index.html"/>
+<link rel="alternate" type="text/xml" title="RSS .92" href="../../../feed/rss/index.html"/>
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="../../../feed/atom/index.html"/>
+<link rel="pingback" href="../../../xmlrpc.php.html"/>
+ 
+ 
+<style type="text/css" media="screen"><!-- @import url( ../../../wp-content/themes/light/style.css ); --></style>
+ 
+<meta name="description" content="Implement regular expression matching with support for '.' and '*'. '.' Matches any single character. '*' Matches zero or more of the preceding element"/>
+<meta name="keywords" content="leetcode - regular expression matching in java"/>
+<link rel="canonical" href="index.html"/>
+ 
+<link rel="alternate" type="application/rss+xml" title="Program Creek &raquo; LeetCode &#8211; Regular Expression Matching in Java Comments Feed" href="feed/index.html"/>
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.programcreek.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.4"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,img.emoji{display:inline!important;border:none!important;box-shadow:none!important;height:1em!important;width:1em!important;margin:0 .07em!important;vertical-align:-0.1em!important;background:none!important;padding:0!important;}</style>
+<link rel='stylesheet' id='yarppWidgetCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/widget-ver=4.5.4.css' type='text/css' media='all'/>
+<link rel='stylesheet' id='wp-syntax-css-css' href='../../../wp-content/plugins/wp-syntax/css/wp-syntax-ver=1.0.css' type='text/css' media='all'/>
+<link rel='https://api.w.org/' href='../../../wp-json/index.html'/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-rsd.php.html"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml"/>
+<link rel='prev' title='Java Insert Special Character &#038; to MySQL Database' href='../java-insert-special-character-to-mysql-database/index.html'/>
+<link rel='next' title='LeetCode &#8211; Merge Intervals' href='../leetcode-merge-intervals/index.html'/>
+<meta name="generator" content="WordPress 4.5.4"/>
+<link rel='shortlink' href='../../../index-p=10985.html'/>
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-regular-expression-matching-in-java_.html"/>
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed/index-url=http___www.programcreek.com_2012_12_leetcode-regular-expression-matching-in-java_&format=xml.html"/>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5732630628268628",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+<body id="home">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7639629-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="menu">
+<div class="wrappermiddlewide">
+<div class="menu-prim-container"><ul id="menu-prim" class="menu"><li id="menu-item-7915" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-7915"><a href="../../../index.html">Program Creek</a>
+<ul class="sub-menu">
+<li id="menu-item-13384" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13384"><a href="../../../r-tutorial-for-beginners/index.html">R</a></li>
+<li id="menu-item-13386" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13386"><a href="../../../software-engineering-research/index.html">Research</a></li>
+<li id="menu-item-13385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13385"><a href="../../../machine-learning-for-java-developers/index.html">Machine Learning</a></li>
+<li id="menu-item-10226" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10226"><a href="../../../about/index.html">Contact</a></li>
+</ul>
+</li>
+<li id="menu-item-11059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11059"><a href="../../../simple-java/index.html">Simple Java</a></li>
+<li id="menu-item-13092" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13092"><a href="../../../simple-java-8-lambdas/index.html">Java 8</a></li>
+<li id="menu-item-11524" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11524"><a href="../../11/top-10-algorithms-for-coding-interview/index.html">Coding Interview</a></li>
+<li id="menu-item-7559" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7559"><a href="../../../java-tutorials/index.html">Java</a>
+<ul class="sub-menu">
+<li id="menu-item-6939" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6939"><a href="../../../java-tutorials/java-basics/index.html">Java Basics</a></li>
+<li id="menu-item-6551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6551"><a href="../../../java-object-oriented-programming/index.html">Java Object Oriented Concepts</a></li>
+<li id="menu-item-6559" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6559"><a href="../../../java-collections/index.html">Java Collections &#038; Generics</a></li>
+<li id="menu-item-6542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6542"><a href="../../../java-io/index.html">Java File I/O</a></li>
+<li id="menu-item-6571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6571"><a href="../../../java-database/index.html">Java Database</a></li>
+<li id="menu-item-6565" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6565"><a href="../../../java-threads/index.html">Java Multi-Threading</a></li>
+<li id="menu-item-6957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6957"><a href="../../../java-xml-parsing/index.html">Java XML Parsing</a></li>
+<li id="menu-item-7512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7512"><a href="../../../advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-6219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6219"><a href="../../../java-design-patterns-in-stories/index.html">DP Stories</a></li>
+<li id="menu-item-7237" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7237"><a href="../../../java-api-examples/index.php.html">Java Examples</a></li>
+<li id="menu-item-7872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-7872"><a href="../../../popular-java-web-frameworks/index.html">Frameworks</a>
+<ul class="sub-menu">
+<li id="menu-item-6019" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6019"><a href="../../../2010/05/the-best-free-struts-2-tutorial/index.html">Struts 2</a></li>
+<li id="menu-item-6457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6457"><a href="../../../gwt/index.html">GWT</a></li>
+<li id="menu-item-6047" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6047"><a href="../../../best-eclipse-rcp-tutorials/index.html">Eclipse</a>
+<ul class="sub-menu">
+<li id="menu-item-13454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13454"><a href="../../../eclipse-architecture-design/index.html">Eclipse Architecture</a></li>
+<li id="menu-item-13453" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13453"><a href="../../../develop-plug-ins-using-rcp/index.html">RCP</a></li>
+<li id="menu-item-13455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13455"><a href="../../../2011/01/best-java-development-tooling-jdt-and-astparser-tutorials/index.html">JDT</a></li>
+</ul>
+</li>
+<li id="menu-item-7984" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7984"><a href="../../../spring/index.html">Spring</a></li>
+</ul>
+</li>
+<li id="menu-item-14897" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14897"><a href="../../../python/index.html">Python Examples</a></li>
+</ul></div> </div>
+<div class="clear"> </div>
+</div>
+ 
+<div id="wrap">
+<div class="wrappermiddle">
+ 
+<div id="content">
+<div class="entry-single">
+ 
+<h1 class="entrytitle" id="post-10985"> <a href="index.html" rel="bookmark">
+LeetCode &#8211; Regular Expression Matching in Java </a>
+</h1>
+<div class="entrymeta">
+&nbsp;
+ 
+</strong>
+</div>
+ 
+<div class="entrybody">
+<p>Implement regular expression matching with support for '.' and '*'.</p>
+<p>'.' Matches any single character.<br/>
+'*' Matches zero or more of the preceding element.</p>
+<p>The matching should cover the entire input string (not partial).</p>
+<p>The function prototype should be:<br/>
+bool isMatch(const char *s, const char *p)</p>
+<p>Some examples:<br/>
+isMatch("aa","a") return false<br/>
+isMatch("aa","aa") return true<br/>
+isMatch("aaa","aa") return false<br/>
+isMatch("aa", "a*") return true<br/>
+isMatch("aa", ".*") return true<br/>
+isMatch("ab", ".*") return true<br/>
+isMatch("aab", "c*a*b") return true</p>
+<p><strong>1. Analysis</strong></p>
+<p>First of all, this is one of the most difficulty problems. It is hard to think through all different cases. The problem should be simplified to handle 2 basic cases: </p>
+<ul>
+<li>the second char of pattern is "*" </li>
+<li>the second char of pattern is not "*"</li>
+</ul>
+<p>For the 1st case, if the first char of pattern is not ".", the first char of pattern and string should be the same. Then continue to match the remaining part. </p>
+<p>For the 2nd case, if the first char of pattern is "." or first char of pattern == the first i char of string, continue to match the remaining part. </p>
+<p><strong>2. Java Solution 1 (Short)</strong></p>
+<p>The following Java solution is accepted.</p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">class</span> Solution <span style="color: #009900;">&#123;</span>
+    <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> isMatch<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, <span style="color: #003399;">String</span> p<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #000000; font-weight: bold;">return</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #666666; font-style: italic;">//p's length 1 is special case    </span>
+        <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">1</span> <span style="color: #339933;">||</span> p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'*'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1</span> <span style="color: #339933;">||</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'.'</span> <span style="color: #339933;">&amp;&amp;</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+            <span style="color: #000000; font-weight: bold;">return</span> isMatch<span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>    
+&nbsp;
+        <span style="color: #009900;">&#125;</span><span style="color: #000000; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">int</span> len <span style="color: #339933;">=</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #339933;">-</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">;</span> 
+            <span style="color: #000000; font-weight: bold;">while</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;</span>len <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>i <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">0</span> <span style="color: #339933;">||</span> p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'.'</span> <span style="color: #339933;">||</span> p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+                <span style="color: #000000; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>isMatch<span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>i<span style="color: #339933;">+</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+                i<span style="color: #339933;">++;</span>
+            <span style="color: #009900;">&#125;</span>
+            <span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span> 
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+<p><strong>3. Java Solution 2 (More Readable)</strong></p>
+<div class="wp_syntax"><table><tr><td class="code"><pre class="java" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000066; font-weight: bold;">boolean</span> isMatch<span style="color: #009900;">&#40;</span><span style="color: #003399;">String</span> s, <span style="color: #003399;">String</span> p<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #666666; font-style: italic;">// base case</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// special case</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">==</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// if the length of s is 0, return false</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">//if the first does not match, return false</span>
+		<span style="color: #000000; font-weight: bold;">else</span> <span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'.'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">// otherwise, compare the rest of the string of s and p.</span>
+		<span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> isMatch<span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// case 1: when the second char of p is not '*'</span>
+	<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'*'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&lt;</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #0000ff;">'.'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> isMatch<span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+	<span style="color: #009900;">&#125;</span>
+&nbsp;
+	<span style="color: #666666; font-style: italic;">// case 2: when the second char of p is '*', complex case.</span>
+	<span style="color: #000000; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #666666; font-style: italic;">//case 2.1: a char &amp; '*' can stand for 0 element</span>
+		<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>isMatch<span style="color: #009900;">&#40;</span>s, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+		<span style="color: #009900;">&#125;</span>
+&nbsp;
+		<span style="color: #666666; font-style: italic;">//case 2.2: a char &amp; '*' can stand for 1 or more preceding element, </span>
+		<span style="color: #666666; font-style: italic;">//so try every sub string</span>
+		<span style="color: #000066; font-weight: bold;">int</span> i <span style="color: #339933;">=</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">;</span>
+		<span style="color: #000000; font-weight: bold;">while</span> <span style="color: #009900;">&#40;</span>i<span style="color: #339933;">&lt;</span>s.<span style="color: #006633;">length</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span>p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">||</span> p.<span style="color: #006633;">charAt</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">0</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">==</span><span style="color: #0000ff;">'.'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+			<span style="color: #000000; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>isMatch<span style="color: #009900;">&#40;</span>s.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span>i <span style="color: #339933;">+</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">&#41;</span>, p.<span style="color: #006633;">substring</span><span style="color: #009900;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+				<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+			<span style="color: #009900;">&#125;</span>
+			i<span style="color: #339933;">++;</span>
+		<span style="color: #009900;">&#125;</span>
+		<span style="color: #000000; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+ 
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5732630628268628" data-ad-slot="6344454412" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><div class='yarpp-related'>
+<h3>You may also like ...</h3><ol>
+<li><a href="../../../2013/10/top-10-questions-for-java-regular-expression/index.html" rel="bookmark" title="Top 10 Questions for Java Regular Expression">Top 10 Questions for Java Regular Expression </a></li>
+<li><a href="../../../2010/12/regular-expression-exclude-a-wordstring/index.html" rel="bookmark" title="Regular Expression: exclude a word/string">Regular Expression: exclude a word/string </a></li>
+<li><a href="../../../2014/12/get-keywords-by-using-regular-expression-in-java/index.html" rel="bookmark" title="Get Programming Language Keywords By Using Regular Expression in Java">Get Programming Language Keywords By Using Regular Expression in Java </a></li>
+<li><a href="../leetcode-solution-word-break/index.html" rel="bookmark" title="Leetcode &#8211; Word Break (Java)">Leetcode &#8211; Word Break (Java) </a></li>
+</ol>
+</div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="8149213617"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sociable"></div>
+</div>
+ 
+ 
+Category >> <a href="../../../category/java-2/algorithms/index.html" rel="category tag">Algorithms</a> &nbsp;
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description rdf:about="http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/" dc:identifier="http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/" dc:title="LeetCode &#8211; Regular Expression Matching in Java" trackback:ping="http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/trackback/"/>
+</rdf:RDF>
+</div>
+ 
+<font color="green">If you want someone to read your code,
+please put the code inside <span style="color:red;">&lt;pre&gt;&lt;code&gt;</span>
+and
+<span style="color:red;">&lt;/code&gt;&lt;/pre&gt;</span>
+tags. For example:</font>
+<br>
+<pre>
+&lt;pre&gt;&lt;code&gt; 
+String foo = "bar";
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<div id="disqus_thread">
+<div id="dsq-content">
+<ul id="dsq-comments">
+<li class="comment even thread-even depth-1" id="dsq-comment-15448">
+<div id="dsq-comment-header-15448" class="dsq-comment-header">
+<cite id="dsq-cite-15448">
+<span id="dsq-author-user-15448">Suresh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15448" class="dsq-comment-body">
+<div id="dsq-comment-message-15448" class="dsq-comment-message"><p>This was accepted for me&#8230;</p>
+<p><code><br/>
+bool isMatch(char *s, char *p) { </p>
+<p> if (*s == '' &amp;&amp; *p == '') {<br/>
+return true;<br/>
+} </p>
+<p> if (*(p+1) == '*') { </p>
+<p> char ch = *p;<br/>
+int any = 0; </p>
+<p> if (isMatch(s, p+2)) return true; </p>
+<p> while (*(s+any) != '' &amp;&amp;<br/>
+(*(s+any) == ch || ch == '.')) {<br/>
+if (isMatch(s+any+1, p+2)) return true;<br/>
+any = any + 1;<br/>
+}<br/>
+return false;<br/>
+} </p>
+<p> if (*s == '' || *p == '') {<br/>
+return false;<br/>
+} </p>
+<p> if (*s == *p) {<br/>
+if (isMatch(s+1, p+1)) return true;<br/>
+} </p>
+<p> if (*p == '.') {<br/>
+if (isMatch(s+1, p+1)) return true;<br/>
+} </p>
+<p> return false;<br/>
+}<br/>
+</code></p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-15443">
+<div id="dsq-comment-header-15443" class="dsq-comment-header">
+<cite id="dsq-cite-15443">
+<span id="dsq-author-user-15443">Suresh</span>
+</cite>
+</div>
+<div id="dsq-comment-body-15443" class="dsq-comment-body">
+<div id="dsq-comment-message-15443" class="dsq-comment-message"><p>Mine failing for<br/>
+&#8220;ab&#8221;<br/>
+&#8220;.*&#8221;</p>
+<p>Not sure how they match<br/>
+if &#8220;.*&#8221; matches nothing, it must fail<br/>
+If &#8220;.*&#8221; matches 1 &#8220;a&#8221;, it must still fail</p>
+<p>???</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-12835">
+<div id="dsq-comment-header-12835" class="dsq-comment-header">
+<cite id="dsq-cite-12835">
+<span id="dsq-author-user-12835">Shelley Tong</span>
+</cite>
+</div>
+<div id="dsq-comment-body-12835" class="dsq-comment-body">
+<div id="dsq-comment-message-12835" class="dsq-comment-message"><p>In regular expressions, does this count as a regular expression?<br/>
+p****</p>
+<p>In my mind, the input with string: p and pattern: p**** would return true. but the solution program doesn&#8217;t&#8230;&#8230;&#8230;&#8230;&#8230;</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-11415">
+<div id="dsq-comment-header-11415" class="dsq-comment-header">
+<cite id="dsq-cite-11415">
+<span id="dsq-author-user-11415">JL</span>
+</cite>
+</div>
+<div id="dsq-comment-body-11415" class="dsq-comment-body">
+<div id="dsq-comment-message-11415" class="dsq-comment-message"><p>isMatch(String s, int s_pos, String p, int p_pos)</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-10060">
+<div id="dsq-comment-header-10060" class="dsq-comment-header">
+<cite id="dsq-cite-10060">
+<span id="dsq-author-user-10060">Matias SM</span>
+</cite>
+</div>
+<div id="dsq-comment-body-10060" class="dsq-comment-body">
+<div id="dsq-comment-message-10060" class="dsq-comment-message"><p>A non-recursive approach. It assumes the existence of an invalid matchingChar which may not be a valid assumption (but could be easily replaced with an optional or null and Character usage).</p>
+<p><code><br/>
+boolean isMatch(String str, String pattern) {<br/>
+if (str.isEmpty() ^ pattern.isEmpty()) return false;</p>
+<p> boolean isMatchingStar = false;<br/>
+char matchingChar = ''; //a non-valid char</p>
+<p> int i = 0;<br/>
+int p = 0;<br/>
+while (i p &amp;&amp; ! isMatchingStar) {<br/>
+matchingChar = pattern.charAt(p);<br/>
+//may add check for special char for sanity (invalid expression)<br/>
+++p;<br/>
+if (pattern.length() &gt; p &amp;&amp; pattern.charAt(p) == '*') { //look ahead for *<br/>
+isMatchingStar = true;<br/>
+++p;<br/>
+}<br/>
+} else if (! isMatchingStar) {<br/>
+matchingChar = ''; //or some other invalid char<br/>
+}<br/>
+if (str.charAt(i) == matchingChar || matchingChar == '.') {<br/>
+++i;<br/>
+} else {<br/>
+if (! isMatchingStar) return false;<br/>
+else isMatchingStar = false;<br/>
+}<br/>
+}</p>
+<p> //we completed the str, need to check if there is still pattern to match<br/>
+while (p &lt; pattern.length()) {<br/>
+int next = p + 1;<br/>
+//if there is a char but no wildcard, pattern not matched<br/>
+if (pattern.length() &lt;= next || pattern.charAt(next) != &#039;*&#039;)<br/>
+return false;<br/>
+p = next + 1;<br/>
+}<br/>
+return true;<br/>
+}<br/>
+</code><br/>
+Time complexity O(N), Space O(1)</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-9005">
+<div id="dsq-comment-header-9005" class="dsq-comment-header">
+<cite id="dsq-cite-9005">
+<span id="dsq-author-user-9005">Qiongjie</span>
+</cite>
+</div>
+<div id="dsq-comment-body-9005" class="dsq-comment-body">
+<div id="dsq-comment-message-9005" class="dsq-comment-message"><p>I only check the short version of your code. It fails for this case: isMatch(&#8220;ab*b&#8221;, &#8220;ab*bb&#8221;);</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-7038">
+<div id="dsq-comment-header-7038" class="dsq-comment-header">
+<cite id="dsq-cite-7038">
+<span id="dsq-author-user-7038">Maggie M&#8217;Gill</span>
+</cite>
+</div>
+<div id="dsq-comment-body-7038" class="dsq-comment-body">
+<div id="dsq-comment-message-7038" class="dsq-comment-message"><p>Hi,<br/>
+Shouldn&#8217;t the following be true<br/>
+String s = &#8220;a&#8221;;<br/>
+String p = &#8220;a*&#8221;;<br/>
+?<br/>
+According to the given code, it will evaluate to false.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6819">
+<div id="dsq-comment-header-6819" class="dsq-comment-header">
+<cite id="dsq-cite-6819">
+<span id="dsq-author-user-6819">Student</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6819" class="dsq-comment-body">
+<div id="dsq-comment-message-6819" class="dsq-comment-message"><p>Hi, Can anyone tell me the complexity of this algorithm</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6665">
+<div id="dsq-comment-header-6665" class="dsq-comment-header">
+<cite id="dsq-cite-6665">
+<span id="dsq-author-user-6665">ww</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6665" class="dsq-comment-body">
+<div id="dsq-comment-message-6665" class="dsq-comment-message"><p>s.matches(p);</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6592">
+<div id="dsq-comment-header-6592" class="dsq-comment-header">
+<cite id="dsq-cite-6592">
+<span id="dsq-author-user-6592">Anton Lisovenko</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6592" class="dsq-comment-body">
+<div id="dsq-comment-message-6592" class="dsq-comment-message"><p>That&#8217;s not the first time the solution on programcreek is too complicated. Here is the more clear and simple solution:</p>
+<p><a href="http://ideone.com/PYDm0E" rel="nofollow">http://ideone.com/PYDm0E</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6502">
+<div id="dsq-comment-header-6502" class="dsq-comment-header">
+<cite id="dsq-cite-6502">
+<span id="dsq-author-user-6502">Jing</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6502" class="dsq-comment-body">
+<div id="dsq-comment-message-6502" class="dsq-comment-message"><p>&#8220;aab&#8221; doesn&#8217;t match &#8220;c*a*cbaab&#8221;. Because &#8216;*&#8217; means the preceding character occurs 0 or more times, here &#8216;c&#8217; and &#8216;a&#8217; occurs 0 time and &#8220;c*a*cbaab&#8221; equals &#8220;cbaab&#8221;.</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6291">
+<div id="dsq-comment-header-6291" class="dsq-comment-header">
+<cite id="dsq-cite-6291">
+<span id="dsq-author-user-6291">Davis Zhong</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6291" class="dsq-comment-body">
+<div id="dsq-comment-message-6291" class="dsq-comment-message"><p>So how do you pass in the indices for both strings to isMatch(). The parameters of isMatch are String.</p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-6288">
+<div id="dsq-comment-header-6288" class="dsq-comment-header">
+<cite id="dsq-cite-6288">
+<span id="dsq-author-user-6288">Zlatko Stamatov</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6288" class="dsq-comment-body">
+<div id="dsq-comment-message-6288" class="dsq-comment-message"><p>When testing the solution I have a problem with this test case:</p>
+<p>assertEquals(true, LeetCode.isMatch(&#8220;aab&#8221;, &#8220;c*a*cbaab&#8221;));</p>
+<p>Any ideas on what is the problem?</p>
+</div>
+</div>
+</li> 
+<li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-6116">
+<div id="dsq-comment-header-6116" class="dsq-comment-header">
+<cite id="dsq-cite-6116">
+<span id="dsq-author-user-6116">jin</span>
+</cite>
+</div>
+<div id="dsq-comment-body-6116" class="dsq-comment-body">
+<div id="dsq-comment-message-6116" class="dsq-comment-message"><p>for those who doesn&#8217;t understand this code, maybe this is link helps.</p>
+<p><a href="https://oj.leetcode.com/discuss/9405/the-shortest-ac-code" rel="nofollow">https://oj.leetcode.com/discuss/9405/the-shortest-ac-code</a></p>
+</div>
+</div>
+</li> 
+<li class="comment even thread-even depth-1" id="dsq-comment-5427">
+<div id="dsq-comment-header-5427" class="dsq-comment-header">
+<cite id="dsq-cite-5427">
+<span id="dsq-author-user-5427">Mangat Rai</span>
+</cite>
+</div>
+<div id="dsq-comment-body-5427" class="dsq-comment-body">
+<div id="dsq-comment-message-5427" class="dsq-comment-message"><p>hey!<br/>
+Its a bad habit to use substring function in Java. Since Java 7 strings are not indexed. Complexity of substring function has changed from O(1) to O(n) as now Java copies whole string into new one and returns it instead of moving pointers in the string.</p>
+<p>So the complexity of your code has increased n-times. Sadly test cases at leetcode are quite weak to check complexity issues.</p>
+</div>
+</div>
+</li> 
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var disqus_url = 'http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/';
+var disqus_identifier = '10985 http://www.programcreek.com/?p=10985';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'programcreek';
+var disqus_title = "LeetCode &#8211; Regular Expression Matching in Java";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=10985';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<p>
+</p>
+</div>
+<div id="sidebar">
+<form action="http://www.programcreek.com/search/" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-5732630628268628:9523372015"/>
+<input type="hidden" name="cof" value="FORID:10"/>
+<input type="hidden" name="ie" value="UTF-8"/>
+<input type="text" name="q" size="28"/>
+<input type="submit" name="sa" value="Search"/>
+</div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<div class="sidebarsep"></div>
+ 
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2212528018"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="2195947610"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="9882337616"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+<div class="sidebarsep"></div>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-5732630628268628" data-ad-slot="5165994411"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="sidebarsep"></div>
+<div class="side-bar-block"><h2>Archives</h2> <ul>
+<li><a href='../../../2016/08/index.html'>August 2016</a>&nbsp;(4)</li>
+<li><a href='../../../2016/04/index.html'>April 2016</a>&nbsp;(1)</li>
+<li><a href='../../../2015/12/index.html'>December 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/09/index.html'>September 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/08/index.html'>August 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/07/index.html'>July 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/06/index.html'>June 2015</a>&nbsp;(1)</li>
+<li><a href='../../../2015/05/index.html'>May 2015</a>&nbsp;(3)</li>
+<li><a href='../../../2015/04/index.html'>April 2015</a>&nbsp;(5)</li>
+<li><a href='../../../2015/03/index.html'>March 2015</a>&nbsp;(9)</li>
+<li><a href='../../../2015/02/index.html'>February 2015</a>&nbsp;(2)</li>
+<li><a href='../../../2015/01/index.html'>January 2015</a>&nbsp;(8)</li>
+<li><a href='../../../2014/12/index.html'>December 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/10/index.html'>October 2014</a>&nbsp;(2)</li>
+<li><a href='../../../2014/09/index.html'>September 2014</a>&nbsp;(9)</li>
+<li><a href='../../../2014/08/index.html'>August 2014</a>&nbsp;(22)</li>
+<li><a href='../../../2014/07/index.html'>July 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/06/index.html'>June 2014</a>&nbsp;(28)</li>
+<li><a href='../../../2014/05/index.html'>May 2014</a>&nbsp;(86)</li>
+<li><a href='../../../2014/04/index.html'>April 2014</a>&nbsp;(34)</li>
+<li><a href='../../../2014/03/index.html'>March 2014</a>&nbsp;(29)</li>
+<li><a href='../../../2014/02/index.html'>February 2014</a>&nbsp;(23)</li>
+<li><a href='../../../2014/01/index.html'>January 2014</a>&nbsp;(58)</li>
+<li><a href='../../../2013/12/index.html'>December 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/11/index.html'>November 2013</a>&nbsp;(2)</li>
+<li><a href='../../../2013/10/index.html'>October 2013</a>&nbsp;(5)</li>
+<li><a href='../../../2013/09/index.html'>September 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/08/index.html'>August 2013</a>&nbsp;(6)</li>
+<li><a href='../../../2013/07/index.html'>July 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/06/index.html'>June 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/05/index.html'>May 2013</a>&nbsp;(1)</li>
+<li><a href='../../../2013/04/index.html'>April 2013</a>&nbsp;(13)</li>
+<li><a href='../../../2013/03/index.html'>March 2013</a>&nbsp;(12)</li>
+<li><a href='../../../2013/02/index.html'>February 2013</a>&nbsp;(41)</li>
+<li><a href='../../../2013/01/index.html'>January 2013</a>&nbsp;(29)</li>
+<li><a href='../index.html'>December 2012</a>&nbsp;(40)</li>
+<li><a href='../../11/index.html'>November 2012</a>&nbsp;(11)</li>
+<li><a href='../../10/index.html'>October 2012</a>&nbsp;(7)</li>
+<li><a href='../../09/index.html'>September 2012</a>&nbsp;(13)</li>
+<li><a href='../../08/index.html'>August 2012</a>&nbsp;(7)</li>
+<li><a href='../../07/index.html'>July 2012</a>&nbsp;(2)</li>
+<li><a href='../../06/index.html'>June 2012</a>&nbsp;(6)</li>
+<li><a href='../../05/index.html'>May 2012</a>&nbsp;(9)</li>
+<li><a href='../../04/index.html'>April 2012</a>&nbsp;(13)</li>
+<li><a href='../../03/index.html'>March 2012</a>&nbsp;(4)</li>
+<li><a href='../../02/index.html'>February 2012</a>&nbsp;(10)</li>
+<li><a href='../../01/index.html'>January 2012</a>&nbsp;(9)</li>
+<li><a href='../../../2011/12/index.html'>December 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/11/index.html'>November 2011</a>&nbsp;(6)</li>
+<li><a href='../../../2011/10/index.html'>October 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/09/index.html'>September 2011</a>&nbsp;(15)</li>
+<li><a href='../../../2011/08/index.html'>August 2011</a>&nbsp;(17)</li>
+<li><a href='../../../2011/07/index.html'>July 2011</a>&nbsp;(19)</li>
+<li><a href='../../../2011/06/index.html'>June 2011</a>&nbsp;(1)</li>
+<li><a href='../../../2011/05/index.html'>May 2011</a>&nbsp;(4)</li>
+<li><a href='../../../2011/04/index.html'>April 2011</a>&nbsp;(3)</li>
+<li><a href='../../../2011/03/index.html'>March 2011</a>&nbsp;(7)</li>
+<li><a href='../../../2011/02/index.html'>February 2011</a>&nbsp;(9)</li>
+<li><a href='../../../2011/01/index.html'>January 2011</a>&nbsp;(10)</li>
+<li><a href='../../../2010/12/index.html'>December 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/11/index.html'>November 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/10/index.html'>October 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/09/index.html'>September 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/08/index.html'>August 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/05/index.html'>May 2010</a>&nbsp;(6)</li>
+<li><a href='../../../2010/04/index.html'>April 2010</a>&nbsp;(1)</li>
+<li><a href='../../../2010/03/index.html'>March 2010</a>&nbsp;(4)</li>
+<li><a href='../../../2010/02/index.html'>February 2010</a>&nbsp;(3)</li>
+<li><a href='../../../2010/01/index.html'>January 2010</a>&nbsp;(5)</li>
+<li><a href='../../../2009/11/index.html'>November 2009</a>&nbsp;(2)</li>
+<li><a href='../../../2009/10/index.html'>October 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/09/index.html'>September 2009</a>&nbsp;(5)</li>
+<li><a href='../../../2009/08/index.html'>August 2009</a>&nbsp;(8)</li>
+<li><a href='../../../2009/07/index.html'>July 2009</a>&nbsp;(3)</li>
+<li><a href='../../../2009/06/index.html'>June 2009</a>&nbsp;(6)</li>
+<li><a href='../../../2009/05/index.html'>May 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2009/04/index.html'>April 2009</a>&nbsp;(1)</li>
+<li><a href='../../../2009/03/index.html'>March 2009</a>&nbsp;(7)</li>
+<li><a href='../../../2009/02/index.html'>February 2009</a>&nbsp;(22)</li>
+<li><a href='../../../2009/01/index.html'>January 2009</a>&nbsp;(4)</li>
+<li><a href='../../../2008/12/index.html'>December 2008</a>&nbsp;(1)</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="footer">
+<p> Copyright &copy;&nbsp;2008 - 2016
+Program Creek
+</div>
+<script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'programcreek';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+<link rel='stylesheet' id='yarppRelatedCss-css' href='../../../wp-content/plugins/yet-another-related-posts-plugin/style/related-ver=4.5.4.css' type='text/css' media='all'/>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=4.5.4'></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+ 
+<script type="text/javascript">
+var timeout    = 500;
+var closetimer = 0;
+var ddmenuitem = 0;
+
+function jsddm_open()
+{  jsddm_canceltimer();
+   jsddm_close();
+   ddmenuitem = $(this).find('ul').css('visibility', 'visible');}
+
+function jsddm_close()
+{  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{  closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{  if(closetimer)
+   {  window.clearTimeout(closetimer);
+      closetimer = null;}}
+
+$(document).ready(function()
+{  $('#menu-prim > li').bind('mouseover', jsddm_open)
+   $('#menu-prim > li').bind('mouseout',  jsddm_timer)});
+
+document.onclick = jsddm_close;
+</script>
+</body>
+</html>
+<!-- Localized -->

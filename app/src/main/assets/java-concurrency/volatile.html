@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Java Volatile Keyword</title>
+
+    <meta name="description" content="The Java volatile keyword guarantees variable visibility across threads, meaning reads and writes are visible across threads.">
+    <meta name="keywords"    content="java concurrency multithreading thread volatile">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Java Volatile Keyword">
+    <meta name="twitter:description" content="The Java volatile keyword guarantees variable visibility across threads, meaning reads and writes are visible across threads.">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Java Volatile Keyword"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/volatile.html"/>
+    <meta property="og:description" content="The Java volatile keyword guarantees variable visibility across threads, meaning reads and writes are visible across threads."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/synchronized.html";
+var nextArticleInCategory = "/java-concurrency/threadlocal.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 15429;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html">Race Conditions and Critical Sections</a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html"><b>Java Volatile Keyword</b></a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Java Volatile Keyword</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#the-java-volatile-visibility-guarantee">The Java volatile Visibility Guarantee</a></li><li><a href="#the-java-volatile-happens-before-guarantee">The Java volatile Happens-Before Guarantee</a></li><li><a href="#volatile-is-not-always-enough">volatile is Not Always Enough</a></li><li><a href="#when-is-volatile-enough">When is volatile Enough?</a></li><li><a href="#performance-considerations-of-volatile">Performance Considerations of volatile</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2015-11-20
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    The Java <code>volatile</code> keyword is used to mark a Java variable as "being stored in main memory".
+    More precisely that means, that every read of a volatile variable will be read from the computer's main memory,
+    and not from the CPU cache, and that every write to a volatile variable will be written to main memory, and not
+    just to the CPU cache.
+</p>
+
+<p>
+    Actually, since Java 5 the <code>volatile</code> keyword guarantees more than just that volatile variables are written
+    to and read from main memory. I will explain that in the following sections.
+</p>
+
+
+
+
+<a name="the-java-volatile-visibility-guarantee"></a>
+<h2>The Java volatile Visibility Guarantee</h2>
+
+<p>
+    The Java <code>volatile</code> keyword guarantees visibility of changes to variables across threads. This may
+    sound a bit abstract, so let me elaborate.
+</p>
+
+<p>
+    In a multithreaded application where the threads operate on non-volatile variables, each thread may copy variables
+    from main memory into a CPU cache while working on them, for performance reasons. If your computer contains more
+    than one CPU, each thread may run on a different CPU. That means, that each thread may copy the variables into
+    the CPU cache of different CPUs. This is illustrated here:
+</p>
+
+<img src="../images/java-concurrency/java-volatile-1.png" alt="Threads may hold copies of variables from main memory in CPU caches.">
+
+
+<p>
+    With non-volatile variables there are no guarantees about when the Java Virtual Machine (JVM) reads data from main memory into
+    CPU caches, or writes data from CPU caches to main memory. This can cause several problems which I will explain
+    in the following sections.
+</p>
+
+<p>
+    Imagine a situation in which two or more threads have access to a shared object which contains a counter variable
+    declared like this:
+</p>
+
+<pre class="codeBox">
+public class SharedObject {
+
+    public int counter = 0;
+
+}
+</pre>
+
+<p>
+    Imagine too, that only Thread 1 increments the <code>counter</code> variable, but both Thread 1 and Thread 2 may
+    read the <code>counter</code> variable from time to time.
+</p>
+
+<p>
+    If the <code>counter</code> variable is not declared  <code>volatile</code> there is no guarantee about when the
+    value of the <code>counter</code> variable is written from the CPU cache back to main memory. This means, that
+    the <code>counter</code> variable value in the CPU cache may not be the same as in main memory. This situation is
+    illustrated here:
+</p>
+
+<img src="../images/java-concurrency/java-volatile-2.png" alt="The CPU cache used by Thread 1 and main memory contains different values for the counter variable.">
+
+<p>
+    The problem with threads not seeing the latest value of a variable because it has not yet been written back to main
+    memory by another thread, is called a "visibility" problem. The updates of one thread are not visible to other threads.
+</p>
+
+<p>
+    By declaring the <code>counter</code> variable <code>volatile</code> all writes to the <code>counter</code>
+    variable will be written back to main memory immediately. Also, all reads of the <code>counter</code> variable will
+    be read directly from main memory. Here is how the <code>volatile</code> declaration of the <code>counter</code>
+    variable looks:
+</p>
+
+
+<pre class="codeBox">
+public class SharedObject {
+
+    public <b>volatile</b> int counter = 0;
+
+}
+</pre>
+
+<p>
+    Declaring a variable <code>volatile</code> thus <i>guarantees the visibility</i> for other threads of writes to that
+    variable.
+</p>
+
+
+
+
+<a name="the-java-volatile-happens-before-guarantee"></a>
+<h2>The Java volatile Happens-Before Guarantee</h2>
+
+<p>
+    Since Java 5 the <code>volatile</code> keyword guarantees more than just the reading from and writing to
+    main memory of variables. Actually, the <code>volatile</code> keyword guarantees this:
+</p>
+
+<ul>
+    <li>
+        If Thread A writes to a volatile variable and Thread B subsequently reads the same volatile variable, then
+        all variables visible to Thread A <i>before</i> writing the volatile variable, will also be visible to Thread B
+        <i>after</i> it has read the volatile variable.
+        <br/><br/>
+    </li>
+
+    <li>
+        The reading and writing instructions of volatile variables cannot be reordered by the JVM (the JVM may reorder
+        instructions for performance reasons as long as the JVM detects no change in program behaviour from the reordering).
+        Instructions before and after can be reordered, but the volatile read or write cannot be mixed with these instructions.
+        Whatever instructions follow a read or write of a volatile variable are guaranteed to happen after the read or write.
+    </li>
+
+</ul>
+
+<p>
+    These statements require a deeper explanation.
+</p>
+
+<p>
+    When a thread writes to a volatile variable, then not just the volatile variable itself is written to main memory.
+    Also all other variables changed by the thread before writing to the volatile variable are also flushed to main memory.
+    When a thread reads a volatile variable it will also read all other variables from main memory which were flushed
+    to main memory together with the volatile variable.
+</p>
+
+<p>
+    Look at this example:
+</p>
+
+<pre class="codeBox">
+Thread A:
+    sharedObject.nonVolatile = 123;
+    sharedObject.counter     = sharedObject.counter + 1;
+
+Thread B:
+    int counter     = sharedObject.counter;
+    int nonVolatile = sharedObject.nonVolatile;
+</pre>
+
+
+<p>
+    Since Thread A writes the non-volatile variable <code>sharedObject.nonVolatile</code> before writing to the volatile
+    <code>sharedObject.counter</code>, then both <code>sharedObject.nonVolatile</code> and <code>sharedObject.counter</code>
+    are written to main memory when Thread A writes to <code>sharedObject.counter</code> (the <code>volatile</code> variable).
+</p>
+
+<p>
+    Since Thread B starts by reading the volatile <code>sharedObject.counter</code>, then both the <code>sharedObject.counter</code>
+    and <code>sharedObject.nonVolatile</code> are read from main memory into the CPU cache used by Thread B.
+    By the time Thread B reads <code>sharedObject.nonVolatile</code> it will see the value written by Thread A.
+</p>
+
+<p>
+    Developers may use this extended visibility guarantee to optimize the visibility of variables between threads.
+    Instead of declaring each and every variable <code>volatile</code>, only one or a few need be declared <code>volatile</code>.
+    Here is an example of a simple <code>Exchanger</code> class written after that principle:
+</p>
+
+<pre class="codeBox">
+public class Exchanger {
+
+    private Object   object       = null;
+    private volatile hasNewObject = false;
+
+    public void put(Object newObject) {
+        while(hasNewObject) {
+            //wait - do not overwrite existing new object
+        }
+        object = newObject;
+        hasNewObject = true; //volatile write
+    }
+
+    public Object take(){
+        while(!hasNewObject){ //volatile read
+            //wait - don't take old object (or null)
+        }
+        Object obj = object;
+        hasNewObject = false; //volatile write
+        return obj;
+    }
+}
+</pre>
+
+<p>
+    Thread A may be putting objects from time to time by calling <code>put()</code>. Thread B may take objects from
+    time to time by calling <code>take()</code>. This <code>Exchanger</code> can work just fine using a <code>volatile</code>
+    variable (without the use of <code>synchronized</code> blocks), as long as only Thread A calls <code>put()</code>
+    and only Thread B calls <code>take()</code>.
+</p>
+
+<p>
+    However, the JVM may reorder Java instructions to optimize performance, if the JVM can do so without changing the
+    semantics of the reordered instructions. What would happen if the JVM switched the order of the reads and writes
+    inside <code>put()</code> and <code>take()</code>? What if <code>put()</code> was really executed like this:
+</p>
+
+<pre class="codeBox">
+while(hasNewObject) {
+    //wait - do not overwrite existing new object
+}
+hasNewObject = true; //volatile write
+object = newObject;
+</pre>
+
+<p>
+    Notice the write to the <code>volatile</code> variable <code>hasNewObject</code> is now executed before the new
+    object is actually set. To the JVM this may look completely valid. The values of the two write instructions do not depend on
+    each other.
+</p>
+
+<p>
+    However, reordering the instruction execution would harm the visibility of the <code>object</code>
+    variable. First of all, Thread B might see <code>hasNewObject</code> set to <code>true</code> before Thread A
+    has actually written a new value to the <code>object</code> variable. Second, there is now not even a guarantee
+    about when the new value written to <code>object</code> will be flushed back to main memory (well - the next time
+    Thread A writes to a volatile variable somewhere...).
+</p>
+
+<p>
+    To prevent situations like the one described above from occurring, the <code>volatile</code> keyword comes
+    with a "<i>happens before guarantee</i>". The happens before guarantee guarantees that read and write instructions
+    of <code>volatile</code> variables cannot be reordered. Instructions before and after can be reordered, but the
+    volatile read/write instruction cannot be reordered with any instruction occurring before or after it.
+</p>
+
+<p>
+    Look at this example:
+</p>
+
+<pre class="codeBox">
+sharedObject.nonVolatile1 = 123;
+sharedObject.nonVolatile2 = 456;
+sharedObject.nonVolatile3 = 789;
+
+sharedObject.volatile     = true; //a volatile variable
+
+int someValue1 = sharedObject.nonVolatile4;
+int someValue2 = sharedObject.nonVolatile5;
+int someValue3 = sharedObject.nonVolatile6;
+</pre>
+
+<p>
+    The JVM may reorder the first 3 instructions, as long as all of them <i>happens before</i> the
+    <code>volatile</code> write instruction (they must all be executed before the volatile write instruction).
+</p>
+
+<p>
+    Similarly, the JVM may reorder the last 3 instructions as long as the volatile write instruction <i>happens before</i>
+    all of them. None of the last 3 instructions can be reordered to before the volatile write instruction.
+</p>
+
+<p>
+    That is basically the meaning of the Java volatile happens before guarantee.
+</p>
+
+
+
+
+<a name="volatile-is-not-always-enough"></a>
+<h2>volatile is Not Always Enough</h2>
+
+<p>
+    Even if the <code>volatile</code> keyword guarantees that all reads of a <code>volatile</code> variable are
+    read directly from main memory, and all writes to a <code>volatile</code> variable are written directly to
+    main memory, there are still situations where it is not enough to declare a variable <code>volatile</code>.
+</p>
+
+<p>
+    In the situation explained earlier where only Thread 1 writes to the shared <code>counter</code> variable,
+    declaring the <code>counter</code> variable <code>volatile</code> is enough to make sure that Thread 2 always sees
+    the latest written value.
+</p>
+
+<p>
+    In fact, multiple threads could even be writing to a shared <code>volatile</code> variable, and still have the
+    correct value stored in main memory, if the new value written to the variable does not depend on its previous value.
+    In other words, if a thread writing a value to the shared <code>volatile</code> variable does not first need to
+    read its value to figure out its next value.
+</p>
+
+<p>
+    As soon as a thread needs to first read the value of a <code>volatile</code> variable, and based on that value
+    generate a new value for the shared <code>volatile</code> variable, a <code>volatile</code> variable is no longer
+    enough to guarantee correct visibility. The short time gap in between the reading of the <code>volatile</code>
+    variable and the writing of its new value, creates an <a href="race-conditions-and-critical-sections.html">race condition</a>
+    where multiple threads might read the same value of the <code>volatile</code> variable, generate a new value
+    for the variable, and when writing the value back to main memory - overwrite each other's values.
+</p>
+
+<p>
+    The situation where multiple threads are incrementing the same counter is exactly such a situation where a
+    <code>volatile</code> variable is not enough. The following sections explain this case in more detail.
+</p>
+
+<p>
+    Imagine if Thread 1 reads a shared <code>counter</code> variable with the value 0 into its CPU cache, increment it to 1 and
+    not write the changed value back into main memory. Thread 2 could then read the same <code>counter</code> variable
+    from main memory where the value of the variable is still 0, into its own CPU cache. Thread 2 could then also increment
+    the counter to 1, and also not write it back to main memory. This situation is illustrated in the diagram below:
+</p>
+
+<img src="../images/java-concurrency/java-volatile-3.png" alt="Two threads have read a shared counter variable into their local CPU caches and incremented it.">
+
+
+<p>
+    Thread 1 and Thread 2 are now practically out of sync. The real value of
+    the shared <code>counter</code> variable should have been 2, but each of the threads has the value 1 for the variable
+    in their CPU caches, and in main memory the value is still 0. It is a mess! Even if the threads eventually write their
+    value for the shared <code>counter</code> variable back to main memory, the value will be wrong.
+</p>
+
+
+
+
+<a name="when-is-volatile-enough"></a>
+<h2>When is volatile Enough?</h2>
+
+<p>
+    As I have mentioned earlier, if two threads are both reading and writing to a shared variable, then using the
+    <code>volatile</code> keyword for that is not enough. You need to use a <a href="synchronized.html">synchronized</a>
+    in that case to guarantee that the reading and writing of the variable is atomic. Reading or writing a volatile
+    variable does not block threads reading or writing. For this to happen you must use the <code>synchronized</code>
+    keyword around critical sections.
+</p>
+
+<p>
+    As an alternative to a <code>synchronized</code> block you could also use one of the many atomic data types
+    found in the <a href="../java-util-concurrent/index.html"><code>java.util.concurrent</code> package</a>. For instance,
+    the <a href="../java-util-concurrent/atomiclong.html"><code>AtomicLong</code></a> or
+    <a href="../java-util-concurrent/atomicreference.html"><code>AtomicReference</code></a> or one of the others.
+</p>
+
+<p>
+    In case only one thread reads and writes the value of a volatile variable and other threads only read the variable,
+    then the reading threads are guaranteed to see the latest value written to the volatile variable. Without making
+    the variable volatile, this would not be guaranteed.
+</p>
+
+<p>
+    The <code>volatile</code> keyword is guaranteed to work on 32 bit and 64 variables.
+</p>
+
+
+
+
+<a name="performance-considerations-of-volatile"></a>
+<h2>Performance Considerations of volatile</h2>
+
+<p>
+    Reading and writing of volatile variables causes the variable to be read or written to main memory. Reading from
+    and writing to main memory is more expensive than accessing the CPU cache. Accessing volatile variables also
+    prevent instruction reordering which is a normal performance enhancement technique. Thus, you should only use volatile
+    variables when you really need to enforce visibility of variables.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="threadlocal.html">Java ThreadLocal</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->

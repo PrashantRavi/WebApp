@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>Race Conditions and Critical Sections</title>
+
+    <meta name="description" content="This tutorial explains the concepts of race conditions and critical sections related to concurrency (multithreading).">
+    <meta name="keywords"    content="java concurrency race conditions critical sections">
+    <meta name="author" content="Jakob Jenkov">
+
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:site" content="@jjenkov">
+    <meta name="twitter:title" content="Race Conditions and Critical Sections">
+    <meta name="twitter:description" content="This tutorial explains the concepts of race conditions and critical sections related to concurrency (multithreading).">
+    <meta name="twitter:creator" content="@jjenkov">
+    <meta name="twitter:domain" content="jenkov.com">
+
+    <meta name="twitter:image:src" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png">
+
+    <meta name="og:type"  content="article"/>
+    <meta name="og:title" content="Race Conditions and Critical Sections"/>
+    <meta property="og:url"   content="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html"/>
+    <meta property="og:description" content="This tutorial explains the concepts of race conditions and critical sections related to concurrency (multithreading)."/>
+
+    <meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-concurrency-teaser-500-300.png"/>
+
+    <link href="https://plus.google.com/108227213807945109821" rel="publisher" />
+
+    <meta name="google-site-verification" content="i_TwzdElg-by5uXLvyAjuIaCjxo0yjtW8LdRPUDEEcw" />
+
+    <!-- jQuery -->
+    <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<style>
+body {background-color: #f0f0f0;background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);}
+.dataTable th, .dataTable td { padding: 2px 8px; }
+</style>
+<style id="layoutCss"></style>
+<style id="jqcCss"></style>
+<style id="articleCss"></style>
+<style id="navBarCss"></style>
+<style>
+code  { font-size: 14px; }
+</style>
+
+<script>
+lcv = "4";
+ls = localStorage;
+cacheLoaded = false;
+pageLoaded = false;
+
+var prevArticleInCategory = "/java-concurrency/creating-and-starting-threads.html";
+var nextArticleInCategory = "/java-concurrency/thread-safety.html";
+</script>
+
+<script id="jqcJs" ></script>
+<script id="bottomNavBarModule" ></script>
+
+
+<script>
+function jsonp(url) {
+    var script   = document.createElement("script"); script.type = "text/javascript"; script.src = url;
+    document.body.appendChild(script);
+}
+function insertById(ids) {
+    for(var i=0, n=ids.length; i < n; i++) {
+        var el = document.getElementById(ids[i]);
+        if(el != null) { el.innerHTML = localStorage[ids[i]]; }
+    }
+}
+function insertByClass(ids) {
+    for(var i=0, n=ids.length; i<n; i++) {
+        var els = document.getElementsByClassName(ids[i]);
+        for(var j=0,m=els.length; j<m; j++) { els[j].innerHTML = localStorage[ids[i]]; }
+    }
+}
+function init() {
+    if(cacheLoaded == true && pageLoaded == true) {
+        console.log("initializing page");
+        insertById(["layoutCss", "jqcCss", "topBarLogo", "articleCss", "navBarCss", "bottomNavBar", "bottomNavBarModule", "jqcJs"]);
+        insertByClass(["authorPhoto", "authorSocialLinks", "newsletterForm", "googlePlusShare"]);
+        $(document).ready(function() { bottomNavBarModule(); });
+        console.log("page initialized");
+    }
+}
+if(ls.lcv != lcv) {
+    for(var i=0; i < ls.length; i++){
+        ls.removeItem(ls.key(i));
+    }
+    jsonp("/cached-" + lcv + ".js");
+    console.log("cache cleared");
+} else {
+    cacheLoaded = true;
+}
+ls.lcv = lcv;
+</script>
+<!-- jqComponents -->
+
+
+<script>
+articleLen = 7194;
+adRandom = Math.random() * 100;
+
+function dw(text) { document.write(text); }
+
+function writeAd(adSlot, w, h) {
+ dw("<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'><"); dw("/script>");
+ dw("<ins class='adsbygoogle' style='display:inline-block;width:" + w + "px;height:" + h + "px' data-ad-client='ca-pub-5569543489255665' data-ad-slot='" +  adSlot + "'></ins>");
+ dw("<script>");
+ dw("(adsbygoogle = window.adsbygoogle || []).push({});");
+ dw("<"); dw("/script>");
+}
+
+function topAdStyles(w, mT, mB) {
+    var adEl = document.getElementById("topAds");
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+
+function bottomAdStyles(elId, w, mT, mB) {
+    var adEl = document.getElementById(elId);
+    adEl.style.width = (w + "px"); adEl.style.marginTop = (mT + "px"); adEl.style.marginBottom = (mB + "px"); adEl.style.marginRight = "auto"; adEl.style.marginLeft = "auto";
+}
+</script>
+
+
+<div id="topBar">
+<div jqc-row jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c">
+        <div id="topBarContent">
+        <div id="topBarLogo"></div>
+        <div id="topBarPhrase">Tech and Media Labs</div>
+        <div id="topBarMenu">
+        <a href="../index.html">Tutorials</a>
+        <a href="http://jenkov.com/about/index.html">About</a>
+        <a href="http://jenkov.com/rss.xml">RSS</a>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="cookieNote">
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0 3:24">
+    <div jqc-cell="0:12c" >
+        <div class="card">
+            This site uses cookies to improve the user experience. <button onclick="hideCookieNote()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function hideCookieNote() { document.getElementById("cookieNote").innerHTML = ""; ls.cookieNote = 0; }
+
+if(ls.cookieNote == 0) {
+    hideCookieNote();
+}
+</script>
+
+<div jqc-row jqc-row-widths="0:100% 4:1200" jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="topAds">
+            <script>
+                var adEl = document.getElementById("topAds");
+                if(window.innerWidth > 970) {
+                    if(adRandom <= 5){
+                        writeAd("6094206201", 970, 90); /* wider ad - 5% of page views */
+                        topAdStyles(970, 20, 20);
+                    } else {
+                        writeAd("7630855405", 728, 90); /* standard ad */
+                        topAdStyles(728, 20, 20);
+                    }
+                } else if(window.innerWidth >= 728 && window.innerWidth <= 970)  {  /* Tutorials - Top Banner */
+                    writeAd("7630855405", 728, 90);
+                    topAdStyles(728, 20, 20);
+                } else {  /* Tutorials - Top Banner - Mobile */
+                    writeAd("3297914607", 320, 50);
+                    topAdStyles(320, 10, 0);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div jqc-row jqc-row-widths="0:100% 4:1200" jqc-column-counts="0:24" jqc-row-paddings="0:0 3:24" jqc-cell-spacings="0:8">
+        <div jqc-cell="0:0c  3:7c" >
+            <div id="trailToc" class="card">
+                <div id='trailTitle'>Java Concurrency</div><ol><li><a href="index.html">Java Concurrency / Multithreading Tutorial</a></li><li><a href="benefits.html">Multithreading Benefits</a></li><li><a href="costs.html">Multithreading Costs</a></li><li><a href="concurrency-models.html">Concurrency Models</a></li><li><a href="same-threading.html">Same-threading</a></li><li><a href="concurrency-vs-parallelism.html">Concurrency vs. Parallelism</a></li><li><a href="creating-and-starting-threads.html">Creating and Starting Java Threads</a></li><li><a href="race-conditions-and-critical-sections.html"><b>Race Conditions and Critical Sections</b></a></li><li><a href="thread-safety.html">Thread Safety and Shared Resources</a></li><li><a href="thread-safety-and-immutability.html">Thread Safety and Immutability</a></li><li><a href="java-memory-model.html">Java Memory Model</a></li><li><a href="synchronized.html">Java Synchronized Blocks</a></li><li><a href="volatile.html">Java Volatile Keyword</a></li><li><a href="threadlocal.html">Java ThreadLocal</a></li><li><a href="thread-signaling.html">Thread Signaling</a></li><li><a href="deadlock.html">Deadlock</a></li><li><a href="deadlock-prevention.html">Deadlock Prevention</a></li><li><a href="starvation-and-fairness.html">Starvation and Fairness</a></li><li><a href="nested-monitor-lockout.html">Nested Monitor Lockout</a></li><li><a href="slipped-conditions.html">Slipped Conditions</a></li><li><a href="locks.html">Locks in Java</a></li><li><a href="read-write-locks.html">Read / Write Locks in Java</a></li><li><a href="reentrance-lockout.html">Reentrance Lockout</a></li><li><a href="semaphores.html">Semaphores</a></li><li><a href="blocking-queues.html">Blocking Queues</a></li><li><a href="thread-pools.html">Thread Pools</a></li><li><a href="compare-and-swap.html">Compare and Swap</a></li><li><a href="anatomy-of-a-synchronizer.html">Anatomy of a Synchronizer</a></li><li><a href="non-blocking-algorithms.html">Non-blocking Algorithms</a></li><li><a href="amdahls-law.html">Amdahl's Law</a></li><li><a href="references.html">Java Concurrency References</a></li></ol>
+            </div>
+
+            <br><br>
+            <!-- Left Bar Adsense Banner Ad -->
+            <div id="side-ads">
+                <script>
+                if(window.innerWidth >= 900){
+                    if(adRandom <= 94)     { writeAd("5873880207", 300,  600);}
+                    else if(adRandom < 96) { writeAd("3389666608", 160,  600);}
+                    else                   { writeAd("4257546205", 300, 1050);}
+                }
+            </script>
+            </div>
+
+            <br><br>
+
+
+            <div style="display: none;" class="card newsletterForm">
+            </div>
+
+        </div>
+        <div jqc-cell="0:24c 3:17c" >
+
+
+            <div class="card">
+            <h1>Race Conditions and Critical Sections</h1>
+
+            <div id="mainBody">
+
+                <div id="pageToc" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                    <ul><li><a href="#critical-sections">Critical Sections</a></li><li><a href="#race-conditions-in-critical-sections">Race Conditions in Critical Sections</a></li><li><a href="#">Preventing Race Conditions</a></li><li><a href="#critical-section-throughput">Critical Section Throughput</a></li></ul>
+                </div>
+                <div id="lastUpdate">
+                    <table><tr><td class="authorPhoto"></td>
+                            <td><p style="margin: 0px 0px 6px 0px;">
+                                    Jakob Jenkov<br>
+                                    Last update: 2016-09-11
+                                </p>
+                                <div class="authorSocialLinks"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+    A <i>race condition</i> is a special condition that may occur inside a critical section. A <i>critical section</i>
+    is a section of code that is executed by multiple threads and where the sequence of execution for the threads
+    makes a difference in the result of the concurrent execution of the critical section.
+</p>
+
+<p>
+    When the result of multiple threads executing a critical section may differ depending on the sequence in which the threads
+    execute, the critical section is said to contain a race condition. The term race condition stems from
+    the metaphor that the threads are racing through the critical section, and that the result of that race impacts
+    the result of executing the critical section.
+</p>
+
+<p>
+    This may all sound a bit complicated, so I will elaborate more on race conditions and critical sections in the
+    following sections.
+</p>
+
+
+
+
+<a name="critical-sections"></a>
+<h2>Critical Sections</h2>
+
+<p>
+    Running more than one thread inside the same application does not by itself cause problems.
+    The problems arise when multiple threads access the same resources. For instance the same
+    memory (variables, arrays, or objects), systems (databases, web services etc.) or files.
+</p>
+
+<p>
+    In fact, problems only arise if one or more of the threads write to these resources.
+    It is safe to let multiple threads read the same resources, as long as the resources
+    do not change.
+</p>
+
+<p>
+    Here is a critical section Java code example that may fail if executed by multiple threads simultaneously:
+</p>
+
+<pre class="codeBox">
+  public class Counter {
+
+     protected long count = 0;
+
+     public void add(long value){
+         this.count = this.count + value;
+     }
+  }
+</pre>
+
+<p>
+    Imagine if two threads, A and B, are executing the add method on the same instance of
+    the <code>Counter</code> class. There is no way to know when the operating system switches
+    between the two threads. The code in the <code>add()</code> method is not executed as a single atomic instruction by
+    the Java virtual machine. Rather it is executed as a set of smaller instructions, similar to this:
+</p>
+
+<ol>
+    <li>Read this.count from memory into register.</li>
+    <li>Add value to register.</li>
+    <li>Write register to memory.</li>
+</ol>
+
+
+<p>
+    Observe what happens with the following mixed execution of threads A and B:
+</p>
+
+
+<pre class="codeBox">
+       this.count = 0;
+
+   A:  Reads this.count into a register (0)
+   B:  Reads this.count into a register (0)
+   B:  Adds value 2 to register
+   B:  Writes register value (2) back to memory. this.count now equals 2
+   A:  Adds value 3 to register
+   A:  Writes register value (3) back to memory. this.count now equals 3
+</pre>
+
+<p>
+    The two threads wanted to add the values 2 and 3 to the counter. Thus the value
+    should have been 5 after the two threads complete execution. However, since
+    the execution of the two threads is interleaved, the result ends up being different.
+</p>
+
+<p>
+    In the execution sequence example listed above, both threads read the value 0 from memory. Then they add their i
+    ndividual values, 2 and 3, to the value, and write the result back to memory. Instead of 5, the value left in
+    <code>this.count</code> will be the value written by the last thread to write its value. In the above case it is
+    thread A, but it could as well have been thread B.
+</p>
+
+
+<a name="race-conditions-in-critical-sections"></a>
+<h2>Race Conditions in Critical Sections</h2>
+
+
+<p>
+    The code in the <code>add()</code> method in the example earlier contains a critical section. When multiple threads
+    execute this critical section, race conditions occur.
+</p>
+
+<p>
+    More formally, the situation where two threads compete for the same resource, where the
+    sequence in which the resource is accessed is significant, is called
+    race conditions. A code section that leads to race conditions is called
+    a critical section.
+</p>
+
+
+
+<a name=""></a>
+<h2>Preventing Race Conditions</h2>
+
+
+<p>
+    To prevent race conditions from occurring you must make sure that the critical section is executed as an atomic
+    instruction. That means that once a single thread is executing it, no other threads can execute it until the
+    first thread has left the critical section.
+</p>
+
+<p>
+    Race conditions can be avoided by proper thread synchronization in critical sections. Thread synchronization can be
+    achieved using a <a href="synchronized.html">synchronized block of Java code</a>. Thread synchronization can also
+    be achieved using other synchronization constructs like <a href="locks.html">locks</a> or atomic variables
+    like <a href="../java-concurrent-util/atomicinteger.html">java.util.concurrent.atomic.AtomicInteger</a>.
+</p>
+
+
+
+<a name="critical-section-throughput"></a>
+<h2>Critical Section Throughput</h2>
+
+<p>
+    For smaller critical sections making the whole critical section a synchronized block may work. But, for larger
+    critical sections it may be beneficial to break the critical section into smaller critical sections, to allow
+    multiple threads to execute each a smaller critical section. This may decrease contention on the shared resource,
+    and thus increase throughput of the total critical section.
+</p>
+
+<p>
+    Here is a very simplified Java code example to show what I mean:
+</p>
+
+
+<pre class="codeBox">
+public class TwoSums {
+    
+    private int sum1 = 0;
+    private int sum2 = 0;
+    
+    public void add(int val1, int val2){
+        synchronized(this){
+            this.sum1 += val1;   
+            this.sum2 += val2;
+        }
+    }
+}
+</pre>
+
+<p>
+    Notice how the <code>add()</code> method adds values to two different sum member variables. To prevent race conditions
+    the summing is executed inside a Java synchronized block. With this implementation only a single thread can ever
+    execute the summing at the same time.
+</p>
+
+<p>
+    However, since the two sum variables are independent of each other, you could split their summing up into two
+    separate synchronized blocks, like this:
+</p>
+
+<pre class="codeBox">
+public class TwoSums {
+    
+    private int sum1 = 0;
+    private int sum2 = 0;
+
+    private Integer sum1Lock = new Integer(1);
+    private Integer sum2Lock = new Integer(2);
+
+    public void add(int val1, int val2){
+        synchronized(this.sum1Lock){
+            this.sum1 += val1;   
+        }
+        synchronized(this.sum2Lock){
+            this.sum2 += val2;
+        }
+    }
+}
+</pre>
+
+
+<p>
+    Now two threads can execute the <code>add()</code> method at the same time. One thread inside the first synchronized
+    block, and another thread inside the second synchronized block. The two synchronized blocks are synchronized on
+    different objects, so two different threads can execute the two blocks independently.
+    This way threads will have to wait less for each other to execute the <code>add()</code> method.
+</p>
+
+<p>
+    This example is very simple, of course. In a real life shared resource the breaking down of critical sections may
+    be a whole lot more complicated, and require more analysis of execution order possibilities.
+</p>
+
+                <div>
+                </div>
+
+                <div id="next">Next: <a href="thread-safety.html">Thread Safety and Shared Resources</a></div>
+                <div id="bottomSocial">
+
+                    <div style="display:inline-block;">
+                        <table>
+                            <tr><td colspan="2">
+                                <div class='g-plus' data-action='share' data-height='24'  data-annotation='none'></div>
+                                <script type='text/javascript'>
+                                    (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                     })();
+                                </script>
+
+                                <a href='https://twitter.com/share' class='twitter-share-button' data-via='jjenkov' target="_blank">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            </td></tr>
+                            <tr><td class="authorPhoto"></td><td><p style="margin: 0px 0px 6px 0px;">Jakob Jenkov</p><div class="authorSocialLinks"></div></td></tr>
+                        </table>
+                    </div>
+
+                    <div  style="display: none;" class="newsletterForm"  style="display:inline-block;"></div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bottom ads - (nested row is working, but should perhaps not be a nested row?) (note: was a nested row in old design - not in new) -->
+<div jqc-row jqc-row-paddings="0:0">
+    <div jqc-cell="0:12c">
+        <div id="pageBottomAds">
+            <script>
+                    if(articleLen >= 4000){ /* for longer articles place ads here, at the bottom of the page */
+                        if(window.innerWidth >= 728 ) {  /* Adsense Ads - Bottom Banner */
+                            if(adRandom < 5)       { writeAd("2721937400", 970, 90);  bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else if(adRandom < 30) { writeAd("9547200207", 970, 250); bottomAdStyles("pageBottomAds", 970, 20, 20);}
+                            else                   { writeAd("7776167002", 728, 90);  bottomAdStyles("pageBottomAds", 728, 20, 20);}
+                        } else if(window.innerWidth < 728) {  /* Adsense Ads - Bottom Banner - Mobile */
+                            if(adRandom < 50) {
+                                writeAd("4216244607", 320, 50); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            } else {
+                                writeAd("7377085404", 320, 100); bottomAdStyles("pageBottomAds", 320, 10, 0);
+                            }
+                        }
+                    }
+                </script>
+            <br/><br/><br/>
+        </div>
+
+
+        <div style="height: 30px"></div>
+        <div id="disqusComments" class="card">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'tutorials-jenkov-com'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+
+    </div>
+</div>
+
+<span id="layoutManager" jqc-type="jqcResponsiveLayoutManager" jqc-row-paddings="0:8 4:0"></span>
+
+
+<div id="footerBar">
+<div jqc-row>
+    <div jqc-cell="0:12c">
+        Copyright &nbsp;Jenkov Aps
+    </div>
+</div>
+</div>
+
+<div id="trailTocFixedDiv">
+  <div id="trailTocFixedCloseButton">Close TOC</div>
+  <div id="trailTocFixedInnerDiv"></div>
+</div>
+<div id="bottomNavBar"></div>
+
+<!-- init page -->
+<script>
+pageLoaded = true;
+init();
+</script>
+
+
+<!-- Google Analytics Script -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4036229-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+<!-- Localized -->
