@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Does compiler create default constructor when we write our own?</title>
+	<atom:link href="http://www.geeksforgeeks.org/g-fact-26/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/g-fact-26/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-26985</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Mon, 26 Aug 2013 07:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-26985</guid>
+		<description><![CDATA[Thanks for pointing this out.  We have updated program 2.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out.  We have updated program 2.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: srikanth</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-26984</link>
+		<dc:creator><![CDATA[srikanth]]></dc:creator>
+		<pubDate>Mon, 26 Aug 2013 07:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-26984</guid>
+		<description><![CDATA[Hi , In program 2 variable &quot;value &quot; and constructor both are declared in privates section of the class.]]></description>
+		<content:encoded><![CDATA[<p>Hi , In program 2 variable &#8220;value &#8221; and constructor both are declared in privates section of the class.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kathiresan</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-15783</link>
+		<dc:creator><![CDATA[Kathiresan]]></dc:creator>
+		<pubDate>Thu, 28 Feb 2013 13:21:17 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-15783</guid>
+		<description><![CDATA[How do i know that a compiler creates a default constructor when we do not explicitly provide it to our customized class ?]]></description>
+		<content:encoded><![CDATA[<p>How do i know that a compiler creates a default constructor when we do not explicitly provide it to our customized class ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-1808</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Thu, 29 Jul 2010 08:01:26 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-1808</guid>
+		<description><![CDATA[@Karthik
+Given below is the examples. It is compiled on one of the most used commercial compiler and code generated for ARM () processor.
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+
+// In both the examples, the compiler will
+// declare or define the default constructor (DC)
+// Ensure to disable all sorts of optimization
+
+// Example 1 (Compiler only declares DC)
+
+// A &#039;plain old data&#039; type
+class POD
+{
+private:
+    int i;
+
+protected:
+    char c;
+
+public:
+    float f;
+
+    void SimpleBehavior(void) {}
+};
+
+// No code will be generated in default constructor
+class DerivedPOD : public POD
+{
+public:
+    void SimpleBehavior(void) {}
+};
+
+/////////////////////////////////////////////////////////////////////////
+
+// Example 2 (Compiler defines DC)
+
+// An interface
+class RegisterBase
+{
+public:
+    // Comment the virtual functions to avoid code generation in default constructor
+
+    virtual void Read(unsigned char *pWriteTo, unsigned size)
+    {
+        // Default Read
+    }
+    virtual void Write(unsigned char *pReadFrom, unsigned size)
+    {
+        // Default Write
+    }
+
+    void AnotherBehavior()
+    {}
+};
+
+// The extension
+// The default constructor needs to generate code to call the base class constructor
+// However, it is not responsible to initialize any data members (e.g. mmap)
+class Controller : public RegisterBase
+{
+public:
+
+    // If we exclude the virtual functions, the default constructor need not to generate code
+    // These funcitons are virtual from &#039;base class&#039;
+
+    // Remove virtual and see the assembly
+    void Read(unsigned char *pWriteTo, unsigned size)
+    {
+        // Controller specific Read
+    }
+    void Write(unsigned char *pReadFrom, unsigned size)
+    {
+        // Controller specific Write
+    }
+
+    void SetBase(void *base)
+    {
+        mmap = base;
+    }
+
+    void AnotherBehavior()
+    {}
+
+protected:
+    void *mmap;
+};
+
+// Ensure code will be generated
+Controller ControllerObject;
+DerivedPOD PlainOldTypeObject;
+
+// Corresponding assembly code is below
+// Note that the default constructor calling &#039;RegisterBase&#039; constructor
+// bl (branching instruction)
+; Function compile flags: /Odsp
+
+    AREA    &#124;.text&#124;, CODE, ARM
+
+&#124;??0Controller@@QAA@XZ&#124; PROC ; Controller::Controller
+&#124;$LN5@Controller&#124;
+    mov         r12, sp
+    stmdb       sp!, {r0}
+    stmdb       sp!, {r12, lr}
+    sub         sp, sp, #4
+&#124;$M2673&#124;
+    ldr         r0, [sp, #0xC]
+    bl          &#124;??0RegisterBase@@QAA@XZ&#124;
+    ldr         r2, [pc, #0x18]
+    ldr         r3, [sp, #0xC]
+    str         r2, [r3]
+    ldr         r3, [sp, #0xC]
+    str         r3, [sp]
+    ldr         r0, [sp]
+    add         sp, sp, #4
+    ldmia       sp, {sp, pc}
+&#124;$LN6@Controller&#124;
+&#124;$LN7@Controller&#124;
+
+// I haven&#039;t seen default code generated for DerivedPOD class constructor eventhough it is derived from POD.
+// Hope, it clarifies.
+
+&lt;/code&gt; &lt;/pre&gt;
+
+We can say a class will DEFINE an implicit default constructor during any of the following conditions
+    a) virtual member function
+    b) an object with virtual function
+    c) Derived from non-trivial base class
+    d) If the class defined via virtual inheritance
+
+What if we define base class constructor, and omit the derived class constructor? Try it, will the code compile? Why?]]></description>
+		<content:encoded><![CDATA[<p>@Karthik<br />
+Given below is the examples. It is compiled on one of the most used commercial compiler and code generated for ARM () processor.</p>
+<pre> <code language="C">
+
+// In both the examples, the compiler will
+// declare or define the default constructor (DC)
+// Ensure to disable all sorts of optimization
+
+// Example 1 (Compiler only declares DC)
+
+// A 'plain old data' type
+class POD
+{
+private:
+    int i;
+
+protected:
+    char c;
+
+public:
+    float f;
+
+    void SimpleBehavior(void) {}
+};
+
+// No code will be generated in default constructor
+class DerivedPOD : public POD
+{
+public:
+    void SimpleBehavior(void) {}
+};
+
+/////////////////////////////////////////////////////////////////////////
+
+// Example 2 (Compiler defines DC)
+
+// An interface
+class RegisterBase
+{
+public:
+    // Comment the virtual functions to avoid code generation in default constructor
+
+    virtual void Read(unsigned char *pWriteTo, unsigned size)
+    {
+        // Default Read
+    }
+    virtual void Write(unsigned char *pReadFrom, unsigned size)
+    {
+        // Default Write
+    }
+
+    void AnotherBehavior()
+    {}
+};
+
+// The extension
+// The default constructor needs to generate code to call the base class constructor
+// However, it is not responsible to initialize any data members (e.g. mmap)
+class Controller : public RegisterBase
+{
+public:
+
+    // If we exclude the virtual functions, the default constructor need not to generate code
+    // These funcitons are virtual from 'base class'
+
+    // Remove virtual and see the assembly
+    void Read(unsigned char *pWriteTo, unsigned size)
+    {
+        // Controller specific Read
+    }
+    void Write(unsigned char *pReadFrom, unsigned size)
+    {
+        // Controller specific Write
+    }
+
+    void SetBase(void *base)
+    {
+        mmap = base;
+    }
+
+    void AnotherBehavior()
+    {}
+
+protected:
+    void *mmap;
+};
+
+// Ensure code will be generated
+Controller ControllerObject;
+DerivedPOD PlainOldTypeObject;
+
+// Corresponding assembly code is below
+// Note that the default constructor calling 'RegisterBase' constructor
+// bl (branching instruction)
+; Function compile flags: /Odsp
+
+    AREA    |.text|, CODE, ARM
+
+|??0Controller@@QAA@XZ| PROC ; Controller::Controller
+|$LN5@Controller|
+    mov         r12, sp
+    stmdb       sp!, {r0}
+    stmdb       sp!, {r12, lr}
+    sub         sp, sp, #4
+|$M2673|
+    ldr         r0, [sp, #0xC]
+    bl          |??0RegisterBase@@QAA@XZ|
+    ldr         r2, [pc, #0x18]
+    ldr         r3, [sp, #0xC]
+    str         r2, [r3]
+    ldr         r3, [sp, #0xC]
+    str         r3, [sp]
+    ldr         r0, [sp]
+    add         sp, sp, #4
+    ldmia       sp, {sp, pc}
+|$LN6@Controller|
+|$LN7@Controller|
+
+// I haven't seen default code generated for DerivedPOD class constructor eventhough it is derived from POD.
+// Hope, it clarifies.
+
+</code> </pre>
+<p>We can say a class will DEFINE an implicit default constructor during any of the following conditions<br />
+    a) virtual member function<br />
+    b) an object with virtual function<br />
+    c) Derived from non-trivial base class<br />
+    d) If the class defined via virtual inheritance</p>
+<p>What if we define base class constructor, and omit the derived class constructor? Try it, will the code compile? Why?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-1806</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Thu, 29 Jul 2010 03:35:14 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-1806</guid>
+		<description><![CDATA[@Karthik, Please go through the first link (http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363). I will provide sample code later, busy with some office work.]]></description>
+		<content:encoded><![CDATA[<p>@Karthik, Please go through the first link (<a href="http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363" rel="nofollow">http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363</a>). I will provide sample code later, busy with some office work.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-1805</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Thu, 29 Jul 2010 03:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-1805</guid>
+		<description><![CDATA[@Venki 
+
+&lt;em&gt;&quot;However, non-trivial constructors will generated code that requires necessary initializations&quot;&lt;/em&gt;
+
+Could you please provide an example of this?]]></description>
+		<content:encoded><![CDATA[<p>@Venki </p>
+<p><em>&#8220;However, non-trivial constructors will generated code that requires necessary initializations&#8221;</em></p>
+<p>Could you please provide an example of this?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/g-fact-26/#comment-1799</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Wed, 28 Jul 2010 16:46:38 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8316#comment-1799</guid>
+		<description><![CDATA[The C++ compiler declares/defines the default constructors based on situation. In trivial scenarios there will not be any code generated for default constructors. However, non-trivial constructors will generated code that requires necessary initializations. The default constructor provided by compiler won&#039;t touch the data members of object under creation. The default behavior is required to support OOP.
+
+More detailed explanation can be found on the following links,
+
+http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363
+http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=14
+
+If any one worked on object files, we can reverse engineer the actual C++ object layout using DWARF debug information with GNU tools.]]></description>
+		<content:encoded><![CDATA[<p>The C++ compiler declares/defines the default constructors based on situation. In trivial scenarios there will not be any code generated for default constructors. However, non-trivial constructors will generated code that requires necessary initializations. The default constructor provided by compiler won&#8217;t touch the data members of object under creation. The default behavior is required to support OOP.</p>
+<p>More detailed explanation can be found on the following links,</p>
+<p><a href="http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363" rel="nofollow">http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=363</a><br />
+<a href="http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=14" rel="nofollow">http://www.informit.com/guides/content.aspx?g=cplusplus&#038;seqNum=14</a></p>
+<p>If any one worked on object files, we can reverse engineer the actual C++ object layout using DWARF debug information with GNU tools.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.038 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:24 -->
+
+<!-- Compression = gzip -->

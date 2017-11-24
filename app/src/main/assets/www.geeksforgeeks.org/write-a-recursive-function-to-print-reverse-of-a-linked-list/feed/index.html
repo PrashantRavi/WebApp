@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Write a recursive function to print reverse of a Linked List</title>
+	<atom:link href="http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Swati</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-39995</link>
+		<dc:creator><![CDATA[Swati]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 20:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-39995</guid>
+		<description><![CDATA[Please someone help me with the following code , where I am trying to print the reverse linked list.
+I am trying to travel till last element , print it then remove it , and reduce the Linked List by 1 size.
+ But it is giving segmentation fault
+
+void PrintReverse_t(node *head)
+
+{
+
+ 
+if (head != NULL)
+{
+    node *p;
+
+    node *q;
+
+    p = head;
+
+    while (p-&#062;next != NULL)
+
+    {
+
+        q = p;
+
+        p=p-&#062;next;
+
+     
+
+    }
+
+   cout &#060;data&#060;next = NULL;
+
+    free(p);
+
+     
+
+  PrintReverse_t(head);
+
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>Please someone help me with the following code , where I am trying to print the reverse linked list.<br />
+I am trying to travel till last element , print it then remove it , and reduce the Linked List by 1 size.<br />
+ But it is giving segmentation fault</p>
+<p>void PrintReverse_t(node *head)</p>
+<p>{</p>
+<p>if (head != NULL)<br />
+{<br />
+    node *p;</p>
+<p>    node *q;</p>
+<p>    p = head;</p>
+<p>    while (p-&gt;next != NULL)</p>
+<p>    {</p>
+<p>        q = p;</p>
+<p>        p=p-&gt;next;</p>
+<p>    }</p>
+<p>   cout &lt;data&lt;next = NULL;</p>
+<p>    free(p);</p>
+<p>  PrintReverse_t(head);</p>
+<p>}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sdj</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-36856</link>
+		<dc:creator><![CDATA[sdj]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 06:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-36856</guid>
+		<description><![CDATA[logic to reverse print a circular linked list:
+
+void circRev(struct node *head1)
+{
+    if(head1-&#062;next==head)
+    {
+        cout &#060;data &#060;next);
+    cout &#060;data &#060;&#060; &#034;n&#034;;
+}]]></description>
+		<content:encoded><![CDATA[<p>logic to reverse print a circular linked list:</p>
+<p>void circRev(struct node *head1)<br />
+{<br />
+    if(head1-&gt;next==head)<br />
+    {<br />
+        cout &lt;data &lt;next);<br />
+    cout &lt;data &lt;&lt; &quot;n&quot;;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Codeguru</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-30892</link>
+		<dc:creator><![CDATA[Codeguru]]></dc:creator>
+		<pubDate>Sat, 21 Dec 2013 05:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-30892</guid>
+		<description><![CDATA[complete c code to reverse a linked list 
+
+#include
+#include
+
+struct node 
+{
+int data;
+struct node * link;
+};
+
+void insert_beg(struct node ** head,int num)
+{
+struct node * temp;
+temp=(struct node *)malloc(sizeof(struct node));
+temp-&#062;data=num;
+temp-&#062;link=*head;
+*head=temp;
+return;
+}
+
+
+void traverse(struct node * head)
+{
+while(head!=NULL)
+{
+printf(&quot;%dn&quot;,head-&#062;data);
+head=head-&#062;link;
+}
+}
+
+
+void reverse(struct node ** head)
+{
+struct node * first;
+struct node * rest;
+if(*head==NULL)
+return;
+first=*head;
+rest=first-&#062;link;
+if(rest==NULL)
+return;
+reverse(&#038;rest);
+first-&#062;link-&#062;link=first;
+first-&#062;link=NULL;
+*head=rest;
+}
+
+void main()
+
+{
+
+    struct node * head=NULL;
+
+    insert_beg(&#038;head,10);
+
+    insert_beg(&#038;head,100);
+
+    insert_beg(&#038;head,100);
+
+    insert_beg(&#038;head,10000);
+
+    insert_beg(&#038;head,1);
+
+    printf(&quot;the list is :&quot;);
+
+    traverse(head);
+
+    reverse(&#038;head);    
+
+    printf(&quot;after reverse :&quot;);
+
+    traverse(head);    
+}]]></description>
+		<content:encoded><![CDATA[<p>complete c code to reverse a linked list </p>
+<p>#include<br />
+#include</p>
+<p>struct node<br />
+{<br />
+int data;<br />
+struct node * link;<br />
+};</p>
+<p>void insert_beg(struct node ** head,int num)<br />
+{<br />
+struct node * temp;<br />
+temp=(struct node *)malloc(sizeof(struct node));<br />
+temp-&gt;data=num;<br />
+temp-&gt;link=*head;<br />
+*head=temp;<br />
+return;<br />
+}</p>
+<p>void traverse(struct node * head)<br />
+{<br />
+while(head!=NULL)<br />
+{<br />
+printf(&#8220;%dn&#8221;,head-&gt;data);<br />
+head=head-&gt;link;<br />
+}<br />
+}</p>
+<p>void reverse(struct node ** head)<br />
+{<br />
+struct node * first;<br />
+struct node * rest;<br />
+if(*head==NULL)<br />
+return;<br />
+first=*head;<br />
+rest=first-&gt;link;<br />
+if(rest==NULL)<br />
+return;<br />
+reverse(&amp;rest);<br />
+first-&gt;link-&gt;link=first;<br />
+first-&gt;link=NULL;<br />
+*head=rest;<br />
+}</p>
+<p>void main()</p>
+<p>{</p>
+<p>    struct node * head=NULL;</p>
+<p>    insert_beg(&amp;head,10);</p>
+<p>    insert_beg(&amp;head,100);</p>
+<p>    insert_beg(&amp;head,100);</p>
+<p>    insert_beg(&amp;head,10000);</p>
+<p>    insert_beg(&amp;head,1);</p>
+<p>    printf(&#8220;the list is :&#8221;);</p>
+<p>    traverse(head);</p>
+<p>    reverse(&amp;head);    </p>
+<p>    printf(&#8220;after reverse :&#8221;);</p>
+<p>    traverse(head);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhay</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-29641</link>
+		<dc:creator><![CDATA[Abhay]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 04:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-29641</guid>
+		<description><![CDATA[/* ya linklist can be reversed using stack or simply array*/
+first count the number of elements in the list, and make the maximum size of the stack equal to the sizeof the list. After theat push element on to the stack, after pushing all the element start popping and read the element. doing this you can pring the linklist in reverse order.
+the simple array code is given below
+
+
+i=0;
+
+while(ptr-&#062;link!=NULL)
+{
+  arr[i]=ptr-&#062;info;
+ptr=ptr-&#062;link;
+i++;
+
+}
+for(j=i-1;j&#062;=0;j--)
+printf(&quot;%d&quot;,arr[j]);]]></description>
+		<content:encoded><![CDATA[<p>/* ya linklist can be reversed using stack or simply array*/<br />
+first count the number of elements in the list, and make the maximum size of the stack equal to the sizeof the list. After theat push element on to the stack, after pushing all the element start popping and read the element. doing this you can pring the linklist in reverse order.<br />
+the simple array code is given below</p>
+<p>i=0;</p>
+<p>while(ptr-&gt;link!=NULL)<br />
+{<br />
+  arr[i]=ptr-&gt;info;<br />
+ptr=ptr-&gt;link;<br />
+i++;</p>
+<p>}<br />
+for(j=i-1;j&gt;=0;j&#8211;)<br />
+printf(&#8220;%d&#8221;,arr[j]);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anon</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-28780</link>
+		<dc:creator><![CDATA[Anon]]></dc:creator>
+		<pubDate>Sat, 12 Oct 2013 15:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-28780</guid>
+		<description><![CDATA[will be sort of cheating but you can use a stack ;)]]></description>
+		<content:encoded><![CDATA[<p>will be sort of cheating but you can use a stack 😉</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prathviraj</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-22674</link>
+		<dc:creator><![CDATA[prathviraj]]></dc:creator>
+		<pubDate>Thu, 25 Jul 2013 14:07:14 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-22674</guid>
+		<description><![CDATA[Could you give a solution without using recursive function?]]></description>
+		<content:encoded><![CDATA[<p>Could you give a solution without using recursive function?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Scholastica Peter</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-25633</link>
+		<dc:creator><![CDATA[Scholastica Peter]]></dc:creator>
+		<pubDate>Mon, 27 May 2013 21:41:06 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-25633</guid>
+		<description><![CDATA[so good when using recursive.]]></description>
+		<content:encoded><![CDATA[<p>so good when using recursive.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ashish Singh</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-25632</link>
+		<dc:creator><![CDATA[Ashish Singh]]></dc:creator>
+		<pubDate>Sat, 09 Mar 2013 15:14:03 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-25632</guid>
+		<description><![CDATA[solve above prblm by using recursive and non recursive function.]]></description>
+		<content:encoded><![CDATA[<p>solve above prblm by using recursive and non recursive function.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: code4fun</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-8523</link>
+		<dc:creator><![CDATA[code4fun]]></dc:creator>
+		<pubDate>Mon, 21 May 2012 19:28:18 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-8523</guid>
+		<description><![CDATA[Here it is in C
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+typedef struct node
+{
+	int data;
+	struct node* next;
+}NODE,*PNODE;
+
+PNODE reverseLinkList(PNODE head)
+{
+	PNODE temp ;
+	if (!head &#124;&#124; !head-&#062;next)
+		return head;
+
+	temp = reverseLinkList(head-&#062;next);
+	head-&#062;next-&#062;next = head;
+	head-&#062;next = NULL;
+	return temp;
+}&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here it is in C</p>
+<pre> <code language="C">
+typedef struct node
+{
+	int data;
+	struct node* next;
+}NODE,*PNODE;
+
+PNODE reverseLinkList(PNODE head)
+{
+	PNODE temp ;
+	if (!head || !head-&gt;next)
+		return head;
+
+	temp = reverseLinkList(head-&gt;next);
+	head-&gt;next-&gt;next = head;
+	head-&gt;next = NULL;
+	return temp;
+}</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: BlackMath</title>
+		<link>http://www.geeksforgeeks.org/write-a-recursive-function-to-print-reverse-of-a-linked-list/#comment-8042</link>
+		<dc:creator><![CDATA[BlackMath]]></dc:creator>
+		<pubDate>Wed, 11 Apr 2012 21:21:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=3723#comment-8042</guid>
+		<description><![CDATA[A java program to actually reverse a linked list by recursion, not only printing it.
+
+&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+class LNode
+{
+   int value;
+   LNode next;
+
+   LNode (int val)
+   {
+      value = val;
+   }
+}
+
+public class ReverseLinkedListByRecursion
+{
+  public static void printList (LNode head)
+  {
+    while (head != null)
+    {
+      System.out.print (head.value + &#034;   &#034;);
+      head = head.next;
+    }
+    System.out.println();
+  }
+  
+  public static LNode reverseList (LNode head, LNode prev)
+  {
+    if (head == null)
+      return prev;
+    
+    LNode tmp = head.next;
+    head.next = prev;
+    prev = reverseList (tmp, head);
+    return prev;
+  }
+  
+  public static void main (String args[])
+  {
+    LNode a = new LNode (11);
+    LNode b = new LNode (12);a.next = b;
+    LNode c = new LNode (13);b.next = c;
+    LNode d = new LNode (14);c.next = d;
+    LNode e = new LNode (15);d.next = e;
+    LNode f = new LNode (37);e.next = f;
+    LNode g = new LNode (39);f.next = g;
+    
+    LNode head = a;
+    System.out.println (&#034;Before reversing list : &#034;);
+    printList(head);
+    
+    head = reverseList (head, null);
+    
+    System.out.println (&#034;After reversing list : &#034;);
+    printList(head);
+  }
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>A java program to actually reverse a linked list by recursion, not only printing it.</p>
+<pre> <code language="Java">
+/* Paste your code here (You may delete these lines if not writing code) */
+class LNode
+{
+   int value;
+   LNode next;
+
+   LNode (int val)
+   {
+      value = val;
+   }
+}
+
+public class ReverseLinkedListByRecursion
+{
+  public static void printList (LNode head)
+  {
+    while (head != null)
+    {
+      System.out.print (head.value + &quot;   &quot;);
+      head = head.next;
+    }
+    System.out.println();
+  }
+  
+  public static LNode reverseList (LNode head, LNode prev)
+  {
+    if (head == null)
+      return prev;
+    
+    LNode tmp = head.next;
+    head.next = prev;
+    prev = reverseList (tmp, head);
+    return prev;
+  }
+  
+  public static void main (String args[])
+  {
+    LNode a = new LNode (11);
+    LNode b = new LNode (12);a.next = b;
+    LNode c = new LNode (13);b.next = c;
+    LNode d = new LNode (14);c.next = d;
+    LNode e = new LNode (15);d.next = e;
+    LNode f = new LNode (37);e.next = f;
+    LNode g = new LNode (39);f.next = g;
+    
+    LNode head = a;
+    System.out.println (&quot;Before reversing list : &quot;);
+    printList(head);
+    
+    head = reverseList (head, null);
+    
+    System.out.println (&quot;After reversing list : &quot;);
+    printList(head);
+  }
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:43 -->
+
+<!-- Compression = gzip -->

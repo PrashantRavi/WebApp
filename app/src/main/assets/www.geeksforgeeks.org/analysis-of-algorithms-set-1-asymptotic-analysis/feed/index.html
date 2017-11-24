@@ -1,0 +1,1333 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Analysis of Algorithms &#124; Set 1 (Asymptotic Analysis)</title>
+	<atom:link href="http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: harsha</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-35277</link>
+		<dc:creator><![CDATA[harsha]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 11:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-35277</guid>
+		<description><![CDATA[Running time is time taken by program to run and display desired output . Asymptotic Analysis is used to pick up which algorithm is better. Asymptotic notation doesn&#039;t give actual running time it will says how running time is increased with respect to size of input .]]></description>
+		<content:encoded><![CDATA[<p>Running time is time taken by program to run and display desired output . Asymptotic Analysis is used to pick up which algorithm is better. Asymptotic notation doesn&#8217;t give actual running time it will says how running time is increased with respect to size of input .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: aRUN</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-34961</link>
+		<dc:creator><![CDATA[aRUN]]></dc:creator>
+		<pubDate>Mon, 21 Apr 2014 16:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-34961</guid>
+		<description><![CDATA[PLZ TELL ME THE TIME COMPLEXITY OF FOLLOWING PROGRAM IT&#039;S KIND URGENT
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include 
+
+#include
+
+using namespace std;
+
+using namespace cv;
+
+//----------- generate string form right to left int+String----------------//
+
+string gen(string a, int x)
+
+{
+
+	//int num;
+
+	string temp = a;
+
+	ostringstream ostr; //output string stream
+
+	ostr &#060;&#060; x; //use the string stream just like cout,
+
+	//the str() function of the stream
+
+	string theNumberString = ostr.str();
+
+	theNumberString = theNumberString + temp;
+
+	return theNumberString;
+
+}
+
+//----------- generate string form right to left String+int img1-----------//
+
+string genBack(string a, int x)
+
+{
+
+	//int num;
+
+	string temp = a;
+
+	ostringstream ostr; //output string stream
+
+	ostr &#060;depth, src-&#062;nChannels);
+
+	IplImage* dst2 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst3 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst4 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst5 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst6 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst7 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst8 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	//-------------Accessories of our filters to convolve with-------------//
+
+	double delta = 0;
+
+	CvPoint anchor = cvPoint(-1, -1);
+
+	double c90[] = { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
+
+	// 180 degree
+
+	double c180[] = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+
+	// 270 degree
+
+	double c270[] = { 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+
+	//0 degree
+
+	double c0[] = { 1, 0, -1, 1, 0, -1, 1, 0, -1 };
+
+	// 135 degree
+
+	double c135[] = { -1, -1, 0, -1, 0, 1, 0, 1, 1 };
+
+	// 225 degree
+
+	double c225[] = { 0, 1, 1, -1, 0, 1, -1, -1, 0 };
+
+	// 315 degree
+
+	double c315[] = { 1, 1, 0, 1, 0, -1, 0, -1, -1 };
+
+	// 45
+
+	double c45[] = { 0, -1, -1, 1, 0, -1, 1, 1, 0 };
+
+	//Allocate and apply the header for Mat//
+
+	CvMat* M0 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M45 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M90 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M135 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M180 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M225 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M270 = cvCreateMat(3, 3, CV_64FC1);
+
+	CvMat* M315 = cvCreateMat(3, 3, CV_64FC1);
+
+	omp_set_nested(numOfPro);
+
+	omp_set_dynamic(numOfPro);
+
+	// Allow parallel sections
+
+#pragma omp parallel num_threads(numOfPro)
+
+	{
+
+#pragma omp sections
+
+		{
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M90, 3, 3, CV_64FC1, c90);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+			cvInitMatHeader(M180, 3, 3, CV_64FC1, c180);
+
+			/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+		}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M270, 3, 3, CV_64FC1, c270);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M0, 3, 3, CV_64FC1, c0);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M135, 3, 3, CV_64FC1, c135);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M225, 3, 3, CV_64FC1, c225);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M315, 3, 3, CV_64FC1, c315);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvInitMatHeader(M45, 3, 3, CV_64FC1, c45);
+
+				/// printf(&quot;done by %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+		}
+
+#pragma omp barrier
+
+		//------first step of merging---------//
+
+#pragma omp sections
+
+		{
+
+#pragma omp section
+
+			{
+
+				cvFilter2D(src, dst1, M90, anchor);
+
+				//cvSaveImage(&quot;90Degree.jpg&quot;,dst1); // to save itermediate images
+
+				cvFilter2D(src, dst2, M180, anchor);
+
+				//cvSaveImage(&quot;180Degree.jpg&quot;,dst2); // to save itermediate images
+
+				cvMax(dst1, dst2, dst2);
+
+				/* printf(&quot;Hello world section 1 thread %in&quot;,omp_get_thread_num());
+
+				// for testing purposes */
+
+			}
+
+#pragma omp section
+
+			{
+
+		cvFilter2D(src, dst3, M270, anchor);
+
+		//cvSaveImage(&quot;270Degree.jpg&quot;,dst3); // to save itermediate images
+
+		cvFilter2D(src, dst4, M0, anchor);
+
+		//cvSaveImage(&quot;0Degree.jpg&quot;,dst4); // to save itermediate images
+
+		cvMax(dst3, dst4, dst4);
+
+		/* printf(&quot;Hello world section 2 thread %in&quot;,omp_get_thread_num()); // for testing purposes */
+
+	}
+
+#pragma omp section
+
+			{
+
+				cvFilter2D(src, dst5, M135, anchor);
+
+				//cvSaveImage(&quot;135Degree.jpg&quot;,dst5);
+
+				cvFilter2D(src, dst6, M225, anchor);
+
+				//cvSaveImage(&quot;225Degree.jpg&quot;,dst6);
+
+				cvMax(dst5, dst6, dst6);
+
+				/// printf(&quot;Hello world section 3 thread %in&quot;,omp_get_thread_num()); // for testing purposes
+
+			}
+
+#pragma omp section
+
+			{
+
+				cvFilter2D(src, dst7, M315, anchor);
+
+				//cvSaveImage(&quot;315Degree.jpg&quot;,dst7); // to save itermediate images
+
+				cvFilter2D(src, dst8, M45, anchor);
+
+				//cvSaveImage(&quot;45Degree.jpg&quot;,dst8); // to save itermediate images
+
+				cvMax(dst7, dst8, dst8);
+
+				/* printf(&quot;Hello world section 4 thread %in&quot;,omp_get_thread_num()); // for testing purposes */
+
+			}
+
+	}
+
+		/* I need to have barrier here to wait until all the other processes have completed their job in order */
+
+#pragma omp barrier
+
+#pragma omp parallel sections
+
+		{
+
+			// Second step of merging
+
+#pragma omp section
+
+			{
+
+				cvMax(dst2, dst4, dst4);
+
+				// printf(&quot;Hello world section 2_1 thread %in&quot;,omp_get_thread_num());
+
+			}
+
+#pragma omp section
+
+			{
+
+			cvMax(dst6, dst8, dst8);
+
+			// printf(&quot;Hello world section 2_2 thread %in&quot;,omp_get_thread_num());
+
+		}
+
+		}
+
+	}
+
+	//------------------------------------------//
+
+	//----------Third step of merging-----------//
+
+	cvMax(dst4, dst8, dst8);
+
+	// cvSaveImage(&quot;out.jpg&quot;,dst8);
+
+	return(dst8); // return the final result
+
+	cvReleaseImage(&#038;src);
+
+	cvReleaseImage(&#038;dst1);
+
+	cvReleaseImage(&#038;dst2);
+
+	cvReleaseImage(&#038;dst3);
+
+	cvReleaseImage(&#038;dst4);
+
+	cvReleaseImage(&#038;dst5);
+
+	cvReleaseImage(&#038;dst6);
+
+	cvReleaseImage(&#038;dst7);
+
+	cvReleaseImage(&#038;dst8);
+
+	// in each 45 degree angel
+
+	cvReleaseData(&#038;M0);
+
+	cvReleaseData(&#038;M45);
+
+	cvReleaseData(&#038;M90);
+
+	cvReleaseData(&#038;M135);
+
+	cvReleaseData(&#038;M180);
+
+	cvReleaseData(&#038;M225);
+
+	cvReleaseData(&#038;M270);
+
+	cvReleaseData(&#038;M315);
+
+}
+
+IplImage* EightDirections(IplImage* src)
+
+{
+
+	 // to not allow to store the sub images for now
+
+	IplImage* dst1 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst2 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst3 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst4 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst5 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst6 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst7 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	IplImage* dst8 = cvCreateImage(cvGetSize(src), src-&#062;depth, src-&#062;nChannels);
+
+	//--------Accessories of our filters-------//
+
+	double delta = 0;
+
+	CvPoint anchor = cvPoint(-1, -1);
+
+	double c90[] = { -1, -1, -1, 0, 0, 0, 1, 1, 1 };
+
+	// 180 degree
+
+	double c180[] = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+
+	// 270 degree
+
+	double c270[] = { 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+
+	//0 degree
+
+	double c0[] = { 1, 0, -1, 1, 0, -1, 1, 0, -1 };
+
+	// 135 degree
+
+	double c135[] = { -1, -1, 0, -1, 0, 1, 0, 1, 1 };
+
+	// 225 degree
+
+	double c225[] = { 0, 1, 1, -1, 0, 1, -1, -1, 0 };
+
+	// 315 degree
+
+	double c315[] = { 1, 1, 0, 1, 0, -1, 0, -1, -1 };
+
+	// 45
+
+	double c45[] = { 0, -1, -1, 1, 0, -1, 1, 1, 0 };
+
+	//------------------------------------------//
+
+	//--Allocate and apply the header for Mat--//
+
+	CvMat* M90 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M90, 3, 3, CV_64FC1, c90);
+
+	CvMat* M180 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M180, 3, 3, CV_64FC1, c180);
+
+	CvMat* M270 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M270, 3, 3, CV_64FC1, c270);
+
+	CvMat* M0 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M0, 3, 3, CV_64FC1, c0);
+
+	CvMat* M135 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M135, 3, 3, CV_64FC1, c135);
+
+	CvMat* M225 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M225, 3, 3, CV_64FC1, c225);
+
+	CvMat* M315 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M315, 3, 3, CV_64FC1, c315);
+
+	CvMat* M45 = cvCreateMat(3, 3, CV_64FC1);
+
+	cvInitMatHeader(M45, 3, 3, CV_64FC1, c45);
+
+	// o--&#062; means save all the combination
+
+	//------first step of merging---------//
+
+	cvFilter2D(src, dst1, M90, anchor); //cvSaveImage(&quot;90Degree.jpg&quot;,dst1);
+
+	cvFilter2D(src, dst2, M180, anchor); //cvSaveImage(&quot;180Degree.jpg&quot;,dst2);
+
+	cvMax(dst1, dst2, dst2);
+
+	cvFilter2D(src, dst3, M270, anchor); //cvSaveImage(&quot;270Degree.jpg&quot;,dst3);
+
+	cvFilter2D(src, dst4, M0, anchor); //cvSaveImage(&quot;0Degree.jpg&quot;,dst4);
+
+	cvMax(dst3, dst4, dst4);
+
+	cvFilter2D(src, dst5, M135, anchor); //cvSaveImage(&quot;135Degree.jpg&quot;,dst5);
+
+	cvFilter2D(src, dst6, M225, anchor); //cvSaveImage(&quot;225Degree.jpg&quot;,dst6);
+
+	cvMax(dst5, dst6, dst6);
+
+	cvFilter2D(src, dst7, M315, anchor); //cvSaveImage(&quot;315Degree.jpg&quot;,dst7);
+
+	cvFilter2D(src, dst8, M45, anchor); //cvSaveImage(&quot;45Degree.jpg&quot;,dst8);
+
+	//-------------------------------------------//
+
+	//-----------second step of merging----------//
+
+	cvMax(dst7, dst8, dst8);
+
+	cvMax(dst2, dst4, dst4);
+
+	cvMax(dst6, dst8, dst8);
+
+	//------------------------------------------//
+
+	//----------Third step of merging-----------//
+
+	cvMax(dst4, dst8, dst8);
+
+	cvSaveImage(&quot;out.jpg&quot;, dst8);
+
+	//-----------------------------------------//
+
+	// 1 --&#062; means save only the alldirections one
+
+	return (dst8);
+
+	cvReleaseImage(&#038;src);
+
+	cvReleaseImage(&#038;dst1);
+
+	cvReleaseImage(&#038;dst2);
+
+	cvReleaseImage(&#038;dst3);
+
+	cvReleaseImage(&#038;dst4);
+
+	cvReleaseImage(&#038;dst5);
+
+	cvReleaseImage(&#038;dst6);
+
+	cvReleaseImage(&#038;dst7);
+
+	cvReleaseImage(&#038;dst8);
+
+	// in each 45 degree angel
+
+	cvReleaseData(&#038;M0);
+
+	cvReleaseData(&#038;M45);
+
+	cvReleaseData(&#038;M90);
+
+	cvReleaseData(&#038;M135);
+
+	cvReleaseData(&#038;M180);
+
+	cvReleaseData(&#038;M225);
+
+	cvReleaseData(&#038;M270);
+
+	cvReleaseData(&#038;M315);
+
+}
+
+//------------------------------Divide Image in parallel------------------------//
+
+IplImage* retSubImgNS(IplImage* img, CvRect roiRect)
+
+{
+
+	/// cvSetImageROI(img, roiRect);
+
+	IplImage* subImg = cvCreateImageHeader(cvSize(roiRect.width, roiRect.height), img-&#062;depth, img-&#062;nChannels);
+
+	subImg-&#062;origin = img-&#062;origin;
+
+	subImg-&#062;widthStep = img-&#062;widthStep;
+
+	subImg-&#062;imageData = img-&#062;imageData + roiRect.y*img-&#062;widthStep + roiRect.x*img-&#062;nChannels;
+
+	///cvCopy(img, subImg, NULL);
+
+	///cvResetImageROI(img);
+
+	return subImg;
+
+}
+
+//-----------------------------------------------------------------------------//
+
+void SubImgRow8DMerge(IplImage* img1, int n, int isParallel,int subPro)
+
+{
+
+	CvPoint p1; // define object of type point
+
+	CvPoint p2;
+
+	// here it can depend on the number of processors that are used.
+
+	string iName = &quot;&quot;;
+
+	string imName = &quot;&quot;;
+
+	string pImage = &quot;&quot;;
+
+	string nName = &quot;&quot;;
+
+	string wName = &quot;&quot;;
+
+	const char* fName;
+
+	const char* cName;
+
+	//int n =16;
+
+	int workLoad = img1-&#062;height / n; // so in this program each of the processor will take a block of the image of two diementions workload*width
+
+	p1.x = 0;
+
+	p2.x = img1-&#062;width - 1;//p2.y=256;
+
+	int x;
+
+	int y;
+
+	int i;
+
+	/// omp_set_num_threads(numOfThread);
+
+#pragma omp parallel shared(img1,workLoad,n) firstprivate(imName,nName,fName,wName,cName,x,y,i)
+
+	{
+
+#pragma omp for ordered schedule(dynamic)
+
+		for (i = 0; i&#060;n; i++)
+
+		{
+
+			x = 0;
+
+			y = i*workLoad;
+
+			imName = genBack(&#034;img&#034;, i);
+
+			// cout&#060;&#060;omp_get_thread_num()&#060;width-1,img1-&#062;height/n));
+
+			/* synchronize the data partition in order to avoid having more than one processor working on the same data sections
+
+			because we set and reset the data of interest and this should be done by only single processor.
+
+			*/
+
+			imName = retSubImgNS(img1, cvRect(x, y, img1-&#062;width, img1-&#062;height / n));
+
+			if (isParallel == 0)
+
+			{
+
+				imName = EightDirections(imName);
+
+			}
+
+			else
+
+			{
+
+				imName = EightDirections_Parlelle(imName,subPro);
+
+			}
+
+			// we can check to see whether the program is working or not
+
+			/* synchronize the data merging in order to avoid having more than one processor working on the same data sections because we set and reset the data of interest and this should be done by only single processor.
+
+			*/
+
+#pragma omp critical
+
+			{
+
+				mergeSubImg(img1, imName, cvRect(x, y, img1-&#062;width, img1-&#062;height / n));
+
+			}
+
+			cvReleaseImage(&#038;imName); // release the images
+
+		}
+
+	}
+
+	cvSaveImage(&quot;out.jpg&quot;, img1);
+
+}
+
+//-----------------------Process Sub Images--------------------//
+
+//-----------------------------------------------------------------------
+
+// Get user input of matrix dimension and printing option
+
+//-----------------------------------------------------------------------
+
+int main()
+
+{
+
+	string img;
+
+	
+
+	///bool isOkay;
+
+	double runtime = 0;
+
+	int n = 1;
+
+	int numOfThread = 4;
+
+	int isParallel = 1;
+
+	int subPro = 4;
+
+	
+
+	printf(&quot;Enter 1 for parallel and 0 for sequentialt&quot;);
+
+	scanf(&quot;%d&quot;, &#038;isParallel);
+
+	
+
+	IplImage* img1 = cvLoadImage(&quot;1.jpg&quot;, CV_LOAD_IMAGE_GRAYSCALE);
+
+	
+
+	///omp_set_num_threads(numOfThread);
+
+	///runtime = omp_get_wtime();
+
+	if (isParallel == 1)
+
+	{
+
+		printf(&quot;Split into Rows, t %i subimages,t %i threads,t %i subThreadsn &quot;, n, numOfThread, subPro);
+
+	}
+
+	runtime = omp_get_wtime();
+
+	SubImgRow8DMerge(img1, n, isParallel,subPro);
+
+	runtime = omp_get_wtime() - runtime;
+
+	///runtime = omp_get_wtime() - runtime;
+
+	//printf(&quot;%i subimages,t %i threads,t %i subThreadsn&quot;,n,numOfThread);
+
+	cout &#060;&#060; runtime &#060;&#060; &#034; seconds&#034; &#060;&#060; endl;
+
+	cvReleaseImage(&#038;img1);
+
+	Mat src = imread(&#034;1.jpg&#034;, CV_LOAD_IMAGE_GRAYSCALE);
+
+	Mat dst = imread(&#034;out.jpg&#034;);
+
+	
+
+	namedWindow(&#034;final&#034;);
+
+	imshow(&#034;final&#034;, dst);
+
+	namedWindow(&#034;initial&#034;);
+
+	imshow(&#034;initial&#034;, src);
+
+	waitKey();
+
+}]]></description>
+		<content:encoded><![CDATA[<p>PLZ TELL ME THE TIME COMPLEXITY OF FOLLOWING PROGRAM IT&#8217;S KIND URGENT</p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>#include</p>
+<p>using namespace std;</p>
+<p>using namespace cv;</p>
+<p>//&#8212;&#8212;&#8212;&#8211; generate string form right to left int+String&#8212;&#8212;&#8212;&#8212;&#8212;-//</p>
+<p>string gen(string a, int x)</p>
+<p>{</p>
+<p>	//int num;</p>
+<p>	string temp = a;</p>
+<p>	ostringstream ostr; //output string stream</p>
+<p>	ostr &lt;&lt; x; //use the string stream just like cout,</p>
+<p>	//the str() function of the stream</p>
+<p>	string theNumberString = ostr.str();</p>
+<p>	theNumberString = theNumberString + temp;</p>
+<p>	return theNumberString;</p>
+<p>}</p>
+<p>//&#8212;&#8212;&#8212;&#8211; generate string form right to left String+int img1&#8212;&#8212;&#8212;&#8211;//</p>
+<p>string genBack(string a, int x)</p>
+<p>{</p>
+<p>	//int num;</p>
+<p>	string temp = a;</p>
+<p>	ostringstream ostr; //output string stream</p>
+<p>	ostr &lt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst2 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst3 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst4 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst5 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst6 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst7 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst8 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;-Accessories of our filters to convolve with&#8212;&#8212;&#8212;&#8212;-//</p>
+<p>	double delta = 0;</p>
+<p>	CvPoint anchor = cvPoint(-1, -1);</p>
+<p>	double c90[] = { -1, -1, -1, 0, 0, 0, 1, 1, 1 };</p>
+<p>	// 180 degree</p>
+<p>	double c180[] = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };</p>
+<p>	// 270 degree</p>
+<p>	double c270[] = { 1, 1, 1, 0, 0, 0, -1, -1, -1 };</p>
+<p>	//0 degree</p>
+<p>	double c0[] = { 1, 0, -1, 1, 0, -1, 1, 0, -1 };</p>
+<p>	// 135 degree</p>
+<p>	double c135[] = { -1, -1, 0, -1, 0, 1, 0, 1, 1 };</p>
+<p>	// 225 degree</p>
+<p>	double c225[] = { 0, 1, 1, -1, 0, 1, -1, -1, 0 };</p>
+<p>	// 315 degree</p>
+<p>	double c315[] = { 1, 1, 0, 1, 0, -1, 0, -1, -1 };</p>
+<p>	// 45</p>
+<p>	double c45[] = { 0, -1, -1, 1, 0, -1, 1, 1, 0 };</p>
+<p>	//Allocate and apply the header for Mat//</p>
+<p>	CvMat* M0 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M45 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M90 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M135 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M180 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M225 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M270 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	CvMat* M315 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	omp_set_nested(numOfPro);</p>
+<p>	omp_set_dynamic(numOfPro);</p>
+<p>	// Allow parallel sections</p>
+<p>#pragma omp parallel num_threads(numOfPro)</p>
+<p>	{</p>
+<p>#pragma omp sections</p>
+<p>		{</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M90, 3, 3, CV_64FC1, c90);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>			cvInitMatHeader(M180, 3, 3, CV_64FC1, c180);</p>
+<p>			/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>		}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M270, 3, 3, CV_64FC1, c270);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M0, 3, 3, CV_64FC1, c0);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M135, 3, 3, CV_64FC1, c135);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M225, 3, 3, CV_64FC1, c225);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M315, 3, 3, CV_64FC1, c315);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvInitMatHeader(M45, 3, 3, CV_64FC1, c45);</p>
+<p>				/// printf(&#8220;done by %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>		}</p>
+<p>#pragma omp barrier</p>
+<p>		//&#8212;&#8212;first step of merging&#8212;&#8212;&#8212;//</p>
+<p>#pragma omp sections</p>
+<p>		{</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvFilter2D(src, dst1, M90, anchor);</p>
+<p>				//cvSaveImage(&#8220;90Degree.jpg&#8221;,dst1); // to save itermediate images</p>
+<p>				cvFilter2D(src, dst2, M180, anchor);</p>
+<p>				//cvSaveImage(&#8220;180Degree.jpg&#8221;,dst2); // to save itermediate images</p>
+<p>				cvMax(dst1, dst2, dst2);</p>
+<p>				/* printf(&#8220;Hello world section 1 thread %in&#8221;,omp_get_thread_num());</p>
+<p>				// for testing purposes */</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>		cvFilter2D(src, dst3, M270, anchor);</p>
+<p>		//cvSaveImage(&#8220;270Degree.jpg&#8221;,dst3); // to save itermediate images</p>
+<p>		cvFilter2D(src, dst4, M0, anchor);</p>
+<p>		//cvSaveImage(&#8220;0Degree.jpg&#8221;,dst4); // to save itermediate images</p>
+<p>		cvMax(dst3, dst4, dst4);</p>
+<p>		/* printf(&#8220;Hello world section 2 thread %in&#8221;,omp_get_thread_num()); // for testing purposes */</p>
+<p>	}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvFilter2D(src, dst5, M135, anchor);</p>
+<p>				//cvSaveImage(&#8220;135Degree.jpg&#8221;,dst5);</p>
+<p>				cvFilter2D(src, dst6, M225, anchor);</p>
+<p>				//cvSaveImage(&#8220;225Degree.jpg&#8221;,dst6);</p>
+<p>				cvMax(dst5, dst6, dst6);</p>
+<p>				/// printf(&#8220;Hello world section 3 thread %in&#8221;,omp_get_thread_num()); // for testing purposes</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvFilter2D(src, dst7, M315, anchor);</p>
+<p>				//cvSaveImage(&#8220;315Degree.jpg&#8221;,dst7); // to save itermediate images</p>
+<p>				cvFilter2D(src, dst8, M45, anchor);</p>
+<p>				//cvSaveImage(&#8220;45Degree.jpg&#8221;,dst8); // to save itermediate images</p>
+<p>				cvMax(dst7, dst8, dst8);</p>
+<p>				/* printf(&#8220;Hello world section 4 thread %in&#8221;,omp_get_thread_num()); // for testing purposes */</p>
+<p>			}</p>
+<p>	}</p>
+<p>		/* I need to have barrier here to wait until all the other processes have completed their job in order */</p>
+<p>#pragma omp barrier</p>
+<p>#pragma omp parallel sections</p>
+<p>		{</p>
+<p>			// Second step of merging</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>				cvMax(dst2, dst4, dst4);</p>
+<p>				// printf(&#8220;Hello world section 2_1 thread %in&#8221;,omp_get_thread_num());</p>
+<p>			}</p>
+<p>#pragma omp section</p>
+<p>			{</p>
+<p>			cvMax(dst6, dst8, dst8);</p>
+<p>			// printf(&#8220;Hello world section 2_2 thread %in&#8221;,omp_get_thread_num());</p>
+<p>		}</p>
+<p>		}</p>
+<p>	}</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;//</p>
+<p>	//&#8212;&#8212;&#8212;-Third step of merging&#8212;&#8212;&#8212;&#8211;//</p>
+<p>	cvMax(dst4, dst8, dst8);</p>
+<p>	// cvSaveImage(&#8220;out.jpg&#8221;,dst8);</p>
+<p>	return(dst8); // return the final result</p>
+<p>	cvReleaseImage(&amp;src);</p>
+<p>	cvReleaseImage(&amp;dst1);</p>
+<p>	cvReleaseImage(&amp;dst2);</p>
+<p>	cvReleaseImage(&amp;dst3);</p>
+<p>	cvReleaseImage(&amp;dst4);</p>
+<p>	cvReleaseImage(&amp;dst5);</p>
+<p>	cvReleaseImage(&amp;dst6);</p>
+<p>	cvReleaseImage(&amp;dst7);</p>
+<p>	cvReleaseImage(&amp;dst8);</p>
+<p>	// in each 45 degree angel</p>
+<p>	cvReleaseData(&amp;M0);</p>
+<p>	cvReleaseData(&amp;M45);</p>
+<p>	cvReleaseData(&amp;M90);</p>
+<p>	cvReleaseData(&amp;M135);</p>
+<p>	cvReleaseData(&amp;M180);</p>
+<p>	cvReleaseData(&amp;M225);</p>
+<p>	cvReleaseData(&amp;M270);</p>
+<p>	cvReleaseData(&amp;M315);</p>
+<p>}</p>
+<p>IplImage* EightDirections(IplImage* src)</p>
+<p>{</p>
+<p>	 // to not allow to store the sub images for now</p>
+<p>	IplImage* dst1 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst2 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst3 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst4 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst5 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst6 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst7 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	IplImage* dst8 = cvCreateImage(cvGetSize(src), src-&gt;depth, src-&gt;nChannels);</p>
+<p>	//&#8212;&#8212;&#8211;Accessories of our filters&#8212;&#8212;-//</p>
+<p>	double delta = 0;</p>
+<p>	CvPoint anchor = cvPoint(-1, -1);</p>
+<p>	double c90[] = { -1, -1, -1, 0, 0, 0, 1, 1, 1 };</p>
+<p>	// 180 degree</p>
+<p>	double c180[] = { -1, 0, 1, -1, 0, 1, -1, 0, 1 };</p>
+<p>	// 270 degree</p>
+<p>	double c270[] = { 1, 1, 1, 0, 0, 0, -1, -1, -1 };</p>
+<p>	//0 degree</p>
+<p>	double c0[] = { 1, 0, -1, 1, 0, -1, 1, 0, -1 };</p>
+<p>	// 135 degree</p>
+<p>	double c135[] = { -1, -1, 0, -1, 0, 1, 0, 1, 1 };</p>
+<p>	// 225 degree</p>
+<p>	double c225[] = { 0, 1, 1, -1, 0, 1, -1, -1, 0 };</p>
+<p>	// 315 degree</p>
+<p>	double c315[] = { 1, 1, 0, 1, 0, -1, 0, -1, -1 };</p>
+<p>	// 45</p>
+<p>	double c45[] = { 0, -1, -1, 1, 0, -1, 1, 1, 0 };</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;//</p>
+<p>	//&#8211;Allocate and apply the header for Mat&#8211;//</p>
+<p>	CvMat* M90 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M90, 3, 3, CV_64FC1, c90);</p>
+<p>	CvMat* M180 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M180, 3, 3, CV_64FC1, c180);</p>
+<p>	CvMat* M270 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M270, 3, 3, CV_64FC1, c270);</p>
+<p>	CvMat* M0 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M0, 3, 3, CV_64FC1, c0);</p>
+<p>	CvMat* M135 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M135, 3, 3, CV_64FC1, c135);</p>
+<p>	CvMat* M225 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M225, 3, 3, CV_64FC1, c225);</p>
+<p>	CvMat* M315 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M315, 3, 3, CV_64FC1, c315);</p>
+<p>	CvMat* M45 = cvCreateMat(3, 3, CV_64FC1);</p>
+<p>	cvInitMatHeader(M45, 3, 3, CV_64FC1, c45);</p>
+<p>	// o&#8211;&gt; means save all the combination</p>
+<p>	//&#8212;&#8212;first step of merging&#8212;&#8212;&#8212;//</p>
+<p>	cvFilter2D(src, dst1, M90, anchor); //cvSaveImage(&#8220;90Degree.jpg&#8221;,dst1);</p>
+<p>	cvFilter2D(src, dst2, M180, anchor); //cvSaveImage(&#8220;180Degree.jpg&#8221;,dst2);</p>
+<p>	cvMax(dst1, dst2, dst2);</p>
+<p>	cvFilter2D(src, dst3, M270, anchor); //cvSaveImage(&#8220;270Degree.jpg&#8221;,dst3);</p>
+<p>	cvFilter2D(src, dst4, M0, anchor); //cvSaveImage(&#8220;0Degree.jpg&#8221;,dst4);</p>
+<p>	cvMax(dst3, dst4, dst4);</p>
+<p>	cvFilter2D(src, dst5, M135, anchor); //cvSaveImage(&#8220;135Degree.jpg&#8221;,dst5);</p>
+<p>	cvFilter2D(src, dst6, M225, anchor); //cvSaveImage(&#8220;225Degree.jpg&#8221;,dst6);</p>
+<p>	cvMax(dst5, dst6, dst6);</p>
+<p>	cvFilter2D(src, dst7, M315, anchor); //cvSaveImage(&#8220;315Degree.jpg&#8221;,dst7);</p>
+<p>	cvFilter2D(src, dst8, M45, anchor); //cvSaveImage(&#8220;45Degree.jpg&#8221;,dst8);</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-//</p>
+<p>	//&#8212;&#8212;&#8212;&#8211;second step of merging&#8212;&#8212;&#8212;-//</p>
+<p>	cvMax(dst7, dst8, dst8);</p>
+<p>	cvMax(dst2, dst4, dst4);</p>
+<p>	cvMax(dst6, dst8, dst8);</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;//</p>
+<p>	//&#8212;&#8212;&#8212;-Third step of merging&#8212;&#8212;&#8212;&#8211;//</p>
+<p>	cvMax(dst4, dst8, dst8);</p>
+<p>	cvSaveImage(&#8220;out.jpg&#8221;, dst8);</p>
+<p>	//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;//</p>
+<p>	// 1 &#8211;&gt; means save only the alldirections one</p>
+<p>	return (dst8);</p>
+<p>	cvReleaseImage(&amp;src);</p>
+<p>	cvReleaseImage(&amp;dst1);</p>
+<p>	cvReleaseImage(&amp;dst2);</p>
+<p>	cvReleaseImage(&amp;dst3);</p>
+<p>	cvReleaseImage(&amp;dst4);</p>
+<p>	cvReleaseImage(&amp;dst5);</p>
+<p>	cvReleaseImage(&amp;dst6);</p>
+<p>	cvReleaseImage(&amp;dst7);</p>
+<p>	cvReleaseImage(&amp;dst8);</p>
+<p>	// in each 45 degree angel</p>
+<p>	cvReleaseData(&amp;M0);</p>
+<p>	cvReleaseData(&amp;M45);</p>
+<p>	cvReleaseData(&amp;M90);</p>
+<p>	cvReleaseData(&amp;M135);</p>
+<p>	cvReleaseData(&amp;M180);</p>
+<p>	cvReleaseData(&amp;M225);</p>
+<p>	cvReleaseData(&amp;M270);</p>
+<p>	cvReleaseData(&amp;M315);</p>
+<p>}</p>
+<p>//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;Divide Image in parallel&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;//</p>
+<p>IplImage* retSubImgNS(IplImage* img, CvRect roiRect)</p>
+<p>{</p>
+<p>	/// cvSetImageROI(img, roiRect);</p>
+<p>	IplImage* subImg = cvCreateImageHeader(cvSize(roiRect.width, roiRect.height), img-&gt;depth, img-&gt;nChannels);</p>
+<p>	subImg-&gt;origin = img-&gt;origin;</p>
+<p>	subImg-&gt;widthStep = img-&gt;widthStep;</p>
+<p>	subImg-&gt;imageData = img-&gt;imageData + roiRect.y*img-&gt;widthStep + roiRect.x*img-&gt;nChannels;</p>
+<p>	///cvCopy(img, subImg, NULL);</p>
+<p>	///cvResetImageROI(img);</p>
+<p>	return subImg;</p>
+<p>}</p>
+<p>//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;//</p>
+<p>void SubImgRow8DMerge(IplImage* img1, int n, int isParallel,int subPro)</p>
+<p>{</p>
+<p>	CvPoint p1; // define object of type point</p>
+<p>	CvPoint p2;</p>
+<p>	// here it can depend on the number of processors that are used.</p>
+<p>	string iName = &#8220;&#8221;;</p>
+<p>	string imName = &#8220;&#8221;;</p>
+<p>	string pImage = &#8220;&#8221;;</p>
+<p>	string nName = &#8220;&#8221;;</p>
+<p>	string wName = &#8220;&#8221;;</p>
+<p>	const char* fName;</p>
+<p>	const char* cName;</p>
+<p>	//int n =16;</p>
+<p>	int workLoad = img1-&gt;height / n; // so in this program each of the processor will take a block of the image of two diementions workload*width</p>
+<p>	p1.x = 0;</p>
+<p>	p2.x = img1-&gt;width &#8211; 1;//p2.y=256;</p>
+<p>	int x;</p>
+<p>	int y;</p>
+<p>	int i;</p>
+<p>	/// omp_set_num_threads(numOfThread);</p>
+<p>#pragma omp parallel shared(img1,workLoad,n) firstprivate(imName,nName,fName,wName,cName,x,y,i)</p>
+<p>	{</p>
+<p>#pragma omp for ordered schedule(dynamic)</p>
+<p>		for (i = 0; i&lt;n; i++)</p>
+<p>		{</p>
+<p>			x = 0;</p>
+<p>			y = i*workLoad;</p>
+<p>			imName = genBack(&quot;img&quot;, i);</p>
+<p>			// cout&lt;&lt;omp_get_thread_num()&lt;width-1,img1-&gt;height/n));</p>
+<p>			/* synchronize the data partition in order to avoid having more than one processor working on the same data sections</p>
+<p>			because we set and reset the data of interest and this should be done by only single processor.</p>
+<p>			*/</p>
+<p>			imName = retSubImgNS(img1, cvRect(x, y, img1-&gt;width, img1-&gt;height / n));</p>
+<p>			if (isParallel == 0)</p>
+<p>			{</p>
+<p>				imName = EightDirections(imName);</p>
+<p>			}</p>
+<p>			else</p>
+<p>			{</p>
+<p>				imName = EightDirections_Parlelle(imName,subPro);</p>
+<p>			}</p>
+<p>			// we can check to see whether the program is working or not</p>
+<p>			/* synchronize the data merging in order to avoid having more than one processor working on the same data sections because we set and reset the data of interest and this should be done by only single processor.</p>
+<p>			*/</p>
+<p>#pragma omp critical</p>
+<p>			{</p>
+<p>				mergeSubImg(img1, imName, cvRect(x, y, img1-&gt;width, img1-&gt;height / n));</p>
+<p>			}</p>
+<p>			cvReleaseImage(&amp;imName); // release the images</p>
+<p>		}</p>
+<p>	}</p>
+<p>	cvSaveImage(&#8220;out.jpg&#8221;, img1);</p>
+<p>}</p>
+<p>//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;Process Sub Images&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;//</p>
+<p>//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>// Get user input of matrix dimension and printing option</p>
+<p>//&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>int main()</p>
+<p>{</p>
+<p>	string img;</p>
+<p>	///bool isOkay;</p>
+<p>	double runtime = 0;</p>
+<p>	int n = 1;</p>
+<p>	int numOfThread = 4;</p>
+<p>	int isParallel = 1;</p>
+<p>	int subPro = 4;</p>
+<p>	printf(&#8220;Enter 1 for parallel and 0 for sequentialt&#8221;);</p>
+<p>	scanf(&#8220;%d&#8221;, &amp;isParallel);</p>
+<p>	IplImage* img1 = cvLoadImage(&#8220;1.jpg&#8221;, CV_LOAD_IMAGE_GRAYSCALE);</p>
+<p>	///omp_set_num_threads(numOfThread);</p>
+<p>	///runtime = omp_get_wtime();</p>
+<p>	if (isParallel == 1)</p>
+<p>	{</p>
+<p>		printf(&#8220;Split into Rows, t %i subimages,t %i threads,t %i subThreadsn &#8220;, n, numOfThread, subPro);</p>
+<p>	}</p>
+<p>	runtime = omp_get_wtime();</p>
+<p>	SubImgRow8DMerge(img1, n, isParallel,subPro);</p>
+<p>	runtime = omp_get_wtime() &#8211; runtime;</p>
+<p>	///runtime = omp_get_wtime() &#8211; runtime;</p>
+<p>	//printf(&#8220;%i subimages,t %i threads,t %i subThreadsn&#8221;,n,numOfThread);</p>
+<p>	cout &lt;&lt; runtime &lt;&lt; &quot; seconds&quot; &lt;&lt; endl;</p>
+<p>	cvReleaseImage(&amp;img1);</p>
+<p>	Mat src = imread(&quot;1.jpg&quot;, CV_LOAD_IMAGE_GRAYSCALE);</p>
+<p>	Mat dst = imread(&quot;out.jpg&quot;);</p>
+<p>	namedWindow(&quot;final&quot;);</p>
+<p>	imshow(&quot;final&quot;, dst);</p>
+<p>	namedWindow(&quot;initial&quot;);</p>
+<p>	imshow(&quot;initial&quot;, src);</p>
+<p>	waitKey();</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jovaughn</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-34709</link>
+		<dc:creator><![CDATA[Jovaughn]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 15:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-34709</guid>
+		<description><![CDATA[Can you clarify the statement:
+&quot;we evaluate the performance of an algorithm in terms of input size (we don’t measure the actual running time).&quot;  Can you clarify what running time is?  Running time in other books mean steps or operations executed.]]></description>
+		<content:encoded><![CDATA[<p>Can you clarify the statement:<br />
+&#8220;we evaluate the performance of an algorithm in terms of input size (we don’t measure the actual running time).&#8221;  Can you clarify what running time is?  Running time in other books mean steps or operations executed.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Lily</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-32042</link>
+		<dc:creator><![CDATA[Lily]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2014 05:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-32042</guid>
+		<description><![CDATA[very helpful website..]]></description>
+		<content:encoded><![CDATA[<p>very helpful website..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: hari</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-30706</link>
+		<dc:creator><![CDATA[hari]]></dc:creator>
+		<pubDate>Sat, 14 Dec 2013 06:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-30706</guid>
+		<description><![CDATA[you are right man]]></description>
+		<content:encoded><![CDATA[<p>you are right man</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: hari</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-30705</link>
+		<dc:creator><![CDATA[hari]]></dc:creator>
+		<pubDate>Sat, 14 Dec 2013 06:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-30705</guid>
+		<description><![CDATA[useful]]></description>
+		<content:encoded><![CDATA[<p>useful</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Robin Thomas</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-25147</link>
+		<dc:creator><![CDATA[Robin Thomas]]></dc:creator>
+		<pubDate>Sun, 18 Aug 2013 03:40:22 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-25147</guid>
+		<description><![CDATA[Nope. 1000 and 2 are merely machine dependent constants. Those are ignored in asymptotic analysis.
+
+In asymptotic analysis, we always assume the input size n &#062;= n0, where n0 is the constant. If you check the formal definition of big O, or big Omega or the other classes, you shall understand it.]]></description>
+		<content:encoded><![CDATA[<p>Nope. 1000 and 2 are merely machine dependent constants. Those are ignored in asymptotic analysis.</p>
+<p>In asymptotic analysis, we always assume the input size n &gt;= n0, where n0 is the constant. If you check the formal definition of big O, or big Omega or the other classes, you shall understand it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rajavenu Kyatham</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-26622</link>
+		<dc:creator><![CDATA[Rajavenu Kyatham]]></dc:creator>
+		<pubDate>Mon, 08 Jul 2013 17:30:36 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-26622</guid>
+		<description><![CDATA[awesome website....]]></description>
+		<content:encoded><![CDATA[<p>awesome website&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kush Pandey</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-26621</link>
+		<dc:creator><![CDATA[Kush Pandey]]></dc:creator>
+		<pubDate>Fri, 21 Jun 2013 11:05:16 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-26621</guid>
+		<description><![CDATA[good job]]></description>
+		<content:encoded><![CDATA[<p>good job</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: hxgxs1</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-18738</link>
+		<dc:creator><![CDATA[hxgxs1]]></dc:creator>
+		<pubDate>Mon, 27 May 2013 10:19:50 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-18738</guid>
+		<description><![CDATA[Doubt!!!
+It says that 
+&quot;in Asymptotic analysis, we always talk about input sizes larger than a constant value.&quot; 
+In the case of 1000nlogn and 2nlogn  the constant values are 1000 and 2 right??]]></description>
+		<content:encoded><![CDATA[<p>Doubt!!!<br />
+It says that<br />
+&#8220;in Asymptotic analysis, we always talk about input sizes larger than a constant value.&#8221;<br />
+In the case of 1000nlogn and 2nlogn  the constant values are 1000 and 2 right??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sampat S Magi</title>
+		<link>http://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/#comment-26620</link>
+		<dc:creator><![CDATA[Sampat S Magi]]></dc:creator>
+		<pubDate>Sun, 12 May 2013 17:25:40 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11064#comment-26620</guid>
+		<description><![CDATA[great site. knowledgeable.]]></description>
+		<content:encoded><![CDATA[<p>great site. knowledgeable.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:07:51 -->
+
+<!-- Compression = gzip -->

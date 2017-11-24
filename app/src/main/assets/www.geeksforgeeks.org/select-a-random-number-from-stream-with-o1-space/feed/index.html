@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Select a random number from stream, with O(1) space</title>
+	<atom:link href="http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-37973</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 07:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-37973</guid>
+		<description><![CDATA[Count the number of quotes and randomly generate a number and select a quote. If this algo looks very naive, could you please give details about the problem.]]></description>
+		<content:encoded><![CDATA[<p>Count the number of quotes and randomly generate a number and select a quote. If this algo looks very naive, could you please give details about the problem.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Surabhi</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-23043</link>
+		<dc:creator><![CDATA[Surabhi]]></dc:creator>
+		<pubDate>Thu, 01 Aug 2013 07:30:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-23043</guid>
+		<description><![CDATA[I am kind of confused with the solution you proposed everytime we are holding only previous resultant number and new number,  int i = rand() % count; line suggest that if a number is generated in between and it is neither the location the already stored res number nor the latest count-1 than also u r returning res.How come it is equiprobable,everytime new number i is having the probability of 1/2 of selecting or discarding.Please reply]]></description>
+		<content:encoded><![CDATA[<p>I am kind of confused with the solution you proposed everytime we are holding only previous resultant number and new number,  int i = rand() % count; line suggest that if a number is generated in between and it is neither the location the already stored res number nor the latest count-1 than also u r returning res.How come it is equiprobable,everytime new number i is having the probability of 1/2 of selecting or discarding.Please reply</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-18470</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 16:53:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-18470</guid>
+		<description><![CDATA[Cormen problem: 5.1-2:
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;iostream&#062;
+#include &#060;ctime&#062;
+using namespace std;
+
+int random(int a, int b) {
+  static int first_run=1;
+  if(a==0 &#038;&#038; b==1) {
+    if(first_run==1) {
+      srand( (unsigned)time( NULL ) );
+      first_run=0;
+    }
+    return rand()%2;
+  } else if(a==b){
+    return a;
+  } else if(b==a+1) {
+    if(random(0, 1)) {
+      return b;
+    } else {
+      return a;
+    }
+  } else {
+    if(random(0, 1)) {
+      return random((a+b)/2+1, b);
+    } else {
+      return random(a, (a+b)/2);
+    }
+  }
+}
+
+int main() {
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  cout&#060;&#060;random(1, 10)&#060;&#060;endl;
+  return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+1
+5
+5
+9
+8
+5
+7
+3
+3
+5
+3
+9
+8
+6
+4
+10
+4
+5
+4
+5]]></description>
+		<content:encoded><![CDATA[<p>Cormen problem: 5.1-2:</p>
+<pre> <code language="C">
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+using namespace std;
+
+int random(int a, int b) {
+  static int first_run=1;
+  if(a==0 &amp;&amp; b==1) {
+    if(first_run==1) {
+      srand( (unsigned)time( NULL ) );
+      first_run=0;
+    }
+    return rand()%2;
+  } else if(a==b){
+    return a;
+  } else if(b==a+1) {
+    if(random(0, 1)) {
+      return b;
+    } else {
+      return a;
+    }
+  } else {
+    if(random(0, 1)) {
+      return random((a+b)/2+1, b);
+    } else {
+      return random(a, (a+b)/2);
+    }
+  }
+}
+
+int main() {
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  cout&lt;&lt;random(1, 10)&lt;&lt;endl;
+  return 0;
+}
+</code> </pre>
+<p>1<br />
+5<br />
+5<br />
+9<br />
+8<br />
+5<br />
+7<br />
+3<br />
+3<br />
+5<br />
+3<br />
+9<br />
+8<br />
+6<br />
+4<br />
+10<br />
+4<br />
+5<br />
+4<br />
+5</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hemanth</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-12990</link>
+		<dc:creator><![CDATA[Hemanth]]></dc:creator>
+		<pubDate>Thu, 29 Nov 2012 05:08:15 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-12990</guid>
+		<description><![CDATA[It&#039;s a google interview question with little variation.
+
+Select a random quote from a given input file. Each quote can be of any no. of lines. 
+
+Ex input file:
+Quote1 Line1
+Quote1 Line2
+Quote1 Line3
+%%
+Quote2 Line1
+Quote2 Line2
+Quote2 Line3
+Quote2 Line4
+Quote2 Line5
+%%
+Quote3 Line1
+%%
+Quote4 Line1
+Quote4 Line2
+Quote4 Line3
+Quote4 Line4
+%%
+Quote5 Line1
+Quote5 Line2
+%%]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s a google interview question with little variation.</p>
+<p>Select a random quote from a given input file. Each quote can be of any no. of lines. </p>
+<p>Ex input file:<br />
+Quote1 Line1<br />
+Quote1 Line2<br />
+Quote1 Line3<br />
+%%<br />
+Quote2 Line1<br />
+Quote2 Line2<br />
+Quote2 Line3<br />
+Quote2 Line4<br />
+Quote2 Line5<br />
+%%<br />
+Quote3 Line1<br />
+%%<br />
+Quote4 Line1<br />
+Quote4 Line2<br />
+Quote4 Line3<br />
+Quote4 Line4<br />
+%%<br />
+Quote5 Line1<br />
+Quote5 Line2<br />
+%%</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-12432</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Wed, 07 Nov 2012 05:07:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-12432</guid>
+		<description><![CDATA[@neo: please note that the question is not about selecting a set of random numbers, it is about selecting a random number at any point in stream.  You will never get 2 after 3, but that doesn&#039;t matter. The point is, you may get 2 in the 4th iteration with 1/n probability.]]></description>
+		<content:encoded><![CDATA[<p>@neo: please note that the question is not about selecting a set of random numbers, it is about selecting a random number at any point in stream.  You will never get 2 after 3, but that doesn&#8217;t matter. The point is, you may get 2 in the 4th iteration with 1/n probability.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: neo</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-12424</link>
+		<dc:creator><![CDATA[neo]]></dc:creator>
+		<pubDate>Tue, 06 Nov 2012 18:12:27 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-12424</guid>
+		<description><![CDATA[this code has flaw, which is, it is not selecting random number each time with 1/n probality, if we run it for large number of n say 10, then for each selection it will give most latest number not with probabilty 1/n for each element.
+
+say in above example it will never give output as:
+
+
+Random number from first 1 numbers is 1
+Random number from first 2 numbers is 1
+Random number from first 3 numbers is 3
+Random number from first 4 numbers is 2]]></description>
+		<content:encoded><![CDATA[<p>this code has flaw, which is, it is not selecting random number each time with 1/n probality, if we run it for large number of n say 10, then for each selection it will give most latest number not with probabilty 1/n for each element.</p>
+<p>say in above example it will never give output as:</p>
+<p>Random number from first 1 numbers is 1<br />
+Random number from first 2 numbers is 1<br />
+Random number from first 3 numbers is 3<br />
+Random number from first 4 numbers is 2</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pradeep gupta</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-12305</link>
+		<dc:creator><![CDATA[pradeep gupta]]></dc:creator>
+		<pubDate>Tue, 06 Nov 2012 04:22:13 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-12305</guid>
+		<description><![CDATA[nice solution.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>nice solution.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Lokesh</title>
+		<link>http://www.geeksforgeeks.org/select-a-random-number-from-stream-with-o1-space/#comment-12289</link>
+		<dc:creator><![CDATA[Lokesh]]></dc:creator>
+		<pubDate>Mon, 05 Nov 2012 13:38:15 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26581#comment-12289</guid>
+		<description><![CDATA[awesome, it&#039;s a google interview question]]></description>
+		<content:encoded><![CDATA[<p>awesome, it&#8217;s a google interview question</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:14:32 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Graph Coloring &#124; Set 2 (Greedy Algorithm)</title>
+	<atom:link href="http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-36091</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 15 May 2014 16:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-36091</guid>
+		<description><![CDATA[also mark the cross edges]]></description>
+		<content:encoded><![CDATA[<p>also mark the cross edges</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-36004</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Tue, 13 May 2014 19:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-36004</guid>
+		<description><![CDATA[int fun()
+{
+	int clr,i,j,flag,v,p;
+	clr=0;
+	while(q.front!=-1)
+	{
+		v=q.del();
+		p=pred[v];
+		if(p!=-1)
+		   state[p]=1;
+		for(i=0;i&#060;n;i++)
+		{
+			if(be[v][i]==1)
+			{
+				state[i]=1;
+			}
+		}
+		for(i=0,flag=0;i&#060;n,dtime[i]&#060;dtime[v];i++)
+		{
+			if(state[i]==0)
+			{
+				flag=1;
+				break;
+			}
+		}
+		if(!flag)
+		   clr++;
+		for(i=0;i&#060;n;i++)
+		{
+			if(te[v][i]==1)
+			{
+				q.insert(i);
+			}
+		}
+		for(i=0;i&#060;n;i++)
+		{
+			state[i]=0;
+		}
+	}
+	return clr;
+}]]></description>
+		<content:encoded><![CDATA[<p>int fun()<br />
+{<br />
+	int clr,i,j,flag,v,p;<br />
+	clr=0;<br />
+	while(q.front!=-1)<br />
+	{<br />
+		v=q.del();<br />
+		p=pred[v];<br />
+		if(p!=-1)<br />
+		   state[p]=1;<br />
+		for(i=0;i&lt;n;i++)<br />
+		{<br />
+			if(be[v][i]==1)<br />
+			{<br />
+				state[i]=1;<br />
+			}<br />
+		}<br />
+		for(i=0,flag=0;i&lt;n,dtime[i]&lt;dtime[v];i++)<br />
+		{<br />
+			if(state[i]==0)<br />
+			{<br />
+				flag=1;<br />
+				break;<br />
+			}<br />
+		}<br />
+		if(!flag)<br />
+		   clr++;<br />
+		for(i=0;i&lt;n;i++)<br />
+		{<br />
+			if(te[v][i]==1)<br />
+			{<br />
+				q.insert(i);<br />
+			}<br />
+		}<br />
+		for(i=0;i&lt;n;i++)<br />
+		{<br />
+			state[i]=0;<br />
+		}<br />
+	}<br />
+	return clr;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-36003</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Tue, 13 May 2014 19:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-36003</guid>
+		<description><![CDATA[actually it is a NP complete problem...
+u can apply my algorithm....it uses a queue
+step1-run a dfs at a starting vertex and assign discovery times and also mark tree and back edges.
+step2-eneque the root of dfs
+step 3-take a status array with entries 0 nd 1...if status[i]=1 means that u can&#039;t take the colour of vertex i .
+ste3-while(!q.empty)
+-&#062;deque the element say it is v
+-&#062;mark its predecessor and back edges vertices in status array as 1 
+because they r adjacent to that vertices
+-&#062;for all vertices whose  discovery time is less than v (ie vertices which r already coloured during course of algorithm) if all entries of them are 1 then u have to take a new colour ...else not
+-&#062;enque its child to queue
+-&#062;status array allentries 0 (for a fresh start for new vertex)
+
+
+go back to step 3]]></description>
+		<content:encoded><![CDATA[<p>actually it is a NP complete problem&#8230;<br />
+u can apply my algorithm&#8230;.it uses a queue<br />
+step1-run a dfs at a starting vertex and assign discovery times and also mark tree and back edges.<br />
+step2-eneque the root of dfs<br />
+step 3-take a status array with entries 0 nd 1&#8230;if status[i]=1 means that u can&#8217;t take the colour of vertex i .<br />
+ste3-while(!q.empty)<br />
+-&gt;deque the element say it is v<br />
+-&gt;mark its predecessor and back edges vertices in status array as 1<br />
+because they r adjacent to that vertices<br />
+-&gt;for all vertices whose  discovery time is less than v (ie vertices which r already coloured during course of algorithm) if all entries of them are 1 then u have to take a new colour &#8230;else not<br />
+-&gt;enque its child to queue<br />
+-&gt;status array allentries 0 (for a fresh start for new vertex)</p>
+<p>go back to step 3</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sniper27</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-35715</link>
+		<dc:creator><![CDATA[sniper27]]></dc:creator>
+		<pubDate>Tue, 06 May 2014 09:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-35715</guid>
+		<description><![CDATA[program 100% work , but i need for graph directed , if you can .. please !!!]]></description>
+		<content:encoded><![CDATA[<p>program 100% work , but i need for graph directed , if you can .. please !!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-33929</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 27 Mar 2014 15:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-33929</guid>
+		<description><![CDATA[Thank for sharing]]></description>
+		<content:encoded><![CDATA[<p>Thank for sharing</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-33927</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 27 Mar 2014 15:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-33927</guid>
+		<description><![CDATA[Very good implementation]]></description>
+		<content:encoded><![CDATA[<p>Very good implementation</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: loconet</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-32946</link>
+		<dc:creator><![CDATA[loconet]]></dc:creator>
+		<pubDate>Tue, 25 Feb 2014 01:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-32946</guid>
+		<description><![CDATA[But the loop to find the next available colour should really be O(d) (where d is the max degree) not O(V) worst case because we know that to vertex colour any graph with this algorithm, we&#039;ll need at most d+1 colours (not V like the code shows).]]></description>
+		<content:encoded><![CDATA[<p>But the loop to find the next available colour should really be O(d) (where d is the max degree) not O(V) worst case because we know that to vertex colour any graph with this algorithm, we&#8217;ll need at most d+1 colours (not V like the code shows).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-32689</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 08:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-32689</guid>
+		<description><![CDATA[rahul, we have updated the time complexity.  Please see the below comment from laxmi.]]></description>
+		<content:encoded><![CDATA[<p>rahul, we have updated the time complexity.  Please see the below comment from laxmi.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-32688</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 08:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-32688</guid>
+		<description><![CDATA[guest, thanks for the feedback.  We have updated the time complexity.]]></description>
+		<content:encoded><![CDATA[<p>guest, thanks for the feedback.  We have updated the time complexity.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-32687</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 08:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-32687</guid>
+		<description><![CDATA[Thanks for pointing this out. We have corrected it.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out. We have corrected it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: paperapp</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/#comment-32027</link>
+		<dc:creator><![CDATA[paperapp]]></dc:creator>
+		<pubDate>Fri, 31 Jan 2014 13:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123945#comment-32027</guid>
+		<description><![CDATA[It should be d+1 and not d+! in the last paragraph.]]></description>
+		<content:encoded><![CDATA[<p>It should be d+1 and not d+! in the last paragraph.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:19:00 -->
+
+<!-- Compression = gzip -->

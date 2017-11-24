@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print all nodes that are at distance k from a leaf node</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Programmer</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-39548</link>
+		<dc:creator><![CDATA[Programmer]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 16:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-39548</guid>
+		<description><![CDATA[your code print print node more than 1 time...]]></description>
+		<content:encoded><![CDATA[<p>your code print print node more than 1 time&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-39435</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 08:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-39435</guid>
+		<description><![CDATA[Hello.
+I have a confusion here...
+If we analyse the solution...,let k=2
+In the given example...,
+1. root=1. so we insert it in the pat array and set visted as false.pathlen=1
+2. then it gies to root-&#062;left and insery 2 in the path array and visted =false.pathlen=2
+3.Now again it goes to root-&#062;left and insert 4 into the array and set visited=false,pathlen=3.
+Since, it is leaf node and it satisfies the if condition, the path[pathlen-k-1] will be printed.
+The PROBLEM  is...
+NOW, when we go to root-&#062;right, then we insert 5 into the path array and set false.
+path={1,2,4,5}, pathlen=4,k=2
+so pathlen-k-1=1..
+i.e it will print 2....??????
+But technically it shud print 1 na....
+I think i am missing out something...
+Please someone point out the mistake....
+
+Thanx in advance :)]]></description>
+		<content:encoded><![CDATA[<p>Hello.<br />
+I have a confusion here&#8230;<br />
+If we analyse the solution&#8230;,let k=2<br />
+In the given example&#8230;,<br />
+1. root=1. so we insert it in the pat array and set visted as false.pathlen=1<br />
+2. then it gies to root-&gt;left and insery 2 in the path array and visted =false.pathlen=2<br />
+3.Now again it goes to root-&gt;left and insert 4 into the array and set visited=false,pathlen=3.<br />
+Since, it is leaf node and it satisfies the if condition, the path[pathlen-k-1] will be printed.<br />
+The PROBLEM  is&#8230;<br />
+NOW, when we go to root-&gt;right, then we insert 5 into the path array and set false.<br />
+path={1,2,4,5}, pathlen=4,k=2<br />
+so pathlen-k-1=1..<br />
+i.e it will print 2&#8230;.??????<br />
+But technically it shud print 1 na&#8230;.<br />
+I think i am missing out something&#8230;<br />
+Please someone point out the mistake&#8230;.</p>
+<p>Thanx in advance 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-38899</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 05:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-38899</guid>
+		<description><![CDATA[You can easily handle this by taking visited node array.]]></description>
+		<content:encoded><![CDATA[<p>You can easily handle this by taking visited node array.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-38693</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 13:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-38693</guid>
+		<description><![CDATA[A nlogn approach with no extra space other than one created by recursive steps. Although here redundant prints will come.
+
+void print_leaf_knode_aux(node *head, node *root, int k, int path, int *max_path)
+{
+    if (!root &#124;&#124; !head &#124;&#124; (*max_path &#062; 0))
+        return;
+
+    if (root == head)
+        *max_path = path;
+
+    print_leaf_knode_aux(head, root-&#062;left, k, path + 1, max_path);
+    print_leaf_knode_aux(head, root-&#062;right, k, path + 1, max_path);
+
+    if (k == (*max_path - path))
+        printf(&quot;%d &quot;, root-&#062;data);
+}
+
+void print_leaf_knode(node *head, node *root, int k)
+{
+    int max_path = -1;
+
+    print_leaf_knode_aux(head, root, k, 0, &#038;max_path);
+}
+
+void display_leaf_knode_aux(node *head, node *root, int k)
+{
+    if (!head)
+        return;
+
+    if (!head-&#062;left &#038;&#038; !head-&#062;right)
+    {
+        return print_leaf_knode(head, root, k);
+    }
+
+    display_leaf_knode_aux(head-&#062;left, root, k);
+    display_leaf_knode_aux(head-&#062;right, root, k);
+}
+
+void display_leaf_knode(node *head, int k)
+{
+
+    if (!head)
+        return;
+
+    display_leaf_knode_aux(head, head, k);
+}]]></description>
+		<content:encoded><![CDATA[<p>A nlogn approach with no extra space other than one created by recursive steps. Although here redundant prints will come.</p>
+<p>void print_leaf_knode_aux(node *head, node *root, int k, int path, int *max_path)<br />
+{<br />
+    if (!root || !head || (*max_path &gt; 0))<br />
+        return;</p>
+<p>    if (root == head)<br />
+        *max_path = path;</p>
+<p>    print_leaf_knode_aux(head, root-&gt;left, k, path + 1, max_path);<br />
+    print_leaf_knode_aux(head, root-&gt;right, k, path + 1, max_path);</p>
+<p>    if (k == (*max_path &#8211; path))<br />
+        printf(&#8220;%d &#8220;, root-&gt;data);<br />
+}</p>
+<p>void print_leaf_knode(node *head, node *root, int k)<br />
+{<br />
+    int max_path = -1;</p>
+<p>    print_leaf_knode_aux(head, root, k, 0, &amp;max_path);<br />
+}</p>
+<p>void display_leaf_knode_aux(node *head, node *root, int k)<br />
+{<br />
+    if (!head)<br />
+        return;</p>
+<p>    if (!head-&gt;left &amp;&amp; !head-&gt;right)<br />
+    {<br />
+        return print_leaf_knode(head, root, k);<br />
+    }</p>
+<p>    display_leaf_knode_aux(head-&gt;left, root, k);<br />
+    display_leaf_knode_aux(head-&gt;right, root, k);<br />
+}</p>
+<p>void display_leaf_knode(node *head, int k)<br />
+{</p>
+<p>    if (!head)<br />
+        return;</p>
+<p>    display_leaf_knode_aux(head, head, k);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-38691</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 13:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-38691</guid>
+		<description><![CDATA[Elegant approach , but it does not work.
+You are loosing information for the leafs once you are moving up.
+INPUT: 5 2 7 1 3 6 8 4 9
+Try for above bst with input k = 3.
+Expected output should be 5 but your approach does not give any output in this case.]]></description>
+		<content:encoded><![CDATA[<p>Elegant approach , but it does not work.<br />
+You are loosing information for the leafs once you are moving up.<br />
+INPUT: 5 2 7 1 3 6 8 4 9<br />
+Try for above bst with input k = 3.<br />
+Expected output should be 5 but your approach does not give any output in this case.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yilin Gu</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-38136</link>
+		<dc:creator><![CDATA[Yilin Gu]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 18:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-38136</guid>
+		<description><![CDATA[I think when the root is null, it should Integer.max_value, here is my solution, .Please correct me if i am wrong
+
+public int printNode(TreeNode root) {
+
+if (root == null)
+return Integer.MAX_VALUE;
+
+if (root. left == null &#038;&#038; root. right == null)
+return 1;
+
+int layer_left = printNode(root. left);
+int layer_right = printNode(root. right);
+
+if (layer_left + 1 == 3 &#124;&#124; layer_right + 1 == 3)
+System.out.print(root. val);
+
+return Math. min(layer_left, layer_right) + 1;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I think when the root is null, it should Integer.max_value, here is my solution, .Please correct me if i am wrong</p>
+<p>public int printNode(TreeNode root) {</p>
+<p>if (root == null)<br />
+return Integer.MAX_VALUE;</p>
+<p>if (root. left == null &amp;&amp; root. right == null)<br />
+return 1;</p>
+<p>int layer_left = printNode(root. left);<br />
+int layer_right = printNode(root. right);</p>
+<p>if (layer_left + 1 == 3 || layer_right + 1 == 3)<br />
+System.out.print(root. val);</p>
+<p>return Math. min(layer_left, layer_right) + 1;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zzpp</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-38039</link>
+		<dc:creator><![CDATA[zzpp]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 21:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-38039</guid>
+		<description><![CDATA[I think your solution will print out the same node several times. For example, a root with a left child and a right child, k = 1. Then the root will be printed out twice.]]></description>
+		<content:encoded><![CDATA[<p>I think your solution will print out the same node several times. For example, a root with a left child and a right child, k = 1. Then the root will be printed out twice.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-37960</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 05:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-37960</guid>
+		<description><![CDATA[Its constant. isLeaf means checking whether the given node has children or not.]]></description>
+		<content:encoded><![CDATA[<p>Its constant. isLeaf means checking whether the given node has children or not.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-37887</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 23:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-37887</guid>
+		<description><![CDATA[Can you please explain the complexity of
+
+if (isLeaf(root))
+
+{
+
+return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Can you please explain the complexity of</p>
+<p>if (isLeaf(root))</p>
+<p>{</p>
+<p>return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Priya</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-37809</link>
+		<dc:creator><![CDATA[Priya]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 06:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-37809</guid>
+		<description><![CDATA[Can you explain the logic ? why are you returning m+1 , n+1 or max(m,n) etc etc? I am not able to understand?]]></description>
+		<content:encoded><![CDATA[<p>Can you explain the logic ? why are you returning m+1 , n+1 or max(m,n) etc etc? I am not able to understand?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guru</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-leaf-node/#comment-36281</link>
+		<dc:creator><![CDATA[Guru]]></dc:creator>
+		<pubDate>Mon, 19 May 2014 17:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127204#comment-36281</guid>
+		<description><![CDATA[yes. I accept that. This solution will not satisfy all scenarios. Thanks]]></description>
+		<content:encoded><![CDATA[<p>yes. I accept that. This solution will not satisfy all scenarios. Thanks</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.051 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:54 -->
+
+<!-- Compression = gzip -->

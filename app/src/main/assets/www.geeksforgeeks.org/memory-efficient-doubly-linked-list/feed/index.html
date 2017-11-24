@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Memory efficient doubly linked list</title>
+	<atom:link href="http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Dark Protocol</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-33809</link>
+		<dc:creator><![CDATA[Dark Protocol]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 18:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-33809</guid>
+		<description><![CDATA[Beautifully Answered!!!]]></description>
+		<content:encoded><![CDATA[<p>Beautifully Answered!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dark Protocol</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-33810</link>
+		<dc:creator><![CDATA[Dark Protocol]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 18:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-33810</guid>
+		<description><![CDATA[Beautifully Answered!!!]]></description>
+		<content:encoded><![CDATA[<p>Beautifully Answered!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: suresh kumar mahawar</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-32670</link>
+		<dc:creator><![CDATA[suresh kumar mahawar]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 04:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-32670</guid>
+		<description><![CDATA[@rajx there is a case miss for single node.
+here is your code with modification http://ideone.com/vErgLZ]]></description>
+		<content:encoded><![CDATA[<p>@rajx there is a case miss for single node.<br />
+here is your code with modification <a href="http://ideone.com/vErgLZ" rel="nofollow">http://ideone.com/vErgLZ</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sajal Sharma</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-31434</link>
+		<dc:creator><![CDATA[Sajal Sharma]]></dc:creator>
+		<pubDate>Fri, 10 Jan 2014 22:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-31434</guid>
+		<description><![CDATA[use xor link list....]]></description>
+		<content:encoded><![CDATA[<p>use xor link list&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-17842</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Fri, 03 May 2013 17:00:14 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-17842</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nandu</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-9575</link>
+		<dc:creator><![CDATA[nandu]]></dc:creator>
+		<pubDate>Fri, 13 Jul 2012 12:34:57 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-9575</guid>
+		<description><![CDATA[#include 
+#include 
+using namespace std;
+
+class dlist
+{
+        struct node
+            {
+            int data;
+            node *link;
+            };
+        node *head,*tail;
+
+    public:
+        dlist(){head=tail=NULL;}
+
+        ~dlist()
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=head;
+             while(current)
+                    {
+                    temp=current;
+                    current=(node*)((int)prev^(int)current-&#062;link);
+                    prev=temp;
+                    delete temp;
+                    }
+            }
+
+        void insertAtBegin(int item)
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    ptr-&#062;link=head;
+                    head-&#062;link=(node*)((int)head-&#062;link^(int)ptr);
+                    head=ptr;
+                    }
+            }
+
+        void insertAtEnd(int item)
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    ptr-&#062;link=tail;
+                    tail-&#062;link=(node*)((int)tail-&#062;link^(int)ptr);
+                    tail=ptr;
+                    }
+            }
+
+        void insertAsc(int item)
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    node *prev,*current,*temp;
+                    prev=NULL;
+                    current=head;
+                    while(current &#038;&#038; current-&#062;datalink);
+                            prev=temp;
+                            }
+                    if(current==head)   //Add as first node.
+                            {
+                            ptr-&#062;link=head;
+                            head-&#062;link=(node*)((int)head-&#062;link^(int)ptr);
+                            head=ptr;
+                            }
+                    else if(current==NULL)  //Add as last node.
+                            {
+                            ptr-&#062;link=tail;
+                            tail-&#062;link=(node*)((int)tail-&#062;link^(int)ptr);
+                            tail=ptr;
+                            }
+                    else
+                            {
+                            ptr-&#062;link=(node*)((int)prev^(int)current);
+                            prev-&#062;link=(node*)((int)prev-&#062;link^(int)current^(int)ptr);
+                            current-&#062;link=(node*)((int)current-&#062;link^(int)prev^(int)ptr);
+                            }
+
+                    }
+            }
+
+        void display()
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=head;
+             while(current)
+                    {
+                    cout&#060;data&#060;link);
+                    prev=temp;
+                    }
+            }
+
+        void rdisplay()
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=tail;
+             while(current)
+                    {
+                    cout&#060;data&#060;link);
+                    prev=temp;
+                    }
+            }
+};
+
+int main()
+{
+dlist dl;
+
+dl.insertAsc(500);
+dl.insertAsc(50);
+dl.insertAsc(5000);
+dl.insertAsc(5);
+dl.insertAsc(58);
+
+dl.display();
+cout&#060;&#060;endl;
+dl.rdisplay();
+
+return EXIT_SUCCESS;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+using namespace std;</p>
+<p>class dlist<br />
+{<br />
+        struct node<br />
+            {<br />
+            int data;<br />
+            node *link;<br />
+            };<br />
+        node *head,*tail;</p>
+<p>    public:<br />
+        dlist(){head=tail=NULL;}</p>
+<p>        ~dlist()<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=head;<br />
+             while(current)<br />
+                    {<br />
+                    temp=current;<br />
+                    current=(node*)((int)prev^(int)current-&gt;link);<br />
+                    prev=temp;<br />
+                    delete temp;<br />
+                    }<br />
+            }</p>
+<p>        void insertAtBegin(int item)<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    ptr-&gt;link=head;<br />
+                    head-&gt;link=(node*)((int)head-&gt;link^(int)ptr);<br />
+                    head=ptr;<br />
+                    }<br />
+            }</p>
+<p>        void insertAtEnd(int item)<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    ptr-&gt;link=tail;<br />
+                    tail-&gt;link=(node*)((int)tail-&gt;link^(int)ptr);<br />
+                    tail=ptr;<br />
+                    }<br />
+            }</p>
+<p>        void insertAsc(int item)<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    node *prev,*current,*temp;<br />
+                    prev=NULL;<br />
+                    current=head;<br />
+                    while(current &amp;&amp; current-&gt;datalink);<br />
+                            prev=temp;<br />
+                            }<br />
+                    if(current==head)   //Add as first node.<br />
+                            {<br />
+                            ptr-&gt;link=head;<br />
+                            head-&gt;link=(node*)((int)head-&gt;link^(int)ptr);<br />
+                            head=ptr;<br />
+                            }<br />
+                    else if(current==NULL)  //Add as last node.<br />
+                            {<br />
+                            ptr-&gt;link=tail;<br />
+                            tail-&gt;link=(node*)((int)tail-&gt;link^(int)ptr);<br />
+                            tail=ptr;<br />
+                            }<br />
+                    else<br />
+                            {<br />
+                            ptr-&gt;link=(node*)((int)prev^(int)current);<br />
+                            prev-&gt;link=(node*)((int)prev-&gt;link^(int)current^(int)ptr);<br />
+                            current-&gt;link=(node*)((int)current-&gt;link^(int)prev^(int)ptr);<br />
+                            }</p>
+<p>                    }<br />
+            }</p>
+<p>        void display()<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=head;<br />
+             while(current)<br />
+                    {<br />
+                    cout&lt;data&lt;link);<br />
+                    prev=temp;<br />
+                    }<br />
+            }</p>
+<p>        void rdisplay()<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=tail;<br />
+             while(current)<br />
+                    {<br />
+                    cout&lt;data&lt;link);<br />
+                    prev=temp;<br />
+                    }<br />
+            }<br />
+};</p>
+<p>int main()<br />
+{<br />
+dlist dl;</p>
+<p>dl.insertAsc(500);<br />
+dl.insertAsc(50);<br />
+dl.insertAsc(5000);<br />
+dl.insertAsc(5);<br />
+dl.insertAsc(58);</p>
+<p>dl.display();<br />
+cout&lt;&lt;endl;<br />
+dl.rdisplay();</p>
+<p>return EXIT_SUCCESS;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nandu</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-9574</link>
+		<dc:creator><![CDATA[nandu]]></dc:creator>
+		<pubDate>Fri, 13 Jul 2012 12:33:54 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-9574</guid>
+		<description><![CDATA[#include 
+#include 
+using namespace std;
+
+class dlist
+{
+        struct node
+            {
+            int data;
+            node *link;
+            };
+        node *head,*tail;
+
+    public:
+        dlist(){head=tail=NULL;}
+
+        ~dlist()
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=head;
+             while(current)
+                    {
+                    temp=current;
+                    current=(node*)((int)prev^(int)current-&#062;link);
+                    prev=temp;
+                    delete temp;
+                    }
+            }
+
+        void insertAtBegin(int item) //insert at the beginning.
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    ptr-&#062;link=head;
+                    head-&#062;link=(node*)((int)head-&#062;link^(int)ptr);
+                    head=ptr;
+                    }
+            }
+
+        void insertAtEnd(int item)  //insert at the end.
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    ptr-&#062;link=tail;
+                    tail-&#062;link=(node*)((int)tail-&#062;link^(int)ptr);
+                    tail=ptr;
+                    }
+            }
+
+        void insertAsc(int item) //insert in ascending order.
+            {
+                node *ptr=new node;
+                ptr-&#062;data=item;
+                if(head==NULL) //List is empty.
+                    {
+                     ptr-&#062;link=NULL;
+                     head=tail=ptr;
+                    }
+                else
+                    {
+                    node *prev,*current,*temp;
+                    prev=NULL;
+                    current=head;
+                    while(current &#038;&#038; current-&#062;datalink);
+                            prev=temp;
+                            }
+                    if(current==head)   //Add as first node.
+                            {
+                            ptr-&#062;link=head;
+                            head-&#062;link=(node*)((int)head-&#062;link^(int)ptr);
+                            head=ptr;
+                            }
+                    else if(current==NULL)  //Add as last node.
+                            {
+                            ptr-&#062;link=tail;
+                            tail-&#062;link=(node*)((int)tail-&#062;link^(int)ptr);
+                            tail=ptr;
+                            }
+                    else
+                            {
+                            ptr-&#062;link=(node*)((int)prev^(int)current);
+                            prev-&#062;link=(node*)((int)prev-&#062;link^(int)current^(int)ptr);
+                            current-&#062;link=(node*)((int)current-&#062;link^(int)prev^(int)ptr);
+                            }
+
+                    }
+            }
+
+        void display() //forward display.
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=head;
+             while(current)
+                    {
+                    cout&#060;data&#060;link);
+                    prev=temp;
+                    }
+            }
+
+        void rdisplay() // display in reverse order.
+            {
+             node *prev,*current,*temp;
+             prev=NULL;
+             current=tail;
+             while(current)
+                    {
+                    cout&#060;data&#060;link);
+                    prev=temp;
+                    }
+            }
+};
+
+
+//Driver program.
+int main()
+{
+dlist dl;
+
+dl.insertAsc(500);
+dl.insertAsc(50);
+dl.insertAsc(5000);
+dl.insertAsc(5);
+dl.insertAsc(58);
+
+dl.display();
+cout&#060;&#060;endl;
+dl.rdisplay();
+
+return EXIT_SUCCESS;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+using namespace std;</p>
+<p>class dlist<br />
+{<br />
+        struct node<br />
+            {<br />
+            int data;<br />
+            node *link;<br />
+            };<br />
+        node *head,*tail;</p>
+<p>    public:<br />
+        dlist(){head=tail=NULL;}</p>
+<p>        ~dlist()<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=head;<br />
+             while(current)<br />
+                    {<br />
+                    temp=current;<br />
+                    current=(node*)((int)prev^(int)current-&gt;link);<br />
+                    prev=temp;<br />
+                    delete temp;<br />
+                    }<br />
+            }</p>
+<p>        void insertAtBegin(int item) //insert at the beginning.<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    ptr-&gt;link=head;<br />
+                    head-&gt;link=(node*)((int)head-&gt;link^(int)ptr);<br />
+                    head=ptr;<br />
+                    }<br />
+            }</p>
+<p>        void insertAtEnd(int item)  //insert at the end.<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    ptr-&gt;link=tail;<br />
+                    tail-&gt;link=(node*)((int)tail-&gt;link^(int)ptr);<br />
+                    tail=ptr;<br />
+                    }<br />
+            }</p>
+<p>        void insertAsc(int item) //insert in ascending order.<br />
+            {<br />
+                node *ptr=new node;<br />
+                ptr-&gt;data=item;<br />
+                if(head==NULL) //List is empty.<br />
+                    {<br />
+                     ptr-&gt;link=NULL;<br />
+                     head=tail=ptr;<br />
+                    }<br />
+                else<br />
+                    {<br />
+                    node *prev,*current,*temp;<br />
+                    prev=NULL;<br />
+                    current=head;<br />
+                    while(current &amp;&amp; current-&gt;datalink);<br />
+                            prev=temp;<br />
+                            }<br />
+                    if(current==head)   //Add as first node.<br />
+                            {<br />
+                            ptr-&gt;link=head;<br />
+                            head-&gt;link=(node*)((int)head-&gt;link^(int)ptr);<br />
+                            head=ptr;<br />
+                            }<br />
+                    else if(current==NULL)  //Add as last node.<br />
+                            {<br />
+                            ptr-&gt;link=tail;<br />
+                            tail-&gt;link=(node*)((int)tail-&gt;link^(int)ptr);<br />
+                            tail=ptr;<br />
+                            }<br />
+                    else<br />
+                            {<br />
+                            ptr-&gt;link=(node*)((int)prev^(int)current);<br />
+                            prev-&gt;link=(node*)((int)prev-&gt;link^(int)current^(int)ptr);<br />
+                            current-&gt;link=(node*)((int)current-&gt;link^(int)prev^(int)ptr);<br />
+                            }</p>
+<p>                    }<br />
+            }</p>
+<p>        void display() //forward display.<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=head;<br />
+             while(current)<br />
+                    {<br />
+                    cout&lt;data&lt;link);<br />
+                    prev=temp;<br />
+                    }<br />
+            }</p>
+<p>        void rdisplay() // display in reverse order.<br />
+            {<br />
+             node *prev,*current,*temp;<br />
+             prev=NULL;<br />
+             current=tail;<br />
+             while(current)<br />
+                    {<br />
+                    cout&lt;data&lt;link);<br />
+                    prev=temp;<br />
+                    }<br />
+            }<br />
+};</p>
+<p>//Driver program.<br />
+int main()<br />
+{<br />
+dlist dl;</p>
+<p>dl.insertAsc(500);<br />
+dl.insertAsc(50);<br />
+dl.insertAsc(5000);<br />
+dl.insertAsc(5);<br />
+dl.insertAsc(58);</p>
+<p>dl.display();<br />
+cout&lt;&lt;endl;<br />
+dl.rdisplay();</p>
+<p>return EXIT_SUCCESS;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rajx</title>
+		<link>http://www.geeksforgeeks.org/memory-efficient-doubly-linked-list/#comment-3616</link>
+		<dc:creator><![CDATA[rajx]]></dc:creator>
+		<pubDate>Mon, 21 Mar 2011 10:05:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1289#comment-3616</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include
+#include
+
+typedef struct nod
+{
+   int data;
+   struct nod * next;
+}node;
+
+
+void insert( node ** head , int data , node ** tail)
+{
+   node * temp = (node*)malloc( sizeof(node) );
+   temp-&#062;data = data;
+   temp-&#062;next = NULL;
+
+   if ( !(*head))
+   {
+      *head = temp;
+      return ;
+   }
+   node * pre = NULL;
+   node * cur = * head;
+   node * nxt = NULL;
+   
+   while( cur-&#062;next != pre)
+   {
+      nxt = (node*)((unsigned int)cur-&#062;next ^(unsigned int)pre);
+      pre = cur;
+      cur = nxt;
+   }
+
+   cur-&#062;next = (node*)((unsigned int)cur-&#062;next^(unsigned int)temp);
+   temp-&#062;next = cur ;
+   *tail = temp ;
+   return;
+}
+
+void print( node * head )
+{
+   node * pre = NULL;
+   node * cur = head;
+   node * nxt = NULL;
+   while( cur )
+   {
+      printf(&#034; %d &#034;,cur-&#062;data);
+      nxt = (node*)((unsigned int)cur-&#062;next ^(unsigned int)pre);
+      pre = cur;
+      cur = nxt;
+   }
+   printf(&#034;NULL\n&#034;);
+   return;
+}
+
+int main()
+{
+   node * head = NULL;
+   node * tail = NULL;
+   insert(&#038;head,3,&#038;tail);
+   insert(&#038;head,5,&#038;tail);
+   insert(&#038;head,7,&#038;tail);
+   insert(&#038;head,11,&#038;tail);
+   insert(&#038;head,13,&#038;tail);
+   print( head );
+   print( tail );
+   return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+Let me know if there some error/bug.]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+#include
+#include
+
+typedef struct nod
+{
+   int data;
+   struct nod * next;
+}node;
+
+
+void insert( node ** head , int data , node ** tail)
+{
+   node * temp = (node*)malloc( sizeof(node) );
+   temp-&gt;data = data;
+   temp-&gt;next = NULL;
+
+   if ( !(*head))
+   {
+      *head = temp;
+      return ;
+   }
+   node * pre = NULL;
+   node * cur = * head;
+   node * nxt = NULL;
+   
+   while( cur-&gt;next != pre)
+   {
+      nxt = (node*)((unsigned int)cur-&gt;next ^(unsigned int)pre);
+      pre = cur;
+      cur = nxt;
+   }
+
+   cur-&gt;next = (node*)((unsigned int)cur-&gt;next^(unsigned int)temp);
+   temp-&gt;next = cur ;
+   *tail = temp ;
+   return;
+}
+
+void print( node * head )
+{
+   node * pre = NULL;
+   node * cur = head;
+   node * nxt = NULL;
+   while( cur )
+   {
+      printf(&quot; %d &quot;,cur-&gt;data);
+      nxt = (node*)((unsigned int)cur-&gt;next ^(unsigned int)pre);
+      pre = cur;
+      cur = nxt;
+   }
+   printf(&quot;NULL\n&quot;);
+   return;
+}
+
+int main()
+{
+   node * head = NULL;
+   node * tail = NULL;
+   insert(&amp;head,3,&amp;tail);
+   insert(&amp;head,5,&amp;tail);
+   insert(&amp;head,7,&amp;tail);
+   insert(&amp;head,11,&amp;tail);
+   insert(&amp;head,13,&amp;tail);
+   print( head );
+   print( tail );
+   return 0;
+}
+</code> </pre>
+<p>Let me know if there some error/bug.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:07:36 -->
+
+<!-- Compression = gzip -->

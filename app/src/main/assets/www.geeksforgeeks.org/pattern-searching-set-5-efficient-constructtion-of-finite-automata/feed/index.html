@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Pattern Searching &#124; Set 6 (Efficient Construction of Finite Automata)</title>
+	<atom:link href="http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Saurabh</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-39095</link>
+		<dc:creator><![CDATA[Saurabh]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 03:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-39095</guid>
+		<description><![CDATA[I have doubts in  how the transition function is computed.  Furthermore, in statement 
+// Update the entry corresponding to this character
+        TF[i][pat[i]] = i + 1;
+for i = M it will access pat[M] which is segmentation fault. So how is this algorithm working? 
+Anyone please help.]]></description>
+		<content:encoded><![CDATA[<p>I have doubts in  how the transition function is computed.  Furthermore, in statement<br />
+// Update the entry corresponding to this character<br />
+        TF[i][pat[i]] = i + 1;<br />
+for i = M it will access pat[M] which is segmentation fault. So how is this algorithm working?<br />
+Anyone please help.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suthar</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-37958</link>
+		<dc:creator><![CDATA[Suthar]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 05:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-37958</guid>
+		<description><![CDATA[for (x = 0; x &#060; NO_OF_CHARS; x++)
+            TF[i][x] = TF[lps][x];
+
+
+Update last entry similar to previous ones, using lps. Just that now there is no more remaining character in pattern so no need to update it again as we are doing for other rows.
+
+You can add this for loop at the end of method.]]></description>
+		<content:encoded><![CDATA[<p>for (x = 0; x &lt; NO_OF_CHARS; x++)<br />
+            TF[i][x] = TF[lps][x];</p>
+<p>Update last entry similar to previous ones, using lps. Just that now there is no more remaining character in pattern so no need to update it again as we are doing for other rows.</p>
+<p>You can add this for loop at the end of method.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-29877</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 16 Nov 2013 11:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-29877</guid>
+		<description><![CDATA[This code runs in O(n) time with constant space ...please correct me if it is incorrect.
+
+int position[26] = {0};
+
+int delta(int state,char input,char *fa,int i){
+   if( fa[state] == input ){
+     position[input - 97] = state;
+     return state+1;
+   }
+   return position[input-97];
+}
+int pattern_match(char *str,char *p,int n,int m){
+   int q = 0;
+   for(int i = 0 ; i  1)
+        i--;
+      else if(q == m){
+        cout&#060;&#060;&#034;pattern found at : &#034;&#060;&#060;i-m+1&#060;&#060;endl;
+        q=0;
+     }
+   }
+}
+
+int main(){
+  char str[] = &#034;geeks for geeks&#034;;
+  char pattern[] = &#034;geeks&#034;;
+  pattern_match(str, 
+                           pattern, 
+                              sizeof(str)/sizeof(char)-1,
+                                 sizeof(pattern)/sizeof(char) -1);
+ return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>This code runs in O(n) time with constant space &#8230;please correct me if it is incorrect.</p>
+<p>int position[26] = {0};</p>
+<p>int delta(int state,char input,char *fa,int i){<br />
+   if( fa[state] == input ){<br />
+     position[input &#8211; 97] = state;<br />
+     return state+1;<br />
+   }<br />
+   return position[input-97];<br />
+}<br />
+int pattern_match(char *str,char *p,int n,int m){<br />
+   int q = 0;<br />
+   for(int i = 0 ; i  1)<br />
+        i&#8211;;<br />
+      else if(q == m){<br />
+        cout&lt;&lt;&quot;pattern found at : &quot;&lt;&lt;i-m+1&lt;&lt;endl;<br />
+        q=0;<br />
+     }<br />
+   }<br />
+}</p>
+<p>int main(){<br />
+  char str[] = &quot;geeks for geeks&quot;;<br />
+  char pattern[] = &quot;geeks&quot;;<br />
+  pattern_match(str,<br />
+                           pattern,<br />
+                              sizeof(str)/sizeof(char)-1,<br />
+                                 sizeof(pattern)/sizeof(char) -1);<br />
+ return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alien</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-27205</link>
+		<dc:creator><![CDATA[alien]]></dc:creator>
+		<pubDate>Fri, 30 Aug 2013 21:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-27205</guid>
+		<description><![CDATA[@GeeksforGeeks: Could you please explain why this algorithm is able to fill TF table correctly while maintaining lps at a given time?]]></description>
+		<content:encoded><![CDATA[<p>@GeeksforGeeks: Could you please explain why this algorithm is able to fill TF table correctly while maintaining lps at a given time?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shiwakant Bharti</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-27179</link>
+		<dc:creator><![CDATA[Shiwakant Bharti]]></dc:creator>
+		<pubDate>Fri, 30 Aug 2013 10:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-27179</guid>
+		<description><![CDATA[Akshay khare Nice findings! I got the same error in Java. 
+
+Here is the test case which should break:
+&lt;code&gt;
+        char[] txt2 = &quot;AABAACAADAABAAABAA&quot;.toCharArray();
+        char[] pat2 = &quot;AABA&quot;.toCharArray();
+
+//This code fix worked for me. Not sure if this robust enough.
+        for (i = 1; i &#060;= M; i++) {
+            // Copy values from row at index lps
+            // Is this powerful enough to handle case of i = M(halt state
+            // transition)?
+            for (ch = 0; ch &#060; NoOfChars; ch++) {
+                TFDP[i][ch] = TFDP[lps][ch];
+            }
+            // This is special case where the last halt state is also considered
+            // for regular processing.
+            // Here pat[M] is out of bound and further calculation isn&#039;t needed.
+            //
+            if (i == M) {
+                break;
+            }
+            // Update the entry corresponding to this character
+            TFDP[i][pat[i]] = (i + 1);
+            // Update lps for next row to be filled
+            if (i &#060; M)
+                lps = TFDP[lps][pat[i]];
+        }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Akshay khare Nice findings! I got the same error in Java. </p>
+<p>Here is the test case which should break:<br />
+<code><br />
+        char[] txt2 = "AABAACAADAABAAABAA".toCharArray();<br />
+        char[] pat2 = "AABA".toCharArray();</p>
+<p>//This code fix worked for me. Not sure if this robust enough.<br />
+        for (i = 1; i &lt;= M; i++) {<br />
+            // Copy values from row at index lps<br />
+            // Is this powerful enough to handle case of i = M(halt state<br />
+            // transition)?<br />
+            for (ch = 0; ch &lt; NoOfChars; ch++) {<br />
+                TFDP[i][ch] = TFDP[lps][ch];<br />
+            }<br />
+            // This is special case where the last halt state is also considered<br />
+            // for regular processing.<br />
+            // Here pat[M] is out of bound and further calculation isn&#039;t needed.<br />
+            //<br />
+            if (i == M) {<br />
+                break;<br />
+            }<br />
+            // Update the entry corresponding to this character<br />
+            TFDP[i][pat[i]] = (i + 1);<br />
+            // Update lps for next row to be filled<br />
+            if (i &lt; M)<br />
+                lps = TFDP[lps][pat[i]];<br />
+        }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dhiren</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-21730</link>
+		<dc:creator><![CDATA[Dhiren]]></dc:creator>
+		<pubDate>Mon, 08 Jul 2013 20:11:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-21730</guid>
+		<description><![CDATA[Consider this example
+Pattern – A C A C
+At state-0, we have only “A”, so lps = 0
+Transition from state-0 to state-1, probable cases may be
+Case-1 a new ‘A’ comes, then we go back to our longest prefix suffix till now which is “A” which is state-0 and see what if a ‘A’ comes, in this case it is 1
+Case-2 a new ‘G’ comes, then we go back to our longest prefix suffix till now and see what if ‘G’ comes in this case it will be 0
+Case-3 a new ‘C’ comes, then also value will be 0
+That’s why we are first copying the lps row values into the current ith row.
+Then we update the state transition for patt[i] in this case for ‘C’ state will be 2.
+Then we calculate the current lps value, that is “AC” but still lps =0 as there is no longest prefix suffix.
+
+Calculation of lps can be clear from state transition-2 to 3.
+Current lps is 0, now ‘A’ comes so that new lps is 1 for “ACA” which can be found out in row [lps][‘A’]]]></description>
+		<content:encoded><![CDATA[<p>Consider this example<br />
+Pattern – A C A C<br />
+At state-0, we have only “A”, so lps = 0<br />
+Transition from state-0 to state-1, probable cases may be<br />
+Case-1 a new ‘A’ comes, then we go back to our longest prefix suffix till now which is “A” which is state-0 and see what if a ‘A’ comes, in this case it is 1<br />
+Case-2 a new ‘G’ comes, then we go back to our longest prefix suffix till now and see what if ‘G’ comes in this case it will be 0<br />
+Case-3 a new ‘C’ comes, then also value will be 0<br />
+That’s why we are first copying the lps row values into the current ith row.<br />
+Then we update the state transition for patt[i] in this case for ‘C’ state will be 2.<br />
+Then we calculate the current lps value, that is “AC” but still lps =0 as there is no longest prefix suffix.</p>
+<p>Calculation of lps can be clear from state transition-2 to 3.<br />
+Current lps is 0, now ‘A’ comes so that new lps is 1 for “ACA” which can be found out in row [lps][‘A’]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arvind</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-20437</link>
+		<dc:creator><![CDATA[Arvind]]></dc:creator>
+		<pubDate>Sun, 23 Jun 2013 18:19:41 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-20437</guid>
+		<description><![CDATA[How does this algorithm work ? where is the proof for this ?]]></description>
+		<content:encoded><![CDATA[<p>How does this algorithm work ? where is the proof for this ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ram</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-20379</link>
+		<dc:creator><![CDATA[Ram]]></dc:creator>
+		<pubDate>Sat, 22 Jun 2013 19:32:42 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-20379</guid>
+		<description><![CDATA[Wher is the proof ????????????? please post the proof]]></description>
+		<content:encoded><![CDATA[<p>Wher is the proof ????????????? please post the proof</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akshay khare</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-18812</link>
+		<dc:creator><![CDATA[Akshay khare]]></dc:creator>
+		<pubDate>Tue, 28 May 2013 19:37:27 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-18812</guid>
+		<description><![CDATA[when i will become equal to M 
+then TF[i][pat[i]] = i+1. will give segmentation fault
+since pat has length M and its index can be upto M-1 only
+how will TF[M][pat[M]] will work..pat[M] -&#062; this location not exists..pls explain how last row is calcualated..or correct me if i am wrong...]]></description>
+		<content:encoded><![CDATA[<p>when i will become equal to M<br />
+then TF[i][pat[i]] = i+1. will give segmentation fault<br />
+since pat has length M and its index can be upto M-1 only<br />
+how will TF[M][pat[M]] will work..pat[M] -&gt; this location not exists..pls explain how last row is calcualated..or correct me if i am wrong&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-17991</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Wed, 08 May 2013 05:48:27 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-17991</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vinu</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-5-efficient-constructtion-of-finite-automata/#comment-10263</link>
+		<dc:creator><![CDATA[vinu]]></dc:creator>
+		<pubDate>Sun, 19 Aug 2012 09:15:52 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18902#comment-10263</guid>
+		<description><![CDATA[Yes... @GeeksForGeeks can you please me more clear with reasoning of steps in transition function? 
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Yes&#8230; @GeeksForGeeks can you please me more clear with reasoning of steps in transition function? </p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:10:58 -->
+
+<!-- Compression = gzip -->

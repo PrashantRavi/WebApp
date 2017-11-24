@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Pattern Searching &#124; Set 8 (Suffix Tree Introduction)</title>
+	<atom:link href="http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Guest_1923</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-39255</link>
+		<dc:creator><![CDATA[Guest_1923]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 13:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-39255</guid>
+		<description><![CDATA[How does making the tree compressed help, and what is the trade off if we use a normal tries?]]></description>
+		<content:encoded><![CDATA[<p>How does making the tree compressed help, and what is the trade off if we use a normal tries?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tanu Saxena</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-34547</link>
+		<dc:creator><![CDATA[Tanu Saxena]]></dc:creator>
+		<pubDate>Thu, 10 Apr 2014 12:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-34547</guid>
+		<description><![CDATA[This pattern searching in the given suffix tree takes O(m) time, where m is the length of the pattern. What about getting all the occurrences of the pattern in the text?? I&#039;ve read that if there are k occurrences of a pattern, then time complexity of finding them all in the text is O(m+k). [Definitely , pre -processing time is O(n): n being the length of the text].]]></description>
+		<content:encoded><![CDATA[<p>This pattern searching in the given suffix tree takes O(m) time, where m is the length of the pattern. What about getting all the occurrences of the pattern in the text?? I&#8217;ve read that if there are k occurrences of a pattern, then time complexity of finding them all in the text is O(m+k). [Definitely , pre -processing time is O(n): n being the length of the text].</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arpit Baheti</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-29013</link>
+		<dc:creator><![CDATA[Arpit Baheti]]></dc:creator>
+		<pubDate>Fri, 18 Oct 2013 06:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-29013</guid>
+		<description><![CDATA[This is not complete implementation but it build trie for each suffix of a given pattern just how to compress the trie for the node having only one child is missing.please suggest or give code.
+
+
+&lt;code&gt;
+
+#include 
+
+#include 
+
+#include 
+
+using namespace std;
+
+typedef struct trie
+
+{
+
+    char data;
+
+    int eos;
+
+    struct trie *child[27];
+
+} trie;
+
+trie* makeNode(char data)
+
+{
+
+    trie *node = new trie;
+
+    node-&#062;data = data;
+
+    node-&#062;eos =0;
+
+    for(int i=0; ichild[i] = NULL;
+
+    return node;
+
+}
+
+trie* insertTrie(trie *root,const char *word)       //simple code to insert one suffix in to trie at a time.
+
+{
+
+    if(!*word)
+
+        return NULL;
+
+    if(!root)
+
+    {
+
+        root = makeNode(*word);
+
+        if(!*(word+1))
+
+            root-&#062;eos =1;
+
+        else
+
+        {
+
+            root-&#062;child[*(word+1)-97] = insertTrie(root-&#062;child[*(word+1)-97],word+1);
+
+        }
+
+    }
+
+    else
+
+    {
+
+        root-&#062;child[*(word+1)-97] = insertTrie(root-&#062;child[*(word+1)-97],word+1);
+
+    }
+
+    return root;
+
+}
+
+void display(trie* root,char *word,int i)           // this function is to display the trie data structure.
+
+{
+
+    if(!root)
+
+        return;
+
+    int j,k;
+
+    trie *temp;
+
+    for(k=0; kchild[k])
+
+        {
+
+            temp =root-&#062;child[k];
+
+            word[i] = temp-&#062;data;
+
+            if(temp-&#062;eos)
+
+            {
+
+                word[i+1]=&#039;&#039;;
+
+                cout&#060;&#060;word&#060;&#060;endl;
+
+                i=0;
+
+            }
+
+            display(temp,word,i+1);
+
+        }
+
+    }
+
+}
+
+vector all_suffix(string pattern)       //build suffix of pattern and store it in to vector.
+
+{
+
+    vector suffix;
+
+    auto iters = pattern.begin();
+
+    auto itere = pattern.end();
+
+    while(iters!=pattern.end())
+
+    {
+
+        string s(iters,itere);
+
+        suffix.push_back(s);
+
+        iters++;
+
+    }
+
+    return suffix;
+
+}
+
+trie* makeTrie(vector s)
+
+{
+
+    trie *root = makeNode(&#039;$&#039;);     //for first node to store string first character as child.
+
+    trie *temp=NULL;
+
+    string c;
+
+    auto iter = s.begin();
+
+    while(iter!=s.end())
+
+    {
+
+        c =*iter+&quot;{&quot;;           //{ is used for terminate character.
+
+        root-&#062;child[*(c.c_str())-97] = insertTrie(root-&#062;child[*(c.c_str())-97],c.c_str());
+
+        iter++;
+
+    }
+
+    c = &quot;{&quot;;                    //at the end just insert terminate character.
+
+    root-&#062;child[*(c.c_str())-97] = insertTrie(root-&#062;child[*(c.c_str())-97],c.c_str());
+
+    return root;
+
+}
+
+int main()
+
+{
+
+    vector s = all_suffix(&quot;banana&quot;);   //create all suffix of given word banana.
+
+    trie *root = makeTrie(s);                  //create trie and store root node.
+
+    char *word = new char[10];
+
+    display(root,word,0);
+
+   
+
+    //root = compressTrie(root);            //just want to know how do i compress the trie.please suggest any logic or code.
+
+    return 0;
+
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>This is not complete implementation but it build trie for each suffix of a given pattern just how to compress the trie for the node having only one child is missing.please suggest or give code.</p>
+<p><code></p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>using namespace std;</p>
+<p>typedef struct trie</p>
+<p>{</p>
+<p>    char data;</p>
+<p>    int eos;</p>
+<p>    struct trie *child[27];</p>
+<p>} trie;</p>
+<p>trie* makeNode(char data)</p>
+<p>{</p>
+<p>    trie *node = new trie;</p>
+<p>    node-&gt;data = data;</p>
+<p>    node-&gt;eos =0;</p>
+<p>    for(int i=0; ichild[i] = NULL;</p>
+<p>    return node;</p>
+<p>}</p>
+<p>trie* insertTrie(trie *root,const char *word)       //simple code to insert one suffix in to trie at a time.</p>
+<p>{</p>
+<p>    if(!*word)</p>
+<p>        return NULL;</p>
+<p>    if(!root)</p>
+<p>    {</p>
+<p>        root = makeNode(*word);</p>
+<p>        if(!*(word+1))</p>
+<p>            root-&gt;eos =1;</p>
+<p>        else</p>
+<p>        {</p>
+<p>            root-&gt;child[*(word+1)-97] = insertTrie(root-&gt;child[*(word+1)-97],word+1);</p>
+<p>        }</p>
+<p>    }</p>
+<p>    else</p>
+<p>    {</p>
+<p>        root-&gt;child[*(word+1)-97] = insertTrie(root-&gt;child[*(word+1)-97],word+1);</p>
+<p>    }</p>
+<p>    return root;</p>
+<p>}</p>
+<p>void display(trie* root,char *word,int i)           // this function is to display the trie data structure.</p>
+<p>{</p>
+<p>    if(!root)</p>
+<p>        return;</p>
+<p>    int j,k;</p>
+<p>    trie *temp;</p>
+<p>    for(k=0; kchild[k])</p>
+<p>        {</p>
+<p>            temp =root-&gt;child[k];</p>
+<p>            word[i] = temp-&gt;data;</p>
+<p>            if(temp-&gt;eos)</p>
+<p>            {</p>
+<p>                word[i+1]='';</p>
+<p>                cout&lt;&lt;word&lt;&lt;endl;</p>
+<p>                i=0;</p>
+<p>            }</p>
+<p>            display(temp,word,i+1);</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+<p>vector all_suffix(string pattern)       //build suffix of pattern and store it in to vector.</p>
+<p>{</p>
+<p>    vector suffix;</p>
+<p>    auto iters = pattern.begin();</p>
+<p>    auto itere = pattern.end();</p>
+<p>    while(iters!=pattern.end())</p>
+<p>    {</p>
+<p>        string s(iters,itere);</p>
+<p>        suffix.push_back(s);</p>
+<p>        iters++;</p>
+<p>    }</p>
+<p>    return suffix;</p>
+<p>}</p>
+<p>trie* makeTrie(vector s)</p>
+<p>{</p>
+<p>    trie *root = makeNode('$');     //for first node to store string first character as child.</p>
+<p>    trie *temp=NULL;</p>
+<p>    string c;</p>
+<p>    auto iter = s.begin();</p>
+<p>    while(iter!=s.end())</p>
+<p>    {</p>
+<p>        c =*iter+"{";           //{ is used for terminate character.</p>
+<p>        root-&gt;child[*(c.c_str())-97] = insertTrie(root-&gt;child[*(c.c_str())-97],c.c_str());</p>
+<p>        iter++;</p>
+<p>    }</p>
+<p>    c = "{";                    //at the end just insert terminate character.</p>
+<p>    root-&gt;child[*(c.c_str())-97] = insertTrie(root-&gt;child[*(c.c_str())-97],c.c_str());</p>
+<p>    return root;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    vector s = all_suffix("banana");   //create all suffix of given word banana.</p>
+<p>    trie *root = makeTrie(s);                  //create trie and store root node.</p>
+<p>    char *word = new char[10];</p>
+<p>    display(root,word,0);</p>
+<p>    //root = compressTrie(root);            //just want to know how do i compress the trie.please suggest any logic or code.</p>
+<p>    return 0;</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: minoz</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-18546</link>
+		<dc:creator><![CDATA[minoz]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 19:46:45 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-18546</guid>
+		<description><![CDATA[could you please post the implementation of suffix trees soon?
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>could you please post the implementation of suffix trees soon?</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gangadhara</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-15208</link>
+		<dc:creator><![CDATA[Gangadhara]]></dc:creator>
+		<pubDate>Tue, 12 Feb 2013 07:07:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-15208</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+
+#include&#060;iostream&#062;
+using namespace std;
+
+char* Sub(char* main,char* sub)
+{
+	int i=0,k=0,test=0,j=0;
+	while(*(main+i))
+	{	
+		if(!*(sub+j))break;
+		
+		k=i++;
+		if(*(main+(k++))==*(sub+(j++)))
+		{		
+			cout&#060;&#060;(main+i)&#060;&#060;endl;
+					
+			while(1)
+			{
+				if(*(main+k++)!=*(sub+j++))
+				{
+					test=1;j=0;
+					break;
+				}
+			}
+		}
+		if(test==1)break;
+		i=k;
+	}
+	return main+i;
+}
+int main()
+{
+	char* ret=Sub(&#034;This place is very nice&#034;,&#034;place&#034;);
+	cout&#060;&#060;ret;
+	return 0;
+}
+
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+
+#include&lt;iostream&gt;
+using namespace std;
+
+char* Sub(char* main,char* sub)
+{
+	int i=0,k=0,test=0,j=0;
+	while(*(main+i))
+	{	
+		if(!*(sub+j))break;
+		
+		k=i++;
+		if(*(main+(k++))==*(sub+(j++)))
+		{		
+			cout&lt;&lt;(main+i)&lt;&lt;endl;
+					
+			while(1)
+			{
+				if(*(main+k++)!=*(sub+j++))
+				{
+					test=1;j=0;
+					break;
+				}
+			}
+		}
+		if(test==1)break;
+		i=k;
+	}
+	return main+i;
+}
+int main()
+{
+	char* ret=Sub(&quot;This place is very nice&quot;,&quot;place&quot;);
+	cout&lt;&lt;ret;
+	return 0;
+}
+
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rahul</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-14585</link>
+		<dc:creator><![CDATA[rahul]]></dc:creator>
+		<pubDate>Sun, 20 Jan 2013 11:07:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-14585</guid>
+		<description><![CDATA[please provide little explanation of this code.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>please provide little explanation of this code.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Asap</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-14491</link>
+		<dc:creator><![CDATA[Asap]]></dc:creator>
+		<pubDate>Tue, 15 Jan 2013 17:58:10 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-14491</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+#include&#060;string.h&#062;
+struct tree
+{
+int si;
+int ei;
+struct tree* below;
+struct tree* right;    
+};
+typedef struct tree* node;
+
+node newnode(int start,int end)
+{
+node temp=(node)malloc(sizeof(struct tree));
+temp-&#062;below=NULL; 
+temp-&#062;right=NULL; 
+temp-&#062;si=start;
+temp-&#062;ei=end;
+return temp;
+}
+
+node insert(node head,int start,int end,char *str)
+{
+    int i,j;
+    node temp=head,prev;
+    if(head==NULL)
+    {
+    temp=newnode(start,end);   
+     
+    }
+    else
+    {
+        
+        while(head)
+        {
+            if(str[start]==str[head-&#062;si])
+            break;
+            else{
+                prev=head;
+            head=head-&#062;right;
+            
+        }
+        }
+        if(head){
+            j=(head-&#062;si)+1;
+        for(i=start+1;i&#060;=end,j&#060;=head-&#062;ei;i++,j++)
+        {
+              if(str[i]!=str[j])
+              break;
+        }
+        prev=NULL;
+        if(head-&#062;below)
+        prev=head-&#062;below;
+        head-&#062;below=newnode(j,head-&#062;ei);
+        head-&#062;ei=j-1;
+        head-&#062;below-&#062;right=newnode(i,end);
+        
+        if(prev)
+        head-&#062;below-&#062;below=prev;
+    }
+    
+    else
+    {
+        prev-&#062;right=newnode(start,end);    
+    }
+    
+    }
+    
+    return temp;
+}
+
+
+
+void search(node head,char *str,char *str1,int i,int n)
+{
+    int j;
+if(head)
+{
+if(str1[i]==str[head-&#062;si]){
+    for(i=i+1,j=head-&#062;si+1;j&#060;=(head-&#062;ei),i&#060;=n;j++,i++)
+    {
+    if(str1[i]!=str[j])
+    {
+    printf(&#034;Pattern not found&#034;);
+    return ;    
+    }    
+    }
+    if(i==n+1)
+    {
+    printf(&#034;Pattern found\n&#034;); 
+    return ;   
+    }
+    else
+    {
+        search(head-&#062;below,str,str1,i,n);    
+    }
+
+}
+else
+{
+search(head-&#062;right,str,str1,i,n);
+return;
+}
+
+}    
+else
+printf(&#034;Pattern not found&#034;);
+}
+
+
+void disp(node head)
+{
+    if(!head)
+    return;
+printf(&#034;\n  %d %d \n&#034;,head-&#062;si,head-&#062;ei);
+disp(head-&#062;below);
+disp(head-&#062;right);    
+}
+
+int main()
+{
+    char str[20]=&#034;banana$&#034;,str1[20]=&#034;nan&#034;;
+    node head=NULL;
+    int n,i=0;
+
+n=strlen(str);
+
+for(i=0;i&#060;n;i++){
+head=insert(head,i,n-1,str);    
+
+}
+disp(head);
+//printf(&#034;Enter string to search\n&#034;);
+
+//gets(str1);
+search(head,str,str1,0,strlen(str1)-1);
+
+system(&#034;pause&#034;);
+return 0;    
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;string.h&gt;
+struct tree
+{
+int si;
+int ei;
+struct tree* below;
+struct tree* right;    
+};
+typedef struct tree* node;
+
+node newnode(int start,int end)
+{
+node temp=(node)malloc(sizeof(struct tree));
+temp-&gt;below=NULL; 
+temp-&gt;right=NULL; 
+temp-&gt;si=start;
+temp-&gt;ei=end;
+return temp;
+}
+
+node insert(node head,int start,int end,char *str)
+{
+    int i,j;
+    node temp=head,prev;
+    if(head==NULL)
+    {
+    temp=newnode(start,end);   
+     
+    }
+    else
+    {
+        
+        while(head)
+        {
+            if(str[start]==str[head-&gt;si])
+            break;
+            else{
+                prev=head;
+            head=head-&gt;right;
+            
+        }
+        }
+        if(head){
+            j=(head-&gt;si)+1;
+        for(i=start+1;i&lt;=end,j&lt;=head-&gt;ei;i++,j++)
+        {
+              if(str[i]!=str[j])
+              break;
+        }
+        prev=NULL;
+        if(head-&gt;below)
+        prev=head-&gt;below;
+        head-&gt;below=newnode(j,head-&gt;ei);
+        head-&gt;ei=j-1;
+        head-&gt;below-&gt;right=newnode(i,end);
+        
+        if(prev)
+        head-&gt;below-&gt;below=prev;
+    }
+    
+    else
+    {
+        prev-&gt;right=newnode(start,end);    
+    }
+    
+    }
+    
+    return temp;
+}
+
+
+
+void search(node head,char *str,char *str1,int i,int n)
+{
+    int j;
+if(head)
+{
+if(str1[i]==str[head-&gt;si]){
+    for(i=i+1,j=head-&gt;si+1;j&lt;=(head-&gt;ei),i&lt;=n;j++,i++)
+    {
+    if(str1[i]!=str[j])
+    {
+    printf(&quot;Pattern not found&quot;);
+    return ;    
+    }    
+    }
+    if(i==n+1)
+    {
+    printf(&quot;Pattern found\n&quot;); 
+    return ;   
+    }
+    else
+    {
+        search(head-&gt;below,str,str1,i,n);    
+    }
+
+}
+else
+{
+search(head-&gt;right,str,str1,i,n);
+return;
+}
+
+}    
+else
+printf(&quot;Pattern not found&quot;);
+}
+
+
+void disp(node head)
+{
+    if(!head)
+    return;
+printf(&quot;\n  %d %d \n&quot;,head-&gt;si,head-&gt;ei);
+disp(head-&gt;below);
+disp(head-&gt;right);    
+}
+
+int main()
+{
+    char str[20]=&quot;banana$&quot;,str1[20]=&quot;nan&quot;;
+    node head=NULL;
+    int n,i=0;
+
+n=strlen(str);
+
+for(i=0;i&lt;n;i++){
+head=insert(head,i,n-1,str);    
+
+}
+disp(head);
+//printf(&quot;Enter string to search\n&quot;);
+
+//gets(str1);
+search(head,str,str1,0,strlen(str1)-1);
+
+system(&quot;pause&quot;);
+return 0;    
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: atul</title>
+		<link>http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/#comment-14292</link>
+		<dc:creator><![CDATA[atul]]></dc:creator>
+		<pubDate>Mon, 07 Jan 2013 16:54:06 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29117#comment-14292</guid>
+		<description><![CDATA[eagerly waiting implementation part 
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>eagerly waiting implementation part </p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.051 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:09:39 -->
+
+<!-- Compression = gzip -->

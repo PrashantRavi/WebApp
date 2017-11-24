@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Importance of function prototype in C</title>
+	<atom:link href="http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: mb1994</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-39055</link>
+		<dc:creator><![CDATA[mb1994]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 16:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-39055</guid>
+		<description><![CDATA[im starting to love this website. great stuff.]]></description>
+		<content:encoded><![CDATA[<p>im starting to love this website. great stuff.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: neha2210</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-15723</link>
+		<dc:creator><![CDATA[neha2210]]></dc:creator>
+		<pubDate>Wed, 27 Feb 2013 12:44:15 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-15723</guid>
+		<description><![CDATA[Thanks great article :)]]></description>
+		<content:encoded><![CDATA[<p>Thanks great article 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vishal Kanaujia</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9570</link>
+		<dc:creator><![CDATA[Vishal Kanaujia]]></dc:creator>
+		<pubDate>Thu, 12 Jul 2012 21:35:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9570</guid>
+		<description><![CDATA[@Narendra, Saurav:
+The first program works without definition of strerror() because glibc.so is supplying the definition. The program will fail to link otherwise.
+
+On my Ubuntu machine:
+
+kanaujia@ubuntu:~/work$ gcc -o link link.c
+link.c: In function ‘main’:
+link.c:10:9: warning: format ‘%s’ expects argument of type ‘char *’, but argument 3 has type ‘int’ [-Wformat]
+
+kanaujia@ubuntu:~/work$ ldd ./link
+	linux-gate.so.1 =&#062;  (0xb7795000)
+	libc.so.6 =&#062; /lib/i386-linux-gnu/libc.so.6 (0xb75d9000)
+	/lib/ld-linux.so.2 (0xb7796000)
+
+kanaujia@ubuntu:~/work$ nm -D /lib/i386-linux-gnu/libc.so.6&#124;grep strerror
+0007bbd0 T __strerror_r
+00081eb0 T __xpg_strerror_r
+000c5750 T gai_strerror
+000f8be0 T hstrerror
+0007baf0 T strerror    &#060;&#060;&#060;&#060;&#060;----------------------
+00081ff0 T strerror_l
+0007bbd0 W strerror_r]]></description>
+		<content:encoded><![CDATA[<p>@Narendra, Saurav:<br />
+The first program works without definition of strerror() because glibc.so is supplying the definition. The program will fail to link otherwise.</p>
+<p>On my Ubuntu machine:</p>
+<p>kanaujia@ubuntu:~/work$ gcc -o link link.c<br />
+link.c: In function ‘main’:<br />
+link.c:10:9: warning: format ‘%s’ expects argument of type ‘char *’, but argument 3 has type ‘int’ [-Wformat]</p>
+<p>kanaujia@ubuntu:~/work$ ldd ./link<br />
+	linux-gate.so.1 =&gt;  (0xb7795000)<br />
+	libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0xb75d9000)<br />
+	/lib/ld-linux.so.2 (0xb7796000)</p>
+<p>kanaujia@ubuntu:~/work$ nm -D /lib/i386-linux-gnu/libc.so.6|grep strerror<br />
+0007bbd0 T __strerror_r<br />
+00081eb0 T __xpg_strerror_r<br />
+000c5750 T gai_strerror<br />
+000f8be0 T hstrerror<br />
+0007baf0 T strerror    &lt;&lt;&lt;&lt;&lt;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br />
+00081ff0 T strerror_l<br />
+0007bbd0 W strerror_r</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: saurav</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9556</link>
+		<dc:creator><![CDATA[saurav]]></dc:creator>
+		<pubDate>Thu, 12 Jul 2012 04:38:58 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9556</guid>
+		<description><![CDATA[Hi Ravi,
+
+gcc doesn&#039;t bother much about the function prototype. It may give warning if it doesn&#039;t find the prototype of function (but this is an error for g++). GCC hope it will find the function definition at link time and if it doesn&#039;t find that causes a linker error. The interesting part is you can call a function (whose prototype is not mentioned) with certain number of parameters, which is actually defined with some different no. of parameters but still compiler will compile successfully and obviously you&#039;ll not get the expected result. The point is linker only looks for the definition against a name and link it. 
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi Ravi,</p>
+<p>gcc doesn&#8217;t bother much about the function prototype. It may give warning if it doesn&#8217;t find the prototype of function (but this is an error for g++). GCC hope it will find the function definition at link time and if it doesn&#8217;t find that causes a linker error. The interesting part is you can call a function (whose prototype is not mentioned) with certain number of parameters, which is actually defined with some different no. of parameters but still compiler will compile successfully and obviously you&#8217;ll not get the expected result. The point is linker only looks for the definition against a name and link it. </p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Narendra</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9555</link>
+		<dc:creator><![CDATA[Narendra]]></dc:creator>
+		<pubDate>Thu, 12 Jul 2012 04:36:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9555</guid>
+		<description><![CDATA[I have tested this code and I also use &quot;gcc&quot;, it&#039;s compiling with warning.
+
+I used gcc version 4.5.2
+
+[narendra@/tmp]$ cat test.c 
+#include 
+#include 
+ 
+int main(int argc, char *argv[])
+{
+    FILE *fp;
+ 
+    fp = fopen(argv[1], &quot;r&quot;);
+    if (fp == NULL) {
+        fprintf(stderr, &quot;%s\n&quot;, strerror(errno));
+        return errno;
+    }
+ 
+    printf(&quot;file exist\n&quot;);
+ 
+    fclose(fp);
+ 
+    return 0;
+}
+
+[narendra@/tmp]$ gcc test.c -o test
+test.c: In function ‘main’:
+test.c:10:9: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’
+
+[narendra@/tmp]$ ./test test.c
+file exist
+[narendra@/tmp]$]]></description>
+		<content:encoded><![CDATA[<p>I have tested this code and I also use &#8220;gcc&#8221;, it&#8217;s compiling with warning.</p>
+<p>I used gcc version 4.5.2</p>
+<p>[narendra@/tmp]$ cat test.c<br />
+#include<br />
+#include </p>
+<p>int main(int argc, char *argv[])<br />
+{<br />
+    FILE *fp;</p>
+<p>    fp = fopen(argv[1], &#8220;r&#8221;);<br />
+    if (fp == NULL) {<br />
+        fprintf(stderr, &#8220;%s\n&#8221;, strerror(errno));<br />
+        return errno;<br />
+    }</p>
+<p>    printf(&#8220;file exist\n&#8221;);</p>
+<p>    fclose(fp);</p>
+<p>    return 0;<br />
+}</p>
+<p>[narendra@/tmp]$ gcc test.c -o test<br />
+test.c: In function ‘main’:<br />
+test.c:10:9: warning: format ‘%s’ expects type ‘char *’, but argument 3 has type ‘int’</p>
+<p>[narendra@/tmp]$ ./test test.c<br />
+file exist<br />
+[narendra@/tmp]$</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ravi</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9552</link>
+		<dc:creator><![CDATA[Ravi]]></dc:creator>
+		<pubDate>Thu, 12 Jul 2012 02:38:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9552</guid>
+		<description><![CDATA[Hi Narendra,
+
+How can the code be compiled without knowing the prototype of the function?
+
+I checked it on gcc and I am unable to compile the code.
+
+Appreciate your response.
+
+Thanks.]]></description>
+		<content:encoded><![CDATA[<p>Hi Narendra,</p>
+<p>How can the code be compiled without knowing the prototype of the function?</p>
+<p>I checked it on gcc and I am unable to compile the code.</p>
+<p>Appreciate your response.</p>
+<p>Thanks.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: xanpeng</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9546</link>
+		<dc:creator><![CDATA[xanpeng]]></dc:creator>
+		<pubDate>Wed, 11 Jul 2012 06:03:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9546</guid>
+		<description><![CDATA[I tried the second example, it works in x86_64, though there will be warning. 
+On my machine, sizeof(int*)=8 and sizeof(int)=4. 
+
+My best guess: there will be truncation when malloc() returns, but value truncated(which is the memory address to be written) is still valid. 
+
+But I&#039;m not quite sure. Hope for Narendra Kangralkar&#039;s answer:)
+
+Thanks.]]></description>
+		<content:encoded><![CDATA[<p>I tried the second example, it works in x86_64, though there will be warning.<br />
+On my machine, sizeof(int*)=8 and sizeof(int)=4. </p>
+<p>My best guess: there will be truncation when malloc() returns, but value truncated(which is the memory address to be written) is still valid. </p>
+<p>But I&#8217;m not quite sure. Hope for Narendra Kangralkar&#8217;s answer:)</p>
+<p>Thanks.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Robin</title>
+		<link>http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/#comment-9534</link>
+		<dc:creator><![CDATA[Robin]]></dc:creator>
+		<pubDate>Tue, 10 Jul 2012 17:34:28 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21814#comment-9534</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+Thanks
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+Thanks
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:25:15 -->
+
+<!-- Compression = gzip -->

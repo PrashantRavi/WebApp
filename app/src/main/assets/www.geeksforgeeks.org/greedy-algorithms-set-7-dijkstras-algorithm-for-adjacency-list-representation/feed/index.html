@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Greedy Algorithms &#124; Set 8 (Dijkstra’s Algorithm for Adjacency List Representation)</title>
+	<atom:link href="http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rahul Gandhi</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-39932</link>
+		<dc:creator><![CDATA[Rahul Gandhi]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 05:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-39932</guid>
+		<description><![CDATA[In the &quot;Notes&quot; section of the article, point 2, it should be dijkstra instead of dijekstra.]]></description>
+		<content:encoded><![CDATA[<p>In the &#8220;Notes&#8221; section of the article, point 2, it should be dijkstra instead of dijekstra.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: :)</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-39858</link>
+		<dc:creator><![CDATA[:)]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 09:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-39858</guid>
+		<description><![CDATA[http://ideone.com/u1dS0y#comments]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/u1dS0y#comments" rel="nofollow">http://ideone.com/u1dS0y#comments</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: :)</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-39854</link>
+		<dc:creator><![CDATA[:)]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 09:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-39854</guid>
+		<description><![CDATA[//using stl 
+#include
+#include
+#include
+#include
+
+
+using namespace std ;
+
+
+struct vertex{
+	int no;
+	int dist;
+};
+
+
+
+
+struct heap_node{
+	int num ; 
+	int key ;
+};
+
+
+bool compare(struct heap_node a,struct heap_node b){
+	if(a.key &#062; b.key)
+		return true ;
+	return false;
+}
+
+
+void shortestPath(vector *adj,int n ,int src){
+	int i;
+	struct heap_node node[n];	
+	for(i=0 ; i&#060;n ; i++){
+		node[i].num=i;
+		node[i].key= INT_MAX;
+	}
+	bool visited[n];
+	memset(visited,false,sizeof(visited));
+	node[src].key=0;
+	make_heap(node,node+n,compare);
+	for(i=0 ; i&#060;n-1 ; i++){
+		pop_heap(node,node+n-i,compare);
+		int cur = n-i-1;
+		int val;
+		int u = node[cur].num ;
+		visited[u]=true ;
+		vector :: iterator it ;
+		for(it = adj[u].begin() ; it!=adj[u].end() ; it++){
+			for(int j=0 ; jno){
+					val = j;
+					break;
+				}
+			}
+			if(!visited[it-&#062;no] &#038;&#038; node[cur].key != INT_MAX &#038;&#038; node[val].key &#062; node[cur].key +it-&#062;dist ){
+			
+				node[val].key = node[cur].key + it-&#062;dist ;
+				cout&#060;&#060;node[val].key&#060;&#060;&#034; : &#034;&#060;dist&#060;&#060;endl;;
+			}
+		}
+		make_heap(node,node+n-i-1,compare);
+	}
+	cout&#060;&#060;&#034;The Shortest distance from :&#034;&#060;&#060;src&#060;&#060;&#034; : n&#034;;
+	for(int i= 0 ; i&#060;n ; i++){
+		cout&#060;&#060;&#034;Node &#034;&#060;&#060;node[i].num&#060;&#060;&#034; : &#034;&#060;&#060;node[i].key&#060;&#060;endl;
+	}
+}
+
+
+int main(){
+	int no_of_vertices,edges ;
+	cout&#060;&#062;no_of_vertices ;
+	vector *adj = new vector[no_of_vertices];
+	cout&#060;&#062;edges;
+	cout&#060;&#060;&#034;Enter weighted edges &#038; length (labelling vertices from 0 to n-1 ):  n&#034;;
+	for(int i=0 ; i&#062;from&#062;&#062;to&#062;&#062;dis;
+		struct vertex node;
+		struct vertex n;
+		n.no = from ;
+		n.dist = dis ;
+		node.no = to;
+		node.dist = dis;
+		adj[from].push_back(node);		
+		adj[to].push_back(n);
+	}
+	int src ;
+	cout&#060;&#062;src ;
+	shortestPath(adj,no_of_vertices,src);
+}]]></description>
+		<content:encoded><![CDATA[<p>//using stl<br />
+#include<br />
+#include<br />
+#include<br />
+#include</p>
+<p>using namespace std ;</p>
+<p>struct vertex{<br />
+	int no;<br />
+	int dist;<br />
+};</p>
+<p>struct heap_node{<br />
+	int num ;<br />
+	int key ;<br />
+};</p>
+<p>bool compare(struct heap_node a,struct heap_node b){<br />
+	if(a.key &gt; b.key)<br />
+		return true ;<br />
+	return false;<br />
+}</p>
+<p>void shortestPath(vector *adj,int n ,int src){<br />
+	int i;<br />
+	struct heap_node node[n];<br />
+	for(i=0 ; i&lt;n ; i++){<br />
+		node[i].num=i;<br />
+		node[i].key= INT_MAX;<br />
+	}<br />
+	bool visited[n];<br />
+	memset(visited,false,sizeof(visited));<br />
+	node[src].key=0;<br />
+	make_heap(node,node+n,compare);<br />
+	for(i=0 ; i&lt;n-1 ; i++){<br />
+		pop_heap(node,node+n-i,compare);<br />
+		int cur = n-i-1;<br />
+		int val;<br />
+		int u = node[cur].num ;<br />
+		visited[u]=true ;<br />
+		vector :: iterator it ;<br />
+		for(it = adj[u].begin() ; it!=adj[u].end() ; it++){<br />
+			for(int j=0 ; jno){<br />
+					val = j;<br />
+					break;<br />
+				}<br />
+			}<br />
+			if(!visited[it-&gt;no] &amp;&amp; node[cur].key != INT_MAX &amp;&amp; node[val].key &gt; node[cur].key +it-&gt;dist ){</p>
+<p>				node[val].key = node[cur].key + it-&gt;dist ;<br />
+				cout&lt;&lt;node[val].key&lt;&lt;&quot; : &quot;&lt;dist&lt;&lt;endl;;<br />
+			}<br />
+		}<br />
+		make_heap(node,node+n-i-1,compare);<br />
+	}<br />
+	cout&lt;&lt;&quot;The Shortest distance from :&quot;&lt;&lt;src&lt;&lt;&quot; : n&quot;;<br />
+	for(int i= 0 ; i&lt;n ; i++){<br />
+		cout&lt;&lt;&quot;Node &quot;&lt;&lt;node[i].num&lt;&lt;&quot; : &quot;&lt;&lt;node[i].key&lt;&lt;endl;<br />
+	}<br />
+}</p>
+<p>int main(){<br />
+	int no_of_vertices,edges ;<br />
+	cout&lt;&gt;no_of_vertices ;<br />
+	vector *adj = new vector[no_of_vertices];<br />
+	cout&lt;&gt;edges;<br />
+	cout&lt;&lt;&quot;Enter weighted edges &amp; length (labelling vertices from 0 to n-1 ):  n&quot;;<br />
+	for(int i=0 ; i&gt;from&gt;&gt;to&gt;&gt;dis;<br />
+		struct vertex node;<br />
+		struct vertex n;<br />
+		n.no = from ;<br />
+		n.dist = dis ;<br />
+		node.no = to;<br />
+		node.dist = dis;<br />
+		adj[from].push_back(node);<br />
+		adj[to].push_back(n);<br />
+	}<br />
+	int src ;<br />
+	cout&lt;&gt;src ;<br />
+	shortestPath(adj,no_of_vertices,src);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: karthik nayak</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-39450</link>
+		<dc:creator><![CDATA[karthik nayak]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 12:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-39450</guid>
+		<description><![CDATA[I was looking for the explanation, brilliant thanks :D]]></description>
+		<content:encoded><![CDATA[<p>I was looking for the explanation, brilliant thanks 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ihym</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-37636</link>
+		<dc:creator><![CDATA[ihym]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 01:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-37636</guid>
+		<description><![CDATA[using this implementation to find all pair shortest path leads to memory leaks. are there any modifications to solve this? thx in advance.]]></description>
+		<content:encoded><![CDATA[<p>using this implementation to find all pair shortest path leads to memory leaks. are there any modifications to solve this? thx in advance.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hero</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-36983</link>
+		<dc:creator><![CDATA[Hero]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 02:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-36983</guid>
+		<description><![CDATA[I think this code is redendant, we can safely delete them. Because the src vertex has already included inside heap while we loop over the whole vertices.
+
+// Make dist value of src vertex as 0 so that it is extracted first
+    minHeap-&#062;array[src] = newMinHeapNode(src, dist[src]);
+    minHeap-&#062;pos[src]   = src;]]></description>
+		<content:encoded><![CDATA[<p>I think this code is redendant, we can safely delete them. Because the src vertex has already included inside heap while we loop over the whole vertices.</p>
+<p>// Make dist value of src vertex as 0 so that it is extracted first<br />
+    minHeap-&gt;array[src] = newMinHeapNode(src, dist[src]);<br />
+    minHeap-&gt;pos[src]   = src;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: andrei</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-35323</link>
+		<dc:creator><![CDATA[andrei]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 12:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-35323</guid>
+		<description><![CDATA[How does the code change in case of directed graphs?]]></description>
+		<content:encoded><![CDATA[<p>How does the code change in case of directed graphs?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nikunj</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-33793</link>
+		<dc:creator><![CDATA[nikunj]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 08:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-33793</guid>
+		<description><![CDATA[hi..
+do you have the code of dijkstra implemented with fibonacci heap.?
+if yes, then please send it to me at coolnik2006@gmail.com
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>hi..<br />
+do you have the code of dijkstra implemented with fibonacci heap.?<br />
+if yes, then please send it to me at <a href="mailto:coolnik2006@gmail.com">coolnik2006@gmail.com</a><br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nikunj</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-33794</link>
+		<dc:creator><![CDATA[nikunj]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 08:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-33794</guid>
+		<description><![CDATA[hi..
+do you have the code of dijkstra implemented with fibonacci heap.?
+if yes, then please send it to me at coolnik2006@gmail.com
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>hi..<br />
+do you have the code of dijkstra implemented with fibonacci heap.?<br />
+if yes, then please send it to me at <a href="mailto:coolnik2006@gmail.com">coolnik2006@gmail.com</a><br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: hello</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-29227</link>
+		<dc:creator><![CDATA[hello]]></dc:creator>
+		<pubDate>Wed, 23 Oct 2013 06:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-29227</guid>
+		<description><![CDATA[3rd point in the Notes section says, as soon as the distance for the target is found... break. But in case if there  is other way to go that target having minimum distance than the one calculated before? so I guess even if we are interested in single target, program should loop for the whole vertices...]]></description>
+		<content:encoded><![CDATA[<p>3rd point in the Notes section says, as soon as the distance for the target is found&#8230; break. But in case if there  is other way to go that target having minimum distance than the one calculated before? so I guess even if we are interested in single target, program should loop for the whole vertices&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kumar Vikram</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/#comment-20368</link>
+		<dc:creator><![CDATA[Kumar Vikram]]></dc:creator>
+		<pubDate>Sat, 22 Jun 2013 10:24:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27753#comment-20368</guid>
+		<description><![CDATA[There was some bugs in my earlier comment. This is the corrected code.
+[sourcecode language=&quot;C++&quot;]
+#include&#060;iostream&#062;
+#include &#060;list&#062;
+#include &#060;limits.h&#062;
+
+using namespace std;
+ 
+class AdjListNode
+{
+    int v;
+    int weight;
+public:
+    AdjListNode(int _v, int _w)  { v = _v;  weight = _w;}
+    int getV()       {  return v;  }
+    int getWeight()  {  return weight; }
+};
+ 
+class Graph
+{
+    int V;    // No. of vertices&#039;
+    // Pointer to an array containing adjacency lists
+    list&#060;AdjListNode&#062; *adj;
+ 
+    
+    public:
+    Graph(int V);   // Constructor
+ 
+    // function to add an edge to graph
+    void addEdge(int u, int v, int weight);
+    void get_dist(int src);
+    int min_dist(int dist[],bool sptSet[]);
+    
+    
+};
+ 
+Graph::Graph(int V)
+{
+    this-&#062;V = V;
+    adj = new list&#060;AdjListNode&#062;[V];
+}
+ 
+void Graph::addEdge(int u, int v, int weight)
+{
+    AdjListNode node(v, weight);
+    adj[u].push_back(node); // Add v to u&#039;s list
+}
+
+int Graph::min_dist(int dist[],bool sptSet[])
+{
+	int min = INT_MAX, min_index;
+ 
+   for (int v = 0; v &#060; V; v++)
+     if (sptSet[v] == false &#038;&#038; dist[v] &#060;= min)
+         min = dist[v], min_index = v;
+ 
+   return min_index;
+}
+
+void Graph::get_dist(int src)
+{
+	int dist[V];     // The output array.  dist[i] will hold the shortest
+                      // distance from src to i
+ 
+     bool sptSet[V]; // sptSet[i] will true if vertex i is included in shortest
+                     // path tree or shortest distance from src to i is finalized
+
+	for (int i = 0; i &#060; V; i++)
+        dist[i] = INT_MAX, sptSet[i] = false;
+ 
+     // Distance of source vertex from itself is always 0
+      dist[src] = 0;
+	sptSet[src] = true;
+	list&#060;AdjListNode&#062;::iterator i;
+		for(i=adj[src].begin();i!=adj[src].end();i++)
+		{
+			if(!sptSet[i-&#062;getV()] &#038;&#038;  (dist[i-&#062;getV()] &#062; dist[src]+i-&#062;getWeight()))
+				dist[i-&#062;getV()] = dist[src]+i-&#062;getWeight();
+		}
+	for(int count = 0; count &#060; V-1; count++)
+	{
+		int u=min_dist(dist,sptSet);
+		sptSet[u] = true;
+		list&#060;AdjListNode&#062;::iterator i;
+		for(i=adj[u].begin();i!=adj[u].end();i++)
+		{
+			if(!sptSet[i-&#062;getV()] &#038;&#038; dist[u]!=INT_MAX &#038;&#038; (dist[i-&#062;getV()] &#062; dist[u]+i-&#062;getWeight()))
+				dist[i-&#062;getV()] = dist[u]+i-&#062;getWeight();
+		}
+	} 
+	cout&#060;&#060;&#034;Vertex\t\tDistance&#034;&#060;&#060;endl;
+for(int i=0;i&#060;V;i++)
+{
+	cout&#060;&#060;i&#060;&#060;&#034;\t\t&#034;&#060;&#060;dist[i]&#060;&#060;&#034;\t\t&#034;;
+	cout&#060;&#060;endl;
+}
+}
+
+int main()
+{
+    
+    Graph g(9);
+    g.addEdge(0, 1, 4);
+    g.addEdge(1, 0, 4);
+    g.addEdge(0, 7, 8);
+    g.addEdge(7, 0, 8);
+    g.addEdge(1, 2, 8);
+    g.addEdge(2, 1, 8);
+    g.addEdge(1, 7, 11);
+    g.addEdge(7, 1, 11);
+    g.addEdge(2, 3, 7);
+    g.addEdge(3, 2, 7);
+    g.addEdge(2, 8, 2);
+    g.addEdge(8, 2, 2);
+    g.addEdge(2, 5, 4);
+    g.addEdge(5, 2, 4);
+    g.addEdge(3, 4, 9);
+    g.addEdge(4, 3, 9);
+    g.addEdge(3, 5, 14);
+    g.addEdge(5, 3, 14);
+    g.addEdge(4, 5, 10);
+    g.addEdge(5, 4, 10);
+    g.addEdge(5, 6, 2);
+    g.addEdge(6, 5, 2);
+    g.addEdge(6, 7, 1);
+    g.addEdge(7, 6, 1);
+    g.addEdge(6, 8, 6);
+    g.addEdge(8, 6, 6);
+    g.addEdge(7, 8, 7);
+    g.addEdge(8, 7, 7);
+ 
+    int s=0;
+    cout &#060;&#060;&#034;Following are shortest distances from source &#034; &#060;&#060; s &#060;&#060;&#034;\n&#034;;
+    g.get_dist(s);
+ 
+    return 0;
+} 
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>There was some bugs in my earlier comment. This is the corrected code.</p>
+<p>#include&lt;iostream&gt;<br />
+#include &lt;list&gt;<br />
+#include &lt;limits.h&gt;</p>
+<p>using namespace std;</p>
+<p>class AdjListNode<br />
+{<br />
+    int v;<br />
+    int weight;<br />
+public:<br />
+    AdjListNode(int _v, int _w)  { v = _v;  weight = _w;}<br />
+    int getV()       {  return v;  }<br />
+    int getWeight()  {  return weight; }<br />
+};</p>
+<p>class Graph<br />
+{<br />
+    int V;    // No. of vertices&#8217;<br />
+    // Pointer to an array containing adjacency lists<br />
+    list&lt;AdjListNode&gt; *adj;</p>
+<p>    public:<br />
+    Graph(int V);   // Constructor</p>
+<p>    // function to add an edge to graph<br />
+    void addEdge(int u, int v, int weight);<br />
+    void get_dist(int src);<br />
+    int min_dist(int dist[],bool sptSet[]);</p>
+<p>};</p>
+<p>Graph::Graph(int V)<br />
+{<br />
+    this-&gt;V = V;<br />
+    adj = new list&lt;AdjListNode&gt;[V];<br />
+}</p>
+<p>void Graph::addEdge(int u, int v, int weight)<br />
+{<br />
+    AdjListNode node(v, weight);<br />
+    adj[u].push_back(node); // Add v to u&#8217;s list<br />
+}</p>
+<p>int Graph::min_dist(int dist[],bool sptSet[])<br />
+{<br />
+	int min = INT_MAX, min_index;</p>
+<p>   for (int v = 0; v &lt; V; v++)<br />
+     if (sptSet[v] == false &amp;&amp; dist[v] &lt;= min)<br />
+         min = dist[v], min_index = v;</p>
+<p>   return min_index;<br />
+}</p>
+<p>void Graph::get_dist(int src)<br />
+{<br />
+	int dist[V];     // The output array.  dist[i] will hold the shortest<br />
+                      // distance from src to i</p>
+<p>     bool sptSet[V]; // sptSet[i] will true if vertex i is included in shortest<br />
+                     // path tree or shortest distance from src to i is finalized</p>
+<p>	for (int i = 0; i &lt; V; i++)<br />
+        dist[i] = INT_MAX, sptSet[i] = false;</p>
+<p>     // Distance of source vertex from itself is always 0<br />
+      dist[src] = 0;<br />
+	sptSet[src] = true;<br />
+	list&lt;AdjListNode&gt;::iterator i;<br />
+		for(i=adj[src].begin();i!=adj[src].end();i++)<br />
+		{<br />
+			if(!sptSet[i-&gt;getV()] &amp;&amp;  (dist[i-&gt;getV()] &gt; dist[src]+i-&gt;getWeight()))<br />
+				dist[i-&gt;getV()] = dist[src]+i-&gt;getWeight();<br />
+		}<br />
+	for(int count = 0; count &lt; V-1; count++)<br />
+	{<br />
+		int u=min_dist(dist,sptSet);<br />
+		sptSet[u] = true;<br />
+		list&lt;AdjListNode&gt;::iterator i;<br />
+		for(i=adj[u].begin();i!=adj[u].end();i++)<br />
+		{<br />
+			if(!sptSet[i-&gt;getV()] &amp;&amp; dist[u]!=INT_MAX &amp;&amp; (dist[i-&gt;getV()] &gt; dist[u]+i-&gt;getWeight()))<br />
+				dist[i-&gt;getV()] = dist[u]+i-&gt;getWeight();<br />
+		}<br />
+	}<br />
+	cout&lt;&lt;&quot;Vertex\t\tDistance&quot;&lt;&lt;endl;<br />
+for(int i=0;i&lt;V;i++)<br />
+{<br />
+	cout&lt;&lt;i&lt;&lt;&quot;\t\t&quot;&lt;&lt;dist[i]&lt;&lt;&quot;\t\t&quot;;<br />
+	cout&lt;&lt;endl;<br />
+}<br />
+}</p>
+<p>int main()<br />
+{</p>
+<p>    Graph g(9);<br />
+    g.addEdge(0, 1, 4);<br />
+    g.addEdge(1, 0, 4);<br />
+    g.addEdge(0, 7, 8);<br />
+    g.addEdge(7, 0, 8);<br />
+    g.addEdge(1, 2, 8);<br />
+    g.addEdge(2, 1, 8);<br />
+    g.addEdge(1, 7, 11);<br />
+    g.addEdge(7, 1, 11);<br />
+    g.addEdge(2, 3, 7);<br />
+    g.addEdge(3, 2, 7);<br />
+    g.addEdge(2, 8, 2);<br />
+    g.addEdge(8, 2, 2);<br />
+    g.addEdge(2, 5, 4);<br />
+    g.addEdge(5, 2, 4);<br />
+    g.addEdge(3, 4, 9);<br />
+    g.addEdge(4, 3, 9);<br />
+    g.addEdge(3, 5, 14);<br />
+    g.addEdge(5, 3, 14);<br />
+    g.addEdge(4, 5, 10);<br />
+    g.addEdge(5, 4, 10);<br />
+    g.addEdge(5, 6, 2);<br />
+    g.addEdge(6, 5, 2);<br />
+    g.addEdge(6, 7, 1);<br />
+    g.addEdge(7, 6, 1);<br />
+    g.addEdge(6, 8, 6);<br />
+    g.addEdge(8, 6, 6);<br />
+    g.addEdge(7, 8, 7);<br />
+    g.addEdge(8, 7, 7);</p>
+<p>    int s=0;<br />
+    cout &lt;&lt;&quot;Following are shortest distances from source &quot; &lt;&lt; s &lt;&lt;&quot;\n&quot;;<br />
+    g.get_dist(s);</p>
+<p>    return 0;<br />
+} </p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.096 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:08:49 -->
+
+<!-- Compression = gzip -->

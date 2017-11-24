@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Segment Tree &#124; Set 1 (Sum of given range)</title>
+	<atom:link href="http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: matheus</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-38250</link>
+		<dc:creator><![CDATA[matheus]]></dc:creator>
+		<pubDate>Thu, 12 Jun 2014 00:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-38250</guid>
+		<description><![CDATA[I think that the function constructSTUtil has a little problem, when we get on the most right of the array &#062;&#062;, and do this operation: i*2+2 we get outside of the array on the next function call.]]></description>
+		<content:encoded><![CDATA[<p>I think that the function constructSTUtil has a little problem, when we get on the most right of the array &gt;&gt;, and do this operation: i*2+2 we get outside of the array on the next function call.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-37558</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 19:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-37558</guid>
+		<description><![CDATA[// Update the values of nodes in segment tree
+    updateValueUtil(st, 0, n-1, i, diff, 0);  i think is wrong
+it should be   updateValueUtil(st, 0, n-1, i, diff, i); since we update child nodes of node i]]></description>
+		<content:encoded><![CDATA[<p>// Update the values of nodes in segment tree<br />
+    updateValueUtil(st, 0, n-1, i, diff, 0);  i think is wrong<br />
+it should be   updateValueUtil(st, 0, n-1, i, diff, i); since we update child nodes of node i</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gaurav</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-35875</link>
+		<dc:creator><![CDATA[gaurav]]></dc:creator>
+		<pubDate>Sat, 10 May 2014 15:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-35875</guid>
+		<description><![CDATA[Shouldn&#039;t  &#039;if (qs = se)&#039; in getSumUtil() function be &#039;if (qs &#062;= ss &#038;&#038; qe &#060;= se)&#039; ??]]></description>
+		<content:encoded><![CDATA[<p>Shouldn&#8217;t  &#8216;if (qs = se)&#8217; in getSumUtil() function be &#8216;if (qs &gt;= ss &amp;&amp; qe &lt;= se)&#039; ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-35266</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 05:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-35266</guid>
+		<description><![CDATA[void update(tnode* root,int arr[],int low,int high,int ind,int val)
+
+{
+
+	if(low==high)
+
+	{
+
+		root-&#062;data=val;
+
+		return;
+
+	}
+
+	int mid=(low+high)/2;
+
+	if(ind&#062;mid)
+
+	   update(root-&#062;rchild,arr,mid+1,high,ind,val);
+
+	if(indlchild,arr,low,mid,ind,val);
+
+	root-&#062;data=root-&#062;lchild-&#062;data+root-&#062;rchild-&#062;data;
+
+}
+
+int sum(tnode* root,int low,int high,int l,int h)
+
+{
+
+	if((low==l)&#038;&#038;(high==h))
+
+		return root-&#062;data;
+
+	int mid=(low+high)/2;
+
+	if(l&#062;mid)
+
+	   return sum(root-&#062;rchild,mid+1,high,l,h);
+
+	if(hlchild,low,mid,l,h);
+
+	else
+
+	{
+
+		int m=(l+h)/2;
+
+		return((sum(root,low,high,l,m)+sum(root,low,high,m+1,h)));
+
+	}
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void update(tnode* root,int arr[],int low,int high,int ind,int val)</p>
+<p>{</p>
+<p>	if(low==high)</p>
+<p>	{</p>
+<p>		root-&gt;data=val;</p>
+<p>		return;</p>
+<p>	}</p>
+<p>	int mid=(low+high)/2;</p>
+<p>	if(ind&gt;mid)</p>
+<p>	   update(root-&gt;rchild,arr,mid+1,high,ind,val);</p>
+<p>	if(indlchild,arr,low,mid,ind,val);</p>
+<p>	root-&gt;data=root-&gt;lchild-&gt;data+root-&gt;rchild-&gt;data;</p>
+<p>}</p>
+<p>int sum(tnode* root,int low,int high,int l,int h)</p>
+<p>{</p>
+<p>	if((low==l)&amp;&amp;(high==h))</p>
+<p>		return root-&gt;data;</p>
+<p>	int mid=(low+high)/2;</p>
+<p>	if(l&gt;mid)</p>
+<p>	   return sum(root-&gt;rchild,mid+1,high,l,h);</p>
+<p>	if(hlchild,low,mid,l,h);</p>
+<p>	else</p>
+<p>	{</p>
+<p>		int m=(l+h)/2;</p>
+<p>		return((sum(root,low,high,l,m)+sum(root,low,high,m+1,h)));</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-35265</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 05:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-35265</guid>
+		<description><![CDATA[note the crucial points
+1-segment tree is not complete binary tree
+2-the left and right subtree are divided based on middle values
+3-the sum and update code are similar to bianry search code so its implementation is 0(logn) time ,,,,,not favourable for update process
+construction is simple ...just recursively go down dividing the index into 2 halves and when base case comes fill the node data and during unwinding phase adjust root-&#062;data
+for range sum
+if ind1&#062;mid then just move to right subtree 
+if ind2data;
+
+	int mid=(low+high)/2;
+
+	if(l&#062;mid)
+
+	   return sum(root-&#062;rchild,mid+1,high,l,h);
+
+	if(hlchild,low,mid,l,h);
+
+	else
+
+	{
+
+		int m=(l+h)/2;
+
+		return((sum(root,low,high,l,m)+sum(root,low,high,m+1,h)));
+
+	}
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>note the crucial points<br />
+1-segment tree is not complete binary tree<br />
+2-the left and right subtree are divided based on middle values<br />
+3-the sum and update code are similar to bianry search code so its implementation is 0(logn) time ,,,,,not favourable for update process<br />
+construction is simple &#8230;just recursively go down dividing the index into 2 halves and when base case comes fill the node data and during unwinding phase adjust root-&gt;data<br />
+for range sum<br />
+if ind1&gt;mid then just move to right subtree<br />
+if ind2data;</p>
+<p>	int mid=(low+high)/2;</p>
+<p>	if(l&gt;mid)</p>
+<p>	   return sum(root-&gt;rchild,mid+1,high,l,h);</p>
+<p>	if(hlchild,low,mid,l,h);</p>
+<p>	else</p>
+<p>	{</p>
+<p>		int m=(l+h)/2;</p>
+<p>		return((sum(root,low,high,l,m)+sum(root,low,high,m+1,h)));</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankur Sao</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-35085</link>
+		<dc:creator><![CDATA[Ankur Sao]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 22:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-35085</guid>
+		<description><![CDATA[ConstructST only allocates memory for the segment tree array and calls constructUTil function which actually fills up the segment tree array. ConstructST than returns this array!]]></description>
+		<content:encoded><![CDATA[<p>ConstructST only allocates memory for the segment tree array and calls constructUTil function which actually fills up the segment tree array. ConstructST than returns this array!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: dmr</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-34612</link>
+		<dc:creator><![CDATA[dmr]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 07:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-34612</guid>
+		<description><![CDATA[We can use segment trees for finding sum in a given range. But how can this be modified to find minimum element in a given range in O(logn) time? This is a question in References link (
+http://www.cse.iitk.ac.in/users/aca/lop12/slides/06.pdf) given above.]]></description>
+		<content:encoded><![CDATA[<p>We can use segment trees for finding sum in a given range. But how can this be modified to find minimum element in a given range in O(logn) time? This is a question in References link (<br />
+<a href="http://www.cse.iitk.ac.in/users/aca/lop12/slides/06.pdf" rel="nofollow">http://www.cse.iitk.ac.in/users/aca/lop12/slides/06.pdf</a>) given above.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-34205</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Wed, 02 Apr 2014 15:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-34205</guid>
+		<description><![CDATA[will the complexity in your implementation be O(logn) ???? but to find the sum....u r computing the sum during runtime ryt ????]]></description>
+		<content:encoded><![CDATA[<p>will the complexity in your implementation be O(logn) ???? but to find the sum&#8230;.u r computing the sum during runtime ryt ????</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prshant jha</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-33423</link>
+		<dc:creator><![CDATA[prshant jha]]></dc:creator>
+		<pubDate>Wed, 12 Mar 2014 07:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-33423</guid>
+		<description><![CDATA[here is my  update version in 0(logn) complexity with much simpler implementation than above
+http://ideone.com/SppdWT]]></description>
+		<content:encoded><![CDATA[<p>here is my  update version in 0(logn) complexity with much simpler implementation than above<br />
+<a href="http://ideone.com/SppdWT" rel="nofollow">http://ideone.com/SppdWT</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-33393</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Tue, 11 Mar 2014 16:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-33393</guid>
+		<description><![CDATA[#include
+
+using namespace std;
+
+struct node
+
+{
+
+	node* lchild;
+
+	int data;
+
+	node* rchild;
+
+	node()
+
+	{
+
+		lchild=NULL;
+
+		rchild=NULL;
+
+	}
+
+}*root=NULL;
+
+node* fun(node* root,int arr[],int low,int high)
+
+{
+
+	if(!root)
+
+	    root=new node();
+
+	if(low==high)
+
+	{
+
+		root-&#062;data=arr[low];
+
+		return root;
+
+	}
+
+	int mid=(low+high)/2;
+
+	root-&#062;lchild=fun(root-&#062;lchild,arr,low,mid);
+
+	root-&#062;rchild=fun(root-&#062;rchild,arr,mid+1,high);
+
+	root-&#062;data=root-&#062;lchild-&#062;data+root-&#062;rchild-&#062;data;
+
+	return root;
+
+}
+
+void display(node* root)
+
+{
+
+   if(root!=NULL)
+
+   {
+
+   	display(root-&#062;lchild);
+
+   	cout&#060;data&#060;rchild);
+
+   }
+
+}
+
+int main()
+
+{
+
+	int arr[]={3,5,1,7,9,6};
+
+	int i,r;
+
+	int n=sizeof(arr)/sizeof(arr[0]);
+
+	cout&#060;&#060;&#034;the inorder trversal of segment tree is.n&#034;;
+
+	display(fun(root,arr,0,n-1));
+
+    cout&#060;&#060;&#034;n&#034;&#060;&#062;i&#062;&#062;r;
+
+    root=NULL;
+
+    cout&#060;data&#060;&#060;&#034; is the range sum.n&#034;;
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>using namespace std;</p>
+<p>struct node</p>
+<p>{</p>
+<p>	node* lchild;</p>
+<p>	int data;</p>
+<p>	node* rchild;</p>
+<p>	node()</p>
+<p>	{</p>
+<p>		lchild=NULL;</p>
+<p>		rchild=NULL;</p>
+<p>	}</p>
+<p>}*root=NULL;</p>
+<p>node* fun(node* root,int arr[],int low,int high)</p>
+<p>{</p>
+<p>	if(!root)</p>
+<p>	    root=new node();</p>
+<p>	if(low==high)</p>
+<p>	{</p>
+<p>		root-&gt;data=arr[low];</p>
+<p>		return root;</p>
+<p>	}</p>
+<p>	int mid=(low+high)/2;</p>
+<p>	root-&gt;lchild=fun(root-&gt;lchild,arr,low,mid);</p>
+<p>	root-&gt;rchild=fun(root-&gt;rchild,arr,mid+1,high);</p>
+<p>	root-&gt;data=root-&gt;lchild-&gt;data+root-&gt;rchild-&gt;data;</p>
+<p>	return root;</p>
+<p>}</p>
+<p>void display(node* root)</p>
+<p>{</p>
+<p>   if(root!=NULL)</p>
+<p>   {</p>
+<p>   	display(root-&gt;lchild);</p>
+<p>   	cout&lt;data&lt;rchild);</p>
+<p>   }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int arr[]={3,5,1,7,9,6};</p>
+<p>	int i,r;</p>
+<p>	int n=sizeof(arr)/sizeof(arr[0]);</p>
+<p>	cout&lt;&lt;&quot;the inorder trversal of segment tree is.n&quot;;</p>
+<p>	display(fun(root,arr,0,n-1));</p>
+<p>    cout&lt;&lt;&quot;n&quot;&lt;&gt;i&gt;&gt;r;</p>
+<p>    root=NULL;</p>
+<p>    cout&lt;data&lt;&lt;&quot; is the range sum.n&quot;;</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/#comment-33391</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Tue, 11 Mar 2014 16:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29503#comment-33391</guid>
+		<description><![CDATA[here is the implementation of the segment tree
+http://ideone.com/JPDzqz]]></description>
+		<content:encoded><![CDATA[<p>here is the implementation of the segment tree<br />
+<a href="http://ideone.com/JPDzqz" rel="nofollow">http://ideone.com/JPDzqz</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:07:58 -->
+
+<!-- Compression = gzip -->

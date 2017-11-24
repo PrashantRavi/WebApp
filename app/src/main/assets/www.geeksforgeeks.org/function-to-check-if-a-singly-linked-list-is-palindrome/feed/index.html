@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Function to check if a singly linked list is palindrome</title>
+	<atom:link href="http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Anurag Singh</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-40104</link>
+		<dc:creator><![CDATA[Anurag Singh]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 21:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-40104</guid>
+		<description><![CDATA[In recursive method 3 approach, for a palindrome list, every pair [(0, n), (1, n-1), (2, n-2), ... ] is being compared twice (2nd time comparison starts after left and right cross each other). We can avoid repeated comparison by introducing another parameter (i.e. isDone), set it to true when there is a crossing ((right != NULL &#038;&#038; right-&#062;next == *left) &#124;&#124; (left-&#062;next != NULL &#038;&#038; left-&#062;next-&#062;next == *left)), but then due to these extra pointer comparison, it may not add any value in terms of total no of comparison. 
+Any thoughts ???????]]></description>
+		<content:encoded><![CDATA[<p>In recursive method 3 approach, for a palindrome list, every pair [(0, n), (1, n-1), (2, n-2), &#8230; ] is being compared twice (2nd time comparison starts after left and right cross each other). We can avoid repeated comparison by introducing another parameter (i.e. isDone), set it to true when there is a crossing ((right != NULL &amp;&amp; right-&gt;next == *left) || (left-&gt;next != NULL &amp;&amp; left-&gt;next-&gt;next == *left)), but then due to these extra pointer comparison, it may not add any value in terms of total no of comparison.<br />
+Any thoughts ???????</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jay Tiwari</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-40041</link>
+		<dc:creator><![CDATA[Jay Tiwari]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 10:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-40041</guid>
+		<description><![CDATA[bool IsPalindrome(Node *curr)
+
+{
+
+    bool rc = false;
+
+    static Node *head = curr;
+
+    if(curr != NULL)
+
+    {
+
+        rc = IsPalindrome(curr-&#062;next);
+
+    }
+
+    else
+
+    {
+
+        return true;
+
+    }
+
+ 
+
+    if(rc)
+
+    {  
+
+        if(curr-&#062;data == head-&#062;data)
+
+        {
+
+            head = head-&#062;next;
+
+            rc = true;
+
+        }
+
+        else
+
+        {
+
+            rc = false;
+
+        }
+
+    }
+
+ 
+
+    return rc;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>bool IsPalindrome(Node *curr)</p>
+<p>{</p>
+<p>    bool rc = false;</p>
+<p>    static Node *head = curr;</p>
+<p>    if(curr != NULL)</p>
+<p>    {</p>
+<p>        rc = IsPalindrome(curr-&gt;next);</p>
+<p>    }</p>
+<p>    else</p>
+<p>    {</p>
+<p>        return true;</p>
+<p>    }</p>
+<p>    if(rc)</p>
+<p>    {  </p>
+<p>        if(curr-&gt;data == head-&gt;data)</p>
+<p>        {</p>
+<p>            head = head-&gt;next;</p>
+<p>            rc = true;</p>
+<p>        }</p>
+<p>        else</p>
+<p>        {</p>
+<p>            rc = false;</p>
+<p>        }</p>
+<p>    }</p>
+<p>    return rc;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Palash</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-40002</link>
+		<dc:creator><![CDATA[Palash]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 01:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-40002</guid>
+		<description><![CDATA[I wanted to use Recursion, but could not implement successfully. It is checking correctly only the first 2 characters. I have given (start,start) as arguments in the initial calling function, so that I could store the un-reversed Linked List for checking. Where am I doing wrong?
+
+void ispalin(struct node *start,struct node *tmp)
+
+{
+
+    if(start==NULL)
+
+        return ;
+
+    ispalin(start-&#062;link,tmp);
+
+    if(tmp-&#062;info!=start-&#062;info)
+
+    {
+
+        printf(&quot;nNot a Palindromen&quot;);
+
+    }
+
+    tmp=tmp-&#062;link;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I wanted to use Recursion, but could not implement successfully. It is checking correctly only the first 2 characters. I have given (start,start) as arguments in the initial calling function, so that I could store the un-reversed Linked List for checking. Where am I doing wrong?</p>
+<p>void ispalin(struct node *start,struct node *tmp)</p>
+<p>{</p>
+<p>    if(start==NULL)</p>
+<p>        return ;</p>
+<p>    ispalin(start-&gt;link,tmp);</p>
+<p>    if(tmp-&gt;info!=start-&gt;info)</p>
+<p>    {</p>
+<p>        printf(&#8220;nNot a Palindromen&#8221;);</p>
+<p>    }</p>
+<p>    tmp=tmp-&gt;link;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39954</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 08:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39954</guid>
+		<description><![CDATA[check your program
+the function defined is correct , i checked it  :)]]></description>
+		<content:encoded><![CDATA[<p>check your program<br />
+the function defined is correct , i checked it  🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39726</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 06:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39726</guid>
+		<description><![CDATA[Your observation is Incorrect . As i am checking always fast-&#062;next &#038; fast-&#062;next-&#062;next before entering the loop , then the update fast-&#062;next-&#062;next made to fast will always be valid.]]></description>
+		<content:encoded><![CDATA[<p>Your observation is Incorrect . As i am checking always fast-&gt;next &amp; fast-&gt;next-&gt;next before entering the loop , then the update fast-&gt;next-&gt;next made to fast will always be valid.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Random</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39673</link>
+		<dc:creator><![CDATA[Random]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 17:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39673</guid>
+		<description><![CDATA[You&#039;ll get &quot;Segmentation fault&quot; if ur fast ptr is pointing to the last node or its previous node while executing the first while loop]]></description>
+		<content:encoded><![CDATA[<p>You&#8217;ll get &#8220;Segmentation fault&#8221; if ur fast ptr is pointing to the last node or its previous node while executing the first while loop</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: guest</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39517</link>
+		<dc:creator><![CDATA[guest]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 08:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39517</guid>
+		<description><![CDATA[why hasn&#039;t this post considered a single character as a palindrome?]]></description>
+		<content:encoded><![CDATA[<p>why hasn&#8217;t this post considered a single character as a palindrome?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: dhiru</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39352</link>
+		<dc:creator><![CDATA[dhiru]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 12:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39352</guid>
+		<description><![CDATA[can any one explain me the 3rd method?]]></description>
+		<content:encoded><![CDATA[<p>can any one explain me the 3rd method?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dipankar Jana</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39012</link>
+		<dc:creator><![CDATA[Dipankar Jana]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 07:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39012</guid>
+		<description><![CDATA[int getNodeCount(Node *head) {
+    if(head == NULL) return -1;
+    Node *temp = head;
+    int counter = 0;
+    while(temp != NULL){
+        counter++;
+        temp = temp-&#062;next;
+}
+    return counter;
+}
+
+Node *ReverseList(Node **head){
+    Node *prev = NULL;
+    Node *temp = *head;
+    Node *next;
+    while(temp != NULL){
+        next = temp-&#062;next;
+        temp-&#062;next = prev;
+        prev = temp;
+        temp = next;
+    }
+    *head = prev;
+    return *head;
+}
+
+
+
+
+bool isPalindrome(Node *head) {
+
+    Node *temp = head;
+
+    Node *orig_list = head;
+
+    Node *rev_list = NULL;
+
+    int index;
+
+    for(index = 1; index next;
+
+    }
+
+    rev_list = ReverseList(&#038;temp);
+
+    while(orig_list != NULL &#038;&#038; rev_list != NULL){
+
+        if(orig_list-&#062;data != rev_list-&#062;data ){
+
+            return false;
+
+        }
+
+        orig_list = orig_list-&#062;next;
+
+        rev_list = rev_list-&#062;next;
+
+    }
+
+    /// Free memory
+
+    delete rev_list;
+
+    delete orig_list;
+
+    /// If we reach here the the list is palindrome
+
+    return true;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>int getNodeCount(Node *head) {<br />
+    if(head == NULL) return -1;<br />
+    Node *temp = head;<br />
+    int counter = 0;<br />
+    while(temp != NULL){<br />
+        counter++;<br />
+        temp = temp-&gt;next;<br />
+}<br />
+    return counter;<br />
+}</p>
+<p>Node *ReverseList(Node **head){<br />
+    Node *prev = NULL;<br />
+    Node *temp = *head;<br />
+    Node *next;<br />
+    while(temp != NULL){<br />
+        next = temp-&gt;next;<br />
+        temp-&gt;next = prev;<br />
+        prev = temp;<br />
+        temp = next;<br />
+    }<br />
+    *head = prev;<br />
+    return *head;<br />
+}</p>
+<p>bool isPalindrome(Node *head) {</p>
+<p>    Node *temp = head;</p>
+<p>    Node *orig_list = head;</p>
+<p>    Node *rev_list = NULL;</p>
+<p>    int index;</p>
+<p>    for(index = 1; index next;</p>
+<p>    }</p>
+<p>    rev_list = ReverseList(&amp;temp);</p>
+<p>    while(orig_list != NULL &amp;&amp; rev_list != NULL){</p>
+<p>        if(orig_list-&gt;data != rev_list-&gt;data ){</p>
+<p>            return false;</p>
+<p>        }</p>
+<p>        orig_list = orig_list-&gt;next;</p>
+<p>        rev_list = rev_list-&gt;next;</p>
+<p>    }</p>
+<p>    /// Free memory</p>
+<p>    delete rev_list;</p>
+<p>    delete orig_list;</p>
+<p>    /// If we reach here the the list is palindrome</p>
+<p>    return true;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-39011</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 07:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-39011</guid>
+		<description><![CDATA[This should work..
+
+
+/**
+ Reverse a Singly Linked List
+ Helper function
+**/
+Node *ReverseList(Node **head)
+{
+    Node *prev = NULL;
+    Node *temp = *head;
+    Node *next;
+    while(temp != NULL)
+    {
+        next = temp-&#062;next;
+        temp-&#062;next = prev;
+        prev = temp;
+        temp = next;
+    }
+    *head = prev;
+    return *head;
+}
+
+
+bool isPalindrome(Node *head) {
+    Node *temp = head;
+    Node *orig_list = head;
+    Node *rev_list = NULL;
+    int index;
+
+    for(index = 1; index next;
+    }
+
+    rev_list = ReverseList(&#038;temp);
+
+    while(orig_list != NULL &#038;&#038; rev_list != NULL){
+        if(orig_list-&#062;data != rev_list-&#062;data ){
+            return false;
+        }
+        orig_list = orig_list-&#062;next;
+        rev_list = rev_list-&#062;next;
+    }
+    /// Free memory
+    delete rev_list;
+    delete orig_list;
+
+    /// If we reach here the the list is palindrome
+    return true;
+}]]></description>
+		<content:encoded><![CDATA[<p>This should work..</p>
+<p>/**<br />
+ Reverse a Singly Linked List<br />
+ Helper function<br />
+**/<br />
+Node *ReverseList(Node **head)<br />
+{<br />
+    Node *prev = NULL;<br />
+    Node *temp = *head;<br />
+    Node *next;<br />
+    while(temp != NULL)<br />
+    {<br />
+        next = temp-&gt;next;<br />
+        temp-&gt;next = prev;<br />
+        prev = temp;<br />
+        temp = next;<br />
+    }<br />
+    *head = prev;<br />
+    return *head;<br />
+}</p>
+<p>bool isPalindrome(Node *head) {<br />
+    Node *temp = head;<br />
+    Node *orig_list = head;<br />
+    Node *rev_list = NULL;<br />
+    int index;</p>
+<p>    for(index = 1; index next;<br />
+    }</p>
+<p>    rev_list = ReverseList(&amp;temp);</p>
+<p>    while(orig_list != NULL &amp;&amp; rev_list != NULL){<br />
+        if(orig_list-&gt;data != rev_list-&gt;data ){<br />
+            return false;<br />
+        }<br />
+        orig_list = orig_list-&gt;next;<br />
+        rev_list = rev_list-&gt;next;<br />
+    }<br />
+    /// Free memory<br />
+    delete rev_list;<br />
+    delete orig_list;</p>
+<p>    /// If we reach here the the list is palindrome<br />
+    return true;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/#comment-38961</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 15:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1072#comment-38961</guid>
+		<description><![CDATA[Method 2 can be simplified by below approach:
+
+bool palindrome(node *head)
+{
+    node *slow = head;
+    node *fast = head;
+bool b = true;
+
+    if (!head)
+        return false;
+    while (fast-&#062;next &#038;&#038; fast-&#062;next-&#062;next)
+    {
+        slow = slow-&#062;next;
+        fast = fast-&#062;next-&#062;next;
+    }
+    slow = slow-&#062;next;
+fast =slow;
+    reverse(&#038;slow);
+    while (slow != NULL)
+    {
+        if (slow-&#062;data != head-&#062;data)
+{
+b = false;
+break;
+}
+         slow = slow-&#062;next;
+         head = head-&#062;next;
+    }
+if (!b)
+b = true;
+reverse(&#038;fast);
+return b;
+}]]></description>
+		<content:encoded><![CDATA[<p>Method 2 can be simplified by below approach:</p>
+<p>bool palindrome(node *head)<br />
+{<br />
+    node *slow = head;<br />
+    node *fast = head;<br />
+bool b = true;</p>
+<p>    if (!head)<br />
+        return false;<br />
+    while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next)<br />
+    {<br />
+        slow = slow-&gt;next;<br />
+        fast = fast-&gt;next-&gt;next;<br />
+    }<br />
+    slow = slow-&gt;next;<br />
+fast =slow;<br />
+    reverse(&amp;slow);<br />
+    while (slow != NULL)<br />
+    {<br />
+        if (slow-&gt;data != head-&gt;data)<br />
+{<br />
+b = false;<br />
+break;<br />
+}<br />
+         slow = slow-&gt;next;<br />
+         head = head-&gt;next;<br />
+    }<br />
+if (!b)<br />
+b = true;<br />
+reverse(&amp;fast);<br />
+return b;<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.069 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:41 -->
+
+<!-- Compression = gzip -->

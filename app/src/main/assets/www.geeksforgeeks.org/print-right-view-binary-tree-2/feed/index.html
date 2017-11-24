@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print Right View of a Binary Tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-right-view-binary-tree-2/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rohit Pujar</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-40105</link>
+		<dc:creator><![CDATA[Rohit Pujar]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 23:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-40105</guid>
+		<description><![CDATA[Left view!!!
+
+	public void leftView(Node root) {
+
+		Node parent, current;
+
+		current = parent = root;
+
+		while (current != null) {
+
+			parent = current;
+
+			current = current.leftChild;
+
+			if (current != null) {
+
+				System.out.println(current.data);
+
+			}
+
+			if (current == null) {
+
+				if (parent.rightChild != null) {
+
+					current = parent.rightChild;
+
+					System.out.println(current.data);
+
+				}
+
+			}
+
+		}
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>Left view!!!</p>
+<p>	public void leftView(Node root) {</p>
+<p>		Node parent, current;</p>
+<p>		current = parent = root;</p>
+<p>		while (current != null) {</p>
+<p>			parent = current;</p>
+<p>			current = current.leftChild;</p>
+<p>			if (current != null) {</p>
+<p>				System.out.println(current.data);</p>
+<p>			}</p>
+<p>			if (current == null) {</p>
+<p>				if (parent.rightChild != null) {</p>
+<p>					current = parent.rightChild;</p>
+<p>					System.out.println(current.data);</p>
+<p>				}</p>
+<p>			}</p>
+<p>		}</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Pujar</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-39998</link>
+		<dc:creator><![CDATA[Rohit Pujar]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 21:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-39998</guid>
+		<description><![CDATA[public void rightView(Node root){
+		if(root!=null){
+			System.out.println(root.data);
+			rightView(root.rightChild);
+		}
+	}]]></description>
+		<content:encoded><![CDATA[<p>public void rightView(Node root){<br />
+		if(root!=null){<br />
+			System.out.println(root.data);<br />
+			rightView(root.rightChild);<br />
+		}<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-39460</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 14:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-39460</guid>
+		<description><![CDATA[this program prints right view using levelorder traversal....
+but i think its not much efficient...i guess its complexity is O(n)...
+m not sure... you can find other implementations levelorder in the given link above in the article
+
+
+
+
+#include
+
+#include
+
+#include
+
+struct node
+
+{
+
+       int data,level;
+
+       struct node* left,*right;
+
+}*root=NULL;
+
+struct level
+
+{
+
+       int data,l;
+
+       struct level* next,*list;
+
+}*start=NULL;
+
+struct node* newnode(int x)
+
+{
+
+       struct node*p=(struct node*)malloc(sizeof(struct node));
+
+       p-&#062;data=x;
+
+       p-&#062;left=p-&#062;right=NULL;
+
+       return p;
+
+};
+
+void traverse(struct node*p,int);
+
+void insert(int,int);
+
+void print();
+
+int main()
+
+{
+
+    root=newnode(1);
+
+    root-&#062;left=newnode(2);
+
+    root-&#062;right=newnode(3);
+
+    root-&#062;left-&#062;left=newnode(7);
+
+    root-&#062;left-&#062;right=newnode(8);
+
+    root-&#062;left-&#062;right-&#062;left=newnode(9);
+
+    root-&#062;left-&#062;right-&#062;left-&#062;right=newnode(10);
+
+    root-&#062;right-&#062;right=newnode(4);
+
+    root-&#062;right-&#062;left=newnode(5);
+
+    root-&#062;right-&#062;left-&#062;right=newnode(6);
+
+    traverse(root,1);
+
+    print();
+
+    getch();
+
+}
+
+void traverse(struct node*p,int l)
+
+{
+
+     if(p!=NULL)
+
+     {
+
+                insert(p-&#062;data,l);
+
+                traverse(p-&#062;left,l+1);
+
+                traverse(p-&#062;right,l+1);
+
+                
+
+     }
+
+}
+
+void insert(int x,int l)
+
+{
+
+     static struct level *q;
+
+     struct level *r,*s,* p= (struct level*)malloc(sizeof(struct level));
+
+     p-&#062;l=l;
+
+     p-&#062;data=x;
+
+     p-&#062;next=p-&#062;list=NULL;
+
+     if(start==NULL)
+
+                    q=start=p;
+
+     else
+
+     {
+
+         for(r=start;r!=NULL;r=r-&#062;next)
+
+                                       if(r-&#062;l==l)
+
+                                                  break;
+
+         if(r==NULL)
+
+         {
+
+             q-&#062;next=p;
+
+             q=p;
+
+         }
+
+         else
+
+         {       
+
+                 while(r!=NULL)
+
+                 {
+
+                               s=r;
+
+                               r=r-&#062;list;
+
+                 }
+
+                 s-&#062;list=p;
+
+         }
+
+     }     
+
+ }
+
+ void print()
+
+ {
+
+      struct level*p,*q,*s;
+
+      for(p=start;p!=NULL;p=p-&#062;next)
+
+      {
+
+                                    for(q=p;q!=NULL;q=q-&#062;list)
+
+                                    {
+
+                                                              s=q;
+
+                                    }
+
+                                    printf(&quot;%dn&quot;,s-&#062;data);
+
+      }                                                              
+
+ }]]></description>
+		<content:encoded><![CDATA[<p>this program prints right view using levelorder traversal&#8230;.<br />
+but i think its not much efficient&#8230;i guess its complexity is O(n)&#8230;<br />
+m not sure&#8230; you can find other implementations levelorder in the given link above in the article</p>
+<p>#include</p>
+<p>#include</p>
+<p>#include</p>
+<p>struct node</p>
+<p>{</p>
+<p>       int data,level;</p>
+<p>       struct node* left,*right;</p>
+<p>}*root=NULL;</p>
+<p>struct level</p>
+<p>{</p>
+<p>       int data,l;</p>
+<p>       struct level* next,*list;</p>
+<p>}*start=NULL;</p>
+<p>struct node* newnode(int x)</p>
+<p>{</p>
+<p>       struct node*p=(struct node*)malloc(sizeof(struct node));</p>
+<p>       p-&gt;data=x;</p>
+<p>       p-&gt;left=p-&gt;right=NULL;</p>
+<p>       return p;</p>
+<p>};</p>
+<p>void traverse(struct node*p,int);</p>
+<p>void insert(int,int);</p>
+<p>void print();</p>
+<p>int main()</p>
+<p>{</p>
+<p>    root=newnode(1);</p>
+<p>    root-&gt;left=newnode(2);</p>
+<p>    root-&gt;right=newnode(3);</p>
+<p>    root-&gt;left-&gt;left=newnode(7);</p>
+<p>    root-&gt;left-&gt;right=newnode(8);</p>
+<p>    root-&gt;left-&gt;right-&gt;left=newnode(9);</p>
+<p>    root-&gt;left-&gt;right-&gt;left-&gt;right=newnode(10);</p>
+<p>    root-&gt;right-&gt;right=newnode(4);</p>
+<p>    root-&gt;right-&gt;left=newnode(5);</p>
+<p>    root-&gt;right-&gt;left-&gt;right=newnode(6);</p>
+<p>    traverse(root,1);</p>
+<p>    print();</p>
+<p>    getch();</p>
+<p>}</p>
+<p>void traverse(struct node*p,int l)</p>
+<p>{</p>
+<p>     if(p!=NULL)</p>
+<p>     {</p>
+<p>                insert(p-&gt;data,l);</p>
+<p>                traverse(p-&gt;left,l+1);</p>
+<p>                traverse(p-&gt;right,l+1);</p>
+<p>     }</p>
+<p>}</p>
+<p>void insert(int x,int l)</p>
+<p>{</p>
+<p>     static struct level *q;</p>
+<p>     struct level *r,*s,* p= (struct level*)malloc(sizeof(struct level));</p>
+<p>     p-&gt;l=l;</p>
+<p>     p-&gt;data=x;</p>
+<p>     p-&gt;next=p-&gt;list=NULL;</p>
+<p>     if(start==NULL)</p>
+<p>                    q=start=p;</p>
+<p>     else</p>
+<p>     {</p>
+<p>         for(r=start;r!=NULL;r=r-&gt;next)</p>
+<p>                                       if(r-&gt;l==l)</p>
+<p>                                                  break;</p>
+<p>         if(r==NULL)</p>
+<p>         {</p>
+<p>             q-&gt;next=p;</p>
+<p>             q=p;</p>
+<p>         }</p>
+<p>         else</p>
+<p>         {       </p>
+<p>                 while(r!=NULL)</p>
+<p>                 {</p>
+<p>                               s=r;</p>
+<p>                               r=r-&gt;list;</p>
+<p>                 }</p>
+<p>                 s-&gt;list=p;</p>
+<p>         }</p>
+<p>     }     </p>
+<p> }</p>
+<p> void print()</p>
+<p> {</p>
+<p>      struct level*p,*q,*s;</p>
+<p>      for(p=start;p!=NULL;p=p-&gt;next)</p>
+<p>      {</p>
+<p>                                    for(q=p;q!=NULL;q=q-&gt;list)</p>
+<p>                                    {</p>
+<p>                                                              s=q;</p>
+<p>                                    }</p>
+<p>                                    printf(&#8220;%dn&#8221;,s-&gt;data);</p>
+<p>      }                                                              </p>
+<p> }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-39370</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 17:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-39370</guid>
+		<description><![CDATA[same logic but different approach...although complexity of both is same i guess... m i right..??
+
+#include
+
+#include
+
+#include
+
+struct node
+
+{
+
+       int data,level;
+
+       struct node* left,*right;
+
+}*root=NULL;
+
+struct node* newnode(int x)
+
+{
+
+       struct node*p=(struct node*)malloc(sizeof(struct node));
+
+       p-&#062;data=x;
+
+       p-&#062;left=p-&#062;right=NULL;
+
+       return p;
+
+};
+
+void level (struct node*);
+
+void rightview(struct node*p);
+
+int main()
+
+{
+
+    root=newnode(1);
+
+    root-&#062;left=newnode(2);
+
+    root-&#062;right=newnode(3);
+
+    root-&#062;left-&#062;left=newnode(7);
+
+    root-&#062;left-&#062;right=newnode(8);
+
+    root-&#062;left-&#062;right-&#062;left=newnode(9);
+
+    root-&#062;left-&#062;right-&#062;left-&#062;right=newnode(10);
+
+    root-&#062;right-&#062;right=newnode(4);
+
+    root-&#062;right-&#062;left=newnode(5);
+
+    root-&#062;right-&#062;left-&#062;right=newnode(6);
+
+    level(root);
+
+    rightview(root);
+
+    getch();
+
+}
+
+void level(struct node*p)
+
+{
+
+     static int x=1;
+
+     if(p!=NULL)
+
+     {
+
+                p-&#062;level=x;
+
+                x++;
+
+                level(p-&#062;left);
+
+                level(p-&#062;right);
+
+                x--;
+
+     }
+
+}
+
+void rightview(struct node*p)
+
+{
+
+     static int m=0;
+
+     if(p!=NULL)
+
+     {
+
+                if(p-&#062;level&#062;m)
+
+                {
+
+                              printf(&quot;%dn&quot;,p-&#062;data);
+
+                              m++;
+
+                }
+
+                rightview(p-&#062;right);
+
+                rightview(p-&#062;left);
+
+     }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>same logic but different approach&#8230;although complexity of both is same i guess&#8230; m i right..??</p>
+<p>#include</p>
+<p>#include</p>
+<p>#include</p>
+<p>struct node</p>
+<p>{</p>
+<p>       int data,level;</p>
+<p>       struct node* left,*right;</p>
+<p>}*root=NULL;</p>
+<p>struct node* newnode(int x)</p>
+<p>{</p>
+<p>       struct node*p=(struct node*)malloc(sizeof(struct node));</p>
+<p>       p-&gt;data=x;</p>
+<p>       p-&gt;left=p-&gt;right=NULL;</p>
+<p>       return p;</p>
+<p>};</p>
+<p>void level (struct node*);</p>
+<p>void rightview(struct node*p);</p>
+<p>int main()</p>
+<p>{</p>
+<p>    root=newnode(1);</p>
+<p>    root-&gt;left=newnode(2);</p>
+<p>    root-&gt;right=newnode(3);</p>
+<p>    root-&gt;left-&gt;left=newnode(7);</p>
+<p>    root-&gt;left-&gt;right=newnode(8);</p>
+<p>    root-&gt;left-&gt;right-&gt;left=newnode(9);</p>
+<p>    root-&gt;left-&gt;right-&gt;left-&gt;right=newnode(10);</p>
+<p>    root-&gt;right-&gt;right=newnode(4);</p>
+<p>    root-&gt;right-&gt;left=newnode(5);</p>
+<p>    root-&gt;right-&gt;left-&gt;right=newnode(6);</p>
+<p>    level(root);</p>
+<p>    rightview(root);</p>
+<p>    getch();</p>
+<p>}</p>
+<p>void level(struct node*p)</p>
+<p>{</p>
+<p>     static int x=1;</p>
+<p>     if(p!=NULL)</p>
+<p>     {</p>
+<p>                p-&gt;level=x;</p>
+<p>                x++;</p>
+<p>                level(p-&gt;left);</p>
+<p>                level(p-&gt;right);</p>
+<p>                x&#8211;;</p>
+<p>     }</p>
+<p>}</p>
+<p>void rightview(struct node*p)</p>
+<p>{</p>
+<p>     static int m=0;</p>
+<p>     if(p!=NULL)</p>
+<p>     {</p>
+<p>                if(p-&gt;level&gt;m)</p>
+<p>                {</p>
+<p>                              printf(&#8220;%dn&#8221;,p-&gt;data);</p>
+<p>                              m++;</p>
+<p>                }</p>
+<p>                rightview(p-&gt;right);</p>
+<p>                rightview(p-&gt;left);</p>
+<p>     }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-39246</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 11:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-39246</guid>
+		<description><![CDATA[Can anybody please provide with the code to print te right view using Level Order Traversal]]></description>
+		<content:encoded><![CDATA[<p>Can anybody please provide with the code to print te right view using Level Order Traversal</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-38853</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 15:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-38853</guid>
+		<description><![CDATA[using level order
+void printRightview(btnode *t)
+{
+    if(t==NULL)
+    return;
+    
+    cout&#060;&#060;endl;
+    
+    queue  q;
+    q.push(t);
+    
+    while(1)
+    {
+        int count=q.size();
+        if(count==0)
+        {    break;
+        }
+        
+        t=q.front();
+        cout&#060;data&#060;0)
+        {
+            t=q.front();
+            if(t-&#062;rchild)
+            q.push(t-&#062;rchild);
+            
+            if(t-&#062;lchild)
+            q.push(t-&#062;lchild);
+            
+            q.pop();
+            count--;
+        }
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>using level order<br />
+void printRightview(btnode *t)<br />
+{<br />
+    if(t==NULL)<br />
+    return;</p>
+<p>    cout&lt;&lt;endl;</p>
+<p>    queue  q;<br />
+    q.push(t);</p>
+<p>    while(1)<br />
+    {<br />
+        int count=q.size();<br />
+        if(count==0)<br />
+        {    break;<br />
+        }</p>
+<p>        t=q.front();<br />
+        cout&lt;data&lt;0)<br />
+        {<br />
+            t=q.front();<br />
+            if(t-&gt;rchild)<br />
+            q.push(t-&gt;rchild);</p>
+<p>            if(t-&gt;lchild)<br />
+            q.push(t-&gt;lchild);</p>
+<p>            q.pop();<br />
+            count&#8211;;<br />
+        }<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gastonbm</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-38848</link>
+		<dc:creator><![CDATA[gastonbm]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 14:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-38848</guid>
+		<description><![CDATA[yeah.. hence the quotes I put in &#039;in reverse&#039;]]></description>
+		<content:encoded><![CDATA[<p>yeah.. hence the quotes I put in &#8216;in reverse&#8217;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-38792</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 07:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-38792</guid>
+		<description><![CDATA[its reverse form of postorder as you are first printing the root and then its children]]></description>
+		<content:encoded><![CDATA[<p>its reverse form of postorder as you are first printing the root and then its children</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-38766</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 03:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-38766</guid>
+		<description><![CDATA[Can anybody please provide with the code to print te right view using Level Order Traversal]]></description>
+		<content:encoded><![CDATA[<p>Can anybody please provide with the code to print te right view using Level Order Traversal</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gastonbm</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-38759</link>
+		<dc:creator><![CDATA[gastonbm]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 00:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-38759</guid>
+		<description><![CDATA[It&#039;s a preorder traversal &#039;in reverse&#039; from the end to the beginning.. Implemented like this is O(h) = O(n) extra memory, but one can get away using Morris Traversal for reducing it to O(1) extra mem..]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s a preorder traversal &#8216;in reverse&#8217; from the end to the beginning.. Implemented like this is O(h) = O(n) extra memory, but one can get away using Morris Traversal for reducing it to O(1) extra mem..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anupam</title>
+		<link>http://www.geeksforgeeks.org/print-right-view-binary-tree-2/#comment-37949</link>
+		<dc:creator><![CDATA[Anupam]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 02:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127635#comment-37949</guid>
+		<description><![CDATA[void printRight(TreeNode node){
+  while (node != null) {
+    System.out.println(node.getData());
+    if(node.right() != null) {
+      node = node.right(); 
+    } else { 
+      node = node.left()
+   }
+  }
+}]]></description>
+		<content:encoded><![CDATA[<p>void printRight(TreeNode node){<br />
+  while (node != null) {<br />
+    System.out.println(node.getData());<br />
+    if(node.right() != null) {<br />
+      node = node.right();<br />
+    } else {<br />
+      node = node.left()<br />
+   }<br />
+  }<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:49 -->
+
+<!-- Compression = gzip -->

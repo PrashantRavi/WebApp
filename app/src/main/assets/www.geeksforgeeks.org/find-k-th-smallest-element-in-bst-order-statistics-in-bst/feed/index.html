@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Find k-th smallest element in BST (Order Statistics in BST)</title>
+	<atom:link href="http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Jitendra Suthar</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-40109</link>
+		<dc:creator><![CDATA[Jitendra Suthar]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 04:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-40109</guid>
+		<description><![CDATA[pretty easy solution  in O(n) time is
+
+void smallestK(np*root,int key)
+
+{  static int count=0;
+   if(root==NULL) return ;
+
+	smallestK(root-&#062;left,key);
+if(++count==key)
+{
+		printf(&quot;nnKth Smallest Element  %d &quot;,root-&#062;data);
+}
+smallestK(root-&#062;right,key);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>pretty easy solution  in O(n) time is</p>
+<p>void smallestK(np*root,int key)</p>
+<p>{  static int count=0;<br />
+   if(root==NULL) return ;</p>
+<p>	smallestK(root-&gt;left,key);<br />
+if(++count==key)<br />
+{<br />
+		printf(&#8220;nnKth Smallest Element  %d &#8220;,root-&gt;data);<br />
+}<br />
+smallestK(root-&gt;right,key);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nkaushik</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-39416</link>
+		<dc:creator><![CDATA[nkaushik]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 07:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-39416</guid>
+		<description><![CDATA[int smallestK(node *root,int arr[],int k)
+
+{
+
+    if(root==null)
+
+        return k;
+
+    k=smallestK(root-&#062;left,arr,k);
+
+    arr[k]=root-&#062;data;
+
+    k++;
+
+    k=smallestK(root-&#062;right,arr,k);
+
+return k;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>int smallestK(node *root,int arr[],int k)</p>
+<p>{</p>
+<p>    if(root==null)</p>
+<p>        return k;</p>
+<p>    k=smallestK(root-&gt;left,arr,k);</p>
+<p>    arr[k]=root-&gt;data;</p>
+<p>    k++;</p>
+<p>    k=smallestK(root-&gt;right,arr,k);</p>
+<p>return k;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ashish Bansal</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-39029</link>
+		<dc:creator><![CDATA[Ashish Bansal]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 09:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-39029</guid>
+		<description><![CDATA[#include 
+#include 
+ 
+#define ARRAY_SIZE(arr) sizeof(arr)/sizeof(arr[0])
+ 
+typedef struct node_t node_t;
+ 
+/* Binary tree node */
+struct node_t
+{
+    int data;
+    int lCount;
+ 
+    node_t* left;
+    node_t* right;
+};
+ 
+/* Iterative insertion
+   Recursion is least preferred unless we gain something
+*/
+node_t *insert_node(node_t *root, node_t* node)
+{
+    /* A crawling pointer */
+    node_t *pTraverse = root;
+    node_t *currentParent = root;
+ 
+    // Traverse till appropriate node
+    while(pTraverse)
+    {
+        currentParent = pTraverse;
+ 
+        if( node-&#062;data data )
+        {
+            /* We are branching to left subtree
+               increment node count */
+            pTraverse-&#062;lCount++;
+            /* left subtree */
+            pTraverse = pTraverse-&#062;left;
+        }
+        else
+        {
+            /* right subtree */
+            pTraverse = pTraverse-&#062;right;
+        }
+    }
+ 
+    /* If the tree is empty, make it as root node */
+    if( !root )
+    {
+        root = node;
+    }
+    else if( node-&#062;data data )
+    {
+        /* Insert on left side */
+        currentParent-&#062;left = node;
+    }
+    else
+    {
+        /* Insert on right side */
+        currentParent-&#062;right = node;
+    }
+ 
+    return root;
+}
+ 
+/* Elements are in an array. The function builds binary tree */
+node_t* binary_search_tree(node_t *root, int keys[], int const size)
+{
+    int iterator;
+    node_t *new_node = NULL;
+ 
+    for(iterator = 0; iterator data   = keys[iterator];
+        new_node-&#062;lCount = 0;
+        new_node-&#062;left   = NULL;
+        new_node-&#062;right  = NULL;
+ 
+        /* insert into BST */
+        root = insert_node(root, new_node);
+    }
+ 
+    return root;
+}
+ 
+/*int k_smallest_element(node_t *root, int k)
+{
+    int ret = -1;
+ 
+    if( root )
+    {
+        /* A crawling pointer */
+    /*    node_t *pTraverse = root;
+ 
+        /* Go to k-th smallest */
+      /*  while(pTraverse)
+        {
+            if( (pTraverse-&#062;lCount + 1) == k )
+            {
+                ret = pTraverse-&#062;data;
+                break;
+            }
+            else if( k &#062; pTraverse-&#062;lCount )
+            {
+                /*  There are less nodes on left subtree
+                    Go to right subtree */
+        /*        k = k - (pTraverse-&#062;lCount + 1);
+                pTraverse = pTraverse-&#062;right;
+            }
+            else
+            {
+                /* The node is on left subtree */
+          /*:wq
+      pTraverse = pTraverse-&#062;left;
+            }
+        }
+    }
+ 
+    return ret;
+}*/
+ 
+void k_smallest_element(node_t *root, int *k , int *p)
+{
+    if(root == NULL)
+    return;
+    k_smallest_element(root-&#062;left , k , p);
+//    printf(&quot;Ashish printing the k = %d n and p = %d n&quot;,*k , *p);
+    //*p = *p+1;
+    (*p)++;
+//    printf(&quot;Ashish after increament p = %d n &quot;,*p);
+    if(*p == *k)
+    printf(&quot;Ashish smallest printing for k = %d  value =   %d n&quot;,*k,root-&#062;data);
+    else if(*p &#062; * k)
+    return;
+    k_smallest_element(root-&#062;right , k , p);
+}
+
+void inorder (node_t *root)
+{
+    if(root == NULL)
+    return;
+    inorder(root-&#062;left);
+    printf(&quot;%d&quot;,root-&#062;data);
+
+    inorder(root-&#062;right);
+}
+/* Driver program to test above functions */
+static int p;
+int main(void)
+{
+    /* just add elements to test */
+    /* NOTE: A sorted array results in skewed tree */
+    int ele[] = { 20, 8, 22, 4, 12, 10, 14 };
+    int i;
+    node_t* root = NULL;
+    /* Creating the tree given in the above diagram */
+    root = binary_search_tree(root, ele, ARRAY_SIZE(ele));
+    //inorder(root); 
+    /*  It should print the sorted array */
+   // for(i = 1; i &#060;= ARRAY_SIZE(ele); i++)
+    {
+    //printf(&#034;n kth smallest elment for k = %d n &#034;,i );
+    //p = i;
+    p =0;
+    i =4;
+        k_smallest_element(root, &#038;i,&#038;p);
+    }
+ 
+    getchar();
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include </p>
+<p>#define ARRAY_SIZE(arr) sizeof(arr)/sizeof(arr[0])</p>
+<p>typedef struct node_t node_t;</p>
+<p>/* Binary tree node */<br />
+struct node_t<br />
+{<br />
+    int data;<br />
+    int lCount;</p>
+<p>    node_t* left;<br />
+    node_t* right;<br />
+};</p>
+<p>/* Iterative insertion<br />
+   Recursion is least preferred unless we gain something<br />
+*/<br />
+node_t *insert_node(node_t *root, node_t* node)<br />
+{<br />
+    /* A crawling pointer */<br />
+    node_t *pTraverse = root;<br />
+    node_t *currentParent = root;</p>
+<p>    // Traverse till appropriate node<br />
+    while(pTraverse)<br />
+    {<br />
+        currentParent = pTraverse;</p>
+<p>        if( node-&gt;data data )<br />
+        {<br />
+            /* We are branching to left subtree<br />
+               increment node count */<br />
+            pTraverse-&gt;lCount++;<br />
+            /* left subtree */<br />
+            pTraverse = pTraverse-&gt;left;<br />
+        }<br />
+        else<br />
+        {<br />
+            /* right subtree */<br />
+            pTraverse = pTraverse-&gt;right;<br />
+        }<br />
+    }</p>
+<p>    /* If the tree is empty, make it as root node */<br />
+    if( !root )<br />
+    {<br />
+        root = node;<br />
+    }<br />
+    else if( node-&gt;data data )<br />
+    {<br />
+        /* Insert on left side */<br />
+        currentParent-&gt;left = node;<br />
+    }<br />
+    else<br />
+    {<br />
+        /* Insert on right side */<br />
+        currentParent-&gt;right = node;<br />
+    }</p>
+<p>    return root;<br />
+}</p>
+<p>/* Elements are in an array. The function builds binary tree */<br />
+node_t* binary_search_tree(node_t *root, int keys[], int const size)<br />
+{<br />
+    int iterator;<br />
+    node_t *new_node = NULL;</p>
+<p>    for(iterator = 0; iterator data   = keys[iterator];<br />
+        new_node-&gt;lCount = 0;<br />
+        new_node-&gt;left   = NULL;<br />
+        new_node-&gt;right  = NULL;</p>
+<p>        /* insert into BST */<br />
+        root = insert_node(root, new_node);<br />
+    }</p>
+<p>    return root;<br />
+}</p>
+<p>/*int k_smallest_element(node_t *root, int k)<br />
+{<br />
+    int ret = -1;</p>
+<p>    if( root )<br />
+    {<br />
+        /* A crawling pointer */<br />
+    /*    node_t *pTraverse = root;</p>
+<p>        /* Go to k-th smallest */<br />
+      /*  while(pTraverse)<br />
+        {<br />
+            if( (pTraverse-&gt;lCount + 1) == k )<br />
+            {<br />
+                ret = pTraverse-&gt;data;<br />
+                break;<br />
+            }<br />
+            else if( k &gt; pTraverse-&gt;lCount )<br />
+            {<br />
+                /*  There are less nodes on left subtree<br />
+                    Go to right subtree */<br />
+        /*        k = k &#8211; (pTraverse-&gt;lCount + 1);<br />
+                pTraverse = pTraverse-&gt;right;<br />
+            }<br />
+            else<br />
+            {<br />
+                /* The node is on left subtree */<br />
+          /*:wq<br />
+      pTraverse = pTraverse-&gt;left;<br />
+            }<br />
+        }<br />
+    }</p>
+<p>    return ret;<br />
+}*/</p>
+<p>void k_smallest_element(node_t *root, int *k , int *p)<br />
+{<br />
+    if(root == NULL)<br />
+    return;<br />
+    k_smallest_element(root-&gt;left , k , p);<br />
+//    printf(&#8220;Ashish printing the k = %d n and p = %d n&#8221;,*k , *p);<br />
+    //*p = *p+1;<br />
+    (*p)++;<br />
+//    printf(&#8220;Ashish after increament p = %d n &#8220;,*p);<br />
+    if(*p == *k)<br />
+    printf(&#8220;Ashish smallest printing for k = %d  value =   %d n&#8221;,*k,root-&gt;data);<br />
+    else if(*p &gt; * k)<br />
+    return;<br />
+    k_smallest_element(root-&gt;right , k , p);<br />
+}</p>
+<p>void inorder (node_t *root)<br />
+{<br />
+    if(root == NULL)<br />
+    return;<br />
+    inorder(root-&gt;left);<br />
+    printf(&#8220;%d&#8221;,root-&gt;data);</p>
+<p>    inorder(root-&gt;right);<br />
+}<br />
+/* Driver program to test above functions */<br />
+static int p;<br />
+int main(void)<br />
+{<br />
+    /* just add elements to test */<br />
+    /* NOTE: A sorted array results in skewed tree */<br />
+    int ele[] = { 20, 8, 22, 4, 12, 10, 14 };<br />
+    int i;<br />
+    node_t* root = NULL;<br />
+    /* Creating the tree given in the above diagram */<br />
+    root = binary_search_tree(root, ele, ARRAY_SIZE(ele));<br />
+    //inorder(root);<br />
+    /*  It should print the sorted array */<br />
+   // for(i = 1; i &lt;= ARRAY_SIZE(ele); i++)<br />
+    {<br />
+    //printf(&quot;n kth smallest elment for k = %d n &quot;,i );<br />
+    //p = i;<br />
+    p =0;<br />
+    i =4;<br />
+        k_smallest_element(root, &amp;i,&amp;p);<br />
+    }</p>
+<p>    getchar();<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: x</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-39028</link>
+		<dc:creator><![CDATA[x]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 09:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-39028</guid>
+		<description><![CDATA[bool f(struct node *root,int k,int *i)
+
+{
+
+	if(root==NULL)return false;
+
+	if(f(root-&#062;left,k,i))return true;
+
+	if(k==*i)
+
+	{
+
+		printf(&quot;%d &quot;,root-&#062;data);return true;
+
+	}
+
+	*i=*i+1;
+
+	return f(root-&#062;right,k,i);
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>bool f(struct node *root,int k,int *i)</p>
+<p>{</p>
+<p>	if(root==NULL)return false;</p>
+<p>	if(f(root-&gt;left,k,i))return true;</p>
+<p>	if(k==*i)</p>
+<p>	{</p>
+<p>		printf(&#8220;%d &#8220;,root-&gt;data);return true;</p>
+<p>	}</p>
+<p>	*i=*i+1;</p>
+<p>	return f(root-&gt;right,k,i);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Saumye</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-38942</link>
+		<dc:creator><![CDATA[Saumye]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 12:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-38942</guid>
+		<description><![CDATA[We can also do inorder traversal keeping a counter and printing the node when count == K.]]></description>
+		<content:encoded><![CDATA[<p>We can also do inorder traversal keeping a counter and printing the node when count == K.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Kumar</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-38749</link>
+		<dc:creator><![CDATA[Rohit Kumar]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 21:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-38749</guid>
+		<description><![CDATA[void kth_smaller(struct node*root,int n)
+{ 
+    static int i;
+    if(root==NULL)return;
+  
+    kth_smaller(root-&#062;prev,n);
+      i++;if(i==n)printf(&quot; %d &quot;,root-&#062;data);
+    kth_smaller(root-&#062;next,n);
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>void kth_smaller(struct node*root,int n)<br />
+{<br />
+    static int i;<br />
+    if(root==NULL)return;</p>
+<p>    kth_smaller(root-&gt;prev,n);<br />
+      i++;if(i==n)printf(&#8221; %d &#8220;,root-&gt;data);<br />
+    kth_smaller(root-&gt;next,n);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: shubh_211</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-38739</link>
+		<dc:creator><![CDATA[shubh_211]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 19:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-38739</guid>
+		<description><![CDATA[int solve (node* root, int k, int *j){
+
+if( root != NULL) {
+int a = solve(root-&#062;left, k, j);
+if(a != -1){
+return a;
+}
+if(*j == k){
+cout &#060;data &#060;data;
+}
+(*j)++;
+int b = solve(root-&#062;right, k, j);
+if( b != -1) {
+return b;
+}
+return -1;
+}
+else return -1;
+}
+
+int kthSmallest(node * root, int k){
+if(root == NULL){
+return -1;
+}
+int j = 1;
+return solve(root, k, &#038;j);
+}]]></description>
+		<content:encoded><![CDATA[<p>int solve (node* root, int k, int *j){</p>
+<p>if( root != NULL) {<br />
+int a = solve(root-&gt;left, k, j);<br />
+if(a != -1){<br />
+return a;<br />
+}<br />
+if(*j == k){<br />
+cout &lt;data &lt;data;<br />
+}<br />
+(*j)++;<br />
+int b = solve(root-&gt;right, k, j);<br />
+if( b != -1) {<br />
+return b;<br />
+}<br />
+return -1;<br />
+}<br />
+else return -1;<br />
+}</p>
+<p>int kthSmallest(node * root, int k){<br />
+if(root == NULL){<br />
+return -1;<br />
+}<br />
+int j = 1;<br />
+return solve(root, k, &amp;j);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shivam Chaudhary</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-38471</link>
+		<dc:creator><![CDATA[Shivam Chaudhary]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 19:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-38471</guid>
+		<description><![CDATA[void kth_smallest(node *root,int k)
+
+{
+
+	if(root == NULL) {
+
+		return;
+
+	}else {
+
+		kth_smallest(root-&#062;left,k);
+
+		cnt++;
+
+		if(cnt == k) {
+
+			cout &#060;data &#060;right,k);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void kth_smallest(node *root,int k)</p>
+<p>{</p>
+<p>	if(root == NULL) {</p>
+<p>		return;</p>
+<p>	}else {</p>
+<p>		kth_smallest(root-&gt;left,k);</p>
+<p>		cnt++;</p>
+<p>		if(cnt == k) {</p>
+<p>			cout &lt;data &lt;right,k);</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Legolas</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-37850</link>
+		<dc:creator><![CDATA[Legolas]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 17:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-37850</guid>
+		<description><![CDATA[I can go all the way to left to find the smallest element and find the successor of the current node and then again find the successor of the new successor node continue this k times and we get the kth smallest item.!]]></description>
+		<content:encoded><![CDATA[<p>I can go all the way to left to find the smallest element and find the successor of the current node and then again find the successor of the new successor node continue this k times and we get the kth smallest item.!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MD</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-37837</link>
+		<dc:creator><![CDATA[MD]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 12:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-37837</guid>
+		<description><![CDATA[struct node *return_k_smallest(struct node *root,int k)
+
+    {
+
+       static int count=0;
+
+        static struct node *temp;
+
+        if (root==NULL)
+
+            return 0;
+
+        return_k_smallest(root-&#062;left,k);
+
+        if (++count==k)
+
+            temp=root;
+
+        return_k_smallest(root-&#062;right,k);
+
+    return temp;
+
+    }]]></description>
+		<content:encoded><![CDATA[<p>struct node *return_k_smallest(struct node *root,int k)</p>
+<p>    {</p>
+<p>       static int count=0;</p>
+<p>        static struct node *temp;</p>
+<p>        if (root==NULL)</p>
+<p>            return 0;</p>
+<p>        return_k_smallest(root-&gt;left,k);</p>
+<p>        if (++count==k)</p>
+<p>            temp=root;</p>
+<p>        return_k_smallest(root-&gt;right,k);</p>
+<p>    return temp;</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rock_on</title>
+		<link>http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#comment-35779</link>
+		<dc:creator><![CDATA[rock_on]]></dc:creator>
+		<pubDate>Thu, 08 May 2014 06:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10379#comment-35779</guid>
+		<description><![CDATA[good one :)]]></description>
+		<content:encoded><![CDATA[<p>good one 🙂</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.051 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:06:30 -->
+
+<!-- Compression = gzip -->

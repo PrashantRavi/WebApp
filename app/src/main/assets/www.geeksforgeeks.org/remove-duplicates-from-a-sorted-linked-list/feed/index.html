@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Remove duplicates from a sorted linked list</title>
+	<atom:link href="http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-39988</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 18:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-39988</guid>
+		<description><![CDATA[an other easy approach
+
+void deleteDuplicate(node **header)
+{
+    node *ptr1=*header,*ptr2;
+    int i;
+    while(ptr1!=NULL)
+    {
+        i=ptr1-&#062;data;
+        ptr2=ptr1-&#062;next;
+        while(ptr2!=NULL&#038;&#038;ptr2-&#062;data==i)ptr2=ptr2-&#062;next;
+        ptr1-&#062;next=ptr2;
+        ptr1=ptr1-&#062;next;
+    }
+    return;
+}]]></description>
+		<content:encoded><![CDATA[<p>an other easy approach</p>
+<p>void deleteDuplicate(node **header)<br />
+{<br />
+    node *ptr1=*header,*ptr2;<br />
+    int i;<br />
+    while(ptr1!=NULL)<br />
+    {<br />
+        i=ptr1-&gt;data;<br />
+        ptr2=ptr1-&gt;next;<br />
+        while(ptr2!=NULL&amp;&amp;ptr2-&gt;data==i)ptr2=ptr2-&gt;next;<br />
+        ptr1-&gt;next=ptr2;<br />
+        ptr1=ptr1-&gt;next;<br />
+    }<br />
+    return;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gitanshu behal</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-39689</link>
+		<dc:creator><![CDATA[Gitanshu behal]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 19:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-39689</guid>
+		<description><![CDATA[I think this implementation is a bit easier to understand:
+
+void removeDuplicates(struct node* head)
+
+{
+
+	if(head==NULL &#124;&#124; head-&#062;next==NULL)
+
+		return;
+
+	node *prev=head,*current=head-&#062;next;
+
+	while(current!=NULL)
+
+	{
+
+		if(current-&#062;data == prev-&#062;data)
+
+		{
+
+			prev-&#062;next=current-&#062;next;
+
+			free(current);
+
+			current=prev-&#062;next;
+
+		}
+
+		else
+
+		{
+
+			prev=prev-&#062;next;
+
+			current=current-&#062;next;
+
+		}
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I think this implementation is a bit easier to understand:</p>
+<p>void removeDuplicates(struct node* head)</p>
+<p>{</p>
+<p>	if(head==NULL || head-&gt;next==NULL)</p>
+<p>		return;</p>
+<p>	node *prev=head,*current=head-&gt;next;</p>
+<p>	while(current!=NULL)</p>
+<p>	{</p>
+<p>		if(current-&gt;data == prev-&gt;data)</p>
+<p>		{</p>
+<p>			prev-&gt;next=current-&gt;next;</p>
+<p>			free(current);</p>
+<p>			current=prev-&gt;next;</p>
+<p>		}</p>
+<p>		else</p>
+<p>		{</p>
+<p>			prev=prev-&gt;next;</p>
+<p>			current=current-&gt;next;</p>
+<p>		}</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-38964</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 16:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-38964</guid>
+		<description><![CDATA[Using a two node window:
+
+
+void remove_duplicate(node *head)
+{
+if (!head)
+return;
+node * w1 = head;
+node * w2 = head-&#062;next;
+
+
+while (w2)
+{
+if (w1-&#062;data == w2-&#062;data)
+{
+w1-&#062;next = w2-&#062;next;
+
+head = w2;
+w2 = w2-&#062;next;
+free(head);
+}
+else
+{w1 = w1-&#062;next;
+w2 = w2-&#062;next;
+
+}
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>Using a two node window:</p>
+<p>void remove_duplicate(node *head)<br />
+{<br />
+if (!head)<br />
+return;<br />
+node * w1 = head;<br />
+node * w2 = head-&gt;next;</p>
+<p>while (w2)<br />
+{<br />
+if (w1-&gt;data == w2-&gt;data)<br />
+{<br />
+w1-&gt;next = w2-&gt;next;</p>
+<p>head = w2;<br />
+w2 = w2-&gt;next;<br />
+free(head);<br />
+}<br />
+else<br />
+{w1 = w1-&gt;next;<br />
+w2 = w2-&gt;next;</p>
+<p>}<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav Nara</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-37930</link>
+		<dc:creator><![CDATA[Gaurav Nara]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 17:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-37930</guid>
+		<description><![CDATA[but you&#039;re not deleting the node.. you&#039;re just shifting the next pointer?]]></description>
+		<content:encoded><![CDATA[<p>but you&#8217;re not deleting the node.. you&#8217;re just shifting the next pointer?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nobody</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-37721</link>
+		<dc:creator><![CDATA[nobody]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 05:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-37721</guid>
+		<description><![CDATA[Is this code correct? 
+struct node* cur=head;
+struct node* cur_next=head-&#062;next;
+while(cur!=NULL &#038;&#038; cur-&#062;next!=NULL)
+{
+while(cur-&#062;data==cur_next-&#062;data)
+{
+struct node *temp=cur_next;
+cur_next=cur_next-&#062;next;
+free(temp);
+}
+cur-&#062;next=cur_next;
+cur=cur_next;
+cur_next=cur_next-&#062;next;
+}]]></description>
+		<content:encoded><![CDATA[<p>Is this code correct?<br />
+struct node* cur=head;<br />
+struct node* cur_next=head-&gt;next;<br />
+while(cur!=NULL &amp;&amp; cur-&gt;next!=NULL)<br />
+{<br />
+while(cur-&gt;data==cur_next-&gt;data)<br />
+{<br />
+struct node *temp=cur_next;<br />
+cur_next=cur_next-&gt;next;<br />
+free(temp);<br />
+}<br />
+cur-&gt;next=cur_next;<br />
+cur=cur_next;<br />
+cur_next=cur_next-&gt;next;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SANTOSH KUMAR MISHRA</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-37635</link>
+		<dc:creator><![CDATA[SANTOSH KUMAR MISHRA]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 01:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-37635</guid>
+		<description><![CDATA[void RemoveDuplicate(ListNode *head)
+{
+ListNode *current,*temp;
+current = head;
+if(!current)
+{
+printf(&quot;nnList is empty.nn&quot;);
+return;
+}
+while(current-&#062;next-&#062;next)
+{
+if(current-&#062;data == current-&#062;next-&#062;data)
+{
+temp = current-&#062;next;
+current-&#062;next = current-&#062;next-&#062;next;
+free(temp);
+continue;
+}
+current = current-&#062;next;	
+}
+if(current-&#062;next != NULL)
+if(current-&#062;data == current-&#062;next-&#062;data)
+{
+temp = current-&#062;next;	
+current-&#062;next = NULL;
+free(temp);
+}
+printf(&quot;nnDuplicate Node successfully removed.nn&quot;);
+}]]></description>
+		<content:encoded><![CDATA[<p>void RemoveDuplicate(ListNode *head)<br />
+{<br />
+ListNode *current,*temp;<br />
+current = head;<br />
+if(!current)<br />
+{<br />
+printf(&#8220;nnList is empty.nn&#8221;);<br />
+return;<br />
+}<br />
+while(current-&gt;next-&gt;next)<br />
+{<br />
+if(current-&gt;data == current-&gt;next-&gt;data)<br />
+{<br />
+temp = current-&gt;next;<br />
+current-&gt;next = current-&gt;next-&gt;next;<br />
+free(temp);<br />
+continue;<br />
+}<br />
+current = current-&gt;next;<br />
+}<br />
+if(current-&gt;next != NULL)<br />
+if(current-&gt;data == current-&gt;next-&gt;data)<br />
+{<br />
+temp = current-&gt;next;<br />
+current-&gt;next = NULL;<br />
+free(temp);<br />
+}<br />
+printf(&#8220;nnDuplicate Node successfully removed.nn&#8221;);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-37390</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 20:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-37390</guid>
+		<description><![CDATA[please check it .
+
+
+void remove_duplicate( struct node *first )
+
+{
+
+     if ( first == NULL &#038;&#038; first-&#062;next == NULL ){
+
+        return;
+
+     }
+
+     int cur = first-&#062;data;
+
+     struct node *pre = first;
+
+     struct node *current = first-&#062;next;
+
+     while ( current != NULL ) {
+
+           if ( cur == current-&#062;data) {
+
+              pre-&#062;next = current-&#062;next;
+
+           }
+
+           else {
+
+               cur  = current-&#062;data;
+
+                pre = current;
+
+           }
+
+           current = current-&#062;next;
+
+     }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>please check it .</p>
+<p>void remove_duplicate( struct node *first )</p>
+<p>{</p>
+<p>     if ( first == NULL &amp;&amp; first-&gt;next == NULL ){</p>
+<p>        return;</p>
+<p>     }</p>
+<p>     int cur = first-&gt;data;</p>
+<p>     struct node *pre = first;</p>
+<p>     struct node *current = first-&gt;next;</p>
+<p>     while ( current != NULL ) {</p>
+<p>           if ( cur == current-&gt;data) {</p>
+<p>              pre-&gt;next = current-&gt;next;</p>
+<p>           }</p>
+<p>           else {</p>
+<p>               cur  = current-&gt;data;</p>
+<p>                pre = current;</p>
+<p>           }</p>
+<p>           current = current-&gt;next;</p>
+<p>     }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: v3gA</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-36260</link>
+		<dc:creator><![CDATA[v3gA]]></dc:creator>
+		<pubDate>Mon, 19 May 2014 09:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-36260</guid>
+		<description><![CDATA[One can use a recursive version as well. http://ideone.com/4UeBkp
+Time complexity : O(n)
+Auxiliary space: O(1) (No stack space taken with tail call optimization)]]></description>
+		<content:encoded><![CDATA[<p>One can use a recursive version as well. <a href="http://ideone.com/4UeBkp" rel="nofollow">http://ideone.com/4UeBkp</a><br />
+Time complexity : O(n)<br />
+Auxiliary space: O(1) (No stack space taken with tail call optimization)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aman</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-35727</link>
+		<dc:creator><![CDATA[Aman]]></dc:creator>
+		<pubDate>Tue, 06 May 2014 16:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-35727</guid>
+		<description><![CDATA[Solution with less number of variables:
+
+void removeDuplicates(Node* head)
+
+{
+
+    while(head-&#062;next  != NULL)
+
+    {
+
+        if(head-&#062;data == head-&#062;next-&#062;data)
+
+        {
+
+            Node* temp = head-&#062;next;
+
+            head-&#062;next = head-&#062;next-&#062;next;
+
+            temp = NULL;
+
+            }
+
+            else
+
+                head = head-&#062;next;
+
+        }
+
+    }
+
+As head pointer is not required to change in this case it can be passed by value.]]></description>
+		<content:encoded><![CDATA[<p>Solution with less number of variables:</p>
+<p>void removeDuplicates(Node* head)</p>
+<p>{</p>
+<p>    while(head-&gt;next  != NULL)</p>
+<p>    {</p>
+<p>        if(head-&gt;data == head-&gt;next-&gt;data)</p>
+<p>        {</p>
+<p>            Node* temp = head-&gt;next;</p>
+<p>            head-&gt;next = head-&gt;next-&gt;next;</p>
+<p>            temp = NULL;</p>
+<p>            }</p>
+<p>            else</p>
+<p>                head = head-&gt;next;</p>
+<p>        }</p>
+<p>    }</p>
+<p>As head pointer is not required to change in this case it can be passed by value.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-34549</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Thu, 10 Apr 2014 12:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-34549</guid>
+		<description><![CDATA[Yes, you are write It is not much optimized then above algorithm but it&#039;s another way of doing it and I even mentioned this disadvantage in my post.... but it can come in handy when linked list is not sorted .]]></description>
+		<content:encoded><![CDATA[<p>Yes, you are write It is not much optimized then above algorithm but it&#8217;s another way of doing it and I even mentioned this disadvantage in my post&#8230;. but it can come in handy when linked list is not sorted .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jonathan Chen</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/#comment-34479</link>
+		<dc:creator><![CDATA[Jonathan Chen]]></dc:creator>
+		<pubDate>Tue, 08 Apr 2014 22:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5075#comment-34479</guid>
+		<description><![CDATA[How is it more optimized? I don&#039;t think it is. 
+
+
+The original strategy traverses the list only once. In order to remove duplicates in general, you have to look at every item at least once. 
+
+
+Your strategy goes through every element once as well. However, the downside is that you also use an auxiliary hashtable which is worse in terms of space complexity.
+
+
+If there are millions more elements, your strategy has to traverse through every single one of them, just like the above approach does.]]></description>
+		<content:encoded><![CDATA[<p>How is it more optimized? I don&#8217;t think it is. </p>
+<p>The original strategy traverses the list only once. In order to remove duplicates in general, you have to look at every item at least once. </p>
+<p>Your strategy goes through every element once as well. However, the downside is that you also use an auxiliary hashtable which is worse in terms of space complexity.</p>
+<p>If there are millions more elements, your strategy has to traverse through every single one of them, just like the above approach does.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:43 -->
+
+<!-- Compression = gzip -->

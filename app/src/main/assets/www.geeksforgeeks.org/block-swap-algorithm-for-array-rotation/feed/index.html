@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Block swap algorithm for array rotation</title>
+	<atom:link href="http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: venkat</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-26961</link>
+		<dc:creator><![CDATA[venkat]]></dc:creator>
+		<pubDate>Sun, 25 Aug 2013 18:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-26961</guid>
+		<description><![CDATA[there &quot;among the first (d) elements last (n-d) elements are replaced 
+so in the remaining elements the number of elements to be rotated is 
+(d-(n-d)) i.e., (2d-n)...
+Eg: arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} and rotate by (d=  6).
+
+after first block swap {7, 8, 9, 4, 5, 6, 1, 2, 3}
+
+now we have to rotate array {4, 5, 6, 1, 2, 3} by 2*6 - 9 = 3
+
+
+
+
+I hope understood........:)]]></description>
+		<content:encoded><![CDATA[<p>there &#8220;among the first (d) elements last (n-d) elements are replaced<br />
+so in the remaining elements the number of elements to be rotated is<br />
+(d-(n-d)) i.e., (2d-n)&#8230;<br />
+Eg: arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9} and rotate by (d=  6).</p>
+<p>after first block swap {7, 8, 9, 4, 5, 6, 1, 2, 3}</p>
+<p>now we have to rotate array {4, 5, 6, 1, 2, 3} by 2*6 &#8211; 9 = 3</p>
+<p>I hope understood&#8230;&#8230;..:)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cool</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-25078</link>
+		<dc:creator><![CDATA[cool]]></dc:creator>
+		<pubDate>Fri, 16 Aug 2013 17:10:38 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-25078</guid>
+		<description><![CDATA[wats d logic in &#039;2d-n&#039;??explain pls!!]]></description>
+		<content:encoded><![CDATA[<p>wats d logic in &#8216;2d-n&#8217;??explain pls!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anonymous</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-21534</link>
+		<dc:creator><![CDATA[Anonymous]]></dc:creator>
+		<pubDate>Sat, 06 Jul 2013 10:28:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-21534</guid>
+		<description><![CDATA[The following code takes O(d)/O(n-d) time whichever is larger. But has a space complexity of O(d). 
+The following code stores the array the array to be swapped in another array.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+
+void rotateArray(int a[],int d,int n)
+{
+    d%=n;
+    int i,j=0;
+    int *b=(int *) calloc (d,sizeof(int));
+    for(i=0;i&#060;d;i++)
+        b[i]=a[i];
+    for(i=d;i&#060;n;i++)
+        a[i-d]=a[i];
+    for(i=n-d;i&#060;n;i++)
+        a[i]=b[i-n+d];
+}
+
+int main()
+{
+    int n,a[]={1,2,3,4,5,6,7},i,d=7;
+    n=sizeof(a)/sizeof(a[0]);
+    if((d%n)&#062;0)
+        rotateArray(a,d,n);
+    for(i=0;i&#060;n;i++)
+        printf(&#034;%d &#034;,a[i]);
+    return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>The following code takes O(d)/O(n-d) time whichever is larger. But has a space complexity of O(d).<br />
+The following code stores the array the array to be swapped in another array.</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+void rotateArray(int a[],int d,int n)
+{
+    d%=n;
+    int i,j=0;
+    int *b=(int *) calloc (d,sizeof(int));
+    for(i=0;i&lt;d;i++)
+        b[i]=a[i];
+    for(i=d;i&lt;n;i++)
+        a[i-d]=a[i];
+    for(i=n-d;i&lt;n;i++)
+        a[i]=b[i-n+d];
+}
+
+int main()
+{
+    int n,a[]={1,2,3,4,5,6,7},i,d=7;
+    n=sizeof(a)/sizeof(a[0]);
+    if((d%n)&gt;0)
+        rotateArray(a,d,n);
+    for(i=0;i&lt;n;i++)
+        printf(&quot;%d &quot;,a[i]);
+    return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vanathi</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-16347</link>
+		<dc:creator><![CDATA[Vanathi]]></dc:creator>
+		<pubDate>Thu, 14 Mar 2013 17:06:06 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-16347</guid>
+		<description><![CDATA[Algo:
+Rotate array(arr[] , d, length)
+  1.Initialize A[]  of given input array size.
+  2.store j = d ,i=0
+  3.Iterate the array til i &#060; array.length
+       a. if j &#060; array.length
+             add the elements array[j] into A[i];
+              increment i;
+              increment j;
+       b. else
+              assign j=0;
+             iterate till j!= d
+             add the element array[j] into A[i];
+              increment i;
+               increment j;
+ 
+  return A;
+
+[sourcecode language=&#034;JAVA&#034;]
+/* Paste your code here (You may delete these lines if not writing code) */
+package arrays;
+
+public class RotateArray {
+
+	public static void main(String[] args){
+		int[] array=new int[4];
+		array[0]=1;
+		array[1]=2;
+		array[2]=3;
+		array[3]=4;
+		
+	   int k=10;
+	   array=RotateArray.rotationArray(array,k);
+	 
+	}
+
+	private static int[] rotationArray(int[] array, int k) {
+		int[] rotateArray=new int[array.length];
+		int j=k;
+		int i=0;
+		if(j&#062;array.length){
+			j=j/array.length;
+		}
+		k=j;
+		while(i &#060; rotateArray.length){
+			if(j&#060;array.length){
+				if(j&#062;i){
+				  rotateArray[i]=array[j];	
+					j++;
+					i++;
+				}else{
+					while(j&#060;k){
+						 rotateArray[i]=array[j];
+						j++;
+						i++;
+					}
+				}
+			}else{
+				j=0;
+			}
+		}
+		 for(i=0;i&#060;rotateArray.length;i++){
+			  System.out.println(rotateArray[i]);
+		  }
+		return rotateArray;
+	}
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Algo:<br />
+Rotate array(arr[] , d, length)<br />
+  1.Initialize A[]  of given input array size.<br />
+  2.store j = d ,i=0<br />
+  3.Iterate the array til i &lt; array.length<br />
+       a. if j &lt; array.length<br />
+             add the elements array[j] into A[i];<br />
+              increment i;<br />
+              increment j;<br />
+       b. else<br />
+              assign j=0;<br />
+             iterate till j!= d<br />
+             add the element array[j] into A[i];<br />
+              increment i;<br />
+               increment j;</p>
+<p>  return A;</p>
+<p>/* Paste your code here (You may delete these lines if not writing code) */<br />
+package arrays;</p>
+<p>public class RotateArray {</p>
+<p>	public static void main(String[] args){<br />
+		int[] array=new int[4];<br />
+		array[0]=1;<br />
+		array[1]=2;<br />
+		array[2]=3;<br />
+		array[3]=4;</p>
+<p>	   int k=10;<br />
+	   array=RotateArray.rotationArray(array,k);</p>
+<p>	}</p>
+<p>	private static int[] rotationArray(int[] array, int k) {<br />
+		int[] rotateArray=new int[array.length];<br />
+		int j=k;<br />
+		int i=0;<br />
+		if(j&gt;array.length){<br />
+			j=j/array.length;<br />
+		}<br />
+		k=j;<br />
+		while(i &lt; rotateArray.length){<br />
+			if(j&lt;array.length){<br />
+				if(j&gt;i){<br />
+				  rotateArray[i]=array[j];<br />
+					j++;<br />
+					i++;<br />
+				}else{<br />
+					while(j&lt;k){<br />
+						 rotateArray[i]=array[j];<br />
+						j++;<br />
+						i++;<br />
+					}<br />
+				}<br />
+			}else{<br />
+				j=0;<br />
+			}<br />
+		}<br />
+		 for(i=0;i&lt;rotateArray.length;i++){<br />
+			  System.out.println(rotateArray[i]);<br />
+		  }<br />
+		return rotateArray;<br />
+	}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: naresh</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-15629</link>
+		<dc:creator><![CDATA[naresh]]></dc:creator>
+		<pubDate>Mon, 25 Feb 2013 05:20:39 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-15629</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+Here is the block-swap implementation in java (block swap can be replaced with native method like Array.copyArry etc.. method not sure about it)
+
+package com.nbethi;
+ 
+import java.util.Arrays;
+ 
+public class BlockSwapArray {
+ 
+    public static void main(String[] args) {
+        int[] array;
+        int size = 17;
+        array = new int[size];
+        for (int i = 0; i &#060; size; i++) {
+            array[i] = i;
+        }
+        System.out.println(Arrays.toString(array));
+        rotateLeft(array, 7);
+        System.out.println(Arrays.toString(array));
+        System.out.println(&#034;DONE&#034;);
+ 
+    }
+ 
+    public static void rotateLeft(int[] arr, int d) {
+        rotate(arr, 0, arr.length, d, arr.length - d);
+    }
+ 
+    public static void rotate(int[] arr, int start, int end, int m, int n) {
+        System.out.println(Arrays.toString(arr) + &#034; #&#034; + start + &#034; #&#034; + end + &#034; #&#034; + m + &#034; #&#034; + n);
+ 
+        if(m==n){
+            blockSwap(arr, start, end - m, n);
+            return;
+        }
+        if (m &#060; n) {
+            blockSwap(arr, start, end - m, m);
+            rotate(arr, start, end - m, m, n - m);
+        } else {
+            blockSwap(arr, start, end - n, n);
+            rotate(arr, start + n, end, m - n, n);
+        }
+    }
+ 
+    private static void blockSwap(int[] arr, int l, int r, int size) {
+        for (int i = 0; i &#060; size; i++) {
+            swap(arr, l + i, r + i);
+        }
+    }
+ 
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+Here is the block-swap implementation in java (block swap can be replaced with native method like Array.copyArry etc.. method not sure about it)
+
+package com.nbethi;
+ 
+import java.util.Arrays;
+ 
+public class BlockSwapArray {
+ 
+    public static void main(String[] args) {
+        int[] array;
+        int size = 17;
+        array = new int[size];
+        for (int i = 0; i &lt; size; i++) {
+            array[i] = i;
+        }
+        System.out.println(Arrays.toString(array));
+        rotateLeft(array, 7);
+        System.out.println(Arrays.toString(array));
+        System.out.println(&quot;DONE&quot;);
+ 
+    }
+ 
+    public static void rotateLeft(int[] arr, int d) {
+        rotate(arr, 0, arr.length, d, arr.length - d);
+    }
+ 
+    public static void rotate(int[] arr, int start, int end, int m, int n) {
+        System.out.println(Arrays.toString(arr) + &quot; #&quot; + start + &quot; #&quot; + end + &quot; #&quot; + m + &quot; #&quot; + n);
+ 
+        if(m==n){
+            blockSwap(arr, start, end - m, n);
+            return;
+        }
+        if (m &lt; n) {
+            blockSwap(arr, start, end - m, m);
+            rotate(arr, start, end - m, m, n - m);
+        } else {
+            blockSwap(arr, start, end - n, n);
+            rotate(arr, start + n, end, m - n, n);
+        }
+    }
+ 
+    private static void blockSwap(int[] arr, int l, int r, int size) {
+        for (int i = 0; i &lt; size; i++) {
+            swap(arr, l + i, r + i);
+        }
+    }
+ 
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ranga</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-14672</link>
+		<dc:creator><![CDATA[ranga]]></dc:creator>
+		<pubDate>Tue, 22 Jan 2013 16:05:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-14672</guid>
+		<description><![CDATA[Too good...Fantastic...Thanks alot.]]></description>
+		<content:encoded><![CDATA[<p>Too good&#8230;Fantastic&#8230;Thanks alot.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ar</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-6509</link>
+		<dc:creator><![CDATA[ar]]></dc:creator>
+		<pubDate>Wed, 16 Nov 2011 05:40:18 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-6509</guid>
+		<description><![CDATA[The algorithm does not handle the above example: [1,2,3,4,5,6,7]  with d = 2
+
+Because at final step you will have [3,5,4,6,7,1,2]
+
+And A = [5,4] and B=EMPTY
+
+So if d==n, then we should swap the numbers. This case should be corrected in the above algorithm.
+
+
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>The algorithm does not handle the above example: [1,2,3,4,5,6,7]  with d = 2</p>
+<p>Because at final step you will have [3,5,4,6,7,1,2]</p>
+<p>And A = [5,4] and B=EMPTY</p>
+<p>So if d==n, then we should swap the numbers. This case should be corrected in the above algorithm.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: red</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-4645</link>
+		<dc:creator><![CDATA[red]]></dc:creator>
+		<pubDate>Mon, 18 Jul 2011 10:22:03 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-4645</guid>
+		<description><![CDATA[swap the first d elements with the next d elements (swapping one element at a time. this would require just one auxiliary varaible). 
+continue this until the no of elements left in the array is less than d. in that move the last few elements to the left as required. 
+
+time complexity O(n)
+space complexity O(1)]]></description>
+		<content:encoded><![CDATA[<p>swap the first d elements with the next d elements (swapping one element at a time. this would require just one auxiliary varaible).<br />
+continue this until the no of elements left in the array is less than d. in that move the last few elements to the left as required. </p>
+<p>time complexity O(n)<br />
+space complexity O(1)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: KK123</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-4442</link>
+		<dc:creator><![CDATA[KK123]]></dc:creator>
+		<pubDate>Sun, 26 Jun 2011 20:38:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-4442</guid>
+		<description><![CDATA[Here my recursive implementation its pretty easy than above one :)
+
+&lt;pre&gt; &lt;code language=&quot;CPP&quot;&gt;
+#include&#060;iostream&#062;
+using namespace std;
+
+void rotate(int *arr, int d, int n, int index);
+
+int main()
+{
+    int n, d, arr[100];
+    cin &#062;&#062; n;
+    for(int i=0; i&#062; arr[i];
+       
+    cout &#060;&#062; d;
+    
+    rotate(arr, d, n, 0);
+    
+    for(int i=0; i&#060;n; i++)
+       cout &#060;&#060; arr[i] &#060;&#060; &#034; &#034;;
+       
+    cout &#060;&#060; endl; 
+       
+    system(&#034;pause&#034;);
+    return 0;
+}
+
+void rotate(int *arr, int d, int n, int index)
+{
+     if(index == n)
+         return ;
+     
+     int data = arr[(index + 2) % n];
+     rotate(arr, d, n, index + 1);
+     arr[index] = data;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here my recursive implementation its pretty easy than above one 🙂</p>
+<pre> <code language="CPP">
+#include&lt;iostream&gt;
+using namespace std;
+
+void rotate(int *arr, int d, int n, int index);
+
+int main()
+{
+    int n, d, arr[100];
+    cin &gt;&gt; n;
+    for(int i=0; i&gt; arr[i];
+       
+    cout &lt;&gt; d;
+    
+    rotate(arr, d, n, 0);
+    
+    for(int i=0; i&lt;n; i++)
+       cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
+       
+    cout &lt;&lt; endl; 
+       
+    system(&quot;pause&quot;);
+    return 0;
+}
+
+void rotate(int *arr, int d, int n, int index)
+{
+     if(index == n)
+         return ;
+     
+     int data = arr[(index + 2) % n];
+     rotate(arr, d, n, index + 1);
+     arr[index] = data;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Asit</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-917</link>
+		<dc:creator><![CDATA[Asit]]></dc:creator>
+		<pubDate>Mon, 26 Apr 2010 01:19:26 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-917</guid>
+		<description><![CDATA[good logic!]]></description>
+		<content:encoded><![CDATA[<p>good logic!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/#comment-433</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Mon, 08 Feb 2010 04:57:30 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2878#comment-433</guid>
+		<description><![CDATA[@Jagdish: This post only explains Block Swap Algorithm for array rotation.  We have separates for other approaches of array rotation. Please see below
+
+http://geeksforgeeks.org/?p=2398
+http://geeksforgeeks.org/?p=2838
+
+Also, please see http://www.cs.bell-labs.com/cm/cs/pearls/s02b.pdf for comparison of the standard rotation algorithms.]]></description>
+		<content:encoded><![CDATA[<p>@Jagdish: This post only explains Block Swap Algorithm for array rotation.  We have separates for other approaches of array rotation. Please see below</p>
+<p><a href="http://geeksforgeeks.org/?p=2398" rel="nofollow">http://geeksforgeeks.org/?p=2398</a><br />
+<a href="http://geeksforgeeks.org/?p=2838" rel="nofollow">http://geeksforgeeks.org/?p=2838</a></p>
+<p>Also, please see <a href="http://www.cs.bell-labs.com/cm/cs/pearls/s02b.pdf" rel="nofollow">http://www.cs.bell-labs.com/cm/cs/pearls/s02b.pdf</a> for comparison of the standard rotation algorithms.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.056 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:31:02 -->
+
+<!-- Compression = gzip -->

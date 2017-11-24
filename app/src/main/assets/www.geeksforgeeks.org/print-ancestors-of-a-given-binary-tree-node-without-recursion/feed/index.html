@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print ancestors of a given binary tree node without recursion</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: MK</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-39485</link>
+		<dc:creator><![CDATA[MK]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 19:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-39485</guid>
+		<description><![CDATA[This won&#039;t handle the case when element is not present!?]]></description>
+		<content:encoded><![CDATA[<p>This won&#8217;t handle the case when element is not present!?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-38918</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 09:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-38918</guid>
+		<description><![CDATA[how ?]]></description>
+		<content:encoded><![CDATA[<p>how ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-38628</link>
+		<dc:creator><![CDATA[Vivek]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 05:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-38628</guid>
+		<description><![CDATA[we can do a BFS or level order traversal while keeping track of parent of each node in a parent array. When we reach the desired key, we print all its ancestors
+]]></description>
+		<content:encoded><![CDATA[<p>we can do a BFS or level order traversal while keeping track of parent of each node in a parent array. When we reach the desired key, we print all its ancestors</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-38155</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 21:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-38155</guid>
+		<description><![CDATA[int printAncestors(btnode *root,int k)
+{
+    if(root==NULL)
+    return NULL;
+    
+    stack  s;
+    btnode *current=root;
+    while(1)
+    {
+        while(current!=NULL)
+        {            if(current-&#062;rchild)
+                    s.push(current-&#062;rchild);
+            
+                s.push(current);
+                current=current-&#062;lchild;
+        }
+            if(!s.empty())
+            {
+                    current=s.top();
+                    s.pop();
+            }
+            else
+            {    return 0;
+            }
+            
+        if(current-&#062;rchild &#038;&#038; !s.empty() &#038;&#038; current-&#062;rchild==s.top())
+        {    btnode *temp=current;
+            current=s.top();
+            s.pop();
+            s.push(temp);
+        }
+        else
+        {    if(current-&#062;data==k)
+            {    while(!s.empty())
+                {
+                    current=s.top();
+                    s.pop();
+                    cout&#060;data&#060;rchild==s.top())
+                    {    s.pop();
+                    }
+                }
+                return 1;
+            }
+            current=NULL;
+        }
+    }
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>int printAncestors(btnode *root,int k)<br />
+{<br />
+    if(root==NULL)<br />
+    return NULL;</p>
+<p>    stack  s;<br />
+    btnode *current=root;<br />
+    while(1)<br />
+    {<br />
+        while(current!=NULL)<br />
+        {            if(current-&gt;rchild)<br />
+                    s.push(current-&gt;rchild);</p>
+<p>                s.push(current);<br />
+                current=current-&gt;lchild;<br />
+        }<br />
+            if(!s.empty())<br />
+            {<br />
+                    current=s.top();<br />
+                    s.pop();<br />
+            }<br />
+            else<br />
+            {    return 0;<br />
+            }</p>
+<p>        if(current-&gt;rchild &amp;&amp; !s.empty() &amp;&amp; current-&gt;rchild==s.top())<br />
+        {    btnode *temp=current;<br />
+            current=s.top();<br />
+            s.pop();<br />
+            s.push(temp);<br />
+        }<br />
+        else<br />
+        {    if(current-&gt;data==k)<br />
+            {    while(!s.empty())<br />
+                {<br />
+                    current=s.top();<br />
+                    s.pop();<br />
+                    cout&lt;data&lt;rchild==s.top())<br />
+                    {    s.pop();<br />
+                    }<br />
+                }<br />
+                return 1;<br />
+            }<br />
+            current=NULL;<br />
+        }<br />
+    }<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mahesh</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-37319</link>
+		<dc:creator><![CDATA[Mahesh]]></dc:creator>
+		<pubDate>Sat, 31 May 2014 19:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-37319</guid>
+		<description><![CDATA[Inorder traversal will not have all the ancestors of the node when we reach the node. Only postorder traversal has that property.]]></description>
+		<content:encoded><![CDATA[<p>Inorder traversal will not have all the ancestors of the node when we reach the node. Only postorder traversal has that property.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nitin</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-37031</link>
+		<dc:creator><![CDATA[nitin]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 18:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-37031</guid>
+		<description><![CDATA[Find the solution using array :
+
+http://ideone.com/iuHnXa]]></description>
+		<content:encoded><![CDATA[<p>Find the solution using array :</p>
+<p><a href="http://ideone.com/iuHnXa" rel="nofollow">http://ideone.com/iuHnXa</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: p</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-31901</link>
+		<dc:creator><![CDATA[p]]></dc:creator>
+		<pubDate>Mon, 27 Jan 2014 10:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-31901</guid>
+		<description><![CDATA[? ??]]></description>
+		<content:encoded><![CDATA[<p>? ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gatorboy</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-31479</link>
+		<dc:creator><![CDATA[gatorboy]]></dc:creator>
+		<pubDate>Sun, 12 Jan 2014 17:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-31479</guid>
+		<description><![CDATA[This can be done in simple way using recursion.
+
+PrintAncestors(Node root, int key){
+   if(root==null)
+      return false;
+   if(root.value == key)
+     return true;
+   if(PrintAncestors(root.left, key) &#124;&#124; PrintAncestors(root.right, key)){
+     System.out.print(root.value) 
+     return true;
+    }
+  return false;
+}]]></description>
+		<content:encoded><![CDATA[<p>This can be done in simple way using recursion.</p>
+<p>PrintAncestors(Node root, int key){<br />
+   if(root==null)<br />
+      return false;<br />
+   if(root.value == key)<br />
+     return true;<br />
+   if(PrintAncestors(root.left, key) || PrintAncestors(root.right, key)){<br />
+     System.out.print(root.value)<br />
+     return true;<br />
+    }<br />
+  return false;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zealfire</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-31455</link>
+		<dc:creator><![CDATA[zealfire]]></dc:creator>
+		<pubDate>Sat, 11 Jan 2014 18:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-31455</guid>
+		<description><![CDATA[just wanted to verify whether this method will work or not :we can do level order traversal by keeping the nodes in queue,but not remove top nodes while inserting  there child node,then picking parent elements of particular node from array by using formula for parent node which is (i-1)/2.]]></description>
+		<content:encoded><![CDATA[<p>just wanted to verify whether this method will work or not :we can do level order traversal by keeping the nodes in queue,but not remove top nodes while inserting  there child node,then picking parent elements of particular node from array by using formula for parent node which is (i-1)/2.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sriahsrha</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-31192</link>
+		<dc:creator><![CDATA[sriahsrha]]></dc:creator>
+		<pubDate>Thu, 02 Jan 2014 19:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-31192</guid>
+		<description><![CDATA[i think ths works
+
+1:do inorder traversal without recurssion
+2: once u find the target node
+ print the stack ,traverse the stack from top  to bottom and print only elements of height lesser than height of target till u reach the root.]]></description>
+		<content:encoded><![CDATA[<p>i think ths works</p>
+<p>1:do inorder traversal without recurssion<br />
+2: once u find the target node<br />
+ print the stack ,traverse the stack from top  to bottom and print only elements of height lesser than height of target till u reach the root.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yukang</title>
+		<link>http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/#comment-29881</link>
+		<dc:creator><![CDATA[Yukang]]></dc:creator>
+		<pubDate>Sat, 16 Nov 2013 13:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119933#comment-29881</guid>
+		<description><![CDATA[using two stack, and code is very simple!
+
+
+void PrintAncesters(struct Node* root, int target) {
+
+    if(root == NULL) return;
+
+    stack st;
+
+    stack out;
+
+    st.push(root);
+
+    bool found  = false;
+
+    while(!st.empty()) {
+
+        struct Node* cur = st.top();
+
+        out.push(cur);
+
+        if(cur-&#062;data == target) {
+
+            found = true;
+
+            break;
+
+        }
+
+        st.pop();
+
+        if(cur-&#062;left)
+
+            st.push(cur-&#062;left);
+
+        if(cur-&#062;right)
+
+            st.push(cur-&#062;right);
+
+    }
+
+    printf(&quot;%-2d: &quot;, target);
+
+    struct Node* prev = out.top();
+
+    out.pop();
+
+    while(found &#038;&#038; !out.empty()) {
+
+        struct Node* cur = out.top();
+
+        if(prev == NULL &#124;&#124; cur-&#062;left == prev &#124;&#124; cur-&#062;right == prev) {
+
+            printf(&quot; %-2d &quot;, cur-&#062;data);
+
+            prev = cur;
+
+        }
+
+        out.pop();
+
+    }
+
+    printf(&quot;n&quot;);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>using two stack, and code is very simple!</p>
+<p>void PrintAncesters(struct Node* root, int target) {</p>
+<p>    if(root == NULL) return;</p>
+<p>    stack st;</p>
+<p>    stack out;</p>
+<p>    st.push(root);</p>
+<p>    bool found  = false;</p>
+<p>    while(!st.empty()) {</p>
+<p>        struct Node* cur = st.top();</p>
+<p>        out.push(cur);</p>
+<p>        if(cur-&gt;data == target) {</p>
+<p>            found = true;</p>
+<p>            break;</p>
+<p>        }</p>
+<p>        st.pop();</p>
+<p>        if(cur-&gt;left)</p>
+<p>            st.push(cur-&gt;left);</p>
+<p>        if(cur-&gt;right)</p>
+<p>            st.push(cur-&gt;right);</p>
+<p>    }</p>
+<p>    printf(&#8220;%-2d: &#8220;, target);</p>
+<p>    struct Node* prev = out.top();</p>
+<p>    out.pop();</p>
+<p>    while(found &amp;&amp; !out.empty()) {</p>
+<p>        struct Node* cur = out.top();</p>
+<p>        if(prev == NULL || cur-&gt;left == prev || cur-&gt;right == prev) {</p>
+<p>            printf(&#8221; %-2d &#8220;, cur-&gt;data);</p>
+<p>            prev = cur;</p>
+<p>        }</p>
+<p>        out.pop();</p>
+<p>    }</p>
+<p>    printf(&#8220;n&#8221;);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:05 -->
+
+<!-- Compression = gzip -->

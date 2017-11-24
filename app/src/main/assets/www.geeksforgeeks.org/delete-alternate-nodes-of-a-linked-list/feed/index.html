@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Delete alternate nodes of a Linked List</title>
+	<atom:link href="http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Vinayak</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-39360</link>
+		<dc:creator><![CDATA[Vinayak]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 15:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-39360</guid>
+		<description><![CDATA[My code is not working as expected. the same original list is being printed.
+can someone please check? Thanks
+Here is the Ideone link- 
+
+Here&#039;s the function-
+http://ideone.com/D9jhp4
+struct node*delete_alternate(struct node*start ){
+
+	struct node*temp, *p;
+
+	p=start;
+
+	if(p-&#062;link!=NULL)return start;
+
+	while(p!=NULL){
+
+		temp=p-&#062;link;
+
+		p-&#062;link=temp-&#062;link;
+
+		p=temp;
+
+		free(temp);
+
+		if(p-&#062;link!=NULL)p=p-&#062;link;
+
+ 
+
+	}return start;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>My code is not working as expected. the same original list is being printed.<br />
+can someone please check? Thanks<br />
+Here is the Ideone link- </p>
+<p>Here&#8217;s the function-<br />
+<a href="http://ideone.com/D9jhp4" rel="nofollow">http://ideone.com/D9jhp4</a><br />
+struct node*delete_alternate(struct node*start ){</p>
+<p>	struct node*temp, *p;</p>
+<p>	p=start;</p>
+<p>	if(p-&gt;link!=NULL)return start;</p>
+<p>	while(p!=NULL){</p>
+<p>		temp=p-&gt;link;</p>
+<p>		p-&gt;link=temp-&gt;link;</p>
+<p>		p=temp;</p>
+<p>		free(temp);</p>
+<p>		if(p-&gt;link!=NULL)p=p-&gt;link;</p>
+<p>	}return start;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sonu431</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-38381</link>
+		<dc:creator><![CDATA[sonu431]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 05:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-38381</guid>
+		<description><![CDATA[this can be even more easier ...................to get
+void deleteAlt (struct node *head)
+{
+struct node*temp=head;
+struct node*delnode, *savenode;
+
+if (!head)
+return;
+
+while ( temp!=NULL &#038;&#038;  temp-&#062;next!=NULL)
+{
+delnode=temp-&#062;next;
+savenode=delnode-&#062;next;
+temp-&#062;next=savenode;
+free(delnode);
+temp=savenode;
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>this can be even more easier &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;.to get<br />
+void deleteAlt (struct node *head)<br />
+{<br />
+struct node*temp=head;<br />
+struct node*delnode, *savenode;</p>
+<p>if (!head)<br />
+return;</p>
+<p>while ( temp!=NULL &amp;&amp;  temp-&gt;next!=NULL)<br />
+{<br />
+delnode=temp-&gt;next;<br />
+savenode=delnode-&gt;next;<br />
+temp-&gt;next=savenode;<br />
+free(delnode);<br />
+temp=savenode;<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aswin Gokulachandran</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-37707</link>
+		<dc:creator><![CDATA[Aswin Gokulachandran]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 21:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-37707</guid>
+		<description><![CDATA[Java Implementation (Only the method)
+
+--------------------------
+
+/*
+
+	 * Method 1 to delete the alternate elements in the list
+
+	 */
+
+	public void deleteAlternateNodes(){
+
+		currNode = head;
+
+		while(currNode.next!=null){
+
+			currNode.next = currNode.next.next;
+
+			if(currNode.next!=null)
+
+				currNode = currNode.next;
+
+			else
+
+				break;
+
+		}
+
+	}
+
+	
+
+	/*
+
+	 * Method 2 (using recursion) to delete the alternate elements in the list
+
+	 */
+
+	public void deleteAltNodesRec(){
+
+		deleteAltNodesRec(head);
+
+	}
+
+	
+
+	public void deleteAltNodesRec(Node node){
+
+		currNode = node;
+
+		
+
+		if(currNode.next!=null &#038;&#038; currNode!=null){			
+
+			if(currNode.next.next!=null){
+
+				currNode.next = currNode.next.next;
+
+				deleteAltNodesRec(currNode.next);
+
+			}else
+
+				currNode.next = null;			
+
+		}
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>Java Implementation (Only the method)</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>/*</p>
+<p>	 * Method 1 to delete the alternate elements in the list</p>
+<p>	 */</p>
+<p>	public void deleteAlternateNodes(){</p>
+<p>		currNode = head;</p>
+<p>		while(currNode.next!=null){</p>
+<p>			currNode.next = currNode.next.next;</p>
+<p>			if(currNode.next!=null)</p>
+<p>				currNode = currNode.next;</p>
+<p>			else</p>
+<p>				break;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	/*</p>
+<p>	 * Method 2 (using recursion) to delete the alternate elements in the list</p>
+<p>	 */</p>
+<p>	public void deleteAltNodesRec(){</p>
+<p>		deleteAltNodesRec(head);</p>
+<p>	}</p>
+<p>	public void deleteAltNodesRec(Node node){</p>
+<p>		currNode = node;</p>
+<p>		if(currNode.next!=null &amp;&amp; currNode!=null){			</p>
+<p>			if(currNode.next.next!=null){</p>
+<p>				currNode.next = currNode.next.next;</p>
+<p>				deleteAltNodesRec(currNode.next);</p>
+<p>			}else</p>
+<p>				currNode.next = null;			</p>
+<p>		}</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-35003</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Tue, 22 Apr 2014 19:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-35003</guid>
+		<description><![CDATA[Java implementation is here
+
+package deletealtrnatenodesoflinkedlist;
+
+public class LinkedList implements Cloneable {
+
+	Node head = null;
+
+	
+
+	// Adding at the End
+
+	class Node {
+
+		T value;
+
+		Node nextReference;
+
+		public Node(T value) {
+
+			this.value = value;
+
+			this.nextReference = null;
+
+		}
+
+		public Node(T value, Node ref) {
+
+			this.value = value;
+
+			this.nextReference = ref;
+
+		}
+
+		public Node() {
+
+			// TODO Auto-generated constructor stub
+
+		}
+
+		public T getValue() {
+
+			return value;
+
+		}
+
+		public void setValue(T value) {
+
+			this.value = value;
+
+		}
+
+		public Node getNextReference() {
+
+			return nextReference;
+
+		}
+
+		public void setNextReference(Node nextReference) {
+
+			this.nextReference = nextReference;
+
+		}
+
+	}
+
+	public void add(E value) {
+
+		Node nodeToBeAdded = head;
+
+		if (validate(head)) {
+
+			head = new Node(value);
+
+			return;
+
+		}
+
+		while (nodeToBeAdded.getNextReference() != null) {
+
+			nodeToBeAdded = nodeToBeAdded.getNextReference();
+
+		}
+
+		Node node = new Node(value);
+
+		nodeToBeAdded.setNextReference(node);
+
+	}
+
+	
+
+	
+
+	void printAll() {
+
+		Node node = head;
+
+		while (node != null) {
+
+			System.out.println(node.getValue());
+
+			node = node.getNextReference();
+
+		}
+
+	}
+
+	
+
+	public boolean validate(Node head) {
+
+		if (head == null) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+	void deleteNodes(){
+
+		Node node=head;
+
+		Node nextNode=node.getNextReference();
+
+		while(node!=null &#038;&#038; nextNode!=null){
+
+			node.setNextReference(nextNode.getNextReference());
+
+			node=node.getNextReference();
+
+                        if(node!=null)
+
+             nextNode=node.getNextReference();
+
+			
+
+			
+
+		}
+
+	}
+
+	void recursiveDelete(Node node1){
+
+		Node node=node1;
+
+		if(node==null)
+
+			return;
+
+		Node nextNode=node.getNextReference();
+
+		if(node!=null &#038;&#038; nextNode!=null){
+
+			node.setNextReference(nextNode.getNextReference());
+
+			recursiveDelete(node.getNextReference());		
+
+		}
+
+	}	
+
+	void delete(){
+
+		recursiveDelete(head);	
+
+	}	
+
+	public static void main(String[] args) {
+
+		LinkedList linkedList = new LinkedList();
+
+		
+
+		linkedList.add(1);
+
+		linkedList.add(2);
+
+		linkedList.add(3);
+
+		linkedList.add(4);
+
+		
+
+		linkedList.add(1);
+
+	
+
+	
+
+		linkedList.delete();
+
+		linkedList.printAll();
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Java implementation is here</p>
+<p>package deletealtrnatenodesoflinkedlist;</p>
+<p>public class LinkedList implements Cloneable {</p>
+<p>	Node head = null;</p>
+<p>	// Adding at the End</p>
+<p>	class Node {</p>
+<p>		T value;</p>
+<p>		Node nextReference;</p>
+<p>		public Node(T value) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = null;</p>
+<p>		}</p>
+<p>		public Node(T value, Node ref) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = ref;</p>
+<p>		}</p>
+<p>		public Node() {</p>
+<p>			// TODO Auto-generated constructor stub</p>
+<p>		}</p>
+<p>		public T getValue() {</p>
+<p>			return value;</p>
+<p>		}</p>
+<p>		public void setValue(T value) {</p>
+<p>			this.value = value;</p>
+<p>		}</p>
+<p>		public Node getNextReference() {</p>
+<p>			return nextReference;</p>
+<p>		}</p>
+<p>		public void setNextReference(Node nextReference) {</p>
+<p>			this.nextReference = nextReference;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void add(E value) {</p>
+<p>		Node nodeToBeAdded = head;</p>
+<p>		if (validate(head)) {</p>
+<p>			head = new Node(value);</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		while (nodeToBeAdded.getNextReference() != null) {</p>
+<p>			nodeToBeAdded = nodeToBeAdded.getNextReference();</p>
+<p>		}</p>
+<p>		Node node = new Node(value);</p>
+<p>		nodeToBeAdded.setNextReference(node);</p>
+<p>	}</p>
+<p>	void printAll() {</p>
+<p>		Node node = head;</p>
+<p>		while (node != null) {</p>
+<p>			System.out.println(node.getValue());</p>
+<p>			node = node.getNextReference();</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public boolean validate(Node head) {</p>
+<p>		if (head == null) {</p>
+<p>			return true;</p>
+<p>		}</p>
+<p>		return false;</p>
+<p>	}</p>
+<p>	void deleteNodes(){</p>
+<p>		Node node=head;</p>
+<p>		Node nextNode=node.getNextReference();</p>
+<p>		while(node!=null &amp;&amp; nextNode!=null){</p>
+<p>			node.setNextReference(nextNode.getNextReference());</p>
+<p>			node=node.getNextReference();</p>
+<p>                        if(node!=null)</p>
+<p>             nextNode=node.getNextReference();</p>
+<p>		}</p>
+<p>	}</p>
+<p>	void recursiveDelete(Node node1){</p>
+<p>		Node node=node1;</p>
+<p>		if(node==null)</p>
+<p>			return;</p>
+<p>		Node nextNode=node.getNextReference();</p>
+<p>		if(node!=null &amp;&amp; nextNode!=null){</p>
+<p>			node.setNextReference(nextNode.getNextReference());</p>
+<p>			recursiveDelete(node.getNextReference());		</p>
+<p>		}</p>
+<p>	}	</p>
+<p>	void delete(){</p>
+<p>		recursiveDelete(head);	</p>
+<p>	}	</p>
+<p>	public static void main(String[] args) {</p>
+<p>		LinkedList linkedList = new LinkedList();</p>
+<p>		linkedList.add(1);</p>
+<p>		linkedList.add(2);</p>
+<p>		linkedList.add(3);</p>
+<p>		linkedList.add(4);</p>
+<p>		linkedList.add(1);</p>
+<p>		linkedList.delete();</p>
+<p>		linkedList.printAll();</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Viswanath</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-33331</link>
+		<dc:creator><![CDATA[Viswanath]]></dc:creator>
+		<pubDate>Mon, 10 Mar 2014 05:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-33331</guid>
+		<description><![CDATA[My implementation is better and shorter]]></description>
+		<content:encoded><![CDATA[<p>My implementation is better and shorter</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Dagar</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-32310</link>
+		<dc:creator><![CDATA[Himanshu Dagar]]></dc:creator>
+		<pubDate>Fri, 07 Feb 2014 11:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-32310</guid>
+		<description><![CDATA[For combined code can refer to below link
+
+http://ideone.com/Om2sOW]]></description>
+		<content:encoded><![CDATA[<p>For combined code can refer to below link</p>
+<p><a href="http://ideone.com/Om2sOW" rel="nofollow">http://ideone.com/Om2sOW</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-32102</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Sun, 02 Feb 2014 13:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-32102</guid>
+		<description><![CDATA[all the relavent test cases here would be: 1) empty list, 2) odd length list, and 3) even length list.
+The above code passes all.]]></description>
+		<content:encoded><![CDATA[<p>all the relavent test cases here would be: 1) empty list, 2) odd length list, and 3) even length list.<br />
+The above code passes all.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Marsha Donna</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-32098</link>
+		<dc:creator><![CDATA[Marsha Donna]]></dc:creator>
+		<pubDate>Sun, 02 Feb 2014 11:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-32098</guid>
+		<description><![CDATA[ya thanks it works fine..bt i havent chcked 4 all test cases]]></description>
+		<content:encoded><![CDATA[<p>ya thanks it works fine..bt i havent chcked 4 all test cases</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik Nagpal</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-32051</link>
+		<dc:creator><![CDATA[Kartik Nagpal]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2014 06:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-32051</guid>
+		<description><![CDATA[http://ideone.com/u4fkZG
+Here&#039;s a complete C++ code for the same, using your code for delete_alternate_node routine. Hope you will find it helpful.]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/u4fkZG" rel="nofollow">http://ideone.com/u4fkZG</a><br />
+Here&#8217;s a complete C++ code for the same, using your code for delete_alternate_node routine. Hope you will find it helpful.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Marsha Donna</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-31728</link>
+		<dc:creator><![CDATA[Marsha Donna]]></dc:creator>
+		<pubDate>Wed, 22 Jan 2014 17:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-31728</guid>
+		<description><![CDATA[is anything wrong in the following code:
+void delete_alternate_node(struct node **headref)
+{
+    struct node *cur=*headref;
+    struct node *temp=NULL;
+
+    while(cur!=NULL&#038;&#038;cur-&#062;link!=NULL)
+    {
+        temp=cur-&#062;link;
+        cur-&#062;link=cur-&#062;link-&#062;link;
+        free(temp);
+        cur=cur-&#062;link;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>is anything wrong in the following code:<br />
+void delete_alternate_node(struct node **headref)<br />
+{<br />
+    struct node *cur=*headref;<br />
+    struct node *temp=NULL;</p>
+<p>    while(cur!=NULL&amp;&amp;cur-&gt;link!=NULL)<br />
+    {<br />
+        temp=cur-&gt;link;<br />
+        cur-&gt;link=cur-&gt;link-&gt;link;<br />
+        free(temp);<br />
+        cur=cur-&gt;link;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: wakeup123</title>
+		<link>http://www.geeksforgeeks.org/delete-alternate-nodes-of-a-linked-list/#comment-22733</link>
+		<dc:creator><![CDATA[wakeup123]]></dc:creator>
+		<pubDate>Sat, 27 Jul 2013 07:46:59 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7443#comment-22733</guid>
+		<description><![CDATA[in method 1, why int arr[100]; in the driver portion of the code in the beginning of int main?]]></description>
+		<content:encoded><![CDATA[<p>in method 1, why int arr[100]; in the driver portion of the code in the beginning of int main?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:46 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Splay Tree &#124; Set 1 (Search)</title>
+	<atom:link href="http://www.geeksforgeeks.org/splay-tree-set-1-insert/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Satyanarayana Reddy</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-38505</link>
+		<dc:creator><![CDATA[Satyanarayana Reddy]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 04:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-38505</guid>
+		<description><![CDATA[Great Post..!!
+
+But doesn&#039;t it loose its balanced property during the rotations in splaying?]]></description>
+		<content:encoded><![CDATA[<p>Great Post..!!</p>
+<p>But doesn&#8217;t it loose its balanced property during the rotations in splaying?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashanht jha</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-35683</link>
+		<dc:creator><![CDATA[prashanht jha]]></dc:creator>
+		<pubDate>Mon, 05 May 2014 16:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-35683</guid>
+		<description><![CDATA[here is my full code : http://ideone.com/FPAbqt 
+give ur own inputs]]></description>
+		<content:encoded><![CDATA[<p>here is my full code : <a href="http://ideone.com/FPAbqt" rel="nofollow">http://ideone.com/FPAbqt</a><br />
+give ur own inputs</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashanht jha</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-35682</link>
+		<dc:creator><![CDATA[prashanht jha]]></dc:creator>
+		<pubDate>Mon, 05 May 2014 16:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-35682</guid>
+		<description><![CDATA[#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+tnode* left_rotate(tnode* root)
+{
+	tnode* lptr,*temp;
+	lptr=root-&#062;rchild;
+	temp=lptr-&#062;lchild;
+	lptr-&#062;lchild=root;
+	root-&#062;rchild=temp;
+	return lptr;
+ 
+}
+tnode* right_rotate(tnode* root)
+{
+	tnode* rptr,*temp;
+	rptr=root-&#062;lchild;
+	temp=rptr-&#062;rchild;
+	rptr-&#062;rchild=root;
+	root-&#062;lchild=temp;
+	return rptr;
+}
+tnode* splay(tnode* root,int d,int k)
+{
+	if(root-&#062;data==d)
+	  return root;
+	if(d&#062;root-&#062;data)
+	   root-&#062;rchild=splay(root-&#062;rchild,d,k);
+	if(ddata)
+	   root-&#062;lchild=splay(root-&#062;lchild,d,k);
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;lchild-&#062;data==d)&#038;&#038;(root-&#062;data==k))
+	{
+		return right_rotate(root);
+	}
+	if((root-&#062;rchild)&#038;&#038;(root-&#062;rchild-&#062;data==d)&#038;&#038;(root-&#062;data==k))
+	{
+		return left_rotate(root);
+	}
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;lchild-&#062;lchild)&#038;&#038;(root-&#062;lchild-&#062;lchild-&#062;data==d))
+	{
+		root-&#062;lchild=right_rotate(root-&#062;lchild);
+		return right_rotate(root);
+	}
+	if((root-&#062;rchild)&#038;&#038;(root-&#062;rchild-&#062;rchild)&#038;&#038;(root-&#062;rchild-&#062;rchild-&#062;data==d))
+	{
+		root-&#062;rchild=left_rotate(root-&#062;rchild);
+		return left_rotate(root);
+	}
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;lchild-&#062;rchild)&#038;&#038;(root-&#062;lchild-&#062;rchild-&#062;data==d))
+	{
+		root-&#062;lchild=left_rotate(root-&#062;lchild);
+		return right_rotate(root);
+	}
+	if((root-&#062;rchild)&#038;&#038;(root-&#062;rchild-&#062;lchild)&#038;&#038;(root-&#062;rchild-&#062;lchild-&#062;data==d))
+	{
+		root-&#062;rchild=right_rotate(root-&#062;rchild);
+		return left_rotate(root);
+	}
+	return root;
+ 
+ 
+ 
+ 
+}
+ 
+tnode* insert(tnode* root,int d)
+{
+	if(!root)
+	{
+		root=new tnode(d);
+		return root;
+	}
+	if(d&#062;root-&#062;data)
+	   root-&#062;rchild=insert(root-&#062;rchild,d);
+	if(ddata)
+	    root-&#062;lchild=insert(root-&#062;lchild,d);
+	return root;
+ 
+}
+ 
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int n,k;
+	cout&#060;&#062;n;
+	while(n!=-1)
+	{
+		root=insert(root,n);
+		cout&#060;&#062;n;
+	}
+	display(root);
+	cout&#060;&#062;k;
+	root=splay(root,k,root-&#062;data);
+	display(root);
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+tnode* left_rotate(tnode* root)<br />
+{<br />
+	tnode* lptr,*temp;<br />
+	lptr=root-&gt;rchild;<br />
+	temp=lptr-&gt;lchild;<br />
+	lptr-&gt;lchild=root;<br />
+	root-&gt;rchild=temp;<br />
+	return lptr;</p>
+<p>}<br />
+tnode* right_rotate(tnode* root)<br />
+{<br />
+	tnode* rptr,*temp;<br />
+	rptr=root-&gt;lchild;<br />
+	temp=rptr-&gt;rchild;<br />
+	rptr-&gt;rchild=root;<br />
+	root-&gt;lchild=temp;<br />
+	return rptr;<br />
+}<br />
+tnode* splay(tnode* root,int d,int k)<br />
+{<br />
+	if(root-&gt;data==d)<br />
+	  return root;<br />
+	if(d&gt;root-&gt;data)<br />
+	   root-&gt;rchild=splay(root-&gt;rchild,d,k);<br />
+	if(ddata)<br />
+	   root-&gt;lchild=splay(root-&gt;lchild,d,k);<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;lchild-&gt;data==d)&amp;&amp;(root-&gt;data==k))<br />
+	{<br />
+		return right_rotate(root);<br />
+	}<br />
+	if((root-&gt;rchild)&amp;&amp;(root-&gt;rchild-&gt;data==d)&amp;&amp;(root-&gt;data==k))<br />
+	{<br />
+		return left_rotate(root);<br />
+	}<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;lchild-&gt;lchild)&amp;&amp;(root-&gt;lchild-&gt;lchild-&gt;data==d))<br />
+	{<br />
+		root-&gt;lchild=right_rotate(root-&gt;lchild);<br />
+		return right_rotate(root);<br />
+	}<br />
+	if((root-&gt;rchild)&amp;&amp;(root-&gt;rchild-&gt;rchild)&amp;&amp;(root-&gt;rchild-&gt;rchild-&gt;data==d))<br />
+	{<br />
+		root-&gt;rchild=left_rotate(root-&gt;rchild);<br />
+		return left_rotate(root);<br />
+	}<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;lchild-&gt;rchild)&amp;&amp;(root-&gt;lchild-&gt;rchild-&gt;data==d))<br />
+	{<br />
+		root-&gt;lchild=left_rotate(root-&gt;lchild);<br />
+		return right_rotate(root);<br />
+	}<br />
+	if((root-&gt;rchild)&amp;&amp;(root-&gt;rchild-&gt;lchild)&amp;&amp;(root-&gt;rchild-&gt;lchild-&gt;data==d))<br />
+	{<br />
+		root-&gt;rchild=right_rotate(root-&gt;rchild);<br />
+		return left_rotate(root);<br />
+	}<br />
+	return root;</p>
+<p>}</p>
+<p>tnode* insert(tnode* root,int d)<br />
+{<br />
+	if(!root)<br />
+	{<br />
+		root=new tnode(d);<br />
+		return root;<br />
+	}<br />
+	if(d&gt;root-&gt;data)<br />
+	   root-&gt;rchild=insert(root-&gt;rchild,d);<br />
+	if(ddata)<br />
+	    root-&gt;lchild=insert(root-&gt;lchild,d);<br />
+	return root;</p>
+<p>}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int n,k;<br />
+	cout&lt;&gt;n;<br />
+	while(n!=-1)<br />
+	{<br />
+		root=insert(root,n);<br />
+		cout&lt;&gt;n;<br />
+	}<br />
+	display(root);<br />
+	cout&lt;&gt;k;<br />
+	root=splay(root,k,root-&gt;data);<br />
+	display(root);<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashanht jha</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-35681</link>
+		<dc:creator><![CDATA[prashanht jha]]></dc:creator>
+		<pubDate>Mon, 05 May 2014 16:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-35681</guid>
+		<description><![CDATA[its a beautifull example of power of recursion
+here during the unwinding phase of recursion we check for the rotation conditions not at the recursive call where search key is found because u dont have the information regarding its parent and grandparent at that time unless u push them into stack...so when the recursion reaches the grandparent or parent(if possible) there u check the condition and apply rotations....:)]]></description>
+		<content:encoded><![CDATA[<p>its a beautifull example of power of recursion<br />
+here during the unwinding phase of recursion we check for the rotation conditions not at the recursive call where search key is found because u dont have the information regarding its parent and grandparent at that time unless u push them into stack&#8230;so when the recursion reaches the grandparent or parent(if possible) there u check the condition and apply rotations&#8230;.:)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31580</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Fri, 17 Jan 2014 07:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31580</guid>
+		<description><![CDATA[Siva Krishna &#038; G4GFan,
+
+
+Thanks for your inputs.  We have updated the name from Zig-Zag to Zag-Zig.]]></description>
+		<content:encoded><![CDATA[<p>Siva Krishna &amp; G4GFan,</p>
+<p>Thanks for your inputs.  We have updated the name from Zig-Zag to Zag-Zig.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: G4GFan</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31575</link>
+		<dc:creator><![CDATA[G4GFan]]></dc:creator>
+		<pubDate>Fri, 17 Jan 2014 06:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31575</guid>
+		<description><![CDATA[Nope both are diff. zig-&#062;R and zag-&#062;L, 
+hence zig-zig-&#062;RR zag-zag-&#062;LL zig-zag-&#062;RL zag-zig-&#062;LR]]></description>
+		<content:encoded><![CDATA[<p>Nope both are diff. zig-&gt;R and zag-&gt;L,<br />
+hence zig-zig-&gt;RR zag-zag-&gt;LL zig-zag-&gt;RL zag-zig-&gt;LR</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31566</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 17:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31566</guid>
+		<description><![CDATA[Siva, as far as I know they are called same.  You can confirm from the link provided by G4Gfan]]></description>
+		<content:encoded><![CDATA[<p>Siva, as far as I know they are called same.  You can confirm from the link provided by G4Gfan</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siva Krishna</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31560</link>
+		<dc:creator><![CDATA[Siva Krishna]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 13:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31560</guid>
+		<description><![CDATA[I didn&#039;t get you. Are they both same or not(i.e can be called with same name or not).]]></description>
+		<content:encoded><![CDATA[<p>I didn&#8217;t get you. Are they both same or not(i.e can be called with same name or not).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: G4GFan</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31559</link>
+		<dc:creator><![CDATA[G4GFan]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 11:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31559</guid>
+		<description><![CDATA[Yes it is correct. You can verify the same in the link mentioned in below comment.]]></description>
+		<content:encoded><![CDATA[<p>Yes it is correct. You can verify the same in the link mentioned in below comment.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siva Krishna</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31557</link>
+		<dc:creator><![CDATA[Siva Krishna]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 09:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31557</guid>
+		<description><![CDATA[I think here only Zig-Zag is mentioned and Zag-Zig is treated as a another case of Zig-Zag . Is it right way? or Is it a Typo?]]></description>
+		<content:encoded><![CDATA[<p>I think here only Zig-Zag is mentioned and Zag-Zig is treated as a another case of Zig-Zag . Is it right way? or Is it a Typo?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: G4GFan</title>
+		<link>http://www.geeksforgeeks.org/splay-tree-set-1-insert/#comment-31528</link>
+		<dc:creator><![CDATA[G4GFan]]></dc:creator>
+		<pubDate>Wed, 15 Jan 2014 07:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=125429#comment-31528</guid>
+		<description><![CDATA[For a quick view even http://lcm.csa.iisc.ernet.in/dsa/node93.html is good]]></description>
+		<content:encoded><![CDATA[<p>For a quick view even <a href="http://lcm.csa.iisc.ernet.in/dsa/node93.html" rel="nofollow">http://lcm.csa.iisc.ernet.in/dsa/node93.html</a> is good</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:11:51 -->
+
+<!-- Compression = gzip -->

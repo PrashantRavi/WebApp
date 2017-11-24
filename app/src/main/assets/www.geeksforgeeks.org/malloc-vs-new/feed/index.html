@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: malloc() vs new</title>
+	<atom:link href="http://www.geeksforgeeks.org/malloc-vs-new/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/malloc-vs-new/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Shashi</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-36616</link>
+		<dc:creator><![CDATA[Shashi]]></dc:creator>
+		<pubDate>Sun, 25 May 2014 11:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-36616</guid>
+		<description><![CDATA[void allocat(char **str,int size)
+{
+*str=(char *)malloc(size);
+}
+int main()
+{
+char *ptr=NULL;
+allocat(&#038;ptr,20);
+strcpy(ptr,&quot;quick heal&quot;);
+printf(&quot;%c&quot;,*ptr);
+}
+
+
+
+try to pass address of ptr and change the signature of allocat accordingly..above code snippet would work]]></description>
+		<content:encoded><![CDATA[<p>void allocat(char **str,int size)<br />
+{<br />
+*str=(char *)malloc(size);<br />
+}<br />
+int main()<br />
+{<br />
+char *ptr=NULL;<br />
+allocat(&amp;ptr,20);<br />
+strcpy(ptr,&#8221;quick heal&#8221;);<br />
+printf(&#8220;%c&#8221;,*ptr);<br />
+}</p>
+<p>try to pass address of ptr and change the signature of allocat accordingly..above code snippet would work</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav Jain</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-36210</link>
+		<dc:creator><![CDATA[Gaurav Jain]]></dc:creator>
+		<pubDate>Sun, 18 May 2014 12:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-36210</guid>
+		<description><![CDATA[Here ptr and str are two different pointers. When you allocate memory, the str points to new memory location while ptr is still pointing to null.
+
+Modify the function definition as:
+
+void allocat(char *&#038;str,int size)
+
+{
+...
+}
+
+and it will work.]]></description>
+		<content:encoded><![CDATA[<p>Here ptr and str are two different pointers. When you allocate memory, the str points to new memory location while ptr is still pointing to null.</p>
+<p>Modify the function definition as:</p>
+<p>void allocat(char *&amp;str,int size)</p>
+<p>{<br />
+&#8230;<br />
+}</p>
+<p>and it will work.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amit Kumar</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-35223</link>
+		<dc:creator><![CDATA[Amit Kumar]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 08:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-35223</guid>
+		<description><![CDATA[why this program not getting allocate the memory ??    
+
+
+
+
+#include
+#include
+#include
+
+void allocat(char *str,int size)
+{
+   str=(char *)malloc(size);
+}
+int main()
+{
+    char *ptr=NULL;
+    allocat(ptr,20);
+    strcpy(ptr,&quot;quick heal&quot;);
+    printf(&quot;%c&quot;,*ptr);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>why this program not getting allocate the memory ??    </p>
+<p>#include<br />
+#include<br />
+#include</p>
+<p>void allocat(char *str,int size)<br />
+{<br />
+   str=(char *)malloc(size);<br />
+}<br />
+int main()<br />
+{<br />
+    char *ptr=NULL;<br />
+    allocat(ptr,20);<br />
+    strcpy(ptr,&#8221;quick heal&#8221;);<br />
+    printf(&#8220;%c&#8221;,*ptr);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: OM</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-31968</link>
+		<dc:creator><![CDATA[OM]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2014 15:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-31968</guid>
+		<description><![CDATA[How new returns exact data type]]></description>
+		<content:encoded><![CDATA[<p>How new returns exact data type</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vladimir Shishov</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-31425</link>
+		<dc:creator><![CDATA[Vladimir Shishov]]></dc:creator>
+		<pubDate>Fri, 10 Jan 2014 14:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-31425</guid>
+		<description><![CDATA[There is a &#039;new expression&#039; and a &#039;new operator&#039; that are different things.
+- operator new doesn&#039;t call constructors. 
+- operator new returns void* just like malloc.
+
+I think there is a lot of different things that can be added, such as new[] expression vs malloc.]]></description>
+		<content:encoded><![CDATA[<p>There is a &#8216;new expression&#8217; and a &#8216;new operator&#8217; that are different things.<br />
+&#8211; operator new doesn&#8217;t call constructors.<br />
+&#8211; operator new returns void* just like malloc.</p>
+<p>I think there is a lot of different things that can be added, such as new[] expression vs malloc.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: muthua</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-31390</link>
+		<dc:creator><![CDATA[muthua]]></dc:creator>
+		<pubDate>Thu, 09 Jan 2014 08:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-31390</guid>
+		<description><![CDATA[In new we do not mention the size but malloc we mention the size. for example,
+int *p = new int;
+int *p = (int*) malloc(sizeof(int));]]></description>
+		<content:encoded><![CDATA[<p>In new we do not mention the size but malloc we mention the size. for example,<br />
+int *p = new int;<br />
+int *p = (int*) malloc(sizeof(int));</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rakesh</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-29634</link>
+		<dc:creator><![CDATA[Rakesh]]></dc:creator>
+		<pubDate>Thu, 07 Nov 2013 19:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-29634</guid>
+		<description><![CDATA[Yes quite obvious, as malloc has been derived from C and hence there is no support for OO mechanics.]]></description>
+		<content:encoded><![CDATA[<p>Yes quite obvious, as malloc has been derived from C and hence there is no support for OO mechanics.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rakesh</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-29633</link>
+		<dc:creator><![CDATA[Rakesh]]></dc:creator>
+		<pubDate>Thu, 07 Nov 2013 19:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-29633</guid>
+		<description><![CDATA[Neither code works.
+
+Even the malloc() fails to allocate the memory specified and returns NULL pointer. It is just that no error handling is associated with the malloc thing.
+
+You can verify my statement by checking the return value of the malloc call.]]></description>
+		<content:encoded><![CDATA[<p>Neither code works.</p>
+<p>Even the malloc() fails to allocate the memory specified and returns NULL pointer. It is just that no error handling is associated with the malloc thing.</p>
+<p>You can verify my statement by checking the return value of the malloc call.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bipin Kumar</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-27966</link>
+		<dc:creator><![CDATA[Bipin Kumar]]></dc:creator>
+		<pubDate>Sat, 21 Sep 2013 13:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-27966</guid>
+		<description><![CDATA[The one more  difference which i would like to add is in the case of malloc the deallocation of memory in done with the help of free() but in new the deallocation is done with delete operator.]]></description>
+		<content:encoded><![CDATA[<p>The one more  difference which i would like to add is in the case of malloc the deallocation of memory in done with the help of free() but in new the deallocation is done with delete operator.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MITTAL</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-20590</link>
+		<dc:creator><![CDATA[MITTAL]]></dc:creator>
+		<pubDate>Tue, 25 Jun 2013 15:19:01 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-20590</guid>
+		<description><![CDATA[Try to run program 1 and 2
+program 1:
+#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+int* n=new int[1000000000];
+    return 0;
+}
+
+program 2:
+#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+int* n=(int*)malloc(sizeof(int)*1000000000);
+    return 0;
+}
+
+Note:- new fails to allocate large amount of memory and it shows run time error. While malloc works fine.]]></description>
+		<content:encoded><![CDATA[<p>Try to run program 1 and 2<br />
+program 1:<br />
+#include <iostream><br />
+using namespace std;<br />
+int main()<br />
+{<br />
+int* n=new int[1000000000];<br />
+    return 0;<br />
+}</p>
+<p>program 2:<br />
+#include </iostream><iostream><br />
+using namespace std;<br />
+int main()<br />
+{<br />
+int* n=(int*)malloc(sizeof(int)*1000000000);<br />
+    return 0;<br />
+}</p>
+<p>Note:- new fails to allocate large amount of memory and it shows run time error. While malloc works fine.</iostream></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Manas Maity</title>
+		<link>http://www.geeksforgeeks.org/malloc-vs-new/#comment-25862</link>
+		<dc:creator><![CDATA[Manas Maity]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 04:20:34 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8378#comment-25862</guid>
+		<description><![CDATA[I need smthng more..]]></description>
+		<content:encoded><![CDATA[<p>I need smthng more..</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:52:45 -->
+
+<!-- Compression = gzip -->

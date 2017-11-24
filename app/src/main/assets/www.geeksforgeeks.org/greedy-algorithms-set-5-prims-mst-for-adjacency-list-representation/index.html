@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.">
+<link rel="shortcut icon" href="../gfg.png" type="image/x-icon" />
+
+<meta property="og:image" content="http://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="200">
+<meta property="og:image:height" content="200">
+
+<title>Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation) - GeeksforGeeks</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="" />
+<!--[if lt IE 9]>
+<script src="../wp-content/themes/iconic-one/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<script>
+
+    var arrPostCat = new Array();
+            arrPostCat.push('2068');
+            arrPostCat.push('1747');
+        var domain = 1;
+    var arrPost = new Array();
+    var post_id = "27580";
+    var post_type = "post";
+    var post_slug = window.location.href;
+    var ip = "34.195.252.124";
+    var post_title = "Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation)";
+    var post_status = "publish";
+                            var isAdminLoggedIn = 0;
+        </script>
+
+<!-- This site is optimized with the Yoast SEO plugin v3.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation) - GeeksforGeeks" />
+<meta property="og:description" content="We recommend to read following two posts as a prerequisite of this post. 1. Greedy Algorithms | Set 5 (Prim’s Minimum Spanning Tree (MST)) 2.… Read More &raquo;" />
+<meta property="og:url" content="http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/" />
+<meta property="og:site_name" content="GeeksforGeeks" />
+<meta property="article:tag" content="MST" />
+<meta property="article:section" content="Graph" />
+<meta property="article:published_time" content="2012-11-23T00:03:26+00:00" />
+<meta property="article:modified_time" content="2017-06-20T17:09:47+00:00" />
+<meta property="og:updated_time" content="2017-06-20T17:09:47+00:00" />
+<meta property="og:image" content="../wp-content/uploads/Fig-11.jpg" />
+<meta property="og:image" content="../wp-content/uploads/MST1.jpg" />
+<meta property="og:image" content="../wp-content/uploads/MST2.jpg" />
+<meta property="og:image" content="../wp-content/uploads/MST3.jpg" />
+<meta property="og:image" content="../wp-content/uploads/MST4.jpg" />
+<meta property="og:image" content="../wp-content/uploads/MST5.jpg" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='../index.html' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='http://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Feed" href="../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Comments Feed" href="../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation) Comments Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.geeksforgeeks.org\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='mtq_CoreStyleSheets-css'  href='../wp-content/plugins/mtouch-quiz/mtq_core_style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mtq_ThemeStyleSheets-css'  href='../wp-content/plugins/mtouch-quiz/mtq_theme_style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-quicklatex-format-css'  href='../wp-content/plugins/wp-quicklatex/css/quicklatex-format.css' type='text/css' media='all' />
+<link rel='stylesheet' id='themonic-fonts-css'  href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-style-css'  href='../wp-content/themes/iconic-one/css/gfg-1.6.css' type='text/css' media='all' />
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='../wp-content/themes/iconic-one/js/gfg-6.8.js'></script>
+<link rel='https://api.w.org/' href='../wp-json/index.html' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.cdn.geeksforgeeks.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.6.8" />
+<link rel='shortlink' href='../index-p=27580.html' />
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed-url=http_%7C%7Cwww.geeksforgeeks.org%7Cgreedy-algorithms-set-5-prims-mst-for-adjacency-list-representation%7C.json" />
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed-url=http_%7C%7Cwww.geeksforgeeks.org%7Cgreedy-algorithms-set-5-prims-mst-for-adjacency-list-representation%7C&format=xml.xml" />
+<style>
+#wpadminbar{
+background: #ff0000 !important;
+}
+</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+
+<script type='text/javascript'>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/27823234/SP', [300, 250], 'div-gpt-ad-1458112424022-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+</head>
+
+<body class="single single-post postid-27580 single-format-standard custom-background custom-background-white custom-font-enabled">
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+
+<div id="page" style="position:relative;" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<div style="margin-bottom: 5px;">	
+				<hgroup class="main_gfg_title">
+			<a href="../index.html" title="GeeksforGeeks" rel="home">GeeksforGeeks</a>
+				<br .../> <a class="site-description">A computer science portal for geeks</a>
+		</hgroup>
+		<span class="responsive-custom-search">
+<script>
+  (function() {
+    var cx = '009682134359037907028:tj6eafkv_be';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+		
+		<gcse:search></gcse:search>  
+		</span>
+
+<div class="top-button-div">
+<hgroup style="float:right;display:inline-block;margin-top:5px;">   
+
+
+<a class="products" href="https://practice.geeksforgeeks.org/">Practice</a>
+
+<a class="products" href="http://quiz.geeksforgeeks.org/gate-corner-2/">GATE CS</a>
+
+<a class="products" href="http://quiz.geeksforgeeks.org/placements/">Placements</a>
+
+<a class="products" href="https://www.youtube.com/geeksforgeeksvideos/">Videos</a>
+
+<a class="products" href="../contribute/index.html">Contribute</a>
+</hgroup><br></br>
+
+
+<div id="profile" style="float: right; margin-top: -1%;margin-right:1%;"></div>
+</div>
+</div>
+
+		
+		
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="index.html#content" title="Skip to content">Skip to content</a>
+			<div class="menu-iconic-container"><ul id="menu-top" class="nav-menu"><li id="menu-item-147519" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147519"><a href="../index.html"><img style="width: 30px;vertical-align: middle;" src="../wp-content/uploads/gfg_transparent_white_small.png"></a></li>
+<li id="menu-item-141975" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-141975"><a href="../fundamentals-of-algorithms/index.html">Algo ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135030" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135030"><a href="../fundamentals-of-algorithms/index.html#AnalysisofAlgorithms">Analysis of Algorithms</a></li>
+	<li id="menu-item-146823" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146823"><a href="../fundamentals-of-algorithms/index.html">Topicwise ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-147774" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147774"><a href="../searching-algorithms/index.html">Searching Algorithms</a></li>
+		<li id="menu-item-147773" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147773"><a href="../sorting-algorithms/index.html">Sorting Algorithms</a></li>
+		<li id="menu-item-135041" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135041"><a href="../graph-data-structure-and-algorithms/index.html">Graph Algorithms</a></li>
+		<li id="menu-item-135040" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135040"><a href="../bitwise-algorithms/index.html">Bit Algorithms</a></li>
+		<li id="menu-item-135034" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135034"><a href="../fundamentals-of-algorithms/index.html#PatternSearching">Pattern Searching</a></li>
+		<li id="menu-item-135038" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135038"><a href="../geometric-algorithms/index.html">Geometric Algorithms</a></li>
+		<li id="menu-item-135039" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135039"><a href="../mathematical-algorithms/index.html">Mathematical Algorithms</a></li>
+		<li id="menu-item-135042" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135042"><a href="../randomized-algorithms/index.html">Randomized Algorithms</a></li>
+		<li id="menu-item-156520" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-156520"><a href="../category/algorithm/game-theory/index.html">Game Theory</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146824" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146824"><a href="../fundamentals-of-algorithms/index.html">Algorithm Paradigms ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-135032" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135032"><a href="../greedy-algorithms/index.html">Greedy Algorithms</a></li>
+		<li id="menu-item-135033" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135033"><a href="../dynamic-programming/index.html">Dynamic Programming</a></li>
+		<li id="menu-item-135037" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135037"><a href="../divide-and-conquer/index.html">Divide and Conquer</a></li>
+		<li id="menu-item-135036" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135036"><a href="../backtracking-algorithms/index.html">Backtracking</a></li>
+		<li id="menu-item-137933" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137933"><a href="../fundamentals-of-algorithms/index.html#BranchandBound">Branch &#038; Bound</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146911" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146911"><a href="../fundamentals-of-algorithms/index.html">All Algorithms</a></li>
+</ul>
+</li>
+<li id="menu-item-142016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-142016"><a href="../data-structures/index.html">DS  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135054" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135054"><a href="../array-data-structure/index.html">Array</a></li>
+	<li id="menu-item-135045" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135045"><a href="../data-structures/linked-list/index.html">LinkedList</a></li>
+	<li id="menu-item-135046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135046"><a href="../stack-data-structure/index.html">Stack</a></li>
+	<li id="menu-item-135047" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135047"><a href="../queue-data-structure/index.html">Queue</a></li>
+	<li id="menu-item-146827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146827"><a href="../data-structures/index.html">Tree based DS ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-135048" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135048"><a href="../binary-tree-data-structure/index.html">Binary Tree</a></li>
+		<li id="menu-item-135049" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135049"><a href="../binary-search-tree-data-structure/index.html">Binary Search Tree</a></li>
+		<li id="menu-item-135050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135050"><a href="../heap-data-structure/index.html">Heap</a></li>
+	</ul>
+</li>
+	<li id="menu-item-135051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135051"><a href="../hashing-data-structure/index.html">Hashing</a></li>
+	<li id="menu-item-135052" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135052"><a href="../graph-data-structure-and-algorithms/index.html">Graph</a></li>
+	<li id="menu-item-135053" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135053"><a href="../advanced-data-structures/index.html">Advanced Data Structure</a></li>
+	<li id="menu-item-135055" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135055"><a href="../matrix/index.html">Matrix</a></li>
+	<li id="menu-item-147716" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147716"><a href="../string-data-structure/index.html">Strings</a></li>
+	<li id="menu-item-135056" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135056"><a href="../data-structures/index.html">All Data Structures</a></li>
+</ul>
+</li>
+<li id="menu-item-147478" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-147478"><a href="../category/program-output/index.html">Languages ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135006" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135006"><a href="../c/index.html">C</a></li>
+	<li id="menu-item-135007" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135007"><a href="../c-plus-plus/index.html">C++</a></li>
+	<li id="menu-item-135012" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135012"><a href="../java/index.html">Java</a></li>
+	<li id="menu-item-137004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137004"><a href="../python/index.html">Python</a></li>
+	<li id="menu-item-135016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135016"><a href="../sql-tutorial/index.html">SQL</a></li>
+	<li id="menu-item-140854" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140854"><a title="http://www.geeksforgeeks.org/category/program-output/" href="../category/program-output/index.html">Program Output</a></li>
+</ul>
+</li>
+<li id="menu-item-142017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-142017"><a href="../company-interview-corner/index.html">Interview  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-141326" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141326"><a href="../company-preparation/index.html">Company Prep</a></li>
+	<li id="menu-item-137171" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137171"><a href="../interview-preparation-for-software-developer/index.html">Top Topics</a></li>
+	<li id="menu-item-137172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137172"><a href="https://practice.geeksforgeeks.org/company-tags">Practice Company Questions</a></li>
+	<li id="menu-item-137173" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137173"><a href="../company-interview-corner/index.html">Interview Experiences</a></li>
+	<li id="menu-item-137174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137174"><a href="../category/interview-experiences/experienced-interview-experiences/index.html">Experienced Interviews</a></li>
+	<li id="menu-item-137175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137175"><a href="../category/interview-experiences/internship-interview-experiences/index.html">Internship Interviews</a></li>
+	<li id="menu-item-137176" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137176"><a href="../category/competitive-programming/index.html">Competitive Programming</a></li>
+	<li id="menu-item-147581" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147581"><a href="../software-design-patterns/index.html">Design Patterns</a></li>
+	<li id="menu-item-137186" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137186"><a href="http://geeksquiz.com/quiz-corner/">Multiple Choice Quizzes</a></li>
+</ul>
+</li>
+<li id="menu-item-137178" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-137178"><a href="../student-corner/index.html">Students  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-137183" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137183"><a href="../campus-ambassador-program-by-geeksforgeeks/index.html">Campus Ambassador Program</a></li>
+	<li id="menu-item-137179" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137179"><a href="../geek-of-the-month/index.html">Geek of the Month</a></li>
+	<li id="menu-item-137570" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137570"><a href="http://geeksquiz.com/placements/">Placement Course</a></li>
+	<li id="menu-item-136004" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-136004"><a href="../category/project/index.html">Project</a></li>
+	<li id="menu-item-137180" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137180"><a href="../category/competitive-programming/index.html">Competitive Programming</a></li>
+	<li id="menu-item-137181" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137181"><a href="../testimonials/index.html">Testimonials</a></li>
+	<li id="menu-item-138863" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-138863"><a href="../category/geek-on-the-top/index.html">Geek on the Top</a></li>
+	<li id="menu-item-141974" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141974"><a href="../careers/index.html">Careers</a></li>
+	<li id="menu-item-137378" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137378"><a href="../internship/index.html">Internship</a></li>
+	<li id="menu-item-147457" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147457"><a href="../school-programming/index.html">School Programming</a></li>
+</ul>
+</li>
+<li id="menu-item-146712" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146712"><a href="../gate-corner-2-gq/index.html">GATE ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146713" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146713"><a href="../gate-corner-2-gq/index.html">GATE CS Corner</a></li>
+	<li id="menu-item-146714" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146714"><a href="../gate-cs-notes-gq/index.html">GATE Notes</a></li>
+	<li id="menu-item-146715" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146715"><a href="../lmns-gq/index.html">Last Minute Notes</a></li>
+	<li id="menu-item-146716" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146716"><a href="../original-gate-previous-year-question-papers-cse-and-it-gq/index.html">Official Papers</a></li>
+	<li id="menu-item-146717" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146717"><a href="../gate-cs-2018-important-dates/index.html">Gate 2018 Important Dates and Links</a></li>
+</ul>
+</li>
+<li id="menu-item-146718" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146718"><a href="../articles-on-computer-science-subjects-gq/index.html">CS Subjects ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146729"><a href="../operating-systems/index.html">Operating Systems</a></li>
+	<li id="menu-item-146724" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146724"><a href="../dbms/index.html">DBMS</a></li>
+	<li id="menu-item-146721" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146721"><a href="../computer-network-tutorials/index.html">Computer Networks</a></li>
+	<li id="menu-item-146720" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146720"><a href="../compiler-design-tutorials/index.html">Compiler Design</a></li>
+	<li id="menu-item-147831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147831"><a href="../web-technology/index.html">Web Technology</a></li>
+	<li id="menu-item-146722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146722"><a href="../computer-organization-and-architecture-tutorials/index.html">Computer Organization &#038; Architecture</a></li>
+	<li id="menu-item-146726" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146726"><a href="../digital-electronics-logic-design-tutorials/index.html">Digital Electronics</a></li>
+	<li id="menu-item-146727" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146727"><a href="../engineering-mathematics-tutorials/index.html">Engg. Mathematics</a></li>
+	<li id="menu-item-146730" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146730"><a href="../theory-of-computation-automata-tutorials/index.html">Theory of Computation</a></li>
+	<li id="menu-item-147512" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147512"><a href="../advanced-computer-subjects-tutorials/index.html">Advanced Topics</a></li>
+	<li id="menu-item-146725" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146725"><a href="../category/difference-between/index.html">What&#8217;s Difference?</a></li>
+</ul>
+</li>
+<li id="menu-item-140855" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-140855"><a href="http://quiz.geeksforgeeks.org/quiz-corner/">Quizzes ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146748"><a href="../quizzes-on-programming-languages-gq/index.html">Languages ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-146743" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146743"><a href="../quiz-corner-gq/index.html#C%20Programming%20Mock%20Tests">C</a></li>
+		<li id="menu-item-146745" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146745"><a href="../quiz-corner-gq/index.html#C++%20Programming%20Mock%20Tests">C++</a></li>
+		<li id="menu-item-146746" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146746"><a href="../quiz-corner-gq/index.html#Java%20Programming%20Mock%20Tests">Java</a></li>
+		<li id="menu-item-146747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146747"><a href="../quiz-corner-gq/index.html#Python%20Programming%20Mock%20Tests">Python</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146825" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146825"><a href="../quiz-corner-gq/index.html#Data%20Structures%20Mock%20Tests">CS Subjectwise ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-146731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146731"><a href="../quiz-corner-gq/index.html#Data%20Structures%20Mock%20Tests">Data Structures</a></li>
+		<li id="menu-item-146732" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146732"><a href="../quiz-corner-gq/index.html#Algorithms%20Mock%20Tests">Algorithms</a></li>
+		<li id="menu-item-146733" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146733"><a href="../quiz-corner-gq/index.html#Operating%20Systems%20Mock%20Tests">Operating Systems</a></li>
+		<li id="menu-item-146734" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146734"><a href="../quiz-corner-gq/index.html#DBMS%20Mock%20Tests">DBMS</a></li>
+		<li id="menu-item-146735" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146735"><a href="../quiz-corner-gq/index.html#Compiler%20Design%20Mock%20Tests">Compiler Design</a></li>
+		<li id="menu-item-146736" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146736"><a href="../quiz-corner-gq/index.html#Computer%20Networks%20Mock%20Tests">Computer Networks</a></li>
+		<li id="menu-item-146737" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146737"><a href="../quiz-corner-gq/index.html#Theory%20of%20Computation%20Mock%20Tests">Theory of Computation</a></li>
+		<li id="menu-item-146738" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146738"><a href="../quiz-corner-gq/index.html#Computer%20Organization%20and%20Architecture">Computer Organization</a></li>
+		<li id="menu-item-146739" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146739"><a href="../software-engineering-gq/index.html">Software Engineering</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146740" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146740"><a href="../html-and-xml-gq/index.html">HTML &#038; XML</a></li>
+	<li id="menu-item-146741" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146741"><a href="../quiz-corner-gq/index.html#Engineering%20Mathematics">Engg. Mathematics</a></li>
+	<li id="menu-item-146742" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146742"><a href="../quiz-corner-gq/index.html#Aptitude%20Mock%20Tests">Aptitude</a></li>
+</ul>
+</li>
+<li id="menu-item-135367" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135367"><a href="../category/guestblogs/index.html">GBlog</a></li>
+<li id="menu-item-141885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141885"><a href="../puzzles/index.html">Puzzles</a></li>
+<li id="menu-item-141816" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141816"><a href="../the-technical-scripter-event-by-geeksforgeeks-2/index.html">What&#8217;s New?</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+<button id="scrollTopBtn" title="Scroll to Top" type="button" class="btn btn-success">&#x25B2;</button>
+	<div id="main" class="wrapper">
+<div class="leftSideBarParent">
+    <div class="leftSideBar">
+        <div class="menuDivForLeftbar"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div><span class="leftbarDataSpan" data-pid="27580" data-lid="1" data-type="post" data-termid="2068"></span><div class="quickLink_S">
+<table>
+<tbody>
+
+
+<tr>
+<td><a href="../write-interview-experience/index.html">How to write an Interview Experience?</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Difficulty Levels</td>
+</tr>
+
+<tr>
+<td><a href="../basic/index.html">Basic</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../easy/index.html">Easy</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../medium/index.html">Medium</a></td>
+</tr>
+
+
+
+<tr>
+<td><a href="../hard/index.html">Hard</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../expert/index.html">Expert</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Popular Tags</td>
+</tr>
+
+
+<tr>
+<td style="padding:2px;line-height:1.7;font-size:13px;"><a href="../tag/amazon/index.html">Amazon</a>, 
+<a href="../tag/microsoft/index.html">Microsoft</a>, <a href="../category/dynamic-programming/index.html">Dynamic Programming</a>, <a href="../tag/samsung/index.html">Samsung</a><br/><a href="../tags/index.html">Click here for more</a></td>
+</tr>
+
+
+
+
+<tr>
+<td class="quickLink-header_S"><b>Interview Preparation</td>
+</tr>
+
+
+<tr>
+<td><a href="../a-complete-step-by-step-guide-for-placement-preparation-by-geeksforgeeks/index.html">Step by Step Preparation</a></td>
+</tr>
+
+<tr>
+<td><a href="../company-preparation/index.html">Company Preparation</a></td>
+</tr>
+
+<tr>
+<td><a href="../interview-preparation-for-software-developer/index.html">Top Topics</a></td>
+</tr>
+
+
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/company-tags">Company Specific Practice</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../software-design-patterns/index.html">Software Design Patterns</a></td>
+</tr>
+
+<tr>
+<td><a href="../placements-gq/index.html">Placements Preparation Course</a></td>
+</tr>
+
+<tr>
+<td><a href="../company-interview-corner/index.html">Interview Corner</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../category/interview-experiences/index.html">Recent Interview Experiences</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../geeksquiz-home/index.html">GQ Home Page</a></td>
+</tr>
+
+<tr>
+<td><a href="../quiz-corner-gq/index.html">Quiz Corner</a></td>
+</tr>
+
+<tr>
+<td><a href="../lmns-gq/index.html">LMNs</a></td>
+</tr>
+
+<tr>
+<td class="quickLink-header_S"><b>Practice Platform</b></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/recent.php?ref=home">What's New ?</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/ranking.php?ref=home">Leaderboard !!</a></td>
+</tr>
+
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/topic-tags/?ref=home">Topic-wise Practice</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/subjective-page.php?ref=home">Subjective Problems</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/School/0/0/?ref=home">Difficulty Level - School</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Basic/0/0/?ref=home">Difficulty Level - Basic</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Easy/0/0/?ref=home">Difficulty Level - Easy</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Medium/0/0/?ref=home">Difficulty Level - Medium</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Hard/0/0/?ref=home">Difficulty Level - Hard</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/pickACategory.php?ref=home">How to pick a difficulty level?</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/?ref=home">Explore More...</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Programming Languages</b></td>
+</tr>
+
+<tr>
+<td><a href="../c/index.html">C</a></td>
+</tr>
+
+<tr>
+<td><a href="../c-plus-plus/index.html">C++</a></td>
+</tr>
+
+<tr>
+<td><a href="../java/index.html">Java</a></td>
+</tr>
+
+<tr>
+<td><a href="../python/index.html">Python</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../sql-tutorial/index.html">SQL</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Important Quick Links</b></td>
+</tr>
+
+<tr>
+<td><a href="../school-programming/index.html">School Programming</a></td>
+</tr>
+
+<tr>
+<td><a href="../operating-systems/index.html">Operating Systems</a></td>
+</tr>
+
+<tr>
+<td><a href="../dbms/index.html">DBMS</a></td>
+</tr>
+
+<tr>
+<td><a href="../computer-network-tutorials/index.html">Computer Networks</a></td>
+</tr>
+
+<tr>
+<td><a href="../engineering-mathematics-tutorials/index.html">Engineering Mathematics</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/design-pattern/index.html">Design Patterns</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/puzzles/index.html">Common Interview Puzzles</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../web-technology/index.html">Web Technology</a></td>
+
+<tr>
+<td><a href="../category/gfact/index.html">G-Facts</a></td>
+</tr>
+
+<tr>
+<td><a href="../tag/computer-graphics/index.html">Computer Graphics</a></td>
+</tr>
+
+<tr>
+<td><a href="../image-processing/index.html">Image Processing</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/project/index.html">Project Ideas</a></td>
+</tr>
+
+</tbody>
+</table>
+</div>    </div>
+</div>
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+                        							 	<article id="post-27580" class="post-27580 post type-post status-publish format-standard hentry category-graph category-greedy tag-mst">
+				<header class="entry-header">
+						<h1 class="entry-title">Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation)</h1>
+				
+							<div class="divclass"> 
+					<a href="../hard/index.html" title="Hard"><span class="articleRating alignright level-4">4.4</span></a>
+					</div>
+								</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<p>We recommend to read following two posts as a prerequisite of this post.<span id="more-27580"></span></p>
+<p><strong>1.</strong> <a href="../index-p=27455.html">Greedy Algorithms | Set 5 (Prim’s Minimum Spanning Tree (MST))</a><br />
+<strong>2.</strong> <a href="../index-p=27134.html">Graph and its representations</a></p>
+<p>We have discussed <a href="../index-p=27455.html">Prim&#8217;s algorithm and its implementation for adjacency matrix representation of graphs</a>. The time complexity for the matrix representation is O(V^2). In this post, O(ELogV) algorithm for adjacency list representation is discussed.<br />
+As discussed in the previous post, in Prim&#8217;s algorithm, two sets are maintained, one set contains list of vertices already included in MST, other set contains vertices not yet included. With adjacency list representation, all vertices of a graph can be traversed in O(V+E) time using <a href="../index-p=18382.html">BFS</a>. The idea is to traverse all vertices of graph using <a href="../index-p=18382.html">BFS </a>and use a Min Heap to store the vertices not yet included in MST. Min Heap is used as a priority queue to get the minimum weight edge from the <a href="http://en.wikipedia.org/wiki/Cut_(graph_theory)">cut</a>. Min Heap is used as time complexity of operations like extracting minimum element and decreasing key value is O(LogV) in Min Heap.</p>
+<p>Following are the detailed steps.<br />
+<strong>1) </strong>Create a Min Heap of size V where V is the number of vertices in the given graph. Every node of min heap contains vertex number and key value of the vertex.<br />
+<strong>2)</strong> Initialize Min Heap with first vertex as root (the key value assigned to first vertex is 0). The key value assigned to all other vertices is INF (infinite).<br />
+<strong>3) </strong> While Min Heap is not empty, do following<br />
+&#8230;..<strong>a)</strong> Extract the min value node from Min Heap. Let the extracted vertex be u.<br />
+&#8230;..<strong>b)</strong> For every adjacent vertex v of u, check if v is in Min Heap (not yet included in MST). If v is in Min Heap and its key value is more than weight of u-v, then update the key value of v as weight of u-v.</p>
+<p>Let us understand the above algorithm with the following example:<br />
+<a href="../wp-content/uploads/Fig-11.jpg"><img title="Fig-1" src="../wp-content/uploads/Fig-11.jpg" alt="" width="300" height="139" /></a><br />
+Initially, key value of first vertex is 0 and INF (infinite) for all other vertices. So vertex 0 is extracted from Min Heap and key values of vertices adjacent to 0 (1 and 7) are updated. Min Heap contains all vertices except vertex 0.<br />
+The vertices in green color are the vertices included in MST.<br />
+<a href="../wp-content/uploads/MST1.jpg"><img title="Fig-2" src="../wp-content/uploads/MST1.jpg" alt="" width="80" height="139" /></a><br />
+Since key value of vertex 1 is minimum among all nodes in Min Heap, it is extracted from Min Heap and key values of vertices adjacent to 1 are updated (Key is updated if the a vertex is not in Min Heap and previous key value is greater than the weight of edge from 1 to the adjacent). Min Heap contains all vertices except vertex 0 and 1.<br />
+<a href="../wp-content/uploads/MST2.jpg"><img title="Fig-3" src="../wp-content/uploads/MST2.jpg" alt="" width="150" height="139" /></a><br />
+Since key value of vertex 7 is minimum among all nodes in Min Heap, it is extracted from Min Heap and key values of vertices adjacent to 7 are updated (Key is updated if the a vertex is not in Min Heap and previous key value is greater than the weight of edge from 7 to the adjacent). Min Heap contains all vertices except vertex 0, 1 and 7.<br />
+<a href="../wp-content/uploads/MST3.jpg"><img title="Fig-4" src="../wp-content/uploads/MST3.jpg" alt="" width="110" height="125" /></a><br />
+Since key value of vertex 6 is minimum among all nodes in Min Heap, it is extracted from Min Heap and key values of vertices adjacent to 6 are updated (Key is updated if the a vertex is not in Min Heap and previous key value is greater than the weight of edge from 6 to the adjacent). Min Heap contains all vertices except vertex 0, 1, 7 and 6.<br />
+<a href="../wp-content/uploads/MST4.jpg"><img title="Fig-4" src="../wp-content/uploads/MST4.jpg" alt="" width="150" height="139" /></a><br />
+The above steps are repeated for rest of the nodes in Min Heap till Min Heap becomes empty<br />
+<a href="../wp-content/uploads/MST5.jpg"><img title="Fig-1" src="../wp-content/uploads/MST5.jpg" alt="" width="300" height="139" /></a></p>
+<div class="responsive-tabs">
+<h2 class="tabtitle">C++</h2>
+<div class="tabcontent">
+
+<pre class="brush: cpp; highlight: [223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283]; title: ; notranslate" title="">
+// C / C++ program for Prim's MST for adjacency list representation of graph
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+
+// A structure to represent a node in adjacency list
+struct AdjListNode
+{
+    int dest;
+    int weight;
+    struct AdjListNode* next;
+};
+
+// A structure to represent an adjacency liat
+struct AdjList
+{
+    struct AdjListNode *head;  // pointer to head node of list
+};
+
+// A structure to represent a graph. A graph is an array of adjacency lists.
+// Size of array will be V (number of vertices in graph)
+struct Graph
+{
+    int V;
+    struct AdjList* array;
+};
+
+// A utility function to create a new adjacency list node
+struct AdjListNode* newAdjListNode(int dest, int weight)
+{
+    struct AdjListNode* newNode =
+            (struct AdjListNode*) malloc(sizeof(struct AdjListNode));
+    newNode-&gt;dest = dest;
+    newNode-&gt;weight = weight;
+    newNode-&gt;next = NULL;
+    return newNode;
+}
+
+// A utility function that creates a graph of V vertices
+struct Graph* createGraph(int V)
+{
+    struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
+    graph-&gt;V = V;
+
+    // Create an array of adjacency lists.  Size of array will be V
+    graph-&gt;array = (struct AdjList*) malloc(V * sizeof(struct AdjList));
+
+     // Initialize each adjacency list as empty by making head as NULL
+    for (int i = 0; i &lt; V; ++i)
+        graph-&gt;array[i].head = NULL;
+
+    return graph;
+}
+
+// Adds an edge to an undirected graph
+void addEdge(struct Graph* graph, int src, int dest, int weight)
+{
+    // Add an edge from src to dest.  A new node is added to the adjacency
+    // list of src.  The node is added at the begining
+    struct AdjListNode* newNode = newAdjListNode(dest, weight);
+    newNode-&gt;next = graph-&gt;array[src].head;
+    graph-&gt;array[src].head = newNode;
+
+    // Since graph is undirected, add an edge from dest to src also
+    newNode = newAdjListNode(src, weight);
+    newNode-&gt;next = graph-&gt;array[dest].head;
+    graph-&gt;array[dest].head = newNode;
+}
+
+// Structure to represent a min heap node
+struct MinHeapNode
+{
+    int  v;
+    int key;
+};
+
+// Structure to represent a min heap
+struct MinHeap
+{
+    int size;      // Number of heap nodes present currently
+    int capacity;  // Capacity of min heap
+    int *pos;     // This is needed for decreaseKey()
+    struct MinHeapNode **array;
+};
+
+// A utility function to create a new Min Heap Node
+struct MinHeapNode* newMinHeapNode(int v, int key)
+{
+    struct MinHeapNode* minHeapNode =
+           (struct MinHeapNode*) malloc(sizeof(struct MinHeapNode));
+    minHeapNode-&gt;v = v;
+    minHeapNode-&gt;key = key;
+    return minHeapNode;
+}
+
+// A utilit function to create a Min Heap
+struct MinHeap* createMinHeap(int capacity)
+{
+    struct MinHeap* minHeap =
+         (struct MinHeap*) malloc(sizeof(struct MinHeap));
+    minHeap-&gt;pos = (int *)malloc(capacity * sizeof(int));
+    minHeap-&gt;size = 0;
+    minHeap-&gt;capacity = capacity;
+    minHeap-&gt;array =
+         (struct MinHeapNode**) malloc(capacity * sizeof(struct MinHeapNode*));
+    return minHeap;
+}
+
+// A utility function to swap two nodes of min heap. Needed for min heapify
+void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
+{
+    struct MinHeapNode* t = *a;
+    *a = *b;
+    *b = t;
+}
+
+// A standard function to heapify at given idx
+// This function also updates position of nodes when they are swapped.
+// Position is needed for decreaseKey()
+void minHeapify(struct MinHeap* minHeap, int idx)
+{
+    int smallest, left, right;
+    smallest = idx;
+    left = 2 * idx + 1;
+    right = 2 * idx + 2;
+
+    if (left &lt; minHeap-&gt;size &amp;&amp;
+        minHeap-&gt;array[left]-&gt;key &lt; minHeap-&gt;array[smallest]-&gt;key )
+      smallest = left;
+
+    if (right &lt; minHeap-&gt;size &amp;&amp;
+        minHeap-&gt;array[right]-&gt;key &lt; minHeap-&gt;array[smallest]-&gt;key )
+      smallest = right;
+
+    if (smallest != idx)
+    {
+        // The nodes to be swapped in min heap
+        MinHeapNode *smallestNode = minHeap-&gt;array[smallest];
+        MinHeapNode *idxNode = minHeap-&gt;array[idx];
+
+        // Swap positions
+        minHeap-&gt;pos[smallestNode-&gt;v] = idx;
+        minHeap-&gt;pos[idxNode-&gt;v] = smallest;
+
+        // Swap nodes
+        swapMinHeapNode(&amp;minHeap-&gt;array[smallest], &amp;minHeap-&gt;array[idx]);
+
+        minHeapify(minHeap, smallest);
+    }
+}
+
+// A utility function to check if the given minHeap is ampty or not
+int isEmpty(struct MinHeap* minHeap)
+{
+    return minHeap-&gt;size == 0;
+}
+
+// Standard function to extract minimum node from heap
+struct MinHeapNode* extractMin(struct MinHeap* minHeap)
+{
+    if (isEmpty(minHeap))
+        return NULL;
+
+    // Store the root node
+    struct MinHeapNode* root = minHeap-&gt;array[0];
+
+    // Replace root node with last node
+    struct MinHeapNode* lastNode = minHeap-&gt;array[minHeap-&gt;size - 1];
+    minHeap-&gt;array[0] = lastNode;
+
+    // Update position of last node
+    minHeap-&gt;pos[root-&gt;v] = minHeap-&gt;size-1;
+    minHeap-&gt;pos[lastNode-&gt;v] = 0;
+
+    // Reduce heap size and heapify root
+    --minHeap-&gt;size;
+    minHeapify(minHeap, 0);
+
+    return root;
+}
+
+// Function to decreasy key value of a given vertex v. This function
+// uses pos[] of min heap to get the current index of node in min heap
+void decreaseKey(struct MinHeap* minHeap, int v, int key)
+{
+    // Get the index of v in  heap array
+    int i = minHeap-&gt;pos[v];
+
+    // Get the node and update its key value
+    minHeap-&gt;array[i]-&gt;key = key;
+
+    // Travel up while the complete tree is not hepified.
+    // This is a O(Logn) loop
+    while (i &amp;&amp; minHeap-&gt;array[i]-&gt;key &lt; minHeap-&gt;array[(i - 1) / 2]-&gt;key)
+    {
+        // Swap this node with its parent
+        minHeap-&gt;pos[minHeap-&gt;array[i]-&gt;v] = (i-1)/2;
+        minHeap-&gt;pos[minHeap-&gt;array[(i-1)/2]-&gt;v] = i;
+        swapMinHeapNode(&amp;minHeap-&gt;array[i],  &amp;minHeap-&gt;array[(i - 1) / 2]);
+
+        // move to parent index
+        i = (i - 1) / 2;
+    }
+}
+
+// A utility function to check if a given vertex
+// 'v' is in min heap or not
+bool isInMinHeap(struct MinHeap *minHeap, int v)
+{
+   if (minHeap-&gt;pos[v] &lt; minHeap-&gt;size)
+     return true;
+   return false;
+}
+
+// A utility function used to print the constructed MST
+void printArr(int arr[], int n)
+{
+    for (int i = 1; i &lt; n; ++i)
+        printf(&quot;%d - %d\n&quot;, arr[i], i);
+}
+
+// The main function that constructs Minimum Spanning Tree (MST)
+// using Prim's algorithm
+void PrimMST(struct Graph* graph)
+{
+    int V = graph-&gt;V;// Get the number of vertices in graph
+    int parent[V];   // Array to store constructed MST
+    int key[V];      // Key values used to pick minimum weight edge in cut
+
+    // minHeap represents set E
+    struct MinHeap* minHeap = createMinHeap(V);
+
+    // Initialize min heap with all vertices. Key value of
+    // all vertices (except 0th vertex) is initially infinite
+    for (int v = 1; v &lt; V; ++v)
+    {
+        parent[v] = -1;
+        key[v] = INT_MAX;
+        minHeap-&gt;array[v] = newMinHeapNode(v, key[v]);
+        minHeap-&gt;pos[v] = v;
+    }
+
+    // Make key value of 0th vertex as 0 so that it
+    // is extracted first
+    key[0] = 0;
+    minHeap-&gt;array[0] = newMinHeapNode(0, key[0]);
+    minHeap-&gt;pos[0]   = 0;
+
+    // Initially size of min heap is equal to V
+    minHeap-&gt;size = V;
+
+    // In the followin loop, min heap contains all nodes
+    // not yet added to MST.
+    while (!isEmpty(minHeap))
+    {
+        // Extract the vertex with minimum key value
+        struct MinHeapNode* minHeapNode = extractMin(minHeap);
+        int u = minHeapNode-&gt;v; // Store the extracted vertex number
+
+        // Traverse through all adjacent vertices of u (the extracted
+        // vertex) and update their key values
+        struct AdjListNode* pCrawl = graph-&gt;array[u].head;
+        while (pCrawl != NULL)
+        {
+            int v = pCrawl-&gt;dest;
+
+            // If v is not yet included in MST and weight of u-v is
+            // less than key value of v, then update key value and
+            // parent of v
+            if (isInMinHeap(minHeap, v) &amp;&amp; pCrawl-&gt;weight &lt; key[v])
+            {
+                key[v] = pCrawl-&gt;weight;
+                parent[v] = u;
+                decreaseKey(minHeap, v, key[v]);
+            }
+            pCrawl = pCrawl-&gt;next;
+        }
+    }
+
+    // print edges of MST
+    printArr(parent, V);
+}
+
+// Driver program to test above functions
+int main()
+{
+    // Let us create the graph given in above fugure
+    int V = 9;
+    struct Graph* graph = createGraph(V);
+    addEdge(graph, 0, 1, 4);
+    addEdge(graph, 0, 7, 8);
+    addEdge(graph, 1, 2, 8);
+    addEdge(graph, 1, 7, 11);
+    addEdge(graph, 2, 3, 7);
+    addEdge(graph, 2, 8, 2);
+    addEdge(graph, 2, 5, 4);
+    addEdge(graph, 3, 4, 9);
+    addEdge(graph, 3, 5, 14);
+    addEdge(graph, 4, 5, 10);
+    addEdge(graph, 5, 6, 2);
+    addEdge(graph, 6, 7, 1);
+    addEdge(graph, 6, 8, 6);
+    addEdge(graph, 7, 8, 7);
+
+    PrimMST(graph);
+
+    return 0;
+}
+</pre>
+
+</div><h2 class="tabtitle">Python</h2>
+<div class="tabcontent">
+
+<pre class="brush: python; highlight: [140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198]; title: ; notranslate" title="">
+# A Python program for Prims's MST for 
+# adjacency list representation of graph
+
+from collections import defaultdict
+import sys
+
+class Heap():
+
+    def __init__(self):
+        self.array = []
+        self.size = 0
+        self.pos = []
+
+    def newMinHeapNode(self, v, dist):
+        minHeapNode = [v, dist]
+        return minHeapNode
+
+    # A utility function to swap two nodes of 
+    # min heap. Needed for min heapify
+    def swapMinHeapNode(self,a, b):
+        t = self.array[a]
+        self.array[a] = self.array[b]
+        self.array[b] = t
+
+    # A standard function to heapify at given idx
+    # This function also updates position of nodes 
+    # when they are swapped. Position is needed 
+    # for decreaseKey()
+    def minHeapify(self, idx):
+        smallest = idx
+        left = 2*idx + 1
+        right = 2*idx + 2
+
+        if left &lt; self.size and self.array[left][1] &lt; \
+                                self.array[smallest][1]:
+            smallest = left
+
+        if right &lt; self.size and self.array[right][1] &lt; \
+                                self.array[smallest][1]:
+            smallest = right
+
+        # The nodes to be swapped in min heap 
+        # if idx is not smallest
+        if smallest != idx:
+
+            # Swap positions
+            self.pos[ self.array[smallest][0] ] = idx
+            self.pos[ self.array[idx][0] ] = smallest
+
+            # Swap nodes
+            self.swapMinHeapNode(smallest, idx)
+
+            self.minHeapify(smallest)
+
+    # Standard function to extract minimum node from heap
+    def extractMin(self):
+
+        # Return NULL wif heap is empty
+        if self.isEmpty() == True:
+            return
+
+        # Store the root node
+        root = self.array[0]
+
+        # Replace root node with last node
+        lastNode = self.array[self.size - 1]
+        self.array[0] = lastNode
+
+        # Update position of last node
+        self.pos[lastNode[0]] = 0
+        self.pos[root[0]] = self.size - 1
+
+        # Reduce heap size and heapify root
+        self.size -= 1
+        self.minHeapify(0)
+
+        return root
+
+    def isEmpty(self):
+        return True if self.size == 0 else False
+
+    def decreaseKey(self, v, dist):
+
+        # Get the index of v in  heap array
+
+        i = self.pos[v]
+
+        # Get the node and update its dist value
+        self.array[i][1] = dist
+
+        # Travel up while the complete tree is not 
+        # hepified. This is a O(Logn) loop
+        while i &gt; 0 and self.array[i][1] &lt; \
+                    self.array[(i - 1) / 2][1]:
+
+            # Swap this node with its parent
+            self.pos[ self.array[i][0] ] = (i-1)/2
+            self.pos[ self.array[(i-1)/2][0] ] = i
+            self.swapMinHeapNode(i, (i - 1)/2 )
+
+            # move to parent index
+            i = (i - 1) / 2;
+
+    # A utility function to check if a given vertex
+    # 'v' is in min heap or not
+    def isInMinHeap(self, v):
+
+        if self.pos[v] &lt; self.size:
+            return True
+        return False
+
+
+def printArr(parent, n):
+    for i in range(1,n):
+        print &quot;%d - %d&quot; % (parent[i], i)
+
+
+class Graph():
+
+    def __init__(self, V):
+        self.V = V
+        self.graph = defaultdict(list)
+
+    # Adds an edge to an undirected graph
+    def addEdge(self, src, dest, weight):
+
+        # Add an edge from src to dest.  A new node is
+        # added to the adjacency list of src. The node 
+        # is added at the begining. The first element of
+        # the node has the destination and the second 
+        # elements has the weight
+        newNode = [dest, weight]
+        self.graph[src].insert(0, newNode)
+
+        # Since graph is undirected, add an edge from 
+        # dest to src also
+        newNode = [src, weight]
+        self.graph[dest].insert(0, newNode)
+
+    # The main function that prints the Minimum 
+    # Spanning Tree(MST) using the Prim's Algorithm. 
+    # It is a O(ELogV) function
+    def PrimMST(self):
+        # Get the number of vertices in graph
+        V = self.V  
+        
+        # key values used to pick minimum weight edge in cut
+        key = []   
+        
+        # List to store contructed MST
+        parent = [] 
+
+        # minHeap represents set E
+        minHeap = Heap()
+
+        #  Initialize min heap with all vertices. Key values of all
+        # vertices (except the 0th vertex) is is initially infinite
+        for v in range(V):
+            parent.append(-1)
+            key.append(sys.maxint)
+            minHeap.array.append( minHeap.newMinHeapNode(v, key[v]) )
+            minHeap.pos.append(v)
+
+        # Make key value of 0th vertex as 0 so 
+        # that it is extracted first
+        minHeap.pos[0] = 0
+        key[0] = 0
+        minHeap.decreaseKey(0, key[0])
+
+        # Initially size of min heap is equal to V
+        minHeap.size = V;
+
+        # In the following loop, min heap contains all nodes
+        # not yet added in the MST.
+        while minHeap.isEmpty() == False:
+
+            # Extract the vertex with minimum distance value
+            newHeapNode = minHeap.extractMin()
+            u = newHeapNode[0]
+
+            # Traverse through all adjacent vertices of u 
+            # (the extracted vertex) and update their 
+            # distance values
+            for pCrawl in self.graph[u]:
+
+                v = pCrawl[0]
+
+                # If shortest distance to v is not finalized 
+                # yet, and distance to v through u is less than
+                # its previously calculated distance
+                if minHeap.isInMinHeap(v) and pCrawl[1] &lt; key[v]:
+                    key[v] = pCrawl[1]
+                    parent[v] = u
+
+                    # update distance value in min heap also
+                    minHeap.decreaseKey(v, key[v])
+
+        printArr(parent,V)
+
+
+# Driver program to test the above functions
+graph = Graph(9)
+graph.addEdge(0, 1, 4)
+graph.addEdge(0, 7, 8)
+graph.addEdge(1, 2, 8)
+graph.addEdge(1, 7, 11)
+graph.addEdge(2, 3, 7)
+graph.addEdge(2, 8, 2)
+graph.addEdge(2, 5, 4)
+graph.addEdge(3, 4, 9)
+graph.addEdge(3, 5, 14)
+graph.addEdge(4, 5, 10)
+graph.addEdge(5, 6, 2)
+graph.addEdge(6, 7, 1)
+graph.addEdge(6, 8, 6)
+graph.addEdge(7, 8, 7)
+graph.PrimMST()
+
+# This code is contributed by Divyanshu Mehta
+</pre>
+</div></div>
+<p>Output:</p>
+<pre>0 - 1
+5 - 2
+2 - 3
+3 - 4
+6 - 5
+7 - 6
+0 - 7
+2 - 8</pre>
+<p><strong>Time Complexity:</strong> The time complexity of the above code/algorithm looks O(V^2) as there are two nested while loops. If we take a closer look, we can observe that the statements in inner loop are executed O(V+E) times (similar to BFS). The inner loop has decreaseKey() operation which takes O(LogV) time. So overall time complexity is O(E+V)*O(LogV) which is O((E+V)*LogV) = O(ELogV) (For a connected graph, V = O(E))</p>
+<p><iframe width="665" height="374" src="https://www.youtube.com/embed/PzznKcMyu0Y?feature=oembed" frameborder="0" allowfullscreen></iframe></p>
+<p><strong>References:</strong><br />
+<a href="http://www.flipkart.com/introduction-algorithms-8120340078/p/itmczynzhyhxv2gs?pid=9788120340077&affid=sandeepgfg">Introduction to Algorithms by Clifford Stein, Thomas H. Cormen, Charles E. Leiserson, Ronald L.<br />
+</a><br />
+<a href="http://en.wikipedia.org/wiki/Prim's_algorithm">http://en.wikipedia.org/wiki/Prim&#8217;s_algorithm</a></p>
+<p>This article is compiled by <a href="https://www.facebook.com/barnwal.aashish">Aashish Barnwal</a> and reviewed by GeeksforGeeks team. Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.</p>
+
+			 <div class="AdsParent" style="width:100%;">
+<span class="rectangleAd">
+<!--
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+ Big Rectangle Blog Bottom 
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="4061219431"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- GfGDownLeftNew -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="5794942435"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</span>
+<span class="responsiveAd">
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- newMobile2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="1950485631"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</span>
+</div>
+<h1><strong><a href="http://quiz.geeksforgeeks.org/gate-corner-2/">GATE CS Corner</a>
+&nbsp;&nbsp;&nbsp;<a href="https://practice.geeksforgeeks.org/company-tags">Company Wise Coding Practice</a></strong></h1>
+
+		</div><!-- .entry-content -->
+				
+		
+
+		<footer class="entry-meta">
+		<span><div class="categoryButton"><a href="../category/data-structures/graph/index.html" rel="category tag">Graph</a></div><div class="categoryButton"><a href="../category/algorithm/greedy/index.html" rel="category tag">Greedy</a></div></span> <span><div class="tagButton"><a href="../tag/mst/index.html" rel="tag">MST</a></div></span>
+           	<div id="improveArticle" style="float: right;cursor: pointer;"></div><div class="common-bottom">Please write to us at contribute@geeksforgeeks.org to report any issue with the above content.</div>          	
+					</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+
+<div style="font-size:15px; line-height:22px; margin-left:20px; color:green">
+
+<h2 style='font-size:20px; color: #838383'>Recommended Posts:</h2><br/><ul><li><a href='../greedy-algorithms-set-5-prims-minimum-spanning-tree-mst-2/index.html'>Greedy Algorithms | Set 5 (Prim’s Minimum Spanning Tree (MST))</a></li><li><a href='../greedy-algorithms-set-2-kruskals-minimum-spanning-tree-mst/index.html'>Greedy Algorithms | Set 2 (Kruskal’s Minimum Spanning Tree Algorithm)</a></li><li><a href='../greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/index.html'>Greedy Algorithms | Set 7 (Dijkstra&#8217;s shortest path algorithm)</a></li><li><a href='../prims-algorithm-using-priority_queue-stl/index.html'>Prim&#8217;s algorithm using priority_queue in STL</a></li><li><a href='../greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/index.html'>Greedy Algorithms | Set 8 (Dijkstra’s Algorithm for Adjacency List Representation)</a></li><li><a href='../shortest-path-reach-one-prime-changing-single-digit-time/index.html'>Shortest path to reach one prime to other by changing single digit at a time</a></li><li><a href='../traveling-salesman-problem-tsp-implementation/index.html'>Traveling Salesman Problem (TSP) Implementation</a></li><li><a href='../degree-centrality-centrality-measure/index.html'>Degree Centrality (Centrality Measure)</a></li><li><a href='../water-jug-problem-using-bfs/index.html'>Water Jug problem using BFS</a></li><li><a href='../number-of-cyclic-elements-in-an-array-where-we-can-jump-according-to-value/index.html'>Number of cyclic elements in an array where we can jump according to value</a></li></ul><br/></div>
+
+
+<!-- Added on 29 Oct 2015 for next and previous from same category -->
+<nav class="nav-single">
+					<div class="assistive-text">Post navigation</div>
+					<span class="nav-previous"><a href="../greedy-algorithms-set-5-prims-minimum-spanning-tree-mst-2/index.html" rel="prev"><< Previous Post</a></span>
+					<span class="nav-next"><a href="../greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/index.html" rel="next">Next Post >></a></span>
+				</nav><!-- .nav-single -->
+<!--
+<script type="text/javascript">
+	
+				arrPost.push('');
+	
+		   <?php// } ?>
+
+</script>
+-->
+
+
+
+<div class="plugins">
+<div pid="27580" ptitle="Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation)" id="ratePlugin"><div class="login">
+            (<a href="https://auth.geeksforgeeks.org/?to=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/">Login</a> to Rate)
+            <br><br>
+            </div>
+            <div class="techno">
+            <span id="rating_box" class="avg-rating level-4">4.4</span>
+            <span class="rating-desc"> Average Difficulty : <b id="diff-rating">4.4/5.0</b><br><span id="vote_count">Based on <b>53</b> vote(s)</span></span><br/><br/>
+        <input rating="1" type="button" class="box basic"  value="Basic"/>
+        <input rating="2" type="button" class="box easy"   value="Easy"/>
+        <input rating="3" type="button" class="box medium" value="Medium"/>
+        <input rating="4" type="button" class="box hard"   value="Hard"/>
+        <input rating="5" type="button" class="box expert" value="Expert"/>
+        <br><span class="process"></span></div></div><div pid="27580" ptitle="Greedy Algorithms | Set 6 (Prim’s MST for Adjacency List Representation)" id="markPlugin"><br><br><div class="lists">
+        <input id="todo" type="checkbox" class="mark">
+        <label class="checkbox" for="todo"> Add to TODO List </label>
+        <br>
+        <input id="done" type="checkbox" class="mark">
+        <label class="checkbox" for="done"> Mark as DONE </label>
+        </div></div></div>
+<div id="author" name="GeeksforGeeks"></div>
+<br></br>
+
+<style type="text/css">
+ 
+#share-buttons img {
+width: 35px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+#share-buttons a:hover {
+	text-decoration: none;
+}
+</style>
+
+
+<div id="share-buttons" style="display:none">
+   
+    <!-- Facebook -->
+    <a href="http://www.facebook.com/sharer.php?u=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/" target="_blank" title="Share on Facebook">
+        <img src="../wp-content/uploads/facebook.png" alt="Facebook" />
+    </a>
+    
+    <!-- Google+ -->
+    <a href="https://plus.google.com/share?url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/" target="_blank" title="Share on Google">
+        <img src="../wp-content/uploads/google.png" alt="Google" />
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/" target="_blank" title="Share on LinkedIn">
+        <img src="../wp-content/uploads/linkedin.png" alt="LinkedIn" />
+    </a>
+    
+    <!-- Twitter -->
+    <a href="https://twitter.com/share?url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/&text=Greedy%20Algorithms%20%7C%20Set%206%20(Prim%E2%80%99s%20MST%20for%20Adjacency%20List%20Representation)&hashtags=GeeksforGeeks" target="_blank" title="Share on Twitter">
+        <img src="../wp-content/uploads/twitter.png" alt="Twitter" />
+    </a>
+
+    <!-- Pinterest -->
+    <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());" title="Share on Pinterest">
+        <img src="../wp-content/uploads/pinterest.png" alt="Pinterest" />
+    </a>
+    
+    <!-- Reddit -->
+    <a href="http://reddit.com/submit?url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/&title=Greedy%20Algorithms%20%7C%20Set%206%20(Prim%E2%80%99s%20MST%20for%20Adjacency%20List%20Representation)" target="_blank" title="Share on Reddit">
+        <img src="../wp-content/uploads/reddit.png" alt="Reddit" />
+    </a>
+    
+    <!-- StumbleUpon-->
+    <a href="http://www.stumbleupon.com/submit?url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/&title=Greedy%20Algorithms%20%7C%20Set%206%20(Prim%E2%80%99s%20MST%20for%20Adjacency%20List%20Representation)" target="_blank" title="Share on StumbleUpon">
+        <img src="../wp-content/uploads/stumbleupon.png" alt="StumbleUpon" />
+    </a>
+    
+    <!-- Tumblr-->
+    <a href="http://www.tumblr.com/share/link?url=http://www.geeksforgeeks.org/greedy-algorithms-set-5-prims-mst-for-adjacency-list-representation/&title=Greedy%20Algorithms%20%7C%20Set%206%20(Prim%E2%80%99s%20MST%20for%20Adjacency%20List%20Representation)" target="_blank" title="Share on Tumblr">
+        <img src="../wp-content/uploads/tumblr.png" alt="Tumblr" />
+    </a>
+   
+</div>
+
+<br></br>
+<p>Writing code in comment? Please use <a href="https://ide.geeksforgeeks.org/">ide.geeksforgeeks.org</a>, generate link and share the link here.</a></p>
+<br/>
+<div style="display:flex">
+<button id="comment" class="action-button" style="width:45%;cursor: pointer;margin-right:10%;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0);border-color: #4cb96b;border-radius: 4px;">Load Comments</button>
+<button id="share" class="action-button" onclick="document.getElementById('share-buttons').style.display='block';this.style.display='none';" style="width:45%;cursor: pointer;margin-right:10%;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0);border-color: #4cb96b;border-radius: 4px;">Share this post!</button>
+
+</div>
+
+<div id="disqus_thread"></div>
+
+					</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-2" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Big 300x600 Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="4402736037"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-3" class="widget widget_text">			<div class="textwidget"><div class="trendings_gfg">
+					<table width="100%" align="center">
+						<thead>
+							<tr>
+								<th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;">Trending Content</th>
+							</tr>
+						</thead>
+						<tbody>
+
+<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+
+
+							<a href="../longest-common-subsequence/index.html">Longest Common Subsequence</a>
+
+						</td>
+					</tr>			
+												<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+
+
+							<a href="../breadth-first-traversal-for-a-graph/index.html">Breadth First Traversal or BFS</a>
+
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../tag/statistical-algorithms/index.html">Statistical Algorithms</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../longest-repeated-subsequence/index.html">Longest Repeated Subsequence</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../strpbrk-in-c/index.html">strpbrk() in C</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../detect-negative-cycle-graph-bellman-ford/index.html">Detect a negative cycle in a Graph | (Bellman Ford)</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../knapsack-problem/index.html">0-1 Knapsack Problem</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../gate-cs-notes-gq/index.html">GATE CS Notes</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../depth-first-traversal-for-a-graph/index.html">Depth First Traversal or DFS for a Graph</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../reverse-a-linked-list/index.html">Reverse a linked list</a>
+
+						</td>
+					</tr>
+						</tbody>
+					</table>
+				</div></div>
+		</aside><aside id="text-4" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveRightBarMay16 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="7089558833"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-5" class="widget widget_text">			<div class="textwidget"><table align="center" width="100%">
+    <thead>
+        <tr>
+            <th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;line-height:1.7;">
+                Most Visited Posts
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../top-algorithms-and-data-structures-for-competitive-programming/index.html">Top 10 Algorithms and Data Structures for Competitive Programming</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../top-10-algorithms-in-interview-questions/index.html">Top 10 algorithms in Interview Questions</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../how-to-begin-with-competitive-programming/index.html">How to begin with Competitive Programming?</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../a-complete-step-by-step-guide-for-placement-preparation-by-geeksforgeeks/index.html">Step by Step Guide for Placement Preparation</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../how-to-prepare-for-acm-icpc/index.html">How to prepare for ACM-ICPC?</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="http://quiz.geeksforgeeks.org/insertion-sort/">Insertion Sort</a>,
+                <a href="http://geeksquiz.com/binary-search/">Binary Search</a>,
+                <a href="http://geeksquiz.com/quick-sort/">QuickSort</a>,
+                <a href="http://geeksquiz.com/merge-sort/">MergeSort</a>,
+                <a href="http://geeksquiz.com/heap-sort/">HeapSort</a>
+            </td>
+        </tr>
+    </tbody>
+</table></div>
+		</aside><aside id="text-7" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- GfGSideBottomResponsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="5749413230"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-6" class="widget widget_text">			<div class="textwidget"><table align="center" width="100%">
+    <thead>
+        <tr>
+            <th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;line-height:1.7;">
+                Popular Categories
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/interview-experiences/index.html">Interview Experiences</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../advanced-data-structures/index.html">Advanced Data Structures</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../dynamic-programming/index.html">Dynamic Programming</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/greedy/index.html">Greedy Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/backtracking/index.html">Backtracking</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/pattern-searching/index.html">Pattern Searching</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/divide-and-conquer/index.html">Divide &amp; Conquer</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/geometric/index.html">Geometric Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/searching/index.html">Searching</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/sorting/index.html">Sorting</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/analysis/index.html">Analysis of Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/mathematical/index.html">Mathematical Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/randomized/index.html">Randomized Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/recursion/index.html">Recursion</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/game-theory/index.html">Game Theory</a>
+            </td>
+        </tr>
+
+    </tbody>
+</table></div>
+		</aside><aside id="text-8" class="widget widget_text">			<div class="textwidget"><!-- BuySellAds Zone Code -->
+<div id="bsap_1306934" class="bsarocks bsap_785bf45b162de1c5511e8baa02854e5c"></div>
+<!-- End BuySellAds Zone Code --></div>
+		</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><p class="widget-title">Tags</p><div class="tagcloud"><a href='../category/advanced-data-structure/index.html' class='tag-link-1762 tag-link-position-1' title='151 topics' style='font-size: 10.210526315789pt;'>Advanced Data Structure</a>
+<a href='../tag/amazon/index.html' class='tag-link-1942 tag-link-position-2' title='466 topics' style='font-size: 15.368421052632pt;'>Amazon</a>
+<a href='../category/quizzes-gq/aptitude-gq/index.html' class='tag-link-2200 tag-link-position-3' title='284 topics' style='font-size: 13.052631578947pt;'>Aptitude</a>
+<a href='../tag/aptitude/index.html' class='tag-link-2159 tag-link-position-4' title='287 topics' style='font-size: 13.157894736842pt;'>Aptitude</a>
+<a href='../category/data-structures/c-arrays/index.html' class='tag-link-3 tag-link-position-5' title='565 topics' style='font-size: 16.210526315789pt;'>Arrays</a>
+<a href='../category/articles/index.html' class='tag-link-18 tag-link-position-6' title='93 topics' style='font-size: 8pt;'>Articles</a>
+<a href='../category/algorithm/bit-magic/index.html' class='tag-link-17 tag-link-position-7' title='184 topics' style='font-size: 11.157894736842pt;'>Bit Magic</a>
+<a href='../tag/c/index.html' class='tag-link-2138 tag-link-position-8' title='397 topics' style='font-size: 14.631578947368pt;'>C</a>
+<a href='../category/programming-language/c/index.html' class='tag-link-2064 tag-link-position-9' title='543 topics' style='font-size: 16.105263157895pt;'>C</a>
+<a href='../category/programming-language/cpp/index.html' class='tag-link-2065 tag-link-position-10' title='657 topics' style='font-size: 16.947368421053pt;'>C++</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/cpp-gq/index.html' class='tag-link-2207 tag-link-position-11' title='130 topics' style='font-size: 9.5789473684211pt;'>C++ Quiz</a>
+<a href='../category/computer-subject/computer-networks/index.html' class='tag-link-2051 tag-link-position-12' title='100 topics' style='font-size: 8.3157894736842pt;'>Computer Networks</a>
+<a href='../tag/cpp-library/index.html' class='tag-link-1964 tag-link-position-13' title='111 topics' style='font-size: 8.8421052631579pt;'>CPP-Library</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/c-gq/index.html' class='tag-link-2206 tag-link-position-14' title='274 topics' style='font-size: 12.947368421053pt;'>C Quiz</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/data-structures-gate-gq/index.html' class='tag-link-2213 tag-link-position-15' title='129 topics' style='font-size: 9.4736842105263pt;'>Data Structures</a>
+<a href='../tag/data-structures/index.html' class='tag-link-2142 tag-link-position-16' title='129 topics' style='font-size: 9.4736842105263pt;'>Data Structures</a>
+<a href='../category/computer-subject/dbms/index.html' class='tag-link-2053 tag-link-position-17' title='99 topics' style='font-size: 8.3157894736842pt;'>DBMS</a>
+<a href='../category/algorithm/dynamic-programming/index.html' class='tag-link-1746 tag-link-position-18' title='257 topics' style='font-size: 12.631578947368pt;'>Dynamic Programming</a>
+<a href='../category/interview-experiences/experienced-interview-experiences/index.html' class='tag-link-1795 tag-link-position-19' title='125 topics' style='font-size: 9.3684210526316pt;'>Experienced</a>
+<a href='../category/guestblogs/index.html' class='tag-link-1710 tag-link-position-20' title='252 topics' style='font-size: 12.526315789474pt;'>GBlog</a>
+<a href='../category/algorithm/geometric/index.html' class='tag-link-1754 tag-link-position-21' title='95 topics' style='font-size: 8.1052631578947pt;'>Geometric</a>
+<a href='../category/data-structures/graph/index.html' class='tag-link-2068 tag-link-position-22' title='182 topics' style='font-size: 11.052631578947pt;'>Graph</a>
+<a href='../category/data-structures/hash/index.html' class='tag-link-1756 tag-link-position-23' title='142 topics' style='font-size: 10pt;'>Hash</a>
+<a href='../category/interview-experiences/internship-interview-experiences/index.html' class='tag-link-1794 tag-link-position-24' title='168 topics' style='font-size: 10.736842105263pt;'>Internship</a>
+<a href='../category/interview-experiences/index.html' class='tag-link-1140 tag-link-position-25' title='1,993 topics' style='font-size: 22pt;'>Interview Experiences</a>
+<a href='../category/programming-language/java/index.html' class='tag-link-2058 tag-link-position-26' title='689 topics' style='font-size: 17.157894736842pt;'>Java</a>
+<a href='../category/data-structures/linked-list/index.html' class='tag-link-8 tag-link-position-27' title='176 topics' style='font-size: 10.947368421053pt;'>Linked Lists</a>
+<a href='../category/algorithm/mathematical/index.html' class='tag-link-1753 tag-link-position-28' title='685 topics' style='font-size: 17.157894736842pt;'>Mathematical</a>
+<a href='../category/data-structures/matrix/index.html' class='tag-link-1760 tag-link-position-29' title='200 topics' style='font-size: 11.473684210526pt;'>Matrix</a>
+<a href='../category/multiple-choice-question/index.html' class='tag-link-66 tag-link-position-30' title='96 topics' style='font-size: 8.2105263157895pt;'>MCQ</a>
+<a href='../tag/microsoft/index.html' class='tag-link-104 tag-link-position-31' title='179 topics' style='font-size: 11.052631578947pt;'>Microsoft</a>
+<a href='../tag/number-digits/index.html' class='tag-link-1911 tag-link-position-32' title='122 topics' style='font-size: 9.2631578947368pt;'>number-digits</a>
+<a href='../category/program-output/index.html' class='tag-link-5 tag-link-position-33' title='182 topics' style='font-size: 11.052631578947pt;'>Program Output</a>
+<a href='../category/project/index.html' class='tag-link-1767 tag-link-position-34' title='124 topics' style='font-size: 9.3684210526316pt;'>Project</a>
+<a href='../category/puzzles/index.html' class='tag-link-2063 tag-link-position-35' title='161 topics' style='font-size: 10.526315789474pt;'>Puzzles</a>
+<a href='../category/programming-language/python/index.html' class='tag-link-1789 tag-link-position-36' title='468 topics' style='font-size: 15.368421052632pt;'>Python</a>
+<a href='../category/quizzes-gq/qa-placement-quizzes-gq/index.html' class='tag-link-2204 tag-link-position-37' title='274 topics' style='font-size: 12.947368421053pt;'>QA - Placement Quizzes</a>
+<a href='../tag/qa-placement-quizzes/index.html' class='tag-link-2187 tag-link-position-38' title='274 topics' style='font-size: 12.947368421053pt;'>QA - Placement Quizzes</a>
+<a href='../category/school-programming/index.html' class='tag-link-2078 tag-link-position-39' title='312 topics' style='font-size: 13.578947368421pt;'>School Programming</a>
+<a href='../category/algorithm/searching/index.html' class='tag-link-1751 tag-link-position-40' title='107 topics' style='font-size: 8.6315789473684pt;'>Searching</a>
+<a href='../category/algorithm/sorting/index.html' class='tag-link-1752 tag-link-position-41' title='215 topics' style='font-size: 11.789473684211pt;'>Sorting</a>
+<a href='../tag/stl/index.html' class='tag-link-1797 tag-link-position-42' title='237 topics' style='font-size: 12.315789473684pt;'>STL</a>
+<a href='../category/data-structures/c-strings/index.html' class='tag-link-7 tag-link-position-43' title='432 topics' style='font-size: 15.052631578947pt;'>Strings</a>
+<a href='../category/technical-scripter/index.html' class='tag-link-1788 tag-link-position-44' title='124 topics' style='font-size: 9.3684210526316pt;'>Technical Scripter</a>
+<a href='../category/data-structures/tree/index.html' class='tag-link-19 tag-link-position-45' title='288 topics' style='font-size: 13.157894736842pt;'>Trees</a></div>
+</aside><aside id="text-9" class="widget widget_text">			<div class="textwidget"><!-- BuySellAds Zone Code -->
+<div id="bsap_1304848" class="bsarocks bsap_785bf45b162de1c5511e8baa02854e5c"></div>
+<!-- End BuySellAds Zone Code --></div>
+		</aside><aside id="text-10" class="widget widget_text">			<div class="textwidget"><a href="../recent-comments/index.html" style="margin-right: 0px !important;">
+  <center>
+    <input type="button" value="Recent Comments" style="background-color: #4cb96b; color:white; width:100%; font-size:large; cursor:pointer;font-weight:bold;">
+  </center>
+</a></div>
+		</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo" style="padding:0; ">
+		<div class="site-info">
+		<div class="clear"></div>
+		</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+<center>
+  <div class="iconic-footer" style="min-height:40px;font-size:14px;padding-bottom: 0px;line-height: 1.5;">
+    @geeksforgeeks, 
+    <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/deed.en_US" title="Valid XHTML Strict 1.0">Some rights reserved</a><a href="../about/contact-us/index.html"> &nbsp; &nbsp; &nbsp; &nbsp;Contact Us!</a>
+    <a href="../about/index.html"> &nbsp; &nbsp; &nbsp; &nbsp;About Us!&nbsp; &nbsp; &nbsp;</a>
+    <a href="../careers/index.html"> &nbsp; &nbsp; &nbsp;Careers!&nbsp; &nbsp; </a>
+    <a href="../privacy-policy/index.html">&nbsp; &nbsp; &nbsp; Privacy Policy&nbsp; &nbsp;&nbsp; </a>
+    <!-- adding social buttons on 07 April, 2017 -->
+    <a href="https://www.facebook.com/GeeksforGeeks-316764689022/timeline/" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="facebook">
+      <img src="../wp-content/uploads/square_facebook_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://twitter.com/geeksforgeeks" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="twitter">
+      <img src="../wp-content/uploads/square_twitter_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://www.linkedin.com/company-beta/1299009" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="linkedin">
+      <img src="../wp-content/uploads/square_linkedin_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=free.programming.programming" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="play store">
+      <img src="../wp-content/uploads/square_play_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://www.microsoft.com/en-us/store/apps/geeksforgeeks-official/9nblggh4rh30" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="windows store">
+      <img src="../wp-content/uploads/square_windows_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://itunes.apple.com/us/app/geeksforgeeks/id1101205459?ls=1&mt=8" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="app store">
+      <img src="../wp-content/uploads/square_app_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+  </div>
+</center><!-- .site-info -->
+
+				<div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore-1.1.js'></script>
+<script type='text/javascript' src='../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js'></script>
+<script type='text/javascript' src='../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.geeksforgeeks.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.geeksforgeeks.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<link rel='stylesheet' id='tabby-print-css'  href='../wp-content/plugins/tabby-responsive-tabs/css/tabby-print.css' type='text/css' media='all' />
+<script type='text/javascript' src='../wp-includes/js/wp-embed.min.js'></script>
+<script type='text/javascript' src='../wp-content/plugins/tabby-responsive-tabs/js/tabby.js'></script>
+
+<script>jQuery(document).ready(function($) { RESPONSIVEUI.responsiveTabs(); })</script>
+
+<script type="text/javascript">
+// below changes to be added in gfg.js in future.
+// load comment button click when page scroll to it and positioned ad in mobile view.
+flag=0;jQuery(window).scroll(function(){if(jQuery('#comment').length !=0 ){var hT=jQuery('#comment').offset().top,hH=jQuery('#comment').outerHeight(),wH=jQuery(window).height(),wS=jQuery(this).scrollTop();if(wS>(hT+hH-wH-70)&&!flag){jQuery('#comment').click();flag=1}}});var temp_width=jQuery(window).width();if(temp_width<468){if(jQuery('article').length>1){jQuery(jQuery('.responsiveAd')).insertAfter('article:eq(2)');jQuery('.rectangleAd').hide()}
+else if(jQuery('#practiceLinkDiv').length>0){jQuery(jQuery('.responsiveAd')).insertAfter('#practiceLinkDiv');jQuery('.rectangleAd').css('width','')}else{jQuery('.responsiveAd').hide();jQuery('.rectangleAd').css('width','')}}
+
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12148232-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>  
+<script async type="text/javascript" src="http://cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=geeksforgeeks" id="_fancybar_js"></script>
+</body>
+</html>
+
+<!-- Dynamic page generated in 0.244 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-23 18:42:01 -->
+
+<!-- Compression = gzip -->

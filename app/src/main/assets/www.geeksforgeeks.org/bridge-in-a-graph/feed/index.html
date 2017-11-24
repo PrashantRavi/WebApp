@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Bridges in a graph</title>
+	<atom:link href="http://www.geeksforgeeks.org/bridge-in-a-graph/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/bridge-in-a-graph/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-35912</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 12 May 2014 05:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-35912</guid>
+		<description><![CDATA[#include
+#define n 11
+#define max 20
+int adj[max][max];
+int te[max][max];
+int be[max][max];
+int status[max];
+int dtime[max];
+int ftime[max];
+#define initial 0
+#define active 1
+#define backtracked 2
+#define size 50
+using namespace std;
+void dfs(int v,int &#038;time)
+{
+	status[v]=active;
+	dtime[v]=++time;
+	for(int i=0;i&#060;n;i++)
+	{
+		if(adj[v][i]==1)
+		{
+			if(status[i]==initial)
+			{
+				te[v][i]=1;
+				dfs(i,time);
+			}
+		   if((status[i]==active)&#038;&#038;(te[i][v]!=1))
+			{
+				be[v][i]=1;
+			}
+ 
+		}
+	}
+	time++;
+	ftime[v]=time;
+	status[v]=backtracked;
+}
+void get_ap()
+{
+	int child,flag;
+	for(int i=1;i&#060;n;i++)
+	{
+		for(int j=0;j&#060;n;j++)
+		{
+			if(te[i][j]==1)
+			{
+				child=j;
+				flag=0;
+				for(int k=0;k=dtime[child])&#038;&#038;(ftime[k]&#060;=ftime[child]))
+					{
+						for(int p=0;p&#060;n;p++)
+						{
+							if((be[k][p]==1)&#038;&#038;(dtime[p]&#060;dtime[i]))
+							{
+								flag=1;
+							}
+						}
+					}
+				}
+				if(!flag)
+				   cout&#060;&#060;&#034;edge &#034;&#060;&#060;i &#060;&#060;&#034;--&#034;&#060;&#060;child&#060;&#060;&#034; is bridge edge.n&#034;;
+			}
+		}
+	}
+}
+ 
+int main()
+{ 
+    int time=0;int v1,v2,vi;
+	for(int i=0;i&#060;n;i++)
+	{
+		dtime[i]=0;
+		status[i]=initial;
+		ftime[i]=0;
+	}
+	int m=n*(n-1)/2;
+	for(int i=0;i&#060;n;i++)
+	{
+		for(int j=0;j&#060;n;j++)
+		{
+			adj[i][j]=0;
+			te[i][j]=0;
+			be[i][j]=0;
+		}
+	}
+	for(int i=0;i&#060;m;i++)
+	{
+		cout&#060;&#062;v1&#062;&#062;v2;
+		if((v1==-1)&#038;&#038;(v2==-1))
+		   break;
+		adj[v1][v2]=1;
+		adj[v2][v1]=1;
+	}
+	cout&#060;&#062;vi;
+	dfs(vi,time);
+	get_ap();
+	return 0;
+ 
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#define n 11<br />
+#define max 20<br />
+int adj[max][max];<br />
+int te[max][max];<br />
+int be[max][max];<br />
+int status[max];<br />
+int dtime[max];<br />
+int ftime[max];<br />
+#define initial 0<br />
+#define active 1<br />
+#define backtracked 2<br />
+#define size 50<br />
+using namespace std;<br />
+void dfs(int v,int &amp;time)<br />
+{<br />
+	status[v]=active;<br />
+	dtime[v]=++time;<br />
+	for(int i=0;i&lt;n;i++)<br />
+	{<br />
+		if(adj[v][i]==1)<br />
+		{<br />
+			if(status[i]==initial)<br />
+			{<br />
+				te[v][i]=1;<br />
+				dfs(i,time);<br />
+			}<br />
+		   if((status[i]==active)&amp;&amp;(te[i][v]!=1))<br />
+			{<br />
+				be[v][i]=1;<br />
+			}</p>
+<p>		}<br />
+	}<br />
+	time++;<br />
+	ftime[v]=time;<br />
+	status[v]=backtracked;<br />
+}<br />
+void get_ap()<br />
+{<br />
+	int child,flag;<br />
+	for(int i=1;i&lt;n;i++)<br />
+	{<br />
+		for(int j=0;j&lt;n;j++)<br />
+		{<br />
+			if(te[i][j]==1)<br />
+			{<br />
+				child=j;<br />
+				flag=0;<br />
+				for(int k=0;k=dtime[child])&amp;&amp;(ftime[k]&lt;=ftime[child]))<br />
+					{<br />
+						for(int p=0;p&lt;n;p++)<br />
+						{<br />
+							if((be[k][p]==1)&amp;&amp;(dtime[p]&lt;dtime[i]))<br />
+							{<br />
+								flag=1;<br />
+							}<br />
+						}<br />
+					}<br />
+				}<br />
+				if(!flag)<br />
+				   cout&lt;&lt;&quot;edge &quot;&lt;&lt;i &lt;&lt;&quot;&#8211;&quot;&lt;&lt;child&lt;&lt;&quot; is bridge edge.n&quot;;<br />
+			}<br />
+		}<br />
+	}<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int time=0;int v1,v2,vi;<br />
+	for(int i=0;i&lt;n;i++)<br />
+	{<br />
+		dtime[i]=0;<br />
+		status[i]=initial;<br />
+		ftime[i]=0;<br />
+	}<br />
+	int m=n*(n-1)/2;<br />
+	for(int i=0;i&lt;n;i++)<br />
+	{<br />
+		for(int j=0;j&lt;n;j++)<br />
+		{<br />
+			adj[i][j]=0;<br />
+			te[i][j]=0;<br />
+			be[i][j]=0;<br />
+		}<br />
+	}<br />
+	for(int i=0;i&lt;m;i++)<br />
+	{<br />
+		cout&lt;&gt;v1&gt;&gt;v2;<br />
+		if((v1==-1)&amp;&amp;(v2==-1))<br />
+		   break;<br />
+		adj[v1][v2]=1;<br />
+		adj[v2][v1]=1;<br />
+	}<br />
+	cout&lt;&gt;vi;<br />
+	dfs(vi,time);<br />
+	get_ap();<br />
+	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-35913</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 12 May 2014 05:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-35913</guid>
+		<description><![CDATA[give the inputs
+here is my implementation
+http://ideone.com/IAOUjg]]></description>
+		<content:encoded><![CDATA[<p>give the inputs<br />
+here is my implementation<br />
+<a href="http://ideone.com/IAOUjg" rel="nofollow">http://ideone.com/IAOUjg</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-35911</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 12 May 2014 05:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-35911</guid>
+		<description><![CDATA[for calculating bridge edges first calculate articulation points 
+suppose vertex v is an AP then there is a child of v whose descendents doesnt have the back edge to ancestor 
+the edge v-child will be the bridge edge
+because on its removal the graph will become disconnected as there is no way to reach on the ancestor or other child&#039;s subtree for that vertex]]></description>
+		<content:encoded><![CDATA[<p>for calculating bridge edges first calculate articulation points<br />
+suppose vertex v is an AP then there is a child of v whose descendents doesnt have the back edge to ancestor<br />
+the edge v-child will be the bridge edge<br />
+because on its removal the graph will become disconnected as there is no way to reach on the ancestor or other child&#8217;s subtree for that vertex</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: moi</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-33736</link>
+		<dc:creator><![CDATA[moi]]></dc:creator>
+		<pubDate>Sat, 22 Mar 2014 09:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-33736</guid>
+		<description><![CDATA[Parent doesn&#039;t get updated anywhere. I mean vertices are never added to it...all its values are NIL]]></description>
+		<content:encoded><![CDATA[<p>Parent doesn&#8217;t get updated anywhere. I mean vertices are never added to it&#8230;all its values are NIL</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sandeep Jain</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-26265</link>
+		<dc:creator><![CDATA[Sandeep Jain]]></dc:creator>
+		<pubDate>Mon, 03 Jun 2013 04:25:16 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-26265</guid>
+		<description><![CDATA[Thanks for pointing this out.  We have updated the code.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out.  We have updated the code.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sarthak Mall 'shanky'</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-26264</link>
+		<dc:creator><![CDATA[Sarthak Mall 'shanky']]></dc:creator>
+		<pubDate>Mon, 03 Jun 2013 03:39:50 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-26264</guid>
+		<description><![CDATA[Or if the already connected given...
+then only one call to bridgeUtil(vertex, visited, disc, low, parent); with any vertex is sufficient...]]></description>
+		<content:encoded><![CDATA[<p>Or if the already connected given&#8230;<br />
+then only one call to bridgeUtil(vertex, visited, disc, low, parent); with any vertex is sufficient&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sarthak Mall 'shanky'</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-26263</link>
+		<dc:creator><![CDATA[Sarthak Mall 'shanky']]></dc:creator>
+		<pubDate>Mon, 03 Jun 2013 03:37:11 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-26263</guid>
+		<description><![CDATA[In the void Graph::bridge() function I think there should be.
+bridgeUtil(i, visited, disc, low, parent);.
+ instead of bridgeUtil(0, visited, disc, low, parent);.]]></description>
+		<content:encoded><![CDATA[<p>In the void Graph::bridge() function I think there should be.<br />
+bridgeUtil(i, visited, disc, low, parent);.<br />
+ instead of bridgeUtil(0, visited, disc, low, parent);.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-18541</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 18:47:51 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-18541</guid>
+		<description><![CDATA[The approach looks good, but time complexity seems more than O(V+E).]]></description>
+		<content:encoded><![CDATA[<p>The approach looks good, but time complexity seems more than O(V+E).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-18540</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 18:47:24 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-18540</guid>
+		<description><![CDATA[The approach looks good, but time complexity seems more than O(V+E).]]></description>
+		<content:encoded><![CDATA[<p>The approach looks good, but time complexity seems more than O(V+E).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: badri</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-18488</link>
+		<dc:creator><![CDATA[badri]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 04:22:30 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-18488</guid>
+		<description><![CDATA[Can be also done using loop finding mechanism , using union find algo , check if cycle exists by adding new edge if yes , make bridge to 0 else increment.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Can be also done using loop finding mechanism , using union find algo , check if cycle exists by adding new edge if yes , make bridge to 0 else increment.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bohemia</title>
+		<link>http://www.geeksforgeeks.org/bridge-in-a-graph/#comment-18487</link>
+		<dc:creator><![CDATA[Bohemia]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 04:07:23 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118009#comment-18487</guid>
+		<description><![CDATA[Hey , How about this one?
+**Using an adjacency matrix
+1)for edge between vertices u and v
+2)remove the edge u-v
+3)find all vertices thus reachable from u , store for each vertex the bool value 1 or 0 respectively 
+4)find all vertices reachable from v , store for each vertex the bool value 1 or 0 respectively 
+5) take the bit-wise and of both the above arrays . if !0 , the edge was not a bridge , else it is .]]></description>
+		<content:encoded><![CDATA[<p>Hey , How about this one?<br />
+**Using an adjacency matrix<br />
+1)for edge between vertices u and v<br />
+2)remove the edge u-v<br />
+3)find all vertices thus reachable from u , store for each vertex the bool value 1 or 0 respectively<br />
+4)find all vertices reachable from v , store for each vertex the bool value 1 or 0 respectively<br />
+5) take the bit-wise and of both the above arrays . if !0 , the edge was not a bridge , else it is .</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:18:27 -->
+
+<!-- Compression = gzip -->

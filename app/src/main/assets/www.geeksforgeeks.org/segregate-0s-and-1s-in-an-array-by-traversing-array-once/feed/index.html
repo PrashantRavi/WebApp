@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Segregate 0s and 1s in an array</title>
+	<atom:link href="http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: sachin.hbti</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-40183</link>
+		<dc:creator><![CDATA[sachin.hbti]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 17:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-40183</guid>
+		<description><![CDATA[In above solutions we need to hardcode the numbers and these can only work for hardcoded numbers,but the below solution can work for an array which has only two numbers and we have to segrgate them:
+
+
+public int[] sortTwoNumbersArray(int[] arr, boolean ascOrder){
+	int length = arr.length;
+	int lowEnd = 0;
+	int highEnd = length-1;
+	boolean number1IndexStuck = false;
+	boolean number2IndexStuck = false;
+	int number1 = -1, number2 =-1;
+	int i = 0, j = length-1;
+	boolean found = false;
+	/***Loop to find both different numbers**/
+	for(; i &#060; j; ){
+		if(arr[i] != arr[j]){
+			found = true;
+			break;
+		}else{
+			i++;
+			j--;
+		}
+	}
+	/**If there are any two different numbers then find small and big number and
+	assign it number1 and number2 variable to change the sorting order**/
+	if(found){
+		if(arr[i] &#060; arr[j]){
+			if(ascOrder){
+				number1 = arr[i];
+				number2 = arr[j];
+			}else{
+				number1 = arr[j];
+				number2 = arr[i];
+			}
+		}else{
+			if(ascOrder){
+				number1 = arr[j];
+				number2 = arr[i];
+			}else{
+				number1 = arr[i];
+				number2 = arr[j];
+			}
+		}
+	}else{
+		return arr;
+	}
+	
+	while(lowEnd &#060; highEnd){
+		if(arr[lowEnd] == number1){
+			lowEnd++;
+		}else{
+			number1IndexStuck = true;
+		}
+		if(arr[highEnd] == number2){
+			highEnd--;
+		}else{
+			number2IndexStuck = true;
+		}
+		if(number2IndexStuck &#038;&#038; number1IndexStuck){
+			int temp = arr[lowEnd];
+			arr[lowEnd] = arr[highEnd];
+			arr[highEnd] = temp;
+			number1IndexStuck = false;
+			number2IndexStuck = false;
+
+		}
+	}
+	return arr;
+		
+}]]></description>
+		<content:encoded><![CDATA[<p>In above solutions we need to hardcode the numbers and these can only work for hardcoded numbers,but the below solution can work for an array which has only two numbers and we have to segrgate them:</p>
+<p>public int[] sortTwoNumbersArray(int[] arr, boolean ascOrder){<br />
+	int length = arr.length;<br />
+	int lowEnd = 0;<br />
+	int highEnd = length-1;<br />
+	boolean number1IndexStuck = false;<br />
+	boolean number2IndexStuck = false;<br />
+	int number1 = -1, number2 =-1;<br />
+	int i = 0, j = length-1;<br />
+	boolean found = false;<br />
+	/***Loop to find both different numbers**/<br />
+	for(; i &lt; j; ){<br />
+		if(arr[i] != arr[j]){<br />
+			found = true;<br />
+			break;<br />
+		}else{<br />
+			i++;<br />
+			j&#8211;;<br />
+		}<br />
+	}<br />
+	/**If there are any two different numbers then find small and big number and<br />
+	assign it number1 and number2 variable to change the sorting order**/<br />
+	if(found){<br />
+		if(arr[i] &lt; arr[j]){<br />
+			if(ascOrder){<br />
+				number1 = arr[i];<br />
+				number2 = arr[j];<br />
+			}else{<br />
+				number1 = arr[j];<br />
+				number2 = arr[i];<br />
+			}<br />
+		}else{<br />
+			if(ascOrder){<br />
+				number1 = arr[j];<br />
+				number2 = arr[i];<br />
+			}else{<br />
+				number1 = arr[i];<br />
+				number2 = arr[j];<br />
+			}<br />
+		}<br />
+	}else{<br />
+		return arr;<br />
+	}</p>
+<p>	while(lowEnd &lt; highEnd){<br />
+		if(arr[lowEnd] == number1){<br />
+			lowEnd++;<br />
+		}else{<br />
+			number1IndexStuck = true;<br />
+		}<br />
+		if(arr[highEnd] == number2){<br />
+			highEnd&#8211;;<br />
+		}else{<br />
+			number2IndexStuck = true;<br />
+		}<br />
+		if(number2IndexStuck &amp;&amp; number1IndexStuck){<br />
+			int temp = arr[lowEnd];<br />
+			arr[lowEnd] = arr[highEnd];<br />
+			arr[highEnd] = temp;<br />
+			number1IndexStuck = false;<br />
+			number2IndexStuck = false;</p>
+<p>		}<br />
+	}<br />
+	return arr;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vivek27</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-39699</link>
+		<dc:creator><![CDATA[vivek27]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 20:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-39699</guid>
+		<description><![CDATA[Take 0 as a pivot element and apply partition algorithm on array. It will segregate the array in two halves 0&#039;s and 1&#039;s. And time complexity will be O(n) because partition algorithm takes O(n) time.]]></description>
+		<content:encoded><![CDATA[<p>Take 0 as a pivot element and apply partition algorithm on array. It will segregate the array in two halves 0&#8217;s and 1&#8217;s. And time complexity will be O(n) because partition algorithm takes O(n) time.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-39504</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 05:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-39504</guid>
+		<description><![CDATA[There is a typo in segregate0and1() function. in the If block it must be &quot;right--&quot; but its given &quot;right-&quot;. please change it.]]></description>
+		<content:encoded><![CDATA[<p>There is a typo in segregate0and1() function. in the If block it must be &#8220;right&#8211;&#8221; but its given &#8220;right-&#8220;. please change it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: x</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-39498</link>
+		<dc:creator><![CDATA[x]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 04:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-39498</guid>
+		<description><![CDATA[void swap(int *a,int *b)
+
+{
+
+	int t=*a;*a=*b;*b=t;
+
+}
+
+void segregate0and1(int *arr,int n)
+
+{
+
+	int f,s;f=s=-1;
+
+	int i=0;
+
+	while(i&#060;n)
+
+	{
+
+		if(arr[i]==0)
+
+		{
+
+			swap(&#038;arr[s+1],&#038;arr[i]);
+
+			s++;f++;
+
+		}
+
+		else
+
+		f++;
+
+		i++;
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void swap(int *a,int *b)</p>
+<p>{</p>
+<p>	int t=*a;*a=*b;*b=t;</p>
+<p>}</p>
+<p>void segregate0and1(int *arr,int n)</p>
+<p>{</p>
+<p>	int f,s;f=s=-1;</p>
+<p>	int i=0;</p>
+<p>	while(i&lt;n)</p>
+<p>	{</p>
+<p>		if(arr[i]==0)</p>
+<p>		{</p>
+<p>			swap(&amp;arr[s+1],&amp;arr[i]);</p>
+<p>			s++;f++;</p>
+<p>		}</p>
+<p>		else</p>
+<p>		f++;</p>
+<p>		i++;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: _rahulg</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-37971</link>
+		<dc:creator><![CDATA[_rahulg]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 07:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-37971</guid>
+		<description><![CDATA[In 
+
+&quot;
+
+ while(arr[right] == 1 &#038;&#038; left &#060; right)
+
+        right–;
+
+&#034;
+
+
+
+It should me right-- instead of right-]]></description>
+		<content:encoded><![CDATA[<p>In </p>
+<p>&#8221;</p>
+<p> while(arr[right] == 1 &amp;&amp; left &lt; right)</p>
+<p>        right–;</p>
+<p>&quot;</p>
+<p>It should me right&#8211; instead of right-</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vaibhav kumar</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-37670</link>
+		<dc:creator><![CDATA[vaibhav kumar]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 11:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-37670</guid>
+		<description><![CDATA[void segzeroeven(int a[],int n)
+
+{ int i=-1,j,temp;
+
+   
+for(j=0;j&#060;n-1;j++)
+
+   
+{
+
+        if(a[j]==0)
+
+        {
+
+            i++;
+
+            temp=a[i];
+
+            a[i]=a[j];
+
+            a[j]=temp;
+
+        }
+
+   
+}
+
+ 
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void segzeroeven(int a[],int n)</p>
+<p>{ int i=-1,j,temp;</p>
+<p>for(j=0;j&lt;n-1;j++)</p>
+<p>{</p>
+<p>        if(a[j]==0)</p>
+<p>        {</p>
+<p>            i++;</p>
+<p>            temp=a[i];</p>
+<p>            a[i]=a[j];</p>
+<p>            a[j]=temp;</p>
+<p>        }</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venu Gopal</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-34698</link>
+		<dc:creator><![CDATA[Venu Gopal]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 11:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-34698</guid>
+		<description><![CDATA[In method 2, what is the need of making the code unnecessarily complex 
+
+a simpler version of method 2 is http://ideone.com/PFRHbc]]></description>
+		<content:encoded><![CDATA[<p>In method 2, what is the need of making the code unnecessarily complex </p>
+<p>a simpler version of method 2 is <a href="http://ideone.com/PFRHbc" rel="nofollow">http://ideone.com/PFRHbc</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-34697</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 11:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-34697</guid>
+		<description><![CDATA[In method 2, what is the need of making the code unnecessarily complex 
+
+a simpler version of method 2 is http://ideone.com/PFRHbc]]></description>
+		<content:encoded><![CDATA[<p>In method 2, what is the need of making the code unnecessarily complex </p>
+<p>a simpler version of method 2 is <a href="http://ideone.com/PFRHbc" rel="nofollow">http://ideone.com/PFRHbc</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pankaj</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-31175</link>
+		<dc:creator><![CDATA[Pankaj]]></dc:creator>
+		<pubDate>Wed, 01 Jan 2014 18:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-31175</guid>
+		<description><![CDATA[why did we use the condition (left&#060;right) in the two inner while loops?? i think this condition is redundant...]]></description>
+		<content:encoded><![CDATA[<p>why did we use the condition (left&lt;right) in the two inner while loops?? i think this condition is redundant&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhay</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-29669</link>
+		<dc:creator><![CDATA[Abhay]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 17:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-29669</guid>
+		<description><![CDATA[/* the problem can be segregate in atmost O(n/2) complexity using below code*/
+
+#include
+int main()
+{
+    int arr[]={0,1,0,1,0,0,1,1,1,0};
+    int i,n=sizeof(arr)/sizeof(arr[0]);
+    int tmp,p;
+    i=0;
+    p=n;
+    while(i&#060;n)
+    {
+        if(arr[i]==1 &#038;&#038; arr[n-1]==0)
+        {
+            tmp=arr[i];
+            arr[i]=arr[n-1];
+            arr[n-1]=tmp;
+            n--;
+            i++;
+        }
+        if(arr[i]==1 &#038;&#038; arr[n-1]==1)
+            n--;
+        if(arr[i]==0 &#038;&#038; arr[n-1]==0)
+            i++;
+        if(arr[i]==0 &#038;&#038; arr[n-1]==1)
+        {
+            i++;
+            n--;
+        }
+        
+    }
+    for(i=0;i&#060;p;i++)
+        printf(&#034;%d&#034;,arr[i]);
+}]]></description>
+		<content:encoded><![CDATA[<p>/* the problem can be segregate in atmost O(n/2) complexity using below code*/</p>
+<p>#include<br />
+int main()<br />
+{<br />
+    int arr[]={0,1,0,1,0,0,1,1,1,0};<br />
+    int i,n=sizeof(arr)/sizeof(arr[0]);<br />
+    int tmp,p;<br />
+    i=0;<br />
+    p=n;<br />
+    while(i&lt;n)<br />
+    {<br />
+        if(arr[i]==1 &amp;&amp; arr[n-1]==0)<br />
+        {<br />
+            tmp=arr[i];<br />
+            arr[i]=arr[n-1];<br />
+            arr[n-1]=tmp;<br />
+            n&#8211;;<br />
+            i++;<br />
+        }<br />
+        if(arr[i]==1 &amp;&amp; arr[n-1]==1)<br />
+            n&#8211;;<br />
+        if(arr[i]==0 &amp;&amp; arr[n-1]==0)<br />
+            i++;<br />
+        if(arr[i]==0 &amp;&amp; arr[n-1]==1)<br />
+        {<br />
+            i++;<br />
+            n&#8211;;<br />
+        }</p>
+<p>    }<br />
+    for(i=0;i&lt;p;i++)<br />
+        printf(&quot;%d&quot;,arr[i]);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: draganwarrior</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-28027</link>
+		<dc:creator><![CDATA[draganwarrior]]></dc:creator>
+		<pubDate>Sun, 22 Sep 2013 21:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-28027</guid>
+		<description><![CDATA[This  can  also  be solved  by  standered  partioning  algo 
+
+considring  pivot  ==0
+http://ideone.com/nlgTkt
+
+      correct  me  if  wrong]]></description>
+		<content:encoded><![CDATA[<p>This  can  also  be solved  by  standered  partioning  algo </p>
+<p>considring  pivot  ==0<br />
+<a href="http://ideone.com/nlgTkt" rel="nofollow">http://ideone.com/nlgTkt</a></p>
+<p>      correct  me  if  wrong</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:23:17 -->
+
+<!-- Compression = gzip -->

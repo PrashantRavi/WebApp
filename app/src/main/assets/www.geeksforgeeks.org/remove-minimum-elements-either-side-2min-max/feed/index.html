@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Remove minimum elements from either side such that 2*min  becomes more than max</title>
+	<atom:link href="http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Vineel Kumar Reddy Kovvuri</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-39297</link>
+		<dc:creator><![CDATA[Vineel Kumar Reddy Kovvuri]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 03:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-39297</guid>
+		<description><![CDATA[http://ideone.com/LE5XUs
+
+Looks like this can be solved in O(n) skeptic
+
+The idea here is to grab a window who&#039;s length is maximum and with the constraint mentioned in the problem.
+
+But by carefully sliding the window and handling the overlapping window cases. Looks like it can be solved in O(n)
+
+step1: let the current window be at 0 both i = 0, j = 0 and also let min, max be at index 0
+
+step2: check if new element will fall in to following there categories.
+
+step3: new &#060;= arr[min] // could be a new minimum to expand the window
+
+		step 3a: if twice of new minimum is greater than current max //{7,3,[21],&#124;19&#124;,34,31,600,500,320,260,270};
+
+				then we can update the current min 
+
+				expand the window by incrementing j 
+
+				and update the max window found so far in pi,pj
+
+		step 3b: if twice of new minimum is less than current max //{[7],&#124;3&#124;,21,19,34,31,600,500,320,260,270};
+
+				then start a new window from max + 1. The new window will overlap if max &#060; j or will not if max = j
+
+step4: arr[min] &#060;= new &#060;= arr[max] //{7,3,[21,19,34],&#124;31&#124;,600,500,320,260,270};
+
+		step 4a: add the new element and increment the j to next element and update the maximum window found so far in pi, pj	
+
+step5: new &#060; arr[min] // could be a new maximum to expand the window
+
+		step 5a: if twice of current minimum is still greater than new element
+
+				then we can update the current max 
+
+				and expand the window by incrementing j 
+
+				and update the max window found so far in pi,pj
+
+		step 5b: if twice of current minimum is less than new element
+
+				update the max window found so far in pi,pj
+
+				new window has to be created with following two cases.
+
+				step5b.i) new window will not overlaps: //{7, 3,[21,19,34,31],&#124;600&#124;,500,320,260,270};
+
+						if twice of current max is less than the new element
+
+				step5b.ii) new window will overlaps: //{7, 3,[21,34,19,31],&#124;54&#124;,500,320,260,270};
+
+						if twice of current max is greater than the new element chances are elements after min + 1 may fall in to new window (example 31 in the above array)
+
+						so start a new window from min + 1]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/LE5XUs" rel="nofollow">http://ideone.com/LE5XUs</a></p>
+<p>Looks like this can be solved in O(n) skeptic</p>
+<p>The idea here is to grab a window who&#8217;s length is maximum and with the constraint mentioned in the problem.</p>
+<p>But by carefully sliding the window and handling the overlapping window cases. Looks like it can be solved in O(n)</p>
+<p>step1: let the current window be at 0 both i = 0, j = 0 and also let min, max be at index 0</p>
+<p>step2: check if new element will fall in to following there categories.</p>
+<p>step3: new &lt;= arr[min] // could be a new minimum to expand the window</p>
+<p>		step 3a: if twice of new minimum is greater than current max //{7,3,[21],|19|,34,31,600,500,320,260,270};</p>
+<p>				then we can update the current min </p>
+<p>				expand the window by incrementing j </p>
+<p>				and update the max window found so far in pi,pj</p>
+<p>		step 3b: if twice of new minimum is less than current max //{[7],|3|,21,19,34,31,600,500,320,260,270};</p>
+<p>				then start a new window from max + 1. The new window will overlap if max &lt; j or will not if max = j</p>
+<p>step4: arr[min] &lt;= new &lt;= arr[max] //{7,3,[21,19,34],|31|,600,500,320,260,270};</p>
+<p>		step 4a: add the new element and increment the j to next element and update the maximum window found so far in pi, pj	</p>
+<p>step5: new &lt; arr[min] // could be a new maximum to expand the window</p>
+<p>		step 5a: if twice of current minimum is still greater than new element</p>
+<p>				then we can update the current max </p>
+<p>				and expand the window by incrementing j </p>
+<p>				and update the max window found so far in pi,pj</p>
+<p>		step 5b: if twice of current minimum is less than new element</p>
+<p>				update the max window found so far in pi,pj</p>
+<p>				new window has to be created with following two cases.</p>
+<p>				step5b.i) new window will not overlaps: //{7, 3,[21,19,34,31],|600|,500,320,260,270};</p>
+<p>						if twice of current max is less than the new element</p>
+<p>				step5b.ii) new window will overlaps: //{7, 3,[21,34,19,31],|54|,500,320,260,270};</p>
+<p>						if twice of current max is greater than the new element chances are elements after min + 1 may fall in to new window (example 31 in the above array)</p>
+<p>						so start a new window from min + 1</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Preethi</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-38143</link>
+		<dc:creator><![CDATA[Preethi]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 19:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-38143</guid>
+		<description><![CDATA[Sort the array initially,
+1.Take the first element ie. i.
+2.Multiply i with 2 compare it with largest element
+3.If not greater than compare with second largest no 
+4.if not &#062; then simply delete i and first largest element.
+4.continue the first step til you got]]></description>
+		<content:encoded><![CDATA[<p>Sort the array initially,<br />
+1.Take the first element ie. i.<br />
+2.Multiply i with 2 compare it with largest element<br />
+3.If not greater than compare with second largest no<br />
+4.if not &gt; then simply delete i and first largest element.<br />
+4.continue the first step til you got</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-37943</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 21:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-37943</guid>
+		<description><![CDATA[I think the above algorithm is wrong as it assumes that the middle elements will come in the window. But that may not be the case:
+
+
+{4,5,300,6,2,3}]]></description>
+		<content:encoded><![CDATA[<p>I think the above algorithm is wrong as it assumes that the middle elements will come in the window. But that may not be the case:</p>
+<p>{4,5,300,6,2,3}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-37942</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 21:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-37942</guid>
+		<description><![CDATA[Another algorithm can be:
+
+1.) start from middle element of the array
+2.) expand left side as much as possible, when condition does not satisfy stop
+3.) expand right side as much as possible, when condition does not satisfy stop
+
+
+
+Please let me know if there is any problems with this algo]]></description>
+		<content:encoded><![CDATA[<p>Another algorithm can be:</p>
+<p>1.) start from middle element of the array<br />
+2.) expand left side as much as possible, when condition does not satisfy stop<br />
+3.) expand right side as much as possible, when condition does not satisfy stop</p>
+<p>Please let me know if there is any problems with this algo</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-37938</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 20:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-37938</guid>
+		<description><![CDATA[what changes we need to make in naive solution to print the trimmed array.... plz somebody tell mee...??]]></description>
+		<content:encoded><![CDATA[<p>what changes we need to make in naive solution to print the trimmed array&#8230;. plz somebody tell mee&#8230;??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Alien</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-37911</link>
+		<dc:creator><![CDATA[Alien]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 09:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-37911</guid>
+		<description><![CDATA[Sorting will not work in this case]]></description>
+		<content:encoded><![CDATA[<p>Sorting will not work in this case</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Joy</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-36605</link>
+		<dc:creator><![CDATA[Joy]]></dc:creator>
+		<pubDate>Sun, 25 May 2014 07:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-36605</guid>
+		<description><![CDATA[creative approach. but it can be done in plain n^2 without the matrix 
+http://ideone.com/5COs8l]]></description>
+		<content:encoded><![CDATA[<p>creative approach. but it can be done in plain n^2 without the matrix<br />
+<a href="http://ideone.com/5COs8l" rel="nofollow">http://ideone.com/5COs8l</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Joy</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-36604</link>
+		<dc:creator><![CDATA[Joy]]></dc:creator>
+		<pubDate>Sun, 25 May 2014 06:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-36604</guid>
+		<description><![CDATA[I posted my code http://ideone.com/5COs8l (with running input output)
+
+
+I follow the approach.
+
+
+For each element in array
+    Treat it as expected_min
+     scroll through right and left to check for the condition
+
+
+O(n^2) Solution in python.]]></description>
+		<content:encoded><![CDATA[<p>I posted my code <a href="http://ideone.com/5COs8l" rel="nofollow">http://ideone.com/5COs8l</a> (with running input output)</p>
+<p>I follow the approach.</p>
+<p>For each element in array<br />
+    Treat it as expected_min<br />
+     scroll through right and left to check for the condition</p>
+<p>O(n^2) Solution in python.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: silu</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-36579</link>
+		<dc:creator><![CDATA[silu]]></dc:creator>
+		<pubDate>Sat, 24 May 2014 15:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-36579</guid>
+		<description><![CDATA[#include
+
+using namespace std;
+
+int a[1010],n,ans = 99999999;
+
+int main()
+
+{
+
+    cin&#062;&#062;n;
+
+    for(int i=0;i&#062;a[i];
+
+    for(int i=0;i=0 &#124;&#124; r= 0)
+
+            {
+
+                if(mn &#062; a[l] &#038;&#038; a[l]*2 &#062; mx) mn = a[l];
+
+                else if(mx &lt;a&gt; a[l]) mx = a[l];
+
+                else if(a[l] &#062;= mn and a[l] &#060;= mx) continue;
+
+                else cl = 1;
+
+                if(!cl) ++temp;
+
+            }
+
+            if(!cr &#038;&#038; r  a[r] &#038;&#038; a[r]*2 &#062; mx) mn = a[r];
+
+                else if(mx &lt;a&gt; a[r]) mx = a[r];
+
+                else if(a[r] &#062;= mn and a[r] &#060;= mx) continue;
+
+                else cr = 1;
+
+                if(!cr) ++temp;
+
+            }
+
+        }
+
+        ans = min(ans,n-temp);
+
+    }
+
+    cout&#060;&#060;ans&#060;&#060;endl;
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>using namespace std;</p>
+<p>int a[1010],n,ans = 99999999;</p>
+<p>int main()</p>
+<p>{</p>
+<p>    cin&gt;&gt;n;</p>
+<p>    for(int i=0;i&gt;a[i];</p>
+<p>    for(int i=0;i=0 || r= 0)</p>
+<p>            {</p>
+<p>                if(mn &gt; a[l] &amp;&amp; a[l]*2 &gt; mx) mn = a[l];</p>
+<p>                else if(mx <a> a[l]) mx = a[l];</p>
+<p>                else if(a[l] &gt;= mn and a[l] &lt;= mx) continue;</p>
+<p>                else cl = 1;</p>
+<p>                if(!cl) ++temp;</p>
+<p>            }</p>
+<p>            if(!cr &amp;&amp; r  a[r] &amp;&amp; a[r]*2 &gt; mx) mn = a[r];</p>
+<p>                else if(mx </a><a> a[r]) mx = a[r];</p>
+<p>                else if(a[r] &gt;= mn and a[r] &lt;= mx) continue;</p>
+<p>                else cr = 1;</p>
+<p>                if(!cr) ++temp;</p>
+<p>            }</p>
+<p>        }</p>
+<p>        ans = min(ans,n-temp);</p>
+<p>    }</p>
+<p>    cout&lt;&lt;ans&lt;&lt;endl;</p>
+<p>    return 0;</p>
+<p>}</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Minhaz Palasara</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-36525</link>
+		<dc:creator><![CDATA[Minhaz Palasara]]></dc:creator>
+		<pubDate>Fri, 23 May 2014 07:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-36525</guid>
+		<description><![CDATA[O(n2) written in java. Please reply in case if it fails
+
+/**
+* @author Minhaz
+* Find the minimum number of removals in order to get the 2.min &#062; max 
+*
+* from
+*     ------------
+*To &#124;
+*     &#124;
+*     &#124;
+*/
+
+public class DP1 {
+/**Building the Minimum and Maximum value from one point in array to other
+* and hence building the validity matrix
+* */   
+
+
+void getValidArrayRange(int[] data){
+int[][] min = new int[data.length][data.length];
+int[][] max = new int[data.length][data.length];
+int[][] rangeValidity = new int[data.length][data.length];
+
+        for(int i = 0;i&#060;data.length;i++){
+for(int j = 0;j&lt;i&gt;max[i-1][j]?data[i]:max[i-1][j];
+min[i][j] = data[i]= max[i][j]){
+rangeValidity[i][j] = 1; 
+}   else{
+rangeValidity[i][j] = 0; 
+}       
+}  
+
+
+//This part can avoided with negative index initlization
+min[i][i] = data[i];
+max[i][i] = data[i];
+if(min[i][i]*2 &#062;= max[i][i]){
+rangeValidity[i][i] = 1; 
+}   else{
+rangeValidity[i][i] = 0; 
+}
+}   
+
+        
+
+        //disply for the explanation point
+this.printMatrix(max,&quot;Max&quot;);
+this.printMatrix(min,&quot;Min&quot;);
+this.printMatrix(rangeValidity,&quot;Validity&quot;);
+this.getTheOptimumSubArray(rangeValidity, data);
+}
+
+
+    void printMatrix(int[][] mat,String type){
+System.out.println(&quot;Start &quot;+type+&quot;  Matrix &quot;);
+for(int i=0;i&#060;mat.length;i++){
+for(int j = 0;j&#060;mat.length;j++){
+System.out.print(mat[i][j]+&#034; &#034;);                
+}
+System.out.println(&#034;  &#034;);
+}
+System.out.println(&#034;End &#034;+type+&#034;  Matrix &#034;);
+System.out.println(&#034;  &#034;);        
+}
+
+    
+
+    void getTheOptimumSubArray(int[][] valid,int[] data){
+int k = 0;
+int m = 0;
+int max = 0;
+for(int i = 0;i&#060;valid.length;i++){
+for(int j = 0;jmax){
+max = Math.abs(j-i);
+k = i;
+m = j;
+}                
+}
+}            
+}
+
+        int j = 0;
+System.out.println(&quot;Remove &quot;);
+for(int i = 0;i&#060;valid.length ;i++){
+if(ik){
+j++;
+System.out.print( data[i] +&quot;, &quot;);
+}
+}
+
+
+if(j== 0){
+System.out.println(&quot;Nothing: Its perfect array&quot;);
+}
+
+    }
+
+    
+
+    
+
+  public static void main(String args[]){
+int[] data= {4, 7, 5, 6};
+DP1 d = new DP1();
+d.getValidArrayRange(data);
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>O(n2) written in java. Please reply in case if it fails</p>
+<p>/**<br />
+* @author Minhaz<br />
+* Find the minimum number of removals in order to get the 2.min &gt; max<br />
+*<br />
+* from<br />
+*     &#8212;&#8212;&#8212;&#8212;<br />
+*To |<br />
+*     |<br />
+*     |<br />
+*/</p>
+<p>public class DP1 {<br />
+/**Building the Minimum and Maximum value from one point in array to other<br />
+* and hence building the validity matrix<br />
+* */   </p>
+<p>void getValidArrayRange(int[] data){<br />
+int[][] min = new int[data.length][data.length];<br />
+int[][] max = new int[data.length][data.length];<br />
+int[][] rangeValidity = new int[data.length][data.length];</p>
+<p>        for(int i = 0;i&lt;data.length;i++){<br />
+for(int j = 0;j<i>max[i-1][j]?data[i]:max[i-1][j];<br />
+min[i][j] = data[i]= max[i][j]){<br />
+rangeValidity[i][j] = 1;<br />
+}   else{<br />
+rangeValidity[i][j] = 0;<br />
+}<br />
+}  </p>
+<p>//This part can avoided with negative index initlization<br />
+min[i][i] = data[i];<br />
+max[i][i] = data[i];<br />
+if(min[i][i]*2 &gt;= max[i][i]){<br />
+rangeValidity[i][i] = 1;<br />
+}   else{<br />
+rangeValidity[i][i] = 0;<br />
+}<br />
+}   </p>
+<p>        //disply for the explanation point<br />
+this.printMatrix(max,&#8221;Max&#8221;);<br />
+this.printMatrix(min,&#8221;Min&#8221;);<br />
+this.printMatrix(rangeValidity,&#8221;Validity&#8221;);<br />
+this.getTheOptimumSubArray(rangeValidity, data);<br />
+}</p>
+<p>    void printMatrix(int[][] mat,String type){<br />
+System.out.println(&#8220;Start &#8220;+type+&#8221;  Matrix &#8220;);<br />
+for(int i=0;i&lt;mat.length;i++){<br />
+for(int j = 0;j&lt;mat.length;j++){<br />
+System.out.print(mat[i][j]+&quot; &quot;);<br />
+}<br />
+System.out.println(&quot;  &quot;);<br />
+}<br />
+System.out.println(&quot;End &quot;+type+&quot;  Matrix &quot;);<br />
+System.out.println(&quot;  &quot;);<br />
+}</p>
+<p>    void getTheOptimumSubArray(int[][] valid,int[] data){<br />
+int k = 0;<br />
+int m = 0;<br />
+int max = 0;<br />
+for(int i = 0;i&lt;valid.length;i++){<br />
+for(int j = 0;jmax){<br />
+max = Math.abs(j-i);<br />
+k = i;<br />
+m = j;<br />
+}<br />
+}<br />
+}<br />
+}</p>
+<p>        int j = 0;<br />
+System.out.println(&#8220;Remove &#8220;);<br />
+for(int i = 0;i&lt;valid.length ;i++){<br />
+if(ik){<br />
+j++;<br />
+System.out.print( data[i] +&#8221;, &#8220;);<br />
+}<br />
+}</p>
+<p>if(j== 0){<br />
+System.out.println(&#8220;Nothing: Its perfect array&#8221;);<br />
+}</p>
+<p>    }</p>
+<p>  public static void main(String args[]){<br />
+int[] data= {4, 7, 5, 6};<br />
+DP1 d = new DP1();<br />
+d.getValidArrayRange(data);<br />
+}<br />
+}</i></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Minhaz Palasara</title>
+		<link>http://www.geeksforgeeks.org/remove-minimum-elements-either-side-2min-max/#comment-36524</link>
+		<dc:creator><![CDATA[Minhaz Palasara]]></dc:creator>
+		<pubDate>Fri, 23 May 2014 07:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127861#comment-36524</guid>
+		<description><![CDATA[See, starting from center itself is wrong, its assumption that is  balanced. It might succeed for some case. But its not generic solution.]]></description>
+		<content:encoded><![CDATA[<p>See, starting from center itself is wrong, its assumption that is  balanced. It might succeed for some case. But its not generic solution.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:54:21 -->
+
+<!-- Compression = gzip -->

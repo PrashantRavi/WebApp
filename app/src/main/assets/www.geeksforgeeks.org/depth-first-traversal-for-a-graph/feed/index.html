@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Depth First Traversal or DFS for a Graph</title>
+	<atom:link href="http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Vãîbhåv Joshî</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-39775</link>
+		<dc:creator><![CDATA[Vãîbhåv Joshî]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 12:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-39775</guid>
+		<description><![CDATA[JAVA implantation For DFS....
+
+http://ideone.com/2fZ4K2]]></description>
+		<content:encoded><![CDATA[<p>JAVA implantation For DFS&#8230;.</p>
+<p><a href="http://ideone.com/2fZ4K2" rel="nofollow">http://ideone.com/2fZ4K2</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sriram Ganesh</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-39703</link>
+		<dc:creator><![CDATA[Sriram Ganesh]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 22:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-39703</guid>
+		<description><![CDATA[Here is an easy JAVA implementation of the same code using ArrayList..:-)
+http://ideone.com/koM1t8]]></description>
+		<content:encoded><![CDATA[<p>Here is an easy JAVA implementation of the same code using ArrayList..:-)<br />
+<a href="http://ideone.com/koM1t8" rel="nofollow">http://ideone.com/koM1t8</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-37387</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 19:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-37387</guid>
+		<description><![CDATA[if instead of adjacency list representation ,matrix represtation is used ...
+will the time complexity will be differentt or not ??]]></description>
+		<content:encoded><![CDATA[<p>if instead of adjacency list representation ,matrix represtation is used &#8230;<br />
+will the time complexity will be differentt or not ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthbest</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-37386</link>
+		<dc:creator><![CDATA[samthbest]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 19:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-37386</guid>
+		<description><![CDATA[use stack]]></description>
+		<content:encoded><![CDATA[<p>use stack</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-36911</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 27 May 2014 13:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-36911</guid>
+		<description><![CDATA[#include
+#include
+#include
+#define MAX 50
+struct node
+{
+    int data;
+    struct node *e;
+    bool visited;
+}*nodes[6];
+
+
+struct node *new_node(int data)
+{
+    struct node *new=malloc(sizeof(struct node));
+    new-&#062;data=data;
+    new-&#062;e=NULL;
+    new-&#062;visited=0;
+    return new;
+}
+
+void addEdge(int v1,int v2)
+{
+    struct node *temp;
+    temp=nodes[v1];
+    while(temp-&#062;e!=NULL)
+    {
+        temp=temp-&#062;e;
+    }
+    temp-&#062;e=new_node(v2);
+}
+void print_adj()
+{
+    int i;
+    for(i=0;idata);
+        struct node *temp=nodes[i]-&#062;e;
+        while(temp!=NULL)
+        {
+            printf(&quot;%d &quot;,temp-&#062;data);
+            temp=temp-&#062;e;    
+        }
+        printf(&quot;n&quot;);
+
+        
+    }
+
+}
+void dfs(struct node *no)
+{
+    int i;
+    struct node *temp;
+    for(i=0;idata==no-&#062;data)
+        {
+            temp=nodes[i];
+            break;
+        }
+    }
+    if(temp-&#062;visited==0)
+    {
+        temp-&#062;visited=1;
+        printf(&quot;%d &quot;,temp-&#062;data);
+        struct node *temp1;
+        temp1=temp-&#062;e;
+        while(temp1!=NULL)
+        {    
+            dfs(temp1);
+            temp1=temp1-&#062;e;
+        }
+    }
+}
+
+int main()
+{
+    int i;
+    for(i=0;i&#060;6;i++)
+    {
+        nodes[i]=new_node(i);
+    }
+    addEdge(0,1);
+    addEdge(1,2);
+    addEdge(1,3);
+    addEdge(1,4);
+    addEdge(1,5);
+    addEdge(2,5);
+    addEdge(3,4);
+    addEdge(4,0);
+    
+    print_adj();
+    dfs(nodes[1]);
+    
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#include<br />
+#define MAX 50<br />
+struct node<br />
+{<br />
+    int data;<br />
+    struct node *e;<br />
+    bool visited;<br />
+}*nodes[6];</p>
+<p>struct node *new_node(int data)<br />
+{<br />
+    struct node *new=malloc(sizeof(struct node));<br />
+    new-&gt;data=data;<br />
+    new-&gt;e=NULL;<br />
+    new-&gt;visited=0;<br />
+    return new;<br />
+}</p>
+<p>void addEdge(int v1,int v2)<br />
+{<br />
+    struct node *temp;<br />
+    temp=nodes[v1];<br />
+    while(temp-&gt;e!=NULL)<br />
+    {<br />
+        temp=temp-&gt;e;<br />
+    }<br />
+    temp-&gt;e=new_node(v2);<br />
+}<br />
+void print_adj()<br />
+{<br />
+    int i;<br />
+    for(i=0;idata);<br />
+        struct node *temp=nodes[i]-&gt;e;<br />
+        while(temp!=NULL)<br />
+        {<br />
+            printf(&#8220;%d &#8220;,temp-&gt;data);<br />
+            temp=temp-&gt;e;<br />
+        }<br />
+        printf(&#8220;n&#8221;);</p>
+<p>    }</p>
+<p>}<br />
+void dfs(struct node *no)<br />
+{<br />
+    int i;<br />
+    struct node *temp;<br />
+    for(i=0;idata==no-&gt;data)<br />
+        {<br />
+            temp=nodes[i];<br />
+            break;<br />
+        }<br />
+    }<br />
+    if(temp-&gt;visited==0)<br />
+    {<br />
+        temp-&gt;visited=1;<br />
+        printf(&#8220;%d &#8220;,temp-&gt;data);<br />
+        struct node *temp1;<br />
+        temp1=temp-&gt;e;<br />
+        while(temp1!=NULL)<br />
+        {<br />
+            dfs(temp1);<br />
+            temp1=temp1-&gt;e;<br />
+        }<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int i;<br />
+    for(i=0;i&lt;6;i++)<br />
+    {<br />
+        nodes[i]=new_node(i);<br />
+    }<br />
+    addEdge(0,1);<br />
+    addEdge(1,2);<br />
+    addEdge(1,3);<br />
+    addEdge(1,4);<br />
+    addEdge(1,5);<br />
+    addEdge(2,5);<br />
+    addEdge(3,4);<br />
+    addEdge(4,0);</p>
+<p>    print_adj();<br />
+    dfs(nodes[1]);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Dagar</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-34976</link>
+		<dc:creator><![CDATA[Himanshu Dagar]]></dc:creator>
+		<pubDate>Tue, 22 Apr 2014 10:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-34976</guid>
+		<description><![CDATA[Code which shows different different output when in graph no node is connected to anyone. 
+can refer to below link 
+
+
+http://ideone.com/sBmjrv]]></description>
+		<content:encoded><![CDATA[<p>Code which shows different different output when in graph no node is connected to anyone.<br />
+can refer to below link </p>
+<p><a href="http://ideone.com/sBmjrv" rel="nofollow">http://ideone.com/sBmjrv</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gallon</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-33316</link>
+		<dc:creator><![CDATA[Gallon]]></dc:creator>
+		<pubDate>Sun, 09 Mar 2014 06:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-33316</guid>
+		<description><![CDATA[&lt;code&gt;
+void Graph::DFSUtil(int v, bool visited[])
+
+{
+
+    // Mark the current node as visited and print it
+
+    stack my_stack;
+
+   
+
+    cout&#060;&#060;v&#060;&#060;&#034; &#034;;
+
+    visited[v] = true;
+
+    my_stack.push(v);
+
+    while(!my_stack.empty())
+
+    {
+
+        int top = my_stack.top();
+
+     
+
+        /* Value check if v has any unvisited neighbour (0 or 1) */
+
+        bool no_unvisited_neighbour = true;
+
+        
+
+        for(auto iter = adj[top].begin(); iter!=adj[top].end(); iter++)
+
+        {
+
+            /* Found 1st unvisited adjacent node of v and push it to the stack */
+
+            if(!visited[*iter])
+
+            {   
+
+                no_unvisited_neighbour = false;
+
+                
+
+                cout&#060;&#060;*iter&#060;&#060;&#034; &#034;;
+
+                visited[*iter] = true;
+
+                my_stack.push(*iter);
+
+                break;
+
+                
+
+            }    
+
+                
+
+        }
+
+        
+
+        /* If v has no unvisited neighbours, pop it from the stack */
+
+        if(no_unvisited_neighbour)
+
+        {
+
+            my_stack.pop();
+
+        }
+
+        
+
+    }
+
+    
+
+}
+
+
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+void Graph::DFSUtil(int v, bool visited[])</p>
+<p>{</p>
+<p>    // Mark the current node as visited and print it</p>
+<p>    stack my_stack;</p>
+<p>    cout&lt;&lt;v&lt;&lt;&quot; &quot;;</p>
+<p>    visited[v] = true;</p>
+<p>    my_stack.push(v);</p>
+<p>    while(!my_stack.empty())</p>
+<p>    {</p>
+<p>        int top = my_stack.top();</p>
+<p>        /* Value check if v has any unvisited neighbour (0 or 1) */</p>
+<p>        bool no_unvisited_neighbour = true;</p>
+<p>        for(auto iter = adj[top].begin(); iter!=adj[top].end(); iter++)</p>
+<p>        {</p>
+<p>            /* Found 1st unvisited adjacent node of v and push it to the stack */</p>
+<p>            if(!visited[*iter])</p>
+<p>            {   </p>
+<p>                no_unvisited_neighbour = false;</p>
+<p>                cout&lt;&lt;*iter&lt;&lt;&quot; &quot;;</p>
+<p>                visited[*iter] = true;</p>
+<p>                my_stack.push(*iter);</p>
+<p>                break;</p>
+<p>            }    </p>
+<p>        }</p>
+<p>        /* If v has no unvisited neighbours, pop it from the stack */</p>
+<p>        if(no_unvisited_neighbour)</p>
+<p>        {</p>
+<p>            my_stack.pop();</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gallon</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-33315</link>
+		<dc:creator><![CDATA[Gallon]]></dc:creator>
+		<pubDate>Sun, 09 Mar 2014 06:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-33315</guid>
+		<description><![CDATA[Non-recursive Implementation using STL stack
+
+&lt;code&gt;
+
+void Graph::DFSUtil(int v, bool visited[])
+
+{
+
+    // Mark the current node as visited and print it
+
+    stack my_stack;
+
+   
+
+    cout&#060;&#060;v&#060;&#060;&#034; &#034;;
+
+    visited[v] = true;
+
+    my_stack.push(v);
+
+    while(!my_stack.empty())
+
+    {
+
+        int top = my_stack.top();
+
+     
+
+        /* Value check if v has any unvisited neighbour (0 or 1) */
+
+        bool no_unvisited_neighbour = true;
+
+        
+
+        for(auto iter = adj[top].begin(); iter!=adj[top].end(); iter++)
+
+        {
+
+            /* Found 1st unvisited adjacent node of v and push it to the stack */
+
+            if(!visited[*iter])
+
+            {   
+
+                no_unvisited_neighbour = false;
+
+                
+
+                cout&#060;&#060;*iter&#060;&#060;&#034; &#034;;
+
+                visited[*iter] = true;
+
+                my_stack.push(*iter);
+
+                break;
+
+                
+
+            }    
+
+                
+
+        }
+
+        
+
+        /* If v has no unvisited neighbours, pop it from the stack */
+
+        if(no_unvisited_neighbour)
+
+        {
+
+            my_stack.pop();
+
+        }
+
+        
+
+    }
+
+    
+
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Non-recursive Implementation using STL stack</p>
+<p><code></p>
+<p>void Graph::DFSUtil(int v, bool visited[])</p>
+<p>{</p>
+<p>    // Mark the current node as visited and print it</p>
+<p>    stack my_stack;</p>
+<p>    cout&lt;&lt;v&lt;&lt;&quot; &quot;;</p>
+<p>    visited[v] = true;</p>
+<p>    my_stack.push(v);</p>
+<p>    while(!my_stack.empty())</p>
+<p>    {</p>
+<p>        int top = my_stack.top();</p>
+<p>        /* Value check if v has any unvisited neighbour (0 or 1) */</p>
+<p>        bool no_unvisited_neighbour = true;</p>
+<p>        for(auto iter = adj[top].begin(); iter!=adj[top].end(); iter++)</p>
+<p>        {</p>
+<p>            /* Found 1st unvisited adjacent node of v and push it to the stack */</p>
+<p>            if(!visited[*iter])</p>
+<p>            {   </p>
+<p>                no_unvisited_neighbour = false;</p>
+<p>                cout&lt;&lt;*iter&lt;&lt;&quot; &quot;;</p>
+<p>                visited[*iter] = true;</p>
+<p>                my_stack.push(*iter);</p>
+<p>                break;</p>
+<p>            }    </p>
+<p>        }</p>
+<p>        /* If v has no unvisited neighbours, pop it from the stack */</p>
+<p>        if(no_unvisited_neighbour)</p>
+<p>        {</p>
+<p>            my_stack.pop();</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Well</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-32090</link>
+		<dc:creator><![CDATA[Well]]></dc:creator>
+		<pubDate>Sun, 02 Feb 2014 09:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-32090</guid>
+		<description><![CDATA[How to implement it in NON-recursive approach?]]></description>
+		<content:encoded><![CDATA[<p>How to implement it in NON-recursive approach?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: khushal</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-29560</link>
+		<dc:creator><![CDATA[khushal]]></dc:creator>
+		<pubDate>Tue, 05 Nov 2013 05:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-29560</guid>
+		<description><![CDATA[cyclic graph won&#039;t have topological order. your code doesn&#039;t say a word if graph is cyclic]]></description>
+		<content:encoded><![CDATA[<p>cyclic graph won&#8217;t have topological order. your code doesn&#8217;t say a word if graph is cyclic</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Alien</title>
+		<link>http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/#comment-27467</link>
+		<dc:creator><![CDATA[Alien]]></dc:creator>
+		<pubDate>Tue, 10 Sep 2013 00:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18212#comment-27467</guid>
+		<description><![CDATA[/*
+
+C program for DFS traversal of a graph where graph is presented using Adjacency list
+
+*/
+
+#include 
+
+#include 
+
+// A structure to represent an adjacency list node
+
+struct AdjListNode 
+
+{
+
+	int vertex_num;
+
+	struct AdjListNode *next;
+
+};
+
+// A structure to represent an adjacency list
+
+struct AdjList
+
+{
+
+	struct AdjListNode *head;
+
+};
+
+// A structure to represent a graph. A graph is an array of adjacency lists.
+
+// Size of array will be V (number of vertices in graph)
+
+struct Graph
+
+{
+
+	int noofvertex;
+
+	struct AdjList* array;
+
+};
+
+// A utility function to create a new adjacency list node
+
+struct AdjListNode* newAdjListNode(int v)
+
+{
+
+	struct AdjListNode* newNode = (struct AdjListNode*)malloc(sizeof(struct AdjListNode));
+
+	newNode-&#062;vertex_num = v;
+
+	newNode-&#062;next = NULL;
+
+	
+
+	return newNode;
+
+}
+
+// A utility function that creates a graph of V vertices
+
+struct Graph* createGraph(int n)
+
+{
+
+	int i;
+
+	struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+
+	graph-&#062;noofvertex = n;
+
+	
+
+	// Create an array of adjacency lists.  Size of array will be n
+
+	graph-&#062;array = (struct AdjList*)malloc(n * sizeof(struct AdjList));
+
+	
+
+	// Initialize each adjacency list as empty by making head as NULL
+
+	for(i=0;iarray[i].head = NULL;
+
+	}
+
+	
+
+	return graph;
+
+}
+
+// Adds an edge to an undirected graph
+
+void addEdge(struct Graph *graph, int src, int dest)
+
+{
+
+	// Add an edge from src to dest.  A new node is added to the adjacency
+
+    // list of src.  The node is added at the begining
+
+	struct AdjListNode* newNode = newAdjListNode(dest);
+
+	newNode-&#062;next = graph-&#062;array[src].head;
+
+	graph-&#062;array[src].head = newNode;
+
+	
+
+	// Since graph is undirected, add an edge from dest to src also
+
+    newNode = newAdjListNode(src);
+
+    newNode-&#062;next = graph-&#062;array[dest].head;
+
+    graph-&#062;array[dest].head = newNode;
+
+}
+
+// A utility function to print the adjacenncy list representation of graph
+
+void printGraph(struct Graph* graph)
+
+{
+
+    int v;
+
+    for (v = 0; v noofvertex; ++v)
+
+    {
+
+        struct AdjListNode* pCrawl = graph-&#062;array[v].head;
+
+        printf(&quot;n Adjacency list of vertex %dn head &quot;, v);
+
+        while (pCrawl)
+
+        {
+
+            printf(&quot;-&#062; %d&quot;, pCrawl-&#062;vertex_num);
+
+            pCrawl = pCrawl-&#062;next;
+
+        }
+
+        printf(&quot;n&quot;);
+
+    }
+
+}
+
+void dfsUtil(struct Graph *graph, int visited[], int v)
+
+{
+
+	int i;
+
+	int n = graph-&#062;noofvertex;
+
+	visited[v] = 1;
+
+	printf(&quot;n Vertex: %d&quot;,v);
+
+	struct AdjListNode* pCrawl = graph-&#062;array[v].head;
+
+	
+
+	// TRAP: Not same as matrix representation
+
+	// check the adjacents of current node has been visited or not. If not, call DFSUtil again
+
+	while(pCrawl != NULL)
+
+	{
+
+		if(visited[pCrawl-&#062;vertex_num] == 0)
+
+			dfsUtil(graph,visited,pCrawl-&#062;vertex_num);
+
+		pCrawl = pCrawl-&#062;next;
+
+	}
+
+	
+
+}
+
+void dfs(struct Graph *graph, int visited[])
+
+{
+
+	int i;
+
+	int n = graph-&#062;noofvertex;
+
+	
+
+	// for each connected component
+
+	for(i=0;i&#060;n;i++)
+
+	{
+
+		if(visited[i] == 0)
+
+			dfsUtil(graph,visited,i);
+
+	}
+
+}
+
+int main()
+
+{
+
+/*
+
+	2 connected components
+
+	1-------5  4
+
+	&#124;	/	&#124;   
+
+	2-------3
+
+*/
+
+	
+
+	// create the graph given in above fugure
+
+    int V = 5;
+
+	int visited[5] = {0};
+
+    struct Graph* graph = createGraph(V);
+
+    addEdge(graph, 0, 1);
+
+    addEdge(graph, 0, 4);
+
+    addEdge(graph, 1, 2);
+
+    addEdge(graph, 1, 3);
+
+    addEdge(graph, 1, 4);
+
+    addEdge(graph, 2, 3);
+
+    addEdge(graph, 3, 4);
+
+ 
+
+    // print the adjacency list representation of the above graph
+
+	dfs(graph,visited);
+
+   // printGraph(graph);
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>/*</p>
+<p>C program for DFS traversal of a graph where graph is presented using Adjacency list</p>
+<p>*/</p>
+<p>#include </p>
+<p>#include </p>
+<p>// A structure to represent an adjacency list node</p>
+<p>struct AdjListNode </p>
+<p>{</p>
+<p>	int vertex_num;</p>
+<p>	struct AdjListNode *next;</p>
+<p>};</p>
+<p>// A structure to represent an adjacency list</p>
+<p>struct AdjList</p>
+<p>{</p>
+<p>	struct AdjListNode *head;</p>
+<p>};</p>
+<p>// A structure to represent a graph. A graph is an array of adjacency lists.</p>
+<p>// Size of array will be V (number of vertices in graph)</p>
+<p>struct Graph</p>
+<p>{</p>
+<p>	int noofvertex;</p>
+<p>	struct AdjList* array;</p>
+<p>};</p>
+<p>// A utility function to create a new adjacency list node</p>
+<p>struct AdjListNode* newAdjListNode(int v)</p>
+<p>{</p>
+<p>	struct AdjListNode* newNode = (struct AdjListNode*)malloc(sizeof(struct AdjListNode));</p>
+<p>	newNode-&gt;vertex_num = v;</p>
+<p>	newNode-&gt;next = NULL;</p>
+<p>	return newNode;</p>
+<p>}</p>
+<p>// A utility function that creates a graph of V vertices</p>
+<p>struct Graph* createGraph(int n)</p>
+<p>{</p>
+<p>	int i;</p>
+<p>	struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));</p>
+<p>	graph-&gt;noofvertex = n;</p>
+<p>	// Create an array of adjacency lists.  Size of array will be n</p>
+<p>	graph-&gt;array = (struct AdjList*)malloc(n * sizeof(struct AdjList));</p>
+<p>	// Initialize each adjacency list as empty by making head as NULL</p>
+<p>	for(i=0;iarray[i].head = NULL;</p>
+<p>	}</p>
+<p>	return graph;</p>
+<p>}</p>
+<p>// Adds an edge to an undirected graph</p>
+<p>void addEdge(struct Graph *graph, int src, int dest)</p>
+<p>{</p>
+<p>	// Add an edge from src to dest.  A new node is added to the adjacency</p>
+<p>    // list of src.  The node is added at the begining</p>
+<p>	struct AdjListNode* newNode = newAdjListNode(dest);</p>
+<p>	newNode-&gt;next = graph-&gt;array[src].head;</p>
+<p>	graph-&gt;array[src].head = newNode;</p>
+<p>	// Since graph is undirected, add an edge from dest to src also</p>
+<p>    newNode = newAdjListNode(src);</p>
+<p>    newNode-&gt;next = graph-&gt;array[dest].head;</p>
+<p>    graph-&gt;array[dest].head = newNode;</p>
+<p>}</p>
+<p>// A utility function to print the adjacenncy list representation of graph</p>
+<p>void printGraph(struct Graph* graph)</p>
+<p>{</p>
+<p>    int v;</p>
+<p>    for (v = 0; v noofvertex; ++v)</p>
+<p>    {</p>
+<p>        struct AdjListNode* pCrawl = graph-&gt;array[v].head;</p>
+<p>        printf(&#8220;n Adjacency list of vertex %dn head &#8220;, v);</p>
+<p>        while (pCrawl)</p>
+<p>        {</p>
+<p>            printf(&#8220;-&gt; %d&#8221;, pCrawl-&gt;vertex_num);</p>
+<p>            pCrawl = pCrawl-&gt;next;</p>
+<p>        }</p>
+<p>        printf(&#8220;n&#8221;);</p>
+<p>    }</p>
+<p>}</p>
+<p>void dfsUtil(struct Graph *graph, int visited[], int v)</p>
+<p>{</p>
+<p>	int i;</p>
+<p>	int n = graph-&gt;noofvertex;</p>
+<p>	visited[v] = 1;</p>
+<p>	printf(&#8220;n Vertex: %d&#8221;,v);</p>
+<p>	struct AdjListNode* pCrawl = graph-&gt;array[v].head;</p>
+<p>	// TRAP: Not same as matrix representation</p>
+<p>	// check the adjacents of current node has been visited or not. If not, call DFSUtil again</p>
+<p>	while(pCrawl != NULL)</p>
+<p>	{</p>
+<p>		if(visited[pCrawl-&gt;vertex_num] == 0)</p>
+<p>			dfsUtil(graph,visited,pCrawl-&gt;vertex_num);</p>
+<p>		pCrawl = pCrawl-&gt;next;</p>
+<p>	}</p>
+<p>}</p>
+<p>void dfs(struct Graph *graph, int visited[])</p>
+<p>{</p>
+<p>	int i;</p>
+<p>	int n = graph-&gt;noofvertex;</p>
+<p>	// for each connected component</p>
+<p>	for(i=0;i&lt;n;i++)</p>
+<p>	{</p>
+<p>		if(visited[i] == 0)</p>
+<p>			dfsUtil(graph,visited,i);</p>
+<p>	}</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>/*</p>
+<p>	2 connected components</p>
+<p>	1&#8212;&#8212;-5  4</p>
+<p>	|	/	|   </p>
+<p>	2&#8212;&#8212;-3</p>
+<p>*/</p>
+<p>	// create the graph given in above fugure</p>
+<p>    int V = 5;</p>
+<p>	int visited[5] = {0};</p>
+<p>    struct Graph* graph = createGraph(V);</p>
+<p>    addEdge(graph, 0, 1);</p>
+<p>    addEdge(graph, 0, 4);</p>
+<p>    addEdge(graph, 1, 2);</p>
+<p>    addEdge(graph, 1, 3);</p>
+<p>    addEdge(graph, 1, 4);</p>
+<p>    addEdge(graph, 2, 3);</p>
+<p>    addEdge(graph, 3, 4);</p>
+<p>    // print the adjacency list representation of the above graph</p>
+<p>	dfs(graph,visited);</p>
+<p>   // printGraph(graph);</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:59:57 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: If you are given two traversal sequences, can you construct the binary tree?</title>
+	<atom:link href="http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Amit Baghel</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-39162</link>
+		<dc:creator><![CDATA[Amit Baghel]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 14:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-39162</guid>
+		<description><![CDATA[visited!]]></description>
+		<content:encoded><![CDATA[<p>visited!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: smith</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-31140</link>
+		<dc:creator><![CDATA[smith]]></dc:creator>
+		<pubDate>Mon, 30 Dec 2013 18:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-31140</guid>
+		<description><![CDATA[when preorder and inorder is given:
+
+code is
+
+#include
+
+#include
+
+struct node 
+
+{
+
+	int data;
+
+	struct node *left;
+
+	struct node *right;
+
+};
+
+struct node *construct(int *,int *,struct node *,int ,int,int,int);
+
+struct node *newnode(int data);
+
+int partition(int *,int,int,int);
+
+void travers(struct node *);
+
+void printnode(struct node *,int);
+
+int main()
+
+{
+
+	int inorder[]={4,2,5,1,3};
+
+	int preorder[]={1,2,3,5,3};
+
+	struct node *root=NULL;int i=0;int n=5;
+
+	root=construct(inorder,preorder,root,i,0,n-1,n);
+
+	travers(root);
+
+	
+
+}
+
+void printnode(struct node *root,int level)
+
+{
+
+	if(root==NULL)return ;
+
+	if(level==1)printf(&quot;%d &quot;,root-&#062;data);
+
+	printnode(root-&#062;left,level-1);
+
+	printnode(root-&#062;right,level-1);
+
+	
+
+}
+
+void travers(struct node *root)
+
+{
+
+	for(int i=1;ihigh)return NULL;
+
+    if(low==high)return newnode(ino[low]);
+
+    
+
+    
+
+    (root)=newnode(preo[i]);
+
+     k=partition(ino,preo[i],low,high);
+
+    
+
+    root-&#062;left=construct(ino,preo,((root)-&#062;left),i+1,low,k-1,n);
+
+    root-&#062;right=construct(ino,preo,((root)-&#062;right),i+1,k+1,high,n);
+
+    return root;
+
+    
+
+		
+
+}
+
+int partition(int *ino,int x,int low,int high)
+
+{
+
+	for(int i=low;idata=data;
+
+	newnod-&#062;left=NULL;
+
+	newnod-&#062;right=NULL;
+
+	return newnod;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>when preorder and inorder is given:</p>
+<p>code is</p>
+<p>#include</p>
+<p>#include</p>
+<p>struct node </p>
+<p>{</p>
+<p>	int data;</p>
+<p>	struct node *left;</p>
+<p>	struct node *right;</p>
+<p>};</p>
+<p>struct node *construct(int *,int *,struct node *,int ,int,int,int);</p>
+<p>struct node *newnode(int data);</p>
+<p>int partition(int *,int,int,int);</p>
+<p>void travers(struct node *);</p>
+<p>void printnode(struct node *,int);</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int inorder[]={4,2,5,1,3};</p>
+<p>	int preorder[]={1,2,3,5,3};</p>
+<p>	struct node *root=NULL;int i=0;int n=5;</p>
+<p>	root=construct(inorder,preorder,root,i,0,n-1,n);</p>
+<p>	travers(root);</p>
+<p>}</p>
+<p>void printnode(struct node *root,int level)</p>
+<p>{</p>
+<p>	if(root==NULL)return ;</p>
+<p>	if(level==1)printf(&#8220;%d &#8220;,root-&gt;data);</p>
+<p>	printnode(root-&gt;left,level-1);</p>
+<p>	printnode(root-&gt;right,level-1);</p>
+<p>}</p>
+<p>void travers(struct node *root)</p>
+<p>{</p>
+<p>	for(int i=1;ihigh)return NULL;</p>
+<p>    if(low==high)return newnode(ino[low]);</p>
+<p>    (root)=newnode(preo[i]);</p>
+<p>     k=partition(ino,preo[i],low,high);</p>
+<p>    root-&gt;left=construct(ino,preo,((root)-&gt;left),i+1,low,k-1,n);</p>
+<p>    root-&gt;right=construct(ino,preo,((root)-&gt;right),i+1,k+1,high,n);</p>
+<p>    return root;</p>
+<p>}</p>
+<p>int partition(int *ino,int x,int low,int high)</p>
+<p>{</p>
+<p>	for(int i=low;idata=data;</p>
+<p>	newnod-&gt;left=NULL;</p>
+<p>	newnod-&gt;right=NULL;</p>
+<p>	return newnod;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhi</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-27591</link>
+		<dc:creator><![CDATA[abhi]]></dc:creator>
+		<pubDate>Fri, 13 Sep 2013 05:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-27591</guid>
+		<description><![CDATA[What about the case when we have duplicates in the Binary Tree ?
+
+We can&#039;t identify the tree, right ?
+suppose for the case : when all node values are 1&#039;s only.]]></description>
+		<content:encoded><![CDATA[<p>What about the case when we have duplicates in the Binary Tree ?</p>
+<p>We can&#8217;t identify the tree, right ?<br />
+suppose for the case : when all node values are 1&#8217;s only.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-19161</link>
+		<dc:creator><![CDATA[Rahul]]></dc:creator>
+		<pubDate>Tue, 04 Jun 2013 03:13:37 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-19161</guid>
+		<description><![CDATA[@Rahul Singh 
+
+We are talking about Binary tree not BST]]></description>
+		<content:encoded><![CDATA[<p>@Rahul Singh </p>
+<p>We are talking about Binary tree not BST</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul Singh</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-18659</link>
+		<dc:creator><![CDATA[Rahul Singh]]></dc:creator>
+		<pubDate>Sun, 26 May 2013 09:18:35 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-18659</guid>
+		<description><![CDATA[@geeksforgeeks team if we know any one of the traversal except inorder we can construct the unique BST . because we can ourself find the  inorder traversal by sort the given traversal sequence.]]></description>
+		<content:encoded><![CDATA[<p>@geeksforgeeks team if we know any one of the traversal except inorder we can construct the unique BST . because we can ourself find the  inorder traversal by sort the given traversal sequence.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: trilok sharma</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-15293</link>
+		<dc:creator><![CDATA[trilok sharma]]></dc:creator>
+		<pubDate>Fri, 15 Feb 2013 12:16:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-15293</guid>
+		<description><![CDATA[#include 
+#include 
+#include 
+using namespace std;
+
+struct node
+{
+	int data;
+	node *left;
+	node *right;
+};
+
+node* Newnode(int data)
+{
+node * curr;
+	curr = (node *)malloc(sizeof(node));
+	curr-&#062;data = data;
+	curr-&#062;left = curr-&#062;right = NULL;
+return(curr);
+}
+
+int search(int inorder[],int start,int end,int data)
+{
+	for(int i=start;i end)
+		 return NULL;
+	 
+	data=postorder[post_index--];   
+	node *root=Newnode(data);
+
+	if(start == end)
+		 return root;	
+	
+	
+	in_pos=search(inorder,start,end,data); 
+	root-&#062;right=createTree(postorder,inorder,in_pos+1,end);	
+	root-&#062;left=createTree(postorder,inorder,start,in_pos-1);
+
+return root;
+}
+
+void display_inOrder(struct node* node) 
+{
+  if (node == NULL) 
+    return;
+   
+  display_inOrder(node-&#062;left);
+  printf(&quot;%d &quot;, node-&#062;data); 
+  display_inOrder(node-&#062;right);
+} 
+
+int main()
+{
+int n,in[100000],post[100000],i;
+node *root;
+    
+    cout&#060;&#062;n;
+
+
+	cout&#060;&#060;&#034;Enter postorder sequence = &#034;;
+	for(i=0;i&#062;post[i];
+
+	cout&#060;&#060;&#034;Enter inorder sequence = &#034;;
+	for(i=0;i&#062;in[i];
+		
+	root=createTree(post,in,0,n-1);
+	
+	cout&#060;&#060;&#034;output inorder sequence = &#034;;
+	display_inOrder(root);
+	
+ 
+return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#include<br />
+using namespace std;</p>
+<p>struct node<br />
+{<br />
+	int data;<br />
+	node *left;<br />
+	node *right;<br />
+};</p>
+<p>node* Newnode(int data)<br />
+{<br />
+node * curr;<br />
+	curr = (node *)malloc(sizeof(node));<br />
+	curr-&gt;data = data;<br />
+	curr-&gt;left = curr-&gt;right = NULL;<br />
+return(curr);<br />
+}</p>
+<p>int search(int inorder[],int start,int end,int data)<br />
+{<br />
+	for(int i=start;i end)<br />
+		 return NULL;</p>
+<p>	data=postorder[post_index&#8211;];<br />
+	node *root=Newnode(data);</p>
+<p>	if(start == end)<br />
+		 return root;	</p>
+<p>	in_pos=search(inorder,start,end,data);<br />
+	root-&gt;right=createTree(postorder,inorder,in_pos+1,end);<br />
+	root-&gt;left=createTree(postorder,inorder,start,in_pos-1);</p>
+<p>return root;<br />
+}</p>
+<p>void display_inOrder(struct node* node)<br />
+{<br />
+  if (node == NULL)<br />
+    return;</p>
+<p>  display_inOrder(node-&gt;left);<br />
+  printf(&#8220;%d &#8220;, node-&gt;data);<br />
+  display_inOrder(node-&gt;right);<br />
+} </p>
+<p>int main()<br />
+{<br />
+int n,in[100000],post[100000],i;<br />
+node *root;</p>
+<p>    cout&lt;&gt;n;</p>
+<p>	cout&lt;&lt;&quot;Enter postorder sequence = &quot;;<br />
+	for(i=0;i&gt;post[i];</p>
+<p>	cout&lt;&lt;&quot;Enter inorder sequence = &quot;;<br />
+	for(i=0;i&gt;in[i];</p>
+<p>	root=createTree(post,in,0,n-1);</p>
+<p>	cout&lt;&lt;&quot;output inorder sequence = &quot;;<br />
+	display_inOrder(root);</p>
+<p>return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-12295</link>
+		<dc:creator><![CDATA[Himanshu]]></dc:creator>
+		<pubDate>Mon, 05 Nov 2012 17:33:18 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-12295</guid>
+		<description><![CDATA[Here is a an algorithm from the URL http://stackoverflow.com/questions/4575719/binary-tree-from-in-order-and-level-order-traversals that mentions how to construct a BST given inorder and level order.
+
+f(inorder, levelorder):
+      if length(levelorder) == 0:
+          return None
+      root = levelorder[0]#set root to first element in levelorder
+      subIn1, subIn2 = partition(inorder, levelorder[0]) #partition inorder based on root
+      subLevel1 = extract(levelOrder, subIn1)#remove elements in level order not in subIn1
+      subLevel2 = extract(levelOrder, subIn2)#remove elements in level order not in subIn2
+      root-&#062;left = f(subIn1, subLevel1)
+      root-&#062;right = f(subIn2, subLevel2)
+      return root]]></description>
+		<content:encoded><![CDATA[<p>Here is a an algorithm from the URL <a href="http://stackoverflow.com/questions/4575719/binary-tree-from-in-order-and-level-order-traversals" rel="nofollow">http://stackoverflow.com/questions/4575719/binary-tree-from-in-order-and-level-order-traversals</a> that mentions how to construct a BST given inorder and level order.</p>
+<p>f(inorder, levelorder):<br />
+      if length(levelorder) == 0:<br />
+          return None<br />
+      root = levelorder[0]#set root to first element in levelorder<br />
+      subIn1, subIn2 = partition(inorder, levelorder[0]) #partition inorder based on root<br />
+      subLevel1 = extract(levelOrder, subIn1)#remove elements in level order not in subIn1<br />
+      subLevel2 = extract(levelOrder, subIn2)#remove elements in level order not in subIn2<br />
+      root-&gt;left = f(subIn1, subLevel1)<br />
+      root-&gt;right = f(subIn2, subLevel2)<br />
+      return root</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karthick</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-9052</link>
+		<dc:creator><![CDATA[Karthick]]></dc:creator>
+		<pubDate>Thu, 14 Jun 2012 06:15:56 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-9052</guid>
+		<description><![CDATA[Forget about binary tree.  What about a BST with just pre-order or a post-order?]]></description>
+		<content:encoded><![CDATA[<p>Forget about binary tree.  What about a BST with just pre-order or a post-order?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Avinash</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-7475</link>
+		<dc:creator><![CDATA[Avinash]]></dc:creator>
+		<pubDate>Sun, 12 Feb 2012 02:35:09 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-7475</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not 
+writing code) */
+Construct Tree from given Inorder and Preorder traversals
+April 16, 2010
+Let us consider the below traversals:
+
+Inorder sequence: D B E A F C
+Preorder sequence: A B D E C F
+
+BuildTree(inorder[],preorder[],start,end)
+{
+	static int preindex=0;
+	If start&#062;end return NULL;
+	
+	struct node *newnode=new(preorder(preindex));
+	preindex=preindex+1;
+	
+	If start==end return node;
+	
+	int searchind=search(inorder,start,end,node-&#062;data);
+	
+	node-&#062;left=BuildTree(inorder,preorder,start,searchind-1);
+	node-&#062;right=BuildTree(inorder,preorder,searchind+1,end);
+	
+	return newnode;
+}
+=========================
+Given inorder and postorder traversals construct a binary tree
+
+Inorder sequence: D B E A F C
+Postorder sequence: D E B F C A
+
+struct node *BuidTree(int postorder[], int inorder[], int start, int end)
+{
+	static int postindex=n-1;
+	int searchindex;
+	If start&#062;end return NULL;
+	struct node *newNode=new(postorder[postindex--]);
+	If (start==end) return newNode;
+	searchindex=search(inorder,start,end);
+	newNode-&#062;right=BuildTree(postorder, inorder, searchindex+1,end);
+	newNode-&#062;left=BuildTree(postorder,inorder,start,searchindex-1);
+	
+	return newNode;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not 
+writing code) */
+Construct Tree from given Inorder and Preorder traversals
+April 16, 2010
+Let us consider the below traversals:
+
+Inorder sequence: D B E A F C
+Preorder sequence: A B D E C F
+
+BuildTree(inorder[],preorder[],start,end)
+{
+	static int preindex=0;
+	If start&gt;end return NULL;
+	
+	struct node *newnode=new(preorder(preindex));
+	preindex=preindex+1;
+	
+	If start==end return node;
+	
+	int searchind=search(inorder,start,end,node-&gt;data);
+	
+	node-&gt;left=BuildTree(inorder,preorder,start,searchind-1);
+	node-&gt;right=BuildTree(inorder,preorder,searchind+1,end);
+	
+	return newnode;
+}
+=========================
+Given inorder and postorder traversals construct a binary tree
+
+Inorder sequence: D B E A F C
+Postorder sequence: D E B F C A
+
+struct node *BuidTree(int postorder[], int inorder[], int start, int end)
+{
+	static int postindex=n-1;
+	int searchindex;
+	If start&gt;end return NULL;
+	struct node *newNode=new(postorder[postindex--]);
+	If (start==end) return newNode;
+	searchindex=search(inorder,start,end);
+	newNode-&gt;right=BuildTree(postorder, inorder, searchindex+1,end);
+	newNode-&gt;left=BuildTree(postorder,inorder,start,searchindex-1);
+	
+	return newNode;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Avinash</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-7474</link>
+		<dc:creator><![CDATA[Avinash]]></dc:creator>
+		<pubDate>Sun, 12 Feb 2012 02:29:49 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-7474</guid>
+		<description><![CDATA[Let us consider the below traversals:
+
+Inorder sequence: D B E A F C
+Preorder sequence: A B D E C F
+
+BuildTree(inorder[],preorder[],start,end)
+{
+	static int preindex=0;
+	If start&#062;end return NULL;
+	
+	struct node *newnode=new(preorder(preindex));
+	preindex=preindex+1;
+	
+	If start==end return node;
+	
+	int searchind=search(inorder,start,end,node-&#062;data);
+	
+	node-&#062;left=BuildTree(inorder,preorder,start,searchind-1);
+	node-&#062;right=BuildTree(inorder,preorder,searchind+1,end);
+	
+	return newnode;
+}
+=========================
+Given inorder and postorder traversals construct a binary tree
+
+Inorder sequence: D B E A F C
+Postorder sequence: D E B F C A
+
+struct node *BuidTree(int postorder[], int inorder[], int start, int end)
+{
+	static int postindex=n-1;
+	int searchindex;
+	If start&#062;end return NULL;
+	struct node *newNode=new(postorder[postindex--]);
+	If (start==end) return newNode;
+	searchindex=search(inorder,start,end);
+	newNode-&#062;right=BuildTree(postorder, inorder, searchindex+1,end);
+	newNode-&#062;left=BuildTree(postorder,inorder,start,searchindex-1);
+	
+	return newNode;
+}]]></description>
+		<content:encoded><![CDATA[<p>Let us consider the below traversals:</p>
+<p>Inorder sequence: D B E A F C<br />
+Preorder sequence: A B D E C F</p>
+<p>BuildTree(inorder[],preorder[],start,end)<br />
+{<br />
+	static int preindex=0;<br />
+	If start&gt;end return NULL;</p>
+<p>	struct node *newnode=new(preorder(preindex));<br />
+	preindex=preindex+1;</p>
+<p>	If start==end return node;</p>
+<p>	int searchind=search(inorder,start,end,node-&gt;data);</p>
+<p>	node-&gt;left=BuildTree(inorder,preorder,start,searchind-1);<br />
+	node-&gt;right=BuildTree(inorder,preorder,searchind+1,end);</p>
+<p>	return newnode;<br />
+}<br />
+=========================<br />
+Given inorder and postorder traversals construct a binary tree</p>
+<p>Inorder sequence: D B E A F C<br />
+Postorder sequence: D E B F C A</p>
+<p>struct node *BuidTree(int postorder[], int inorder[], int start, int end)<br />
+{<br />
+	static int postindex=n-1;<br />
+	int searchindex;<br />
+	If start&gt;end return NULL;<br />
+	struct node *newNode=new(postorder[postindex&#8211;]);<br />
+	If (start==end) return newNode;<br />
+	searchindex=search(inorder,start,end);<br />
+	newNode-&gt;right=BuildTree(postorder, inorder, searchindex+1,end);<br />
+	newNode-&gt;left=BuildTree(postorder,inorder,start,searchindex-1);</p>
+<p>	return newNode;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Devansh</title>
+		<link>http://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/#comment-6774</link>
+		<dc:creator><![CDATA[Devansh]]></dc:creator>
+		<pubDate>Tue, 13 Dec 2011 19:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=657#comment-6774</guid>
+		<description><![CDATA[Inorder of a tree is must as from other traversal we are getting the root node of that tree and from inorder we get the child nodes which are in left subtree and right subtree as nodes which are in left subtree appears before root node in inorder traversal and the ones which are in right subtree appears after root.]]></description>
+		<content:encoded><![CDATA[<p>Inorder of a tree is must as from other traversal we are getting the root node of that tree and from inorder we get the child nodes which are in left subtree and right subtree as nodes which are in left subtree appears before root node in inorder traversal and the ones which are in right subtree appears after root.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:03:41 -->
+
+<!-- Compression = gzip -->

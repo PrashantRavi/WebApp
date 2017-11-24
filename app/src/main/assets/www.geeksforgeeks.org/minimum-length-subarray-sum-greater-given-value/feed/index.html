@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Smallest subarray with sum greater than a given value</title>
+	<atom:link href="http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Mrinal Ahlawat</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39955</link>
+		<dc:creator><![CDATA[Mrinal Ahlawat]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 09:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39955</guid>
+		<description><![CDATA[See basically in the effective solution we keep adding elements till the sum does not exceed the given value x. After that in second loop every time we remove at least one element from the start and then the upper loop repeats till we get the smallest sub array. Hope that makes it clear.]]></description>
+		<content:encoded><![CDATA[<p>See basically in the effective solution we keep adding elements till the sum does not exceed the given value x. After that in second loop every time we remove at least one element from the start and then the upper loop repeats till we get the smallest sub array. Hope that makes it clear.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bruce Wayne</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39937</link>
+		<dc:creator><![CDATA[Bruce Wayne]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 06:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39937</guid>
+		<description><![CDATA[Help me understand better?]]></description>
+		<content:encoded><![CDATA[<p>Help me understand better?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vivek</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39855</link>
+		<dc:creator><![CDATA[vivek]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 09:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39855</guid>
+		<description><![CDATA[//my code 
+@geeksforgeeks
+int smallestSubWithSum(int arr[], int n, int x)
+{
+               int start = 0, end = n - 1;
+                int sum = 0 ; 
+         
+
+                for( int i = 0 ; i &#060; n ; i++)
+                           sum + = arr[i];       //calculating sum all elements in array
+          
+
+          if(sum &#060;= x)
+                            return - 1;
+          
+
+           while(start &#060;= end)
+                { 
+
+    /* if current end element is smaller then the current start element then           subtract it from sum and check if greater than x  else check current           start element*/
+                                if( x &#060;  sum - arr[end] &#038;&#038; arr[end] &#060; arr[start] )
+
+                                                    sum-=arr[end--];
+         
+
+                                else if( x&#060; sum - arr[start] )
+       
+
+                                                    sum-=arr[start++];
+       
+
+                   else
+                              return end-start + 1; 
+              }
+}
+correct me if something is wrong.]]></description>
+		<content:encoded><![CDATA[<p>//my code<br />
+@geeksforgeeks<br />
+int smallestSubWithSum(int arr[], int n, int x)<br />
+{<br />
+               int start = 0, end = n &#8211; 1;<br />
+                int sum = 0 ; </p>
+<p>                for( int i = 0 ; i &lt; n ; i++)<br />
+                           sum + = arr[i];       //calculating sum all elements in array</p>
+<p>          if(sum &lt;= x)<br />
+                            return &#8211; 1;</p>
+<p>           while(start &lt;= end)<br />
+                { </p>
+<p>    /* if current end element is smaller then the current start element then           subtract it from sum and check if greater than x  else check current           start element*/<br />
+                                if( x &lt;  sum &#8211; arr[end] &amp;&amp; arr[end] &lt; arr[start] )</p>
+<p>                                                    sum-=arr[end&#8211;];</p>
+<p>                                else if( x&lt; sum &#8211; arr[start] )</p>
+<p>                                                    sum-=arr[start++];</p>
+<p>                   else<br />
+                              return end-start + 1;<br />
+              }<br />
+}<br />
+correct me if something is wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mrinal Ahlawat</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39575</link>
+		<dc:creator><![CDATA[Mrinal Ahlawat]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 21:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39575</guid>
+		<description><![CDATA[just replacing the first while loop with this will solve the problem.
+
+ while (curr_sum &#060;= x &#038;&#038; end &#060; n)
+            {
+            	if(arr[end]&#060;0)
+            	{
+            		curr_sum=0;
+            		++end;
+            		break;
+            	}
+            	else
+            	curr_sum += arr[end++];
+            }]]></description>
+		<content:encoded><![CDATA[<p>just replacing the first while loop with this will solve the problem.</p>
+<p> while (curr_sum &lt;= x &amp;&amp; end &lt; n)<br />
+            {<br />
+            	if(arr[end]&lt;0)<br />
+            	{<br />
+            		curr_sum=0;<br />
+            		++end;<br />
+            		break;<br />
+            	}<br />
+            	else<br />
+            	curr_sum += arr[end++];<br />
+            }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mrinal Ahlawat</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39574</link>
+		<dc:creator><![CDATA[Mrinal Ahlawat]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 21:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39574</guid>
+		<description><![CDATA[it works just fine. try understanding it in a better manner.]]></description>
+		<content:encoded><![CDATA[<p>it works just fine. try understanding it in a better manner.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rajat gupta</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39119</link>
+		<dc:creator><![CDATA[rajat gupta]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 08:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39119</guid>
+		<description><![CDATA[similarly, why the answer of first example is not {45,19}?]]></description>
+		<content:encoded><![CDATA[<p>similarly, why the answer of first example is not {45,19}?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-39007</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 06:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-39007</guid>
+		<description><![CDATA[It isn&#039;t contiguous...]]></description>
+		<content:encoded><![CDATA[<p>It isn&#8217;t contiguous&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-38986</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 03:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-38986</guid>
+		<description><![CDATA[Here we are moving up to the crossover , =&#062; 1 + 4 + 45 + 6 =&#062; 56 , so we try to remove each element from the start and  here first we remove &#039;1&#039; , so sum becomes 55 and length is 3 , next we remove &#039;4&#039; , then the sum becomes 51, which is equal to &#039;k&#039; ,but we need sub array &quot;greater&quot; than k. so we put back &#039;4&#039; hence the length of sub array is &#039;3&#039;. Yes , There may be another sub array whose sum is still less than the current sub array and greater than value  &#039;k&#039; and with size less than the current sub array. Hence we need outer while loop too. Thanks for making me understand :-)]]></description>
+		<content:encoded><![CDATA[<p>Here we are moving up to the crossover , =&gt; 1 + 4 + 45 + 6 =&gt; 56 , so we try to remove each element from the start and  here first we remove &#8216;1&#8217; , so sum becomes 55 and length is 3 , next we remove &#8216;4&#8217; , then the sum becomes 51, which is equal to &#8216;k&#8217; ,but we need sub array &#8220;greater&#8221; than k. so we put back &#8216;4&#8217; hence the length of sub array is &#8216;3&#8217;. Yes , There may be another sub array whose sum is still less than the current sub array and greater than value  &#8216;k&#8217; and with size less than the current sub array. Hence we need outer while loop too. Thanks for making me understand 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: newbie</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-38969</link>
+		<dc:creator><![CDATA[newbie]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 17:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-38969</guid>
+		<description><![CDATA[Had the question been &quot;what is the size of minimum subsequence with sum greater than a given value&quot; , can we use divide and conquer to solve it??]]></description>
+		<content:encoded><![CDATA[<p>Had the question been &#8220;what is the size of minimum subsequence with sum greater than a given value&#8221; , can we use divide and conquer to solve it??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-38966</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 17:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-38966</guid>
+		<description><![CDATA[Outer loop is required to check all the sub arrays whose sum is greater than the given value. And from all such sub arrays we are choosing the min length sub array using min_len. Here is the example,
+Suppose {1,4,45,6,52,10,19} and k=51.
+start=0,end=0. After first inner while loop , sum = 1+4+45+6 = 56&#062;51 and end=4. After second inner while loop, sum = 45+6 start = 2 end=4.
+min_len = 3.
+But this is not the required sub array as it is not of minimum length. If you remove the outer while loop, program will return this as min sub array.Due to outer while loop, it continues to check for other sub arrays (end&#060;n). And finally by using min_len we can track the min_len sub array and return that as the required sub array. Here the answer should be {51} not {4,45,6}.]]></description>
+		<content:encoded><![CDATA[<p>Outer loop is required to check all the sub arrays whose sum is greater than the given value. And from all such sub arrays we are choosing the min length sub array using min_len. Here is the example,<br />
+Suppose {1,4,45,6,52,10,19} and k=51.<br />
+start=0,end=0. After first inner while loop , sum = 1+4+45+6 = 56&gt;51 and end=4. After second inner while loop, sum = 45+6 start = 2 end=4.<br />
+min_len = 3.<br />
+But this is not the required sub array as it is not of minimum length. If you remove the outer while loop, program will return this as min sub array.Due to outer while loop, it continues to check for other sub arrays (end&lt;n). And finally by using min_len we can track the min_len sub array and return that as the required sub array. Here the answer should be {51} not {4,45,6}.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Savan Popat</title>
+		<link>http://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/#comment-38932</link>
+		<dc:creator><![CDATA[Savan Popat]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 10:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=128632#comment-38932</guid>
+		<description><![CDATA[It works fine]]></description>
+		<content:encoded><![CDATA[<p>It works fine</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:37:24 -->
+
+<!-- Compression = gzip -->

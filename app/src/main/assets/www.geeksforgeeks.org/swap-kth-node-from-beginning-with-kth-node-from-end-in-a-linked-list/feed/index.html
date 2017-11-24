@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Swap Kth node from beginning with Kth node from end in a Linked List</title>
+	<atom:link href="http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: monu kesarwani</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-40118</link>
+		<dc:creator><![CDATA[monu kesarwani]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 07:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-40118</guid>
+		<description><![CDATA[simple solution in one scan o(n), without calculating the total nodes....
+
+#include
+#include
+
+struct  node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *insert(struct node *head, int info)
+{
+    struct node *temp;
+    temp = (struct node*)malloc(sizeof(struct node));
+    temp-&#062;data = info;
+    temp-&#062;next = NULL;
+    if(head==NULL)
+     {
+     head = temp;
+     return head;
+     }
+     else
+     {
+         head-&#062;next = insert(head-&#062;next, info);
+     }
+    return head;
+    
+}
+
+void swap_kth_ele(struct node *head, int k)
+{
+    struct node *x=head,*p ,*q, *y=head,*ptr=head;
+    int i=1;
+    while(ptr-&#062;next!=NULL)
+    {
+      if(i==k)    
+       {
+           p=x;
+           x=x-&#062;next;
+           ptr=ptr-&#062;next;
+       }
+      else
+      {
+       q = y;
+       y = y-&#062;next;
+       ptr=ptr-&#062;next;
+       i++;
+      }
+    }
+    if(x-&#062;next==y)
+    {
+      p-&#062;next=y;
+      x-&#062;next=y-&#062;next;
+      y-&#062;next=x;
+    }
+    else if(y-&#062;next==x)
+    {
+        q-&#062;next=x;
+        y-&#062;next=x-&#062;next;
+        x-&#062;next=y;
+    }
+    else if(x==y)
+    {
+      return ;
+    }
+     else
+     {
+         p-&#062;next=y;
+         p=y-&#062;next;
+        y-&#062;next=x-&#062;next;
+         x-&#062;next=p;
+         q-&#062;next=x;
+     }
+}
+void print(struct node *head)
+{
+    struct node *ptr=head;
+    if(ptr==NULL)
+    printf(&quot;unsuccesssful&quot;);
+    while(ptr!=NULL)
+    {
+        printf(&quot;%dt&quot;,ptr-&#062;data);
+        ptr=ptr-&#062;next;
+    }
+}
+
+int main()
+{
+    struct node *head = NULL;
+    int n;
+    head=insert(head,10);
+    head=insert(head,20);
+    head=insert(head,30);
+    head=insert(head,40);
+    head=insert(head,50);
+    head=insert(head,60);
+    head=insert(head,70);
+    head=insert(head,80);
+    print(head);
+    printf(&quot;nn&quot;);
+    swap_kth_ele(head, 3);
+    print(head);   
+return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>simple solution in one scan o(n), without calculating the total nodes&#8230;.</p>
+<p>#include<br />
+#include</p>
+<p>struct  node<br />
+{<br />
+    int data;<br />
+    struct node *next;<br />
+};</p>
+<p>struct node *insert(struct node *head, int info)<br />
+{<br />
+    struct node *temp;<br />
+    temp = (struct node*)malloc(sizeof(struct node));<br />
+    temp-&gt;data = info;<br />
+    temp-&gt;next = NULL;<br />
+    if(head==NULL)<br />
+     {<br />
+     head = temp;<br />
+     return head;<br />
+     }<br />
+     else<br />
+     {<br />
+         head-&gt;next = insert(head-&gt;next, info);<br />
+     }<br />
+    return head;</p>
+<p>}</p>
+<p>void swap_kth_ele(struct node *head, int k)<br />
+{<br />
+    struct node *x=head,*p ,*q, *y=head,*ptr=head;<br />
+    int i=1;<br />
+    while(ptr-&gt;next!=NULL)<br />
+    {<br />
+      if(i==k)<br />
+       {<br />
+           p=x;<br />
+           x=x-&gt;next;<br />
+           ptr=ptr-&gt;next;<br />
+       }<br />
+      else<br />
+      {<br />
+       q = y;<br />
+       y = y-&gt;next;<br />
+       ptr=ptr-&gt;next;<br />
+       i++;<br />
+      }<br />
+    }<br />
+    if(x-&gt;next==y)<br />
+    {<br />
+      p-&gt;next=y;<br />
+      x-&gt;next=y-&gt;next;<br />
+      y-&gt;next=x;<br />
+    }<br />
+    else if(y-&gt;next==x)<br />
+    {<br />
+        q-&gt;next=x;<br />
+        y-&gt;next=x-&gt;next;<br />
+        x-&gt;next=y;<br />
+    }<br />
+    else if(x==y)<br />
+    {<br />
+      return ;<br />
+    }<br />
+     else<br />
+     {<br />
+         p-&gt;next=y;<br />
+         p=y-&gt;next;<br />
+        y-&gt;next=x-&gt;next;<br />
+         x-&gt;next=p;<br />
+         q-&gt;next=x;<br />
+     }<br />
+}<br />
+void print(struct node *head)<br />
+{<br />
+    struct node *ptr=head;<br />
+    if(ptr==NULL)<br />
+    printf(&#8220;unsuccesssful&#8221;);<br />
+    while(ptr!=NULL)<br />
+    {<br />
+        printf(&#8220;%dt&#8221;,ptr-&gt;data);<br />
+        ptr=ptr-&gt;next;<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+    struct node *head = NULL;<br />
+    int n;<br />
+    head=insert(head,10);<br />
+    head=insert(head,20);<br />
+    head=insert(head,30);<br />
+    head=insert(head,40);<br />
+    head=insert(head,50);<br />
+    head=insert(head,60);<br />
+    head=insert(head,70);<br />
+    head=insert(head,80);<br />
+    print(head);<br />
+    printf(&#8220;nn&#8221;);<br />
+    swap_kth_ele(head, 3);<br />
+    print(head);<br />
+return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prince Aggarwal</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-39905</link>
+		<dc:creator><![CDATA[Prince Aggarwal]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 17:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-39905</guid>
+		<description><![CDATA[Always use the One scan for finding the nth node from end.
+
+You are using two scan.
+One for finding the length and one for finding the kth from the end gives the complexity (O(n)+O(n)).
+If you find it in one scan only then it will be O(n) only.
+
+To do this :-
+use two pointers of struct node type pNthNode and ptemp. Initially,both points to head node of the list. pNthNode starts moving only after ptemp made n moves.
+From there both moves forward until ptemp reaches end of the list. As a result pNthNode points to nth node from end of the linked list.
+
+Below is the code for finding the kth from the end
+
+struct ListNode *Nth NodeFromEnd(struct ListNode *head, int NthNode)
+{
+     struct ListNode *ptemp=NULL, *pNthNode=head;
+     int count=0;
+     for(ptemp=head;ptemp!=NULL;)
+     {
+         count++;
+         if(NthNode-countnext;
+         }
+         ptemp=ptemp-&#062;next;
+    }
+
+    if(count&#062;=NthNode)
+        return pNthNode;
+
+    return NULL;
+}]]></description>
+		<content:encoded><![CDATA[<p>Always use the One scan for finding the nth node from end.</p>
+<p>You are using two scan.<br />
+One for finding the length and one for finding the kth from the end gives the complexity (O(n)+O(n)).<br />
+If you find it in one scan only then it will be O(n) only.</p>
+<p>To do this :-<br />
+use two pointers of struct node type pNthNode and ptemp. Initially,both points to head node of the list. pNthNode starts moving only after ptemp made n moves.<br />
+From there both moves forward until ptemp reaches end of the list. As a result pNthNode points to nth node from end of the linked list.</p>
+<p>Below is the code for finding the kth from the end</p>
+<p>struct ListNode *Nth NodeFromEnd(struct ListNode *head, int NthNode)<br />
+{<br />
+     struct ListNode *ptemp=NULL, *pNthNode=head;<br />
+     int count=0;<br />
+     for(ptemp=head;ptemp!=NULL;)<br />
+     {<br />
+         count++;<br />
+         if(NthNode-countnext;<br />
+         }<br />
+         ptemp=ptemp-&gt;next;<br />
+    }</p>
+<p>    if(count&gt;=NthNode)<br />
+        return pNthNode;</p>
+<p>    return NULL;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abc</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-39155</link>
+		<dc:creator><![CDATA[abc]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 13:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-39155</guid>
+		<description><![CDATA[simple implementation works for all cases http://ideone.com/ekbvWE]]></description>
+		<content:encoded><![CDATA[<p>simple implementation works for all cases <a href="http://ideone.com/ekbvWE" rel="nofollow">http://ideone.com/ekbvWE</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amar</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-38687</link>
+		<dc:creator><![CDATA[Amar]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 12:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-38687</guid>
+		<description><![CDATA[http://ideone.com/M19ZnS]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/M19ZnS" rel="nofollow">http://ideone.com/M19ZnS</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-38589</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 17:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-38589</guid>
+		<description><![CDATA[Its actually if(x_prev) where x_prev is temporary pointer which points to the previous node of the node that is to be deleted from the front.
+
+
+If we need to delete a node in the list, first we need to have the pointer to the previous node of the node which must be deleted. only then we can directly assign the next pointer of previous node to the next node of the node which must be deleted.
+
+
+In this case we are checking whether the previous pointer is NULL or not. it is to check for the boundaries. if x_prev is NULL then u can directly delete the current node. Hope this will help.]]></description>
+		<content:encoded><![CDATA[<p>Its actually if(x_prev) where x_prev is temporary pointer which points to the previous node of the node that is to be deleted from the front.</p>
+<p>If we need to delete a node in the list, first we need to have the pointer to the previous node of the node which must be deleted. only then we can directly assign the next pointer of previous node to the next node of the node which must be deleted.</p>
+<p>In this case we are checking whether the previous pointer is NULL or not. it is to check for the boundaries. if x_prev is NULL then u can directly delete the current node. Hope this will help.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sangee</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-38586</link>
+		<dc:creator><![CDATA[sangee]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 16:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-38586</guid>
+		<description><![CDATA[Why do they check if(x-&#062;prev) and if(y-&#062;prev) ? is it for checking whether they are the first nodes..or is der something else too? Kindly reply!]]></description>
+		<content:encoded><![CDATA[<p>Why do they check if(x-&gt;prev) and if(y-&gt;prev) ? is it for checking whether they are the first nodes..or is der something else too? Kindly reply!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-37559</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 19:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-37559</guid>
+		<description><![CDATA[void swapK(lnode *&#038;head,int k)
+{    // it is handling all the cases even if swapping nodes are same or next to each other
+    if(head==NULL&#124;&#124;!head-&#062;next&#124;&#124;k==0)
+    return;
+    int n=countNodes(head);
+    if(k&#062;n)
+    return;
+    
+    lnode *prev1=NULL,*prev2=NULL,*current1=head,*current2=head;
+    int cnt1=1,cnt2=1;
+    while(cnt1next;
+        cnt1++;
+    }
+    while(cnt2next;
+        cnt2++;
+    }
+    
+    
+    if(prev1)
+    prev1-&#062;next=current2;
+    else
+    head=current2;
+    
+    if(prev2)
+    prev2-&#062;next=current1;
+    else
+    head=current1;
+    
+    lnode *temp=current2-&#062;next;
+    current2-&#062;next=current1-&#062;next;
+    current1-&#062;next=temp;
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>void swapK(lnode *&amp;head,int k)<br />
+{    // it is handling all the cases even if swapping nodes are same or next to each other<br />
+    if(head==NULL||!head-&gt;next||k==0)<br />
+    return;<br />
+    int n=countNodes(head);<br />
+    if(k&gt;n)<br />
+    return;</p>
+<p>    lnode *prev1=NULL,*prev2=NULL,*current1=head,*current2=head;<br />
+    int cnt1=1,cnt2=1;<br />
+    while(cnt1next;<br />
+        cnt1++;<br />
+    }<br />
+    while(cnt2next;<br />
+        cnt2++;<br />
+    }</p>
+<p>    if(prev1)<br />
+    prev1-&gt;next=current2;<br />
+    else<br />
+    head=current2;</p>
+<p>    if(prev2)<br />
+    prev2-&gt;next=current1;<br />
+    else<br />
+    head=current1;</p>
+<p>    lnode *temp=current2-&gt;next;<br />
+    current2-&gt;next=current1-&gt;next;<br />
+    current1-&gt;next=temp;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: typing..</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-37073</link>
+		<dc:creator><![CDATA[typing..]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 14:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-37073</guid>
+		<description><![CDATA[it doesnot need to count the number of nodes, it can be implemented by tortoise and hare mathod.
+A perfect program is here. (BUT one flaw in this is swaping neighbour elements, which I will overcome in next few days).
+
+void swapp(node **start, int k)
+
+{
+
+    if(!(*start==NULL &#124;&#124; (*start)-&#062;next==NULL))
+
+    {
+
+        if(k&#062;0)
+
+        {
+
+            if(k==1)
+
+            {
+
+                node *prev=*start, *temp=prev-&#062;next, *temp2;
+
+                while(temp-&#062;next!=NULL)
+
+                {
+
+                    prev=temp;
+
+                    temp=temp-&#062;next;
+
+                }
+
+                temp=(*start)-&#062;next;
+
+                (*start)-&#062;next=NULL;
+
+                temp2=(*start);
+
+                *start=prev-&#062;next;
+
+                prev-&#062;next=temp2;
+
+                (*start)-&#062;next=temp;
+
+            }
+
+            else
+
+            {
+
+                node *swap2=*start, *p2=*start, *swap1;
+
+                int t=k;
+
+                while(t&#062;=1 &#038;&#038; p2!=NULL)
+
+                {
+
+                    if(t==2)
+
+                    {
+
+                        swap1=p2;
+
+                    }
+
+                    p2=p2-&#062;next;
+
+                    t--;
+
+                }
+
+                if(p2==NULL)
+
+                {
+
+                    printf(&quot;NOT POSSIBLE!!!!n&quot;);
+
+                    return;
+
+                }
+
+                while(p2-&#062;next!=NULL)
+
+                {
+
+                    swap2=swap2-&#062;next;
+
+                    p2=p2-&#062;next;
+
+                }
+
+                if(swap1==swap2)
+
+                {
+
+                    printf(&quot;Same element from both siden&quot;);
+
+                    return;
+
+                }
+
+                /*if(swap1-&#062;next==swap2)        //check the case when swaping numbers are neighbours
+
+                {
+
+                    node *t;
+
+                    t=swap1-&#062;next-&#062;next;
+
+                    swap1-&#062;next-&#062;next=swap2-&#062;next-&#062;next;
+
+                    swap2-&#062;next-&#062;next=swap1-&#062;next;
+
+                    swap1-&#062;next=t;
+
+                    return;
+
+                }
+
+                if(swap2-&#062;next==swap1)
+
+                {
+
+                    node *t2;
+
+                    t2=swap2-&#062;next-&#062;next;
+
+                    swap2-&#062;next-&#062;next=swap1-&#062;next-&#062;next;
+
+                    swap1-&#062;next-&#062;next=swap2-&#062;next;
+
+                    swap2-&#062;next=t2;
+
+                    return;
+
+                }*/
+
+                node *t1;
+
+                t1=swap2-&#062;next-&#062;next;
+
+                swap2-&#062;next-&#062;next=swap1-&#062;next-&#062;next;
+
+                swap1-&#062;next-&#062;next=t1;
+
+                t1=swap2-&#062;next;
+
+                swap2-&#062;next=swap1-&#062;next;
+
+                swap1-&#062;next=t1;
+
+            }
+
+        }
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>it doesnot need to count the number of nodes, it can be implemented by tortoise and hare mathod.<br />
+A perfect program is here. (BUT one flaw in this is swaping neighbour elements, which I will overcome in next few days).</p>
+<p>void swapp(node **start, int k)</p>
+<p>{</p>
+<p>    if(!(*start==NULL || (*start)-&gt;next==NULL))</p>
+<p>    {</p>
+<p>        if(k&gt;0)</p>
+<p>        {</p>
+<p>            if(k==1)</p>
+<p>            {</p>
+<p>                node *prev=*start, *temp=prev-&gt;next, *temp2;</p>
+<p>                while(temp-&gt;next!=NULL)</p>
+<p>                {</p>
+<p>                    prev=temp;</p>
+<p>                    temp=temp-&gt;next;</p>
+<p>                }</p>
+<p>                temp=(*start)-&gt;next;</p>
+<p>                (*start)-&gt;next=NULL;</p>
+<p>                temp2=(*start);</p>
+<p>                *start=prev-&gt;next;</p>
+<p>                prev-&gt;next=temp2;</p>
+<p>                (*start)-&gt;next=temp;</p>
+<p>            }</p>
+<p>            else</p>
+<p>            {</p>
+<p>                node *swap2=*start, *p2=*start, *swap1;</p>
+<p>                int t=k;</p>
+<p>                while(t&gt;=1 &amp;&amp; p2!=NULL)</p>
+<p>                {</p>
+<p>                    if(t==2)</p>
+<p>                    {</p>
+<p>                        swap1=p2;</p>
+<p>                    }</p>
+<p>                    p2=p2-&gt;next;</p>
+<p>                    t&#8211;;</p>
+<p>                }</p>
+<p>                if(p2==NULL)</p>
+<p>                {</p>
+<p>                    printf(&#8220;NOT POSSIBLE!!!!n&#8221;);</p>
+<p>                    return;</p>
+<p>                }</p>
+<p>                while(p2-&gt;next!=NULL)</p>
+<p>                {</p>
+<p>                    swap2=swap2-&gt;next;</p>
+<p>                    p2=p2-&gt;next;</p>
+<p>                }</p>
+<p>                if(swap1==swap2)</p>
+<p>                {</p>
+<p>                    printf(&#8220;Same element from both siden&#8221;);</p>
+<p>                    return;</p>
+<p>                }</p>
+<p>                /*if(swap1-&gt;next==swap2)        //check the case when swaping numbers are neighbours</p>
+<p>                {</p>
+<p>                    node *t;</p>
+<p>                    t=swap1-&gt;next-&gt;next;</p>
+<p>                    swap1-&gt;next-&gt;next=swap2-&gt;next-&gt;next;</p>
+<p>                    swap2-&gt;next-&gt;next=swap1-&gt;next;</p>
+<p>                    swap1-&gt;next=t;</p>
+<p>                    return;</p>
+<p>                }</p>
+<p>                if(swap2-&gt;next==swap1)</p>
+<p>                {</p>
+<p>                    node *t2;</p>
+<p>                    t2=swap2-&gt;next-&gt;next;</p>
+<p>                    swap2-&gt;next-&gt;next=swap1-&gt;next-&gt;next;</p>
+<p>                    swap1-&gt;next-&gt;next=swap2-&gt;next;</p>
+<p>                    swap2-&gt;next=t2;</p>
+<p>                    return;</p>
+<p>                }*/</p>
+<p>                node *t1;</p>
+<p>                t1=swap2-&gt;next-&gt;next;</p>
+<p>                swap2-&gt;next-&gt;next=swap1-&gt;next-&gt;next;</p>
+<p>                swap1-&gt;next-&gt;next=t1;</p>
+<p>                t1=swap2-&gt;next;</p>
+<p>                swap2-&gt;next=swap1-&gt;next;</p>
+<p>                swap1-&gt;next=t1;</p>
+<p>            }</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ravi Kiran</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-34434</link>
+		<dc:creator><![CDATA[Ravi Kiran]]></dc:creator>
+		<pubDate>Mon, 07 Apr 2014 16:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-34434</guid>
+		<description><![CDATA[using recursion.. but doesn&#039;t work when k=length of the list need to change code.
+
+
+Please comment on the code.
+// @author Ravi Kiran
+int main()
+{
+swapKthNodeFrontAndBack(root1,1,11);
+
+
+}
+
+
+//global variable
+node * temp = NULL;
+
+
+int swapKthNodeFrontAndBack(node* root,int a,int k)
+{
+	  if(root-&#062;next == NULL)
+	  {          
+		 return a;
+	  }
+	   if(a == k)
+	   {
+		  temp = root;
+		  std::cout&#060;&#060;&#034;Kth element is:&#034;&#060;a&#060;next,a+1,k);
+   
+	   if(length-(a-1) == k)
+	   {
+		 std::cout&#060;&#060;&#034;Kth element from last is:&#034;&#060;a&#060;a;
+		 root-&#062;a= temp-&#062;a;
+		 temp-&#062;a=temp1;
+		 
+	   }  
+	return length;
+}]]></description>
+		<content:encoded><![CDATA[<p>using recursion.. but doesn&#8217;t work when k=length of the list need to change code.</p>
+<p>Please comment on the code.<br />
+// @author Ravi Kiran<br />
+int main()<br />
+{<br />
+swapKthNodeFrontAndBack(root1,1,11);</p>
+<p>}</p>
+<p>//global variable<br />
+node * temp = NULL;</p>
+<p>int swapKthNodeFrontAndBack(node* root,int a,int k)<br />
+{<br />
+	  if(root-&gt;next == NULL)<br />
+	  {<br />
+		 return a;<br />
+	  }<br />
+	   if(a == k)<br />
+	   {<br />
+		  temp = root;<br />
+		  std::cout&lt;&lt;&quot;Kth element is:&quot;&lt;a&lt;next,a+1,k);</p>
+<p>	   if(length-(a-1) == k)<br />
+	   {<br />
+		 std::cout&lt;&lt;&quot;Kth element from last is:&quot;&lt;a&lt;a;<br />
+		 root-&gt;a= temp-&gt;a;<br />
+		 temp-&gt;a=temp1;</p>
+<p>	   }<br />
+	return length;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: shruti</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-33267</link>
+		<dc:creator><![CDATA[shruti]]></dc:creator>
+		<pubDate>Fri, 07 Mar 2014 08:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-33267</guid>
+		<description><![CDATA[this code is not working for k=1 and k=n..can anybody correct and explain?]]></description>
+		<content:encoded><![CDATA[<p>this code is not working for k=1 and k=n..can anybody correct and explain?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vignesh Murugesan</title>
+		<link>http://www.geeksforgeeks.org/swap-kth-node-from-beginning-with-kth-node-from-end-in-a-linked-list/#comment-32584</link>
+		<dc:creator><![CDATA[Vignesh Murugesan]]></dc:creator>
+		<pubDate>Sun, 16 Feb 2014 02:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117603#comment-32584</guid>
+		<description><![CDATA[void Swap(int x, int y)	//0 -&#062; len-1
+{
+if (x &#060; 0 &#124;&#124; y y) swapVals(&#038;x, &#038;y);
+if (Head == NULL &#124;&#124; Head-&#062;Next == NULL) return;
+Node *First= Head, *Second = Head;
+while (--x &#062; -1 &#038;&#038; First != NULL) First = First-&#062;Next;
+while (--y &#062; -1 &#038;&#038; Second != NULL)	 Second= Second-&#062;Next;
+if (!(First&#038;&#038;Second)) return;
+Node* Ptr = Head;
+bool SwappedHead = false;
+if (Ptr == First)
+  SwappedHead = true;
+if (First-&#062;Next == Second)
+{	
+  First-&#062;Next = Second-&#062;Next;
+  Second-&#062;Next = First;
+  if (SwappedHead) Head = Second;
+  else
+  {
+    while (Ptr-&#062;Next != First)
+      Ptr = Ptr-&#062;Next;
+    Ptr-&#062;Next = Second;
+  }
+  return;
+}
+while (!SwappedHead &#038;&#038; Ptr-&#062;Next != First)
+  Ptr = Ptr-&#062;Next;
+Node* Ptr1 = Head;
+
+
+while (Ptr1-&#062;Next != Second)
+   Ptr1 = Ptr1-&#062;Next;
+Node *Rest = Second-&#062;Next;
+
+if (SwappedHead) Head = Second;
+Ptr-&#062;Next = Second;
+Second-&#062;Next = First-&#062;Next;
+if (Ptr1) Ptr1-&#062;Next = First;
+First-&#062;Next = Rest;	
+}]]></description>
+		<content:encoded><![CDATA[<p>void Swap(int x, int y)	//0 -&gt; len-1<br />
+{<br />
+if (x &lt; 0 || y y) swapVals(&amp;x, &amp;y);<br />
+if (Head == NULL || Head-&gt;Next == NULL) return;<br />
+Node *First= Head, *Second = Head;<br />
+while (&#8211;x &gt; -1 &amp;&amp; First != NULL) First = First-&gt;Next;<br />
+while (&#8211;y &gt; -1 &amp;&amp; Second != NULL)	 Second= Second-&gt;Next;<br />
+if (!(First&amp;&amp;Second)) return;<br />
+Node* Ptr = Head;<br />
+bool SwappedHead = false;<br />
+if (Ptr == First)<br />
+  SwappedHead = true;<br />
+if (First-&gt;Next == Second)<br />
+{<br />
+  First-&gt;Next = Second-&gt;Next;<br />
+  Second-&gt;Next = First;<br />
+  if (SwappedHead) Head = Second;<br />
+  else<br />
+  {<br />
+    while (Ptr-&gt;Next != First)<br />
+      Ptr = Ptr-&gt;Next;<br />
+    Ptr-&gt;Next = Second;<br />
+  }<br />
+  return;<br />
+}<br />
+while (!SwappedHead &amp;&amp; Ptr-&gt;Next != First)<br />
+  Ptr = Ptr-&gt;Next;<br />
+Node* Ptr1 = Head;</p>
+<p>while (Ptr1-&gt;Next != Second)<br />
+   Ptr1 = Ptr1-&gt;Next;<br />
+Node *Rest = Second-&gt;Next;</p>
+<p>if (SwappedHead) Head = Second;<br />
+Ptr-&gt;Next = Second;<br />
+Second-&gt;Next = First-&gt;Next;<br />
+if (Ptr1) Ptr1-&gt;Next = First;<br />
+First-&gt;Next = Rest;<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.054 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:15:25 -->
+
+<!-- Compression = gzip -->

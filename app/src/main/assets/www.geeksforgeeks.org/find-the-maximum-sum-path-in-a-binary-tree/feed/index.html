@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Find the maximum sum leaf to root path in a Binary Tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-38152</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 20:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-38152</guid>
+		<description><![CDATA[much easier solution.. please correct if i am wrong ?
+
+https://ideone.com/SqaxDk]]></description>
+		<content:encoded><![CDATA[<p>much easier solution.. please correct if i am wrong ?</p>
+<p><a href="https://ideone.com/SqaxDk" rel="nofollow">https://ideone.com/SqaxDk</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: isidorouk</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-31590</link>
+		<dc:creator><![CDATA[isidorouk]]></dc:creator>
+		<pubDate>Fri, 17 Jan 2014 20:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-31590</guid>
+		<description><![CDATA[Can some one help me to understand what is wrong with this method, which should get the max path of a pyramid?
+
+private long GetMax(int row, int column, Pyramid pyramid)
+
+{
+    
+    if (row == 0) return pyramid[row, column];
+    
+    long value = pyramid[row, column];
+    
+    if (row != 0)
+    
+    {
+        
+        long left = pyramid[row - 1, column];
+        
+        long right = pyramid[row - 1, column + 1];
+        
+        long highest = Math.Max(left, right);
+        
+        int nextColumn = highest == left ? column : column + 1;
+        
+        value += GetTotalAbove(row – 1, nextColumn, pyramid);
+    
+    }
+    
+    return value;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Can some one help me to understand what is wrong with this method, which should get the max path of a pyramid?</p>
+<p>private long GetMax(int row, int column, Pyramid pyramid)</p>
+<p>{</p>
+<p>    if (row == 0) return pyramid[row, column];</p>
+<p>    long value = pyramid[row, column];</p>
+<p>    if (row != 0)</p>
+<p>    {</p>
+<p>        long left = pyramid[row &#8211; 1, column];</p>
+<p>        long right = pyramid[row &#8211; 1, column + 1];</p>
+<p>        long highest = Math.Max(left, right);</p>
+<p>        int nextColumn = highest == left ? column : column + 1;</p>
+<p>        value += GetTotalAbove(row – 1, nextColumn, pyramid);</p>
+<p>    }</p>
+<p>    return value;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sreenivas</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-31418</link>
+		<dc:creator><![CDATA[Sreenivas]]></dc:creator>
+		<pubDate>Fri, 10 Jan 2014 09:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-31418</guid>
+		<description><![CDATA[This is simple and good :)]]></description>
+		<content:encoded><![CDATA[<p>This is simple and good 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-27325</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 04 Sep 2013 03:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-27325</guid>
+		<description><![CDATA[And in Haskell:
+&lt;code&gt;
+data Tree a =
+       Empty
+     &#124; Node (Tree a) a (Tree a)
+     deriving (Eq,Show)
+
+maxRootLeaf :: Tree Int -&#062; Int
+       maxRootLeaf Empty         = 0
+       maxRootLeaf (Node l x r)  = x + (if maxRootLeaf (r) &#062; maxRootLeaf (l) 
+                                                      then maxRootLeaf (r) 
+                                                      else maxRootLeaf (l))
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>And in Haskell:<br />
+<code><br />
+data Tree a =<br />
+       Empty<br />
+     | Node (Tree a) a (Tree a)<br />
+     deriving (Eq,Show)</p>
+<p>maxRootLeaf :: Tree Int -&gt; Int<br />
+       maxRootLeaf Empty         = 0<br />
+       maxRootLeaf (Node l x r)  = x + (if maxRootLeaf (r) &gt; maxRootLeaf (l)<br />
+                                                      then maxRootLeaf (r)<br />
+                                                      else maxRootLeaf (l))</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akhil</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-19697</link>
+		<dc:creator><![CDATA[Akhil]]></dc:creator>
+		<pubDate>Thu, 13 Jun 2013 13:43:21 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-19697</guid>
+		<description><![CDATA[To print the maximum sum :
+An O(n) postorder simple code
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+struct tree
+{
+    int info;
+    struct tree *l;
+    struct tree *r;
+};
+typedef struct tree *Tree;
+
+Tree newNode(int num)
+{
+    Tree temp = (Tree)malloc(sizeof(struct tree));
+    temp-&#062;info = num;
+    temp-&#062;l = NULL;
+    temp-&#062;r = NULL;
+    return temp;
+}
+/* the idea is to calculate the max sum from leaf to root */
+int maxRootLeaf(Tree root)
+{
+    if(!root)
+        return 0;
+    if(!root-&#062;l &#038;&#038; !root-&#062;r)
+        return root-&#062;info;
+    /* find max sum for the subtrees*/
+    int ls = maxRootLeaf(root-&#062;l);
+    int rs = maxRootLeaf(root-&#062;r);
+    /* return maximum of subtrees+ data of the root */
+    return(root-&#062;info + (ls&#062;rs?ls:rs));
+}
+int main()
+{
+    struct tree *root = NULL;
+
+    /* Constructing tree given in the above figure */
+    root = newNode(10);
+    root-&#062;l = newNode(-2);
+    root-&#062;r = newNode(7);
+    root-&#062;l-&#062;l = newNode(8);
+    root-&#062;l-&#062;r = newNode(-4);
+    int sum = maxRootLeaf(root);
+    printf (&#034;\nSum of the nodes is %d &#034;, sum);
+    return 0;
+}
+
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>To print the maximum sum :<br />
+An O(n) postorder simple code</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+struct tree
+{
+    int info;
+    struct tree *l;
+    struct tree *r;
+};
+typedef struct tree *Tree;
+
+Tree newNode(int num)
+{
+    Tree temp = (Tree)malloc(sizeof(struct tree));
+    temp-&gt;info = num;
+    temp-&gt;l = NULL;
+    temp-&gt;r = NULL;
+    return temp;
+}
+/* the idea is to calculate the max sum from leaf to root */
+int maxRootLeaf(Tree root)
+{
+    if(!root)
+        return 0;
+    if(!root-&gt;l &amp;&amp; !root-&gt;r)
+        return root-&gt;info;
+    /* find max sum for the subtrees*/
+    int ls = maxRootLeaf(root-&gt;l);
+    int rs = maxRootLeaf(root-&gt;r);
+    /* return maximum of subtrees+ data of the root */
+    return(root-&gt;info + (ls&gt;rs?ls:rs));
+}
+int main()
+{
+    struct tree *root = NULL;
+
+    /* Constructing tree given in the above figure */
+    root = newNode(10);
+    root-&gt;l = newNode(-2);
+    root-&gt;r = newNode(7);
+    root-&gt;l-&gt;l = newNode(8);
+    root-&gt;l-&gt;r = newNode(-4);
+    int sum = maxRootLeaf(root);
+    printf (&quot;\nSum of the nodes is %d &quot;, sum);
+    return 0;
+}
+
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-18939</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 03:12:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-18939</guid>
+		<description><![CDATA[Thanks for pointing this out.  We have corrected it.  Keep it up!]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out.  We have corrected it.  Keep it up!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: NNavneet</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-18938</link>
+		<dc:creator><![CDATA[NNavneet]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 02:42:10 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-18938</guid>
+		<description><![CDATA[&quot;The sums of these three paths are 16, 8 and 17 respectively.&quot;
+It should be 
+&quot; The sums of these three paths are 16, 4 and 17 respectively.&quot; In the first paragraph.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>&#8220;The sums of these three paths are 16, 8 and 17 respectively.&#8221;<br />
+It should be<br />
+&#8221; The sums of these three paths are 16, 4 and 17 respectively.&#8221; In the first paragraph.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ysunil040</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-18768</link>
+		<dc:creator><![CDATA[ysunil040]]></dc:creator>
+		<pubDate>Tue, 28 May 2013 04:36:14 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-18768</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+int maxSum(Tree root,int toPrint)
+{
+	if (root == NULL)
+		return INT_MIN;
+	if (root-&#062;left == NULL &#038;&#038; root-&#062;right == NULL)
+	{
+		if (toPrint)
+			printf(&#034;%d\n&#034;,root-&#062;data);
+		return root-&#062;data;
+	}
+	int lsum = maxSum(root-&#062;left,0);
+	int rsum = maxSum(root-&#062;right,0);
+
+	if (toPrint)
+	{
+		printf(&#034;%d &#034;,root-&#062;data);
+		int sum = root-&#062;data;
+		if (lsum &#062;= rsum)
+			sum += maxSum(root-&#062;left,toPrint);
+		else
+			sum += maxSum(root-&#062;right,toPrint);
+		return sum;
+	}
+	else
+	{
+		return root-&#062;data + max(lsum,rsum);
+	}
+}
+
+Call the function as maxSum(root,1)
+It&#039;s a two pass solution.
+Time Complexity O(H*N) - H - Height of the Tree and N - Number of Nodes
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+int maxSum(Tree root,int toPrint)
+{
+	if (root == NULL)
+		return INT_MIN;
+	if (root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL)
+	{
+		if (toPrint)
+			printf(&quot;%d\n&quot;,root-&gt;data);
+		return root-&gt;data;
+	}
+	int lsum = maxSum(root-&gt;left,0);
+	int rsum = maxSum(root-&gt;right,0);
+
+	if (toPrint)
+	{
+		printf(&quot;%d &quot;,root-&gt;data);
+		int sum = root-&gt;data;
+		if (lsum &gt;= rsum)
+			sum += maxSum(root-&gt;left,toPrint);
+		else
+			sum += maxSum(root-&gt;right,toPrint);
+		return sum;
+	}
+	else
+	{
+		return root-&gt;data + max(lsum,rsum);
+	}
+}
+
+Call the function as maxSum(root,1)
+It's a two pass solution.
+Time Complexity O(H*N) - H - Height of the Tree and N - Number of Nodes
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ysunil040</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-18767</link>
+		<dc:creator><![CDATA[ysunil040]]></dc:creator>
+		<pubDate>Tue, 28 May 2013 04:32:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-18767</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+int maxSum(Tree root,int toPrint)
+{
+        if (root == NULL)
+		return INT_MIN;
+	if (root-&#062;left == NULL &#038;&#038; root-&#062;right == NULL)
+	{
+		if (toPrint)
+			printf(&#034;%d\n&#034;,root-&#062;data);
+		return root-&#062;data;
+	}
+	int lsum = maxSum(root-&#062;left,0);
+	int rsum = maxSum(root-&#062;right,0);
+
+	if (toPrint)
+	{
+		printf(&#034;%d &#034;,root-&#062;data);
+		int sum = root-&#062;data;
+		if (lsum &#062;= rsum)
+			sum += maxSum(root-&#062;left,toPrint);
+		else
+			sum += maxSum(root-&#062;right,toPrint);
+		return sum;
+	}
+	else
+	{
+		return root-&#062;data + max(lsum,rsum);
+	}
+}
+
+Call the above function as 
+  maxSum(root,1)
+
+This will print path from root to leaf and time complexity is O(H*N) H - Height of Tree and N - Number of Nodes in tree
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+int maxSum(Tree root,int toPrint)
+{
+        if (root == NULL)
+		return INT_MIN;
+	if (root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL)
+	{
+		if (toPrint)
+			printf(&quot;%d\n&quot;,root-&gt;data);
+		return root-&gt;data;
+	}
+	int lsum = maxSum(root-&gt;left,0);
+	int rsum = maxSum(root-&gt;right,0);
+
+	if (toPrint)
+	{
+		printf(&quot;%d &quot;,root-&gt;data);
+		int sum = root-&gt;data;
+		if (lsum &gt;= rsum)
+			sum += maxSum(root-&gt;left,toPrint);
+		else
+			sum += maxSum(root-&gt;right,toPrint);
+		return sum;
+	}
+	else
+	{
+		return root-&gt;data + max(lsum,rsum);
+	}
+}
+
+Call the above function as 
+  maxSum(root,1)
+
+This will print path from root to leaf and time complexity is O(H*N) H - Height of Tree and N - Number of Nodes in tree
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-18388</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Mon, 20 May 2013 07:56:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-18388</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ishanu</title>
+		<link>http://www.geeksforgeeks.org/find-the-maximum-sum-path-in-a-binary-tree/#comment-17317</link>
+		<dc:creator><![CDATA[ishanu]]></dc:creator>
+		<pubDate>Sat, 13 Apr 2013 22:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18722#comment-17317</guid>
+		<description><![CDATA[a minor change to the above code
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;iostream&#062;
+//to find the maximum distance between root and a leaf
+using namespace std;
+
+struct bst
+{
+	int data;
+	bst *lchild;
+	bst *rchild;
+};
+bst* root=NULL;
+
+bst* newNode(int num)
+{
+	bst*node= new bst;
+	node-&#062;data=num;
+	node-&#062;lchild=NULL;
+	node-&#062;rchild=NULL;
+	return node;
+}
+
+void preorder(bst *node,bst *total,int a[2],int sum)
+{
+    if(node==NULL)
+		return;
+    
+    sum=sum+node-&#062;data;
+    if(sum&#062;total-&#062;data&#038;&#038;node-&#062;lchild==NULL&#038;&#038;node-&#062;rchild==NULL)
+    {
+		total-&#062;data=sum;
+		a[1]=node-&#062;data;
+	}
+    preorder(node-&#062;lchild,total,a,sum);
+ 
+   preorder(node-&#062;rchild,total,a,sum);
+ 
+   
+}
+
+
+
+int main()
+{
+	bst* total=new bst;
+	total-&#062;data=0;
+	
+	  root = newNode(10);
+    root-&#062;lchild = newNode(6);
+    root-&#062;rchild = newNode(7);
+    root-&#062;lchild-&#062;lchild = newNode(8);
+    root-&#062;lchild-&#062;rchild = newNode(-4);
+   int a[2];
+    a[0]=root-&#062;data;
+	
+	preorder(root,total,a,0);
+cout&#060;&#060;&#034;\nmaximum path is:&#034;&#060;&#060;total-&#062;data;
+cout&#060;&#060;&#034;\nthe maximum path is between &#034;&#060;&#060;a[0]&#060;&#060;&#034; &#038; &#034;&#060;&#060;a[1];
+
+
+
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>a minor change to the above code</p>
+<pre> <code language="C">
+#include &lt;iostream&gt;
+//to find the maximum distance between root and a leaf
+using namespace std;
+
+struct bst
+{
+	int data;
+	bst *lchild;
+	bst *rchild;
+};
+bst* root=NULL;
+
+bst* newNode(int num)
+{
+	bst*node= new bst;
+	node-&gt;data=num;
+	node-&gt;lchild=NULL;
+	node-&gt;rchild=NULL;
+	return node;
+}
+
+void preorder(bst *node,bst *total,int a[2],int sum)
+{
+    if(node==NULL)
+		return;
+    
+    sum=sum+node-&gt;data;
+    if(sum&gt;total-&gt;data&amp;&amp;node-&gt;lchild==NULL&amp;&amp;node-&gt;rchild==NULL)
+    {
+		total-&gt;data=sum;
+		a[1]=node-&gt;data;
+	}
+    preorder(node-&gt;lchild,total,a,sum);
+ 
+   preorder(node-&gt;rchild,total,a,sum);
+ 
+   
+}
+
+
+
+int main()
+{
+	bst* total=new bst;
+	total-&gt;data=0;
+	
+	  root = newNode(10);
+    root-&gt;lchild = newNode(6);
+    root-&gt;rchild = newNode(7);
+    root-&gt;lchild-&gt;lchild = newNode(8);
+    root-&gt;lchild-&gt;rchild = newNode(-4);
+   int a[2];
+    a[0]=root-&gt;data;
+	
+	preorder(root,total,a,0);
+cout&lt;&lt;&quot;\nmaximum path is:&quot;&lt;&lt;total-&gt;data;
+cout&lt;&lt;&quot;\nthe maximum path is between &quot;&lt;&lt;a[0]&lt;&lt;&quot; &amp; &quot;&lt;&lt;a[1];
+
+
+
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:38:33 -->
+
+<!-- Compression = gzip -->

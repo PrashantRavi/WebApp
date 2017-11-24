@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Merge Two Balanced Binary Search Trees</title>
+	<atom:link href="http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ultimate_coder</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-39433</link>
+		<dc:creator><![CDATA[ultimate_coder]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 08:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-39433</guid>
+		<description><![CDATA[Can you please provide your algo/logic. Raw code is of little help.]]></description>
+		<content:encoded><![CDATA[<p>Can you please provide your algo/logic. Raw code is of little help.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-38831</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 11:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-38831</guid>
+		<description><![CDATA[How about this algorithm which does not use any auxiliary space. The algorithm is same as merging 2 sorted arrays.
+
+// The function to print data of two BSTs in sorted order
+
+void  merge(struct node *root1, struct node *root2, int *n1, int *n2)
+
+{
+
+    
+
+    	// left subtrees
+
+    	if(root1-&#062;data data)
+
+    		if(root2-&#062;left)
+
+    		{
+
+    			--(*n2);
+
+    			merge(root1,root2-&#062;left,n1,n2);
+
+    		}
+
+    			
+
+    	if(root1-&#062;data &#062; root2-&#062;data)
+
+    		if(root1-&#062;left)
+
+    		{
+
+    			--(*n1);
+
+    			merge(root1-&#062;left,root2,n1,n2);
+
+    		}
+
+    	
+
+    	// processing
+
+    	if(root1-&#062;data data)
+
+    	{
+
+    		printf(&quot;%d--&#062;&quot;, root1-&#062;data);
+
+    		if(root1-&#062;right != NULL)
+
+    		{
+
+    			--(*n1);
+
+  		  		merge(root1-&#062;right,root2,n1,n2);	
+
+  		  	}
+
+    	}	
+
+    	else if(root1-&#062;data &#062; root2-&#062;data)
+
+    	{
+
+    		printf(&quot;%d--&#062;&quot;, root2-&#062;data);
+
+    		if(root2-&#062;right!=NULL)
+
+    		{
+
+    			--(*n2);
+
+    			merge(root1,root2-&#062;right,n1,n2);	
+
+    		}
+
+    	}
+
+    	
+
+    	// If first BST is empty, then output is inorder
+
+    // traversal of second BST
+
+    if ((*n1)==1 &#038;&#038; !isPrinted)
+
+    {
+
+    	isPrinted = 1;
+
+        inorder(root2);
+
+        return;
+
+    }
+
+    // If second BST is empty, then output is inorder
+
+    // traversal of first BST
+
+    else if ((*n2) == 1 &#038;&#038; !isPrinted)
+
+    {
+
+        inorder(root1);
+
+        return ;
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>How about this algorithm which does not use any auxiliary space. The algorithm is same as merging 2 sorted arrays.</p>
+<p>// The function to print data of two BSTs in sorted order</p>
+<p>void  merge(struct node *root1, struct node *root2, int *n1, int *n2)</p>
+<p>{</p>
+<p>    	// left subtrees</p>
+<p>    	if(root1-&gt;data data)</p>
+<p>    		if(root2-&gt;left)</p>
+<p>    		{</p>
+<p>    			&#8211;(*n2);</p>
+<p>    			merge(root1,root2-&gt;left,n1,n2);</p>
+<p>    		}</p>
+<p>    	if(root1-&gt;data &gt; root2-&gt;data)</p>
+<p>    		if(root1-&gt;left)</p>
+<p>    		{</p>
+<p>    			&#8211;(*n1);</p>
+<p>    			merge(root1-&gt;left,root2,n1,n2);</p>
+<p>    		}</p>
+<p>    	// processing</p>
+<p>    	if(root1-&gt;data data)</p>
+<p>    	{</p>
+<p>    		printf(&#8220;%d&#8211;&gt;&#8221;, root1-&gt;data);</p>
+<p>    		if(root1-&gt;right != NULL)</p>
+<p>    		{</p>
+<p>    			&#8211;(*n1);</p>
+<p>  		  		merge(root1-&gt;right,root2,n1,n2);	</p>
+<p>  		  	}</p>
+<p>    	}	</p>
+<p>    	else if(root1-&gt;data &gt; root2-&gt;data)</p>
+<p>    	{</p>
+<p>    		printf(&#8220;%d&#8211;&gt;&#8221;, root2-&gt;data);</p>
+<p>    		if(root2-&gt;right!=NULL)</p>
+<p>    		{</p>
+<p>    			&#8211;(*n2);</p>
+<p>    			merge(root1,root2-&gt;right,n1,n2);	</p>
+<p>    		}</p>
+<p>    	}</p>
+<p>    	// If first BST is empty, then output is inorder</p>
+<p>    // traversal of second BST</p>
+<p>    if ((*n1)==1 &amp;&amp; !isPrinted)</p>
+<p>    {</p>
+<p>    	isPrinted = 1;</p>
+<p>        inorder(root2);</p>
+<p>        return;</p>
+<p>    }</p>
+<p>    // If second BST is empty, then output is inorder</p>
+<p>    // traversal of first BST</p>
+<p>    else if ((*n2) == 1 &amp;&amp; !isPrinted)</p>
+<p>    {</p>
+<p>        inorder(root1);</p>
+<p>        return ;</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akshay Johri</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-31442</link>
+		<dc:creator><![CDATA[Akshay Johri]]></dc:creator>
+		<pubDate>Sat, 11 Jan 2014 07:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-31442</guid>
+		<description><![CDATA[How about.. 
+1. convert both the trees to threaded binary O(n). So now inorder traversal can be done. 
+2. Merge the two DLLs O(2n)
+3 .Construct the tree O(2n)]]></description>
+		<content:encoded><![CDATA[<p>How about..<br />
+1. convert both the trees to threaded binary O(n). So now inorder traversal can be done.<br />
+2. Merge the two DLLs O(2n)<br />
+3 .Construct the tree O(2n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bannhi Barua</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-25734</link>
+		<dc:creator><![CDATA[Bannhi Barua]]></dc:creator>
+		<pubDate>Thu, 06 Jun 2013 09:20:12 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-25734</guid>
+		<description><![CDATA[another method proposal.
+void insert (struct node **a, int data).
+{
+
+
+
+printf(&#034;%d called forn&#034;, data);.
+
+
+
+struct node *temp = *a,*prev;.
+
+
+
+
+while(temp!=NULL).
+
+
+
+{.
+
+
+
+prev = temp;.
+
+
+
+if(temp-&#062;data &#062; data).
+
+
+
+temp = temp-&#062;left;.
+
+
+
+else if (temp-&#062;data &#060; data).
+
+
+
+temp = temp-&#062;right;.
+
+
+
+else.
+
+
+
+return;.
+
+
+
+}.
+
+
+
+temp = newNode(data);.
+
+
+
+printf(&#034;prev -- %dn&#034;, prev-&#062;data);.
+
+
+
+if (prev-&#062;data &#062; temp-&#062;data).
+
+
+
+prev-&#062;left = temp;.
+
+
+
+else.
+
+
+
+prev-&#062;right = temp;.
+
+
+
+return;.
+}
+
+void merge (struct node **a, struct node *b).
+{
+
+
+
+if (a == NULL).
+
+
+
+return;.
+
+
+
+else if (b == NULL).
+
+
+
+return;.
+
+
+
+else.
+
+
+
+{.
+
+
+
+merge(a, b-&#062;left);.
+
+
+
+insert(a, b-&#062;data);.
+
+
+
+merge(a, b-&#062;right);.
+
+
+
+}.
+}]]></description>
+		<content:encoded><![CDATA[<p>another method proposal.<br />
+void insert (struct node **a, int data).<br />
+{</p>
+<p>printf(&quot;%d called forn&quot;, data);.</p>
+<p>struct node *temp = *a,*prev;.</p>
+<p>while(temp!=NULL).</p>
+<p>{.</p>
+<p>prev = temp;.</p>
+<p>if(temp-&gt;data &gt; data).</p>
+<p>temp = temp-&gt;left;.</p>
+<p>else if (temp-&gt;data &lt; data).</p>
+<p>temp = temp-&gt;right;.</p>
+<p>else.</p>
+<p>return;.</p>
+<p>}.</p>
+<p>temp = newNode(data);.</p>
+<p>printf(&quot;prev &#8212; %dn&quot;, prev-&gt;data);.</p>
+<p>if (prev-&gt;data &gt; temp-&gt;data).</p>
+<p>prev-&gt;left = temp;.</p>
+<p>else.</p>
+<p>prev-&gt;right = temp;.</p>
+<p>return;.<br />
+}</p>
+<p>void merge (struct node **a, struct node *b).<br />
+{</p>
+<p>if (a == NULL).</p>
+<p>return;.</p>
+<p>else if (b == NULL).</p>
+<p>return;.</p>
+<p>else.</p>
+<p>{.</p>
+<p>merge(a, b-&gt;left);.</p>
+<p>insert(a, b-&gt;data);.</p>
+<p>merge(a, b-&gt;right);.</p>
+<p>}.<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: leet</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-10685</link>
+		<dc:creator><![CDATA[leet]]></dc:creator>
+		<pubDate>Fri, 07 Sep 2012 06:56:02 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-10685</guid>
+		<description><![CDATA[Can you please explin how it is O(m+n).I am not getting why the number of comparisons is m+n.
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Can you please explin how it is O(m+n).I am not getting why the number of comparisons is m+n.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: leet</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-8429</link>
+		<dc:creator><![CDATA[leet]]></dc:creator>
+		<pubDate>Mon, 14 May 2012 14:26:22 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-8429</guid>
+		<description><![CDATA[Can you please post -how to find the lca of two nodes in n-ary tree?]]></description>
+		<content:encoded><![CDATA[<p>Can you please post -how to find the lca of two nodes in n-ary tree?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-7973</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Sat, 07 Apr 2012 07:18:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-7973</guid>
+		<description><![CDATA[Sometimes it is easier to get the time complexity directly by applying intuition.  For example, in your program it is clear that the total number of comparisons will be equal to number of nodes in first tree plus number of nodes in second tree. So, we can say that the complexity is O(m+n).]]></description>
+		<content:encoded><![CDATA[<p>Sometimes it is easier to get the time complexity directly by applying intuition.  For example, in your program it is clear that the total number of comparisons will be equal to number of nodes in first tree plus number of nodes in second tree. So, we can say that the complexity is O(m+n).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prashant</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-7949</link>
+		<dc:creator><![CDATA[Prashant]]></dc:creator>
+		<pubDate>Thu, 05 Apr 2012 17:05:09 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-7949</guid>
+		<description><![CDATA[I have an algorithm for merging two BSTs, it compares values  at the root of the two trees and performs insertion accordingly. Here it is: 
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+void merge (node* root1, node* root2)
+{
+        if(root1 == null)
+        {
+                root1 = root2;
+                return;
+        }
+        if(root2 == null)
+                return;
+        if(root1-&#062;data &#060; roo2-&#062;data)
+        {
+                node* ptr = root2-&#062;left;
+                root2-&#062;left = NULL;
+                merge(root1-&#062;right,root2);
+                merge(root1,ptr);
+        }
+        else
+        {
+                node* ptr = root2-&#062;right;
+                root2-&#062;right = NULL;
+                merge(root1-&#062;left,root2);
+                merge(root1,ptr);
+        }
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+But I have a problem: 
+How do we do complexity calculation for such an algo, as it is a function of two variables (n-&#062;no of nodes in Tree1 and m-&#062;no of nodes in Tree2)
+
+I worked out a recursive relation for this algo, but how do I get an upper bound...?
+T(n,m) = T(n,m/2) + T(n/2,m/2)]]></description>
+		<content:encoded><![CDATA[<p>I have an algorithm for merging two BSTs, it compares values  at the root of the two trees and performs insertion accordingly. Here it is: </p>
+<pre> <code language="C">
+void merge (node* root1, node* root2)
+{
+        if(root1 == null)
+        {
+                root1 = root2;
+                return;
+        }
+        if(root2 == null)
+                return;
+        if(root1-&gt;data &lt; roo2-&gt;data)
+        {
+                node* ptr = root2-&gt;left;
+                root2-&gt;left = NULL;
+                merge(root1-&gt;right,root2);
+                merge(root1,ptr);
+        }
+        else
+        {
+                node* ptr = root2-&gt;right;
+                root2-&gt;right = NULL;
+                merge(root1-&gt;left,root2);
+                merge(root1,ptr);
+        }
+}
+</code> </pre>
+<p>But I have a problem:<br />
+How do we do complexity calculation for such an algo, as it is a function of two variables (n-&gt;no of nodes in Tree1 and m-&gt;no of nodes in Tree2)</p>
+<p>I worked out a recursive relation for this algo, but how do I get an upper bound&#8230;?<br />
+T(n,m) = T(n,m/2) + T(n/2,m/2)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: camster</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-7921</link>
+		<dc:creator><![CDATA[camster]]></dc:creator>
+		<pubDate>Sun, 01 Apr 2012 11:49:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-7921</guid>
+		<description><![CDATA[Hi everybody, Here is my recursive algorithm for merging two 2 n-ary trees (where 2 &lt;= n &lt;= 256&gt;. Please let me if if you find any mistakes or can optimize this better. Thank you camster.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+struct RTreenode {   
+	int value;   
+	struct RTreenode *children[256];    
+};   
+
+
+ // Merge tree root2(aka currtwo) into tree currone
+ // recursively destroy tree root2(akac  currtwo)
+// in O(n + m) time complexity 
+
+void Helper(RTreenode*&#038; root2, 
+            RTreenode*&#038; currone,            
+            RTreenode*&#038; currtwo){
+	if (currone == NULL &#124;&#124; currtwo == NULL){
+		return;	
+	}
+	for (int i = 0; i &#060; 256; i++){
+		Helper(root2, currone-&#062;children[i],
+                       currtwo-&#062;children[i]);
+		if (currone &#038;&#038; currtwo &#038;&#038; 
+                    currone-&#062;children[i] == NULL  &#038;&#038; 
+                    currtwo-&#062;children[i] != NULL){
+			currone-&#062;children[i] = 
+                           currtwo-&#062;children[i];
+		}
+		else if (currone &#038;&#038; currtwo &#038;&#038;
+                         currone-&#062;children[i] != NULL     
+                              &#038;&#038;                  
+                         currtwo-&#062;children[i] != NULL){
+			   delete currtwo-&#062;children[i];
+			   currtwo-&#062;children[i] = NULL;
+		}
+	}
+
+	if (currtwo == root2){
+		delete currtwo;
+		currtwo = NULL;
+		return;
+	}
+}
+
+/* Paste your code here (You may delete these lines if not writing code) */
+
+    C++ test program
+    RTreenode* nodey = new RTreenode;
+   nodey-&#062;value = 25;
+   for (int i = 0; i &#060; 256; i++){
+	 nodey-&#062;children[i] = NULL;
+   }
+
+   RTreenode* nodee = new RTreenode;
+   nodee-&#062;value = 5;
+   for (int i = 0; i &#060; 256; i++){
+	 nodee-&#062;children[i] = NULL;
+   }
+
+
+   RTreenode* nodem = new RTreenode;
+   nodem-&#062;value = 15;
+   for (int i = 0; i &#060; 256; i++){
+	 nodem-&#062;children[i] = NULL;
+   }
+   nodem-&#062;children[&#039;m&#039;] = new RTreenode;
+   nodem-&#062;children[&#039;m&#039;]-&#062;value = 900;
+   for (int j = 0; j &#060; 256; j++){
+	 nodem-&#062;children[&#039;m&#039;]-&#062;children[j] = NULL;
+   }
+   nodem-&#062;children[&#039;m&#039;]-&#062;children[&#039;e&#039;] = nodee; 
+   nodem-&#062;children[&#039;m&#039;]-&#062;children[&#039;y&#039;] = nodey; 
+ 
+
+
+
+   RTreenode* nodee2 = new RTreenode;
+   nodee2-&#062;value = 5;
+   for (int i = 0; i &#060; 256; i++){
+	 nodee2-&#062;children[i] = NULL;
+   }
+
+
+   RTreenode* nodem2 = new RTreenode;
+   nodem2-&#062;value = 15;
+   for (int i = 0; i &#060; 256; i++){
+	 nodem2-&#062;children[i] = NULL;
+   }
+   nodem2-&#062;children[&#039;m&#039;] = new RTreenode;
+   for (int j = 0; j &#060; 256; j++){
+	 nodem2-&#062;children[&#039;m&#039;]-&#062;children[j] = NULL;
+   } 
+   nodem2-&#062;children[&#039;m&#039;]-&#062;value = 800;
+   nodem2-&#062;children[&#039;m&#039;]-&#062;children[&#039;e&#039;] = nodee2; 
+
+
+   // Merge tree nodem into nodem2
+   // recursively destroy modem
+   Helper(nodem,nodem2,nodem);
+ 
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi everybody, Here is my recursive algorithm for merging two 2 n-ary trees (where 2 < = n <= 256>. Please let me if if you find any mistakes or can optimize this better. Thank you camster.</p>
+<pre> <code language="C">
+struct RTreenode {   
+	int value;   
+	struct RTreenode *children[256];    
+};   
+
+
+ // Merge tree root2(aka currtwo) into tree currone
+ // recursively destroy tree root2(akac  currtwo)
+// in O(n + m) time complexity 
+
+void Helper(RTreenode*&amp; root2, 
+            RTreenode*&amp; currone,            
+            RTreenode*&amp; currtwo){
+	if (currone == NULL || currtwo == NULL){
+		return;	
+	}
+	for (int i = 0; i &lt; 256; i++){
+		Helper(root2, currone-&gt;children[i],
+                       currtwo-&gt;children[i]);
+		if (currone &amp;&amp; currtwo &amp;&amp; 
+                    currone-&gt;children[i] == NULL  &amp;&amp; 
+                    currtwo-&gt;children[i] != NULL){
+			currone-&gt;children[i] = 
+                           currtwo-&gt;children[i];
+		}
+		else if (currone &amp;&amp; currtwo &amp;&amp;
+                         currone-&gt;children[i] != NULL     
+                              &amp;&amp;                  
+                         currtwo-&gt;children[i] != NULL){
+			   delete currtwo-&gt;children[i];
+			   currtwo-&gt;children[i] = NULL;
+		}
+	}
+
+	if (currtwo == root2){
+		delete currtwo;
+		currtwo = NULL;
+		return;
+	}
+}
+
+/* Paste your code here (You may delete these lines if not writing code) */
+
+    C++ test program
+    RTreenode* nodey = new RTreenode;
+   nodey-&gt;value = 25;
+   for (int i = 0; i &lt; 256; i++){
+	 nodey-&gt;children[i] = NULL;
+   }
+
+   RTreenode* nodee = new RTreenode;
+   nodee-&gt;value = 5;
+   for (int i = 0; i &lt; 256; i++){
+	 nodee-&gt;children[i] = NULL;
+   }
+
+
+   RTreenode* nodem = new RTreenode;
+   nodem-&gt;value = 15;
+   for (int i = 0; i &lt; 256; i++){
+	 nodem-&gt;children[i] = NULL;
+   }
+   nodem-&gt;children['m'] = new RTreenode;
+   nodem-&gt;children['m']-&gt;value = 900;
+   for (int j = 0; j &lt; 256; j++){
+	 nodem-&gt;children['m']-&gt;children[j] = NULL;
+   }
+   nodem-&gt;children['m']-&gt;children['e'] = nodee; 
+   nodem-&gt;children['m']-&gt;children['y'] = nodey; 
+ 
+
+
+
+   RTreenode* nodee2 = new RTreenode;
+   nodee2-&gt;value = 5;
+   for (int i = 0; i &lt; 256; i++){
+	 nodee2-&gt;children[i] = NULL;
+   }
+
+
+   RTreenode* nodem2 = new RTreenode;
+   nodem2-&gt;value = 15;
+   for (int i = 0; i &lt; 256; i++){
+	 nodem2-&gt;children[i] = NULL;
+   }
+   nodem2-&gt;children['m'] = new RTreenode;
+   for (int j = 0; j &lt; 256; j++){
+	 nodem2-&gt;children['m']-&gt;children[j] = NULL;
+   } 
+   nodem2-&gt;children['m']-&gt;value = 800;
+   nodem2-&gt;children['m']-&gt;children['e'] = nodee2; 
+
+
+   // Merge tree nodem into nodem2
+   // recursively destroy modem
+   Helper(nodem,nodem2,nodem);
+ 
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-7915</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Sun, 01 Apr 2012 04:19:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-7915</guid>
+		<description><![CDATA[@Ronzii &amp; @Dheeraj: Thanks for suggesting a new method.  We will add it to the original post.  Keep it up!]]></description>
+		<content:encoded><![CDATA[<p>@Ronzii &#038; @Dheeraj: Thanks for suggesting a new method.  We will add it to the original post.  Keep it up!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronzii</title>
+		<link>http://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/#comment-7914</link>
+		<dc:creator><![CDATA[Ronzii]]></dc:creator>
+		<pubDate>Sun, 01 Apr 2012 03:40:04 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18611#comment-7914</guid>
+		<description><![CDATA[We could also convert both balanced binary search tree&#039;s to doubly linked lists in O(n) (inplace). After that we can simply merge both linked lists O(m+n) and convert them back into a balanced BST in O(n).
+The complexity remains the same except everything is inplace!
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>We could also convert both balanced binary search tree&#8217;s to doubly linked lists in O(n) (inplace). After that we can simply merge both linked lists O(m+n) and convert them back into a balanced BST in O(n).<br />
+The complexity remains the same except everything is inplace!</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:24:08 -->
+
+<!-- Compression = gzip -->

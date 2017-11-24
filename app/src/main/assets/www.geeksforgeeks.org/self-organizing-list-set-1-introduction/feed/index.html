@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Self Organizing List &#124; Set 1 (Introduction)</title>
+	<atom:link href="http://www.geeksforgeeks.org/self-organizing-list-set-1-introduction/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/self-organizing-list-set-1-introduction/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: discent</title>
+		<link>http://www.geeksforgeeks.org/self-organizing-list-set-1-introduction/#comment-28986</link>
+		<dc:creator><![CDATA[discent]]></dc:creator>
+		<pubDate>Thu, 17 Oct 2013 12:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122846#comment-28986</guid>
+		<description><![CDATA[#include
+
+using namespace std;
+
+class SelfOrganisedList{
+
+private:
+
+        struct node{
+
+                int data;
+
+                struct node *next;
+
+        };
+
+        node *head;
+
+        node *newNode;
+
+        node *hold;
+
+        node *previous;
+
+        bool initiateSearch;
+
+public:
+
+        void createList( );
+
+        void moveToFront( node *, node * );
+
+        void search( );
+
+        void display();
+
+        SelfOrganisedList(){
+
+                head = NULL;
+
+                initiateSearch = false;
+
+        }
+
+};
+
+void SelfOrganisedList::display(){
+
+        hold = head;
+
+        while( NULL != hold ){
+
+                cout&#060;data&#060;&quot;;
+
+                hold = hold-&#062;next;
+
+        }
+
+        cout&#060;&#060;&#034;NULL&#034;&#060;&#060;endl;
+
+}
+
+void SelfOrganisedList::createList(){
+
+int item = 0;
+
+if( NULL == head )
+
+        cout&#060;&#060;&#034;Enter List items. To terminate input, enter -1&#034;&#060;&#062;item;
+
+         if( -1 != item )
+
+        {
+
+                if ( NULL == head ){
+
+                        newNode = new node;
+
+                        newNode-&#062;data = item;
+
+                        head = newNode;
+
+                        hold = newNode;
+
+                }
+
+                else{
+
+                        newNode = new node;
+
+                        newNode-&#062;data = item;
+
+                        hold-&#062;next = newNode;
+
+                        hold = newNode;
+
+                }
+
+                newNode-&#062;next = NULL;
+
+                createList();
+
+        }
+
+}
+
+void SelfOrganisedList::search(){
+
+char ch;
+
+int item = 0;
+
+int index = 1;
+
+bool found = false;
+
+if ( !initiateSearch )
+
+        cout&#060;&#060;&#034;search an item in your Linked List. To stop Search, enter -1 &#034;&#060;&#062;item;
+
+        if( -1 != item )
+
+        {
+
+                if( NULL == head ){
+
+                        cout&#060;&#060;&#034;Empty Linked List, press C to create Linked List&#034;&#060;&#062;ch;
+
+                                if( &#039;C&#039; == ch &#124;&#124; &#039;c&#039; == ch )
+
+                                        createList();
+
+                }
+
+                else{
+
+                        initiateSearch = true;
+
+                        hold = head;
+
+                        previous = head;
+
+                        while( NULL != hold ){
+
+                                        if( item == hold-&#062;data ){
+
+                                                moveToFront( previous, hold );
+
+                                                found = true;
+
+                                                cout&#060;&#060;&#034;Item found at node :&#034;&#060;&#060; index&#060;next;
+
+                                                index = index+1;
+
+                                        }
+
+                                }
+
+                        }
+
+                        if( !found ){
+
+                                cout&#060;&#060;&#034;Your item not found in current list&#034;&#060;&#060;endl;
+
+                                cout&#060;&#060;&#034;Try again &#034; &#060;data;
+
+        hold-&#062;data = previous-&#062;data;
+
+        previous-&#062;data = temp;
+
+}
+
+int main(){
+
+SelfOrganisedList list;
+
+list.createList();
+
+list.search();
+
+list.display();
+
+return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>using namespace std;</p>
+<p>class SelfOrganisedList{</p>
+<p>private:</p>
+<p>        struct node{</p>
+<p>                int data;</p>
+<p>                struct node *next;</p>
+<p>        };</p>
+<p>        node *head;</p>
+<p>        node *newNode;</p>
+<p>        node *hold;</p>
+<p>        node *previous;</p>
+<p>        bool initiateSearch;</p>
+<p>public:</p>
+<p>        void createList( );</p>
+<p>        void moveToFront( node *, node * );</p>
+<p>        void search( );</p>
+<p>        void display();</p>
+<p>        SelfOrganisedList(){</p>
+<p>                head = NULL;</p>
+<p>                initiateSearch = false;</p>
+<p>        }</p>
+<p>};</p>
+<p>void SelfOrganisedList::display(){</p>
+<p>        hold = head;</p>
+<p>        while( NULL != hold ){</p>
+<p>                cout&lt;data&lt;&#8220;;</p>
+<p>                hold = hold-&gt;next;</p>
+<p>        }</p>
+<p>        cout&lt;&lt;&quot;NULL&quot;&lt;&lt;endl;</p>
+<p>}</p>
+<p>void SelfOrganisedList::createList(){</p>
+<p>int item = 0;</p>
+<p>if( NULL == head )</p>
+<p>        cout&lt;&lt;&quot;Enter List items. To terminate input, enter -1&quot;&lt;&gt;item;</p>
+<p>         if( -1 != item )</p>
+<p>        {</p>
+<p>                if ( NULL == head ){</p>
+<p>                        newNode = new node;</p>
+<p>                        newNode-&gt;data = item;</p>
+<p>                        head = newNode;</p>
+<p>                        hold = newNode;</p>
+<p>                }</p>
+<p>                else{</p>
+<p>                        newNode = new node;</p>
+<p>                        newNode-&gt;data = item;</p>
+<p>                        hold-&gt;next = newNode;</p>
+<p>                        hold = newNode;</p>
+<p>                }</p>
+<p>                newNode-&gt;next = NULL;</p>
+<p>                createList();</p>
+<p>        }</p>
+<p>}</p>
+<p>void SelfOrganisedList::search(){</p>
+<p>char ch;</p>
+<p>int item = 0;</p>
+<p>int index = 1;</p>
+<p>bool found = false;</p>
+<p>if ( !initiateSearch )</p>
+<p>        cout&lt;&lt;&quot;search an item in your Linked List. To stop Search, enter -1 &quot;&lt;&gt;item;</p>
+<p>        if( -1 != item )</p>
+<p>        {</p>
+<p>                if( NULL == head ){</p>
+<p>                        cout&lt;&lt;&quot;Empty Linked List, press C to create Linked List&quot;&lt;&gt;ch;</p>
+<p>                                if( &#8216;C&#8217; == ch || &#8216;c&#8217; == ch )</p>
+<p>                                        createList();</p>
+<p>                }</p>
+<p>                else{</p>
+<p>                        initiateSearch = true;</p>
+<p>                        hold = head;</p>
+<p>                        previous = head;</p>
+<p>                        while( NULL != hold ){</p>
+<p>                                        if( item == hold-&gt;data ){</p>
+<p>                                                moveToFront( previous, hold );</p>
+<p>                                                found = true;</p>
+<p>                                                cout&lt;&lt;&quot;Item found at node :&quot;&lt;&lt; index&lt;next;</p>
+<p>                                                index = index+1;</p>
+<p>                                        }</p>
+<p>                                }</p>
+<p>                        }</p>
+<p>                        if( !found ){</p>
+<p>                                cout&lt;&lt;&quot;Your item not found in current list&quot;&lt;&lt;endl;</p>
+<p>                                cout&lt;&lt;&quot;Try again &quot; &lt;data;</p>
+<p>        hold-&gt;data = previous-&gt;data;</p>
+<p>        previous-&gt;data = temp;</p>
+<p>}</p>
+<p>int main(){</p>
+<p>SelfOrganisedList list;</p>
+<p>list.createList();</p>
+<p>list.search();</p>
+<p>list.display();</p>
+<p>return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.034 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:07:52 -->
+
+<!-- Compression = gzip -->

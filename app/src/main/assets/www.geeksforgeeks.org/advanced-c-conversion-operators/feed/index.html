@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Advanced C++ &#124; Conversion Operators</title>
+	<atom:link href="http://www.geeksforgeeks.org/advanced-c-conversion-operators/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-38492</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 21:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-38492</guid>
+		<description><![CDATA[We are printing the magnitude of Complex object in two different ways.]]></description>
+		<content:encoded><![CDATA[<p>We are printing the magnitude of Complex object in two different ways.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Programmer</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-38485</link>
+		<dc:creator><![CDATA[Programmer]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 20:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-38485</guid>
+		<description><![CDATA[What You Want to tell]]></description>
+		<content:encoded><![CDATA[<p>What You Want to tell</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-4346</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Fri, 17 Jun 2011 02:40:45 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-4346</guid>
+		<description><![CDATA[@Simon, many of the C style string processing functions accepts &quot;const char *&quot; as input. Consider a hypothetical C++ string class,
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+class StringHandle
+{
+public:
+    // other interfaces
+
+    // An interface that returns pointer to
+    // underlying character buffer implicitly
+    operator const char* ()
+    {
+        // Delegate call to body
+        return pData-&#062;rawBuffer();
+    }
+
+private:
+    // pimpl idiom
+    StringBody *pData;
+};
+
+// Usage
+
+int main()
+{
+    StringHandle str(&#034;A String&#034;);
+    // ....
+
+    char *buf = new char[256];
+
+    // An implicit conversion
+    ::strcpy(buf, str);
+
+    // .....
+
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+Note that the compiler places call to &quot;&lt;strong&gt;operator const char* ()&lt;/strong&gt;&quot; implicitly to convert String object into raw buffer before making copy using C-style copy function.
+
+For that matter any implicit conversion to primitive types can be handled in this way.
+
+For more details refer the book &quot;Advanced C++&quot; by Copelin. Or refer any standard library code like Boost, Qt C++, etc...]]></description>
+		<content:encoded><![CDATA[<p>@Simon, many of the C style string processing functions accepts &#8220;const char *&#8221; as input. Consider a hypothetical C++ string class,</p>
+<pre> <code language="C">
+class StringHandle
+{
+public:
+    // other interfaces
+
+    // An interface that returns pointer to
+    // underlying character buffer implicitly
+    operator const char* ()
+    {
+        // Delegate call to body
+        return pData-&gt;rawBuffer();
+    }
+
+private:
+    // pimpl idiom
+    StringBody *pData;
+};
+
+// Usage
+
+int main()
+{
+    StringHandle str(&quot;A String&quot;);
+    // ....
+
+    char *buf = new char[256];
+
+    // An implicit conversion
+    ::strcpy(buf, str);
+
+    // .....
+
+}
+</code> </pre>
+<p>Note that the compiler places call to &#8220;<strong>operator const char* ()</strong>&#8221; implicitly to convert String object into raw buffer before making copy using C-style copy function.</p>
+<p>For that matter any implicit conversion to primitive types can be handled in this way.</p>
+<p>For more details refer the book &#8220;Advanced C++&#8221; by Copelin. Or refer any standard library code like Boost, Qt C++, etc&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Simon</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-4326</link>
+		<dc:creator><![CDATA[Simon]]></dc:creator>
+		<pubDate>Wed, 15 Jun 2011 00:17:07 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-4326</guid>
+		<description><![CDATA[Venki:
+You said,&quot;At some places, for example in making compatible calls with existing C library, these are unavoidable.&quot;  would you show a simple example that c used. thanks.]]></description>
+		<content:encoded><![CDATA[<p>Venki:<br />
+You said,&#8221;At some places, for example in making compatible calls with existing C library, these are unavoidable.&#8221;  would you show a simple example that c used. thanks.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3389</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Sat, 26 Feb 2011 03:02:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3389</guid>
+		<description><![CDATA[@karan, we will cover C++ variant class in coming posts. Hope Sandeep clarified other question.
+
+@pajju, Thanks. We would suggest to use such constructs with care when situation demands.]]></description>
+		<content:encoded><![CDATA[<p>@karan, we will cover C++ variant class in coming posts. Hope Sandeep clarified other question.</p>
+<p>@pajju, Thanks. We would suggest to use such constructs with care when situation demands.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sandeep</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3380</link>
+		<dc:creator><![CDATA[Sandeep]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 21:57:03 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3380</guid>
+		<description><![CDATA[See &lt;a href=&quot;http://www.umsl.edu/~subramaniana/overload10.html&quot; rel=&quot;nofollow&quot;&gt;http://www.umsl.edu/~subramaniana/overload10.html&lt;/a&gt;
+
+&lt;em&gt;Excerpt from the link&lt;/em&gt;
+
+If enough conversion functions are defined, the ambiguous operations could occur. For example:
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;class Angle{
+public:
+	operator float() { return value; }
+	Angle(float f = 0.0) : value(f) {}
+	Angle(Angle&#038; A) : value(A.value) {}
+	friend Angle operator+(const Angle&#038; , const Angle&#038; );
+private:
+	float value;
+};
+
+int main)(){
+	Angle a;
+	float f = 10.0;
+	Angle a1 = a + f;	// Error, ambiguous (float + float) or (Angle + Angle)
+
+	return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>See <a href="http://www.umsl.edu/~subramaniana/overload10.html" rel="nofollow">http://www.umsl.edu/~subramaniana/overload10.html</a></p>
+<p><em>Excerpt from the link</em></p>
+<p>If enough conversion functions are defined, the ambiguous operations could occur. For example:</p>
+<pre> <code language="C">class Angle{
+public:
+	operator float() { return value; }
+	Angle(float f = 0.0) : value(f) {}
+	Angle(Angle&amp; A) : value(A.value) {}
+	friend Angle operator+(const Angle&amp; , const Angle&amp; );
+private:
+	float value;
+};
+
+int main)(){
+	Angle a;
+	float f = 10.0;
+	Angle a1 = a + f;	// Error, ambiguous (float + float) or (Angle + Angle)
+
+	return 0;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pajju</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3376</link>
+		<dc:creator><![CDATA[pajju]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 10:53:39 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3376</guid>
+		<description><![CDATA[don&#039;t write such code expecting too much from your compiler.]]></description>
+		<content:encoded><![CDATA[<p>don&#8217;t write such code expecting too much from your compiler.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3374</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 10:34:20 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3374</guid>
+		<description><![CDATA[Mail regarding what? It doesn&#039;t matter...]]></description>
+		<content:encoded><![CDATA[<p>Mail regarding what? It doesn&#8217;t matter&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: karan</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3373</link>
+		<dc:creator><![CDATA[karan]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 10:34:18 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3373</guid>
+		<description><![CDATA[what is Variant class?]]></description>
+		<content:encoded><![CDATA[<p>what is Variant class?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: karan</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3372</link>
+		<dc:creator><![CDATA[karan]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 10:32:47 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3372</guid>
+		<description><![CDATA[&lt;em&gt;The compiler will have more control in calling an appropriate function based on type, rather than what the programmer expects.&lt;/em&gt;
+
+Could you an example, please?  An example that shows compiler doing something unexpected.]]></description>
+		<content:encoded><![CDATA[<p><em>The compiler will have more control in calling an appropriate function based on type, rather than what the programmer expects.</em></p>
+<p>Could you an example, please?  An example that shows compiler doing something unexpected.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pajju</title>
+		<link>http://www.geeksforgeeks.org/advanced-c-conversion-operators/#comment-3368</link>
+		<dc:creator><![CDATA[pajju]]></dc:creator>
+		<pubDate>Thu, 24 Feb 2011 08:24:32 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10890#comment-3368</guid>
+		<description><![CDATA[This is not smart. You are expecting too much from your Compiler. :)
+&lt;em&gt;(You can expect mail from your lead soon :P)&lt;/em&gt;]]></description>
+		<content:encoded><![CDATA[<p>This is not smart. You are expecting too much from your Compiler. 🙂<br />
+<em>(You can expect mail from your lead soon :P)</em></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:15:10 -->
+
+<!-- Compression = gzip -->

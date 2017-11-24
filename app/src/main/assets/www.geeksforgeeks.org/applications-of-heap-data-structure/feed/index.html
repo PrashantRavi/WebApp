@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Applications of Heap Data Structure</title>
+	<atom:link href="http://www.geeksforgeeks.org/applications-of-heap-data-structure/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-35640</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 15:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-35640</guid>
+		<description><![CDATA[bulding heap requires percolate up during the unwinding phase of recursion and during heapsort we percolate down the tree 
+
+tnode* heapify(tnode* root)
+
+{
+
+	if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+
+	{
+
+		tnode* temp=root;
+
+		delete(temp);
+
+		return NULL;
+
+	}
+
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+
+	{
+
+		if(root-&#062;lchild-&#062;data&#062;root-&#062;rchild-&#062;data)
+
+		{
+
+			root-&#062;data=root-&#062;rchild-&#062;data;
+
+			root-&#062;rchild=heapify(root-&#062;rchild);
+
+			return root;
+
+		}
+
+		if(root-&#062;rchild-&#062;data&#062;root-&#062;lchild-&#062;data)
+
+		{
+
+			root-&#062;data=root-&#062;lchild-&#062;data;
+
+			root-&#062;lchild=heapify(root-&#062;lchild);
+
+			return root;
+
+		}
+
+	}
+
+	if((root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+
+	{
+
+		root-&#062;data=root-&#062;lchild-&#062;data;
+
+		root-&#062;lchild=heapify(root-&#062;lchild);
+
+		return root;
+
+	}
+
+	if((!root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+
+	{
+
+		root-&#062;data=root-&#062;rchild-&#062;data;
+
+		root-&#062;rchild=heapify(root-&#062;rchild);
+
+		return root;
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>bulding heap requires percolate up during the unwinding phase of recursion and during heapsort we percolate down the tree </p>
+<p>tnode* heapify(tnode* root)</p>
+<p>{</p>
+<p>	if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))</p>
+<p>	{</p>
+<p>		tnode* temp=root;</p>
+<p>		delete(temp);</p>
+<p>		return NULL;</p>
+<p>	}</p>
+<p>	if((root-&gt;lchild)&amp;&amp;(root-&gt;rchild))</p>
+<p>	{</p>
+<p>		if(root-&gt;lchild-&gt;data&gt;root-&gt;rchild-&gt;data)</p>
+<p>		{</p>
+<p>			root-&gt;data=root-&gt;rchild-&gt;data;</p>
+<p>			root-&gt;rchild=heapify(root-&gt;rchild);</p>
+<p>			return root;</p>
+<p>		}</p>
+<p>		if(root-&gt;rchild-&gt;data&gt;root-&gt;lchild-&gt;data)</p>
+<p>		{</p>
+<p>			root-&gt;data=root-&gt;lchild-&gt;data;</p>
+<p>			root-&gt;lchild=heapify(root-&gt;lchild);</p>
+<p>			return root;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	if((root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))</p>
+<p>	{</p>
+<p>		root-&gt;data=root-&gt;lchild-&gt;data;</p>
+<p>		root-&gt;lchild=heapify(root-&gt;lchild);</p>
+<p>		return root;</p>
+<p>	}</p>
+<p>	if((!root-&gt;lchild)&amp;&amp;(root-&gt;rchild))</p>
+<p>	{</p>
+<p>		root-&gt;data=root-&gt;rchild-&gt;data;</p>
+<p>		root-&gt;rchild=heapify(root-&gt;rchild);</p>
+<p>		return root;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-35639</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 15:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-35639</guid>
+		<description><![CDATA[#include
+#define infinity 9999
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+ 
+void insert(tnode* &#038;root,int d,int i,int n)
+{
+	if(i&#062;n)
+	   return;
+	if(i==n)
+	{
+	   root=new tnode(d);
+	   return;	
+	}
+	insert(root-&#062;lchild,d,(2*i)+1,n);
+	insert(root-&#062;rchild,d,(2*i)+2,n);
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+	{
+		if(root-&#062;data&#062;root-&#062;lchild-&#062;data)
+		{
+			int temp=root-&#062;lchild-&#062;data;
+			root-&#062;lchild-&#062;data=root-&#062;data;
+			root-&#062;data=temp;
+		}
+		if(root-&#062;data&#062;root-&#062;rchild-&#062;data)
+		{
+		    int temp=root-&#062;rchild-&#062;data;
+			root-&#062;rchild-&#062;data=root-&#062;data;
+			root-&#062;data=temp;	
+		}
+	}
+	if((root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+	{
+		if(root-&#062;data&#062;root-&#062;lchild-&#062;data)
+		{
+			int temp=root-&#062;lchild-&#062;data;
+			root-&#062;lchild-&#062;data=root-&#062;data;
+			root-&#062;data=temp;
+		}
+	}
+	if((!root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+	{
+		if(root-&#062;data&#062;root-&#062;rchild-&#062;data)
+		{
+			int temp=root-&#062;rchild-&#062;data;
+			root-&#062;rchild-&#062;data=root-&#062;data;
+			root-&#062;data=temp;	
+		}
+	}
+ 
+}
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+tnode* heapify(tnode* root)
+{
+	if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+	{
+		tnode* temp=root;
+		delete(temp);
+		return NULL;
+	}
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+	{
+		if(root-&#062;lchild-&#062;data&#062;root-&#062;rchild-&#062;data)
+		{
+			root-&#062;data=root-&#062;rchild-&#062;data;
+			root-&#062;rchild=heapify(root-&#062;rchild);
+			return root;
+		}
+		if(root-&#062;rchild-&#062;data&#062;root-&#062;lchild-&#062;data)
+		{
+			root-&#062;data=root-&#062;lchild-&#062;data;
+			root-&#062;lchild=heapify(root-&#062;lchild);
+			return root;
+		}
+	}
+	if((root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+	{
+		root-&#062;data=root-&#062;lchild-&#062;data;
+		root-&#062;lchild=heapify(root-&#062;lchild);
+		return root;
+	}
+	if((!root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+	{
+		root-&#062;data=root-&#062;rchild-&#062;data;
+		root-&#062;rchild=heapify(root-&#062;rchild);
+		return root;
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int n;int i=0;
+	cout&#060;&#062;n;
+	while(n!=-1)
+	{
+		insert(root,n,0,i);
+		i++;
+		cout&#060;&#062;n;
+	}
+	while(root!=NULL)
+	{
+		cout&#060;data&#060;&#060;&#034; &#034;;
+		root=heapify(root);
+	}
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#define infinity 9999<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};</p>
+<p>void insert(tnode* &amp;root,int d,int i,int n)<br />
+{<br />
+	if(i&gt;n)<br />
+	   return;<br />
+	if(i==n)<br />
+	{<br />
+	   root=new tnode(d);<br />
+	   return;<br />
+	}<br />
+	insert(root-&gt;lchild,d,(2*i)+1,n);<br />
+	insert(root-&gt;rchild,d,(2*i)+2,n);<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+	{<br />
+		if(root-&gt;data&gt;root-&gt;lchild-&gt;data)<br />
+		{<br />
+			int temp=root-&gt;lchild-&gt;data;<br />
+			root-&gt;lchild-&gt;data=root-&gt;data;<br />
+			root-&gt;data=temp;<br />
+		}<br />
+		if(root-&gt;data&gt;root-&gt;rchild-&gt;data)<br />
+		{<br />
+		    int temp=root-&gt;rchild-&gt;data;<br />
+			root-&gt;rchild-&gt;data=root-&gt;data;<br />
+			root-&gt;data=temp;<br />
+		}<br />
+	}<br />
+	if((root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))<br />
+	{<br />
+		if(root-&gt;data&gt;root-&gt;lchild-&gt;data)<br />
+		{<br />
+			int temp=root-&gt;lchild-&gt;data;<br />
+			root-&gt;lchild-&gt;data=root-&gt;data;<br />
+			root-&gt;data=temp;<br />
+		}<br />
+	}<br />
+	if((!root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+	{<br />
+		if(root-&gt;data&gt;root-&gt;rchild-&gt;data)<br />
+		{<br />
+			int temp=root-&gt;rchild-&gt;data;<br />
+			root-&gt;rchild-&gt;data=root-&gt;data;<br />
+			root-&gt;data=temp;<br />
+		}<br />
+	}</p>
+<p>}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+tnode* heapify(tnode* root)<br />
+{<br />
+	if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))<br />
+	{<br />
+		tnode* temp=root;<br />
+		delete(temp);<br />
+		return NULL;<br />
+	}<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+	{<br />
+		if(root-&gt;lchild-&gt;data&gt;root-&gt;rchild-&gt;data)<br />
+		{<br />
+			root-&gt;data=root-&gt;rchild-&gt;data;<br />
+			root-&gt;rchild=heapify(root-&gt;rchild);<br />
+			return root;<br />
+		}<br />
+		if(root-&gt;rchild-&gt;data&gt;root-&gt;lchild-&gt;data)<br />
+		{<br />
+			root-&gt;data=root-&gt;lchild-&gt;data;<br />
+			root-&gt;lchild=heapify(root-&gt;lchild);<br />
+			return root;<br />
+		}<br />
+	}<br />
+	if((root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))<br />
+	{<br />
+		root-&gt;data=root-&gt;lchild-&gt;data;<br />
+		root-&gt;lchild=heapify(root-&gt;lchild);<br />
+		return root;<br />
+	}<br />
+	if((!root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+	{<br />
+		root-&gt;data=root-&gt;rchild-&gt;data;<br />
+		root-&gt;rchild=heapify(root-&gt;rchild);<br />
+		return root;<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int n;int i=0;<br />
+	cout&lt;&gt;n;<br />
+	while(n!=-1)<br />
+	{<br />
+		insert(root,n,0,i);<br />
+		i++;<br />
+		cout&lt;&gt;n;<br />
+	}<br />
+	while(root!=NULL)<br />
+	{<br />
+		cout&lt;data&lt;&lt;&quot; &quot;;<br />
+		root=heapify(root);<br />
+	}<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-35638</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 15:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-35638</guid>
+		<description><![CDATA[while bulding heap during the winding phase of recursion restrict the complete tree property by 2i+1 and 2i+2 and during the unwinding phase of recursion implement the min heap property ...implement with tree for smart coding]]></description>
+		<content:encoded><![CDATA[<p>while bulding heap during the winding phase of recursion restrict the complete tree property by 2i+1 and 2i+2 and during the unwinding phase of recursion implement the min heap property &#8230;implement with tree for smart coding</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guddu sharma</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-8922</link>
+		<dc:creator><![CDATA[Guddu sharma]]></dc:creator>
+		<pubDate>Fri, 08 Jun 2012 18:28:43 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-8922</guid>
+		<description><![CDATA[Heap is also used by OS to keep track of the maximum priority process so far. The main advantage in using heap is that whenever any new process arrives,it only takes O(logn) time to update the heap in order of the priorities of the process. So, it is always efficient to extract the process with highest priority &#038; service it in O(1) time.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Heap is also used by OS to keep track of the maximum priority process so far. The main advantage in using heap is that whenever any new process arrives,it only takes O(logn) time to update the heap in order of the priorities of the process. So, it is always efficient to extract the process with highest priority &amp; service it in O(1) time.</p>
+<pre> <code language="C">
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sharath</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-7963</link>
+		<dc:creator><![CDATA[sharath]]></dc:creator>
+		<pubDate>Fri, 06 Apr 2012 15:09:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-7963</guid>
+		<description><![CDATA[heap sort cant work with linked list, it works only with arrays.]]></description>
+		<content:encoded><![CDATA[<p>heap sort cant work with linked list, it works only with arrays.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sandeep</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-2914</link>
+		<dc:creator><![CDATA[Sandeep]]></dc:creator>
+		<pubDate>Sat, 22 Jan 2011 13:15:29 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-2914</guid>
+		<description><![CDATA[@miit: Heapsort can be used in time-critical applications because Worst case time complexity of Heapsort is better than Quicksort, so it is guaranteed with Heapsort that the time won&#039;t grow more than nLogn.]]></description>
+		<content:encoded><![CDATA[<p>@miit: Heapsort can be used in time-critical applications because Worst case time complexity of Heapsort is better than Quicksort, so it is guaranteed with Heapsort that the time won&#8217;t grow more than nLogn.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: miit</title>
+		<link>http://www.geeksforgeeks.org/applications-of-heap-data-structure/#comment-2910</link>
+		<dc:creator><![CDATA[miit]]></dc:creator>
+		<pubDate>Sat, 22 Jan 2011 08:49:40 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10149#comment-2910</guid>
+		<description><![CDATA[What are the limited uses of Heapsort?]]></description>
+		<content:encoded><![CDATA[<p>What are the limited uses of Heapsort?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:42 -->
+
+<!-- Compression = gzip -->

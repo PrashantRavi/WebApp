@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Tug of War</title>
+	<atom:link href="http://www.geeksforgeeks.org/tug-of-war/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/tug-of-war/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: The Big Idiot</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-40162</link>
+		<dc:creator><![CDATA[The Big Idiot]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 13:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-40162</guid>
+		<description><![CDATA[What is the complexity of the above solution ? is it O(2^n)??]]></description>
+		<content:encoded><![CDATA[<p>What is the complexity of the above solution ? is it O(2^n)??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suvodip Bhattacharya</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-39818</link>
+		<dc:creator><![CDATA[Suvodip Bhattacharya]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 18:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-39818</guid>
+		<description><![CDATA[#include
+#include
+#include 
+using namespace std;
+int barr[100];
+
+void Half_Set_Util(int arr[],int barr[],int n,int curr,int half_value,int c_sum,int carr)
+{
+    if(curr ==  n/2 &#124;&#124; carr&#060;0) return;
+
+    if(c_sum+arr[carr] &#060; half_value &#038;&#038; curr &#060; n/2) {
+        barr[curr]=arr[carr];
+        c_sum+=arr[carr];
+        arr[carr]=INT_MIN;
+    Half_Set_Util(arr,barr,n,curr+1,half_value,c_sum,carr-1); } 
+    
+    else if(c_sum+arr[carr] == half_value &#038;&#038; curr == n/2-1) {
+    barr[curr]=arr[carr];
+    c_sum+=arr[carr];
+    arr[carr]=INT_MIN;
+    Half_Set_Util(arr,barr,n,curr+1,half_value,c_sum,carr-1); } 
+    
+    else
+    Half_Set_Util(arr,barr,n,curr,half_value,c_sum,carr-1);
+}                                    
+
+void Half_Set(int arr[],int n)
+{
+    sort(arr,arr+n);    
+    //int barr[n/2];
+    
+    int sum=0;
+    for(int i=0;i&#060;n;i++)
+    sum+=arr[i];
+    
+    Half_Set_Util(arr,barr,n,0,sum/2,0,n-1);
+
+    for(int i=0;i&#060;n/2;i++)
+    cout&#060;&#060;barr[i]&#060;&#060;&#034; &#034;;
+//return barr;
+}    
+
+int main()
+{
+int arr[]={1, 2, 10, 11};
+int n=sizeof(arr)/sizeof(arr[0]);
+Half_Set(arr,n);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#include<br />
+using namespace std;<br />
+int barr[100];</p>
+<p>void Half_Set_Util(int arr[],int barr[],int n,int curr,int half_value,int c_sum,int carr)<br />
+{<br />
+    if(curr ==  n/2 || carr&lt;0) return;</p>
+<p>    if(c_sum+arr[carr] &lt; half_value &amp;&amp; curr &lt; n/2) {<br />
+        barr[curr]=arr[carr];<br />
+        c_sum+=arr[carr];<br />
+        arr[carr]=INT_MIN;<br />
+    Half_Set_Util(arr,barr,n,curr+1,half_value,c_sum,carr-1); } </p>
+<p>    else if(c_sum+arr[carr] == half_value &amp;&amp; curr == n/2-1) {<br />
+    barr[curr]=arr[carr];<br />
+    c_sum+=arr[carr];<br />
+    arr[carr]=INT_MIN;<br />
+    Half_Set_Util(arr,barr,n,curr+1,half_value,c_sum,carr-1); } </p>
+<p>    else<br />
+    Half_Set_Util(arr,barr,n,curr,half_value,c_sum,carr-1);<br />
+}                                    </p>
+<p>void Half_Set(int arr[],int n)<br />
+{<br />
+    sort(arr,arr+n);<br />
+    //int barr[n/2];</p>
+<p>    int sum=0;<br />
+    for(int i=0;i&lt;n;i++)<br />
+    sum+=arr[i];</p>
+<p>    Half_Set_Util(arr,barr,n,0,sum/2,0,n-1);</p>
+<p>    for(int i=0;i&lt;n/2;i++)<br />
+    cout&lt;&lt;barr[i]&lt;&lt;&quot; &quot;;<br />
+//return barr;<br />
+}    </p>
+<p>int main()<br />
+{<br />
+int arr[]={1, 2, 10, 11};<br />
+int n=sizeof(arr)/sizeof(arr[0]);<br />
+Half_Set(arr,n);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: toughtimes</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-38458</link>
+		<dc:creator><![CDATA[toughtimes]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 17:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-38458</guid>
+		<description><![CDATA[same doubt is it necessary??]]></description>
+		<content:encoded><![CDATA[<p>same doubt is it necessary??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: minhaz</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-36934</link>
+		<dc:creator><![CDATA[minhaz]]></dc:creator>
+		<pubDate>Wed, 28 May 2014 02:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-36934</guid>
+		<description><![CDATA[Hey Hi,
+I think Coder011 has Valid Point. We cannot directly apply the solution you r suggesting. We have to have an additional logic to make sure that the half sum is produced by exactly half number of the elements. Not by less than half elements.
+
+
+But really good suggestion by u.]]></description>
+		<content:encoded><![CDATA[<p>Hey Hi,<br />
+I think Coder011 has Valid Point. We cannot directly apply the solution you r suggesting. We have to have an additional logic to make sure that the half sum is produced by exactly half number of the elements. Not by less than half elements.</p>
+<p>But really good suggestion by u.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Coder011</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35626</link>
+		<dc:creator><![CDATA[Coder011]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 11:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35626</guid>
+		<description><![CDATA[Not getting ur line of thought, how is it implicit that the solution already exists?? and please clarify what is &quot;sum&quot;. If it is the sum of the entire array, then how are you justifying the line :
+
+&quot;&lt;b&gt;Once we get the set for subset sum for sum/2, rest of the elements are in another subset.&lt;/b&gt;&quot;
+
+If you think that the ur solution fails when  &lt;b&gt; there are multiple subsets with the same sum&lt;/b&gt; , then what will be answer for this case:
+
+int a[]={1,2,4,8,16,31}
+where no two subsets of size n/2 have the same sum?]]></description>
+		<content:encoded><![CDATA[<p>Not getting ur line of thought, how is it implicit that the solution already exists?? and please clarify what is &#8220;sum&#8221;. If it is the sum of the entire array, then how are you justifying the line :</p>
+<p>&#8220;<b>Once we get the set for subset sum for sum/2, rest of the elements are in another subset.</b>&#8221;</p>
+<p>If you think that the ur solution fails when  <b> there are multiple subsets with the same sum</b> , then what will be answer for this case:</p>
+<p>int a[]={1,2,4,8,16,31}<br />
+where no two subsets of size n/2 have the same sum?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35620</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 10:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35620</guid>
+		<description><![CDATA[Yes correct. But as per the question, it is implicit that the solution {n/2} and {n/2} or {n/2} and {n/2+1} already exists. But this subset algorithm may not work in the situation where there are multiple subsets with the same sum. In that can, we will have to check explicitly whether subset size is n/2 or n/2+1.]]></description>
+		<content:encoded><![CDATA[<p>Yes correct. But as per the question, it is implicit that the solution {n/2} and {n/2} or {n/2} and {n/2+1} already exists. But this subset algorithm may not work in the situation where there are multiple subsets with the same sum. In that can, we will have to check explicitly whether subset size is n/2 or n/2+1.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Coder011</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35618</link>
+		<dc:creator><![CDATA[Coder011]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 09:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35618</guid>
+		<description><![CDATA[consider this case :
+int a[]={1,1,1,1,1,1,1,7};
+subset sum will print true, whereas acc. to question size of two subsets should equal n/2  i.e 4]]></description>
+		<content:encoded><![CDATA[<p>consider this case :<br />
+int a[]={1,1,1,1,1,1,1,7};<br />
+subset sum will print true, whereas acc. to question size of two subsets should equal n/2  i.e 4</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35617</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 08:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35617</guid>
+		<description><![CDATA[Another Solution can be to use Subset sum algorithm to find sum/2. Once we get the set for subset sum for sum/2, rest of the elements are in another subset.]]></description>
+		<content:encoded><![CDATA[<p>Another Solution can be to use Subset sum algorithm to find sum/2. Once we get the set for subset sum for sum/2, rest of the elements are in another subset.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35615</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 08:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35615</guid>
+		<description><![CDATA[This problem is called balanced partitioning problem. It is NP-Complete. So even if we use DP, we can only verify whether such subsets exits. This solution is present on Geeksforgeeks.
+
+http://www.geeksforgeeks.org/d...
+
+There is no known solution which can solve this problem in polynomial time.]]></description>
+		<content:encoded><![CDATA[<p>This problem is called balanced partitioning problem. It is NP-Complete. So even if we use DP, we can only verify whether such subsets exits. This solution is present on Geeksforgeeks.</p>
+<p><a href="http://www.geeksforgeeks.org/d" rel="nofollow">http://www.geeksforgeeks.org/d</a>&#8230;</p>
+<p>There is no known solution which can solve this problem in polynomial time.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35614</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 08:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35614</guid>
+		<description><![CDATA[This problem is called balanced partitioning problem. It is NP-Complete. So even if we use DP, we can only verify whether such subsets exits. This solution is present on Geeksforgeeks. 
+
+http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/
+
+There is no known solution which can solve this problem in polynomial time.]]></description>
+		<content:encoded><![CDATA[<p>This problem is called balanced partitioning problem. It is NP-Complete. So even if we use DP, we can only verify whether such subsets exits. This solution is present on Geeksforgeeks. </p>
+<p><a href="http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/" rel="nofollow">http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/</a></p>
+<p>There is no known solution which can solve this problem in polynomial time.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mani992</title>
+		<link>http://www.geeksforgeeks.org/tug-of-war/#comment-35108</link>
+		<dc:creator><![CDATA[mani992]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 12:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=115594#comment-35108</guid>
+		<description><![CDATA[1 more thing can be done to remove recursion:
+1&#062; suppose there are n elements,then iterate over 0-&#062;n
+2&#062;in each iteration ,
+  suppose i=1 and N=4
+  Now, get the bit at the positions from j=0 to j=3 in i,
+          if the bit=1 then include that arr[j] in the set1 
+
+          else
+          include that in set2
+you can get the bit by using : (i&#038;(1&#060; 0)
+3&#062;calculate the diff at the end of each iteration and compare the result. Hope I was clear enough.]]></description>
+		<content:encoded><![CDATA[<p>1 more thing can be done to remove recursion:<br />
+1&gt; suppose there are n elements,then iterate over 0-&gt;n<br />
+2&gt;in each iteration ,<br />
+  suppose i=1 and N=4<br />
+  Now, get the bit at the positions from j=0 to j=3 in i,<br />
+          if the bit=1 then include that arr[j] in the set1 </p>
+<p>          else<br />
+          include that in set2<br />
+you can get the bit by using : (i&amp;(1&lt; 0)<br />
+3&gt;calculate the diff at the end of each iteration and compare the result. Hope I was clear enough.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.048 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:12:09 -->
+
+<!-- Compression = gzip -->

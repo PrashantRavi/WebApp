@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Why C treats array parameters as pointers?</title>
+	<atom:link href="http://www.geeksforgeeks.org/why-c-treats-array-parameters-as-pointers/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/why-c-treats-array-parameters-as-pointers/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: George</title>
+		<link>http://www.geeksforgeeks.org/why-c-treats-array-parameters-as-pointers/#comment-16127</link>
+		<dc:creator><![CDATA[George]]></dc:creator>
+		<pubDate>Sat, 09 Mar 2013 18:25:16 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4088#comment-16127</guid>
+		<description><![CDATA[Yes, the array actually is like to assign the base address and same as a pointer variable
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Yes, the array actually is like to assign the base address and same as a pointer variable</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: C-Programmer</title>
+		<link>http://www.geeksforgeeks.org/why-c-treats-array-parameters-as-pointers/#comment-4217</link>
+		<dc:creator><![CDATA[C-Programmer]]></dc:creator>
+		<pubDate>Sun, 05 Jun 2011 09:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4088#comment-4217</guid>
+		<description><![CDATA[It is very simple if we look at how the arrays are accessed
+
+array[i] is evaluated as *(array + i)
+
+where &quot;array&quot; will represent the base address and i the offset. So if &quot;array&quot; is a pointer variable, then base address will the address contained in the variable and if &quot;array&quot; is a single dimensional array, then it will represent the base address of the array. So the evaluation results will be the same..]]></description>
+		<content:encoded><![CDATA[<p>It is very simple if we look at how the arrays are accessed</p>
+<p>array[i] is evaluated as *(array + i)</p>
+<p>where &#8220;array&#8221; will represent the base address and i the offset. So if &#8220;array&#8221; is a pointer variable, then base address will the address contained in the variable and if &#8220;array&#8221; is a single dimensional array, then it will represent the base address of the array. So the evaluation results will be the same..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kiran</title>
+		<link>http://www.geeksforgeeks.org/why-c-treats-array-parameters-as-pointers/#comment-486</link>
+		<dc:creator><![CDATA[kiran]]></dc:creator>
+		<pubDate>Mon, 22 Feb 2010 18:23:20 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4088#comment-486</guid>
+		<description><![CDATA[I have seen  lot of people confuse arrays with pointers. It is true that arrays decays into pointers while it is passed into
+a function as a parameter, but its kind of bad practice to
+use arrays and pointers interchangably to refer to one another
+
+For example
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+//declaration
+extern char *ptr;
+//definition
+char ptr[10]; 
+&lt;/code&gt; &lt;/pre&gt;
+
+so access of p[i] using extern will produce a character(garabage), but program treat it as pointers, if you dereference this garbage, you might get what you
+want but it will fail mysteriously at some later point in the program(if you have big program) then debugging takes years to figure out which variables is stepping on each other.
+
+
+
+Pointers Holds the address of data. Array On the hand holds the data itself
+
+In Pointers Data is access indirectly, i.e two instructions
+
+example
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+char *s = &#034;Hello&#034;;
+c = s[i]
+&lt;/code&gt; &lt;/pre&gt;
+
+a.compiler symbol table lookup for s  is done
+b. get the contents of s
+c. now get the value of i and addit to s [s + i]
+
+In arrays data is accessed directly
+
+
+pointers typically points to annonymous data.
+
+usually pointer arithmetic for array operation
+uses subscript for example 
+s[i]   get value of &quot;i&quot; past &quot;s&quot;
+
+Array On the hand holds the data itself
+data is accessed directly 
+
+pointers need malloc(), free, otherwise it will fail
+Arrays don&#039;t need any such thing, as it is automatically 
+allocated and deallocated.]]></description>
+		<content:encoded><![CDATA[<p>I have seen  lot of people confuse arrays with pointers. It is true that arrays decays into pointers while it is passed into<br />
+a function as a parameter, but its kind of bad practice to<br />
+use arrays and pointers interchangably to refer to one another</p>
+<p>For example</p>
+<pre> <code language="C">
+//declaration
+extern char *ptr;
+//definition
+char ptr[10]; 
+</code> </pre>
+<p>so access of p[i] using extern will produce a character(garabage), but program treat it as pointers, if you dereference this garbage, you might get what you<br />
+want but it will fail mysteriously at some later point in the program(if you have big program) then debugging takes years to figure out which variables is stepping on each other.</p>
+<p>Pointers Holds the address of data. Array On the hand holds the data itself</p>
+<p>In Pointers Data is access indirectly, i.e two instructions</p>
+<p>example</p>
+<pre> <code language="C">
+char *s = &quot;Hello&quot;;
+c = s[i]
+</code> </pre>
+<p>a.compiler symbol table lookup for s  is done<br />
+b. get the contents of s<br />
+c. now get the value of i and addit to s [s + i]</p>
+<p>In arrays data is accessed directly</p>
+<p>pointers typically points to annonymous data.</p>
+<p>usually pointer arithmetic for array operation<br />
+uses subscript for example<br />
+s[i]   get value of &#8220;i&#8221; past &#8220;s&#8221;</p>
+<p>Array On the hand holds the data itself<br />
+data is accessed directly </p>
+<p>pointers need malloc(), free, otherwise it will fail<br />
+Arrays don&#8217;t need any such thing, as it is automatically<br />
+allocated and deallocated.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.037 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:25:55 -->
+
+<!-- Compression = gzip -->

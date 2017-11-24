@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: When do we use Initializer List in C++?</title>
+	<atom:link href="http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Sagar</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-40133</link>
+		<dc:creator><![CDATA[Sagar]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 10:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-40133</guid>
+		<description><![CDATA[Actual Code as below
+------------------------------------
+#include 
+
+using namespace std;
+
+class X {
+
+int x;
+
+public:
+
+X() { x = 0; }
+
+X(int i) { x = i; }
+
+void print()
+
+{
+
+    cout &#060;&#060; &#034;x = &#034; &#060;&#060;x &#060;&#060; endl;    
+
+}
+
+};
+
+class Y : public X {
+
+int y; // Different from X&#039;s i
+
+public:
+
+Y() { y = 0; }
+
+Y(int i) { y = i; }
+
+Y(int m, int n): y(m),X(n)
+
+{
+
+    cout &#060;&#060; &#034;Y&#039;s constructor called&#034;&#060;&#060; endl;
+
+}
+
+void print()
+
+{
+
+    X::print();
+
+    cout &#060;&#060; &#034;y = &#034; &#060;&#060;y &#060;&#060; endl;    
+
+}
+
+};
+
+int main() {
+
+cout &#060;&#060; &#034;sizeof(X) = &#034; &#060;&#060; sizeof(X) &#060;&#060; endl;
+
+cout &#060;&#060; &#034;sizeof(Y) = &#034;&#060;&#060; sizeof(Y) &#060;&#060; endl;
+
+Y obj;
+
+obj.print();
+
+obj(1,2);
+
+obj.print();
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Actual Code as below<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+#include </p>
+<p>using namespace std;</p>
+<p>class X {</p>
+<p>int x;</p>
+<p>public:</p>
+<p>X() { x = 0; }</p>
+<p>X(int i) { x = i; }</p>
+<p>void print()</p>
+<p>{</p>
+<p>    cout &lt;&lt; &quot;x = &quot; &lt;&lt;x &lt;&lt; endl;    </p>
+<p>}</p>
+<p>};</p>
+<p>class Y : public X {</p>
+<p>int y; // Different from X&#039;s i</p>
+<p>public:</p>
+<p>Y() { y = 0; }</p>
+<p>Y(int i) { y = i; }</p>
+<p>Y(int m, int n): y(m),X(n)</p>
+<p>{</p>
+<p>    cout &lt;&lt; &quot;Y&#039;s constructor called&quot;&lt;&lt; endl;</p>
+<p>}</p>
+<p>void print()</p>
+<p>{</p>
+<p>    X::print();</p>
+<p>    cout &lt;&lt; &quot;y = &quot; &lt;&lt;y &lt;&lt; endl;    </p>
+<p>}</p>
+<p>};</p>
+<p>int main() {</p>
+<p>cout &lt;&lt; &quot;sizeof(X) = &quot; &lt;&lt; sizeof(X) &lt;&lt; endl;</p>
+<p>cout &lt;&lt; &quot;sizeof(Y) = &quot;&lt;&lt; sizeof(Y) &lt;&lt; endl;</p>
+<p>Y obj;</p>
+<p>obj.print();</p>
+<p>obj(1,2);</p>
+<p>obj.print();</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sagar</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-40132</link>
+		<dc:creator><![CDATA[Sagar]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 10:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-40132</guid>
+		<description><![CDATA[Whats the problem with below code
+
+--------------------------------------------
+
+Getting Error 
+In function &#039;int main()&#039;:
+41:8: error: no match for call to &#039;(Y) (int, int)&#039;
+
+#include 
+using namespace std;
+class X {
+int x;
+
+public:
+X() { x = 0; }
+X(int i) { x = i; }
+void print()
+{
+    cout &#060;&#060; &#034;x = &#034; &#060;&#060;x &#060;&#060; endl; 
+}
+};
+
+class Y : public X {
+int y; // Different from X&#039;s i
+
+public:
+Y() { y = 0; }
+
+Y(int i) { y = i; }
+
+Y(int m, int n): y(m),X(n)
+{
+    cout &#060;&#060; &#034;Y&#039;s constructor called&#034;&#060;&#060; endl;
+}
+
+void print()
+{
+    X::print();
+    cout &#060;&#060; &#034;y = &#034; &#060;&#060;y &#060;&#060; endl; 
+}
+};
+
+int main() {
+cout &#060;&#060; &#034;sizeof(X) = &#034; &#060;&#060; sizeof(X) &#060;&#060; endl;
+cout &#060;&#060; &#034;sizeof(Y) = &#034;&#060;&#060; sizeof(Y) &#060;&#060; endl;
+Y obj;
+obj.print();
+obj(1,2);
+obj.print();
+}]]></description>
+		<content:encoded><![CDATA[<p>Whats the problem with below code</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>Getting Error<br />
+In function &#8216;int main()&#8217;:<br />
+41:8: error: no match for call to &#8216;(Y) (int, int)&#8217;</p>
+<p>#include<br />
+using namespace std;<br />
+class X {<br />
+int x;</p>
+<p>public:<br />
+X() { x = 0; }<br />
+X(int i) { x = i; }<br />
+void print()<br />
+{<br />
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt;x &lt;&lt; endl;<br />
+}<br />
+};</p>
+<p>class Y : public X {<br />
+int y; // Different from X&#039;s i</p>
+<p>public:<br />
+Y() { y = 0; }</p>
+<p>Y(int i) { y = i; }</p>
+<p>Y(int m, int n): y(m),X(n)<br />
+{<br />
+    cout &lt;&lt; &quot;Y&#039;s constructor called&quot;&lt;&lt; endl;<br />
+}</p>
+<p>void print()<br />
+{<br />
+    X::print();<br />
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt;y &lt;&lt; endl;<br />
+}<br />
+};</p>
+<p>int main() {<br />
+cout &lt;&lt; &quot;sizeof(X) = &quot; &lt;&lt; sizeof(X) &lt;&lt; endl;<br />
+cout &lt;&lt; &quot;sizeof(Y) = &quot;&lt;&lt; sizeof(Y) &lt;&lt; endl;<br />
+Y obj;<br />
+obj.print();<br />
+obj(1,2);<br />
+obj.print();<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mani</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-30445</link>
+		<dc:creator><![CDATA[Mani]]></dc:creator>
+		<pubDate>Thu, 05 Dec 2013 15:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-30445</guid>
+		<description><![CDATA[I would like to correct the point no.6. The following are the right steps when compiler executes with and without initialization list.
+
+Without Initializer List
+1. Type&#039;s copy constructor called to create &#039;a&#039;
+2. Type&#039;s constructor called to create &#039;variable&#039;
+3. Type&#039;s assignment operator called to copy &#039;a&#039; into &#039;variable&#039;
+4. Type&#039;s destructor called to destroy &#039;a&#039;
+
+With Initializer List
+1. Type&#039;s copy constructor called to create &#039;a&#039;
+2. Type&#039;s copy constructor called to create &#039;variable&#039;
+3. Type&#039;s destructor called to destroy &#039;a&#039;
+
+
+Basically without initializer list it takes one more operation to do the work, which is bad. So always use initialization list.]]></description>
+		<content:encoded><![CDATA[<p>I would like to correct the point no.6. The following are the right steps when compiler executes with and without initialization list.</p>
+<p>Without Initializer List<br />
+1. Type&#8217;s copy constructor called to create &#8216;a&#8217;<br />
+2. Type&#8217;s constructor called to create &#8216;variable&#8217;<br />
+3. Type&#8217;s assignment operator called to copy &#8216;a&#8217; into &#8216;variable&#8217;<br />
+4. Type&#8217;s destructor called to destroy &#8216;a&#8217;</p>
+<p>With Initializer List<br />
+1. Type&#8217;s copy constructor called to create &#8216;a&#8217;<br />
+2. Type&#8217;s copy constructor called to create &#8216;variable&#8217;<br />
+3. Type&#8217;s destructor called to destroy &#8216;a&#8217;</p>
+<p>Basically without initializer list it takes one more operation to do the work, which is bad. So always use initialization list.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Alexander Korobeynikov</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-28999</link>
+		<dc:creator><![CDATA[Alexander Korobeynikov]]></dc:creator>
+		<pubDate>Thu, 17 Oct 2013 23:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-28999</guid>
+		<description><![CDATA[What is explained in this article is called &quot;initialization list&quot;.
+The &quot;initializer list&quot; is a relatively new term of C++11. Actually, I&#039;ve been looking for the latter when stumbled up this in the google search results.
+
+I&#039;d say the article shall be updated.]]></description>
+		<content:encoded><![CDATA[<p>What is explained in this article is called &#8220;initialization list&#8221;.<br />
+The &#8220;initializer list&#8221; is a relatively new term of C++11. Actually, I&#8217;ve been looking for the latter when stumbled up this in the google search results.</p>
+<p>I&#8217;d say the article shall be updated.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-20728</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Thu, 27 Jun 2013 11:17:25 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-20728</guid>
+		<description><![CDATA[will constructor of a not be called in this case ?]]></description>
+		<content:encoded><![CDATA[<p>will constructor of a not be called in this case ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pavi</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-20467</link>
+		<dc:creator><![CDATA[Pavi]]></dc:creator>
+		<pubDate>Mon, 24 Jun 2013 05:50:52 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-20467</guid>
+		<description><![CDATA[There&#039;s one more thing happening before point# 1 of case:
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+ MyClass(Type a)
+ {
+     variable = a;
+ }
+&lt;/code&gt; &lt;/pre&gt;
+
+That is: the default constructor for variable, i.e.: Type() is called.
+
+Whereas for case:
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+MyClass(Type a):variable(a)
+{
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+That default constructor call is replaced by Copy-constructor for object: variable.
+
+Please reply if you disagree.]]></description>
+		<content:encoded><![CDATA[<p>There&#8217;s one more thing happening before point# 1 of case:</p>
+<pre> <code language="C">
+ MyClass(Type a)
+ {
+     variable = a;
+ }
+</code> </pre>
+<p>That is: the default constructor for variable, i.e.: Type() is called.</p>
+<p>Whereas for case:</p>
+<pre> <code language="C">
+MyClass(Type a):variable(a)
+{
+}
+</code> </pre>
+<p>That default constructor call is replaced by Copy-constructor for object: variable.</p>
+<p>Please reply if you disagree.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-18917</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Thu, 30 May 2013 18:44:33 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-18917</guid>
+		<description><![CDATA[The list of members to be initialized is indicated with constructor as a comma separated list followed by a colon.
+
+Shouldn&#039;t it be as below?
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+The list of members to be initialized is indicated with constructor as a colon followed by a comma separated list.
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>The list of members to be initialized is indicated with constructor as a comma separated list followed by a colon.</p>
+<p>Shouldn&#8217;t it be as below?</p>
+<pre> <code language="C">
+The list of members to be initialized is indicated with constructor as a colon followed by a comma separated list.
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anant</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-18072</link>
+		<dc:creator><![CDATA[Anant]]></dc:creator>
+		<pubDate>Fri, 10 May 2013 12:37:47 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-18072</guid>
+		<description><![CDATA[Above is case 4 .Even if you do not inherit. Still there will be error for not having default constructor.]]></description>
+		<content:encoded><![CDATA[<p>Above is case 4 .Even if you do not inherit. Still there will be error for not having default constructor.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anant</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-18071</link>
+		<dc:creator><![CDATA[Anant]]></dc:creator>
+		<pubDate>Fri, 10 May 2013 11:59:26 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-18071</guid>
+		<description><![CDATA[Case 3: you must have default constructor in base class A so class B can inherit it, else code will give compile time error. At least in VS.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Case 3: you must have default constructor in base class A so class B can inherit it, else code will give compile time error. At least in VS.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: daya</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-7752</link>
+		<dc:creator><![CDATA[daya]]></dc:creator>
+		<pubDate>Wed, 07 Mar 2012 11:34:41 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-7752</guid>
+		<description><![CDATA[Life will be hell if not using initializer list for initialization.
+Initializer list is actually meant to initialize data members n all the stuffs related to initialization. 
+Ctor body are meant to after data member initialization, if some thing has to de done during object creation.]]></description>
+		<content:encoded><![CDATA[<p>Life will be hell if not using initializer list for initialization.<br />
+Initializer list is actually meant to initialize data members n all the stuffs related to initialization.<br />
+Ctor body are meant to after data member initialization, if some thing has to de done during object creation.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhimanyu Vohra</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/#comment-6439</link>
+		<dc:creator><![CDATA[Abhimanyu Vohra]]></dc:creator>
+		<pubDate>Sat, 12 Nov 2011 05:59:55 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13797#comment-6439</guid>
+		<description><![CDATA[Well Explained!!]]></description>
+		<content:encoded><![CDATA[<p>Well Explained!!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:26 -->
+
+<!-- Compression = gzip -->

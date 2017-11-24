@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Pairwise swap elements of a given linked list</title>
+	<atom:link href="http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-38972</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 18:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-38972</guid>
+		<description><![CDATA[Recursive approach for swapping pair of nodes
+
+node *swap_node_pair_rec (node *head)
+{
+    if (!head)
+        return NULL;
+    if (!head-&#062;next)
+        return head;
+    node *prev = swap_node_pair_rec (head-&#062;next-&#062;next);
+    node *tmp = head-&#062;next;
+    head-&#062;next = prev;
+    tmp-&#062;next = head;
+    return tmp;
+}
+
+Caller : root = swap_node_pair_rec(root);]]></description>
+		<content:encoded><![CDATA[<p>Recursive approach for swapping pair of nodes</p>
+<p>node *swap_node_pair_rec (node *head)<br />
+{<br />
+    if (!head)<br />
+        return NULL;<br />
+    if (!head-&gt;next)<br />
+        return head;<br />
+    node *prev = swap_node_pair_rec (head-&gt;next-&gt;next);<br />
+    node *tmp = head-&gt;next;<br />
+    head-&gt;next = prev;<br />
+    tmp-&gt;next = head;<br />
+    return tmp;<br />
+}</p>
+<p>Caller : root = swap_node_pair_rec(root);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek Chauhan</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-38968</link>
+		<dc:creator><![CDATA[Abhishek Chauhan]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 17:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-38968</guid>
+		<description><![CDATA[Swapping ptrs instead
+
+void swap_node_pair (node **head)
+{
+    node *current = *head;
+    node *tmp;
+    node *prev = NULL;
+    if (!(*head))
+        return;
+    if (!(*head)-&#062;next)
+        return;
+    else
+        *head = (*head)-&#062;next;
+    while (current &#038;&#038; current-&#062;next)
+    {
+        tmp = current-&#062;next;
+        current-&#062;next = current-&#062;next-&#062;next;
+        tmp-&#062;next = current;
+        if (prev)
+            prev-&#062;next = tmp;
+        prev = current;
+        current = current-&#062;next;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>Swapping ptrs instead</p>
+<p>void swap_node_pair (node **head)<br />
+{<br />
+    node *current = *head;<br />
+    node *tmp;<br />
+    node *prev = NULL;<br />
+    if (!(*head))<br />
+        return;<br />
+    if (!(*head)-&gt;next)<br />
+        return;<br />
+    else<br />
+        *head = (*head)-&gt;next;<br />
+    while (current &amp;&amp; current-&gt;next)<br />
+    {<br />
+        tmp = current-&gt;next;<br />
+        current-&gt;next = current-&gt;next-&gt;next;<br />
+        tmp-&gt;next = current;<br />
+        if (prev)<br />
+            prev-&gt;next = tmp;<br />
+        prev = current;<br />
+        current = current-&gt;next;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: NAVEEN PRAJAPATI</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-37706</link>
+		<dc:creator><![CDATA[NAVEEN PRAJAPATI]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 21:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-37706</guid>
+		<description><![CDATA[#include 
+#include 
+#include 
+#include 
+using namespace std;
+
+struct node 
+{
+   int data ;
+   struct node *next;
+} *root = NULL;
+
+void insert()
+{
+  struct node *new_node,*current;
+  int i,j,k,m,n;
+
+  cout&#060;&#060;&#034;enter the number of elements&#034;&#060;&#062;n;
+ 
+  for(i = 0; i &#060; n; i++)
+  {
+    cout&#060;&#060;&#034;enter the element u want to enter in list&#034;&#060;&#062;k;
+
+    new_node = (struct node *)malloc(sizeof(struct node));
+    new_node-&#062;data = k;
+    new_node-&#062;next = NULL;
+
+    if(root == NULL)
+    {
+      current = new_node;
+      root = current;
+    }
+    
+    else
+     {
+       current-&#062;next = new_node;
+       current = new_node;
+     }
+
+  }
+
+}
+
+int display()
+{
+   int count = 0;
+   struct node *temp;
+   temp = root;
+
+   while(temp != NULL)
+   {
+     cout&#060;data&#060; &quot;;
+     
+     temp = temp-&#062;next;
+     count++;
+   }
+
+   return count;
+}
+
+void pairwise_swap(int size)
+{
+  struct node *prev,*current;
+  int temp;
+  prev = root;
+  current = prev-&#062;next;
+  if(size%2 == 0)
+  {
+  while(current-&#062;next != NULL)
+  {
+   
+    temp = current-&#062;data;
+    current-&#062;data = prev-&#062;data;
+    prev-&#062;data = temp;
+
+    prev = current-&#062;next;
+    current = prev-&#062;next;
+    if(current-&#062;next == NULL) // this condition is needed because current-&#062;next becomes null and come out of loop without swapping
+    {
+      temp = current-&#062;data;
+      current-&#062;data = prev-&#062;data;
+      prev-&#062;data = temp;
+    }
+
+  }
+  }
+
+  else
+  {
+   while(prev-&#062;next != NULL)
+  {
+
+    temp = current-&#062;data;
+    current-&#062;data = prev-&#062;data;
+    prev-&#062;data = temp;
+
+    prev = current-&#062;next;
+    current = prev-&#062;next;
+
+  }
+  }
+
+}
+
+int main()
+{
+
+  int k;
+  insert();
+ k =  display();
+
+  pairwise_swap(k);
+  cout&#060;&#060;endl;
+  cout&#060;&#060;&#034;linked list after swapping&#034;&#060;&#060;endl;
+  display();
+  return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#include<br />
+#include<br />
+using namespace std;</p>
+<p>struct node<br />
+{<br />
+   int data ;<br />
+   struct node *next;<br />
+} *root = NULL;</p>
+<p>void insert()<br />
+{<br />
+  struct node *new_node,*current;<br />
+  int i,j,k,m,n;</p>
+<p>  cout&lt;&lt;&quot;enter the number of elements&quot;&lt;&gt;n;</p>
+<p>  for(i = 0; i &lt; n; i++)<br />
+  {<br />
+    cout&lt;&lt;&quot;enter the element u want to enter in list&quot;&lt;&gt;k;</p>
+<p>    new_node = (struct node *)malloc(sizeof(struct node));<br />
+    new_node-&gt;data = k;<br />
+    new_node-&gt;next = NULL;</p>
+<p>    if(root == NULL)<br />
+    {<br />
+      current = new_node;<br />
+      root = current;<br />
+    }</p>
+<p>    else<br />
+     {<br />
+       current-&gt;next = new_node;<br />
+       current = new_node;<br />
+     }</p>
+<p>  }</p>
+<p>}</p>
+<p>int display()<br />
+{<br />
+   int count = 0;<br />
+   struct node *temp;<br />
+   temp = root;</p>
+<p>   while(temp != NULL)<br />
+   {<br />
+     cout&lt;data&lt; &#8220;;</p>
+<p>     temp = temp-&gt;next;<br />
+     count++;<br />
+   }</p>
+<p>   return count;<br />
+}</p>
+<p>void pairwise_swap(int size)<br />
+{<br />
+  struct node *prev,*current;<br />
+  int temp;<br />
+  prev = root;<br />
+  current = prev-&gt;next;<br />
+  if(size%2 == 0)<br />
+  {<br />
+  while(current-&gt;next != NULL)<br />
+  {</p>
+<p>    temp = current-&gt;data;<br />
+    current-&gt;data = prev-&gt;data;<br />
+    prev-&gt;data = temp;</p>
+<p>    prev = current-&gt;next;<br />
+    current = prev-&gt;next;<br />
+    if(current-&gt;next == NULL) // this condition is needed because current-&gt;next becomes null and come out of loop without swapping<br />
+    {<br />
+      temp = current-&gt;data;<br />
+      current-&gt;data = prev-&gt;data;<br />
+      prev-&gt;data = temp;<br />
+    }</p>
+<p>  }<br />
+  }</p>
+<p>  else<br />
+  {<br />
+   while(prev-&gt;next != NULL)<br />
+  {</p>
+<p>    temp = current-&gt;data;<br />
+    current-&gt;data = prev-&gt;data;<br />
+    prev-&gt;data = temp;</p>
+<p>    prev = current-&gt;next;<br />
+    current = prev-&gt;next;</p>
+<p>  }<br />
+  }</p>
+<p>}</p>
+<p>int main()<br />
+{</p>
+<p>  int k;<br />
+  insert();<br />
+ k =  display();</p>
+<p>  pairwise_swap(k);<br />
+  cout&lt;&lt;endl;<br />
+  cout&lt;&lt;&quot;linked list after swapping&quot;&lt;&lt;endl;<br />
+  display();<br />
+  return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anon</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-36336</link>
+		<dc:creator><![CDATA[anon]]></dc:creator>
+		<pubDate>Tue, 20 May 2014 14:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-36336</guid>
+		<description><![CDATA[swapping pointers instead of data
+
+void swap(struct node **node)
+{
+        struct node *temp;
+
+        while (*node &#038;&#038; (*node)-&#062;next) {
+                temp = *node;
+                *node = temp-&#062;next;
+                temp-&#062;next = (*node)-&#062;next;
+                (*node)-&#062;next = temp;
+                node = &#038;temp-&#062;next;
+        }
+}]]></description>
+		<content:encoded><![CDATA[<p>swapping pointers instead of data</p>
+<p>void swap(struct node **node)<br />
+{<br />
+        struct node *temp;</p>
+<p>        while (*node &amp;&amp; (*node)-&gt;next) {<br />
+                temp = *node;<br />
+                *node = temp-&gt;next;<br />
+                temp-&gt;next = (*node)-&gt;next;<br />
+                (*node)-&gt;next = temp;<br />
+                node = &amp;temp-&gt;next;<br />
+        }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34940</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 22:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34940</guid>
+		<description><![CDATA[while(temp-&#062;next!=NULL &#038;&#038; temp!=NULL)
+
+change this to
+
+while( temp!=NULL &#038;&#038; temp-&#062;next!=NULL)
+
+and NO Need of this code
+
+if(temp-&#062;next-&#062;next!=NULL)
+/*the condition temp!=NULL is staisfied for last node but the condition of temp-&#062;next!=NULL is not staisifed as it exceds the list, thus not knowing what the next adrress containsso segmentation fault ar=ises*/
+temp=temp-&#062;next-&#062;next;
+else
+temp=temp-&#062;next;
+}
+
+just 
+
+temp=temp-&#062;next-&#062;next;
+
+is enough
+
+because for Total number Nodes are ODD  temp!=NULL becomes false if  Total number Nodes are even temp-&#062;next!=NULL  will become false]]></description>
+		<content:encoded><![CDATA[<p>while(temp-&gt;next!=NULL &amp;&amp; temp!=NULL)</p>
+<p>change this to</p>
+<p>while( temp!=NULL &amp;&amp; temp-&gt;next!=NULL)</p>
+<p>and NO Need of this code</p>
+<p>if(temp-&gt;next-&gt;next!=NULL)<br />
+/*the condition temp!=NULL is staisfied for last node but the condition of temp-&gt;next!=NULL is not staisifed as it exceds the list, thus not knowing what the next adrress containsso segmentation fault ar=ises*/<br />
+temp=temp-&gt;next-&gt;next;<br />
+else<br />
+temp=temp-&gt;next;<br />
+}</p>
+<p>just </p>
+<p>temp=temp-&gt;next-&gt;next;</p>
+<p>is enough</p>
+<p>because for Total number Nodes are ODD  temp!=NULL becomes false if  Total number Nodes are even temp-&gt;next!=NULL  will become false</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Niks</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34927</link>
+		<dc:creator><![CDATA[Niks]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 15:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34927</guid>
+		<description><![CDATA[I am sorry but I dont see a problem with the above code in the case when we have even nos, can you please give an example where it will fail.]]></description>
+		<content:encoded><![CDATA[<p>I am sorry but I dont see a problem with the above code in the case when we have even nos, can you please give an example where it will fail.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Atreyee Ray</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34925</link>
+		<dc:creator><![CDATA[Atreyee Ray]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 14:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34925</guid>
+		<description><![CDATA[the problem that i mentioned arises when it is even number]]></description>
+		<content:encoded><![CDATA[<p>the problem that i mentioned arises when it is even number</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Atreyee Ray</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34924</link>
+		<dc:creator><![CDATA[Atreyee Ray]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 14:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34924</guid>
+		<description><![CDATA[the last node can&#039;t be read by this method since the temp!=NULL is satisfied but because of the &#038;&#038; condition temp-&#062;next!=NULL isn&#039;t satisfied although it is at the end. this one probbaly works plz suggest if it wrong somewhere
+node *pairwiseswap(node *header)
+{
+     node *temp=header;
+     int t;
+     while(temp-&#062;next!=NULL &#038;&#038; temp!=NULL)
+     {
+                            t=temp-&#062;data;
+                            temp-&#062;data=temp-&#062;next-&#062;data;
+                            temp-&#062;next-&#062;data=t;
+                            if(temp-&#062;next-&#062;next!=NULL)
+/*the condition temp!=NULL is staisfied for last node but the condition of temp-&#062;next!=NULL is not staisifed as it exceds the list, thus not knowing what the next adrress containsso segmentation fault ar=ises*/
+                            temp=temp-&#062;next-&#062;next;
+                            else
+                            temp=temp-&#062;next;
+     }
+     return header;
+}]]></description>
+		<content:encoded><![CDATA[<p>the last node can&#8217;t be read by this method since the temp!=NULL is satisfied but because of the &amp;&amp; condition temp-&gt;next!=NULL isn&#8217;t satisfied although it is at the end. this one probbaly works plz suggest if it wrong somewhere<br />
+node *pairwiseswap(node *header)<br />
+{<br />
+     node *temp=header;<br />
+     int t;<br />
+     while(temp-&gt;next!=NULL &amp;&amp; temp!=NULL)<br />
+     {<br />
+                            t=temp-&gt;data;<br />
+                            temp-&gt;data=temp-&gt;next-&gt;data;<br />
+                            temp-&gt;next-&gt;data=t;<br />
+                            if(temp-&gt;next-&gt;next!=NULL)<br />
+/*the condition temp!=NULL is staisfied for last node but the condition of temp-&gt;next!=NULL is not staisifed as it exceds the list, thus not knowing what the next adrress containsso segmentation fault ar=ises*/<br />
+                            temp=temp-&gt;next-&gt;next;<br />
+                            else<br />
+                            temp=temp-&gt;next;<br />
+     }<br />
+     return header;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34906</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 07:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34906</guid>
+		<description><![CDATA[Thanks for sharing your thoughts. Could you please provide more details.  An example list where the above program doesn&#039;t produce expected output would help.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for sharing your thoughts. Could you please provide more details.  An example list where the above program doesn&#8217;t produce expected output would help.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: VaraKalyan M</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-34896</link>
+		<dc:creator><![CDATA[VaraKalyan M]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 21:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-34896</guid>
+		<description><![CDATA[I think , a final step is missed in both the routines.
+For ex : 10 -&#062;20 -&#062;30-&#062;40-&#062;50
+After pass 1: 20 -&#062;10 -&#062;30 -&#062;40 -&#062;50.
+pass 2: 20 -&#062;10 -&#062;40 -&#062;30 -&#062; 40 -&#062;50.
+Here , not only reversing the pair linking it to the previous pair also important. i.e 10 -&#062;40.]]></description>
+		<content:encoded><![CDATA[<p>I think , a final step is missed in both the routines.<br />
+For ex : 10 -&gt;20 -&gt;30-&gt;40-&gt;50<br />
+After pass 1: 20 -&gt;10 -&gt;30 -&gt;40 -&gt;50.<br />
+pass 2: 20 -&gt;10 -&gt;40 -&gt;30 -&gt; 40 -&gt;50.<br />
+Here , not only reversing the pair linking it to the previous pair also important. i.e 10 -&gt;40.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sijayaraman</title>
+		<link>http://www.geeksforgeeks.org/pairwise-swap-elements-of-a-given-linked-list/#comment-32424</link>
+		<dc:creator><![CDATA[sijayaraman]]></dc:creator>
+		<pubDate>Mon, 10 Feb 2014 17:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7049#comment-32424</guid>
+		<description><![CDATA[void swap_pair(struct node* root)
+{
+    if(root==NULL &#124;&#124; root-&#062;link==NULL)
+        return;
+    struct node* current = root;
+    struct node* next = current-&#062;link;
+    while(current-&#062;link!=NULL)
+    {
+        swap(&#038;current-&#062;data,&#038;next-&#062;data);
+        if(current-&#062;link == NULL &#124;&#124; next-&#062;link==NULL)
+        {
+            break;
+        }
+        current=next-&#062;link;
+        next=current-&#062;link;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>void swap_pair(struct node* root)<br />
+{<br />
+    if(root==NULL || root-&gt;link==NULL)<br />
+        return;<br />
+    struct node* current = root;<br />
+    struct node* next = current-&gt;link;<br />
+    while(current-&gt;link!=NULL)<br />
+    {<br />
+        swap(&amp;current-&gt;data,&amp;next-&gt;data);<br />
+        if(current-&gt;link == NULL || next-&gt;link==NULL)<br />
+        {<br />
+            break;<br />
+        }<br />
+        current=next-&gt;link;<br />
+        next=current-&gt;link;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.106 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:45 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Check if all leaves are at same level</title>
+	<atom:link href="http://www.geeksforgeeks.org/check-leaves-level/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/check-leaves-level/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-38447</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 15:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-38447</guid>
+		<description><![CDATA[another approach 
+if any node has left and right child the compare the levels of leaf nodes
+if both child nodes are not present return level of this leaf
+if one of the child is absent then we have to return the level of the present subtree
+
+
+int leafLevel(btnode *t,int level)
+{    if(t==NULL)
+    return 0;
+    
+    if(t-&#062;lchild &#038;&#038; t-&#062;rchild)
+    {
+        int k1=leafLevel(t-&#062;lchild,level+1);
+        int k2=leafLevel(t-&#062;rchild,level+1);
+        if(k1==0 &#038;&#038; k2==0 &#124;&#124; k1!=k2)
+        return 0;
+        
+        return k1;
+    }
+    else if(!t-&#062;lchild &#038;&#038; t-&#062;rchild)
+    {    return leafLevel(t-&#062;rchild,level+1);
+    }
+    else if (!t-&#062;rchild &#038;&#038; t-&#062;lchild)
+    {    return leafLevel(t-&#062;lchild,level+1);
+    }
+    else
+    {    return level;
+    }
+}
+int main()
+{
+        int ch;
+        cout&#060;&#062;ch;
+        btnode *t=NULL;
+        create(t,ch);
+        int level=1;
+        if(leafLevel(t,level))
+        cout&#060;&#060;&#034;All the leaves are at the same level&#034;;
+        else
+        cout&#060;&#060;&#034;Leaves are not at the same level n&#034;;
+}]]></description>
+		<content:encoded><![CDATA[<p>another approach<br />
+if any node has left and right child the compare the levels of leaf nodes<br />
+if both child nodes are not present return level of this leaf<br />
+if one of the child is absent then we have to return the level of the present subtree</p>
+<p>int leafLevel(btnode *t,int level)<br />
+{    if(t==NULL)<br />
+    return 0;</p>
+<p>    if(t-&gt;lchild &amp;&amp; t-&gt;rchild)<br />
+    {<br />
+        int k1=leafLevel(t-&gt;lchild,level+1);<br />
+        int k2=leafLevel(t-&gt;rchild,level+1);<br />
+        if(k1==0 &amp;&amp; k2==0 || k1!=k2)<br />
+        return 0;</p>
+<p>        return k1;<br />
+    }<br />
+    else if(!t-&gt;lchild &amp;&amp; t-&gt;rchild)<br />
+    {    return leafLevel(t-&gt;rchild,level+1);<br />
+    }<br />
+    else if (!t-&gt;rchild &amp;&amp; t-&gt;lchild)<br />
+    {    return leafLevel(t-&gt;lchild,level+1);<br />
+    }<br />
+    else<br />
+    {    return level;<br />
+    }<br />
+}<br />
+int main()<br />
+{<br />
+        int ch;<br />
+        cout&lt;&gt;ch;<br />
+        btnode *t=NULL;<br />
+        create(t,ch);<br />
+        int level=1;<br />
+        if(leafLevel(t,level))<br />
+        cout&lt;&lt;&quot;All the leaves are at the same level&quot;;<br />
+        else<br />
+        cout&lt;&lt;&quot;Leaves are not at the same level n&quot;;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-33873</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 15:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-33873</guid>
+		<description><![CDATA[@All, thanks for sharing your thoughts.  We have removed the second method as it was not handling all cases.  The first method seems to be simple and handles all cases.]]></description>
+		<content:encoded><![CDATA[<p>@All, thanks for sharing your thoughts.  We have removed the second method as it was not handling all cases.  The first method seems to be simple and handles all cases.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Isha</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-33868</link>
+		<dc:creator><![CDATA[Isha]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 12:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-33868</guid>
+		<description><![CDATA[This will work:
+
+int checkLeavesLevel(struct Node *root)
+
+{
+
+	if(root-&#062;left==NULL &#038;&#038; root-&#062;right==NULL) return 1;
+
+	if(root-&#062;left!=NULL &#038;&#038; root-&#062;right!=NULL)
+
+	{
+
+		int lh=checkLeavesLevel(root-&#062;left);
+
+		int rh=checkLeavesLevel(root-&#062;right);
+
+		if(lh==-1 &#124;&#124; rh==-1) return -1;
+
+		if(lh==rh) 
+
+		{
+
+			return lh+1;
+
+		}
+
+		return -1;
+
+	}
+
+	else if(root-&#062;left==NULL &#038;&#038; root-&#062;right!=NULL)
+
+	{
+
+		int rh=checkLeavesLevel(root-&#062;right);
+
+		if(rh==-1) return -1;
+
+		return rh+1;
+
+	}
+
+	else if(root-&#062;left!=NULL &#038;&#038; root-&#062;right==NULL)
+
+	{
+
+		int lh=checkLeavesLevel(root-&#062;left);
+
+		if(lh==-1) return -1;
+
+		return lh+1;
+
+	}
+
+}
+
+int main()
+
+{
+
+    
+
+    struct Node *root = newNode(12);
+
+    root-&#062;left = newNode(5);
+
+	root-&#062;right = newNode(7);
+
+	root-&#062;left-&#062;left = newNode(3);
+
+	root-&#062;right-&#062;right = newNode(1);
+
+	root-&#062;right-&#062;left = newNode(2);
+
+
+    if (checkLeavesLevel(root)!=-1)
+
+        printf(&quot;Leaves are at same leveln&quot;);
+
+    else
+
+        printf(&quot;Leaves are not at same leveln&quot;);
+
+    
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>This will work:</p>
+<p>int checkLeavesLevel(struct Node *root)</p>
+<p>{</p>
+<p>	if(root-&gt;left==NULL &amp;&amp; root-&gt;right==NULL) return 1;</p>
+<p>	if(root-&gt;left!=NULL &amp;&amp; root-&gt;right!=NULL)</p>
+<p>	{</p>
+<p>		int lh=checkLeavesLevel(root-&gt;left);</p>
+<p>		int rh=checkLeavesLevel(root-&gt;right);</p>
+<p>		if(lh==-1 || rh==-1) return -1;</p>
+<p>		if(lh==rh) </p>
+<p>		{</p>
+<p>			return lh+1;</p>
+<p>		}</p>
+<p>		return -1;</p>
+<p>	}</p>
+<p>	else if(root-&gt;left==NULL &amp;&amp; root-&gt;right!=NULL)</p>
+<p>	{</p>
+<p>		int rh=checkLeavesLevel(root-&gt;right);</p>
+<p>		if(rh==-1) return -1;</p>
+<p>		return rh+1;</p>
+<p>	}</p>
+<p>	else if(root-&gt;left!=NULL &amp;&amp; root-&gt;right==NULL)</p>
+<p>	{</p>
+<p>		int lh=checkLeavesLevel(root-&gt;left);</p>
+<p>		if(lh==-1) return -1;</p>
+<p>		return lh+1;</p>
+<p>	}</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    struct Node *root = newNode(12);</p>
+<p>    root-&gt;left = newNode(5);</p>
+<p>	root-&gt;right = newNode(7);</p>
+<p>	root-&gt;left-&gt;left = newNode(3);</p>
+<p>	root-&gt;right-&gt;right = newNode(1);</p>
+<p>	root-&gt;right-&gt;left = newNode(2);</p>
+<p>    if (checkLeavesLevel(root)!=-1)</p>
+<p>        printf(&#8220;Leaves are at same leveln&#8221;);</p>
+<p>    else</p>
+<p>        printf(&#8220;Leaves are not at same leveln&#8221;);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Isha</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-33867</link>
+		<dc:creator><![CDATA[Isha]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 12:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-33867</guid>
+		<description><![CDATA[The second method is  giving incorrect results for the given tree:
+
+struct Node *root = newNode(12);
+
+     root-&#062;left = newNode(5);
+
+    root-&#062;right = newNode(7);
+
+     root-&#062;left-&#062;left = newNode(3);
+
+     root-&#062;right-&#062;right = newNode(1);
+
+     root-&#062;right-&#062;left = newNode(2)
+
+The o/p should be: Leaves are at same level]]></description>
+		<content:encoded><![CDATA[<p>The second method is  giving incorrect results for the given tree:</p>
+<p>struct Node *root = newNode(12);</p>
+<p>     root-&gt;left = newNode(5);</p>
+<p>    root-&gt;right = newNode(7);</p>
+<p>     root-&gt;left-&gt;left = newNode(3);</p>
+<p>     root-&gt;right-&gt;right = newNode(1);</p>
+<p>     root-&gt;right-&gt;left = newNode(2)</p>
+<p>The o/p should be: Leaves are at same level</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pushkar</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-32388</link>
+		<dc:creator><![CDATA[Pushkar]]></dc:creator>
+		<pubDate>Sun, 09 Feb 2014 15:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-32388</guid>
+		<description><![CDATA[Yeah you are right... it will not work for the given problem..]]></description>
+		<content:encoded><![CDATA[<p>Yeah you are right&#8230; it will not work for the given problem..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Setu</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-30617</link>
+		<dc:creator><![CDATA[Setu]]></dc:creator>
+		<pubDate>Tue, 10 Dec 2013 06:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-30617</guid>
+		<description><![CDATA[We can use this java method to check the leaf nodes, if output is -1, leaf nodes are not at same level , other wise it is.
+
+
+public static int utilMethod(Node root, int height)
+
+	{
+
+		if(root==null)
+
+			return height;
+
+		else if(root.left==null &#038;&#038; root.right==null)
+
+			return height;
+
+		else if(root.left==null)
+
+			return utilMethod(root.right, height+1);
+
+		else if(root.right==null)
+
+			return utilMethod(root.left, height+1);
+
+		
+
+		int leftHeight  = utilMethod(root.left, height+1);
+
+		int rightHeight = utilMethod(root.right, height+1);
+
+		if(leftHeight==-1 &#124;&#124; rightHeight==-1)
+
+			return -1;
+
+		else if(leftHeight==rightHeight)
+
+			return leftHeight;
+
+		else 
+
+			return -1;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>We can use this java method to check the leaf nodes, if output is -1, leaf nodes are not at same level , other wise it is.</p>
+<p>public static int utilMethod(Node root, int height)</p>
+<p>	{</p>
+<p>		if(root==null)</p>
+<p>			return height;</p>
+<p>		else if(root.left==null &amp;&amp; root.right==null)</p>
+<p>			return height;</p>
+<p>		else if(root.left==null)</p>
+<p>			return utilMethod(root.right, height+1);</p>
+<p>		else if(root.right==null)</p>
+<p>			return utilMethod(root.left, height+1);</p>
+<p>		int leftHeight  = utilMethod(root.left, height+1);</p>
+<p>		int rightHeight = utilMethod(root.right, height+1);</p>
+<p>		if(leftHeight==-1 || rightHeight==-1)</p>
+<p>			return -1;</p>
+<p>		else if(leftHeight==rightHeight)</p>
+<p>			return leftHeight;</p>
+<p>		else </p>
+<p>			return -1;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Uma Trika</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-30333</link>
+		<dc:creator><![CDATA[Uma Trika]]></dc:creator>
+		<pubDate>Mon, 02 Dec 2013 16:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-30333</guid>
+		<description><![CDATA[void checkUtil(struct Node *root, int h, int *max) {
+if(root == NULL)
+return ;
+
+if((*max==0) &#038;&#038; (root-&#062;left == NULL) &#038;&#038; (root-&#062;right == NULL))
+                *max = h;
+
+        if(root-&#062;left == NULL &#038;&#038; root-&#062;right == NULL &#038;&#038; *max != h)
+{
+               *max = 0;
+
+                return;
+
+        }
+
+        checkUtil(root-&#062;left, h+1, max);
+
+        checkUtil(root-&#062;right, h+1, max);
+
+}
+
+int check(struct Node *root)
+
+{
+
+        int max=0;
+
+        checkUtil(root, 0, &#038;max);
+
+        printf(&quot;max val is:%dn&quot;, max);
+
+        return max;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void checkUtil(struct Node *root, int h, int *max) {<br />
+if(root == NULL)<br />
+return ;</p>
+<p>if((*max==0) &amp;&amp; (root-&gt;left == NULL) &amp;&amp; (root-&gt;right == NULL))<br />
+                *max = h;</p>
+<p>        if(root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL &amp;&amp; *max != h)<br />
+{<br />
+               *max = 0;</p>
+<p>                return;</p>
+<p>        }</p>
+<p>        checkUtil(root-&gt;left, h+1, max);</p>
+<p>        checkUtil(root-&gt;right, h+1, max);</p>
+<p>}</p>
+<p>int check(struct Node *root)</p>
+<p>{</p>
+<p>        int max=0;</p>
+<p>        checkUtil(root, 0, &amp;max);</p>
+<p>        printf(&#8220;max val is:%dn&#8221;, max);</p>
+<p>        return max;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: trojansmith</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-30277</link>
+		<dc:creator><![CDATA[trojansmith]]></dc:creator>
+		<pubDate>Sun, 01 Dec 2013 03:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-30277</guid>
+		<description><![CDATA[This is a java implementation..plz verify
+
+&lt;code&gt;public class Tree {
+
+    int data;
+    Tree left;
+    Tree right;
+    boolean isSameLevel=true;
+    
+    Tree(int data,Tree left,Tree right){
+        this.data = data;
+        this.left = left;
+        this.right = right;
+    }
+    
+    public int sameLevel(Tree node,int level,Integer prevMaxLevel){
+        if(node.left==null &#038;&#038; node.right==null){
+            if(prevMaxLevel!=level &#038;&#038; prevMaxLevel==0){
+                prevMaxLevel=level;
+            }else if(prevMaxLevel != level &#038;&#038; prevMaxLevel!=0){
+                isSameLevel=false;
+                
+            }
+        }
+        if(node.left!=null)prevMaxLevel=sameLevel(node.left,level+1,prevMaxLevel);
+        if(node.right!=null)prevMaxLevel=sameLevel(node.right,level+1,prevMaxLevel);
+        return prevMaxLevel;
+    }
+    
+    public static void main(String[] args){
+        Tree node1 = new Tree(1,null,null);
+        Tree node3 = new Tree(3,node1,null);
+        Tree node2 = new Tree(2,null,null);
+        Tree node9 = new Tree(9,null,null);
+        Tree node5 = new Tree(5,node3,node9);
+        //Tree node7 = new Tree(7,null,node1);
+        Tree root = new Tree(12,node5,null);
+        root.sameLevel(root,1,0);
+        System.out.println(root.isSameLevel);
+    }
+    
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>This is a java implementation..plz verify</p>
+<p><code>public class Tree {</p>
+<p>    int data;<br />
+    Tree left;<br />
+    Tree right;<br />
+    boolean isSameLevel=true;</p>
+<p>    Tree(int data,Tree left,Tree right){<br />
+        this.data = data;<br />
+        this.left = left;<br />
+        this.right = right;<br />
+    }</p>
+<p>    public int sameLevel(Tree node,int level,Integer prevMaxLevel){<br />
+        if(node.left==null &amp;&amp; node.right==null){<br />
+            if(prevMaxLevel!=level &amp;&amp; prevMaxLevel==0){<br />
+                prevMaxLevel=level;<br />
+            }else if(prevMaxLevel != level &amp;&amp; prevMaxLevel!=0){<br />
+                isSameLevel=false;</p>
+<p>            }<br />
+        }<br />
+        if(node.left!=null)prevMaxLevel=sameLevel(node.left,level+1,prevMaxLevel);<br />
+        if(node.right!=null)prevMaxLevel=sameLevel(node.right,level+1,prevMaxLevel);<br />
+        return prevMaxLevel;<br />
+    }</p>
+<p>    public static void main(String[] args){<br />
+        Tree node1 = new Tree(1,null,null);<br />
+        Tree node3 = new Tree(3,node1,null);<br />
+        Tree node2 = new Tree(2,null,null);<br />
+        Tree node9 = new Tree(9,null,null);<br />
+        Tree node5 = new Tree(5,node3,node9);<br />
+        //Tree node7 = new Tree(7,null,node1);<br />
+        Tree root = new Tree(12,node5,null);<br />
+        root.sameLevel(root,1,0);<br />
+        System.out.println(root.isSameLevel);<br />
+    }</p>
+<p>}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ATul</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-30242</link>
+		<dc:creator><![CDATA[ATul]]></dc:creator>
+		<pubDate>Sat, 30 Nov 2013 08:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-30242</guid>
+		<description><![CDATA[Second Solution is only checking whether the Binary Tree is Full Binary Tree .]]></description>
+		<content:encoded><![CDATA[<p>Second Solution is only checking whether the Binary Tree is Full Binary Tree .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-28840</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Sun, 13 Oct 2013 18:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-28840</guid>
+		<description><![CDATA[plz verify the code
+boolean traversal(root,int level,int height)
+{
+   if((root-&#062;left==NULL)&#038;&#038;(root-&#062;right==NULL)&#038;&#038;(height=level))
+        return true;
+  else
+       return false;
+  return traversal(root-&#062;left,level+1,height)&#038;&#038;traversal(root-&#062;right,level+1,height)
+}]]></description>
+		<content:encoded><![CDATA[<p>plz verify the code<br />
+boolean traversal(root,int level,int height)<br />
+{<br />
+   if((root-&gt;left==NULL)&amp;&amp;(root-&gt;right==NULL)&amp;&amp;(height=level))<br />
+        return true;<br />
+  else<br />
+       return false;<br />
+  return traversal(root-&gt;left,level+1,height)&amp;&amp;traversal(root-&gt;right,level+1,height)<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/check-leaves-level/#comment-28615</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 06:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122407#comment-28615</guid>
+		<description><![CDATA[The solution by Very Vibhu tiwari will not result the same result as returned by Chandra prakash,&#039;s solution. 
+Chandra&#039;s solution returns whether all leaf nodes are at the sane level it not. And thus will return true for a tree with root and one leaf node. Say, 100-&#062;70
+
+
+However vibhu&#039;s solution returns whether the tree is a completely balanced tree or not, I.e. all leaves are there and they are at the same level. Thus, it will return false for the root-&#062;left node example]]></description>
+		<content:encoded><![CDATA[<p>The solution by Very Vibhu tiwari will not result the same result as returned by Chandra prakash,&#8217;s solution.<br />
+Chandra&#8217;s solution returns whether all leaf nodes are at the sane level it not. And thus will return true for a tree with root and one leaf node. Say, 100-&gt;70</p>
+<p>However vibhu&#8217;s solution returns whether the tree is a completely balanced tree or not, I.e. all leaves are there and they are at the same level. Thus, it will return false for the root-&gt;left node example</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.045 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:43 -->
+
+<!-- Compression = gzip -->

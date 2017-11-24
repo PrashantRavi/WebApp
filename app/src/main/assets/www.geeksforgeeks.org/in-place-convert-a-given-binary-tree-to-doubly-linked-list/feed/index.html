@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Convert a given Binary Tree to Doubly Linked List &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: typing..</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-39421</link>
+		<dc:creator><![CDATA[typing..]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 07:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-39421</guid>
+		<description><![CDATA[check this code, it might be helpful for you to understand.
+
+
+//call make_inorder_doubly(&#038;root)
+
+
+node * find_lc(node *root)
+
+{
+
+    while(root-&#062;lc!=NULL)
+
+        root=root-&#062;lc;
+
+    return root;
+
+}
+
+node * find_rc(node *root)
+
+{
+
+    while(root-&#062;rc!=NULL)
+
+        root=root-&#062;rc;
+
+    return root;
+
+}
+
+node * make_inorder(node *root,int i)  //main working function
+
+{
+
+    if(root==NULL)
+
+        return NULL;
+
+    if(root-&#062;lc==NULL &#038;&#038; root-&#062;rc==NULL)
+
+    {
+
+        return root;
+
+    }
+
+    if(root!=NULL)
+
+    {
+
+        root-&#062;lc=make_inorder(root-&#062;lc,0);
+
+        root-&#062;rc=make_inorder(root-&#062;rc,1);
+
+        if(root-&#062;lc!=NULL)
+
+        root-&#062;lc-&#062;rc=root;
+
+        if(root-&#062;rc!=NULL)
+
+        root-&#062;rc-&#062;lc=root;
+
+        if(i==0)
+
+            return find_rc(root);
+
+        else
+
+            return find_lc(root);
+
+    }
+
+}
+
+void make_inorder_doubly(node **rootref)        //wrapper function
+
+{
+
+    node *temp_root;
+
+    temp_root=make_inorder(*rootref,0);
+
+    *rootref=set_root_doubly(temp_root);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>check this code, it might be helpful for you to understand.</p>
+<p>//call make_inorder_doubly(&amp;root)</p>
+<p>node * find_lc(node *root)</p>
+<p>{</p>
+<p>    while(root-&gt;lc!=NULL)</p>
+<p>        root=root-&gt;lc;</p>
+<p>    return root;</p>
+<p>}</p>
+<p>node * find_rc(node *root)</p>
+<p>{</p>
+<p>    while(root-&gt;rc!=NULL)</p>
+<p>        root=root-&gt;rc;</p>
+<p>    return root;</p>
+<p>}</p>
+<p>node * make_inorder(node *root,int i)  //main working function</p>
+<p>{</p>
+<p>    if(root==NULL)</p>
+<p>        return NULL;</p>
+<p>    if(root-&gt;lc==NULL &amp;&amp; root-&gt;rc==NULL)</p>
+<p>    {</p>
+<p>        return root;</p>
+<p>    }</p>
+<p>    if(root!=NULL)</p>
+<p>    {</p>
+<p>        root-&gt;lc=make_inorder(root-&gt;lc,0);</p>
+<p>        root-&gt;rc=make_inorder(root-&gt;rc,1);</p>
+<p>        if(root-&gt;lc!=NULL)</p>
+<p>        root-&gt;lc-&gt;rc=root;</p>
+<p>        if(root-&gt;rc!=NULL)</p>
+<p>        root-&gt;rc-&gt;lc=root;</p>
+<p>        if(i==0)</p>
+<p>            return find_rc(root);</p>
+<p>        else</p>
+<p>            return find_lc(root);</p>
+<p>    }</p>
+<p>}</p>
+<p>void make_inorder_doubly(node **rootref)        //wrapper function</p>
+<p>{</p>
+<p>    node *temp_root;</p>
+<p>    temp_root=make_inorder(*rootref,0);</p>
+<p>    *rootref=set_root_doubly(temp_root);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-39314</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 07:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-39314</guid>
+		<description><![CDATA[can someone pleaze explaine this code...sab hoch-poch ho rha h]]></description>
+		<content:encoded><![CDATA[<p>can someone pleaze explaine this code&#8230;sab hoch-poch ho rha h</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-38102</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 11:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-38102</guid>
+		<description><![CDATA[the time complexity of above algo is O(n2) ryt??]]></description>
+		<content:encoded><![CDATA[<p>the time complexity of above algo is O(n2) ryt??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-38101</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 11:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-38101</guid>
+		<description><![CDATA[//convert left subtree to DLL 
+        // and find tail
+        //convert right subtree to DLL
+        //and find head
+        // connect them to the root
+    
+btnode * convertintoDLL(btnode *root)
+{
+    if(root==NULL)
+    {    return NULL;
+    }
+    
+    btnode *tail=convertintoDLL(root-&#062;lchild);
+    if(tail)
+    {
+        while(tail-&#062;rchild!=NULL)
+        {    tail=tail-&#062;rchild;
+        }
+        
+        root-&#062;lchild=tail;
+        tail-&#062;rchild=root;
+    }
+    
+    btnode *head=convertintoDLL(root-&#062;rchild);
+    
+    if(head)
+    {
+        while(head-&#062;lchild!=NULL)
+        {
+                head=head-&#062;lchild;
+        }
+        
+        root-&#062;rchild=head;
+        head-&#062;lchild=root;
+        
+    }
+    
+    return root;
+}
+btnode * convert(btnode *t)
+{
+    if(t==NULL)
+    return NULL;
+    
+    btnode *head=convertintoDLL(t);
+    while(head-&#062;lchild!=NULL)
+    {
+            head=head-&#062;lchild;
+    }
+    return head;
+}]]></description>
+		<content:encoded><![CDATA[<p>//convert left subtree to DLL<br />
+        // and find tail<br />
+        //convert right subtree to DLL<br />
+        //and find head<br />
+        // connect them to the root</p>
+<p>btnode * convertintoDLL(btnode *root)<br />
+{<br />
+    if(root==NULL)<br />
+    {    return NULL;<br />
+    }</p>
+<p>    btnode *tail=convertintoDLL(root-&gt;lchild);<br />
+    if(tail)<br />
+    {<br />
+        while(tail-&gt;rchild!=NULL)<br />
+        {    tail=tail-&gt;rchild;<br />
+        }</p>
+<p>        root-&gt;lchild=tail;<br />
+        tail-&gt;rchild=root;<br />
+    }</p>
+<p>    btnode *head=convertintoDLL(root-&gt;rchild);</p>
+<p>    if(head)<br />
+    {<br />
+        while(head-&gt;lchild!=NULL)<br />
+        {<br />
+                head=head-&gt;lchild;<br />
+        }</p>
+<p>        root-&gt;rchild=head;<br />
+        head-&gt;lchild=root;</p>
+<p>    }</p>
+<p>    return root;<br />
+}<br />
+btnode * convert(btnode *t)<br />
+{<br />
+    if(t==NULL)<br />
+    return NULL;</p>
+<p>    btnode *head=convertintoDLL(t);<br />
+    while(head-&gt;lchild!=NULL)<br />
+    {<br />
+            head=head-&gt;lchild;<br />
+    }<br />
+    return head;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: santosh gupta</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-37111</link>
+		<dc:creator><![CDATA[santosh gupta]]></dc:creator>
+		<pubDate>Sat, 31 May 2014 05:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-37111</guid>
+		<description><![CDATA[it doesn&#039;t fails. The flow never reaches such a condition]]></description>
+		<content:encoded><![CDATA[<p>it doesn&#8217;t fails. The flow never reaches such a condition</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-35686</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 05 May 2014 17:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-35686</guid>
+		<description><![CDATA[a nice exapmle of divide and conquer algorithm
+recursively create dll of left and right subtree and combine it with node
+and return proper inorder or preorder successor
+T(N)=2T(N/2)+0(N)
+
+complexity=nlogn
+
+tnode* create_dll(tnode* root,int &#038;cnt)
+
+{
+
+	if(!root)
+
+	   return NULL;
+
+	if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+
+	   return root;
+
+	tnode* k1=create_dll(root-&#062;lchild,cnt);
+
+	tnode* k2=create_dll(root-&#062;rchild,cnt);
+
+	if(k1)
+
+	{
+
+		root-&#062;lchild=k1;
+
+		k1-&#062;rchild=root;
+
+	}
+
+	if(k2)
+
+	{
+
+		root-&#062;rchild=k2;
+
+		k2-&#062;lchild=root;
+
+	}
+
+	if(cnt%2==0)
+
+	{
+
+		tnode* p=root;
+
+		while(p-&#062;rchild!=NULL)
+
+		{
+
+			p=p-&#062;rchild;
+
+		}
+
+		cnt++;
+
+		return p;
+
+	}
+
+	else
+
+	{
+
+		tnode* p=root;
+
+		while(p-&#062;lchild!=NULL)
+
+		{
+
+			p=p-&#062;lchild;
+
+		}
+
+		cnt++;
+
+		return p;
+
+	}
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>a nice exapmle of divide and conquer algorithm<br />
+recursively create dll of left and right subtree and combine it with node<br />
+and return proper inorder or preorder successor<br />
+T(N)=2T(N/2)+0(N)</p>
+<p>complexity=nlogn</p>
+<p>tnode* create_dll(tnode* root,int &amp;cnt)</p>
+<p>{</p>
+<p>	if(!root)</p>
+<p>	   return NULL;</p>
+<p>	if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))</p>
+<p>	   return root;</p>
+<p>	tnode* k1=create_dll(root-&gt;lchild,cnt);</p>
+<p>	tnode* k2=create_dll(root-&gt;rchild,cnt);</p>
+<p>	if(k1)</p>
+<p>	{</p>
+<p>		root-&gt;lchild=k1;</p>
+<p>		k1-&gt;rchild=root;</p>
+<p>	}</p>
+<p>	if(k2)</p>
+<p>	{</p>
+<p>		root-&gt;rchild=k2;</p>
+<p>		k2-&gt;lchild=root;</p>
+<p>	}</p>
+<p>	if(cnt%2==0)</p>
+<p>	{</p>
+<p>		tnode* p=root;</p>
+<p>		while(p-&gt;rchild!=NULL)</p>
+<p>		{</p>
+<p>			p=p-&gt;rchild;</p>
+<p>		}</p>
+<p>		cnt++;</p>
+<p>		return p;</p>
+<p>	}</p>
+<p>	else</p>
+<p>	{</p>
+<p>		tnode* p=root;</p>
+<p>		while(p-&gt;lchild!=NULL)</p>
+<p>		{</p>
+<p>			p=p-&gt;lchild;</p>
+<p>		}</p>
+<p>		cnt++;</p>
+<p>		return p;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-34662</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Mon, 14 Apr 2014 09:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-34662</guid>
+		<description><![CDATA[I think this question can simply be done by doing Inorder traversal of the binary tree and forming DLL...
+
+Please go through the function which I implemented and Let me know if there is some mistake or Improvement required...
+
+void binarytreetoDLL(struct tree *root,struct tree **head)
+{
+    static struct tree *prev=NULL;
+    struct tree *p=root;
+    if(p==NULL)
+        return;
+    else
+    {
+        convert(p-&#062;left,head);
+
+        p-&#062;left=prev;
+        if((*head)==NULL)
+   (*head)=p;
+        else
+    { prev-&#062;right=p; }
+prev=p;
+
+
+convert(p-&#062;right,head);
+} 
+}
+
+
+
+The head parameter is for the head of DLL and is passed NULL initially....]]></description>
+		<content:encoded><![CDATA[<p>I think this question can simply be done by doing Inorder traversal of the binary tree and forming DLL&#8230;</p>
+<p>Please go through the function which I implemented and Let me know if there is some mistake or Improvement required&#8230;</p>
+<p>void binarytreetoDLL(struct tree *root,struct tree **head)<br />
+{<br />
+    static struct tree *prev=NULL;<br />
+    struct tree *p=root;<br />
+    if(p==NULL)<br />
+        return;<br />
+    else<br />
+    {<br />
+        convert(p-&gt;left,head);</p>
+<p>        p-&gt;left=prev;<br />
+        if((*head)==NULL)<br />
+   (*head)=p;<br />
+        else<br />
+    { prev-&gt;right=p; }<br />
+prev=p;</p>
+<p>convert(p-&gt;right,head);<br />
+}<br />
+}</p>
+<p>The head parameter is for the head of DLL and is passed NULL initially&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ganeshprabhu1994</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-33972</link>
+		<dc:creator><![CDATA[ganeshprabhu1994]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 07:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-33972</guid>
+		<description><![CDATA[There is no way that node parameter will get the value of null then why would it crash?]]></description>
+		<content:encoded><![CDATA[<p>There is no way that node parameter will get the value of null then why would it crash?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ravi</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-33970</link>
+		<dc:creator><![CDATA[Ravi]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 06:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-33970</guid>
+		<description><![CDATA[Try to tun it without base, it would crash.]]></description>
+		<content:encoded><![CDATA[<p>Try to tun it without base, it would crash.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ganeshprabhu1994</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-33969</link>
+		<dc:creator><![CDATA[ganeshprabhu1994]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 06:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-33969</guid>
+		<description><![CDATA[I dont find any need for having a base case in bintree2listutil.]]></description>
+		<content:encoded><![CDATA[<p>I dont find any need for having a base case in bintree2listutil.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: wishall</title>
+		<link>http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/#comment-32644</link>
+		<dc:creator><![CDATA[wishall]]></dc:creator>
+		<pubDate>Mon, 17 Feb 2014 07:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116397#comment-32644</guid>
+		<description><![CDATA[:)]]></description>
+		<content:encoded><![CDATA[<p>🙂</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:12 -->
+
+<!-- Compression = gzip -->

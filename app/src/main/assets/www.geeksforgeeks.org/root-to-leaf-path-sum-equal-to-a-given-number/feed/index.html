@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Root to leaf path sum equal to a given number</title>
+	<atom:link href="http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: NITJ</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-39606</link>
+		<dc:creator><![CDATA[NITJ]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 07:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-39606</guid>
+		<description><![CDATA[Better solution and less lengthy:-
+
+bool hasPathSum(struct node* node, int currSum, int number)
+{
+  /* return true if currSum==number */
+  if (node == NULL) return (currSum== no);
+
+currSum += node-&#062;data;
+
+  return hasPathSum(node-&#062;left,currSum, number) &#124;&#124; 
+hasPathSum(node-&#062;right, currSum, number);
+}
+
+number : The given number
+currSum : starting from 0, the current sum of the path till a node]]></description>
+		<content:encoded><![CDATA[<p>Better solution and less lengthy:-</p>
+<p>bool hasPathSum(struct node* node, int currSum, int number)<br />
+{<br />
+  /* return true if currSum==number */<br />
+  if (node == NULL) return (currSum== no);</p>
+<p>currSum += node-&gt;data;</p>
+<p>  return hasPathSum(node-&gt;left,currSum, number) ||<br />
+hasPathSum(node-&gt;right, currSum, number);<br />
+}</p>
+<p>number : The given number<br />
+currSum : starting from 0, the current sum of the path till a node</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-37660</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 08:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-37660</guid>
+		<description><![CDATA[int hasPathSum(struct node *root,int sum, struct node *parent=NULL)
+{
+    if(parent==NULL &#038;&#038; root==NULL)  // for no root node. zero node tree.
+        return(sum==0);
+    if(root==NULL &#038;&#038; parent-&#062;left==parent-&#062;right &#038;&#038; parent-&#062;left==NULL)
+        return (sum==0);
+    else if(root==NULL)
+    	return false;
+return ((hasPathSum(root-&#062;left,sum-root-&#062;data,root)) &#124;&#124; 
+(hasPathSum(root-&#062;right,sum-root-&#062;data,root)) );
+}]]></description>
+		<content:encoded><![CDATA[<p>int hasPathSum(struct node *root,int sum, struct node *parent=NULL)<br />
+{<br />
+    if(parent==NULL &amp;&amp; root==NULL)  // for no root node. zero node tree.<br />
+        return(sum==0);<br />
+    if(root==NULL &amp;&amp; parent-&gt;left==parent-&gt;right &amp;&amp; parent-&gt;left==NULL)<br />
+        return (sum==0);<br />
+    else if(root==NULL)<br />
+    	return false;<br />
+return ((hasPathSum(root-&gt;left,sum-root-&gt;data,root)) ||<br />
+(hasPathSum(root-&gt;right,sum-root-&gt;data,root)) );<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anushya subbiah</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-37123</link>
+		<dc:creator><![CDATA[anushya subbiah]]></dc:creator>
+		<pubDate>Sat, 31 May 2014 11:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-37123</guid>
+		<description><![CDATA[i thought the same.. if we run out of tree then we must return false.... we cant check for sum=0 ... it will be right only when the previous node was a leaf ...]]></description>
+		<content:encoded><![CDATA[<p>i thought the same.. if we run out of tree then we must return false&#8230;. we cant check for sum=0 &#8230; it will be right only when the previous node was a leaf &#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-36399</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 21 May 2014 10:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-36399</guid>
+		<description><![CDATA[Can be done like this also. Only drawback will be extra space of array. Let me know if you find an error..!
+http://ideone.com/qj72Mg]]></description>
+		<content:encoded><![CDATA[<p>Can be done like this also. Only drawback will be extra space of array. Let me know if you find an error..!<br />
+<a href="http://ideone.com/qj72Mg" rel="nofollow">http://ideone.com/qj72Mg</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sanjay Agarwal</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-35936</link>
+		<dc:creator><![CDATA[Sanjay Agarwal]]></dc:creator>
+		<pubDate>Mon, 12 May 2014 17:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-35936</guid>
+		<description><![CDATA[bool tree::Root_to_leaf_path_given_sum(tree *root, int k, int sum)
+{
+      if (root == NULL)
+            return (sum == k);
+
+    return Root_to_leaf_path_given_sum(root-&#062;left, k, sum + root-&#062;info) &#124;&#124; Root_to_leaf_path_given_sum(root-&#062;right, k, sum + root-&#062;info); 
+}
+
+
+
+k = Given number
+sum = 0, when the function is called.]]></description>
+		<content:encoded><![CDATA[<p>bool tree::Root_to_leaf_path_given_sum(tree *root, int k, int sum)<br />
+{<br />
+      if (root == NULL)<br />
+            return (sum == k);</p>
+<p>    return Root_to_leaf_path_given_sum(root-&gt;left, k, sum + root-&gt;info) || Root_to_leaf_path_given_sum(root-&gt;right, k, sum + root-&gt;info);<br />
+}</p>
+<p>k = Given number<br />
+sum = 0, when the function is called.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Fresh_man</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-35884</link>
+		<dc:creator><![CDATA[Fresh_man]]></dc:creator>
+		<pubDate>Sat, 10 May 2014 23:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-35884</guid>
+		<description><![CDATA[Yes! the code will fail as you pointed out. 
+
+Remove this while if-block
+
+if(root==NULL)
+return 0;
+
+
+
+ and Check null before invoking hasPathSum(Node node, int sum).
+This will solve the problem.]]></description>
+		<content:encoded><![CDATA[<p>Yes! the code will fail as you pointed out. </p>
+<p>Remove this while if-block</p>
+<p>if(root==NULL)<br />
+return 0;</p>
+<p> and Check null before invoking hasPathSum(Node node, int sum).<br />
+This will solve the problem.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Fresh_man</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-35883</link>
+		<dc:creator><![CDATA[Fresh_man]]></dc:creator>
+		<pubDate>Sat, 10 May 2014 23:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-35883</guid>
+		<description><![CDATA[The below code will print the values from root node to leaf node:
+
+
+boolean hasSum(Node root, int sum, List values) {
+
+		boolean found = false;
+int currentSum = sum - root.value;
+// add the value to List
+values.add(root.value);
+
+if (root.left == null &#038;&#038; root.right == null &#038;&#038; currentSum == 0) {
+for (int i : values) {
+System.out.print(i + &quot; &quot;);
+}
+return true;
+}
+
+if (root.left != null) {
+found = hasSum(root.left, currentSum, values);
+if (found) {
+return found;}
+// removes the last inserted element if match not found in List
+values.remove(values.size() - 1);
+}
+
+		if (root.right != null) {
+found = hasSum(root.right, currentSum, values);
+if (found) {
+return found;
+			}
+// removes the last inserted element if match not found in List
+values.remove(values.size() - 1);
+}
+
+		return false;
+}]]></description>
+		<content:encoded><![CDATA[<p>The below code will print the values from root node to leaf node:</p>
+<p>boolean hasSum(Node root, int sum, List values) {</p>
+<p>		boolean found = false;<br />
+int currentSum = sum &#8211; root.value;<br />
+// add the value to List<br />
+values.add(root.value);</p>
+<p>if (root.left == null &amp;&amp; root.right == null &amp;&amp; currentSum == 0) {<br />
+for (int i : values) {<br />
+System.out.print(i + &#8221; &#8220;);<br />
+}<br />
+return true;<br />
+}</p>
+<p>if (root.left != null) {<br />
+found = hasSum(root.left, currentSum, values);<br />
+if (found) {<br />
+return found;}<br />
+// removes the last inserted element if match not found in List<br />
+values.remove(values.size() &#8211; 1);<br />
+}</p>
+<p>		if (root.right != null) {<br />
+found = hasSum(root.right, currentSum, values);<br />
+if (found) {<br />
+return found;<br />
+			}<br />
+// removes the last inserted element if match not found in List<br />
+values.remove(values.size() &#8211; 1);<br />
+}</p>
+<p>		return false;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-35205</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 22:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-35205</guid>
+		<description><![CDATA[Can anyone please explain to me that what would be the algorithm to print all the node participating in the given sum]]></description>
+		<content:encoded><![CDATA[<p>Can anyone please explain to me that what would be the algorithm to print all the node participating in the given sum</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Harjit Singh</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-35182</link>
+		<dc:creator><![CDATA[Harjit Singh]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 06:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-35182</guid>
+		<description><![CDATA[{{
+bool hasPathSum(struct node* root,int sum)
+
+{
+
+  if((root==NULL)&#038;&#038;(sum==0))
+
+     return true;
+
+  if(root==NULL)
+
+      return false;
+
+  int subSum=sum-root-&#062;data;
+
+   return(hasPathSum(root-&#062;left,subSum)&#124;&#124;hasPathSum(root-&#062;right,subSum));
+
+}
+
+}}]]></description>
+		<content:encoded><![CDATA[<p>{{<br />
+bool hasPathSum(struct node* root,int sum)</p>
+<p>{</p>
+<p>  if((root==NULL)&amp;&amp;(sum==0))</p>
+<p>     return true;</p>
+<p>  if(root==NULL)</p>
+<p>      return false;</p>
+<p>  int subSum=sum-root-&gt;data;</p>
+<p>   return(hasPathSum(root-&gt;left,subSum)||hasPathSum(root-&gt;right,subSum));</p>
+<p>}</p>
+<p>}}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: yogi</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-34470</link>
+		<dc:creator><![CDATA[yogi]]></dc:creator>
+		<pubDate>Tue, 08 Apr 2014 15:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-34470</guid>
+		<description><![CDATA[This following snippet of code works on all the +ve and -ve numbers. Is there any way this code snippet would break?
+
+
+bool HasRoot2LeafPathSum(BinNode *pRoot, long remSum)
+{
+    if(pRoot == NULL)
+        return false;
+    if(pRoot-&#062;pLeft == NULL &#038;&#038; pRoot-&#062;pRight == NULL)
+        return (remSum == pRoot-&#062;data);
+    return (HasRoot2LeafPathSum(pRoot-&#062;pLeft, remSum - pRoot-&#062;data) &#124;&#124;
+        HasRoot2LeafPathSum(pRoot-&#062;pRight, remSum - pRoot-&#062;data));
+}
+&lt;code&gt;]]></description>
+		<content:encoded><![CDATA[<p>This following snippet of code works on all the +ve and -ve numbers. Is there any way this code snippet would break?</p>
+<p>bool HasRoot2LeafPathSum(BinNode *pRoot, long remSum)<br />
+{<br />
+    if(pRoot == NULL)<br />
+        return false;<br />
+    if(pRoot-&gt;pLeft == NULL &amp;&amp; pRoot-&gt;pRight == NULL)<br />
+        return (remSum == pRoot-&gt;data);<br />
+    return (HasRoot2LeafPathSum(pRoot-&gt;pLeft, remSum &#8211; pRoot-&gt;data) ||<br />
+        HasRoot2LeafPathSum(pRoot-&gt;pRight, remSum &#8211; pRoot-&gt;data));<br />
+}<br />
+<code></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/#comment-33996</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 20:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6201#comment-33996</guid>
+		<description><![CDATA[Left Search can be stopped 
+If you have reached with no child but the sum is still not what is required it&#039;s less OR if you have reached the value greater then or equal to sum(given value) but the node is not external....
+
+
+Please correct me If I am wrong.]]></description>
+		<content:encoded><![CDATA[<p>Left Search can be stopped<br />
+If you have reached with no child but the sum is still not what is required it&#8217;s less OR if you have reached the value greater then or equal to sum(given value) but the node is not external&#8230;.</p>
+<p>Please correct me If I am wrong.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:31 -->
+
+<!-- Compression = gzip -->

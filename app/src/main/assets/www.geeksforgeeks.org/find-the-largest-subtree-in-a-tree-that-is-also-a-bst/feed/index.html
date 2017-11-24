@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Find the largest BST subtree in a given Binary Tree &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Gautam Goyal</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-37416</link>
+		<dc:creator><![CDATA[Gautam Goyal]]></dc:creator>
+		<pubDate>Mon, 02 Jun 2014 13:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-37416</guid>
+		<description><![CDATA[This is not a sub-tree, when u call tree T a sub-tree rooted at R, you have to include all the children of R and R itself.]]></description>
+		<content:encoded><![CDATA[<p>This is not a sub-tree, when u call tree T a sub-tree rooted at R, you have to include all the children of R and R itself.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-35370</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 12:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-35370</guid>
+		<description><![CDATA[THE BEST METHOD IS TO TRAVERSE IN BOTTOM-UP FASHION RECURSIVELY AND PUSH THE NODES IN STACK WHICH SATISFY BST PROPERTY....IF ANY  NODE WHICH DONT SATISFY IT THEN ALL THE ANCESTORS OF THAT NODE WILL NOT BE ROOT OF THE SUBTREE.
+NOW POP ALL NODES FROM STACK AND GET SIZE OF TREE ROOTED AT THAT NODE (CALCULATE SIZE RECURSIVELY) AND RETURN THE MAX SIZE.  
+time complexity 0(n)]]></description>
+		<content:encoded><![CDATA[<p>THE BEST METHOD IS TO TRAVERSE IN BOTTOM-UP FASHION RECURSIVELY AND PUSH THE NODES IN STACK WHICH SATISFY BST PROPERTY&#8230;.IF ANY  NODE WHICH DONT SATISFY IT THEN ALL THE ANCESTORS OF THAT NODE WILL NOT BE ROOT OF THE SUBTREE.<br />
+NOW POP ALL NODES FROM STACK AND GET SIZE OF TREE ROOTED AT THAT NODE (CALCULATE SIZE RECURSIVELY) AND RETURN THE MAX SIZE.<br />
+time complexity 0(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-35371</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 12:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-35371</guid>
+		<description><![CDATA[http://ideone.com/sDgHsn]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/sDgHsn" rel="nofollow">http://ideone.com/sDgHsn</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-35368</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 12:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-35368</guid>
+		<description><![CDATA[the subtree will be present wrto any node N in either of the 3 regions
+1-left subtree of N
+2-&#062;right subtree of N
+3-&#062;also containing node N
+and return max of the three values]]></description>
+		<content:encoded><![CDATA[<p>the subtree will be present wrto any node N in either of the 3 regions<br />
+1-left subtree of N<br />
+2-&gt;right subtree of N<br />
+3-&gt;also containing node N<br />
+and return max of the three values</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-35369</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 12:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-35369</guid>
+		<description><![CDATA[#include
+#define size 50
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+struct stack
+{
+	tnode* arr[size];
+	int top;
+	public:
+	void push(tnode*);
+	tnode* pop();
+	stack();
+}st;
+stack::stack()
+{
+	top=-1;
+}
+void stack::push(tnode* root)
+{
+	arr[++top]=root;
+}
+tnode* stack::pop()
+{
+	tnode* f=arr[top];
+	top--;
+	return f;
+}
+int fun(tnode* root)
+{
+	if(!root)
+	   return 1;
+	int k1,k2;int k3=0;
+	k1=fun(root-&#062;lchild);
+	k2=fun(root-&#062;rchild);
+	if((root-&#062;lchild)&#038;&#038;(root-&#062;rchild)&#038;&#038;(!((root-&#062;data&#062;root-&#062;lchild-&#062;data)&#038;&#038;(root-&#062;datarchild-&#062;data))))
+	     return 0;
+	if((root-&#062;lchild)&#038;&#038;(!root-&#062;rchild)&#038;&#038;(root-&#062;datalchild-&#062;data))
+	    return 0;
+	if((!root-&#062;lchild)&#038;&#038;(root-&#062;rchild)&#038;&#038;(root-&#062;data&#062;root-&#062;rchild-&#062;data))
+	   return 0;
+	if((k1)&#038;&#038;(k2))
+	{
+	   st.push(root);
+	   return 1;	
+	}
+	return 0;
+}
+int get_size(tnode* ptr)
+{
+	if(!ptr)
+	   return 0;
+	return(1+get_size(ptr-&#062;lchild)+get_size(ptr-&#062;rchild));
+}
+int empty_stack()
+{
+	int max=0;
+	while(st.top!=-1)
+	{
+		tnode* ptr=st.pop();
+		int h=get_size(ptr);
+		if(h&#062;max)
+		  max=h;
+	}
+	return max;
+}
+void create(tnode* &#038;root,int d)
+{
+	int n;
+	if(d==0)
+	  return;
+	root=new tnode(d);
+	cout&#060;&#060;&#034;enter the left child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;lchild,n);
+	cout&#060;&#060;&#034;enter thr right child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;rchild,n);
+}
+ 
+int main()
+{
+    tnode* root=NULL;
+	int n;
+	cout&#060;&#062;n;
+	create(root,n);
+	int k=fun(root);
+	cout&#060;&#060;empty_stack()&#060;&#060;&#034; is the maximum size bst.n&#034;;
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#define size 50<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+struct stack<br />
+{<br />
+	tnode* arr[size];<br />
+	int top;<br />
+	public:<br />
+	void push(tnode*);<br />
+	tnode* pop();<br />
+	stack();<br />
+}st;<br />
+stack::stack()<br />
+{<br />
+	top=-1;<br />
+}<br />
+void stack::push(tnode* root)<br />
+{<br />
+	arr[++top]=root;<br />
+}<br />
+tnode* stack::pop()<br />
+{<br />
+	tnode* f=arr[top];<br />
+	top&#8211;;<br />
+	return f;<br />
+}<br />
+int fun(tnode* root)<br />
+{<br />
+	if(!root)<br />
+	   return 1;<br />
+	int k1,k2;int k3=0;<br />
+	k1=fun(root-&gt;lchild);<br />
+	k2=fun(root-&gt;rchild);<br />
+	if((root-&gt;lchild)&amp;&amp;(root-&gt;rchild)&amp;&amp;(!((root-&gt;data&gt;root-&gt;lchild-&gt;data)&amp;&amp;(root-&gt;datarchild-&gt;data))))<br />
+	     return 0;<br />
+	if((root-&gt;lchild)&amp;&amp;(!root-&gt;rchild)&amp;&amp;(root-&gt;datalchild-&gt;data))<br />
+	    return 0;<br />
+	if((!root-&gt;lchild)&amp;&amp;(root-&gt;rchild)&amp;&amp;(root-&gt;data&gt;root-&gt;rchild-&gt;data))<br />
+	   return 0;<br />
+	if((k1)&amp;&amp;(k2))<br />
+	{<br />
+	   st.push(root);<br />
+	   return 1;<br />
+	}<br />
+	return 0;<br />
+}<br />
+int get_size(tnode* ptr)<br />
+{<br />
+	if(!ptr)<br />
+	   return 0;<br />
+	return(1+get_size(ptr-&gt;lchild)+get_size(ptr-&gt;rchild));<br />
+}<br />
+int empty_stack()<br />
+{<br />
+	int max=0;<br />
+	while(st.top!=-1)<br />
+	{<br />
+		tnode* ptr=st.pop();<br />
+		int h=get_size(ptr);<br />
+		if(h&gt;max)<br />
+		  max=h;<br />
+	}<br />
+	return max;<br />
+}<br />
+void create(tnode* &amp;root,int d)<br />
+{<br />
+	int n;<br />
+	if(d==0)<br />
+	  return;<br />
+	root=new tnode(d);<br />
+	cout&lt;&lt;&quot;enter the left child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;lchild,n);<br />
+	cout&lt;&lt;&quot;enter thr right child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;rchild,n);<br />
+}</p>
+<p>int main()<br />
+{<br />
+    tnode* root=NULL;<br />
+	int n;<br />
+	cout&lt;&gt;n;<br />
+	create(root,n);<br />
+	int k=fun(root);<br />
+	cout&lt;&lt;empty_stack()&lt;&lt;&quot; is the maximum size bst.n&quot;;<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankur Jain</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-35024</link>
+		<dc:creator><![CDATA[Ankur Jain]]></dc:creator>
+		<pubDate>Wed, 23 Apr 2014 11:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-35024</guid>
+		<description><![CDATA[5
+    /  
+   2    4
+ /  
+1    3
+
+
+in this example 
+
+
+largest bst should be
+
+     5
+    / 
+   2   
+ /  
+1    3
+
+i didn&#039;t understand where i am wrong]]></description>
+		<content:encoded><![CDATA[<p>5<br />
+    /<br />
+   2    4<br />
+ /<br />
+1    3</p>
+<p>in this example </p>
+<p>largest bst should be</p>
+<p>     5<br />
+    /<br />
+   2<br />
+ /<br />
+1    3</p>
+<p>i didn&#8217;t understand where i am wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhilash jaiswal</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-34918</link>
+		<dc:creator><![CDATA[abhilash jaiswal]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 11:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-34918</guid>
+		<description><![CDATA[yes ur ryt man]]></description>
+		<content:encoded><![CDATA[<p>yes ur ryt man</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gbRocks</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-34917</link>
+		<dc:creator><![CDATA[gbRocks]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 11:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-34917</guid>
+		<description><![CDATA[I don&#039;t think finding Longest Increasing SubSequence or SubArray will work.
+
+See the two links for a sample test case:
+
+http://ideone.com/ocFwhp
+
+http://ideone.com/1X5XVG
+
+The problem is that we don&#039;t know the LIS forms a subTree or not.Please correct if I am wrong.]]></description>
+		<content:encoded><![CDATA[<p>I don&#8217;t think finding Longest Increasing SubSequence or SubArray will work.</p>
+<p>See the two links for a sample test case:</p>
+<p><a href="http://ideone.com/ocFwhp" rel="nofollow">http://ideone.com/ocFwhp</a></p>
+<p><a href="http://ideone.com/1X5XVG" rel="nofollow">http://ideone.com/1X5XVG</a></p>
+<p>The problem is that we don&#8217;t know the LIS forms a subTree or not.Please correct if I am wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gbRocks</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-34916</link>
+		<dc:creator><![CDATA[gbRocks]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 11:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-34916</guid>
+		<description><![CDATA[@disqus_sDew3tj9gA:disqus No I don&#039;t think this method will work.Since the sequence (or subarray) you will get may or may not be a subTree of the given tree.]]></description>
+		<content:encoded><![CDATA[<p>@disqus_sDew3tj9gA:disqus No I don&#8217;t think this method will work.Since the sequence (or subarray) you will get may or may not be a subTree of the given tree.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gbRocks</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-34915</link>
+		<dc:creator><![CDATA[gbRocks]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 11:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-34915</guid>
+		<description><![CDATA[@abhilashjaiswal:disqus How would you check whether your LIS in the inorder array is actually a subtree or not?
+I think LIS method won&#039;t work in this case.Please correct me if i am wrong.]]></description>
+		<content:encoded><![CDATA[<p>@abhilashjaiswal:disqus How would you check whether your LIS in the inorder array is actually a subtree or not?<br />
+I think LIS method won&#8217;t work in this case.Please correct me if i am wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gurusreekanth</title>
+		<link>http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/#comment-34792</link>
+		<dc:creator><![CDATA[gurusreekanth]]></dc:creator>
+		<pubDate>Thu, 17 Apr 2014 20:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7291#comment-34792</guid>
+		<description><![CDATA[What happens if root does n&#039;t have a left child?. with out if condition does it work?.]]></description>
+		<content:encoded><![CDATA[<p>What happens if root does n&#8217;t have a left child?. with out if condition does it work?.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:29 -->
+
+<!-- Compression = gzip -->

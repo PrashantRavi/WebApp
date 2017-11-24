@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Longest prefix matching &#8211; A Trie based solution in Java</title>
+	<atom:link href="http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Yogesh</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-34864</link>
+		<dc:creator><![CDATA[Yogesh]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 12:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-34864</guid>
+		<description><![CDATA[Hi Ravi, 
+
+As per the problem statement it will fail for some test cases.
+
+e.g. input &quot;a&quot; it will print ans &quot;a&quot; which is wrong as &quot;a&quot; is not in the dictionary.
+
+I think , isEnd() method can be properly used. Save the prev matched Node 
+
+as use it before printing the result.Chaged the getPrefix method a bit.
+
+// The main method that finds out the longest string &#039;input&#039;
+
+ public String getMatchingPrefix(String input)  {
+
+     String result = &quot;&quot;; // Initialize resultant string
+
+     int length = input.length();  // Find length of the input string       
+
+        
+
+     // Initialize reference to traverse through Trie
+
+     TrieNode crawl = root;   
+
+     TrieNode prevNode = null; 
+
+     // Iterate through all characters of input string &#039;str&#039; and traverse 
+
+     // down the Trie
+
+     int level, prevMatch = 0; 
+
+     for( level = 0 ; level &#060; length; level++ )
+
+     {    
+
+         // Find current character of str
+
+         char ch = input.charAt(level);    
+
+           
+
+         // HashMap of current Trie node to traverse down
+
+         HashMap child = crawl.getChildren();                        
+
+         prevNode = crawl;
+
+         // See if there is a Trie edge for the current character
+
+         if( child.containsKey(ch) )
+
+         {
+
+            result += ch;          //Update result
+
+            //System.out.println(&quot;Reached: &quot; + ch);
+
+            
+
+            prevNode = crawl;
+
+           // System.out.println(&quot;prevNode: &quot; + prevNode.getValue());
+
+        				    
+
+            crawl = child.get(ch); //Update crawl to move down in Trie
+
+            
+
+            // If this is end of a word, then update prevMatch
+
+            if( crawl.isWord() ) 
+
+                 prevMatch = level;
+
+         }            
+
+         else {
+
+             //crawl = prevNode;
+
+             break;
+
+         }
+
+     }
+
+       
+
+     // If the last processed character did not match end of a word, 
+
+     // return the previously matching prefix
+
+     if(prevNode!=null &#038;&#038; prevNode.isWord()) {
+
+	 return result.substring(0, prevMatch+1);
+
+     }   else {
+return &quot;&quot;;
+
+     }
+
+ }]]></description>
+		<content:encoded><![CDATA[<p>Hi Ravi, </p>
+<p>As per the problem statement it will fail for some test cases.</p>
+<p>e.g. input &#8220;a&#8221; it will print ans &#8220;a&#8221; which is wrong as &#8220;a&#8221; is not in the dictionary.</p>
+<p>I think , isEnd() method can be properly used. Save the prev matched Node </p>
+<p>as use it before printing the result.Chaged the getPrefix method a bit.</p>
+<p>// The main method that finds out the longest string &#8216;input&#8217;</p>
+<p> public String getMatchingPrefix(String input)  {</p>
+<p>     String result = &#8220;&#8221;; // Initialize resultant string</p>
+<p>     int length = input.length();  // Find length of the input string       </p>
+<p>     // Initialize reference to traverse through Trie</p>
+<p>     TrieNode crawl = root;   </p>
+<p>     TrieNode prevNode = null; </p>
+<p>     // Iterate through all characters of input string &#8216;str&#8217; and traverse </p>
+<p>     // down the Trie</p>
+<p>     int level, prevMatch = 0; </p>
+<p>     for( level = 0 ; level &lt; length; level++ )</p>
+<p>     {    </p>
+<p>         // Find current character of str</p>
+<p>         char ch = input.charAt(level);    </p>
+<p>         // HashMap of current Trie node to traverse down</p>
+<p>         HashMap child = crawl.getChildren();                        </p>
+<p>         prevNode = crawl;</p>
+<p>         // See if there is a Trie edge for the current character</p>
+<p>         if( child.containsKey(ch) )</p>
+<p>         {</p>
+<p>            result += ch;          //Update result</p>
+<p>            //System.out.println(&#8220;Reached: &#8221; + ch);</p>
+<p>            prevNode = crawl;</p>
+<p>           // System.out.println(&#8220;prevNode: &#8221; + prevNode.getValue());</p>
+<p>            crawl = child.get(ch); //Update crawl to move down in Trie</p>
+<p>            // If this is end of a word, then update prevMatch</p>
+<p>            if( crawl.isWord() ) </p>
+<p>                 prevMatch = level;</p>
+<p>         }            </p>
+<p>         else {</p>
+<p>             //crawl = prevNode;</p>
+<p>             break;</p>
+<p>         }</p>
+<p>     }</p>
+<p>     // If the last processed character did not match end of a word, </p>
+<p>     // return the previously matching prefix</p>
+<p>     if(prevNode!=null &amp;&amp; prevNode.isWord()) {</p>
+<p>	 return result.substring(0, prevMatch+1);</p>
+<p>     }   else {<br />
+return &#8220;&#8221;;</p>
+<p>     }</p>
+<p> }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: wasseypuriyan</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-29177</link>
+		<dc:creator><![CDATA[wasseypuriyan]]></dc:creator>
+		<pubDate>Mon, 21 Oct 2013 17:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-29177</guid>
+		<description><![CDATA[&lt;code&gt;
+//Trie
+#include
+#include
+#include
+#include
+
+using namespace std;
+
+struct node{
+    char data;
+    node *child[128];
+};
+
+
+class trie{
+    
+    private:
+    node *root;
+
+    public:
+    trie()
+    {
+        root=new_node(0);
+    }
+
+    node *new_node(int data)
+    {
+        node *Q = new node;
+        Q-&#062;data = data;
+        return Q;
+    }
+
+    void add(string S)
+    {
+        node *cur = root;
+        for(int i=0; ichild[S[i]-&#039;A&#039;])
+            cur-&#062;child[S[i]-&#039;A&#039;] = new_node(S[i]);
+
+            cur = cur-&#062;child[S[i]-&#039;A&#039;];
+        }
+    }
+
+    void check(node *cur, string S, int i)
+    {
+        if(cur)
+        {
+            cout&#060;data&#060;&#060;&#034; &#034;;
+            if(i child[S[i]-&#039;A&#039;],S,i+1);
+        }
+        else
+        cout&#060; 0 &#038;&#038; S[0] &#062; &#039;A&#039;)
+        check(root-&#062;child[S[0]-&#039;A&#039;],S,1);
+        else
+        cout&#060;&#060;&#034;nEmpty root n&#034;;
+    }
+};            
+
+int main()
+{
+    int N = 2;
+    trie T;
+    string S;
+    for(int i=0; i&#060;N; i++)
+    {
+        cout&#060;&#060;&#034;nEnter word for dictionary &#034;;
+        getline(cin,S);
+        T.add(S);
+    }
+    
+
+    for(int i=0; i&#060;4; i++)
+    {
+        cout&#060;&#060;&#034;nEnter search query &#034;;
+        getline(cin,S);
+        T.checkroot(S);
+    }
+    cout&#060;&#060;endl;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+//Trie<br />
+#include<br />
+#include<br />
+#include<br />
+#include</p>
+<p>using namespace std;</p>
+<p>struct node{<br />
+    char data;<br />
+    node *child[128];<br />
+};</p>
+<p>class trie{</p>
+<p>    private:<br />
+    node *root;</p>
+<p>    public:<br />
+    trie()<br />
+    {<br />
+        root=new_node(0);<br />
+    }</p>
+<p>    node *new_node(int data)<br />
+    {<br />
+        node *Q = new node;<br />
+        Q-&gt;data = data;<br />
+        return Q;<br />
+    }</p>
+<p>    void add(string S)<br />
+    {<br />
+        node *cur = root;<br />
+        for(int i=0; ichild[S[i]-'A'])<br />
+            cur-&gt;child[S[i]-'A'] = new_node(S[i]);</p>
+<p>            cur = cur-&gt;child[S[i]-'A'];<br />
+        }<br />
+    }</p>
+<p>    void check(node *cur, string S, int i)<br />
+    {<br />
+        if(cur)<br />
+        {<br />
+            cout&lt;data&lt;&lt;&quot; &quot;;<br />
+            if(i child[S[i]-'A'],S,i+1);<br />
+        }<br />
+        else<br />
+        cout&lt; 0 &amp;&amp; S[0] &gt; 'A')<br />
+        check(root-&gt;child[S[0]-'A'],S,1);<br />
+        else<br />
+        cout&lt;&lt;&quot;nEmpty root n&quot;;<br />
+    }<br />
+};            </p>
+<p>int main()<br />
+{<br />
+    int N = 2;<br />
+    trie T;<br />
+    string S;<br />
+    for(int i=0; i&lt;N; i++)<br />
+    {<br />
+        cout&lt;&lt;&quot;nEnter word for dictionary &quot;;<br />
+        getline(cin,S);<br />
+        T.add(S);<br />
+    }</p>
+<p>    for(int i=0; i&lt;4; i++)<br />
+    {<br />
+        cout&lt;&lt;&quot;nEnter search query &quot;;<br />
+        getline(cin,S);<br />
+        T.checkroot(S);<br />
+    }<br />
+    cout&lt;&lt;endl;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: illuminati</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-22263</link>
+		<dc:creator><![CDATA[illuminati]]></dc:creator>
+		<pubDate>Tue, 16 Jul 2013 22:12:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-22263</guid>
+		<description><![CDATA[#include
+#include
+using namespace std;
+struct node{
+       bool isLeaf;
+       node* alp[26];
+}*root=NULL;
+void trie_insert(string  str)
+{
+     int i,j;
+     node *ptr;
+     int len=str.size();
+     if(root==NULL)
+     {
+             root=new node;
+             root-&#062;isLeaf=false;
+             for(i=0;ialp[i]=NULL;
+             }
+     }                  
+     ptr=root;  
+     for(i=0;ialp[str[i]-&#039;a&#039;]==NULL)
+          {
+                node* p=new node;
+                ptr-&#062;alp[str[i]-&#039;a&#039;]=p;
+                if(i==len-1)
+                p-&#062;isLeaf=true;
+                else
+                p-&#062;isLeaf=false;
+                for(j=0;jalp[j]=NULL;
+                }
+                ptr=p;
+          }
+          else
+          {
+                ptr=ptr-&#062;alp[str[i]-&#039;a&#039;];
+          }
+     }
+}
+int trie_search(string s)
+{
+    int len=s.size();
+    int i;
+    node* ptr=root;
+    for(i=0;ialp[s[i]-&#039;a&#039;];
+            if(ptr==NULL)
+                   return 0;
+            if(i==len-1 &#038;&#038; ptr-&#062;isLeaf)
+            {
+                   return 1;
+            }     
+        }
+    }
+    return 0;
+}
+int longest_prefix(string s)
+{
+    int len=s.size();
+    int i;
+    node* ptr=root;
+    for(i=0;ialp[s[i]-&#039;a&#039;];
+            if(ptr==NULL)
+                   return i-1;
+            if(i==len-1 &#038;&#038; ptr-&#062;isLeaf)
+            {
+                   return i;
+            }     
+    }
+    return i-1;
+}                                                   
+int main()
+{
+    string dict[6]={&quot;any&quot;,&quot;answer&quot;,&quot;arc&quot;,&quot;hello&quot;,&quot;hell&quot;,&quot;ans&quot;},s;
+    for(int i=0;i&#062;s;
+    cout&#060;&#060;trie_search(s)&#060;&#060;endl;
+    cout&#060;&#060;s.substr(0,longest_prefix(s)+1)&#060;&#060;endl;
+    system(&#034;pause&#034;);
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+using namespace std;<br />
+struct node{<br />
+       bool isLeaf;<br />
+       node* alp[26];<br />
+}*root=NULL;<br />
+void trie_insert(string  str)<br />
+{<br />
+     int i,j;<br />
+     node *ptr;<br />
+     int len=str.size();<br />
+     if(root==NULL)<br />
+     {<br />
+             root=new node;<br />
+             root-&gt;isLeaf=false;<br />
+             for(i=0;ialp[i]=NULL;<br />
+             }<br />
+     }<br />
+     ptr=root;<br />
+     for(i=0;ialp[str[i]-&#8216;a&#8217;]==NULL)<br />
+          {<br />
+                node* p=new node;<br />
+                ptr-&gt;alp[str[i]-&#8216;a&#8217;]=p;<br />
+                if(i==len-1)<br />
+                p-&gt;isLeaf=true;<br />
+                else<br />
+                p-&gt;isLeaf=false;<br />
+                for(j=0;jalp[j]=NULL;<br />
+                }<br />
+                ptr=p;<br />
+          }<br />
+          else<br />
+          {<br />
+                ptr=ptr-&gt;alp[str[i]-&#8216;a&#8217;];<br />
+          }<br />
+     }<br />
+}<br />
+int trie_search(string s)<br />
+{<br />
+    int len=s.size();<br />
+    int i;<br />
+    node* ptr=root;<br />
+    for(i=0;ialp[s[i]-&#8216;a&#8217;];<br />
+            if(ptr==NULL)<br />
+                   return 0;<br />
+            if(i==len-1 &amp;&amp; ptr-&gt;isLeaf)<br />
+            {<br />
+                   return 1;<br />
+            }<br />
+        }<br />
+    }<br />
+    return 0;<br />
+}<br />
+int longest_prefix(string s)<br />
+{<br />
+    int len=s.size();<br />
+    int i;<br />
+    node* ptr=root;<br />
+    for(i=0;ialp[s[i]-&#8216;a&#8217;];<br />
+            if(ptr==NULL)<br />
+                   return i-1;<br />
+            if(i==len-1 &amp;&amp; ptr-&gt;isLeaf)<br />
+            {<br />
+                   return i;<br />
+            }<br />
+    }<br />
+    return i-1;<br />
+}<br />
+int main()<br />
+{<br />
+    string dict[6]={&#8220;any&#8221;,&#8221;answer&#8221;,&#8221;arc&#8221;,&#8221;hello&#8221;,&#8221;hell&#8221;,&#8221;ans&#8221;},s;<br />
+    for(int i=0;i&gt;s;<br />
+    cout&lt;&lt;trie_search(s)&lt;&lt;endl;<br />
+    cout&lt;&lt;s.substr(0,longest_prefix(s)+1)&lt;&lt;endl;<br />
+    system(&quot;pause&quot;);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pritybhudolia</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-21725</link>
+		<dc:creator><![CDATA[pritybhudolia]]></dc:creator>
+		<pubDate>Mon, 08 Jul 2013 19:06:28 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-21725</guid>
+		<description><![CDATA[C Implementation
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;stdio.h&#062;
+#include &#060;stdlib.h&#062;
+#include &#060;string.h&#062;
+ 
+#define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
+#define ALPHABET_SIZE (26)
+#define CHAR_TO_INDEX(c) ((int)c - 97)
+ 
+// trie node
+typedef struct trie_node trienode;
+struct trie_node
+{
+    int value;
+    trienode *children[ALPHABET_SIZE];
+};
+ 
+// trie ADT
+typedef struct trie_t trie;
+struct trie_t
+{
+    trienode *root;
+    int count;
+};
+ 
+// Returns new trie node (initialized to NULLs)
+trienode *getnode(void)
+{
+    trienode *pnode = NULL; 
+    pnode = (trienode *)malloc(sizeof(trienode));
+     if( pnode )
+    {
+        int i;
+         pnode-&#062;value = 0;
+         for(i = 0; i &#060; ALPHABET_SIZE; i++)
+        {
+            pnode-&#062;children[i] = NULL;
+        }
+    }
+     return pnode;
+}
+ // Initializes trie (root is dummy node)
+void initialize(trie *ptrie)
+{
+    ptrie-&#062;root = getnode();
+    ptrie-&#062;count = 0;
+}
+ 
+// If not present, inserts key into trie
+// If the key is prefix of trie node, just marks leaf node
+void insert(trie *ptrie, char key[])
+{
+    int level;
+    int length = strlen(key);
+    int index;
+    trienode *pcrawl;
+ 
+    ptrie-&#062;count++;
+    pcrawl = ptrie-&#062;root;
+ 
+    for( level = 0; level &#060; length; level++ )
+    {
+        index = CHAR_TO_INDEX(key[level]);
+        if( !pcrawl-&#062;children[index] )
+        {
+            pcrawl-&#062;children[index] = getnode();
+        }
+ 
+        pcrawl = pcrawl-&#062;children[index];
+    }
+ 
+    // mark last node as leaf
+    pcrawl-&#062;value = ptrie-&#062;count;
+}
+ 
+// Returns -1, if prefix is not found in trie
+int search(trie *ptrie, char key[])
+{
+    int level;
+    int prefix=0;
+    int length = strlen(key);
+    int index;
+    trienode *pcrawl;
+ 
+    pcrawl = ptrie-&#062;root;
+ 
+    for( level = 0; level &#060; length; level++ )
+    {
+        index = CHAR_TO_INDEX(key[level]);
+        if( !pcrawl-&#062;children[index] )
+        {           
+        return prefix-1;
+        }
+        pcrawl = pcrawl-&#062;children[index];        
+        if(pcrawl-&#062;value&#062;prefix)prefix=pcrawl-&#062;value;
+    }
+ 
+    return -1;
+}
+ 
+// Driver
+int main()
+{
+    // Input keys (use only &#039;a&#039; through &#039;z&#039; and lower case)
+    char keys[][9] = {&#034;are&#034;, &#034;area&#034;, &#034;base&#034;, &#034;cat&#034;, &#034;cater&#034;, &#034;children&#034;, &#034;basement&#034;};
+    trie_t trie;
+    //array to search for the prefixes
+    char find[][32] = {&#034;caterer&#034;, &#034;basemessy&#034;,&#034;child&#034;,&#034;arey&#034;,&#034;canteen&#034;};
+ 
+    initialize(&#038;trie);
+ 
+    // Construct trie
+    for(int i = 0; i &#060; ARRAY_SIZE(keys); i++)
+    {
+        insert(&#038;trie, keys[i]);
+    }
+    //search for prefixes in trie
+    for(int i = 0; i &#060; ARRAY_SIZE(find); i++)
+    {
+    if(search(&#038;trie, find[i])&#062;=0)        
+    printf(&#034;%s ----------- %s\n&#034;, find[i],keys[search(&#038;trie, find[i])] );
+    else
+    printf(&#034;%s----------prefix not found\n&#034;,find[i]);
+   }
+   
+    getchar();
+    return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>C Implementation</p>
+<pre> <code language="C">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+ 
+#define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
+#define ALPHABET_SIZE (26)
+#define CHAR_TO_INDEX(c) ((int)c - 97)
+ 
+// trie node
+typedef struct trie_node trienode;
+struct trie_node
+{
+    int value;
+    trienode *children[ALPHABET_SIZE];
+};
+ 
+// trie ADT
+typedef struct trie_t trie;
+struct trie_t
+{
+    trienode *root;
+    int count;
+};
+ 
+// Returns new trie node (initialized to NULLs)
+trienode *getnode(void)
+{
+    trienode *pnode = NULL; 
+    pnode = (trienode *)malloc(sizeof(trienode));
+     if( pnode )
+    {
+        int i;
+         pnode-&gt;value = 0;
+         for(i = 0; i &lt; ALPHABET_SIZE; i++)
+        {
+            pnode-&gt;children[i] = NULL;
+        }
+    }
+     return pnode;
+}
+ // Initializes trie (root is dummy node)
+void initialize(trie *ptrie)
+{
+    ptrie-&gt;root = getnode();
+    ptrie-&gt;count = 0;
+}
+ 
+// If not present, inserts key into trie
+// If the key is prefix of trie node, just marks leaf node
+void insert(trie *ptrie, char key[])
+{
+    int level;
+    int length = strlen(key);
+    int index;
+    trienode *pcrawl;
+ 
+    ptrie-&gt;count++;
+    pcrawl = ptrie-&gt;root;
+ 
+    for( level = 0; level &lt; length; level++ )
+    {
+        index = CHAR_TO_INDEX(key[level]);
+        if( !pcrawl-&gt;children[index] )
+        {
+            pcrawl-&gt;children[index] = getnode();
+        }
+ 
+        pcrawl = pcrawl-&gt;children[index];
+    }
+ 
+    // mark last node as leaf
+    pcrawl-&gt;value = ptrie-&gt;count;
+}
+ 
+// Returns -1, if prefix is not found in trie
+int search(trie *ptrie, char key[])
+{
+    int level;
+    int prefix=0;
+    int length = strlen(key);
+    int index;
+    trienode *pcrawl;
+ 
+    pcrawl = ptrie-&gt;root;
+ 
+    for( level = 0; level &lt; length; level++ )
+    {
+        index = CHAR_TO_INDEX(key[level]);
+        if( !pcrawl-&gt;children[index] )
+        {           
+        return prefix-1;
+        }
+        pcrawl = pcrawl-&gt;children[index];        
+        if(pcrawl-&gt;value&gt;prefix)prefix=pcrawl-&gt;value;
+    }
+ 
+    return -1;
+}
+ 
+// Driver
+int main()
+{
+    // Input keys (use only 'a' through 'z' and lower case)
+    char keys[][9] = {&quot;are&quot;, &quot;area&quot;, &quot;base&quot;, &quot;cat&quot;, &quot;cater&quot;, &quot;children&quot;, &quot;basement&quot;};
+    trie_t trie;
+    //array to search for the prefixes
+    char find[][32] = {&quot;caterer&quot;, &quot;basemessy&quot;,&quot;child&quot;,&quot;arey&quot;,&quot;canteen&quot;};
+ 
+    initialize(&amp;trie);
+ 
+    // Construct trie
+    for(int i = 0; i &lt; ARRAY_SIZE(keys); i++)
+    {
+        insert(&amp;trie, keys[i]);
+    }
+    //search for prefixes in trie
+    for(int i = 0; i &lt; ARRAY_SIZE(find); i++)
+    {
+    if(search(&amp;trie, find[i])&gt;=0)        
+    printf(&quot;%s ----------- %s\n&quot;, find[i],keys[search(&amp;trie, find[i])] );
+    else
+    printf(&quot;%s----------prefix not found\n&quot;,find[i]);
+   }
+   
+    getchar();
+    return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: aman1234</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-19935</link>
+		<dc:creator><![CDATA[aman1234]]></dc:creator>
+		<pubDate>Mon, 17 Jun 2013 09:03:43 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-19935</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+string substr(string s)
+{
+       if(!root)
+       return &#034;&#034;;
+       
+       static string ans=&#034;&#034;;
+       string temp=&#034;&#034;;
+       int level=s.size();
+       node * c=root;
+       
+       for(int i=0;i&#060;level;i++)
+       {
+            c=c-&#062;point[s[i]-&#039;a&#039;];
+            
+            if(c==NULL)
+            return ans;
+           temp+=s[i];
+           
+            if(c-&#062;d &#062; 0)
+            ans=temp;
+            
+            
+       }
+       
+       return ans;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+string substr(string s)
+{
+       if(!root)
+       return &quot;&quot;;
+       
+       static string ans=&quot;&quot;;
+       string temp=&quot;&quot;;
+       int level=s.size();
+       node * c=root;
+       
+       for(int i=0;i&lt;level;i++)
+       {
+            c=c-&gt;point[s[i]-'a'];
+            
+            if(c==NULL)
+            return ans;
+           temp+=s[i];
+           
+            if(c-&gt;d &gt; 0)
+            ans=temp;
+            
+            
+       }
+       
+       return ans;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sudipto</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-19417</link>
+		<dc:creator><![CDATA[Sudipto]]></dc:creator>
+		<pubDate>Sun, 09 Jun 2013 07:41:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-19417</guid>
+		<description><![CDATA[@geeksforgeeks : What is the use of the &#039;value&#039; field in a &#039;TrieNode&#039;?
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>@geeksforgeeks : What is the use of the &#8216;value&#8217; field in a &#8216;TrieNode&#8217;?</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitendra Kumar</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-18891</link>
+		<dc:creator><![CDATA[Nitendra Kumar]]></dc:creator>
+		<pubDate>Thu, 30 May 2013 11:23:20 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-18891</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Test1{
+	public static void main(String[] args) {
+		List&#060;String&#062; list = new ArrayList&#060;String&#062;();
+		list.add(&#034;are&#034;);
+		list.add(&#034;area&#034;);
+		list.add(&#034;base&#034;);
+		list.add(&#034;cat&#034;);
+		list.add(&#034;cater&#034;);
+		list.add(&#034;children&#034;);
+		list.add(&#034;basement&#034;);
+		Map&#060;Integer, String&#062; map = new HashMap&#060;Integer, String&#062;();
+		
+		String input = &#034;caterer&#034;;
+		int length = 0;
+		for (String str : list) {
+			if (input.startsWith(str)) {
+				if (str.length() &#062; length) {
+					length = str.length();
+					map.put(str.length(), str);
+				}
+				
+			}
+		}
+		System.out.println(&#034;Input String : &#034; + input +&#034; OutPut String : &#034; + map.get(length));
+	}
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="Java">
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Test1{
+	public static void main(String[] args) {
+		List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+		list.add(&quot;are&quot;);
+		list.add(&quot;area&quot;);
+		list.add(&quot;base&quot;);
+		list.add(&quot;cat&quot;);
+		list.add(&quot;cater&quot;);
+		list.add(&quot;children&quot;);
+		list.add(&quot;basement&quot;);
+		Map&lt;Integer, String&gt; map = new HashMap&lt;Integer, String&gt;();
+		
+		String input = &quot;caterer&quot;;
+		int length = 0;
+		for (String str : list) {
+			if (input.startsWith(str)) {
+				if (str.length() &gt; length) {
+					length = str.length();
+					map.put(str.length(), str);
+				}
+				
+			}
+		}
+		System.out.println(&quot;Input String : &quot; + input +&quot; OutPut String : &quot; + map.get(length));
+	}
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shaik Zakir Hussain</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-25949</link>
+		<dc:creator><![CDATA[Shaik Zakir Hussain]]></dc:creator>
+		<pubDate>Sun, 26 May 2013 14:48:06 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-25949</guid>
+		<description><![CDATA[vishu, ye kya ho gaya bhai tujhe ?]]></description>
+		<content:encoded><![CDATA[<p>vishu, ye kya ho gaya bhai tujhe ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vishwanath Pratap Singh</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-25948</link>
+		<dc:creator><![CDATA[Vishwanath Pratap Singh]]></dc:creator>
+		<pubDate>Sun, 26 May 2013 11:11:02 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-25948</guid>
+		<description><![CDATA[#include&#060;stdio.h&#062;
+#include&#060;string.h&#062;
+#include&#060;stdlib.h&#062;
+
+typedef struct trie{.
+int words;
+int prefixes;
+struct trie* next[26];.
+}trie;
+
+trie* initialize(trie *node){.
+
+	node=(trie *)malloc(sizeof(trie));
+	node-&#062;words=0;
+	node-&#062;prefixes=0;
+	int i=0;
+	for(i=0;i&#060;26;i++)
+
+
+
+node-&#062;next[i]=NULL;.
+
+
+
+return node;.
+}
+
+trie* addWord(trie * root, char *c){.
+
+if(c[0]==&#039; &#039;){
+	root-&#062;words+=root-&#062;words;
+}
+else{
+	root-&#062;prefixes+=1;
+	char k;
+	k=c[0];
+	c++;
+	int index=k-&#039;a&#039;;
+	if(root-&#062;next[index]==NULL){
+		root-&#062;next[index]=initialize(root-&#062;next[index]);
+	}
+	root-&#062;next[index]=addWord(root-&#062;next[index], c);
+}
+return root;
+}
+
+void findWord(trie* root, char *word){.
+	char k;
+	k=word[0];
+	int index=k-&#039;a&#039;;
+	if(root-&#062;next[index]==NULL){
+		printf(&#034;n&#034;);
+		return;
+	}
+	else{
+		printf(&#034;%c&#034;, k);
+		word++;
+		findWord(root-&#062;next[index], word);
+	}	
+}
+
+main(){
+trie * root=(trie *)malloc(sizeof(trie));.
+root=addWord(root,&#034;are&#034;);
+root=addWord(root,&#034;area&#034;);
+root=addWord(root,&#034;base&#034;);
+root=addWord(root,&#034;cat&#034;);
+root=addWord(root,&#034;cater&#034;);
+root=addWord(root,&#034;children&#034;);
+root=addWord(root,&#034;basement&#034;);
+findWord(root,&#034;caterer&#034;);
+findWord(root,&#034;basemexy&#034;);
+findWord(root,&#034;child&#034;);
+findWord(root,&#034;area&#034;);
+}]]></description>
+		<content:encoded><![CDATA[<p>#include&lt;stdio.h&gt;<br />
+#include&lt;string.h&gt;<br />
+#include&lt;stdlib.h&gt;</p>
+<p>typedef struct trie{.<br />
+int words;<br />
+int prefixes;<br />
+struct trie* next[26];.<br />
+}trie;</p>
+<p>trie* initialize(trie *node){.</p>
+<p>	node=(trie *)malloc(sizeof(trie));<br />
+	node-&gt;words=0;<br />
+	node-&gt;prefixes=0;<br />
+	int i=0;<br />
+	for(i=0;i&lt;26;i++)</p>
+<p>node-&gt;next[i]=NULL;.</p>
+<p>return node;.<br />
+}</p>
+<p>trie* addWord(trie * root, char *c){.</p>
+<p>if(c[0]==&#039; &#039;){<br />
+	root-&gt;words+=root-&gt;words;<br />
+}<br />
+else{<br />
+	root-&gt;prefixes+=1;<br />
+	char k;<br />
+	k=c[0];<br />
+	c++;<br />
+	int index=k-&#039;a&#039;;<br />
+	if(root-&gt;next[index]==NULL){<br />
+		root-&gt;next[index]=initialize(root-&gt;next[index]);<br />
+	}<br />
+	root-&gt;next[index]=addWord(root-&gt;next[index], c);<br />
+}<br />
+return root;<br />
+}</p>
+<p>void findWord(trie* root, char *word){.<br />
+	char k;<br />
+	k=word[0];<br />
+	int index=k-&#039;a&#039;;<br />
+	if(root-&gt;next[index]==NULL){<br />
+		printf(&quot;n&quot;);<br />
+		return;<br />
+	}<br />
+	else{<br />
+		printf(&quot;%c&quot;, k);<br />
+		word++;<br />
+		findWord(root-&gt;next[index], word);<br />
+	}<br />
+}</p>
+<p>main(){<br />
+trie * root=(trie *)malloc(sizeof(trie));.<br />
+root=addWord(root,&quot;are&quot;);<br />
+root=addWord(root,&quot;area&quot;);<br />
+root=addWord(root,&quot;base&quot;);<br />
+root=addWord(root,&quot;cat&quot;);<br />
+root=addWord(root,&quot;cater&quot;);<br />
+root=addWord(root,&quot;children&quot;);<br />
+root=addWord(root,&quot;basement&quot;);<br />
+findWord(root,&quot;caterer&quot;);<br />
+findWord(root,&quot;basemexy&quot;);<br />
+findWord(root,&quot;child&quot;);<br />
+findWord(root,&quot;area&quot;);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-18500</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Thu, 23 May 2013 07:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-18500</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kumar Gautam</title>
+		<link>http://www.geeksforgeeks.org/longest-prefix-matching-a-trie-based-solution-in-java/#comment-18429</link>
+		<dc:creator><![CDATA[Kumar Gautam]]></dc:creator>
+		<pubDate>Tue, 21 May 2013 12:15:29 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117275#comment-18429</guid>
+		<description><![CDATA[Code without using HashMap.The idea is to use references as we use pointers in C and C++.
+
+&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+package Java;
+import java.io.*;
+
+class TNode{
+	final int MAXCHAR = 26;
+	private boolean bIsEnd;
+	private TNode children[];
+	
+	public TNode(){
+		bIsEnd = false;
+		children = new TNode[MAXCHAR];
+		for(int i = 0; i &#060; MAXCHAR; i++)
+			children[i] = null;
+	}
+	
+	public void setIsEnd(boolean val){
+		bIsEnd = val;
+	}
+	
+	public boolean isEnd(){
+		return bIsEnd;
+	}
+	
+	public void setChild(int index){
+		children[index] = new TNode();
+	}
+	
+	public TNode getChild(int index){
+		return children[index];
+	}
+}
+
+class T{
+	private TNode root;
+	
+	public T(){
+		root = new TNode();
+	}
+	
+	public void insert(String word){
+		int length = word.length();
+		TNode crawl = root;
+		for(int level = 0; level &#060; length; level++){
+			char ch = word.charAt(level);
+			int index = (int)ch - (int)&#039;a&#039;;
+			if(crawl.getChild(index) != null)
+				crawl = crawl.getChild(index);
+			else{
+				crawl.setChild(index);
+				crawl = crawl.getChild(index);
+			}
+		}
+		crawl.setIsEnd(true);
+	}
+	
+	public String getMatchingPrefix(String input){
+		int length = input.length();
+		TNode crawl = root;
+		int prevMatch = 0;
+		String result = &#034;&#034;;
+		for(int level = 0; level &#060; length; level++){
+			char ch = input.charAt(level);
+			int index = (int)ch - (int)&#039;a&#039;;
+			if(crawl.getChild(index) != null){
+				result += ch;
+				crawl = crawl.getChild(index);
+				
+				if(crawl.isEnd())
+					prevMatch = level + 1;
+			}
+			else
+				break;
+		}
+		if(!crawl.isEnd())
+			return result.substring(0, prevMatch);
+		else
+			return result;
+	}
+}
+
+public class LongestPrefixMatching {
+	public static void main(String[] args) throws IOException{
+		T dict = new T();
+		dict.insert(&#034;are&#034;);
+		dict.insert(&#034;area&#034;);
+        dict.insert(&#034;base&#034;);
+        dict.insert(&#034;cat&#034;);
+        dict.insert(&#034;cater&#034;);        
+        dict.insert(&#034;basement&#034;);
+        
+        for(int i = 0; i &#060; 6; i++){
+	        System.out.print(&#034;Enter a string: &#034;);
+	        String input = getString();
+	        System.out.print(input + &#034;: &#034;);
+	        System.out.println(dict.getMatchingPrefix(input));
+        }
+	}
+	
+	public static String getString() throws IOException{
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(isr);
+		String s = br.readLine();
+		return s;
+	}
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Code without using HashMap.The idea is to use references as we use pointers in C and C++.</p>
+<pre> <code language="Java">
+package Java;
+import java.io.*;
+
+class TNode{
+	final int MAXCHAR = 26;
+	private boolean bIsEnd;
+	private TNode children[];
+	
+	public TNode(){
+		bIsEnd = false;
+		children = new TNode[MAXCHAR];
+		for(int i = 0; i &lt; MAXCHAR; i++)
+			children[i] = null;
+	}
+	
+	public void setIsEnd(boolean val){
+		bIsEnd = val;
+	}
+	
+	public boolean isEnd(){
+		return bIsEnd;
+	}
+	
+	public void setChild(int index){
+		children[index] = new TNode();
+	}
+	
+	public TNode getChild(int index){
+		return children[index];
+	}
+}
+
+class T{
+	private TNode root;
+	
+	public T(){
+		root = new TNode();
+	}
+	
+	public void insert(String word){
+		int length = word.length();
+		TNode crawl = root;
+		for(int level = 0; level &lt; length; level++){
+			char ch = word.charAt(level);
+			int index = (int)ch - (int)'a';
+			if(crawl.getChild(index) != null)
+				crawl = crawl.getChild(index);
+			else{
+				crawl.setChild(index);
+				crawl = crawl.getChild(index);
+			}
+		}
+		crawl.setIsEnd(true);
+	}
+	
+	public String getMatchingPrefix(String input){
+		int length = input.length();
+		TNode crawl = root;
+		int prevMatch = 0;
+		String result = &quot;&quot;;
+		for(int level = 0; level &lt; length; level++){
+			char ch = input.charAt(level);
+			int index = (int)ch - (int)'a';
+			if(crawl.getChild(index) != null){
+				result += ch;
+				crawl = crawl.getChild(index);
+				
+				if(crawl.isEnd())
+					prevMatch = level + 1;
+			}
+			else
+				break;
+		}
+		if(!crawl.isEnd())
+			return result.substring(0, prevMatch);
+		else
+			return result;
+	}
+}
+
+public class LongestPrefixMatching {
+	public static void main(String[] args) throws IOException{
+		T dict = new T();
+		dict.insert(&quot;are&quot;);
+		dict.insert(&quot;area&quot;);
+        dict.insert(&quot;base&quot;);
+        dict.insert(&quot;cat&quot;);
+        dict.insert(&quot;cater&quot;);        
+        dict.insert(&quot;basement&quot;);
+        
+        for(int i = 0; i &lt; 6; i++){
+	        System.out.print(&quot;Enter a string: &quot;);
+	        String input = getString();
+	        System.out.print(input + &quot;: &quot;);
+	        System.out.println(dict.getMatchingPrefix(input));
+        }
+	}
+	
+	public static String getString() throws IOException{
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(isr);
+		String s = br.readLine();
+		return s;
+	}
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.046 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:08:46 -->
+
+<!-- Compression = gzip -->

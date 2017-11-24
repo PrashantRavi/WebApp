@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Check if each internal node of a BST has exactly one child</title>
+	<atom:link href="http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ansu1234</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-39701</link>
+		<dc:creator><![CDATA[ansu1234]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 20:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-39701</guid>
+		<description><![CDATA[at first check your input...]]></description>
+		<content:encoded><![CDATA[<p>at first check your input&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-39652</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 14:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-39652</guid>
+		<description><![CDATA[2nd soln will not work for 20,8,5,21,6]]></description>
+		<content:encoded><![CDATA[<p>2nd soln will not work for 20,8,5,21,6</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-37870</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 19:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-37870</guid>
+		<description><![CDATA[can someone explain how the third approach is working ??
+i made range INT_MIN AND INT_MAX and updated correspondingly
+but i  am not able to get the third approach?]]></description>
+		<content:encoded><![CDATA[<p>can someone explain how the third approach is working ??<br />
+i made range INT_MIN AND INT_MAX and updated correspondingly<br />
+but i  am not able to get the third approach?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gautam Goyal</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-37510</link>
+		<dc:creator><![CDATA[Gautam Goyal]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 12:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-37510</guid>
+		<description><![CDATA[The following code updates the possible range of future left and right insertions, such that the required property is maintained.
+
+
+int isSingleChildPreOrder(int a[], int n){
+
+	int i=0;
+
+	if(n==0 &#124;&#124; n==1 &#124;&#124; n==2)
+
+		return 1;
+
+	int left_min = INT_MIN;
+
+	int right_max = INT_MAX;
+
+	int left_max = a[0]-1;
+
+	int right_min = a[0]+1;
+
+	for(i=1;i&#060;n;i++)
+       {
+		if(a[i]=left_min){
+			//left child
+
+			right_max = a[i-1]-1;
+		}
+
+		else if(a[i]&#062;=right_min&#038;&#038;a[i]&#060;=right_max){
+			//right child
+
+			left_min = a[i-1]+1;
+		}
+
+		else return 0;
+
+		left_max = a[i]-1;
+		right_min = a[i]+1;
+
+	}
+
+	return 1;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>The following code updates the possible range of future left and right insertions, such that the required property is maintained.</p>
+<p>int isSingleChildPreOrder(int a[], int n){</p>
+<p>	int i=0;</p>
+<p>	if(n==0 || n==1 || n==2)</p>
+<p>		return 1;</p>
+<p>	int left_min = INT_MIN;</p>
+<p>	int right_max = INT_MAX;</p>
+<p>	int left_max = a[0]-1;</p>
+<p>	int right_min = a[0]+1;</p>
+<p>	for(i=1;i&lt;n;i++)<br />
+       {<br />
+		if(a[i]=left_min){<br />
+			//left child</p>
+<p>			right_max = a[i-1]-1;<br />
+		}</p>
+<p>		else if(a[i]&gt;=right_min&amp;&amp;a[i]&lt;=right_max){<br />
+			//right child</p>
+<p>			left_min = a[i-1]+1;<br />
+		}</p>
+<p>		else return 0;</p>
+<p>		left_max = a[i]-1;<br />
+		right_min = a[i]+1;</p>
+<p>	}</p>
+<p>	return 1;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mccullum</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-37328</link>
+		<dc:creator><![CDATA[mccullum]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 01:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-37328</guid>
+		<description><![CDATA[if (height(root) == size(root))
+then yes 
+else
+no
+
+
+simple.. O(n)]]></description>
+		<content:encoded><![CDATA[<p>if (height(root) == size(root))<br />
+then yes<br />
+else<br />
+no</p>
+<p>simple.. O(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amarnath Raju Vysyaraju</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-35725</link>
+		<dc:creator><![CDATA[Amarnath Raju Vysyaraju]]></dc:creator>
+		<pubDate>Tue, 06 May 2014 15:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-35725</guid>
+		<description><![CDATA[@Admin
+One more approach:
+
+For any series of 3 elements in the Array , it should be monotonically increasing/decreasing or the third element must be between first and second. Please correct me if I am wrong
+
+int hasOneChild(int Arr[],int size) {
+	int i;
+	if(size == 1 &#124;&#124; size == 2){
+		return 1;
+	}
+	for(i = 2 ; i  Arr[i-1] &#038;&#038; Arr[i-2] &#062; Arr[i-1] &#038;&#038; Arr[i] &#062; Arr[i-2]){
+			return 0;
+		}
+		if(Arr[i] &#060; Arr[i-1] &#038;&#038; Arr[i-2] &#060; Arr[i-1] &#038;&#038; Arr[i] &#060; Arr[i-2]){
+			return 0;
+		}
+	}
+	return 1;
+}]]></description>
+		<content:encoded><![CDATA[<p>@Admin<br />
+One more approach:</p>
+<p>For any series of 3 elements in the Array , it should be monotonically increasing/decreasing or the third element must be between first and second. Please correct me if I am wrong</p>
+<p>int hasOneChild(int Arr[],int size) {<br />
+	int i;<br />
+	if(size == 1 || size == 2){<br />
+		return 1;<br />
+	}<br />
+	for(i = 2 ; i  Arr[i-1] &amp;&amp; Arr[i-2] &gt; Arr[i-1] &amp;&amp; Arr[i] &gt; Arr[i-2]){<br />
+			return 0;<br />
+		}<br />
+		if(Arr[i] &lt; Arr[i-1] &amp;&amp; Arr[i-2] &lt; Arr[i-1] &amp;&amp; Arr[i] &lt; Arr[i-2]){<br />
+			return 0;<br />
+		}<br />
+	}<br />
+	return 1;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: saransh</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-34062</link>
+		<dc:creator><![CDATA[saransh]]></dc:creator>
+		<pubDate>Sun, 30 Mar 2014 14:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-34062</guid>
+		<description><![CDATA[cant we just solve it using a queue?
+bool one_child(node *root,queue q)
+if(root==NULL)
+return false
+else
+addqueue(root); int t=0;
+while(sizequeue(q)-t==1&#038;&#038;p!=NULL){ t=sizequeue(q);
+p-&#062;left?addqueue(p-&#062;left),p=p-&#062;left:addqueue(p-&#062;right),p=p-&#062;right;}
+if(sizequeue(q)-t!=1)
+return false;
+else return true;]]></description>
+		<content:encoded><![CDATA[<p>cant we just solve it using a queue?<br />
+bool one_child(node *root,queue q)<br />
+if(root==NULL)<br />
+return false<br />
+else<br />
+addqueue(root); int t=0;<br />
+while(sizequeue(q)-t==1&amp;&amp;p!=NULL){ t=sizequeue(q);<br />
+p-&gt;left?addqueue(p-&gt;left),p=p-&gt;left:addqueue(p-&gt;right),p=p-&gt;right;}<br />
+if(sizequeue(q)-t!=1)<br />
+return false;<br />
+else return true;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jayanth</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-31333</link>
+		<dc:creator><![CDATA[Jayanth]]></dc:creator>
+		<pubDate>Tue, 07 Jan 2014 15:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-31333</guid>
+		<description><![CDATA[U r given the preorder traversal of the BST in  an array....Not the root of the tree]]></description>
+		<content:encoded><![CDATA[<p>U r given the preorder traversal of the BST in  an array&#8230;.Not the root of the tree</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bharath</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-30970</link>
+		<dc:creator><![CDATA[Bharath]]></dc:creator>
+		<pubDate>Mon, 23 Dec 2013 18:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-30970</guid>
+		<description><![CDATA[Here is one of the simple method using pre-order traversal 
+ &lt;code&gt;
+int hasOnlyOneChild(struct node * root) {
+if (root == NULL)
+          return true;
+if ( root-&#062;left != NULL &#038;&#038; root-&#062;right != NULL)
+          return false;
+      int lres = hasone(root-&#062;left);
+      int rres = hasone(root-&#062;right);
+return (lres &#038;&#038; rres);
+}
+&lt;/code&gt; ]]></description>
+		<content:encoded><![CDATA[<p>Here is one of the simple method using pre-order traversal<br />
+ <code><br />
+int hasOnlyOneChild(struct node * root) {<br />
+if (root == NULL)<br />
+          return true;<br />
+if ( root-&gt;left != NULL &amp;&amp; root-&gt;right != NULL)<br />
+          return false;<br />
+      int lres = hasone(root-&gt;left);<br />
+      int rres = hasone(root-&gt;right);<br />
+return (lres &amp;&amp; rres);<br />
+}<br />
+</code> </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vijay Apurva</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-29847</link>
+		<dc:creator><![CDATA[Vijay Apurva]]></dc:creator>
+		<pubDate>Thu, 14 Nov 2013 16:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-29847</guid>
+		<description><![CDATA[if no of height is equal to no of nodes then return true]]></description>
+		<content:encoded><![CDATA[<p>if no of height is equal to no of nodes then return true</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sourabh Upadhyay</title>
+		<link>http://www.geeksforgeeks.org/check-if-each-internal-node-of-a-bst-has-exactly-one-child/#comment-29842</link>
+		<dc:creator><![CDATA[Sourabh Upadhyay]]></dc:creator>
+		<pubDate>Thu, 14 Nov 2013 11:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22502#comment-29842</guid>
+		<description><![CDATA[Perform level order traversing and if the number of levels is equal to the number of nodes then return true else false.]]></description>
+		<content:encoded><![CDATA[<p>Perform level order traversing and if the number of levels is equal to the number of nodes then return true else false.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:28:41 -->
+
+<!-- Compression = gzip -->

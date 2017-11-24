@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Efficient program to calculate e^x</title>
+	<atom:link href="http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: K.kaushik</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-19077</link>
+		<dc:creator><![CDATA[K.kaushik]]></dc:creator>
+		<pubDate>Sun, 02 Jun 2013 11:03:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-19077</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+For greater accuracy in output while calculating e^x you may need to consider i upto 100 or more times instead of upto 10 times only. If considered a high value of &#039;i&#039;, you can get expected result for negative values of x also. In the above code, in the main function, x is given as 0, you can calculate e^x for any +ve or -ve value of x with the code.
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+For greater accuracy in output while calculating e^x you may need to consider i upto 100 or more times instead of upto 10 times only. If considered a high value of 'i', you can get expected result for negative values of x also. In the above code, in the main function, x is given as 0, you can calculate e^x for any +ve or -ve value of x with the code.
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: K.kaushik</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-19075</link>
+		<dc:creator><![CDATA[K.kaushik]]></dc:creator>
+		<pubDate>Sun, 02 Jun 2013 10:27:50 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-19075</guid>
+		<description><![CDATA[a typo is there : e^0 = 1 .. Sorry for the inconvenience.]]></description>
+		<content:encoded><![CDATA[<p>a typo is there : e^0 = 1 .. Sorry for the inconvenience.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: K.kaushik</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-19074</link>
+		<dc:creator><![CDATA[K.kaushik]]></dc:creator>
+		<pubDate>Sun, 02 Jun 2013 10:24:52 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-19074</guid>
+		<description><![CDATA[A simple java code for the program:
+If any error is there please reply to inform me...
+
+//considering calculation upto 10 imes.
+
+public class Exponent {
+	
+	public static double getExponent(double x, int i)
+	{
+		if(i == 0)
+			return 1; // as e^0 = 0;
+		
+		if(i &#062; 10)
+			return 1;
+		
+		else
+		{
+			double y = getExponent(x, i+1);
+			return 1 + (x / i) * y;
+		}
+	}
+	public static void main(String[] args)
+	{
+		double exponent = getExponent(0, 1);
+		
+		System.out.println(&quot;The exponent is : &quot; + exponent);
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>A simple java code for the program:<br />
+If any error is there please reply to inform me&#8230;</p>
+<p>//considering calculation upto 10 imes.</p>
+<p>public class Exponent {</p>
+<p>	public static double getExponent(double x, int i)<br />
+	{<br />
+		if(i == 0)<br />
+			return 1; // as e^0 = 0;</p>
+<p>		if(i &gt; 10)<br />
+			return 1;</p>
+<p>		else<br />
+		{<br />
+			double y = getExponent(x, i+1);<br />
+			return 1 + (x / i) * y;<br />
+		}<br />
+	}<br />
+	public static void main(String[] args)<br />
+	{<br />
+		double exponent = getExponent(0, 1);</p>
+<p>		System.out.println(&#8220;The exponent is : &#8221; + exponent);<br />
+	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: A Chakraborty</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-16764</link>
+		<dc:creator><![CDATA[A Chakraborty]]></dc:creator>
+		<pubDate>Tue, 26 Mar 2013 18:48:58 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-16764</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/*A more efficient program for calculating e^x (which doesn&#039;t involved bulky operations like raising number to power or calculation higher factorials).
+
+Simple Recursion is used.
+We know e^x=1+x+x^/2!+....+x^n/n!
+
+Thus the n&#039;th ten Tn=x^n/n!
+n+1&#039;th tern Tn-1=x^n-1/n-1!
+
+dividing the two relations we get.
+
+Tn-1=Tn * n/x.
+
+Calculated in Get().
+Main() not written! */
+#include &#060;stdio.h&#062;
+#include &#060;math.h&#062;
+float Calc(float);
+float Get(int, float);
+float Calc(float x).
+{
+int i, c=0;
+float sum=0, presum=0;
+for(i=0; ;i++)//no condition statement for desired degree of accuracy.
+{
+c++;
+if(c==1000)
+break;
+presum=sum;
+sum=sum+Get(i, x);
+if((sum-presum)&#060;= 0.00001)
+/*HERE I ASSUMED THAT THE POWER BE CALCULATED CORRECT TO 5 DECIMAL PLACES BUT AND DEGREE OF ACCURACY CAN BE ACHIEVED! */
+{
+break;
+}
+}
+return sum;
+}
+float Get(int i, float x).
+{
+float t;
+if(i==0)return 1;
+if(i==1)
+{
+return x;
+}
+else
+{
+t=(float)x/i;
+return(Get(i-1, t));
+}
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+/*A more efficient program for calculating e^x (which doesn't involved bulky operations like raising number to power or calculation higher factorials).
+
+Simple Recursion is used.
+We know e^x=1+x+x^/2!+....+x^n/n!
+
+Thus the n'th ten Tn=x^n/n!
+n+1'th tern Tn-1=x^n-1/n-1!
+
+dividing the two relations we get.
+
+Tn-1=Tn * n/x.
+
+Calculated in Get().
+Main() not written! */
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+float Calc(float);
+float Get(int, float);
+float Calc(float x).
+{
+int i, c=0;
+float sum=0, presum=0;
+for(i=0; ;i++)//no condition statement for desired degree of accuracy.
+{
+c++;
+if(c==1000)
+break;
+presum=sum;
+sum=sum+Get(i, x);
+if((sum-presum)&lt;= 0.00001)
+/*HERE I ASSUMED THAT THE POWER BE CALCULATED CORRECT TO 5 DECIMAL PLACES BUT AND DEGREE OF ACCURACY CAN BE ACHIEVED! */
+{
+break;
+}
+}
+return sum;
+}
+float Get(int i, float x).
+{
+float t;
+if(i==0)return 1;
+if(i==1)
+{
+return x;
+}
+else
+{
+t=(float)x/i;
+return(Get(i-1, t));
+}
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jitendra Khushwaha</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-24585</link>
+		<dc:creator><![CDATA[Jitendra Khushwaha]]></dc:creator>
+		<pubDate>Tue, 19 Feb 2013 13:31:04 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-24585</guid>
+		<description><![CDATA[@Those who know python :
+here is the high precision solution.
+https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py]]></description>
+		<content:encoded><![CDATA[<p>@Those who know python :<br />
+here is the high precision solution.<br />
+<a href="https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py" rel="nofollow">https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jitendra Khushwaha</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-26409</link>
+		<dc:creator><![CDATA[Jitendra Khushwaha]]></dc:creator>
+		<pubDate>Tue, 19 Feb 2013 13:31:04 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-26409</guid>
+		<description><![CDATA[@Those who know python :
+here is the high precision solution.
+https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py]]></description>
+		<content:encoded><![CDATA[<p>@Those who know python :<br />
+here is the high precision solution.<br />
+<a href="https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py" rel="nofollow">https://github.com/jermenkoo/spoj.pl_solutions/blob/master/EVAL.py</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-13419</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Tue, 11 Dec 2012 02:41:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-13419</guid>
+		<description><![CDATA[Thanks for pointing this out. We have replaced comma with semicolon in algorithm.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out. We have replaced comma with semicolon in algorithm.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Raison</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-13416</link>
+		<dc:creator><![CDATA[Raison]]></dc:creator>
+		<pubDate>Mon, 10 Dec 2012 23:56:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-13416</guid>
+		<description><![CDATA[It&#039;s may not get good precision, even change to double version. For low precision, it&#039;s good.]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s may not get good precision, even change to double version. For low precision, it&#8217;s good.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hello</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-13413</link>
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 10 Dec 2012 20:59:04 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-13413</guid>
+		<description><![CDATA[You have an error in your for loop after sum = 1. You meant to put a semi-colon there instead of a comma.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>You have an error in your for loop after sum = 1. You meant to put a semi-colon there instead of a comma.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akshat Gupta</title>
+		<link>http://www.geeksforgeeks.org/program-to-efficiently-calculate-ex/#comment-13407</link>
+		<dc:creator><![CDATA[Akshat Gupta]]></dc:creator>
+		<pubDate>Mon, 10 Dec 2012 16:52:21 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=28320#comment-13407</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+Nicely done!!
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+Nicely done!!
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:14:38 -->
+
+<!-- Compression = gzip -->

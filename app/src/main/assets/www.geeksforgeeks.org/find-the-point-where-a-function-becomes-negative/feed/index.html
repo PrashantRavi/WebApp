@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Unbounded Binary Search Example (Find the point where a monotonically increasing function becomes positive first time)</title>
+	<atom:link href="http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: zzer</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-34738</link>
+		<dc:creator><![CDATA[zzer]]></dc:creator>
+		<pubDate>Wed, 16 Apr 2014 08:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-34738</guid>
+		<description><![CDATA[int binary_search(int low,int high)
+{
+int candidate= -1;
+int mid;
+while(low 0 )
+{
+candidate = mid;
+high = mid-1;
+}
+else
+low = mid+1;
+}
+return candidate;
+}]]></description>
+		<content:encoded><![CDATA[<p>int binary_search(int low,int high)<br />
+{<br />
+int candidate= -1;<br />
+int mid;<br />
+while(low 0 )<br />
+{<br />
+candidate = mid;<br />
+high = mid-1;<br />
+}<br />
+else<br />
+low = mid+1;<br />
+}<br />
+return candidate;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zzer</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-34737</link>
+		<dc:creator><![CDATA[zzer]]></dc:creator>
+		<pubDate>Wed, 16 Apr 2014 08:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-34737</guid>
+		<description><![CDATA[then the range between low and high is bigger, and we can simple use bit maniputation to set i=i*2 by sift i = i&#060;&#060;2, it is faster as well]]></description>
+		<content:encoded><![CDATA[<p>then the range between low and high is bigger, and we can simple use bit maniputation to set i=i*2 by sift i = i&lt;&lt;2, it is faster as well</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tarzan</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-33837</link>
+		<dc:creator><![CDATA[Tarzan]]></dc:creator>
+		<pubDate>Tue, 25 Mar 2014 18:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-33837</guid>
+		<description><![CDATA[so if the function does not return any positive value for input up till INT_MAX, then will it not get stuck in an infinite loop ? 
+
+We need to change this
+
+while (f(i) &#060;= 0)]]></description>
+		<content:encoded><![CDATA[<p>so if the function does not return any positive value for input up till INT_MAX, then will it not get stuck in an infinite loop ? </p>
+<p>We need to change this</p>
+<p>while (f(i) &lt;= 0)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-28227</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sun, 29 Sep 2013 10:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-28227</guid>
+		<description><![CDATA[agreed]]></description>
+		<content:encoded><![CDATA[<p>agreed</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: raghvendra</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-26680</link>
+		<dc:creator><![CDATA[raghvendra]]></dc:creator>
+		<pubDate>Tue, 20 Aug 2013 07:43:37 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-26680</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;iostream&#062;
+#include&#060;cmath&#062;
+using namespace std;
+#define p 1e-6
+double value(double x)
+{
+    return 2*x+5;
+}
+double binary(double low,double high)
+{
+    double mid;
+    while(abs(high-low)&#062;p)
+    {
+      mid=low+(high-low)/2;
+      if(abs(value(mid))&#060;=p)return mid;
+      else if(value(mid)&#062;0)
+        high=mid;
+      else
+      low=mid;
+    }
+    return -1;
+}
+int main()
+{
+    //printf(&#034;%lf\n&#034;,p);
+    cout&#060;&#060;binary(-5.0,5.0);
+    return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+#define p 1e-6
+double value(double x)
+{
+    return 2*x+5;
+}
+double binary(double low,double high)
+{
+    double mid;
+    while(abs(high-low)&gt;p)
+    {
+      mid=low+(high-low)/2;
+      if(abs(value(mid))&lt;=p)return mid;
+      else if(value(mid)&gt;0)
+        high=mid;
+      else
+      low=mid;
+    }
+    return -1;
+}
+int main()
+{
+    //printf(&quot;%lf\n&quot;,p);
+    cout&lt;&lt;binary(-5.0,5.0);
+    return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sunil</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-22218</link>
+		<dc:creator><![CDATA[Sunil]]></dc:creator>
+		<pubDate>Tue, 16 Jul 2013 02:46:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-22218</guid>
+		<description><![CDATA[We can do a binary search for a value of mid where,
+if mid satisfies the condition f(mid)*f(mid+1)&#060;0, we return mid+1.
+if mid satisfies the condition f(mid)*f(mid-1)&#060;0, we return mid.
+ 
+because (-ve)*(-ve)=(+ve) and (+ve)*(+ve)=(-ve) only at the point of transition there is a negative product.]]></description>
+		<content:encoded><![CDATA[<p>We can do a binary search for a value of mid where,<br />
+if mid satisfies the condition f(mid)*f(mid+1)&lt;0, we return mid+1.<br />
+if mid satisfies the condition f(mid)*f(mid-1)&lt;0, we return mid.</p>
+<p>because (-ve)*(-ve)=(+ve) and (+ve)*(+ve)=(-ve) only at the point of transition there is a negative product.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: darkpassenger</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-21220</link>
+		<dc:creator><![CDATA[darkpassenger]]></dc:creator>
+		<pubDate>Wed, 03 Jul 2013 18:26:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-21220</guid>
+		<description><![CDATA[can you tell any case when binary search returns -1 i.e there is no element which is positive after checking in the function find first positive that positive element exists.]]></description>
+		<content:encoded><![CDATA[<p>can you tell any case when binary search returns -1 i.e there is no element which is positive after checking in the function find first positive that positive element exists.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhinav Aggarwal</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-25868</link>
+		<dc:creator><![CDATA[Abhinav Aggarwal]]></dc:creator>
+		<pubDate>Tue, 25 Jun 2013 22:08:57 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-25868</guid>
+		<description><![CDATA[If you do that, then the gap between the subsequent iterations will increase when you get the interval. Suppose that now you make gap 3*i from i. Then you would need to apply binary search in those 2i elements.]]></description>
+		<content:encoded><![CDATA[<p>If you do that, then the gap between the subsequent iterations will increase when you get the interval. Suppose that now you make gap 3*i from i. Then you would need to apply binary search in those 2i elements.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anshul Gupta</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-25867</link>
+		<dc:creator><![CDATA[Anshul Gupta]]></dc:creator>
+		<pubDate>Sun, 23 Jun 2013 08:33:30 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-25867</guid>
+		<description><![CDATA[This is more like newton-raphson method which terminates for the first +ve f(x).]]></description>
+		<content:encoded><![CDATA[<p>This is more like newton-raphson method which terminates for the first +ve f(x).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Manish</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-20399</link>
+		<dc:creator><![CDATA[Manish]]></dc:creator>
+		<pubDate>Sun, 23 Jun 2013 04:10:34 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-20399</guid>
+		<description><![CDATA[We can make use of f&#039;(x)(rate of change of f(x) at x) for computing the amount by which we want to increase i. i think it will significantly reduce complexity.
+
+couldnt figure out how to use it...:(]]></description>
+		<content:encoded><![CDATA[<p>We can make use of f'(x)(rate of change of f(x) at x) for computing the amount by which we want to increase i. i think it will significantly reduce complexity.</p>
+<p>couldnt figure out how to use it&#8230;:(</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: md03</title>
+		<link>http://www.geeksforgeeks.org/find-the-point-where-a-function-becomes-negative/#comment-20247</link>
+		<dc:creator><![CDATA[md03]]></dc:creator>
+		<pubDate>Fri, 21 Jun 2013 07:30:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=118626#comment-20247</guid>
+		<description><![CDATA[In case of low=0 and high=0, mid=0. If first positive value is at index 0, it will be returned at this point:
+
+if (f(0) &gt; 0)
+        return 0;
+If the first positive value is not at index 0, thus the first condition (f(mid)&gt;0) is found false, the second(f(mid-1)&lt; =0) shall not be checked.
+
+In the case when low=5 and high=6, mid=5
+if f(5) is the first positive, then f(4) is negative and hence condition f(mid) &gt; 0 &amp;&amp;  f(mid-1) &lt;= 0 is enough.
+if f(5) is not the the first positive then f(4) is also positive, again the aforesaid condition is sufficient.]]></description>
+		<content:encoded><![CDATA[<p>In case of low=0 and high=0, mid=0. If first positive value is at index 0, it will be returned at this point:</p>
+<p>if (f(0) > 0)<br />
+        return 0;<br />
+If the first positive value is not at index 0, thus the first condition (f(mid)>0) is found false, the second(f(mid-1)< =0) shall not be checked.
+
+In the case when low=5 and high=6, mid=5
+if f(5) is the first positive, then f(4) is negative and hence condition f(mid) > 0 &#038;&#038;  f(mid-1) <= 0 is enough.
+if f(5) is not the the first positive then f(4) is also positive, again the aforesaid condition is sufficient.
+</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:21:14 -->
+
+<!-- Compression = gzip -->

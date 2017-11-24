@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Find the number of islands &#124; Set 1 (Using DFS)</title>
+	<atom:link href="http://www.geeksforgeeks.org/find-number-of-islands/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/find-number-of-islands/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: @meya</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-37665</link>
+		<dc:creator><![CDATA[@meya]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 10:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-37665</guid>
+		<description><![CDATA[Is the time complexity of this algorithm O(n*n) where n is number of rows and columns. ?]]></description>
+		<content:encoded><![CDATA[<p>Is the time complexity of this algorithm O(n*n) where n is number of rows and columns. ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hamza Mansoor Manya</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-37348</link>
+		<dc:creator><![CDATA[Hamza Mansoor Manya]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 09:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-37348</guid>
+		<description><![CDATA[This algo just need a minor modification for that. I&#039;ve already did that]]></description>
+		<content:encoded><![CDATA[<p>This algo just need a minor modification for that. I&#8217;ve already did that</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hamza Mansoor Manya</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-37347</link>
+		<dc:creator><![CDATA[Hamza Mansoor Manya]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 09:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-37347</guid>
+		<description><![CDATA[Thanks man. I used your logic to implement a labeling algorithm]]></description>
+		<content:encoded><![CDATA[<p>Thanks man. I used your logic to implement a labeling algorithm</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav Kumar</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-37010</link>
+		<dc:creator><![CDATA[Gaurav Kumar]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 12:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-37010</guid>
+		<description><![CDATA[Dynamic Programming Approach For Solving No of island :
+
+
+
+
+#include 
+#define R 3
+#define C 5
+int Max(int a, int b){
+	if(a&#062;b)
+	return a;
+	else 
+	return b;
+	}
+int No_of_colours(int Input_matrix[R][C]){
+	int M[R+1][C+1],i,j,count=0;
+	for(i=0;i&#060;=R;i++){
+	M[i][0]=0;	
+	}
+	for(j=0;j&#060;=C;j++){
+		M[0][j]=0;
+	}
+	for(i=1;i&#060;=R;i++){
+		for(j=1;j&#060;=C;j++){
+			if(Input_matrix[i-1][j-1]==1){
+				M[i][j]=Max(M[i-1][j],M[i][j-1])+1;
+			}
+		}
+	}
+	for(i=1;i&#060;=R;i++){
+		for(j=1;j&#060;=C;j++){
+		if(M[i][j]==1)
+			count++;		
+		}
+	}
+	return count;
+	}
+int main(void) {
+	// your code goes here
+	int Matrix[R][C]={{1,0,0,1,0},{0,1,0,0,0},{1,0,1,0,1}};
+	//int Matrix[R][C]={{1,1,0,0,1},{1,0,0,1,0},{1,1,0,1,0},{0,0,1,1,0}};
+	printf(&#034;No Of Island : %d&#034;,No_of_colours(Matrix));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>Dynamic Programming Approach For Solving No of island :</p>
+<p>#include<br />
+#define R 3<br />
+#define C 5<br />
+int Max(int a, int b){<br />
+	if(a&gt;b)<br />
+	return a;<br />
+	else<br />
+	return b;<br />
+	}<br />
+int No_of_colours(int Input_matrix[R][C]){<br />
+	int M[R+1][C+1],i,j,count=0;<br />
+	for(i=0;i&lt;=R;i++){<br />
+	M[i][0]=0;<br />
+	}<br />
+	for(j=0;j&lt;=C;j++){<br />
+		M[0][j]=0;<br />
+	}<br />
+	for(i=1;i&lt;=R;i++){<br />
+		for(j=1;j&lt;=C;j++){<br />
+			if(Input_matrix[i-1][j-1]==1){<br />
+				M[i][j]=Max(M[i-1][j],M[i][j-1])+1;<br />
+			}<br />
+		}<br />
+	}<br />
+	for(i=1;i&lt;=R;i++){<br />
+		for(j=1;j&lt;=C;j++){<br />
+		if(M[i][j]==1)<br />
+			count++;<br />
+		}<br />
+	}<br />
+	return count;<br />
+	}<br />
+int main(void) {<br />
+	// your code goes here<br />
+	int Matrix[R][C]={{1,0,0,1,0},{0,1,0,0,0},{1,0,1,0,1}};<br />
+	//int Matrix[R][C]={{1,1,0,0,1},{1,0,0,1,0},{1,1,0,1,0},{0,0,1,1,0}};<br />
+	printf(&quot;No Of Island : %d&quot;,No_of_colours(Matrix));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venu Gopal</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-34933</link>
+		<dc:creator><![CDATA[Venu Gopal]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 18:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-34933</guid>
+		<description><![CDATA[if you want your matrix to show different islands/connected_components marked with different numbers as in 1, 2, 3, 4, 5 for 5 islands e.g.
+
+
+1 1 0 0 0 
+0 1 0 0 2 
+1 0 0 2 2 
+0 0 0 0 0 
+3 0 4 0 5 
+
+then see the changes in DFS function in this code http://ideone.com/eTYr1R]]></description>
+		<content:encoded><![CDATA[<p>if you want your matrix to show different islands/connected_components marked with different numbers as in 1, 2, 3, 4, 5 for 5 islands e.g.</p>
+<p>1 1 0 0 0<br />
+0 1 0 0 2<br />
+1 0 0 2 2<br />
+0 0 0 0 0<br />
+3 0 4 0 5 </p>
+<p>then see the changes in DFS function in this code <a href="http://ideone.com/eTYr1R" rel="nofollow">http://ideone.com/eTYr1R</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aditya Murgai</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-34672</link>
+		<dc:creator><![CDATA[Aditya Murgai]]></dc:creator>
+		<pubDate>Mon, 14 Apr 2014 14:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-34672</guid>
+		<description><![CDATA[// Program to count islands in boolean 2D matrix
+ 
+#include 
+#include 
+#include 
+ 
+#define ROW 5
+#define COL 5
+
+void countRec(bool aux[][COL],int i ,int j)
+{
+ printf(&quot;i=%d j=%dn&quot;, i,j);
+ if((i&#062;=ROW)&#124;&#124;(j&#062;=COL)&#124;&#124;(i&#060;0)&#124;&#124;(j&#060;0)&#124;&#124;(aux[i][j]==0))
+ return;
+ 
+ aux[i][j]=0; 
+ countRec(aux,i+1 ,j);
+ countRec(aux,i ,j+1);
+ countRec(aux,i+1 ,j+1);
+ countRec(aux,i-1 ,j);
+ countRec(aux,i-1 ,j+1);
+ countRec(aux,i-1 ,j-1);
+ countRec(aux,i+1 ,j-1);
+ countRec(aux,i ,j-1);
+ 
+}
+
+int countIslands(int M[][COL])
+{
+    // Make a bool array to mark visited cells.
+    // Initially all cells are unvisited
+    bool visited[ROW][COL];
+    memset(visited, 0, sizeof(visited));
+    int count=0;
+ 
+    for (int i = 0; i &#060; ROW; ++i)
+        for (int j = 0; j &#060; COL; ++j)
+        {
+         visited[i][j]=M[i][j];
+        }
+        
+        for (int i = 0; i &#060; ROW; ++i)
+        for (int j = 0; j &#060; COL; ++j)
+        {
+         
+         if(visited[i][j])
+         {
+          count++;
+          countRec(visited,i ,j);
+         }
+        }
+
+ 
+ 
+    return count;
+}
+ 
+// Driver program to test above function
+int main()
+{
+    int M[][COL]= {  {1, 1, 0, 0, 0},
+        {0, 1, 0, 0, 1},
+        {1, 0, 0, 1, 1},
+        {0, 0, 0, 0, 0},
+        {1, 0, 1, 0, 1}
+    };
+ 
+    printf(&#034;Number of islands is: %dn&#034;, countIslands(M));
+ 
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>// Program to count islands in boolean 2D matrix</p>
+<p>#include<br />
+#include<br />
+#include </p>
+<p>#define ROW 5<br />
+#define COL 5</p>
+<p>void countRec(bool aux[][COL],int i ,int j)<br />
+{<br />
+ printf(&#8220;i=%d j=%dn&#8221;, i,j);<br />
+ if((i&gt;=ROW)||(j&gt;=COL)||(i&lt;0)||(j&lt;0)||(aux[i][j]==0))<br />
+ return;</p>
+<p> aux[i][j]=0;<br />
+ countRec(aux,i+1 ,j);<br />
+ countRec(aux,i ,j+1);<br />
+ countRec(aux,i+1 ,j+1);<br />
+ countRec(aux,i-1 ,j);<br />
+ countRec(aux,i-1 ,j+1);<br />
+ countRec(aux,i-1 ,j-1);<br />
+ countRec(aux,i+1 ,j-1);<br />
+ countRec(aux,i ,j-1);</p>
+<p>}</p>
+<p>int countIslands(int M[][COL])<br />
+{<br />
+    // Make a bool array to mark visited cells.<br />
+    // Initially all cells are unvisited<br />
+    bool visited[ROW][COL];<br />
+    memset(visited, 0, sizeof(visited));<br />
+    int count=0;</p>
+<p>    for (int i = 0; i &lt; ROW; ++i)<br />
+        for (int j = 0; j &lt; COL; ++j)<br />
+        {<br />
+         visited[i][j]=M[i][j];<br />
+        }</p>
+<p>        for (int i = 0; i &lt; ROW; ++i)<br />
+        for (int j = 0; j &lt; COL; ++j)<br />
+        {</p>
+<p>         if(visited[i][j])<br />
+         {<br />
+          count++;<br />
+          countRec(visited,i ,j);<br />
+         }<br />
+        }</p>
+<p>    return count;<br />
+}</p>
+<p>// Driver program to test above function<br />
+int main()<br />
+{<br />
+    int M[][COL]= {  {1, 1, 0, 0, 0},<br />
+        {0, 1, 0, 0, 1},<br />
+        {1, 0, 0, 1, 1},<br />
+        {0, 0, 0, 0, 0},<br />
+        {1, 0, 1, 0, 1}<br />
+    };</p>
+<p>    printf(&quot;Number of islands is: %dn&quot;, countIslands(M));</p>
+<p>    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bhagwat Singh</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-32437</link>
+		<dc:creator><![CDATA[Bhagwat Singh]]></dc:creator>
+		<pubDate>Tue, 11 Feb 2014 07:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-32437</guid>
+		<description><![CDATA[one time initialization]]></description>
+		<content:encoded><![CDATA[<p>one time initialization</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bhagwat Singh</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-32436</link>
+		<dc:creator><![CDATA[Bhagwat Singh]]></dc:creator>
+		<pubDate>Tue, 11 Feb 2014 07:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-32436</guid>
+		<description><![CDATA[use of static : its donot take extra  memory at each invocation it only takes once in all .]]></description>
+		<content:encoded><![CDATA[<p>use of static : its donot take extra  memory at each invocation it only takes once in all .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cooldude</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-31651</link>
+		<dc:creator><![CDATA[cooldude]]></dc:creator>
+		<pubDate>Sun, 19 Jan 2014 20:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-31651</guid>
+		<description><![CDATA[i gave the same answer that is provided here in amazon written test and the idiots rejected me without asking that u can optimize the solution]]></description>
+		<content:encoded><![CDATA[<p>i gave the same answer that is provided here in amazon written test and the idiots rejected me without asking that u can optimize the solution</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vijay Apurva</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-29846</link>
+		<dc:creator><![CDATA[Vijay Apurva]]></dc:creator>
+		<pubDate>Thu, 14 Nov 2013 15:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-29846</guid>
+		<description><![CDATA[we can do this with out any extra space ...
+
+#include 
+
+#include 
+
+#define ROW 5
+
+#define COL 5
+
+bool isSafe(int M[ROW][COL], int row, int col)
+
+{
+
+    if((row &#062;= 0) &#038;&#038; (row = 0) &#038;&#038; (col &#060; COL)){
+
+    if(M[row][col]==1)
+
+    return true ;
+
+    return false ;
+
+    }
+
+   return false ;
+
+}
+
+void DFS(int M[ROW][COL], int row, int col)
+
+{
+
+     int rowNbr[] = {-1, -1, -1,  0, 0,  1, 1, 1};
+
+     int colNbr[] = {-1,  0,  1, -1, 1, -1, 0, 1};
+
+     M[row][col]=2;
+
+    for (int k = 0; k &#060; 8; k++)
+
+        if (isSafe(M, row + rowNbr[k], col + colNbr[k])){
+
+            DFS(M, row + rowNbr[k], col + colNbr[k]);
+
+            }
+
+}
+
+int countIslands(int M[ROW][COL])
+
+{
+
+    int count = 0;
+
+    for (int i = 0; i &#060; ROW; ++i)
+
+        for (int j = 0; j &#060; COL; ++j)
+
+            if (M[i][j]==1)
+
+            {
+
+                DFS(M, i, j);
+
+                ++count;
+
+            }
+
+    return count;
+
+}
+
+int main()
+
+{
+
+    int M[ROW][COL]= {  {1, 1, 0, 0, 0},
+
+        {0, 1, 0, 0, 1},
+
+        {1, 0, 0, 1, 1},
+
+        {0, 0, 0, 0, 0},
+
+        {1, 1, 1, 1, 1}
+
+    };
+
+    printf(&#034;Number of islands is: %dn&#034;, countIslands(M));
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>we can do this with out any extra space &#8230;</p>
+<p>#include </p>
+<p>#include </p>
+<p>#define ROW 5</p>
+<p>#define COL 5</p>
+<p>bool isSafe(int M[ROW][COL], int row, int col)</p>
+<p>{</p>
+<p>    if((row &gt;= 0) &amp;&amp; (row = 0) &amp;&amp; (col &lt; COL)){</p>
+<p>    if(M[row][col]==1)</p>
+<p>    return true ;</p>
+<p>    return false ;</p>
+<p>    }</p>
+<p>   return false ;</p>
+<p>}</p>
+<p>void DFS(int M[ROW][COL], int row, int col)</p>
+<p>{</p>
+<p>     int rowNbr[] = {-1, -1, -1,  0, 0,  1, 1, 1};</p>
+<p>     int colNbr[] = {-1,  0,  1, -1, 1, -1, 0, 1};</p>
+<p>     M[row][col]=2;</p>
+<p>    for (int k = 0; k &lt; 8; k++)</p>
+<p>        if (isSafe(M, row + rowNbr[k], col + colNbr[k])){</p>
+<p>            DFS(M, row + rowNbr[k], col + colNbr[k]);</p>
+<p>            }</p>
+<p>}</p>
+<p>int countIslands(int M[ROW][COL])</p>
+<p>{</p>
+<p>    int count = 0;</p>
+<p>    for (int i = 0; i &lt; ROW; ++i)</p>
+<p>        for (int j = 0; j &lt; COL; ++j)</p>
+<p>            if (M[i][j]==1)</p>
+<p>            {</p>
+<p>                DFS(M, i, j);</p>
+<p>                ++count;</p>
+<p>            }</p>
+<p>    return count;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    int M[ROW][COL]= {  {1, 1, 0, 0, 0},</p>
+<p>        {0, 1, 0, 0, 1},</p>
+<p>        {1, 0, 0, 1, 1},</p>
+<p>        {0, 0, 0, 0, 0},</p>
+<p>        {1, 1, 1, 1, 1}</p>
+<p>    };</p>
+<p>    printf(&quot;Number of islands is: %dn&quot;, countIslands(M));</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akshay Jindal</title>
+		<link>http://www.geeksforgeeks.org/find-number-of-islands/#comment-22401</link>
+		<dc:creator><![CDATA[Akshay Jindal]]></dc:creator>
+		<pubDate>Fri, 19 Jul 2013 20:35:23 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25783#comment-22401</guid>
+		<description><![CDATA[@Neeraj: thanks for the wonderful approach, the logic behind the implementation in the blog is the same as mentioned above in the post, but implementation is a lot easier and clear in the blog post.
+
+Cheers]]></description>
+		<content:encoded><![CDATA[<p>@Neeraj: thanks for the wonderful approach, the logic behind the implementation in the blog is the same as mentioned above in the post, but implementation is a lot easier and clear in the blog post.</p>
+<p>Cheers</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.077 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:18:47 -->
+
+<!-- Compression = gzip -->

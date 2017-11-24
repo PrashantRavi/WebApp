@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Connect nodes at same level using constant extra space</title>
+	<atom:link href="http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: MK</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-39157</link>
+		<dc:creator><![CDATA[MK]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 14:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-39157</guid>
+		<description><![CDATA[Can someone enlighten on the complexities of above two methods. Method-1 seems to have a lot of rework!!]]></description>
+		<content:encoded><![CDATA[<p>Can someone enlighten on the complexities of above two methods. Method-1 seems to have a lot of rework!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38519</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 06:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38519</guid>
+		<description><![CDATA[Recursion to enforce n traversals
+
+static void join(node *head)
+{
+    if (!head)
+return;
+    if (head-&#062;left &#038;&#038; head-&#062;left-&#062;nextright)
+return;
+    if (head-&#062;right &#038;&#038; head-&#062;right-&#062;nextright)
+return;
+    join(head-&#062;nextright);
+    if (head-&#062;left)
+    {
+        if (head-&#062;right)
+            head-&#062;left-&#062;nextright = head-&#062;right;
+        else
+            insert_next(head-&#062;left, head);
+    }
+    if (head-&#062;right)
+        insert_next(head-&#062;right, head);
+    join(head-&#062;left);
+}
+
+Inorder before this to make nextright of all nodes as 0 to avoid any duplicate traversals.]]></description>
+		<content:encoded><![CDATA[<p>Recursion to enforce n traversals</p>
+<p>static void join(node *head)<br />
+{<br />
+    if (!head)<br />
+return;<br />
+    if (head-&gt;left &amp;&amp; head-&gt;left-&gt;nextright)<br />
+return;<br />
+    if (head-&gt;right &amp;&amp; head-&gt;right-&gt;nextright)<br />
+return;<br />
+    join(head-&gt;nextright);<br />
+    if (head-&gt;left)<br />
+    {<br />
+        if (head-&gt;right)<br />
+            head-&gt;left-&gt;nextright = head-&gt;right;<br />
+        else<br />
+            insert_next(head-&gt;left, head);<br />
+    }<br />
+    if (head-&gt;right)<br />
+        insert_next(head-&gt;right, head);<br />
+    join(head-&gt;left);<br />
+}</p>
+<p>Inorder before this to make nextright of all nodes as 0 to avoid any duplicate traversals.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38517</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 05:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38517</guid>
+		<description><![CDATA[No it wont work. Assume a case where the right level is not complete and when left most node tries to find the rightmost node then you will end up making NULL nextright for left tree.
+Example :
+5 3 8 2 4 6 9 -3 0 - 4 15 13 16]]></description>
+		<content:encoded><![CDATA[<p>No it wont work. Assume a case where the right level is not complete and when left most node tries to find the rightmost node then you will end up making NULL nextright for left tree.<br />
+Example :<br />
+5 3 8 2 4 6 9 -3 0 &#8211; 4 15 13 16</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38516</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 05:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38516</guid>
+		<description><![CDATA[What about the nextright recursion steps which is being processed everytime . It seems to me we will end up reprocessing the same node multiple time for completing its children levels recursively via all higher levels. Hence it does not looks like O(n).]]></description>
+		<content:encoded><![CDATA[<p>What about the nextright recursion steps which is being processed everytime . It seems to me we will end up reprocessing the same node multiple time for completing its children levels recursively via all higher levels. Hence it does not looks like O(n).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38515</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 05:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38515</guid>
+		<description><![CDATA[Iterative with small optimization
+
+static void join_itv(node *head)
+{
+    node *tmp = NULL;
+    if (!head)
+        return;
+    head-&#062;nextright = NULL;
+    while (head)
+    {
+        tmp = head;
+while (tmp)
+        {
+            if (tmp-&#062;left)
+            {
+                if (tmp-&#062;right)
+                    tmp-&#062;left-&#062;nextright = tmp-&#062;right;
+                else
+                    insert_next(tmp-&#062;left, tmp);
+            }
+            if (tmp-&#062;right)
+                insert_next(tmp-&#062;right, tmp);
+            tmp = tmp-&#062;nextright;
+        }
+        if (head-&#062;left)
+            head = head-&#062;left;
+        else
+            head = head-&#062;nextright;
+    }
+
+No need to compare for head-&#062;right as left-&#062;nextright will always be right child.]]></description>
+		<content:encoded><![CDATA[<p>Iterative with small optimization</p>
+<p>static void join_itv(node *head)<br />
+{<br />
+    node *tmp = NULL;<br />
+    if (!head)<br />
+        return;<br />
+    head-&gt;nextright = NULL;<br />
+    while (head)<br />
+    {<br />
+        tmp = head;<br />
+while (tmp)<br />
+        {<br />
+            if (tmp-&gt;left)<br />
+            {<br />
+                if (tmp-&gt;right)<br />
+                    tmp-&gt;left-&gt;nextright = tmp-&gt;right;<br />
+                else<br />
+                    insert_next(tmp-&gt;left, tmp);<br />
+            }<br />
+            if (tmp-&gt;right)<br />
+                insert_next(tmp-&gt;right, tmp);<br />
+            tmp = tmp-&gt;nextright;<br />
+        }<br />
+        if (head-&gt;left)<br />
+            head = head-&gt;left;<br />
+        else<br />
+            head = head-&gt;nextright;<br />
+    }</p>
+<p>No need to compare for head-&gt;right as left-&gt;nextright will always be right child.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38511</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 05:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38511</guid>
+		<description><![CDATA[Another recursive solution:
+
+Do Inorder to make all nextright pointer as NUL before calling join.
+The below implementation guarantees only n access to the nodes.
+static void join(node *head)
+{
+    if (!head)
+        return;
+    if (head-&#062;left &#038;&#038; head-&#062;left-&#062;nextright)
+        return;
+    if (head-&#062;right &#038;&#038; head-&#062;right-&#062;nextright)
+        return;
+    join(head-&#062;nextright);
+    if (head-&#062;left)
+    {
+        if (head-&#062;right)
+            head-&#062;left-&#062;nextright = head-&#062;right;
+        else
+            insert_next(head-&#062;left, head);
+    }
+    if (head-&#062;right)
+        insert_next(head-&#062;right, head);
+    join(head-&#062;left);
+    join(head-&#062;right);
+}
+
+static void insert_next(node *val, node *root)
+{
+    node *tmp = root-&#062;nextright;
+    while (tmp)
+    {
+        if (tmp-&#062;left)
+        {
+            tmp = tmp-&#062;left;
+            break;
+        }
+        else if (tmp-&#062;right)
+        {
+            tmp = tmp-&#062;right;
+            break;
+        }
+        else
+            tmp = tmp-&#062;nextright;
+    }
+    val-&#062;nextright = tmp;
+}]]></description>
+		<content:encoded><![CDATA[<p>Another recursive solution:</p>
+<p>Do Inorder to make all nextright pointer as NUL before calling join.<br />
+The below implementation guarantees only n access to the nodes.<br />
+static void join(node *head)<br />
+{<br />
+    if (!head)<br />
+        return;<br />
+    if (head-&gt;left &amp;&amp; head-&gt;left-&gt;nextright)<br />
+        return;<br />
+    if (head-&gt;right &amp;&amp; head-&gt;right-&gt;nextright)<br />
+        return;<br />
+    join(head-&gt;nextright);<br />
+    if (head-&gt;left)<br />
+    {<br />
+        if (head-&gt;right)<br />
+            head-&gt;left-&gt;nextright = head-&gt;right;<br />
+        else<br />
+            insert_next(head-&gt;left, head);<br />
+    }<br />
+    if (head-&gt;right)<br />
+        insert_next(head-&gt;right, head);<br />
+    join(head-&gt;left);<br />
+    join(head-&gt;right);<br />
+}</p>
+<p>static void insert_next(node *val, node *root)<br />
+{<br />
+    node *tmp = root-&gt;nextright;<br />
+    while (tmp)<br />
+    {<br />
+        if (tmp-&gt;left)<br />
+        {<br />
+            tmp = tmp-&gt;left;<br />
+            break;<br />
+        }<br />
+        else if (tmp-&gt;right)<br />
+        {<br />
+            tmp = tmp-&gt;right;<br />
+            break;<br />
+        }<br />
+        else<br />
+            tmp = tmp-&gt;nextright;<br />
+    }<br />
+    val-&gt;nextright = tmp;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38509</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 05:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38509</guid>
+		<description><![CDATA[test comment]]></description>
+		<content:encoded><![CDATA[<p>test comment</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-38088</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 10:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-38088</guid>
+		<description><![CDATA[Good One....Nice thinking...Loved both ways of implementation]]></description>
+		<content:encoded><![CDATA[<p>Good One&#8230;.Nice thinking&#8230;Loved both ways of implementation</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kv</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-37730</link>
+		<dc:creator><![CDATA[kv]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 09:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-37730</guid>
+		<description><![CDATA[If you will use queue then your space complexity will be of O(n) rather than O(1) as asked in question.]]></description>
+		<content:encoded><![CDATA[<p>If you will use queue then your space complexity will be of O(n) rather than O(1) as asked in question.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tushar K Gupta</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-31995</link>
+		<dc:creator><![CDATA[Tushar K Gupta]]></dc:creator>
+		<pubDate>Thu, 30 Jan 2014 14:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-31995</guid>
+		<description><![CDATA[We do not need the extra function getNextRight(struct node *p), and logic can be simplified very easily.Simply do a level order traversal , using a queue (order is left to right).  Keep a prevNode pointer to the first node of every level, when we get next node on same level , point prevNode -&#062;rightconnect to current and modify prevNode to current.
+Only thing is while initializing the nodes , we have to set rightconnect = NULL else we can do simple modification in below code.
+
+void LevelOrderTraverse(node * root)
+{
+    if(root == NULL)
+           return;
+     queue qTree ;
+     qTree.push(root);
+     
+     while(qTree.size() &#062; 0)
+     {
+node * prevNode = NULL ;
+            int nSize = qTree.size();
+            for(int nIndex = 0 ; nIndex nextRight = temp; }
+                        prevNode = temp ;
+                        if(temp-&#062;left)                      
+                                  qTree.push(temp-&#062;left);
+                       if(temp-&#062;right)
+                                   qTree.push(temp-&#062;right);
+              }
+       }
+}]]></description>
+		<content:encoded><![CDATA[<p>We do not need the extra function getNextRight(struct node *p), and logic can be simplified very easily.Simply do a level order traversal , using a queue (order is left to right).  Keep a prevNode pointer to the first node of every level, when we get next node on same level , point prevNode -&gt;rightconnect to current and modify prevNode to current.<br />
+Only thing is while initializing the nodes , we have to set rightconnect = NULL else we can do simple modification in below code.</p>
+<p>void LevelOrderTraverse(node * root)<br />
+{<br />
+    if(root == NULL)<br />
+           return;<br />
+     queue qTree ;<br />
+     qTree.push(root);</p>
+<p>     while(qTree.size() &gt; 0)<br />
+     {<br />
+node * prevNode = NULL ;<br />
+            int nSize = qTree.size();<br />
+            for(int nIndex = 0 ; nIndex nextRight = temp; }<br />
+                        prevNode = temp ;<br />
+                        if(temp-&gt;left)<br />
+                                  qTree.push(temp-&gt;left);<br />
+                       if(temp-&gt;right)<br />
+                                   qTree.push(temp-&gt;right);<br />
+              }<br />
+       }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abi</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level-with-o1-extra-space/#comment-31302</link>
+		<dc:creator><![CDATA[abi]]></dc:creator>
+		<pubDate>Mon, 06 Jan 2014 17:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16952#comment-31302</guid>
+		<description><![CDATA[what is the worst case time complexity?]]></description>
+		<content:encoded><![CDATA[<p>what is the worst case time complexity?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.050 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:16:34 -->
+
+<!-- Compression = gzip -->

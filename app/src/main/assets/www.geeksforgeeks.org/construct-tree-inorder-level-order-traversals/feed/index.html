@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construct a tree from Inorder and Level order traversals</title>
+	<atom:link href="http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: aayush</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-40169</link>
+		<dc:creator><![CDATA[aayush]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 14:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-40169</guid>
+		<description><![CDATA[the value of n passed for call to buildtree for left and right sbtree is wrong...it must be equal to the size of llevel and rlevel array]]></description>
+		<content:encoded><![CDATA[<p>the value of n passed for call to buildtree for left and right sbtree is wrong&#8230;it must be equal to the size of llevel and rlevel array</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: aayush</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-40168</link>
+		<dc:creator><![CDATA[aayush]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 14:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-40168</guid>
+		<description><![CDATA[yes i agree with you... the value of n must be changed for subsequent calls]]></description>
+		<content:encoded><![CDATA[<p>yes i agree with you&#8230; the value of n must be changed for subsequent calls</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ishan</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-37342</link>
+		<dc:creator><![CDATA[ishan]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 07:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-37342</guid>
+		<description><![CDATA[i am asking this because when we find the key in the inorder traversal, we are just returning the index where its found first. What if its at multiple nodes?]]></description>
+		<content:encoded><![CDATA[<p>i am asking this because when we find the key in the inorder traversal, we are just returning the index where its found first. What if its at multiple nodes?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ishan</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-37339</link>
+		<dc:creator><![CDATA[ishan]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 07:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-37339</guid>
+		<description><![CDATA[do the keys need to be unique for this?]]></description>
+		<content:encoded><![CDATA[<p>do the keys need to be unique for this?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-35243</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 14:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-35243</guid>
+		<description><![CDATA[for each node if there exist a node after it in level ordr traversal but before that node in inorder traversal then dat node is present in its left subtree
+http://ideone.com/B2cmtJ
+
+#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int search(int n,int in[],int low1,int high1)
+{
+	for(int i=low1;i&#060;=high1;i++)
+	{
+		if(in[i]==n)
+		   return i;
+	}
+}
+int check(int in[],int lo[],int low1,int high1,int low2,int high2)
+{
+	for(int i=low2;i&#060;=high2;i++)
+	{
+		for(int j=low1;jhigh1)
+	    return NULL;
+	if(low1==high1)
+	{
+		tnode* root=new tnode(in[low1]);
+		return root;
+	}
+	if(root==NULL)
+	{
+		root=new tnode(lo[low2]);
+	}
+	int k=search(lo[low2],in,low1,high1);
+	int lci=check(in,lo,low1,k-1,low2+1,high2);
+	int rci=check(in,lo,k+1,high1,low2+1,high2);
+	root-&#062;lchild=fun(root-&#062;lchild,in,lo,low1,k-1,lci,high2);
+	root-&#062;rchild=fun(root-&#062;rchild,in,lo,k+1,high1,rci,high2);
+	return root;
+}
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		display(root-&#062;rchild);
+		cout&#060;data&#060;&#060;&#034; &#034;;
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int in[]={2,4,3,5,1,6,7};
+	int lo[]={1,2,7,3,6,4,5};
+	int n=sizeof(in)/sizeof(in[0]);
+	display(fun(root,in,lo,0,n-1,0,n-1));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>for each node if there exist a node after it in level ordr traversal but before that node in inorder traversal then dat node is present in its left subtree<br />
+<a href="http://ideone.com/B2cmtJ" rel="nofollow">http://ideone.com/B2cmtJ</a></p>
+<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int search(int n,int in[],int low1,int high1)<br />
+{<br />
+	for(int i=low1;i&lt;=high1;i++)<br />
+	{<br />
+		if(in[i]==n)<br />
+		   return i;<br />
+	}<br />
+}<br />
+int check(int in[],int lo[],int low1,int high1,int low2,int high2)<br />
+{<br />
+	for(int i=low2;i&lt;=high2;i++)<br />
+	{<br />
+		for(int j=low1;jhigh1)<br />
+	    return NULL;<br />
+	if(low1==high1)<br />
+	{<br />
+		tnode* root=new tnode(in[low1]);<br />
+		return root;<br />
+	}<br />
+	if(root==NULL)<br />
+	{<br />
+		root=new tnode(lo[low2]);<br />
+	}<br />
+	int k=search(lo[low2],in,low1,high1);<br />
+	int lci=check(in,lo,low1,k-1,low2+1,high2);<br />
+	int rci=check(in,lo,k+1,high1,low2+1,high2);<br />
+	root-&gt;lchild=fun(root-&gt;lchild,in,lo,low1,k-1,lci,high2);<br />
+	root-&gt;rchild=fun(root-&gt;rchild,in,lo,k+1,high1,rci,high2);<br />
+	return root;<br />
+}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		display(root-&gt;rchild);<br />
+		cout&lt;data&lt;&lt;&quot; &quot;;<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int in[]={2,4,3,5,1,6,7};<br />
+	int lo[]={1,2,7,3,6,4,5};<br />
+	int n=sizeof(in)/sizeof(in[0]);<br />
+	display(fun(root,in,lo,0,n-1,0,n-1));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RandomGuy</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-35032</link>
+		<dc:creator><![CDATA[RandomGuy]]></dc:creator>
+		<pubDate>Wed, 23 Apr 2014 16:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-35032</guid>
+		<description><![CDATA[If we just pass the current root node to the extractKeys method and take only those elements in the array which are less/more than the current root node, then also we can get the desired result. Just pass an extra boolean and on the basis of boolean values, find the smaller/greater values for left/right level order traversal.]]></description>
+		<content:encoded><![CDATA[<p>If we just pass the current root node to the extractKeys method and take only those elements in the array which are less/more than the current root node, then also we can get the desired result. Just pass an extra boolean and on the basis of boolean values, find the smaller/greater values for left/right level order traversal.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pramendra rathi</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-34407</link>
+		<dc:creator><![CDATA[pramendra rathi]]></dc:creator>
+		<pubDate>Mon, 07 Apr 2014 05:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-34407</guid>
+		<description><![CDATA[yoou can save space by removing the llevel and rlevel array. and by passing the start and end index of levelorder array in function as you are passing for inorder array.]]></description>
+		<content:encoded><![CDATA[<p>yoou can save space by removing the llevel and rlevel array. and by passing the start and end index of levelorder array in function as you are passing for inorder array.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alien</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-34402</link>
+		<dc:creator><![CDATA[alien]]></dc:creator>
+		<pubDate>Mon, 07 Apr 2014 04:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-34402</guid>
+		<description><![CDATA[nice solution]]></description>
+		<content:encoded><![CDATA[<p>nice solution</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: disqus_0z6aYV2hDC</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-34389</link>
+		<dc:creator><![CDATA[disqus_0z6aYV2hDC]]></dc:creator>
+		<pubDate>Sun, 06 Apr 2014 19:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-34389</guid>
+		<description><![CDATA[For lines:
+root-&#062;left = buildTree(in, llevel, inStrt, inIndex-1, n);
+root-&#062;right = buildTree(in, rlevel, inIndex+1, inEnd, n);
+
+The last argument, &#039;n&#039; is the size of the level order array passed. But llevel and rlevel both are less than &#039;n&#039;, won&#039;t we get array out of bounds error in the calls?]]></description>
+		<content:encoded><![CDATA[<p>For lines:<br />
+root-&gt;left = buildTree(in, llevel, inStrt, inIndex-1, n);<br />
+root-&gt;right = buildTree(in, rlevel, inIndex+1, inEnd, n);</p>
+<p>The last argument, &#8216;n&#8217; is the size of the level order array passed. But llevel and rlevel both are less than &#8216;n&#8217;, won&#8217;t we get array out of bounds error in the calls?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-34301</link>
+		<dc:creator><![CDATA[Gaurav]]></dc:creator>
+		<pubDate>Fri, 04 Apr 2014 10:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-34301</guid>
+		<description><![CDATA[here is the code
+
+http://ideone.com/NCpOWN]]></description>
+		<content:encoded><![CDATA[<p>here is the code</p>
+<p><a href="http://ideone.com/NCpOWN" rel="nofollow">http://ideone.com/NCpOWN</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav</title>
+		<link>http://www.geeksforgeeks.org/construct-tree-inorder-level-order-traversals/#comment-34300</link>
+		<dc:creator><![CDATA[Gaurav]]></dc:creator>
+		<pubDate>Fri, 04 Apr 2014 09:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127686#comment-34300</guid>
+		<description><![CDATA[Here is N^2 algo that I developed.
+Space Complexity N
+
+
+public class BuildATree {
+
+	int in[] = { 4, 8, 10, 12, 14, 20, 22 };
+
+	int level[] = { 20, 8, 22, 4, 12, 10, 14 };
+
+	private HashMap map = new HashMap();
+
+	private Node root;
+
+	class Node {
+
+		int data;
+
+		Node left;
+
+		Node right;
+
+		public Node(int data) {
+
+			this.data = data;
+
+		}
+
+	}
+
+	public void startBuildingTree() {
+
+		for (int i = 0; i &#060; in.length; i++) {
+
+			map.put(in[i], i);
+
+		}
+
+		for (int i = 0; i &#060; level.length; i++) {
+
+			insert(level[i]);
+
+		}
+
+	}
+
+	void insert(int data) {
+
+		if (root == null) {
+
+			root = new Node(data);
+
+			return;
+
+		}
+
+		Node n = root;
+
+		int index = map.get(data);
+
+		while (true) {
+
+			int i = map.get(n.data);
+
+			if (index &lt;i&gt; i) {
+
+				if (n.right != null) {
+
+					n = n.right;
+
+				} else {
+
+					n.right = new Node(data);
+
+					return;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	public void travarse() {
+
+		travarse(root);
+
+	}
+
+	public void travarse(Node n) {
+
+		if (n == null) {
+
+			return;
+
+		}
+
+		travarse(n.left);
+
+		System.out.print(&quot; &quot; + n.data);
+
+		travarse(n.right);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is N^2 algo that I developed.<br />
+Space Complexity N</p>
+<p>public class BuildATree {</p>
+<p>	int in[] = { 4, 8, 10, 12, 14, 20, 22 };</p>
+<p>	int level[] = { 20, 8, 22, 4, 12, 10, 14 };</p>
+<p>	private HashMap map = new HashMap();</p>
+<p>	private Node root;</p>
+<p>	class Node {</p>
+<p>		int data;</p>
+<p>		Node left;</p>
+<p>		Node right;</p>
+<p>		public Node(int data) {</p>
+<p>			this.data = data;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void startBuildingTree() {</p>
+<p>		for (int i = 0; i &lt; in.length; i++) {</p>
+<p>			map.put(in[i], i);</p>
+<p>		}</p>
+<p>		for (int i = 0; i &lt; level.length; i++) {</p>
+<p>			insert(level[i]);</p>
+<p>		}</p>
+<p>	}</p>
+<p>	void insert(int data) {</p>
+<p>		if (root == null) {</p>
+<p>			root = new Node(data);</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		Node n = root;</p>
+<p>		int index = map.get(data);</p>
+<p>		while (true) {</p>
+<p>			int i = map.get(n.data);</p>
+<p>			if (index <i> i) {</p>
+<p>				if (n.right != null) {</p>
+<p>					n = n.right;</p>
+<p>				} else {</p>
+<p>					n.right = new Node(data);</p>
+<p>					return;</p>
+<p>				}</p>
+<p>			}</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void travarse() {</p>
+<p>		travarse(root);</p>
+<p>	}</p>
+<p>	public void travarse(Node n) {</p>
+<p>		if (n == null) {</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		travarse(n.left);</p>
+<p>		System.out.print(&#8221; &#8221; + n.data);</p>
+<p>		travarse(n.right);</p>
+<p>	}</p>
+<p>}</i></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:02 -->
+
+<!-- Compression = gzip -->

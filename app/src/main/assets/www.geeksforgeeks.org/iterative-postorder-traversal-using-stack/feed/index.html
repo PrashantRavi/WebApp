@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Iterative Postorder Traversal &#124; Set 2 (Using One Stack)</title>
+	<atom:link href="http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: typing..</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-40116</link>
+		<dc:creator><![CDATA[typing..]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 05:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-40116</guid>
+		<description><![CDATA[we can simply push first root and then root&#039;s right pointer to stack, this will prevent again pushing back the root to stack after poping its right pointer.]]></description>
+		<content:encoded><![CDATA[<p>we can simply push first root and then root&#8217;s right pointer to stack, this will prevent again pushing back the root to stack after poping its right pointer.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vaibhav</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-39138</link>
+		<dc:creator><![CDATA[vaibhav]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 12:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-39138</guid>
+		<description><![CDATA[working code!
+
+#include 
+#include 
+
+int tos=-1;
+ 
+struct node{
+    int data;
+    struct node* right;
+    struct node* left;
+};
+
+struct node *a[100];
+
+void push(struct node* root)
+{
+    a[++tos]=root;
+}
+
+void pop()
+{
+    tos--;
+}
+
+struct node* newnode(int data){
+    struct node *newnode=(struct node*)malloc(sizeof(struct node));
+    newnode-&#062;data=data;
+    newnode-&#062;left=NULL;
+    newnode-&#062;right=NULL;
+    return newnode;
+}
+
+printtreepre(struct node* root)
+{
+    if(root!=NULL)
+    {
+        printf(&quot;%dt&quot;,root-&#062;data);
+        printtreepre(root-&#062;left);
+        printtreepre(root-&#062;right);
+    }
+}
+
+main()
+{   
+   
+    int c=1;
+    struct node* root=newnode(c++);
+    root-&#062;left=newnode(c++);
+    root-&#062;right=newnode(c++);
+    root-&#062;left-&#062;right=newnode(c++);
+    root-&#062;right-&#062;right=newnode(c++);
+    root-&#062;right-&#062;right-&#062;right=newnode(c++);
+    
+    printtreepre(root);
+    push(root);
+    while(root!=NULL)
+    {
+        if(root-&#062;left)
+        {
+            push(root-&#062;left);
+            struct node* temp=root-&#062;left;
+            root-&#062;left=NULL;
+            root=temp;            
+        }
+        else if(root-&#062;right)
+        {
+            push(root-&#062;right);
+            struct node* temp=root-&#062;right;
+            root-&#062;right=NULL;
+            root=temp; 
+        }
+        else if(root-&#062;left==NULL &#038;&#038; root-&#062;right==NULL)
+        {
+            printf(&quot;n%dt&quot;,root-&#062;data);
+            pop();
+            root=a[tos];
+        }
+        
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>working code!</p>
+<p>#include<br />
+#include </p>
+<p>int tos=-1;</p>
+<p>struct node{<br />
+    int data;<br />
+    struct node* right;<br />
+    struct node* left;<br />
+};</p>
+<p>struct node *a[100];</p>
+<p>void push(struct node* root)<br />
+{<br />
+    a[++tos]=root;<br />
+}</p>
+<p>void pop()<br />
+{<br />
+    tos&#8211;;<br />
+}</p>
+<p>struct node* newnode(int data){<br />
+    struct node *newnode=(struct node*)malloc(sizeof(struct node));<br />
+    newnode-&gt;data=data;<br />
+    newnode-&gt;left=NULL;<br />
+    newnode-&gt;right=NULL;<br />
+    return newnode;<br />
+}</p>
+<p>printtreepre(struct node* root)<br />
+{<br />
+    if(root!=NULL)<br />
+    {<br />
+        printf(&#8220;%dt&#8221;,root-&gt;data);<br />
+        printtreepre(root-&gt;left);<br />
+        printtreepre(root-&gt;right);<br />
+    }<br />
+}</p>
+<p>main()<br />
+{   </p>
+<p>    int c=1;<br />
+    struct node* root=newnode(c++);<br />
+    root-&gt;left=newnode(c++);<br />
+    root-&gt;right=newnode(c++);<br />
+    root-&gt;left-&gt;right=newnode(c++);<br />
+    root-&gt;right-&gt;right=newnode(c++);<br />
+    root-&gt;right-&gt;right-&gt;right=newnode(c++);</p>
+<p>    printtreepre(root);<br />
+    push(root);<br />
+    while(root!=NULL)<br />
+    {<br />
+        if(root-&gt;left)<br />
+        {<br />
+            push(root-&gt;left);<br />
+            struct node* temp=root-&gt;left;<br />
+            root-&gt;left=NULL;<br />
+            root=temp;<br />
+        }<br />
+        else if(root-&gt;right)<br />
+        {<br />
+            push(root-&gt;right);<br />
+            struct node* temp=root-&gt;right;<br />
+            root-&gt;right=NULL;<br />
+            root=temp;<br />
+        }<br />
+        else if(root-&gt;left==NULL &amp;&amp; root-&gt;right==NULL)<br />
+        {<br />
+            printf(&#8220;n%dt&#8221;,root-&gt;data);<br />
+            pop();<br />
+            root=a[tos];<br />
+        }</p>
+<p>    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vaibhav</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-39128</link>
+		<dc:creator><![CDATA[vaibhav]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 10:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-39128</guid>
+		<description><![CDATA[much simpler!!!
+push(root);
+    while(root!=NULL)
+    {
+        if(root-&#062;left)
+        {
+            push(root-&#062;left);
+            struct node* temp=root-&#062;left;
+            root-&#062;left=NULL;
+            root=temp;            
+        }
+        else if(root-&#062;right)
+        {
+            push(root-&#062;right);
+            struct node* temp=root-&#062;right;
+            root-&#062;right=NULL;
+            root=temp; 
+        }
+        else if(root-&#062;left==NULL &#038;&#038; root-&#062;right==NULL)
+        {
+            printf(&quot;n%dt&quot;,root-&#062;data);
+            pop();
+            root=a[tos];
+        }
+        
+    }]]></description>
+		<content:encoded><![CDATA[<p>much simpler!!!<br />
+push(root);<br />
+    while(root!=NULL)<br />
+    {<br />
+        if(root-&gt;left)<br />
+        {<br />
+            push(root-&gt;left);<br />
+            struct node* temp=root-&gt;left;<br />
+            root-&gt;left=NULL;<br />
+            root=temp;<br />
+        }<br />
+        else if(root-&gt;right)<br />
+        {<br />
+            push(root-&gt;right);<br />
+            struct node* temp=root-&gt;right;<br />
+            root-&gt;right=NULL;<br />
+            root=temp;<br />
+        }<br />
+        else if(root-&gt;left==NULL &amp;&amp; root-&gt;right==NULL)<br />
+        {<br />
+            printf(&#8220;n%dt&#8221;,root-&gt;data);<br />
+            pop();<br />
+            root=a[tos];<br />
+        }</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-38685</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 12:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-38685</guid>
+		<description><![CDATA[Does anyone has solution for post order traversal in constant memory and O(n) time?]]></description>
+		<content:encoded><![CDATA[<p>Does anyone has solution for post order traversal in constant memory and O(n) time?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-38574</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 15:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-38574</guid>
+		<description><![CDATA[Another Approach:
+static void display_postorder_withstack(node *head)
+{
+    ll_node1 *stack = NULL;
+    bool done = false;
+    node *prev = NULL;
+
+    while (!done)
+    {
+        if (head)
+        {
+            push1 (&#038;stack, head);
+            prev = head;
+            head = head-&#062;left;
+        }
+        else
+        {
+            head = pop1(&#038;stack);
+            if (head &#038;&#038; prev != head-&#062;right)
+            {
+                if (!head-&#062;right)
+                {
+                    printf(&quot;%d &quot;, head-&#062;data);
+                    prev = head;
+                }
+                else
+                    push1 (&#038;stack, head);
+
+                head = head-&#062;right;
+            }
+            else if (head)
+            {
+                printf(&quot;%d &quot;, head-&#062;data);
+                prev = head;
+                head = NULL;
+            }
+            else
+                done = true;
+        }
+    }
+}
+
+
+
+Repush the root if found that prev pointer was root-&#062;right ,otherwise print the root and make root as NULL.]]></description>
+		<content:encoded><![CDATA[<p>Another Approach:<br />
+static void display_postorder_withstack(node *head)<br />
+{<br />
+    ll_node1 *stack = NULL;<br />
+    bool done = false;<br />
+    node *prev = NULL;</p>
+<p>    while (!done)<br />
+    {<br />
+        if (head)<br />
+        {<br />
+            push1 (&amp;stack, head);<br />
+            prev = head;<br />
+            head = head-&gt;left;<br />
+        }<br />
+        else<br />
+        {<br />
+            head = pop1(&amp;stack);<br />
+            if (head &amp;&amp; prev != head-&gt;right)<br />
+            {<br />
+                if (!head-&gt;right)<br />
+                {<br />
+                    printf(&#8220;%d &#8220;, head-&gt;data);<br />
+                    prev = head;<br />
+                }<br />
+                else<br />
+                    push1 (&amp;stack, head);</p>
+<p>                head = head-&gt;right;<br />
+            }<br />
+            else if (head)<br />
+            {<br />
+                printf(&#8220;%d &#8220;, head-&gt;data);<br />
+                prev = head;<br />
+                head = NULL;<br />
+            }<br />
+            else<br />
+                done = true;<br />
+        }<br />
+    }<br />
+}</p>
+<p>Repush the root if found that prev pointer was root-&gt;right ,otherwise print the root and make root as NULL.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anand</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-37638</link>
+		<dc:creator><![CDATA[anand]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 02:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-37638</guid>
+		<description><![CDATA[public void printPostOrderRecursive(Node head){
+
+		Stack s = new Stack();
+
+		Node rootNode = head;
+
+		if(rootNode == null) return;
+
+		
+
+		s.push(rootNode);
+
+		
+
+		while(true){
+
+			
+
+			while(rootNode!=null &#038;&#038; rootNode.left!=null){
+
+				s.push(root);
+
+				root = root.left;
+
+			}
+
+			
+
+			Node peek = s.peek();
+
+			
+
+			if(peek.right == null){
+
+				 rootNode = s.pop();
+
+				 System.out.print(rootNode.data);
+
+				 while(!s.isEmpty() &#038;&#038; s.peek().right == root){
+
+					 rootNode = s.pop();
+
+					 System.out.print(rootNode.data);
+
+				 }
+
+			}
+
+			
+
+			
+
+			rootNode = s.isEmpty()? null : s.peek().right; 
+
+		}]]></description>
+		<content:encoded><![CDATA[<p>public void printPostOrderRecursive(Node head){</p>
+<p>		Stack s = new Stack();</p>
+<p>		Node rootNode = head;</p>
+<p>		if(rootNode == null) return;</p>
+<p>		s.push(rootNode);</p>
+<p>		while(true){</p>
+<p>			while(rootNode!=null &amp;&amp; rootNode.left!=null){</p>
+<p>				s.push(root);</p>
+<p>				root = root.left;</p>
+<p>			}</p>
+<p>			Node peek = s.peek();</p>
+<p>			if(peek.right == null){</p>
+<p>				 rootNode = s.pop();</p>
+<p>				 System.out.print(rootNode.data);</p>
+<p>				 while(!s.isEmpty() &amp;&amp; s.peek().right == root){</p>
+<p>					 rootNode = s.pop();</p>
+<p>					 System.out.print(rootNode.data);</p>
+<p>				 }</p>
+<p>			}</p>
+<p>			rootNode = s.isEmpty()? null : s.peek().right; </p>
+<p>		}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anand</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-37637</link>
+		<dc:creator><![CDATA[anand]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 02:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-37637</guid>
+		<description><![CDATA[Can we do something similar to http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/  - This does post order using a stack]]></description>
+		<content:encoded><![CDATA[<p>Can we do something similar to <a href="http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/" rel="nofollow">http://www.geeksforgeeks.org/print-ancestors-of-a-given-binary-tree-node-without-recursion/</a>  &#8211; This does post order using a stack</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anonym</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-33789</link>
+		<dc:creator><![CDATA[Anonym]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 06:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-33789</guid>
+		<description><![CDATA[looks like you could have used a bool to track the visited nodes]]></description>
+		<content:encoded><![CDATA[<p>looks like you could have used a bool to track the visited nodes</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Debabrata</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-33571</link>
+		<dc:creator><![CDATA[Debabrata]]></dc:creator>
+		<pubDate>Sun, 16 Mar 2014 12:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-33571</guid>
+		<description><![CDATA[//Using double stack is simpler 
+struct Stack{
+    Node *treeNode;
+    struct Stack *next;
+};
+typedef struct Stack Stack;
+void push(Stack **root,Node *t_Node){
+    Stack *head = *root,*tmp;
+    tmp = NALLOC(1,Stack);
+    tmp-&#062;treeNode = t_Node;
+    tmp-&#062;next = (*root);
+    (*root) = tmp;
+}
+
+Node* pop(Stack **root){
+    Stack *tmp = *root;
+    Node* ret;
+    if(!tmp){
+       return NULL;
+   }
+   *root = tmp-&#062;next;
+    tmp-&#062;next = NULL;
+    ret = tmp-&#062;treeNode;
+    free (tmp);
+    return ret;
+}
+
+void it_postorder(Node *root){
+
+    Stack *S1 = NULL;
+    Stack *S2 = NULL ;
+    Node *tmp ;
+    push(&#038;S1,root);
+    while(S1 ){
+        tmp = pop(&#038;S1);
+        push(&#038;S2,tmp);
+        if(tmp-&#062;left){
+            push(&#038;S1,tmp-&#062;left);
+        }
+        if(tmp-&#062;right){
+           push(&#038;S1,tmp-&#062;right);
+       }
+   }
+   std::cout&#060;&#060;&#034;n&#034;;
+   while(S2){
+        tmp = pop(&#038;S2);
+        if(!tmp){
+            break;
+        }
+       std::cout&#060;data&#060;&quot;;
+    }
+   std::cout&#060;&#060;&#034;n&#034;;
+}]]></description>
+		<content:encoded><![CDATA[<p>//Using double stack is simpler<br />
+struct Stack{<br />
+    Node *treeNode;<br />
+    struct Stack *next;<br />
+};<br />
+typedef struct Stack Stack;<br />
+void push(Stack **root,Node *t_Node){<br />
+    Stack *head = *root,*tmp;<br />
+    tmp = NALLOC(1,Stack);<br />
+    tmp-&gt;treeNode = t_Node;<br />
+    tmp-&gt;next = (*root);<br />
+    (*root) = tmp;<br />
+}</p>
+<p>Node* pop(Stack **root){<br />
+    Stack *tmp = *root;<br />
+    Node* ret;<br />
+    if(!tmp){<br />
+       return NULL;<br />
+   }<br />
+   *root = tmp-&gt;next;<br />
+    tmp-&gt;next = NULL;<br />
+    ret = tmp-&gt;treeNode;<br />
+    free (tmp);<br />
+    return ret;<br />
+}</p>
+<p>void it_postorder(Node *root){</p>
+<p>    Stack *S1 = NULL;<br />
+    Stack *S2 = NULL ;<br />
+    Node *tmp ;<br />
+    push(&amp;S1,root);<br />
+    while(S1 ){<br />
+        tmp = pop(&amp;S1);<br />
+        push(&amp;S2,tmp);<br />
+        if(tmp-&gt;left){<br />
+            push(&amp;S1,tmp-&gt;left);<br />
+        }<br />
+        if(tmp-&gt;right){<br />
+           push(&amp;S1,tmp-&gt;right);<br />
+       }<br />
+   }<br />
+   std::cout&lt;&lt;&quot;n&quot;;<br />
+   while(S2){<br />
+        tmp = pop(&amp;S2);<br />
+        if(!tmp){<br />
+            break;<br />
+        }<br />
+       std::cout&lt;data&lt;&#8220;;<br />
+    }<br />
+   std::cout&lt;&lt;&quot;n&quot;;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arko</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-27339</link>
+		<dc:creator><![CDATA[Arko]]></dc:creator>
+		<pubDate>Wed, 04 Sep 2013 13:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-27339</guid>
+		<description><![CDATA[will this code work??/
+
+
+
+
+private static void iterativePostorderSingleStack(Node root) {
+
+		if (root != null) {
+
+			StackArray&#060;Node&#062; array = new StackArray&#060;Node&#062;();
+
+			array.push(root);
+
+			while (!array.isEmpty()) {
+
+				Node node = array.pop();
+
+				if (node.left == null &#038;&#038; node.right == null)
+
+					System.out.print(node.item + &quot; &quot;);
+
+				else {
+
+					Node left = node.left;
+
+					Node right = node.right;
+
+					node.left = null;
+
+					node.right = null;
+
+					array.push(node);
+
+					if (right != null)
+
+						array.push(right);
+
+					if (left != null)
+
+						array.push(left);
+
+				}
+
+			}
+
+		}
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>will this code work??/</p>
+<p>private static void iterativePostorderSingleStack(Node root) {</p>
+<p>		if (root != null) {</p>
+<p>			StackArray&lt;Node&gt; array = new StackArray&lt;Node&gt;();</p>
+<p>			array.push(root);</p>
+<p>			while (!array.isEmpty()) {</p>
+<p>				Node node = array.pop();</p>
+<p>				if (node.left == null &amp;&amp; node.right == null)</p>
+<p>					System.out.print(node.item + &#8221; &#8220;);</p>
+<p>				else {</p>
+<p>					Node left = node.left;</p>
+<p>					Node right = node.right;</p>
+<p>					node.left = null;</p>
+<p>					node.right = null;</p>
+<p>					array.push(node);</p>
+<p>					if (right != null)</p>
+<p>						array.push(right);</p>
+<p>					if (left != null)</p>
+<p>						array.push(left);</p>
+<p>				}</p>
+<p>			}</p>
+<p>		}</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sumit Gera</title>
+		<link>http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/#comment-26122</link>
+		<dc:creator><![CDATA[Sumit Gera]]></dc:creator>
+		<pubDate>Wed, 24 Jul 2013 12:23:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=114897#comment-26122</guid>
+		<description><![CDATA[How can I reason for the terminating condition of the outer do-while loop?]]></description>
+		<content:encoded><![CDATA[<p>How can I reason for the terminating condition of the outer do-while loop?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:04 -->
+
+<!-- Compression = gzip -->

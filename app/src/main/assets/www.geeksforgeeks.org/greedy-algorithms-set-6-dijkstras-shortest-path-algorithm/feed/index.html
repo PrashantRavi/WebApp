@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Greedy Algorithms &#124; Set 7 (Dijkstra&#8217;s shortest path algorithm)</title>
+	<atom:link href="http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: skal</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-39916</link>
+		<dc:creator><![CDATA[skal]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 21:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-39916</guid>
+		<description><![CDATA[Hi, 
+
+if I use : parent[v]  = u, dist[v] = dist[u] + distArr[u][v];  as described on Notes (1) I only get the latest vertex of the path to destination. 
+
+The code is working if I iterate calling the dijkstra() from all every source I get all the minimum paths from source to dist. But parent[v] only holds the last step of the path!
+
+Any ideas?]]></description>
+		<content:encoded><![CDATA[<p>Hi, </p>
+<p>if I use : parent[v]  = u, dist[v] = dist[u] + distArr[u][v];  as described on Notes (1) I only get the latest vertex of the path to destination. </p>
+<p>The code is working if I iterate calling the dijkstra() from all every source I get all the minimum paths from source to dist. But parent[v] only holds the last step of the path!</p>
+<p>Any ideas?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GaoTong</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-39391</link>
+		<dc:creator><![CDATA[GaoTong]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 01:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-39391</guid>
+		<description><![CDATA[The code is wrong! The test is right, because the special test data. 
+
+This is wrong:
+
+for (int i = 0; i &#060; V; i++)
+
+        dist[i] = INT_MAX, sptSet[i] = false;
+
+It should be:
+
+for (int i = 0; i &#060; V; i++){
+
+		dist[i] = (graph[source][/source][i] == 0 ? INT_MAX:graph[source][/source][i]);
+
+		sptSet[i] = false;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>The code is wrong! The test is right, because the special test data. </p>
+<p>This is wrong:</p>
+<p>for (int i = 0; i &lt; V; i++)</p>
+<p>        dist[i] = INT_MAX, sptSet[i] = false;</p>
+<p>It should be:</p>
+<p>for (int i = 0; i &lt; V; i++){</p>
+<p>		dist[i] = (graph[i] == 0 ? INT_MAX:graph[i]);</p>
+<p>		sptSet[i] = false;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jithin</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-37646</link>
+		<dc:creator><![CDATA[jithin]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 06:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-37646</guid>
+		<description><![CDATA[i think the above implementation is taking 0(n^3) : outer for loop iterating n times , function minDistance : taking o(n) time to compute minimum and inner for loop taking O(n). ie n*n*n = n^3]]></description>
+		<content:encoded><![CDATA[<p>i think the above implementation is taking 0(n^3) : outer for loop iterating n times , function minDistance : taking o(n) time to compute minimum and inner for loop taking O(n). ie n*n*n = n^3</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-35869</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sat, 10 May 2014 12:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-35869</guid>
+		<description><![CDATA[u can use min heap or rmq for reducing complexity
+http://ideone.com/2gJjz2
+not work for negative edges because here at each step of algorithm we make a vertex permanent that is we have found shortest path upto dat vertex but if it has negative edges there may exist a path shorter than dat length ..so greedy algorithhm dont work there]]></description>
+		<content:encoded><![CDATA[<p>u can use min heap or rmq for reducing complexity<br />
+<a href="http://ideone.com/2gJjz2" rel="nofollow">http://ideone.com/2gJjz2</a><br />
+not work for negative edges because here at each step of algorithm we make a vertex permanent that is we have found shortest path upto dat vertex but if it has negative edges there may exist a path shorter than dat length ..so greedy algorithhm dont work there</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: andrei</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-35652</link>
+		<dc:creator><![CDATA[andrei]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 20:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-35652</guid>
+		<description><![CDATA[how should one modify Dijkstra to list all simple shortest paths to target?]]></description>
+		<content:encoded><![CDATA[<p>how should one modify Dijkstra to list all simple shortest paths to target?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: James Sutton</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-33200</link>
+		<dc:creator><![CDATA[James Sutton]]></dc:creator>
+		<pubDate>Tue, 04 Mar 2014 14:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-33200</guid>
+		<description><![CDATA[Can anyone convert this for use with Arduino? My attempts have failed so far. I think maybe because I haven&#039;t quite grasped what each part of the code is doing and therefore can&#039;t define them in the arduino sketch as such. Any help would be much appreciated!]]></description>
+		<content:encoded><![CDATA[<p>Can anyone convert this for use with Arduino? My attempts have failed so far. I think maybe because I haven&#8217;t quite grasped what each part of the code is doing and therefore can&#8217;t define them in the arduino sketch as such. Any help would be much appreciated!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mate</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-32405</link>
+		<dc:creator><![CDATA[Mate]]></dc:creator>
+		<pubDate>Mon, 10 Feb 2014 09:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-32405</guid>
+		<description><![CDATA[0 {{0, 4, 0, 0, 0, 0, 0, 8, 0},
+1 {4, 0, 8, 0, 0, 0, 0, 11, 0},
+2 {0, 8, 0, 7, 0, 4, 0, 0, 2},
+3 {0, 0, 7, 0, 9, 14, 0, 0, 0},
+4 {0, 0, 0, 9, 0, 10, 0, 0, 0},
+5 {0, 0, 4, 14 instead of 0, 10, 0, 2, 0, 0},
+6 {0, 0, 0, 14 (here is not 14), 0, 2, 0, 1, 6},
+7 {8, 11, 0, 0, 0, 0, 1, 0, 7},
+8 {0, 0, 2, 0, 0, 0, 6, 7, 0}
+};
+
+
+Because 6 is not connected with 3]]></description>
+		<content:encoded><![CDATA[<p>0 {{0, 4, 0, 0, 0, 0, 0, 8, 0},<br />
+1 {4, 0, 8, 0, 0, 0, 0, 11, 0},<br />
+2 {0, 8, 0, 7, 0, 4, 0, 0, 2},<br />
+3 {0, 0, 7, 0, 9, 14, 0, 0, 0},<br />
+4 {0, 0, 0, 9, 0, 10, 0, 0, 0},<br />
+5 {0, 0, 4, 14 instead of 0, 10, 0, 2, 0, 0},<br />
+6 {0, 0, 0, 14 (here is not 14), 0, 2, 0, 1, 6},<br />
+7 {8, 11, 0, 0, 0, 0, 1, 0, 7},<br />
+8 {0, 0, 2, 0, 0, 0, 6, 7, 0}<br />
+};</p>
+<p>Because 6 is not connected with 3</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: zak</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-32014</link>
+		<dc:creator><![CDATA[zak]]></dc:creator>
+		<pubDate>Thu, 30 Jan 2014 23:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-32014</guid>
+		<description><![CDATA[I am trying to compile the code by MVS 2012 but it does not work]]></description>
+		<content:encoded><![CDATA[<p>I am trying to compile the code by MVS 2012 but it does not work</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ashish Tilokani</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-31835</link>
+		<dc:creator><![CDATA[Ashish Tilokani]]></dc:creator>
+		<pubDate>Sat, 25 Jan 2014 18:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-31835</guid>
+		<description><![CDATA[Its used because the next condition is that of dist[u]+graph[u][v] &#060; dist[v] which can cause overflow as Int type cannot store more than INT_MAX
+and the LHS can be INT_MAX + any positive integer]]></description>
+		<content:encoded><![CDATA[<p>Its used because the next condition is that of dist[u]+graph[u][v] &lt; dist[v] which can cause overflow as Int type cannot store more than INT_MAX<br />
+and the LHS can be INT_MAX + any positive integer</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tan</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-31667</link>
+		<dc:creator><![CDATA[tan]]></dc:creator>
+		<pubDate>Mon, 20 Jan 2014 13:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-31667</guid>
+		<description><![CDATA[can it work for directed graph?]]></description>
+		<content:encoded><![CDATA[<p>can it work for directed graph?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: yossi</title>
+		<link>http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/#comment-30654</link>
+		<dc:creator><![CDATA[yossi]]></dc:creator>
+		<pubDate>Wed, 11 Dec 2013 10:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27697#comment-30654</guid>
+		<description><![CDATA[hy i want to have the detail about the path if you can help me]]></description>
+		<content:encoded><![CDATA[<p>hy i want to have the detail about the path if you can help me</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.051 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:08:47 -->
+
+<!-- Compression = gzip -->

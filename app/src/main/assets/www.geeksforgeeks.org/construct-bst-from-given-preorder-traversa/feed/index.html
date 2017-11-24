@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construct BST from given preorder traversal &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ac</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-38012</link>
+		<dc:creator><![CDATA[ac]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 16:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-38012</guid>
+		<description><![CDATA[{5, 30, 15, 10, 50, 40, 20} is not a preorder traversal of any BST. I think Atul&#039;s code will work.
+Correct me if I&#039;m wrong.]]></description>
+		<content:encoded><![CDATA[<p>{5, 30, 15, 10, 50, 40, 20} is not a preorder traversal of any BST. I think Atul&#8217;s code will work.<br />
+Correct me if I&#8217;m wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-35319</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 10:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-35319</guid>
+		<description><![CDATA[the o(n^2) recusive solution is here
+
+#include
+#define size 50
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int search_rci(int n,int pre[],int low,int high)
+{
+	for(int i=low;in)
+		   return i;
+	}
+	return -1;
+}
+int search_lci(int n,int pre[],int low,int high)
+{
+	for(int i=low;i&#060;=high;i++)
+	{
+		if(pre[i]&#060;n)
+		   return i;
+	}
+	return -1;
+}
+tnode* fun(tnode* root,int pre[],int low,int high)
+{
+	if((low&#060;0)&#124;&#124;(highlchild=fun(root-&#062;lchild,pre,lci,rci-1);
+	root-&#062;rchild=fun(root-&#062;rchild,pre,rci,high);
+	return root;
+}
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int low,high;
+	int pre[]= {10, 5, 1, 7, 40, 50};
+	int n=sizeof(pre)/sizeof(pre[0]);
+	display(fun(root,pre,0,n-1));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>the o(n^2) recusive solution is here</p>
+<p>#include<br />
+#define size 50<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int search_rci(int n,int pre[],int low,int high)<br />
+{<br />
+	for(int i=low;in)<br />
+		   return i;<br />
+	}<br />
+	return -1;<br />
+}<br />
+int search_lci(int n,int pre[],int low,int high)<br />
+{<br />
+	for(int i=low;i&lt;=high;i++)<br />
+	{<br />
+		if(pre[i]&lt;n)<br />
+		   return i;<br />
+	}<br />
+	return -1;<br />
+}<br />
+tnode* fun(tnode* root,int pre[],int low,int high)<br />
+{<br />
+	if((low&lt;0)||(highlchild=fun(root-&gt;lchild,pre,lci,rci-1);<br />
+	root-&gt;rchild=fun(root-&gt;rchild,pre,rci,high);<br />
+	return root;<br />
+}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int low,high;<br />
+	int pre[]= {10, 5, 1, 7, 40, 50};<br />
+	int n=sizeof(pre)/sizeof(pre[0]);<br />
+	display(fun(root,pre,0,n-1));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-34507</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Wed, 09 Apr 2014 12:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-34507</guid>
+		<description><![CDATA[We can also have another O(nlogn) Time Complexity solution but it uses O(n) Space Complexity also...
+
+Step-1: Sort the preorder[] array and store it in another inorder[] array.
+Step-2: Construct the BST using preorder[] and inorder[] array.
+
+O(n) Space  Complexity....
+Please correct me if I am wrong]]></description>
+		<content:encoded><![CDATA[<p>We can also have another O(nlogn) Time Complexity solution but it uses O(n) Space Complexity also&#8230;</p>
+<p>Step-1: Sort the preorder[] array and store it in another inorder[] array.<br />
+Step-2: Construct the BST using preorder[] and inorder[] array.</p>
+<p>O(n) Space  Complexity&#8230;.<br />
+Please correct me if I am wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-34506</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 09 Apr 2014 12:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-34506</guid>
+		<description><![CDATA[We can also have another O(n) Time Complexity solution but it uses O(n) Space Complexity also...
+
+
+Step-1: Sort the preorder[] array and store it in another inorder[] array.
+Step-2: Construct the BST using preorder[] and inorder[] array.
+
+
+O(n) Space and Time Complexity....
+Please correct me if I am wrong]]></description>
+		<content:encoded><![CDATA[<p>We can also have another O(n) Time Complexity solution but it uses O(n) Space Complexity also&#8230;</p>
+<p>Step-1: Sort the preorder[] array and store it in another inorder[] array.<br />
+Step-2: Construct the BST using preorder[] and inorder[] array.</p>
+<p>O(n) Space and Time Complexity&#8230;.<br />
+Please correct me if I am wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rg</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-32831</link>
+		<dc:creator><![CDATA[Rg]]></dc:creator>
+		<pubDate>Fri, 21 Feb 2014 07:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-32831</guid>
+		<description><![CDATA[Method 2: Why do you need min? Since this is a preorder traversal only max is enough. Can you give me a counter example where you would get in incorrect BST if you don&#039;t pass min around]]></description>
+		<content:encoded><![CDATA[<p>Method 2: Why do you need min? Since this is a preorder traversal only max is enough. Can you give me a counter example where you would get in incorrect BST if you don&#8217;t pass min around</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Roman Dzhabarov</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-27709</link>
+		<dc:creator><![CDATA[Roman Dzhabarov]]></dc:creator>
+		<pubDate>Sun, 15 Sep 2013 18:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-27709</guid>
+		<description><![CDATA[I think it will work but having O(n*n) in the worst case and O(n*log(n)) in average. Suppose, 9,8,7,6,5,4 etc preorder.]]></description>
+		<content:encoded><![CDATA[<p>I think it will work but having O(n*n) in the worst case and O(n*log(n)) in average. Suppose, 9,8,7,6,5,4 etc preorder.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amit Bgl</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-25127</link>
+		<dc:creator><![CDATA[Amit Bgl]]></dc:creator>
+		<pubDate>Sat, 17 Aug 2013 15:35:23 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-25127</guid>
+		<description><![CDATA[wow code :D]]></description>
+		<content:encoded><![CDATA[<p>wow code 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shubham Singhal</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-24446</link>
+		<dc:creator><![CDATA[Shubham Singhal]]></dc:creator>
+		<pubDate>Mon, 05 Aug 2013 10:10:36 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-24446</guid>
+		<description><![CDATA[Can we just traverse the input array, and insert nodes in BST in that order and get required BST.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Can we just traverse the input array, and insert nodes in BST in that order and get required BST.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-18461</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 09:14:09 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-18461</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Soumya Sengupta</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-17301</link>
+		<dc:creator><![CDATA[Soumya Sengupta]]></dc:creator>
+		<pubDate>Sat, 13 Apr 2013 10:48:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-17301</guid>
+		<description><![CDATA[When we execute the statement...
+root-&#062;right = constructTreeUtil ( pre, preIndex, i, high, size );
+preIndex should point to i.....so dat i becomes the root and we proceed further......
+isnt it?]]></description>
+		<content:encoded><![CDATA[<p>When we execute the statement&#8230;<br />
+root-&gt;right = constructTreeUtil ( pre, preIndex, i, high, size );<br />
+preIndex should point to i&#8230;..so dat i becomes the root and we proceed further&#8230;&#8230;<br />
+isnt it?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: code_ignitor</title>
+		<link>http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/#comment-16756</link>
+		<dc:creator><![CDATA[code_ignitor]]></dc:creator>
+		<pubDate>Tue, 26 Mar 2013 13:54:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=25203#comment-16756</guid>
+		<description><![CDATA[Sorry !! Got your code :)]]></description>
+		<content:encoded><![CDATA[<p>Sorry !! Got your code 🙂</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:41:42 -->
+
+<!-- Compression = gzip -->

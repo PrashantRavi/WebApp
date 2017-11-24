@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Write a program to add two numbers in base 14</title>
+	<atom:link href="http://www.geeksforgeeks.org/write-a-program-to-add-two-numbers-in-base-14/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/write-a-program-to-add-two-numbers-in-base-14/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: EOF</title>
+		<link>http://www.geeksforgeeks.org/write-a-program-to-add-two-numbers-in-base-14/#comment-20417</link>
+		<dc:creator><![CDATA[EOF]]></dc:creator>
+		<pubDate>Sun, 23 Jun 2013 08:30:58 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=978#comment-20417</guid>
+		<description><![CDATA[Can add two numbers of different lengths.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/**
+ *
+ * @author EOF
+ * Please Note that the program can add base-14 numbers of length &#060; 100.
+ * You may observe unpredictable behavior for length &#062; 100.
+ */
+ 
+#include &#060;iostream&#062;
+#define MAX_SIZ 100
+ 
+using namespace std;
+
+//Add three digits d1, d2 and d3 and store the sum in &#034;sum&#034;
+//and carry in &#034;carry&#034;
+void digitSum(char d1, char d2, char d3, char *sum, char *carry){
+	int x, y, z, s, c;
+
+	x = d1 - &#039;0&#039;;
+	y = d2 - &#039;0&#039;;
+	z = d3 - &#039;0&#039;;
+
+	if(d1 &#062;= &#039;A&#039; &#038;&#038; d1 &#060;= &#039;D&#039;)
+		x = d1 - &#039;A&#039; + 10;
+	if(d2 &#062;= &#039;A&#039; &#038;&#038; d2 &#060;= &#039;D&#039;)
+		y = d2 - &#039;A&#039; + 10;
+	if(d3 &#062;= &#039;A&#039; &#038;&#038; d3 &#060;= &#039;D&#039;)
+		z = d3 - &#039;A&#039; + 10;
+
+	s = (x+y+z)%14;
+	c = (x+y+z)/14;
+
+	if(s&#060;=9) *sum = s + &#039;0&#039;;
+	else *sum = s + &#039;A&#039; - 10;
+
+	if(c&#060;=9) *carry = c + &#039;0&#039;;
+	else *carry = c + &#039;A&#039; - 10;
+}
+
+//Add two base-14 numbers in a[] and b[] and store the result in r[]
+//and return the pointer to first number in the result.
+char* add(char *a, char *b, char *r){
+	int len1, len2, i, j, k;
+	char carry, sum;
+
+	len1 = strlen(a);
+	len2 = strlen(b);
+	k = (len1&#062;len2)?len1:len2;
+	k += 5;
+
+	i=len1-1;
+	j=len2-1;
+
+	r[k--] = &#039;&#092;&#048;&#039;;
+	carry = &#039;0&#039;;
+	while(i&#062;=0 &#038;&#038; j&#062;=0){
+		digitSum(a[i], b[j], carry, &#038;sum, &#038;carry);
+		r[k] = sum;
+		i--; j--; k--;
+	}
+	while(i&#062;=0){
+		digitSum(a[i], &#039;0&#039;, carry, &#038;sum, &#038;carry);
+		r[k] = sum;
+		i--; k--;
+	}
+	while(j&#062;=0){
+		digitSum(&#039;0&#039;, b[j], carry, &#038;sum, &#038;carry);
+		r[k] = sum;
+		j--; k--;
+	}
+	if(carry!=&#039;0&#039;)
+		r[k--] = carry;
+	return &#038;r[k+1];
+}
+
+int main(){
+	int i;
+	char a[] = &#034;AD2&#034;; //&#034;1DC2343AA23C&#034;;
+	char b[] = &#034;12&#034;; //&#034;34BB34CCD2&#034;;
+	char r[MAX_SIZ+10];
+	
+	cout&#060;&#060;add(a,b,r)&#060;&#060;endl;
+
+	return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Can add two numbers of different lengths.</p>
+<pre> <code language="C">
+/**
+ *
+ * @author EOF
+ * Please Note that the program can add base-14 numbers of length &lt; 100.
+ * You may observe unpredictable behavior for length &gt; 100.
+ */
+ 
+#include &lt;iostream&gt;
+#define MAX_SIZ 100
+ 
+using namespace std;
+
+//Add three digits d1, d2 and d3 and store the sum in &quot;sum&quot;
+//and carry in &quot;carry&quot;
+void digitSum(char d1, char d2, char d3, char *sum, char *carry){
+	int x, y, z, s, c;
+
+	x = d1 - '0';
+	y = d2 - '0';
+	z = d3 - '0';
+
+	if(d1 &gt;= 'A' &amp;&amp; d1 &lt;= 'D')
+		x = d1 - 'A' + 10;
+	if(d2 &gt;= 'A' &amp;&amp; d2 &lt;= 'D')
+		y = d2 - 'A' + 10;
+	if(d3 &gt;= 'A' &amp;&amp; d3 &lt;= 'D')
+		z = d3 - 'A' + 10;
+
+	s = (x+y+z)%14;
+	c = (x+y+z)/14;
+
+	if(s&lt;=9) *sum = s + '0';
+	else *sum = s + 'A' - 10;
+
+	if(c&lt;=9) *carry = c + '0';
+	else *carry = c + 'A' - 10;
+}
+
+//Add two base-14 numbers in a[] and b[] and store the result in r[]
+//and return the pointer to first number in the result.
+char* add(char *a, char *b, char *r){
+	int len1, len2, i, j, k;
+	char carry, sum;
+
+	len1 = strlen(a);
+	len2 = strlen(b);
+	k = (len1&gt;len2)?len1:len2;
+	k += 5;
+
+	i=len1-1;
+	j=len2-1;
+
+	r[k--] = '&#92;&#48;';
+	carry = '0';
+	while(i&gt;=0 &amp;&amp; j&gt;=0){
+		digitSum(a[i], b[j], carry, &amp;sum, &amp;carry);
+		r[k] = sum;
+		i--; j--; k--;
+	}
+	while(i&gt;=0){
+		digitSum(a[i], '0', carry, &amp;sum, &amp;carry);
+		r[k] = sum;
+		i--; k--;
+	}
+	while(j&gt;=0){
+		digitSum('0', b[j], carry, &amp;sum, &amp;carry);
+		r[k] = sum;
+		j--; k--;
+	}
+	if(carry!='0')
+		r[k--] = carry;
+	return &amp;r[k+1];
+}
+
+int main(){
+	int i;
+	char a[] = &quot;AD2&quot;; //&quot;1DC2343AA23C&quot;;
+	char b[] = &quot;12&quot;; //&quot;34BB34CCD2&quot;;
+	char r[MAX_SIZ+10];
+	
+	cout&lt;&lt;add(a,b,r)&lt;&lt;endl;
+
+	return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dreamer</title>
+		<link>http://www.geeksforgeeks.org/write-a-program-to-add-two-numbers-in-base-14/#comment-6861</link>
+		<dc:creator><![CDATA[Dreamer]]></dc:creator>
+		<pubDate>Sun, 18 Dec 2011 18:35:10 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=978#comment-6861</guid>
+		<description><![CDATA[I think NULL or terminating character is missing for res string??]]></description>
+		<content:encoded><![CDATA[<p>I think NULL or terminating character is missing for res string??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dreamer</title>
+		<link>http://www.geeksforgeeks.org/write-a-program-to-add-two-numbers-in-base-14/#comment-4180</link>
+		<dc:creator><![CDATA[Dreamer]]></dc:creator>
+		<pubDate>Sun, 29 May 2011 18:00:49 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=978#comment-4180</guid>
+		<description><![CDATA[if( val &#062;= 10 &#038;&#038; val = 10 &#038;&#038; val &#060;= 13)]]></description>
+		<content:encoded><![CDATA[<p>if( val &gt;= 10 &amp;&amp; val = 10 &amp;&amp; val &lt;= 13)</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:13:15 -->
+
+<!-- Compression = gzip -->

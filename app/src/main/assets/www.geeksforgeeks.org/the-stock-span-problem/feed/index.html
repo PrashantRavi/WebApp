@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: The Stock Span Problem</title>
+	<atom:link href="http://www.geeksforgeeks.org/the-stock-span-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/the-stock-span-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: pradeep kumar</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-39738</link>
+		<dc:creator><![CDATA[pradeep kumar]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 08:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-39738</guid>
+		<description><![CDATA[How does it works??What its definition??
+
+stack st;]]></description>
+		<content:encoded><![CDATA[<p>How does it works??What its definition??</p>
+<p>stack st;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amit Jambotkar</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-36133</link>
+		<dc:creator><![CDATA[Amit Jambotkar]]></dc:creator>
+		<pubDate>Fri, 16 May 2014 11:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-36133</guid>
+		<description><![CDATA[public class Stack {
+
+	int top;
+
+	int capacity;
+
+	T values[];
+
+	
+
+	
+
+	
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+
+	public Stack(int capacity){
+
+	this.values= (T[])new  Number[capacity]	;
+
+	this.capacity=capacity;
+
+	this.top=-1;
+
+	}
+
+	
+
+void 	push(T value){
+
+	if(!isFull())
+
+	values[++top]=value;	
+
+		
+
+	}
+
+T pop() {
+
+	if(!isEmpty())
+
+	return values[top--];
+
+	else{
+
+		return null;
+
+	}
+
+	
+
+}
+
+T peak(){
+
+	if(!isEmpty())
+
+		return values[top];
+
+		else
+
+			return null;	
+
+}
+
+boolean isFull(){
+
+	if(top==capacity-1)
+
+		return true;
+
+	return false;
+
+}
+
+boolean isEmpty(){
+
+	if(top==-1)
+
+		return true;
+
+	return false;
+
+}
+
+ void findNextGreaterElement(Stack stack,T[] arr){
+
+	 int result[]= new int[arr.length];
+
+	 result[0]=1;
+
+	 stack.push((T) new Integer(0));
+
+	 for(int i=1;i&#060;arr.length;i++){
+
+		 while(!stack.isEmpty() &#038;&#038; arr[stack.peak().intValue()].doubleValue() &#060; arr[i].doubleValue()){
+
+		 stack.pop();	 
+
+		 }
+
+		 result[i]= stack.isEmpty()?(i+1):(i-stack.peak().intValue());
+
+		 stack.push((T)new Integer(i));
+
+	 }
+
+	 for(int i=0;i&#060;result.length;i++){
+
+		System.out.println(result[i]); 
+
+	 } 
+
+	 
+
+	
+
+}
+
+public static void main(String[] args) {
+
+	Integer[] arr={10, 4, 5, 90, 120, 80};
+
+	Stack st=new Stack(arr.length-1);
+
+	st.findNextGreaterElement(st,arr);
+
+}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>public class Stack {</p>
+<p>	int top;</p>
+<p>	int capacity;</p>
+<p>	T values[];</p>
+<p>	@SuppressWarnings(&#8220;unchecked&#8221;)</p>
+<p>	public Stack(int capacity){</p>
+<p>	this.values= (T[])new  Number[capacity]	;</p>
+<p>	this.capacity=capacity;</p>
+<p>	this.top=-1;</p>
+<p>	}</p>
+<p>void 	push(T value){</p>
+<p>	if(!isFull())</p>
+<p>	values[++top]=value;	</p>
+<p>	}</p>
+<p>T pop() {</p>
+<p>	if(!isEmpty())</p>
+<p>	return values[top&#8211;];</p>
+<p>	else{</p>
+<p>		return null;</p>
+<p>	}</p>
+<p>}</p>
+<p>T peak(){</p>
+<p>	if(!isEmpty())</p>
+<p>		return values[top];</p>
+<p>		else</p>
+<p>			return null;	</p>
+<p>}</p>
+<p>boolean isFull(){</p>
+<p>	if(top==capacity-1)</p>
+<p>		return true;</p>
+<p>	return false;</p>
+<p>}</p>
+<p>boolean isEmpty(){</p>
+<p>	if(top==-1)</p>
+<p>		return true;</p>
+<p>	return false;</p>
+<p>}</p>
+<p> void findNextGreaterElement(Stack stack,T[] arr){</p>
+<p>	 int result[]= new int[arr.length];</p>
+<p>	 result[0]=1;</p>
+<p>	 stack.push((T) new Integer(0));</p>
+<p>	 for(int i=1;i&lt;arr.length;i++){</p>
+<p>		 while(!stack.isEmpty() &amp;&amp; arr[stack.peak().intValue()].doubleValue() &lt; arr[i].doubleValue()){</p>
+<p>		 stack.pop();	 </p>
+<p>		 }</p>
+<p>		 result[i]= stack.isEmpty()?(i+1):(i-stack.peak().intValue());</p>
+<p>		 stack.push((T)new Integer(i));</p>
+<p>	 }</p>
+<p>	 for(int i=0;i&lt;result.length;i++){</p>
+<p>		System.out.println(result[i]); </p>
+<p>	 } </p>
+<p>}</p>
+<p>public static void main(String[] args) {</p>
+<p>	Integer[] arr={10, 4, 5, 90, 120, 80};</p>
+<p>	Stack st=new Stack(arr.length-1);</p>
+<p>	st.findNextGreaterElement(st,arr);</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kx</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-32864</link>
+		<dc:creator><![CDATA[kx]]></dc:creator>
+		<pubDate>Sat, 22 Feb 2014 07:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-32864</guid>
+		<description><![CDATA[It looks good... but this won&#039;t work..
+After : if(price[i]&#062;=price[i-1]) S[i]=S[i-1]+1;
+
+you need to additionally check for a similar condition: (price[i]&#062;=price[i-S[i]]), and update S[i] again accordingly based on the result =&#062; and continue this step until you reach the top of the array. (In a way its similar to the stack implementation above).
+
+Else, your case will fail for something like: price = {70,60,80}. S[2] here should be 3; your method will give 2 (because you stop after comparing with 60, and do not check against 70].]]></description>
+		<content:encoded><![CDATA[<p>It looks good&#8230; but this won&#8217;t work..<br />
+After : if(price[i]&gt;=price[i-1]) S[i]=S[i-1]+1;</p>
+<p>you need to additionally check for a similar condition: (price[i]&gt;=price[i-S[i]]), and update S[i] again accordingly based on the result =&gt; and continue this step until you reach the top of the array. (In a way its similar to the stack implementation above).</p>
+<p>Else, your case will fail for something like: price = {70,60,80}. S[2] here should be 3; your method will give 2 (because you stop after comparing with 60, and do not check against 70].</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sijayaraman</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-32152</link>
+		<dc:creator><![CDATA[sijayaraman]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2014 16:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-32152</guid>
+		<description><![CDATA[void stock(int arr[],int n)
+ {
+      int index=0;
+      int result[n];
+       while(index=0;j--)
+              {
+ 
+                     if(arr[index]&#062;arr[j])
+                     {
+                           result[index]++;
+ 
+                     }
+                     else if(arr[j]&#062; arr[index])
+                     {
+                           break;
+                     }
+              }
+              index++;
+       }
+ 
+       //output
+       for(int i=0;i&#060;n;i++)
+       {
+              cout&#060;&#060;result[i]&#060;&#060;&#034;,&#034;;
+ 
+       }
+
+ }
+int main()
+{
+       int arr[]={10, 4, 5, 90, 120, 80};
+       int n = sizeof(arr)/sizeof(arr[0]);
+       stock(arr,n);
+}]]></description>
+		<content:encoded><![CDATA[<p>void stock(int arr[],int n)<br />
+ {<br />
+      int index=0;<br />
+      int result[n];<br />
+       while(index=0;j&#8211;)<br />
+              {</p>
+<p>                     if(arr[index]&gt;arr[j])<br />
+                     {<br />
+                           result[index]++;</p>
+<p>                     }<br />
+                     else if(arr[j]&gt; arr[index])<br />
+                     {<br />
+                           break;<br />
+                     }<br />
+              }<br />
+              index++;<br />
+       }</p>
+<p>       //output<br />
+       for(int i=0;i&lt;n;i++)<br />
+       {<br />
+              cout&lt;&lt;result[i]&lt;&lt;&quot;,&quot;;</p>
+<p>       }</p>
+<p> }<br />
+int main()<br />
+{<br />
+       int arr[]={10, 4, 5, 90, 120, 80};<br />
+       int n = sizeof(arr)/sizeof(arr[0]);<br />
+       stock(arr,n);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-31398</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 09 Jan 2014 10:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-31398</guid>
+		<description><![CDATA[Does this work for {2,3,10,4,5,6,7}?]]></description>
+		<content:encoded><![CDATA[<p>Does this work for {2,3,10,4,5,6,7}?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shashank Rai</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-28816</link>
+		<dc:creator><![CDATA[Shashank Rai]]></dc:creator>
+		<pubDate>Sun, 13 Oct 2013 06:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-28816</guid>
+		<description><![CDATA[It is wrong, v don&#039;t hav 2 print length of non-decreasing prices upto the given day. eg. 10 4 5 90, den fr 90 ur algo gives 3 but d ans shd b 4 since 10  4]]></description>
+		<content:encoded><![CDATA[<p>It is wrong, v don&#8217;t hav 2 print length of non-decreasing prices upto the given day. eg. 10 4 5 90, den fr 90 ur algo gives 3 but d ans shd b 4 since 10  4</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sapy</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-21091</link>
+		<dc:creator><![CDATA[sapy]]></dc:creator>
+		<pubDate>Tue, 02 Jul 2013 23:41:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-21091</guid>
+		<description><![CDATA[I think the code needs correction...
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+ S[i] = (st.empty())? (i + 1) : (i - st.size());
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>I think the code needs correction&#8230;</p>
+<pre> <code language="C">
+ S[i] = (st.empty())? (i + 1) : (i - st.size());
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: shashank</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-15220</link>
+		<dc:creator><![CDATA[shashank]]></dc:creator>
+		<pubDate>Tue, 12 Feb 2013 20:25:22 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-15220</guid>
+		<description><![CDATA[Hi panda , what the question in coding challenge ?
+
+Thanks
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi panda , what the question in coding challenge ?</p>
+<p>Thanks</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-14902</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 30 Jan 2013 09:48:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-14902</guid>
+		<description><![CDATA[Please take a closer look at the problem statement, especially following part.
+&quot;The span Si of the stock’s price on a given day i is defined as the maximum number of consecutive days &lt;b&gt;just before the given day&lt;/b&gt;, for which the price of the stock on the current day is less than or equal to its price on the given day.&quot;]]></description>
+		<content:encoded><![CDATA[<p>Please take a closer look at the problem statement, especially following part.<br />
+&#8220;The span Si of the stock’s price on a given day i is defined as the maximum number of consecutive days <b>just before the given day</b>, for which the price of the stock on the current day is less than or equal to its price on the given day.&#8221;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sairam Ravu</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-14901</link>
+		<dc:creator><![CDATA[Sairam Ravu]]></dc:creator>
+		<pubDate>Wed, 30 Jan 2013 09:44:12 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-14901</guid>
+		<description><![CDATA[int price[] = {10, 4, 5, 90, 120, 80};
+
+For this input the span[5] that is for 80 should be 3 but your answer is 1.
+
+I didn&#039;t understand the brute force method, it just checks for less than or equal it doesn&#039;t check for consecutive, if so then for {10,4,5,90,120,80}, span[5] will  be 4 instead of 3 because you are just incrementing the count for how many values which are less than given value.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>int price[] = {10, 4, 5, 90, 120, 80};</p>
+<p>For this input the span[5] that is for 80 should be 3 but your answer is 1.</p>
+<p>I didn&#8217;t understand the brute force method, it just checks for less than or equal it doesn&#8217;t check for consecutive, if so then for {10,4,5,90,120,80}, span[5] will  be 4 instead of 3 because you are just incrementing the count for how many values which are less than given value.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlexC</title>
+		<link>http://www.geeksforgeeks.org/the-stock-span-problem/#comment-14373</link>
+		<dc:creator><![CDATA[AlexC]]></dc:creator>
+		<pubDate>Fri, 11 Jan 2013 00:41:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29347#comment-14373</guid>
+		<description><![CDATA[this is the same algorithm (with a small change) used to efficiently construct Cartesian tree.
+
+http://en.wikipedia.org/wiki/All_nearest_smaller_values
+
+
+http://en.wikipedia.org/wiki/Cartesian_tree]]></description>
+		<content:encoded><![CDATA[<p>this is the same algorithm (with a small change) used to efficiently construct Cartesian tree.</p>
+<p><a href="http://en.wikipedia.org/wiki/All_nearest_smaller_values" rel="nofollow">http://en.wikipedia.org/wiki/All_nearest_smaller_values</a></p>
+<p><a href="http://en.wikipedia.org/wiki/Cartesian_tree" rel="nofollow">http://en.wikipedia.org/wiki/Cartesian_tree</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:23:42 -->
+
+<!-- Compression = gzip -->

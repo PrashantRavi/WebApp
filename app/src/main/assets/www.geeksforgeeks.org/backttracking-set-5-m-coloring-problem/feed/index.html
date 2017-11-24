@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Backtracking &#124; Set 5 (m Coloring Problem)</title>
+	<atom:link href="http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: sr7</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-32375</link>
+		<dc:creator><![CDATA[sr7]]></dc:creator>
+		<pubDate>Sun, 09 Feb 2014 10:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-32375</guid>
+		<description><![CDATA[you can further bring down the complexity by avoiding the check for each color . Since the no of colors can go upto N and no of vertices is N .
+
+Checking for each color will take O(n^2) time . Instead 
+
+I assume the base color (uncolored node) is -1 . Colors start from 0.
+
+I will check all the adjacent nodes of the given vertex in O(n) time .
+
+If  i th node is adjacent to vertex v and color[i]&#062;=0 (colored node) , then temp[color[i]] = 1 (temp[i]  if set , indicates that the color is in use by one of its adjacent nodes) , finally I will search the &#039;temp&#039; array starting from i =0,
+
+if temp[i]!=1, then that is the least color not used by any of the adjacent nodes, then color[v] is made i ; It takes O(n) on the whole, instead of O(n^2).
+
+                    
+
+            int temp[V];
+
+            //Initialize all temp values to zero
+
+for (i=0;i&#060;V;i++) temp[i] = 0;
+
+for (i=0;i=0) //Node i is adjacent and colored
+
+  temp[color[i]]=1;
+
+ for (i=0; i&#060;m ; i++) { //Only 0 to m-1 colors are allowed
+  
+    if (!temp[i]) {
+   color[v] = i;  
+   if (graphColoringUtil(graph,m,color,v+1)) return true;
+
+ color[v] = -1; // backtrack
+}
+return true;]]></description>
+		<content:encoded><![CDATA[<p>you can further bring down the complexity by avoiding the check for each color . Since the no of colors can go upto N and no of vertices is N .</p>
+<p>Checking for each color will take O(n^2) time . Instead </p>
+<p>I assume the base color (uncolored node) is -1 . Colors start from 0.</p>
+<p>I will check all the adjacent nodes of the given vertex in O(n) time .</p>
+<p>If  i th node is adjacent to vertex v and color[i]&gt;=0 (colored node) , then temp[color[i]] = 1 (temp[i]  if set , indicates that the color is in use by one of its adjacent nodes) , finally I will search the &#8216;temp&#8217; array starting from i =0,</p>
+<p>if temp[i]!=1, then that is the least color not used by any of the adjacent nodes, then color[v] is made i ; It takes O(n) on the whole, instead of O(n^2).</p>
+<p>            int temp[V];</p>
+<p>            //Initialize all temp values to zero</p>
+<p>for (i=0;i&lt;V;i++) temp[i] = 0;</p>
+<p>for (i=0;i=0) //Node i is adjacent and colored</p>
+<p>  temp[color[i]]=1;</p>
+<p> for (i=0; i&lt;m ; i++) { //Only 0 to m-1 colors are allowed</p>
+<p>    if (!temp[i]) {<br />
+   color[v] = i;<br />
+   if (graphColoringUtil(graph,m,color,v+1)) return true;</p>
+<p> color[v] = -1; // backtrack<br />
+}<br />
+return true;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pavi.8081</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-22275</link>
+		<dc:creator><![CDATA[pavi.8081]]></dc:creator>
+		<pubDate>Wed, 17 Jul 2013 05:45:25 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-22275</guid>
+		<description><![CDATA[Can we modify this algorithm to find the min. number of colors to color the graph nodes. I think we can but haven&#039;t tried though.
+
+If we can do so then the modified algorithm can be used to solve problems like: find the minimum number of party halls required to organize parties with given starting and finishing times.
+
+Please comment...]]></description>
+		<content:encoded><![CDATA[<p>Can we modify this algorithm to find the min. number of colors to color the graph nodes. I think we can but haven&#8217;t tried though.</p>
+<p>If we can do so then the modified algorithm can be used to solve problems like: find the minimum number of party halls required to organize parties with given starting and finishing times.</p>
+<p>Please comment&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: coolguy</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-10909</link>
+		<dc:creator><![CDATA[coolguy]]></dc:creator>
+		<pubDate>Sun, 16 Sep 2012 17:55:37 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-10909</guid>
+		<description><![CDATA[You can understand graph coloring using backtracking by watching this video
+youtu.be/Cl3A_9hokjU]]></description>
+		<content:encoded><![CDATA[<p>You can understand graph coloring using backtracking by watching this video<br />
+youtu.be/Cl3A_9hokjU</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: soupboy</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-9666</link>
+		<dc:creator><![CDATA[soupboy]]></dc:creator>
+		<pubDate>Thu, 19 Jul 2012 03:04:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-9666</guid>
+		<description><![CDATA[Hi, shouldn&#039;t the brute force algorithm&#039;s complexity be m^V and not V^m as written above ?]]></description>
+		<content:encoded><![CDATA[<p>Hi, shouldn&#8217;t the brute force algorithm&#8217;s complexity be m^V and not V^m as written above ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8423</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Mon, 14 May 2012 07:45:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8423</guid>
+		<description><![CDATA[@Rohit Raj
+
+We don&#039;t need to check for this as we assign a color c only after isSafe() returns true. Before calling isSafe(), we assign the color value as 0 which is not a valid value.  When we call isSafe(), the value of c will be greater than 0 and value of color[v] will be 0. So color[v] will never be equal to c. I hope this clarifies your doubt.]]></description>
+		<content:encoded><![CDATA[<p>@Rohit Raj</p>
+<p>We don&#8217;t need to check for this as we assign a color c only after isSafe() returns true. Before calling isSafe(), we assign the color value as 0 which is not a valid value.  When we call isSafe(), the value of c will be greater than 0 and value of color[v] will be 0. So color[v] will never be equal to c. I hope this clarifies your doubt.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Raj</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8422</link>
+		<dc:creator><![CDATA[Rohit Raj]]></dc:creator>
+		<pubDate>Mon, 14 May 2012 06:40:55 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8422</guid>
+		<description><![CDATA[bool isSafe (int v, bool graph[V][V], int color[], int c)
+{
+    for (int i = 0; i &#060; V; i++)
+        if (graph[v][i] &#038;&#038; c == color[i])
+            return false;
+    return true;
+}
+
+as the problem statement says that if (i == j ) then also the graph[i][j] = 1; so shouldn&#039;t we check for this condition in this function? 
+i.e if(graph[v][i] &#038;&#038; c == color[i] &#038;&#038; v != i).]]></description>
+		<content:encoded><![CDATA[<p>bool isSafe (int v, bool graph[V][V], int color[], int c)<br />
+{<br />
+    for (int i = 0; i &lt; V; i++)<br />
+        if (graph[v][i] &amp;&amp; c == color[i])<br />
+            return false;<br />
+    return true;<br />
+}</p>
+<p>as the problem statement says that if (i == j ) then also the graph[i][j] = 1; so shouldn&#039;t we check for this condition in this function?<br />
+i.e if(graph[v][i] &amp;&amp; c == color[i] &amp;&amp; v != i).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gautam</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8306</link>
+		<dc:creator><![CDATA[gautam]]></dc:creator>
+		<pubDate>Fri, 04 May 2012 19:09:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8306</guid>
+		<description><![CDATA[Can be use some dynamic programming to reduce complexity
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Can be use some dynamic programming to reduce complexity</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8273</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 02 May 2012 04:45:01 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8273</guid>
+		<description><![CDATA[@Venki: Thanks for pointing this out. This has been fixed. Yes, the worst case complexity will be O( V * (m^V) ) as we may have to try all configurations in worst case.]]></description>
+		<content:encoded><![CDATA[<p>@Venki: Thanks for pointing this out. This has been fixed. Yes, the worst case complexity will be O( V * (m^V) ) as we may have to try all configurations in worst case.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8272</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Wed, 02 May 2012 04:16:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8272</guid>
+		<description><![CDATA[There is small bug in the code. The colour vector should be of size V in lieu of m. In the current code, the program tries to access elements past the buffer end (while checking validity of colour assignment).
+
+What is the worst case complexity? O(V * m V) as we are exploring all configurations and doing O(V) work at each call.]]></description>
+		<content:encoded><![CDATA[<p>There is small bug in the code. The colour vector should be of size V in lieu of m. In the current code, the program tries to access elements past the buffer end (while checking validity of colour assignment).</p>
+<p>What is the worst case complexity? O(V * m V) as we are exploring all configurations and doing O(V) work at each call.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8270</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Tue, 01 May 2012 15:58:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8270</guid>
+		<description><![CDATA[@Guddu sharma, We need to find *one* feasible solution. The condition if(v==V) is recursion base case to end infinite recursion. When we reach the end branch in the state space tree and still not found solution, we need to backtrack to one level upper and restore the state.
+
+Similarly, if the current assignment is safe, (means the branch generated in the tree can be part of solution state), we recur to next level for next feasible color.
+
+The condition
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* recur to assign colors to rest of the vertices */
+if (graphColoringUtil (graph, m, color, v+1) == true)
+    return true;
+&lt;/code&gt; &lt;/pre&gt;
+
+checks next color. If this next color reaches last color, we are done which will be returned at the if condition
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+if (v == V)
+        return true;
+&lt;/code&gt; &lt;/pre&gt;
+
+Try to draw the state space tree for small values of V and m, you can easily understand the backtracking procedure.]]></description>
+		<content:encoded><![CDATA[<p>@Guddu sharma, We need to find *one* feasible solution. The condition if(v==V) is recursion base case to end infinite recursion. When we reach the end branch in the state space tree and still not found solution, we need to backtrack to one level upper and restore the state.</p>
+<p>Similarly, if the current assignment is safe, (means the branch generated in the tree can be part of solution state), we recur to next level for next feasible color.</p>
+<p>The condition</p>
+<pre> <code language="C">
+/* recur to assign colors to rest of the vertices */
+if (graphColoringUtil (graph, m, color, v+1) == true)
+    return true;
+</code> </pre>
+<p>checks next color. If this next color reaches last color, we are done which will be returned at the if condition</p>
+<pre> <code language="C">
+if (v == V)
+        return true;
+</code> </pre>
+<p>Try to draw the state space tree for small values of V and m, you can easily understand the backtracking procedure.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/#comment-8269</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Tue, 01 May 2012 15:49:31 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19042#comment-8269</guid>
+		<description><![CDATA[@Guddu sharma: The statement serves two purposes:
+1) It calls the function recursively for the other vertices.
+2) It returns true as soon as one of the color assignments lead to a solution. So that other colors are not checked as soon as a color assignment works.
+
+Also, just putting following line is not sufficient. We need to forward the result of this function call to parent calls. 
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+    if (v == V)
+        return true;
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>@Guddu sharma: The statement serves two purposes:<br />
+1) It calls the function recursively for the other vertices.<br />
+2) It returns true as soon as one of the color assignments lead to a solution. So that other colors are not checked as soon as a color assignment works.</p>
+<p>Also, just putting following line is not sufficient. We need to forward the result of this function call to parent calls. </p>
+<pre> <code language="C">
+    if (v == V)
+        return true;
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.053 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:28:07 -->
+
+<!-- Compression = gzip -->

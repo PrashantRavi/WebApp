@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Backtracking &#124; Set 4 (Subset Sum)</title>
+	<atom:link href="http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-36587</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Sat, 24 May 2014 18:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-36587</guid>
+		<description><![CDATA[can one find all possible subsets of a big array say no. of elements =10^5
+in less tha o(n^2)???]]></description>
+		<content:encoded><![CDATA[<p>can one find all possible subsets of a big array say no. of elements =10^5<br />
+in less tha o(n^2)???</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sujeet singh</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-35797</link>
+		<dc:creator><![CDATA[sujeet singh]]></dc:creator>
+		<pubDate>Thu, 08 May 2014 17:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-35797</guid>
+		<description><![CDATA[void print_subarray_sum(int *arr,int arr_size,int given_sum)
+
+{
+
+    int sum =0;
+
+    shorting_array(arr,arr_size);
+
+    for(int i =0;i&#060;arr_size;i++)
+
+        for(int j =i;j given_sum)
+
+            {
+
+                sum =0;break;
+
+            }
+
+        }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void print_subarray_sum(int *arr,int arr_size,int given_sum)</p>
+<p>{</p>
+<p>    int sum =0;</p>
+<p>    shorting_array(arr,arr_size);</p>
+<p>    for(int i =0;i&lt;arr_size;i++)</p>
+<p>        for(int j =i;j given_sum)</p>
+<p>            {</p>
+<p>                sum =0;break;</p>
+<p>            }</p>
+<p>        }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-35608</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 06:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-35608</guid>
+		<description><![CDATA[Another solution without backtracking (using Algorithm of string combination)
+
+#include
+
+#include
+
+#include
+
+void print(int arr[], int n)
+
+{
+
+	int i;
+
+	
+
+	printf(&quot;subset: &quot;);
+
+	for(i=0;isum)
+
+		return;
+
+	
+
+	// base case 2: sum subset found
+
+	if(k==sum)
+
+	{
+
+		print(output,index);
+
+		return;
+
+	}
+
+	
+
+	for(i=start;i&#060;n;i++)
+
+	{
+
+		output[index] = arr[i];
+
+		printAllSubsets(arr,n,output,i+1,index+1,sum,k+arr[i]);
+
+	}
+
+}
+
+void initialize(int arr[], int n)
+
+{
+
+	int i;
+
+	
+
+	for(i=0;i&#060;n;i++)
+
+		arr[i] =0;
+
+}
+
+ 
+
+// driver program to test above function
+
+int main()
+
+{
+
+	int arr[] = {10, 7, 5, 18, 12, 20, 15};
+
+	int sum = 35;
+
+	int n =sizeof(arr)/sizeof(int);
+
+	
+
+	int output[n];
+
+	initialize(output,n);
+
+	
+
+	printAllSubsets(arr,n,output,0,0,sum,0);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Another solution without backtracking (using Algorithm of string combination)</p>
+<p>#include</p>
+<p>#include</p>
+<p>#include</p>
+<p>void print(int arr[], int n)</p>
+<p>{</p>
+<p>	int i;</p>
+<p>	printf(&#8220;subset: &#8220;);</p>
+<p>	for(i=0;isum)</p>
+<p>		return;</p>
+<p>	// base case 2: sum subset found</p>
+<p>	if(k==sum)</p>
+<p>	{</p>
+<p>		print(output,index);</p>
+<p>		return;</p>
+<p>	}</p>
+<p>	for(i=start;i&lt;n;i++)</p>
+<p>	{</p>
+<p>		output[index] = arr[i];</p>
+<p>		printAllSubsets(arr,n,output,i+1,index+1,sum,k+arr[i]);</p>
+<p>	}</p>
+<p>}</p>
+<p>void initialize(int arr[], int n)</p>
+<p>{</p>
+<p>	int i;</p>
+<p>	for(i=0;i&lt;n;i++)</p>
+<p>		arr[i] =0;</p>
+<p>}</p>
+<p>// driver program to test above function</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int arr[] = {10, 7, 5, 18, 12, 20, 15};</p>
+<p>	int sum = 35;</p>
+<p>	int n =sizeof(arr)/sizeof(int);</p>
+<p>	int output[n];</p>
+<p>	initialize(output,n);</p>
+<p>	printAllSubsets(arr,n,output,0,0,sum,0);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: disqus_0z6aYV2hDC</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-34615</link>
+		<dc:creator><![CDATA[disqus_0z6aYV2hDC]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 10:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-34615</guid>
+		<description><![CDATA[Isn&#039;t the following wrong;
+
+if( target_sum == sum )
+
+    {
+
+        // We found subset
+
+        printSubset(t, t_size);
+
+        // Exclude previously added item and consider next candidate
+
+        subset_sum(s, t, s_size, t_size-1, sum - s[ite], ite + 1, target_sum);
+
+        return;
+
+    }
+
+We called subset_sum with i = ite+1, and in the loop when sum == target_sum, we are calling subset_sum with again i = ite+1. We should have called it with i = ite. Also, the sum passed is sum - s[ite]. It should be sum-s[ite -1]]]></description>
+		<content:encoded><![CDATA[<p>Isn&#8217;t the following wrong;</p>
+<p>if( target_sum == sum )</p>
+<p>    {</p>
+<p>        // We found subset</p>
+<p>        printSubset(t, t_size);</p>
+<p>        // Exclude previously added item and consider next candidate</p>
+<p>        subset_sum(s, t, s_size, t_size-1, sum &#8211; s[ite], ite + 1, target_sum);</p>
+<p>        return;</p>
+<p>    }</p>
+<p>We called subset_sum with i = ite+1, and in the loop when sum == target_sum, we are calling subset_sum with again i = ite+1. We should have called it with i = ite. Also, the sum passed is sum &#8211; s[ite]. It should be sum-s[ite -1]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-31059</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Fri, 27 Dec 2013 09:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-31059</guid>
+		<description><![CDATA[int fun(int arr[],int low,int high,int s)
+
+{
+
+	if(s==0)
+
+	   return 1;
+
+	if(s&#060;0)
+
+	   return 0;
+
+	if(low==high)
+
+	{
+
+		if(arr[low]==s)
+
+		{
+
+			cout&#060;&#060;arr[low]&#060;s)
+
+	   return fun(arr,low+1,high,s);
+
+	for(int k=low;k&#060;high;k++)
+
+	{
+
+		int p=fun(arr,k+1,high,s-arr[k]);
+
+		if(p)
+
+		{
+
+			cout&#060;&#060;arr[k]&#060;&#060;&#034; &#034;;
+
+			return 1;
+
+		}
+
+	}
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>int fun(int arr[],int low,int high,int s)</p>
+<p>{</p>
+<p>	if(s==0)</p>
+<p>	   return 1;</p>
+<p>	if(s&lt;0)</p>
+<p>	   return 0;</p>
+<p>	if(low==high)</p>
+<p>	{</p>
+<p>		if(arr[low]==s)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[low]&lt;s)</p>
+<p>	   return fun(arr,low+1,high,s);</p>
+<p>	for(int k=low;k&lt;high;k++)</p>
+<p>	{</p>
+<p>		int p=fun(arr,k+1,high,s-arr[k]);</p>
+<p>		if(p)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[k]&lt;&lt;&quot; &quot;;</p>
+<p>			return 1;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-31058</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Fri, 27 Dec 2013 09:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-31058</guid>
+		<description><![CDATA[/*
+
+int fun(int arr[],int low,int high,int s)
+
+{
+
+	if(s==0)
+
+	   return 1;
+
+	if(s&#060;0)
+
+	   return 0;
+
+	if(low==high)
+
+	{
+
+		if(arr[low]==s)
+
+		{
+
+			cout&#060;&#060;arr[low]&#060;s)
+
+	   return fun(arr,low+1,high,s);
+
+	for(int k=low;k&#060;high;k++)
+
+	{
+
+		int p=fun(arr,k+1,high,s-arr[k]);
+
+		if(p)
+
+		{
+
+			cout&#060;&#060;arr[k]&#060;&#060;&#034; &#034;;
+
+			return 1;
+
+		}
+
+	}
+
+	return 0;
+
+}
+
+int main()
+
+{
+
+	int arr[]={15,33,21,9,4,13,7};
+
+	int n=sizeof(arr)/sizeof(arr[0]);
+
+	int s;cout&#060;&#062;s;
+
+	int k=fun(arr,0,n-1,s);
+
+	if(!k)
+
+	  cout&#060;&#060;&#034;path not exixts.n&#034;;
+
+	return 0;
+
+}int fun(int arr[],int low,int high,int s)
+
+{
+
+	if(s==0)
+
+	   return 1;
+
+	if(s&#060;0)
+
+	   return 0;
+
+	if(low==high)
+
+	{
+
+		if(arr[low]==s)
+
+		{
+
+			cout&#060;&#060;arr[low]&#060;s)
+
+	   return fun(arr,low+1,high,s);
+
+	for(int k=low;k&#060;high;k++)
+
+	{
+
+		int p=fun(arr,k+1,high,s-arr[k]);
+
+		if(p)
+
+		{
+
+			cout&#060;&#060;arr[k]&#060;&#060;&#034; &#034;;
+
+			return 1;
+
+		}
+
+	}
+
+	return 0;
+
+}
+
+int main()
+
+{
+
+	int arr[]={15,33,21,9,4,13,7};
+
+	int n=sizeof(arr)/sizeof(arr[0]);
+
+	int s;cout&#060;&#062;s;
+
+	int k=fun(arr,0,n-1,s);
+
+	if(!k)
+
+	  cout&#060;&#060;&#034;path not exixts.n&#034;;
+
+	return 0;
+
+}
+
+*/]]></description>
+		<content:encoded><![CDATA[<p>/*</p>
+<p>int fun(int arr[],int low,int high,int s)</p>
+<p>{</p>
+<p>	if(s==0)</p>
+<p>	   return 1;</p>
+<p>	if(s&lt;0)</p>
+<p>	   return 0;</p>
+<p>	if(low==high)</p>
+<p>	{</p>
+<p>		if(arr[low]==s)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[low]&lt;s)</p>
+<p>	   return fun(arr,low+1,high,s);</p>
+<p>	for(int k=low;k&lt;high;k++)</p>
+<p>	{</p>
+<p>		int p=fun(arr,k+1,high,s-arr[k]);</p>
+<p>		if(p)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[k]&lt;&lt;&quot; &quot;;</p>
+<p>			return 1;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	return 0;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int arr[]={15,33,21,9,4,13,7};</p>
+<p>	int n=sizeof(arr)/sizeof(arr[0]);</p>
+<p>	int s;cout&lt;&gt;s;</p>
+<p>	int k=fun(arr,0,n-1,s);</p>
+<p>	if(!k)</p>
+<p>	  cout&lt;&lt;&quot;path not exixts.n&quot;;</p>
+<p>	return 0;</p>
+<p>}int fun(int arr[],int low,int high,int s)</p>
+<p>{</p>
+<p>	if(s==0)</p>
+<p>	   return 1;</p>
+<p>	if(s&lt;0)</p>
+<p>	   return 0;</p>
+<p>	if(low==high)</p>
+<p>	{</p>
+<p>		if(arr[low]==s)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[low]&lt;s)</p>
+<p>	   return fun(arr,low+1,high,s);</p>
+<p>	for(int k=low;k&lt;high;k++)</p>
+<p>	{</p>
+<p>		int p=fun(arr,k+1,high,s-arr[k]);</p>
+<p>		if(p)</p>
+<p>		{</p>
+<p>			cout&lt;&lt;arr[k]&lt;&lt;&quot; &quot;;</p>
+<p>			return 1;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	return 0;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int arr[]={15,33,21,9,4,13,7};</p>
+<p>	int n=sizeof(arr)/sizeof(arr[0]);</p>
+<p>	int s;cout&lt;&gt;s;</p>
+<p>	int k=fun(arr,0,n-1,s);</p>
+<p>	if(!k)</p>
+<p>	  cout&lt;&lt;&quot;path not exixts.n&quot;;</p>
+<p>	return 0;</p>
+<p>}</p>
+<p>*/</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ajp</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-30318</link>
+		<dc:creator><![CDATA[Ajp]]></dc:creator>
+		<pubDate>Mon, 02 Dec 2013 09:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-30318</guid>
+		<description><![CDATA[private static void subSetSum(Integer[] arr, Integer[] tArr, int ts,
+                   int sum, int ite, int num) {
+      if (num == sum) {
+             printSubset(tArr, ts);
+      } else if (sum &#060; num) {
+             for (int i = ite; i  num) {
+            // Nothing do
+     }
+}]]></description>
+		<content:encoded><![CDATA[<p>private static void subSetSum(Integer[] arr, Integer[] tArr, int ts,<br />
+                   int sum, int ite, int num) {<br />
+      if (num == sum) {<br />
+             printSubset(tArr, ts);<br />
+      } else if (sum &lt; num) {<br />
+             for (int i = ite; i  num) {<br />
+            // Nothing do<br />
+     }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: C# Rules</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-29869</link>
+		<dc:creator><![CDATA[C# Rules]]></dc:creator>
+		<pubDate>Fri, 15 Nov 2013 23:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-29869</guid>
+		<description><![CDATA[/// Logic is sort numbers and use this logic. Below method assumes that number are already sorted.
+
+public void FindSubset(int sum, int tSum, int[] allInts,ArrayList posibbleset,int currentIndex)
+{
+if (sum == tSum) {PrintResult(posibbleset);}
+else if (sum &#062; tSum){
+for (int i = currentIndex; i &#060; allInts.Length; i++)
+{
+ArrayList ps = (ArrayList) posibbleset.Clone();
+if (tSum + allInts[i] &#060;= sum)
+{
+ps.Add(allInts[i]);
+FindSubset(sum, tSum + allInts[i], allInts, ps, (i + 1));
+}
+else break;
+}
+}
+}
+private void PrintResult(ArrayList possibleSet)
+{
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i &#060; possibleSet.Count; i++)
+{
+sb.Append(possibleSet[i]).Append(&#034;,&#034;);
+}
+Console.WriteLine(sb.ToString());
+}]]></description>
+		<content:encoded><![CDATA[<p>/// Logic is sort numbers and use this logic. Below method assumes that number are already sorted.</p>
+<p>public void FindSubset(int sum, int tSum, int[] allInts,ArrayList posibbleset,int currentIndex)<br />
+{<br />
+if (sum == tSum) {PrintResult(posibbleset);}<br />
+else if (sum &gt; tSum){<br />
+for (int i = currentIndex; i &lt; allInts.Length; i++)<br />
+{<br />
+ArrayList ps = (ArrayList) posibbleset.Clone();<br />
+if (tSum + allInts[i] &lt;= sum)<br />
+{<br />
+ps.Add(allInts[i]);<br />
+FindSubset(sum, tSum + allInts[i], allInts, ps, (i + 1));<br />
+}<br />
+else break;<br />
+}<br />
+}<br />
+}<br />
+private void PrintResult(ArrayList possibleSet)<br />
+{<br />
+StringBuilder sb = new StringBuilder();<br />
+for (int i = 0; i &lt; possibleSet.Count; i++)<br />
+{<br />
+sb.Append(possibleSet[i]).Append(&quot;,&quot;);<br />
+}<br />
+Console.WriteLine(sb.ToString());<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vijay Kumar</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-29702</link>
+		<dc:creator><![CDATA[Vijay Kumar]]></dc:creator>
+		<pubDate>Sun, 10 Nov 2013 02:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-29702</guid>
+		<description><![CDATA[public static void select(int i,int n,int k,String output) {
+
+		if(k==0 &#038;&#038; n==0){
+
+			count++;
+
+			System.out.println(output);
+
+			return;
+
+		}
+
+		if(i&#060;1 &#124;&#124; n&#060;0 &#124;&#124; k==0){return;}
+
+		select(i-1,n,k,output); // not choosing i
+
+		select(i-1,n-i,k-1,output+i +&#034; &#034;);
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>public static void select(int i,int n,int k,String output) {</p>
+<p>		if(k==0 &amp;&amp; n==0){</p>
+<p>			count++;</p>
+<p>			System.out.println(output);</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		if(i&lt;1 || n&lt;0 || k==0){return;}</p>
+<p>		select(i-1,n,k,output); // not choosing i</p>
+<p>		select(i-1,n-i,k-1,output+i +&quot; &quot;);</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-27212</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 31 Aug 2013 05:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-27212</guid>
+		<description><![CDATA[#include 
+
+#include 
+
+void sumOfSubsets(int x[],int w[],int n,int s,int k,int r,int m)
+
+{
+
+    int i;
+
+    x[k]=1;
+
+    if(s+w[k]==m)
+
+    {
+
+        printf(&quot;SOLUTION   :   &quot;);
+
+        for(i=1;ik)
+
+            {
+
+                x[i]=0;
+
+            }
+
+            printf(&quot;%d   &quot;,x[i]);
+
+        }
+
+        printf(&quot;n&quot;);
+
+    }
+
+    else if((s+w[k]+w[k+1])=m)&#038;&#038; (s+w[k+1]&#060;=m))
+
+    {
+
+        x[k]=0;
+
+        sumOfSubsets(x,w,n,s,k+1,r-w[k],m);
+
+    }
+
+}
+
+int main()
+
+{
+
+    int n;
+
+    printf(&#034;Enter the number of values   :    &#034;);
+
+    scanf(&#034;%d&#034;,&#038;n);
+
+    int x[n+1],w[n+1],i,r=0,m;
+
+    for(i=1;i&#060;=n;i++)
+
+    {
+
+        scanf(&#034;%d&#034;,&#038;w[i]);
+
+        x[i]=0;     // storing 0 or 1 depicting whether that element is included in tuple or not.
+
+        r+=w[i]; // r stores total sum
+
+    }
+
+    printf(&#034;Enter the value of sum  :  &#034;);
+
+    scanf(&#034;%d&#034;,&#038;m);  // sum whose subsets are to find out
+
+    if(m&#060;r)
+
+    sumOfSubsets(x,w,n,0,1,r,m);
+
+    else
+
+    printf(&#034;The sum of weights entered is less than m.n!!!! SO NO SOLUTION !!!!&#034;);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include </p>
+<p>#include </p>
+<p>void sumOfSubsets(int x[],int w[],int n,int s,int k,int r,int m)</p>
+<p>{</p>
+<p>    int i;</p>
+<p>    x[k]=1;</p>
+<p>    if(s+w[k]==m)</p>
+<p>    {</p>
+<p>        printf(&#8220;SOLUTION   :   &#8220;);</p>
+<p>        for(i=1;ik)</p>
+<p>            {</p>
+<p>                x[i]=0;</p>
+<p>            }</p>
+<p>            printf(&#8220;%d   &#8220;,x[i]);</p>
+<p>        }</p>
+<p>        printf(&#8220;n&#8221;);</p>
+<p>    }</p>
+<p>    else if((s+w[k]+w[k+1])=m)&amp;&amp; (s+w[k+1]&lt;=m))</p>
+<p>    {</p>
+<p>        x[k]=0;</p>
+<p>        sumOfSubsets(x,w,n,s,k+1,r-w[k],m);</p>
+<p>    }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    int n;</p>
+<p>    printf(&quot;Enter the number of values   :    &quot;);</p>
+<p>    scanf(&quot;%d&quot;,&amp;n);</p>
+<p>    int x[n+1],w[n+1],i,r=0,m;</p>
+<p>    for(i=1;i&lt;=n;i++)</p>
+<p>    {</p>
+<p>        scanf(&quot;%d&quot;,&amp;w[i]);</p>
+<p>        x[i]=0;     // storing 0 or 1 depicting whether that element is included in tuple or not.</p>
+<p>        r+=w[i]; // r stores total sum</p>
+<p>    }</p>
+<p>    printf(&quot;Enter the value of sum  :  &quot;);</p>
+<p>    scanf(&quot;%d&quot;,&amp;m);  // sum whose subsets are to find out</p>
+<p>    if(m&lt;r)</p>
+<p>    sumOfSubsets(x,w,n,0,1,r,m);</p>
+<p>    else</p>
+<p>    printf(&quot;The sum of weights entered is less than m.n!!!! SO NO SOLUTION !!!!&quot;);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/#comment-27211</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 31 Aug 2013 05:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14469#comment-27211</guid>
+		<description><![CDATA[I think this is a better solution if  we are not allowed to modify the array by sorting it.
+
+
+#include 
+#include 
+void sumOfSubsets(int x[],int w[],int n,int s,int k,int r,int m)
+{
+    int i;
+    x[k]=1;
+    if(s+w[k]==m)
+    {
+        printf(&quot;SOLUTION   :   &quot;);
+        for(i=1;ik)
+            {
+                x[i]=0;
+            }
+            printf(&quot;%d   &quot;,x[i]);
+        }
+        printf(&quot;n&quot;);
+    }
+    else if((s+w[k]+w[k+1])=m)&#038;&#038; (s+w[k+1]&#060;=m))
+    {
+        x[k]=0;
+        sumOfSubsets(x,w,n,s,k+1,r-w[k],m);
+    }
+}
+int main()
+{
+    int n;
+    printf(&#034;Enter the number of values   :    &#034;);
+    scanf(&#034;%d&#034;,&#038;n);
+    int x[n+1],w[n+1],i,r=0,m;
+    for(i=1;i&#060;=n;i++)
+    {
+        scanf(&#034;%d&#034;,&#038;w[i]);
+        x[i]=0;     // storing 0 or 1 depicting whether that element is included in tuple or not.
+        r+=w[i]; // r stores total sum
+    }
+    printf(&#034;Enter the value of sum  :  &#034;);
+    scanf(&#034;%d&#034;,&#038;m);  // sum whose subsets are to find out
+    if(m&#060;r)
+    sumOfSubsets(x,w,n,0,1,r,m);
+    else
+    printf(&#034;The sum of weights entered is less than m.n!!!! SO NO SOLUTION !!!!&#034;);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>I think this is a better solution if  we are not allowed to modify the array by sorting it.</p>
+<p>#include<br />
+#include<br />
+void sumOfSubsets(int x[],int w[],int n,int s,int k,int r,int m)<br />
+{<br />
+    int i;<br />
+    x[k]=1;<br />
+    if(s+w[k]==m)<br />
+    {<br />
+        printf(&#8220;SOLUTION   :   &#8220;);<br />
+        for(i=1;ik)<br />
+            {<br />
+                x[i]=0;<br />
+            }<br />
+            printf(&#8220;%d   &#8220;,x[i]);<br />
+        }<br />
+        printf(&#8220;n&#8221;);<br />
+    }<br />
+    else if((s+w[k]+w[k+1])=m)&amp;&amp; (s+w[k+1]&lt;=m))<br />
+    {<br />
+        x[k]=0;<br />
+        sumOfSubsets(x,w,n,s,k+1,r-w[k],m);<br />
+    }<br />
+}<br />
+int main()<br />
+{<br />
+    int n;<br />
+    printf(&quot;Enter the number of values   :    &quot;);<br />
+    scanf(&quot;%d&quot;,&amp;n);<br />
+    int x[n+1],w[n+1],i,r=0,m;<br />
+    for(i=1;i&lt;=n;i++)<br />
+    {<br />
+        scanf(&quot;%d&quot;,&amp;w[i]);<br />
+        x[i]=0;     // storing 0 or 1 depicting whether that element is included in tuple or not.<br />
+        r+=w[i]; // r stores total sum<br />
+    }<br />
+    printf(&quot;Enter the value of sum  :  &quot;);<br />
+    scanf(&quot;%d&quot;,&amp;m);  // sum whose subsets are to find out<br />
+    if(m&lt;r)<br />
+    sumOfSubsets(x,w,n,0,1,r,m);<br />
+    else<br />
+    printf(&quot;The sum of weights entered is less than m.n!!!! SO NO SOLUTION !!!!&quot;);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.045 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:12:00 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 6 (Min Cost Path)</title>
+	<atom:link href="http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: rahul</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-39950</link>
+		<dc:creator><![CDATA[rahul]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 08:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-39950</guid>
+		<description><![CDATA[Here in DP solution R and C both are 3,
+
+for (i = 1; i &#060;= m; i++)
+        tc[i][0] = tc[i-1][0] + cost[i][0];
+ 
+     /* Initialize first row of tc array */
+     for (j = 1; j &#060;= n; j++)
+        tc[0][j] = tc[0][j-1] + cost[0][j];
+
+
+
+in both loops i and j runs till i=3 and j=3,how it is acess cost[3][0] and cost[0][3]. why this not array bound,please explain.]]></description>
+		<content:encoded><![CDATA[<p>Here in DP solution R and C both are 3,</p>
+<p>for (i = 1; i &lt;= m; i++)<br />
+        tc[i][0] = tc[i-1][0] + cost[i][0];</p>
+<p>     /* Initialize first row of tc array */<br />
+     for (j = 1; j &lt;= n; j++)<br />
+        tc[0][j] = tc[0][j-1] + cost[0][j];</p>
+<p>in both loops i and j runs till i=3 and j=3,how it is acess cost[3][0] and cost[0][3]. why this not array bound,please explain.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: epslon</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-37631</link>
+		<dc:creator><![CDATA[epslon]]></dc:creator>
+		<pubDate>Wed, 04 Jun 2014 21:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-37631</guid>
+		<description><![CDATA[Here is a solution Using Memoization
+
+#include
+#define M 3
+#define N 3
+#define I 999
+int table[M][N];
+
+int min(int a,int b,int c)
+{
+    if(a==I &#038;&#038; b==I &#038;&#038; c==I)
+        return 0;
+    else
+    {
+        if(a&#060;=b)
+        {
+            if(a&#060;=c)
+                return a;
+            else
+                return c;
+        }
+        else
+        {
+            if(b&#060;=c)
+                return b;
+            else
+                return c;
+        }
+    }
+}
+
+int minCost(int cost[M][N],int i,int j,int p,int q)
+{
+    int right,down,diagonal;
+
+    if(table[i][j]!=-1)
+        return table[i][j];
+    else
+{
+        printf(&#034;ncalled for i=%d  &#038;&#038;  j=%d&#034;,i,j);
+
+        printf(&#034;ncalled for i=%d  &#038;&#038;  j=%d&#034;,i,j);
+        if(i+1&#060;=p)
+            down=minCost(cost,i+1,j,p,q);
+        else
+            down=I;
+        if(j+1&#060;=q)
+            right=minCost(cost,i,j+1,p,q);
+        else
+            right=I;
+        if(i+1&#060;=p&#038;&#038;j+1&#060;=q)
+            diagonal=minCost(cost,i+1,j+1,p,q);
+        else
+            diagonal=I;
+        table[i][j]= (cost[i][j]+min(down,right,diagonal));
+        return table[i][j];
+    }
+}
+
+int main()
+{
+//    int cost[M][N]={{1,2,3,5},{4,4,1,10},{1,2,8,12},{1,1,1,1}};
+    int cost[M][N]={{1,2,3},{4,8,2},{1,5,3}};
+    int i=0,j=0;
+    int p=2,q=2;
+
+    for(i=0;i&#060;M;i++)
+        for(j=0;j&#060;N;j++)
+            table[i][j]=-1;
+    i=0;
+    j=0;
+    printf(&#034;nnminimum cost = %dn&#034;,minCost(cost,i,j,p,q));
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is a solution Using Memoization</p>
+<p>#include<br />
+#define M 3<br />
+#define N 3<br />
+#define I 999<br />
+int table[M][N];</p>
+<p>int min(int a,int b,int c)<br />
+{<br />
+    if(a==I &amp;&amp; b==I &amp;&amp; c==I)<br />
+        return 0;<br />
+    else<br />
+    {<br />
+        if(a&lt;=b)<br />
+        {<br />
+            if(a&lt;=c)<br />
+                return a;<br />
+            else<br />
+                return c;<br />
+        }<br />
+        else<br />
+        {<br />
+            if(b&lt;=c)<br />
+                return b;<br />
+            else<br />
+                return c;<br />
+        }<br />
+    }<br />
+}</p>
+<p>int minCost(int cost[M][N],int i,int j,int p,int q)<br />
+{<br />
+    int right,down,diagonal;</p>
+<p>    if(table[i][j]!=-1)<br />
+        return table[i][j];<br />
+    else<br />
+{<br />
+        printf(&quot;ncalled for i=%d  &amp;&amp;  j=%d&quot;,i,j);</p>
+<p>        printf(&quot;ncalled for i=%d  &amp;&amp;  j=%d&quot;,i,j);<br />
+        if(i+1&lt;=p)<br />
+            down=minCost(cost,i+1,j,p,q);<br />
+        else<br />
+            down=I;<br />
+        if(j+1&lt;=q)<br />
+            right=minCost(cost,i,j+1,p,q);<br />
+        else<br />
+            right=I;<br />
+        if(i+1&lt;=p&amp;&amp;j+1&lt;=q)<br />
+            diagonal=minCost(cost,i+1,j+1,p,q);<br />
+        else<br />
+            diagonal=I;<br />
+        table[i][j]= (cost[i][j]+min(down,right,diagonal));<br />
+        return table[i][j];<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+//    int cost[M][N]={{1,2,3,5},{4,4,1,10},{1,2,8,12},{1,1,1,1}};<br />
+    int cost[M][N]={{1,2,3},{4,8,2},{1,5,3}};<br />
+    int i=0,j=0;<br />
+    int p=2,q=2;</p>
+<p>    for(i=0;i&lt;M;i++)<br />
+        for(j=0;j&lt;N;j++)<br />
+            table[i][j]=-1;<br />
+    i=0;<br />
+    j=0;<br />
+    printf(&quot;nnminimum cost = %dn&quot;,minCost(cost,i,j,p,q));<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mukesh M</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-36885</link>
+		<dc:creator><![CDATA[Mukesh M]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 20:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-36885</guid>
+		<description><![CDATA[Can you explain how getting min cost via dijkstra is going to be complex considering it is going to follow same way.]]></description>
+		<content:encoded><![CDATA[<p>Can you explain how getting min cost via dijkstra is going to be complex considering it is going to follow same way.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mukesh M</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-36884</link>
+		<dc:creator><![CDATA[Mukesh M]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 20:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-36884</guid>
+		<description><![CDATA[Considering (0,0) as source A and (m,n) as destination B given problems is similar to any shortest path algorithm for A to B. DP can be used to solve in case all directions are unblocked to traverse with loop coming only in case of negative weights.]]></description>
+		<content:encoded><![CDATA[<p>Considering (0,0) as source A and (m,n) as destination B given problems is similar to any shortest path algorithm for A to B. DP can be used to solve in case all directions are unblocked to traverse with loop coming only in case of negative weights.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lakshay</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-35753</link>
+		<dc:creator><![CDATA[lakshay]]></dc:creator>
+		<pubDate>Wed, 07 May 2014 12:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-35753</guid>
+		<description><![CDATA[how about moving from 4-&#062;1-&#062;1-&#062;3 then the asnwer should be 9. i think thats allowed?]]></description>
+		<content:encoded><![CDATA[<p>how about moving from 4-&gt;1-&gt;1-&gt;3 then the asnwer should be 9. i think thats allowed?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ekta Goel</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-35103</link>
+		<dc:creator><![CDATA[Ekta Goel]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 10:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-35103</guid>
+		<description><![CDATA[I did this way: http://ideone.com/i3AtVG]]></description>
+		<content:encoded><![CDATA[<p>I did this way: <a href="http://ideone.com/i3AtVG" rel="nofollow">http://ideone.com/i3AtVG</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ekta Goel</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-35100</link>
+		<dc:creator><![CDATA[Ekta Goel]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 08:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-35100</guid>
+		<description><![CDATA[In order to print the path also, we can keep the track of which element returned minimum out of three using arrows and then backtrack from cell (m,n) .. (much the same way it is done in longest common subsequence problem). But is there any way out to do without this..?]]></description>
+		<content:encoded><![CDATA[<p>In order to print the path also, we can keep the track of which element returned minimum out of three using arrows and then backtrack from cell (m,n) .. (much the same way it is done in longest common subsequence problem). But is there any way out to do without this..?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Swarup Mallick</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-33295</link>
+		<dc:creator><![CDATA[Swarup Mallick]]></dc:creator>
+		<pubDate>Sat, 08 Mar 2014 13:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-33295</guid>
+		<description><![CDATA[Here in the naive approach there is a condition like
+
+
+else if (m == 0 &#038;&#038; n == 0)
+      return cost[m][n];
+
+
+It should be the sum of that row or column.
+
+
+If I will enter only one row or one column then the mentioned code will return the last element which is wrong.
+
+
+Please correct me if I am wrong ?]]></description>
+		<content:encoded><![CDATA[<p>Here in the naive approach there is a condition like</p>
+<p>else if (m == 0 &amp;&amp; n == 0)<br />
+      return cost[m][n];</p>
+<p>It should be the sum of that row or column.</p>
+<p>If I will enter only one row or one column then the mentioned code will return the last element which is wrong.</p>
+<p>Please correct me if I am wrong ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Paparao Veeragandham</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-32907</link>
+		<dc:creator><![CDATA[Paparao Veeragandham]]></dc:creator>
+		<pubDate>Sun, 23 Feb 2014 19:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-32907</guid>
+		<description><![CDATA[DP method does not work If you are allowed to Traverse all possible paths . Because it will be Infinity loop. All DP  problems will be map to Short path from source to Dest. In above case  it was not possible.]]></description>
+		<content:encoded><![CDATA[<p>DP method does not work If you are allowed to Traverse all possible paths . Because it will be Infinity loop. All DP  problems will be map to Short path from source to Dest. In above case  it was not possible.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: dmr</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-31571</link>
+		<dc:creator><![CDATA[dmr]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 20:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-31571</guid>
+		<description><![CDATA[If we were allowed to traverse in all possible directions rather than the three allowed here, could we have still used DP ? Personally I think we can as still we would have optimal and overlapping subproblems.]]></description>
+		<content:encoded><![CDATA[<p>If we were allowed to traverse in all possible directions rather than the three allowed here, could we have still used DP ? Personally I think we can as still we would have optimal and overlapping subproblems.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Animesh Pratap Singh Sikarwar</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/#comment-30956</link>
+		<dc:creator><![CDATA[Animesh Pratap Singh Sikarwar]]></dc:creator>
+		<pubDate>Mon, 23 Dec 2013 11:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14943#comment-30956</guid>
+		<description><![CDATA[ohh yes....!!]]></description>
+		<content:encoded><![CDATA[<p>ohh yes&#8230;.!!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.081 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:08:59 -->
+
+<!-- Compression = gzip -->

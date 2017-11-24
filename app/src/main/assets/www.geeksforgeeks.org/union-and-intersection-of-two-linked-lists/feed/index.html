@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Union and Intersection of two Linked Lists</title>
+	<atom:link href="http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-38564</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 13:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-38564</guid>
+		<description><![CDATA[We are assigning the heads of the lists to temporary pointers in order to traverse the list, yet preserving the heads of the list .]]></description>
+		<content:encoded><![CDATA[<p>We are assigning the heads of the lists to temporary pointers in order to traverse the list, yet preserving the heads of the list .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pradeep kumar</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-38559</link>
+		<dc:creator><![CDATA[pradeep kumar]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 12:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-38559</guid>
+		<description><![CDATA[why do we use these type of assignment in many functions:-
+
+struct node *t1 = head1, *t2 = head2;
+
+And we start use t1  and  t2..........plz tell me.......]]></description>
+		<content:encoded><![CDATA[<p>why do we use these type of assignment in many functions:-</p>
+<p>struct node *t1 = head1, *t2 = head2;</p>
+<p>And we start use t1  and  t2&#8230;&#8230;&#8230;.plz tell me&#8230;&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ashish jaiswal</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-35780</link>
+		<dc:creator><![CDATA[ashish jaiswal]]></dc:creator>
+		<pubDate>Thu, 08 May 2014 07:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-35780</guid>
+		<description><![CDATA[#include
+
+#include
+
+struct node;
+
+void push(struct node**, int);
+
+void print(struct node*);
+
+struct node* getunion(struct node*, struct node*);
+
+struct node* getintersect(struct node*, struct node*);
+
+typedef struct node
+
+{
+
+int data;   
+
+struct node*next;
+
+}Node;
+
+int main()
+
+{
+
+ Node*head1=NULL;
+
+ Node*head2=NULL;
+
+ printf(&quot;Linklist insertion of nodesnn&quot;);
+
+ push(&#038;head1,7);
+
+ push(&#038;head1,2);
+
+ push(&#038;head1,4);
+
+ 
+
+ print(head1);
+
+ push(&#038;head2,1);
+
+ push(&#038;head2,9);
+
+ push(&#038;head2,4);
+
+ push(&#038;head2,2);
+
+ push(&#038;head2,8);
+
+ push(&#038;head2,11);
+
+ push(&#038;head2,12);
+
+ push(&#038;head2,7);
+
+ print(head2);
+
+ Node* res1=getunion(head1, head2);
+
+ print(res1);
+
+Node*res2=getintersect(head1, head2);
+
+print(res2);
+
+ return 0;
+
+}
+
+Node* getunion(Node*head1, Node*head2)
+
+{
+
+    Node*result=NULL;
+
+    Node*a1=head1,*a2=head2;
+
+    
+
+    while(a1)
+
+    {
+
+        push(&#038;result,a1-&#062;data);
+
+        
+
+        a1=a1-&#062;next;
+
+    }
+
+    a1=head1;
+
+    while(a2)
+
+    {
+
+        while(a1)
+
+        {
+
+            if(a1-&#062;data==a2-&#062;data)
+
+            break;
+
+            else
+
+            {
+
+                a1=a1-&#062;next;
+
+            
+
+            }
+
+            if(a1==NULL)
+
+            push(&#038;result,a2-&#062;data);
+
+            
+
+        }
+
+        a2=a2-&#062;next;
+
+        a1=head1;
+
+        
+
+        
+
+    }
+
+    return result;
+
+}
+
+Node* getintersect(Node* head1, Node* head2)
+
+{
+
+    Node*result=NULL;
+
+    Node* a1=head1,*a2=head2;
+
+    
+
+   
+
+     while(a1)
+
+    {
+
+        while(a2)
+
+        {
+
+            if(a1-&#062;data==a2-&#062;data)
+
+            {
+
+                push(&#038;result, a2-&#062;data);
+
+                a2=a2-&#062;next;
+
+                a1=head1;
+
+                
+
+            }
+
+            
+
+            
+
+            else
+
+            {
+
+                a1=a1-&#062;next;
+
+            
+
+            }
+
+            if(a1==NULL)
+
+            {
+
+            a2=a2-&#062;next;
+
+            a1=head1;
+
+            }
+
+        }
+
+        if(a2==NULL)
+
+        break;
+
+        
+
+        
+
+        
+
+    }
+
+    return result;
+
+    
+
+    
+
+    
+
+}
+
+void push(Node**headf,int d)
+
+{
+
+    Node*newnode=(Node*)malloc(sizeof(Node));
+
+    newnode-&#062;data=d;
+
+    newnode-&#062;next=*headf;
+
+    *headf=newnode;
+
+    return;
+
+    
+
+}
+
+void deleteany(Node*headf)
+
+{
+
+  
+
+  Node*prev=headf;
+
+  prev-&#062;data=prev-&#062;next-&#062;data;
+
+  prev-&#062;next=prev-&#062;next-&#062;next;
+
+  free(prev);
+
+  
+
+    
+
+}
+
+void print(Node*headf)
+
+{
+
+    
+
+    while(headf)
+
+    {
+
+        printf(&quot;%d-&#062;&quot;,headf-&#062;data);
+
+        headf=headf-&#062;next;
+
+    }
+
+    printf(&quot;NULLn&quot;);
+
+    return;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>#include</p>
+<p>struct node;</p>
+<p>void push(struct node**, int);</p>
+<p>void print(struct node*);</p>
+<p>struct node* getunion(struct node*, struct node*);</p>
+<p>struct node* getintersect(struct node*, struct node*);</p>
+<p>typedef struct node</p>
+<p>{</p>
+<p>int data;   </p>
+<p>struct node*next;</p>
+<p>}Node;</p>
+<p>int main()</p>
+<p>{</p>
+<p> Node*head1=NULL;</p>
+<p> Node*head2=NULL;</p>
+<p> printf(&#8220;Linklist insertion of nodesnn&#8221;);</p>
+<p> push(&amp;head1,7);</p>
+<p> push(&amp;head1,2);</p>
+<p> push(&amp;head1,4);</p>
+<p> print(head1);</p>
+<p> push(&amp;head2,1);</p>
+<p> push(&amp;head2,9);</p>
+<p> push(&amp;head2,4);</p>
+<p> push(&amp;head2,2);</p>
+<p> push(&amp;head2,8);</p>
+<p> push(&amp;head2,11);</p>
+<p> push(&amp;head2,12);</p>
+<p> push(&amp;head2,7);</p>
+<p> print(head2);</p>
+<p> Node* res1=getunion(head1, head2);</p>
+<p> print(res1);</p>
+<p>Node*res2=getintersect(head1, head2);</p>
+<p>print(res2);</p>
+<p> return 0;</p>
+<p>}</p>
+<p>Node* getunion(Node*head1, Node*head2)</p>
+<p>{</p>
+<p>    Node*result=NULL;</p>
+<p>    Node*a1=head1,*a2=head2;</p>
+<p>    while(a1)</p>
+<p>    {</p>
+<p>        push(&amp;result,a1-&gt;data);</p>
+<p>        a1=a1-&gt;next;</p>
+<p>    }</p>
+<p>    a1=head1;</p>
+<p>    while(a2)</p>
+<p>    {</p>
+<p>        while(a1)</p>
+<p>        {</p>
+<p>            if(a1-&gt;data==a2-&gt;data)</p>
+<p>            break;</p>
+<p>            else</p>
+<p>            {</p>
+<p>                a1=a1-&gt;next;</p>
+<p>            }</p>
+<p>            if(a1==NULL)</p>
+<p>            push(&amp;result,a2-&gt;data);</p>
+<p>        }</p>
+<p>        a2=a2-&gt;next;</p>
+<p>        a1=head1;</p>
+<p>    }</p>
+<p>    return result;</p>
+<p>}</p>
+<p>Node* getintersect(Node* head1, Node* head2)</p>
+<p>{</p>
+<p>    Node*result=NULL;</p>
+<p>    Node* a1=head1,*a2=head2;</p>
+<p>     while(a1)</p>
+<p>    {</p>
+<p>        while(a2)</p>
+<p>        {</p>
+<p>            if(a1-&gt;data==a2-&gt;data)</p>
+<p>            {</p>
+<p>                push(&amp;result, a2-&gt;data);</p>
+<p>                a2=a2-&gt;next;</p>
+<p>                a1=head1;</p>
+<p>            }</p>
+<p>            else</p>
+<p>            {</p>
+<p>                a1=a1-&gt;next;</p>
+<p>            }</p>
+<p>            if(a1==NULL)</p>
+<p>            {</p>
+<p>            a2=a2-&gt;next;</p>
+<p>            a1=head1;</p>
+<p>            }</p>
+<p>        }</p>
+<p>        if(a2==NULL)</p>
+<p>        break;</p>
+<p>    }</p>
+<p>    return result;</p>
+<p>}</p>
+<p>void push(Node**headf,int d)</p>
+<p>{</p>
+<p>    Node*newnode=(Node*)malloc(sizeof(Node));</p>
+<p>    newnode-&gt;data=d;</p>
+<p>    newnode-&gt;next=*headf;</p>
+<p>    *headf=newnode;</p>
+<p>    return;</p>
+<p>}</p>
+<p>void deleteany(Node*headf)</p>
+<p>{</p>
+<p>  Node*prev=headf;</p>
+<p>  prev-&gt;data=prev-&gt;next-&gt;data;</p>
+<p>  prev-&gt;next=prev-&gt;next-&gt;next;</p>
+<p>  free(prev);</p>
+<p>}</p>
+<p>void print(Node*headf)</p>
+<p>{</p>
+<p>    while(headf)</p>
+<p>    {</p>
+<p>        printf(&#8220;%d-&gt;&#8221;,headf-&gt;data);</p>
+<p>        headf=headf-&gt;next;</p>
+<p>    }</p>
+<p>    printf(&#8220;NULLn&#8221;);</p>
+<p>    return;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: eragon</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-33815</link>
+		<dc:creator><![CDATA[eragon]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 20:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-33815</guid>
+		<description><![CDATA[And how do you do a logn binary search on a singly linked list?]]></description>
+		<content:encoded><![CDATA[<p>And how do you do a logn binary search on a singly linked list?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nanda</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-32571</link>
+		<dc:creator><![CDATA[nanda]]></dc:creator>
+		<pubDate>Sat, 15 Feb 2014 20:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-32571</guid>
+		<description><![CDATA[No. Intersection is quite clear as it says two different traversals.
+
+
+Union would be O(m+n), it is like traversing both the lists at the same time with in one single loop, the loop condition would be to check if both are not nulls.
+
+
+As an alternative, you can traverse the first list, put each in a hash table and output all of them. And then traverse the second and output the ones not present in the first.]]></description>
+		<content:encoded><![CDATA[<p>No. Intersection is quite clear as it says two different traversals.</p>
+<p>Union would be O(m+n), it is like traversing both the lists at the same time with in one single loop, the loop condition would be to check if both are not nulls.</p>
+<p>As an alternative, you can traverse the first list, put each in a hash table and output all of them. And then traverse the second and output the ones not present in the first.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Dagar</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-32372</link>
+		<dc:creator><![CDATA[Himanshu Dagar]]></dc:creator>
+		<pubDate>Sun, 09 Feb 2014 08:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-32372</guid>
+		<description><![CDATA[In the third method of Using Hash Table what will be its complexity??
+Will it be O(m+n) or O(mn)??
+
+
+If  searching for an element in hash table ,it will take O(n) time then surely it will be done in O(mn) .So is it true??]]></description>
+		<content:encoded><![CDATA[<p>In the third method of Using Hash Table what will be its complexity??<br />
+Will it be O(m+n) or O(mn)??</p>
+<p>If  searching for an element in hash table ,it will take O(n) time then surely it will be done in O(mn) .So is it true??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nishanth</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-28966</link>
+		<dc:creator><![CDATA[Nishanth]]></dc:creator>
+		<pubDate>Wed, 16 Oct 2013 18:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-28966</guid>
+		<description><![CDATA[how to hash when negative integers are there?? what ll be the size of the hash array??]]></description>
+		<content:encoded><![CDATA[<p>how to hash when negative integers are there?? what ll be the size of the hash array??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nishanth</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-28965</link>
+		<dc:creator><![CDATA[Nishanth]]></dc:creator>
+		<pubDate>Wed, 16 Oct 2013 18:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-28965</guid>
+		<description><![CDATA[what will be the size of hash array? that is , the  integer can be -ve too right?? then how can we hash it??]]></description>
+		<content:encoded><![CDATA[<p>what will be the size of hash array? that is , the  integer can be -ve too right?? then how can we hash it??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gupta</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-27409</link>
+		<dc:creator><![CDATA[Gupta]]></dc:creator>
+		<pubDate>Sat, 07 Sep 2013 10:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-27409</guid>
+		<description><![CDATA[I think it is also asymptotically better than above merge sort method... coz we will select the list to sort which has less number of nodes, by checking countnodes1 and countnodes2... so time complexity will become O((m+n)logn), where n&#060;m, which is better than O(mlogm+nlogn). please correct me if i am wrong..]]></description>
+		<content:encoded><![CDATA[<p>I think it is also asymptotically better than above merge sort method&#8230; coz we will select the list to sort which has less number of nodes, by checking countnodes1 and countnodes2&#8230; so time complexity will become O((m+n)logn), where n&lt;m, which is better than O(mlogm+nlogn). please correct me if i am wrong..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: numid</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-20880</link>
+		<dc:creator><![CDATA[numid]]></dc:creator>
+		<pubDate>Sat, 29 Jun 2013 10:24:23 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-20880</guid>
+		<description><![CDATA[good one!]]></description>
+		<content:encoded><![CDATA[<p>good one!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sumit Poddar</title>
+		<link>http://www.geeksforgeeks.org/union-and-intersection-of-two-linked-lists/#comment-15384</link>
+		<dc:creator><![CDATA[Sumit Poddar]]></dc:creator>
+		<pubDate>Mon, 18 Feb 2013 17:23:09 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18615#comment-15384</guid>
+		<description><![CDATA[I think there is one more method which will take time complexity of O(n) where n is the number of elements in the list which has maximum number of elements. Below is the code in Java.
+
+
+&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+public class SplitList {
+
+    public static void main(String[] args) {
+        Node n1 = new Node(20, null);
+        Node n2 = new Node(4, n1);
+        Node n3 = new Node(15, n2);
+        Node n = new Node(10, n3);
+
+        Node m1 = new Node(10, null);
+        Node m2 = new Node(2, m1);
+        Node m3 = new Node(4, m2);
+        Node m = new Node(8, m3);
+
+        split(n, m);
+    }
+
+    private static void split(Node n, Node m) {
+        Node union = null, inter = null;
+        boolean[] itemList1 = new boolean[256];
+        Node nTemp = n;
+        while (nTemp != null) {
+            itemList1[nTemp.data] = true;
+            nTemp = nTemp.next;
+        }
+
+        while (m != null) {
+            if (itemList1[m.data]) {
+                inter = insertNodeHead(inter, m);
+            } else {
+                union = insertNodeHead(union, m);
+            }
+            m = m.next;
+        }
+
+        while (n != null) {
+            union = insertNodeHead(union, n);
+            n = n.next;
+        }
+
+    }
+
+    private static Node insertNodeHead(Node node, Node m) {
+        if (node == null) {
+            return new Node(m.data, null);
+        } else {
+            return new Node(m.data, node);
+        }
+
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data, Node next) {
+        super();
+        this.data = data;
+        this.next = next;
+    }
+
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+Please let me know if I am wrong.]]></description>
+		<content:encoded><![CDATA[<p>I think there is one more method which will take time complexity of O(n) where n is the number of elements in the list which has maximum number of elements. Below is the code in Java.</p>
+<pre> <code language="Java">
+public class SplitList {
+
+    public static void main(String[] args) {
+        Node n1 = new Node(20, null);
+        Node n2 = new Node(4, n1);
+        Node n3 = new Node(15, n2);
+        Node n = new Node(10, n3);
+
+        Node m1 = new Node(10, null);
+        Node m2 = new Node(2, m1);
+        Node m3 = new Node(4, m2);
+        Node m = new Node(8, m3);
+
+        split(n, m);
+    }
+
+    private static void split(Node n, Node m) {
+        Node union = null, inter = null;
+        boolean[] itemList1 = new boolean[256];
+        Node nTemp = n;
+        while (nTemp != null) {
+            itemList1[nTemp.data] = true;
+            nTemp = nTemp.next;
+        }
+
+        while (m != null) {
+            if (itemList1[m.data]) {
+                inter = insertNodeHead(inter, m);
+            } else {
+                union = insertNodeHead(union, m);
+            }
+            m = m.next;
+        }
+
+        while (n != null) {
+            union = insertNodeHead(union, n);
+            n = n.next;
+        }
+
+    }
+
+    private static Node insertNodeHead(Node node, Node m) {
+        if (node == null) {
+            return new Node(m.data, null);
+        } else {
+            return new Node(m.data, node);
+        }
+
+    }
+}
+
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data, Node next) {
+        super();
+        this.data = data;
+        this.next = next;
+    }
+
+}
+</code> </pre>
+<p>Please let me know if I am wrong.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:07:15 -->
+
+<!-- Compression = gzip -->

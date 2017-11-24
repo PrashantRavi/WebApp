@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Write one line functions for strcat() and strcmp()</title>
+	<atom:link href="http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: rajesh PS</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-39887</link>
+		<dc:creator><![CDATA[rajesh PS]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 15:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-39887</guid>
+		<description><![CDATA[its showing some error in sting copying when i used to compile in visual studio.. can any one clarify my doubts... and the error it show is ERROR: &#039;strcpy&#039;: This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for detail
+
+and this is the program 
+
+#include
+
+#include
+
+int main()
+
+{
+
+	struct employee
+
+	{
+
+		char name[10];
+
+		int age;
+
+		float salary;
+
+	};
+
+	struct employee e1={&quot;rajesh&quot;,19,25000.50};
+
+	struct employee e2,e3;
+
+	strcpy_s(e2.name,e1.name);
+
+	e2.age=e1.age;
+
+	e2.salary=e1.salary;
+
+	e3=e2;
+
+	printf(&quot;n %c%d%f&quot;,e1.name,e1.age,e1.salary);
+
+	printf(&quot;n %c%d%f&quot;,e2.name,e2.age,e2.salary);
+
+	printf(&quot;n %c%d%f&quot;,e3.name,e3.age,e3.salary);
+
+	return 0;
+
+}
+
+ but even though the it has run time error in VISUAL STUDIO]]></description>
+		<content:encoded><![CDATA[<p>its showing some error in sting copying when i used to compile in visual studio.. can any one clarify my doubts&#8230; and the error it show is ERROR: &#8216;strcpy&#8217;: This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for detail</p>
+<p>and this is the program </p>
+<p>#include</p>
+<p>#include</p>
+<p>int main()</p>
+<p>{</p>
+<p>	struct employee</p>
+<p>	{</p>
+<p>		char name[10];</p>
+<p>		int age;</p>
+<p>		float salary;</p>
+<p>	};</p>
+<p>	struct employee e1={&#8220;rajesh&#8221;,19,25000.50};</p>
+<p>	struct employee e2,e3;</p>
+<p>	strcpy_s(e2.name,e1.name);</p>
+<p>	e2.age=e1.age;</p>
+<p>	e2.salary=e1.salary;</p>
+<p>	e3=e2;</p>
+<p>	printf(&#8220;n %c%d%f&#8221;,e1.name,e1.age,e1.salary);</p>
+<p>	printf(&#8220;n %c%d%f&#8221;,e2.name,e2.age,e2.salary);</p>
+<p>	printf(&#8220;n %c%d%f&#8221;,e3.name,e3.age,e3.salary);</p>
+<p>	return 0;</p>
+<p>}</p>
+<p> but even though the it has run time error in VISUAL STUDIO</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Debabrata</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-34560</link>
+		<dc:creator><![CDATA[Debabrata]]></dc:creator>
+		<pubDate>Thu, 10 Apr 2014 17:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-34560</guid>
+		<description><![CDATA[I think my_strcat having problem. there is a possibility of getting garbage value or segfault .. because after (*dest++ = *src++) the dest  is no more ending with &#039;&#039; so that the control will enter to first recursion call instead 2nd.
+
+The problem can be reproduce if we have main as
+
+ char arr[15];
+    char arr1[15];
+    scanf(&quot;%s&quot;,&#038;arr);
+    scanf(&quot;%s&quot;,&#038;arr1);
+    mystrcat(arr,arr1);
+
+the correct implementation should be
+
+void mystrcat(char *s1,char *s2){
+    (*s1 != &#039;&#039;)?mystrcat(++s1,s2):(*s1++ = *s2++)?(*s1=&#039;&#039;)?1:mystrcat(s1,s2):0; 
+}]]></description>
+		<content:encoded><![CDATA[<p>I think my_strcat having problem. there is a possibility of getting garbage value or segfault .. because after (*dest++ = *src++) the dest  is no more ending with &#8221; so that the control will enter to first recursion call instead 2nd.</p>
+<p>The problem can be reproduce if we have main as</p>
+<p> char arr[15];<br />
+    char arr1[15];<br />
+    scanf(&#8220;%s&#8221;,&amp;arr);<br />
+    scanf(&#8220;%s&#8221;,&amp;arr1);<br />
+    mystrcat(arr,arr1);</p>
+<p>the correct implementation should be</p>
+<p>void mystrcat(char *s1,char *s2){<br />
+    (*s1 != &#8221;)?mystrcat(++s1,s2):(*s1++ = *s2++)?(*s1=&#8221;)?1:mystrcat(s1,s2):0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nishanth</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-28621</link>
+		<dc:creator><![CDATA[nishanth]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 09:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-28621</guid>
+		<description><![CDATA[code for string copy
+int my_strcpy(char *a,char *b)
+
+{
+
+	(*b++=*a++)?my_strcpy(a,b):0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>code for string copy<br />
+int my_strcpy(char *a,char *b)</p>
+<p>{</p>
+<p>	(*b++=*a++)?my_strcpy(a,b):0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Javed</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-20908</link>
+		<dc:creator><![CDATA[Javed]]></dc:creator>
+		<pubDate>Sat, 29 Jun 2013 18:58:35 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-20908</guid>
+		<description><![CDATA[It seems there is some problem with my_strcat() function. Here is modified working code.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;cstdio&#062;
+int my_strcat(char *dest, char *src)
+{
+  (*dest)? my_strcat(++dest, src): (*dest++ = *src++)&#038;&#038;my_strcat(dest, src);
+}
+ 
+/* driver function to test above function */
+int main()
+{
+  char dest[100] = &#034;my name&#034;;
+  char src[] = &#034; is khan&#034;;
+  my_strcat(dest, src);
+  printf(&#034;%s\n&#034;, dest);
+}   
+
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>It seems there is some problem with my_strcat() function. Here is modified working code.</p>
+<pre> <code language="C">
+#include&lt;cstdio&gt;
+int my_strcat(char *dest, char *src)
+{
+  (*dest)? my_strcat(++dest, src): (*dest++ = *src++)&amp;&amp;my_strcat(dest, src);
+}
+ 
+/* driver function to test above function */
+int main()
+{
+  char dest[100] = &quot;my name&quot;;
+  char src[] = &quot; is khan&quot;;
+  my_strcat(dest, src);
+  printf(&quot;%s\n&quot;, dest);
+}   
+
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jia</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-5594</link>
+		<dc:creator><![CDATA[jia]]></dc:creator>
+		<pubDate>Tue, 04 Oct 2011 18:36:47 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-5594</guid>
+		<description><![CDATA[@nhlsm: you are right......]]></description>
+		<content:encoded><![CDATA[<p>@nhlsm: you are right&#8230;&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prathiba</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-4402</link>
+		<dc:creator><![CDATA[prathiba]]></dc:creator>
+		<pubDate>Wed, 22 Jun 2011 07:02:50 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-4402</guid>
+		<description><![CDATA[int my_strcmp( char *a, char *b)
+{
+    if (*a == *b)
+    {
+        if (*a == &#039;&#039;)
+        {
+            return 0;
+        } else {
+            return(my_strcmp(++a, ++b));
+        }
+    } else {
+        return 1;
+    }
+}
+the above should be corrected with return(my_strcmp(++a,++b)) else in case of recursive functions, the return value frm the innermost function on stack doesnt reach main.]]></description>
+		<content:encoded><![CDATA[<p>int my_strcmp( char *a, char *b)<br />
+{<br />
+    if (*a == *b)<br />
+    {<br />
+        if (*a == &#8221;)<br />
+        {<br />
+            return 0;<br />
+        } else {<br />
+            return(my_strcmp(++a, ++b));<br />
+        }<br />
+    } else {<br />
+        return 1;<br />
+    }<br />
+}<br />
+the above should be corrected with return(my_strcmp(++a,++b)) else in case of recursive functions, the return value frm the innermost function on stack doesnt reach main.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nhlsm</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-2418</link>
+		<dc:creator><![CDATA[nhlsm]]></dc:creator>
+		<pubDate>Wed, 03 Nov 2010 13:22:18 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-2418</guid>
+		<description><![CDATA[my_strcat() has contraint that 1st arg(=dest) must be filled with NULL. (ex. &#039;geeksfor...&#039;)
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/*
+f=0 : searching NULL step
+f=1 : copying step
+*/
+void my_strcat2(char *dest, char *src, char f=0)
+{
+  (!f &#038;&#038; *dest)? my_strcat2(++dest, src, 0): (*dest++ = *src++)? my_strcat2(dest, src,1): 0 ;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>my_strcat() has contraint that 1st arg(=dest) must be filled with NULL. (ex. &#8216;geeksfor&#8230;&#8217;)</p>
+<pre> <code language="C">
+/*
+f=0 : searching NULL step
+f=1 : copying step
+*/
+void my_strcat2(char *dest, char *src, char f=0)
+{
+  (!f &amp;&amp; *dest)? my_strcat2(++dest, src, 0): (*dest++ = *src++)? my_strcat2(dest, src,1): 0 ;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-1245</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Sat, 05 Jun 2010 17:33:30 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-1245</guid>
+		<description><![CDATA[well written and explained.]]></description>
+		<content:encoded><![CDATA[<p>well written and explained.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhimanu</title>
+		<link>http://www.geeksforgeeks.org/write-one-line-functions-for-strcat-and-strcmp/#comment-1242</link>
+		<dc:creator><![CDATA[abhimanu]]></dc:creator>
+		<pubDate>Sat, 05 Jun 2010 05:48:55 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7705#comment-1242</guid>
+		<description><![CDATA[My 2 cents on my_strcmp
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+//Logic used
+bool my_strcmp(char *a, char *b)
+{
+	if (*a == *b)
+	{
+		if (*a == &#039;&#092;&#048;&#039;)
+		{
+			return true;
+		} else {
+			my_strcmp(++a, ++b);
+		}
+	} else {
+		return false;
+	}
+} 
+
+// Desired One line function
+bool my_strcmp(char *a, char *b)
+{
+	return ((*a == *b) ? ((*a == &#039;&#092;&#048;&#039;) ? true : my_strcmp(++a, ++b)): false);
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>My 2 cents on my_strcmp</p>
+<pre> <code language="C">
+//Logic used
+bool my_strcmp(char *a, char *b)
+{
+	if (*a == *b)
+	{
+		if (*a == '&#92;&#48;')
+		{
+			return true;
+		} else {
+			my_strcmp(++a, ++b);
+		}
+	} else {
+		return false;
+	}
+} 
+
+// Desired One line function
+bool my_strcmp(char *a, char *b)
+{
+	return ((*a == *b) ? ((*a == '&#92;&#48;') ? true : my_strcmp(++a, ++b)): false);
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:24:47 -->
+
+<!-- Compression = gzip -->

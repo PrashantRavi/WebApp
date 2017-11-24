@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: When should we write our own assignment operator in C++?</title>
+	<atom:link href="http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prince goyal</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11540</link>
+		<dc:creator><![CDATA[prince goyal]]></dc:creator>
+		<pubDate>Tue, 09 Oct 2012 07:23:16 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11540</guid>
+		<description><![CDATA[C++ doesn&#039;t allow default assignment operator to be used when there is a non-static &quot;const&quot; variable in your class.
+compiler should show the following error:
+error: non-static const member, can&#039;t use default assignment operator.]]></description>
+		<content:encoded><![CDATA[<p>C++ doesn&#8217;t allow default assignment operator to be used when there is a non-static &#8220;const&#8221; variable in your class.<br />
+compiler should show the following error:<br />
+error: non-static const member, can&#8217;t use default assignment operator.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ajay</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11409</link>
+		<dc:creator><![CDATA[ajay]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2012 17:18:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11409</guid>
+		<description><![CDATA[thanks a lot!!]]></description>
+		<content:encoded><![CDATA[<p>thanks a lot!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11406</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2012 13:13:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11406</guid>
+		<description><![CDATA[Add following line in your class and you get the output as 10.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+// Copy constructor that initializes a reference.
+Test (const Test &#038;t):ref(x) { x = t.x; }
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Add following line in your class and you get the output as 10.</p>
+<pre> <code language="C">
+// Copy constructor that initializes a reference.
+Test (const Test &amp;t):ref(x) { x = t.x; }
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ajay</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11405</link>
+		<dc:creator><![CDATA[ajay]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2012 13:05:21 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11405</guid>
+		<description><![CDATA[Thanks Kartik, please provide some details about copy constructor also.  How to handle references in copy constructor?
+
+I tried following program and got &#039;40&#039; as output:
+&lt;pre&gt; &lt;code language=&quot;CPP&quot;&gt;
+#include&#060;iostream&#062;
+using namespace std;
+
+class Test
+{
+    int x;
+    int &#038;ref;
+public:
+    Test (int i):x(i),ref(x) {}
+    void print() { cout &#060;&#060; ref; }
+    void setX(int i) { x = i; }
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2 = t1;
+    t1.setX(40);
+    t2.print();
+    return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Thanks Kartik, please provide some details about copy constructor also.  How to handle references in copy constructor?</p>
+<p>I tried following program and got &#8217;40&#8217; as output:</p>
+<pre> <code language="CPP">
+#include&lt;iostream&gt;
+using namespace std;
+
+class Test
+{
+    int x;
+    int &amp;ref;
+public:
+    Test (int i):x(i),ref(x) {}
+    void print() { cout &lt;&lt; ref; }
+    void setX(int i) { x = i; }
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2 = t1;
+    t1.setX(40);
+    t2.print();
+    return 0;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11404</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2012 12:53:42 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11404</guid>
+		<description><![CDATA[C++ doesn&#039;t allow default assignment operator to be used when there is a reference in your class.  
+
+For example, the following program produces error &quot;error: non-static reference member &#039;int&#038; Test::ref&#039;, can&#039;t use default assignment operator&quot;
+&lt;pre&gt; &lt;code language=&quot;CPP&quot;&gt;
+#include&#060;iostream&#062;
+using namespace std;
+
+class Test
+{
+    int x;
+    int &#038;ref;
+public:
+    Test (int i):x(i),ref(x) {}
+    void print() { cout &#060;&#060; ref; }
+    void setX(int i) { x = i; }
+    //Test &#038;operator = (const Test &#038;t) {x = t.x;}
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2(20);
+    t2 = t1;
+    t1.setX(40);
+    t2.print();
+    return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+If you uncomment the operator definition in the above program, the program works fine and prints &quot;10&quot;.  
+So compiler forces to write an assignment operator when you have a non-static reference in your class.]]></description>
+		<content:encoded><![CDATA[<p>C++ doesn&#8217;t allow default assignment operator to be used when there is a reference in your class.  </p>
+<p>For example, the following program produces error &#8220;error: non-static reference member &#8216;int&amp; Test::ref&#8217;, can&#8217;t use default assignment operator&#8221;</p>
+<pre> <code language="CPP">
+#include&lt;iostream&gt;
+using namespace std;
+
+class Test
+{
+    int x;
+    int &amp;ref;
+public:
+    Test (int i):x(i),ref(x) {}
+    void print() { cout &lt;&lt; ref; }
+    void setX(int i) { x = i; }
+    //Test &amp;operator = (const Test &amp;t) {x = t.x;}
+};
+
+int main()
+{
+    Test t1(10);
+    Test t2(20);
+    t2 = t1;
+    t1.setX(40);
+    t2.print();
+    return 0;
+}
+</code> </pre>
+<p>If you uncomment the operator definition in the above program, the program works fine and prints &#8220;10&#8221;.<br />
+So compiler forces to write an assignment operator when you have a non-static reference in your class.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ajay</title>
+		<link>http://www.geeksforgeeks.org/assignment-operator-overloading-in-c/#comment-11403</link>
+		<dc:creator><![CDATA[ajay]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2012 12:06:10 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24761#comment-11403</guid>
+		<description><![CDATA[please post an example of references also.]]></description>
+		<content:encoded><![CDATA[<p>please post an example of references also.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.037 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:42 -->
+
+<!-- Compression = gzip -->

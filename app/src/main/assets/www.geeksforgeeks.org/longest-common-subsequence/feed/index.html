@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 4 (Longest Common Subsequence)</title>
+	<atom:link href="http://www.geeksforgeeks.org/longest-common-subsequence/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/longest-common-subsequence/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-40073</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 15:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-40073</guid>
+		<description><![CDATA[please provide a test case where it does not work.
+it shud be prev[j-1]
+Please refer to the research link given by me.]]></description>
+		<content:encoded><![CDATA[<p>please provide a test case where it does not work.<br />
+it shud be prev[j-1]<br />
+Please refer to the research link given by me.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: navneet1075</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-39845</link>
+		<dc:creator><![CDATA[navneet1075]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 06:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-39845</guid>
+		<description><![CDATA[package com.exampke;
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+
+import java.util.HashMap;
+
+import java.util.List;
+
+import java.util.Map;
+
+public class StringAlgos2 {
+
+	public static void main(String[] args) {
+
+String longestCommonSubsequence = StringAlgos
+
+				.getLongestCommonSubSequence(&quot;AAAFRTSRS&quot;, &quot;AAFRSRS&quot;);
+
+		System.out.println(&quot;longest common subsequence is ========&quot;
+
+				+ longestCommonSubsequence);
+
+}
+
+public static String getLongestCommonSubSequence(String s1, String s2) {
+
+		List&#060;Map&#062; myList = getCount(s1, s2);
+
+		int min=0;
+
+		Map s1_count_map=myList.get(0);
+
+		Map s2_count_map=myList.get(1);
+
+		List indexList = new ArrayList();
+
+		int s1_len = s1.length();
+
+		int s2_len = s2.length();
+
+		for (int i = 0; i &#060; s1_len; i++) {
+
+			char s1_char=s1.charAt(i);
+
+			Integer count=(Integer)s1_count_map.get(s1_char);
+
+			for (int j = 0; j count){
+
+						min=count;
+
+					}
+
+					else{
+
+						min=count2;
+
+					}
+
+					for(int m=1;m&#060;=min;m++){
+
+						if(!indexList.contains(j))
+
+					      indexList.add(j);
+
+					}
+
+				}
+
+			}
+
+		}
+
+		Collections.sort(indexList);
+
+		StringBuffer sb = new StringBuffer();
+
+		for (int s : indexList) {
+
+			sb.append(s2.charAt(s));
+
+		}
+
+		return sb.toString();
+
+	}
+
+	    public static List&#060;Map&#062; getCount(String s1, String s2) {
+
+		Map myMap1 = new HashMap();
+
+		for (int i = 0; i &#060; s1.length(); i++) {
+
+			if (myMap1.containsKey(s1.charAt(i))) {
+
+				myMap1.put(s1.charAt(i), myMap1.get(s1.charAt(i)) + 1);
+
+			} else {
+
+				myMap1.put(s1.charAt(i), 1);
+
+			}
+
+		}
+
+		Map myMap2 = new HashMap();
+
+		for (int i = 0; i &#060; s2.length(); i++) {
+
+			if (myMap2.containsKey(s2.charAt(i))) {
+
+				myMap2.put(s2.charAt(i), myMap2.get(s2.charAt(i)) + 1);
+
+			} else {
+
+				myMap2.put(s2.charAt(i), 1);
+
+			}
+
+		}
+
+		List&#060;Map&#062; myList=new ArrayList();
+
+		myList.add(myMap1);
+
+		myList.add(myMap2);
+
+		return myList;
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>package com.exampke;</p>
+<p>import java.util.ArrayList;</p>
+<p>import java.util.Collections;</p>
+<p>import java.util.HashMap;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>public class StringAlgos2 {</p>
+<p>	public static void main(String[] args) {</p>
+<p>String longestCommonSubsequence = StringAlgos</p>
+<p>				.getLongestCommonSubSequence(&#8220;AAAFRTSRS&#8221;, &#8220;AAFRSRS&#8221;);</p>
+<p>		System.out.println(&#8220;longest common subsequence is ========&#8221;</p>
+<p>				+ longestCommonSubsequence);</p>
+<p>}</p>
+<p>public static String getLongestCommonSubSequence(String s1, String s2) {</p>
+<p>		List&lt;Map&gt; myList = getCount(s1, s2);</p>
+<p>		int min=0;</p>
+<p>		Map s1_count_map=myList.get(0);</p>
+<p>		Map s2_count_map=myList.get(1);</p>
+<p>		List indexList = new ArrayList();</p>
+<p>		int s1_len = s1.length();</p>
+<p>		int s2_len = s2.length();</p>
+<p>		for (int i = 0; i &lt; s1_len; i++) {</p>
+<p>			char s1_char=s1.charAt(i);</p>
+<p>			Integer count=(Integer)s1_count_map.get(s1_char);</p>
+<p>			for (int j = 0; j count){</p>
+<p>						min=count;</p>
+<p>					}</p>
+<p>					else{</p>
+<p>						min=count2;</p>
+<p>					}</p>
+<p>					for(int m=1;m&lt;=min;m++){</p>
+<p>						if(!indexList.contains(j))</p>
+<p>					      indexList.add(j);</p>
+<p>					}</p>
+<p>				}</p>
+<p>			}</p>
+<p>		}</p>
+<p>		Collections.sort(indexList);</p>
+<p>		StringBuffer sb = new StringBuffer();</p>
+<p>		for (int s : indexList) {</p>
+<p>			sb.append(s2.charAt(s));</p>
+<p>		}</p>
+<p>		return sb.toString();</p>
+<p>	}</p>
+<p>	    public static List&lt;Map&gt; getCount(String s1, String s2) {</p>
+<p>		Map myMap1 = new HashMap();</p>
+<p>		for (int i = 0; i &lt; s1.length(); i++) {</p>
+<p>			if (myMap1.containsKey(s1.charAt(i))) {</p>
+<p>				myMap1.put(s1.charAt(i), myMap1.get(s1.charAt(i)) + 1);</p>
+<p>			} else {</p>
+<p>				myMap1.put(s1.charAt(i), 1);</p>
+<p>			}</p>
+<p>		}</p>
+<p>		Map myMap2 = new HashMap();</p>
+<p>		for (int i = 0; i &lt; s2.length(); i++) {</p>
+<p>			if (myMap2.containsKey(s2.charAt(i))) {</p>
+<p>				myMap2.put(s2.charAt(i), myMap2.get(s2.charAt(i)) + 1);</p>
+<p>			} else {</p>
+<p>				myMap2.put(s2.charAt(i), 1);</p>
+<p>			}</p>
+<p>		}</p>
+<p>		List&lt;Map&gt; myList=new ArrayList();</p>
+<p>		myList.add(myMap1);</p>
+<p>		myList.add(myMap2);</p>
+<p>		return myList;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: saiyam agarwal</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-39728</link>
+		<dc:creator><![CDATA[saiyam agarwal]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 07:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-39728</guid>
+		<description><![CDATA[I think there is error in your logic ... Line 20 should be 
+curr[j] = max(prev[j], curr[j-1]);]]></description>
+		<content:encoded><![CDATA[<p>I think there is error in your logic &#8230; Line 20 should be<br />
+curr[j] = max(prev[j], curr[j-1]);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-39466</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 14:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-39466</guid>
+		<description><![CDATA[Space Efficient LCS
+Space Complexity : O(min(m,n))
+http://www.ics.uci.edu/~eppstein/161/960229.html
+My Code of the above logic: http://ideone.com/R3lp88]]></description>
+		<content:encoded><![CDATA[<p>Space Efficient LCS<br />
+Space Complexity : O(min(m,n))<br />
+<a href="http://www.ics.uci.edu/~eppstein/161/960229.html" rel="nofollow">http://www.ics.uci.edu/~eppstein/161/960229.html</a><br />
+My Code of the above logic: <a href="http://ideone.com/R3lp88" rel="nofollow">http://ideone.com/R3lp88</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-39425</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 07:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-39425</guid>
+		<description><![CDATA[@geeksforgeeks:disqus  Guys please post the space optimized version of LCS which is based on Hirschberg&#039;s algorithm.
+
+Also please update the article with some applications of LCS.
+This will help the article to be complete.]]></description>
+		<content:encoded><![CDATA[<p>@geeksforgeeks:disqus  Guys please post the space optimized version of LCS which is based on Hirschberg&#8217;s algorithm.</p>
+<p>Also please update the article with some applications of LCS.<br />
+This will help the article to be complete.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jc</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-36113</link>
+		<dc:creator><![CDATA[jc]]></dc:creator>
+		<pubDate>Fri, 16 May 2014 06:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-36113</guid>
+		<description><![CDATA[/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+int lcs( char *X, char *Y, int m, int n )
+{
+.
+.
+.
+ /* L[m][n] contains length of LCS for X[0..n-1] and Y[0..m-1] */
+   return L[m][n];
+}
+ source of confusion between comments. Initially it says X[0..m-1] in the late comment it says X[0..n-1]]]></description>
+		<content:encoded><![CDATA[<p>/* Returns length of LCS for X[0..m-1], Y[0..n-1] */<br />
+int lcs( char *X, char *Y, int m, int n )<br />
+{<br />
+.<br />
+.<br />
+.<br />
+ /* L[m][n] contains length of LCS for X[0..n-1] and Y[0..m-1] */<br />
+   return L[m][n];<br />
+}<br />
+ source of confusion between comments. Initially it says X[0..m-1] in the late comment it says X[0..n-1]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-35941</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Tue, 13 May 2014 04:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-35941</guid>
+		<description><![CDATA[the complexity of naive recursive fun is exponential but in dp there are m*n subproblems so its complexity is 0(mn)
+here is my implementation
+http://ideone.com/XD4UTd]]></description>
+		<content:encoded><![CDATA[<p>the complexity of naive recursive fun is exponential but in dp there are m*n subproblems so its complexity is 0(mn)<br />
+here is my implementation<br />
+<a href="http://ideone.com/XD4UTd" rel="nofollow">http://ideone.com/XD4UTd</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-35940</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Tue, 13 May 2014 03:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-35940</guid>
+		<description><![CDATA[#include
+#include
+#define m 20
+int arr[m][m];
+using namespace std;
+int fun(char st1[],char st2[],int low1,int low2,int high1,int high2)
+{
+	if(arr[low1][low2]!=-1)
+	   return arr[low1][low2];
+	if((low1&#062;high1)&#124;&#124;(low2&#062;high2))
+	   return 0;
+	if(st1[low1]==st2[low2])
+	{
+		arr[low1][low2]=1+fun(st1,st2,low1+1,low2+1,high1,high2);
+		return arr[low1][low2];
+	}
+	else
+	{
+		arr[low1+1][low2]=fun(st1,st2,low1+1,low2,high1,high2);
+		arr[low1][low2+1]=fun(st1,st2,low1,low2+1,high1,high2);
+		arr[low1][low2]=max(arr[low1+1][low2],arr[low1][low2+1]);
+	}
+	return arr[low1][low2];
+}
+int main()
+{
+  char st1[] = &quot;ABCDGH&quot; ;
+  char st2[] =  &quot;AEDFHR&quot; ;
+	for(int i=0;i&#060;m;i++)
+	{
+		for(int j=0;j&#060;m;j++)
+		{
+			arr[i][j]=-1;
+		}
+	}
+	cout&#060;&#060;fun(st1,st2,0,0,strlen(st1)-1,strlen(st2)-1)&#060;&#060;&#034; is the max commmon subseq.n&#034;;
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#define m 20<br />
+int arr[m][m];<br />
+using namespace std;<br />
+int fun(char st1[],char st2[],int low1,int low2,int high1,int high2)<br />
+{<br />
+	if(arr[low1][low2]!=-1)<br />
+	   return arr[low1][low2];<br />
+	if((low1&gt;high1)||(low2&gt;high2))<br />
+	   return 0;<br />
+	if(st1[low1]==st2[low2])<br />
+	{<br />
+		arr[low1][low2]=1+fun(st1,st2,low1+1,low2+1,high1,high2);<br />
+		return arr[low1][low2];<br />
+	}<br />
+	else<br />
+	{<br />
+		arr[low1+1][low2]=fun(st1,st2,low1+1,low2,high1,high2);<br />
+		arr[low1][low2+1]=fun(st1,st2,low1,low2+1,high1,high2);<br />
+		arr[low1][low2]=max(arr[low1+1][low2],arr[low1][low2+1]);<br />
+	}<br />
+	return arr[low1][low2];<br />
+}<br />
+int main()<br />
+{<br />
+  char st1[] = &#8220;ABCDGH&#8221; ;<br />
+  char st2[] =  &#8220;AEDFHR&#8221; ;<br />
+	for(int i=0;i&lt;m;i++)<br />
+	{<br />
+		for(int j=0;j&lt;m;j++)<br />
+		{<br />
+			arr[i][j]=-1;<br />
+		}<br />
+	}<br />
+	cout&lt;&lt;fun(st1,st2,0,0,strlen(st1)-1,strlen(st2)-1)&lt;&lt;&quot; is the max commmon subseq.n&quot;;<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Jain</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-34813</link>
+		<dc:creator><![CDATA[Ankit Jain]]></dc:creator>
+		<pubDate>Fri, 18 Apr 2014 10:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-34813</guid>
+		<description><![CDATA[int lcs (char str1[],char str2[],int len1,int len2)
+{
+    int M[len1+1][len2+1],i,j,flag[len1+1][len2+1],a=0;
+    for(i=0;i&#060;len1+1;i++)
+    {
+        M[i][0]=0;
+        flag[i][0]=2;
+    }
+    for(j=0;j&#060;len2+1;j++)
+    {    
+        M[0][j]=0;
+        flag[0][j]=2;
+    }
+    for(i=1;i&#060;len1+1;i++)
+    {
+        for(j=1;j=M[i][j-1])
+            {
+                M[i][j]=M[i-1][j];
+                flag[i][j]=1;
+            }
+            else
+            {
+                M[i][j]=M[i][j-1];
+                flag[i][j]=-1;
+            }
+        }
+    }
+
+
+    i=len1;
+    j=len2;
+
+    while(1)
+    {
+
+        if(flag[i][j]==3)
+        {
+            printf(&quot;%c&quot;,str1[i-1]);
+            i-=1;j-=1;
+            a++;
+        }
+        else if(flag[i][j]==1)
+        {
+            i-=1;
+        }
+        else if(flag[i][j]==-1)
+        {
+            j-=1;
+        }
+        else
+        {
+            break;
+        }
+
+    }
+    return a;
+}]]></description>
+		<content:encoded><![CDATA[<p>int lcs (char str1[],char str2[],int len1,int len2)<br />
+{<br />
+    int M[len1+1][len2+1],i,j,flag[len1+1][len2+1],a=0;<br />
+    for(i=0;i&lt;len1+1;i++)<br />
+    {<br />
+        M[i][0]=0;<br />
+        flag[i][0]=2;<br />
+    }<br />
+    for(j=0;j&lt;len2+1;j++)<br />
+    {<br />
+        M[0][j]=0;<br />
+        flag[0][j]=2;<br />
+    }<br />
+    for(i=1;i&lt;len1+1;i++)<br />
+    {<br />
+        for(j=1;j=M[i][j-1])<br />
+            {<br />
+                M[i][j]=M[i-1][j];<br />
+                flag[i][j]=1;<br />
+            }<br />
+            else<br />
+            {<br />
+                M[i][j]=M[i][j-1];<br />
+                flag[i][j]=-1;<br />
+            }<br />
+        }<br />
+    }</p>
+<p>    i=len1;<br />
+    j=len2;</p>
+<p>    while(1)<br />
+    {</p>
+<p>        if(flag[i][j]==3)<br />
+        {<br />
+            printf(&#8220;%c&#8221;,str1[i-1]);<br />
+            i-=1;j-=1;<br />
+            a++;<br />
+        }<br />
+        else if(flag[i][j]==1)<br />
+        {<br />
+            i-=1;<br />
+        }<br />
+        else if(flag[i][j]==-1)<br />
+        {<br />
+            j-=1;<br />
+        }<br />
+        else<br />
+        {<br />
+            break;<br />
+        }</p>
+<p>    }<br />
+    return a;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sr</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-33318</link>
+		<dc:creator><![CDATA[sr]]></dc:creator>
+		<pubDate>Sun, 09 Mar 2014 06:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-33318</guid>
+		<description><![CDATA[fuck off..]]></description>
+		<content:encoded><![CDATA[<p>fuck off..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Joel</title>
+		<link>http://www.geeksforgeeks.org/longest-common-subsequence/#comment-33060</link>
+		<dc:creator><![CDATA[Joel]]></dc:creator>
+		<pubDate>Thu, 27 Feb 2014 22:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12998#comment-33060</guid>
+		<description><![CDATA[Here&#039;s an implementation although not memoized that returns the sequence itself:
+
+struct pair {
+
+        int start;
+
+        int end;
+
+};
+
+struct char_list {
+
+        char c;
+
+        struct char_list *next_char;
+
+};
+
+int find_len(struct char_list *list) {
+
+        int n = 0;
+
+        while(list) {
+
+                n++;
+
+                list = list-&#062;next_char;
+
+        }
+
+        return n;
+
+}
+
+struct char_list *lcs(char *str1, char *str2, struct pair p1, struct pair p2, struct char_list *clist)
+
+{
+
+        struct char_list *tmp;
+
+        struct char_list *option1, *option2;
+
+        if(p1.end &#060; p1.start &#124;&#124;  p2.end c = str1[p1.end];
+
+                tmp-&#062;next_char = clist;
+
+                p1.end--;
+
+                p2.end--;
+
+                return lcs(str1, str2, p1, p2, tmp);
+
+        } else {
+
+                p2.end--;
+
+                option1 = lcs(str1, str2, p1, p2, clist);
+
+                p2.end++;
+
+                p1.end--;
+
+                option2 = lcs(str1, str2, p1, p2, clist);
+
+                p1.end++;
+
+                /* TODO: Fix memory leaks */
+
+                if(find_len(option1) &#060; find_len(option2))
+
+                        return option2;
+
+                else
+
+                        return option1;
+
+        }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s an implementation although not memoized that returns the sequence itself:</p>
+<p>struct pair {</p>
+<p>        int start;</p>
+<p>        int end;</p>
+<p>};</p>
+<p>struct char_list {</p>
+<p>        char c;</p>
+<p>        struct char_list *next_char;</p>
+<p>};</p>
+<p>int find_len(struct char_list *list) {</p>
+<p>        int n = 0;</p>
+<p>        while(list) {</p>
+<p>                n++;</p>
+<p>                list = list-&gt;next_char;</p>
+<p>        }</p>
+<p>        return n;</p>
+<p>}</p>
+<p>struct char_list *lcs(char *str1, char *str2, struct pair p1, struct pair p2, struct char_list *clist)</p>
+<p>{</p>
+<p>        struct char_list *tmp;</p>
+<p>        struct char_list *option1, *option2;</p>
+<p>        if(p1.end &lt; p1.start ||  p2.end c = str1[p1.end];</p>
+<p>                tmp-&gt;next_char = clist;</p>
+<p>                p1.end&#8211;;</p>
+<p>                p2.end&#8211;;</p>
+<p>                return lcs(str1, str2, p1, p2, tmp);</p>
+<p>        } else {</p>
+<p>                p2.end&#8211;;</p>
+<p>                option1 = lcs(str1, str2, p1, p2, clist);</p>
+<p>                p2.end++;</p>
+<p>                p1.end&#8211;;</p>
+<p>                option2 = lcs(str1, str2, p1, p2, clist);</p>
+<p>                p1.end++;</p>
+<p>                /* TODO: Fix memory leaks */</p>
+<p>                if(find_len(option1) &lt; find_len(option2))</p>
+<p>                        return option2;</p>
+<p>                else</p>
+<p>                        return option1;</p>
+<p>        }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.046 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:59:02 -->
+
+<!-- Compression = gzip -->

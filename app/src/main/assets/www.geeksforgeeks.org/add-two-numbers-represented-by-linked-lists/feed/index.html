@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Add two numbers represented by linked lists &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-40174</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-40174</guid>
+		<description><![CDATA[why time complexity is O(m+n)
+i think it&#039;s O(max(m,n))
+please clear the doubt 
+
+thanks]]></description>
+		<content:encoded><![CDATA[<p>why time complexity is O(m+n)<br />
+i think it&#8217;s O(max(m,n))<br />
+please clear the doubt </p>
+<p>thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: geekcoder08</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-38307</link>
+		<dc:creator><![CDATA[geekcoder08]]></dc:creator>
+		<pubDate>Thu, 12 Jun 2014 11:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-38307</guid>
+		<description><![CDATA[Solution using Recusrion
+
+http://ideone.com/e.js/SBfmBF
+
+
+Time Complexity :O(n) where n is size of bigger Linked List
+Space Complexity : O(n) ignoring stack frame memory]]></description>
+		<content:encoded><![CDATA[<p>Solution using Recusrion</p>
+<p><a href="http://ideone.com/e.js/SBfmBF" rel="nofollow">http://ideone.com/e.js/SBfmBF</a></p>
+<p>Time Complexity :O(n) where n is size of bigger Linked List<br />
+Space Complexity : O(n) ignoring stack frame memory</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gautam Goyal</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-36582</link>
+		<dc:creator><![CDATA[Gautam Goyal]]></dc:creator>
+		<pubDate>Sat, 24 May 2014 17:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-36582</guid>
+		<description><![CDATA[Recursive Approach:
+typedef struct node* Link;
+Link sumList(Link head1, Link head2){
+
+	int carry = 0;
+
+	int i=0;
+
+	int l1 = getLength(head1);
+
+	int l2 = getLength(head2);
+
+	int diff;
+
+	Link toInsert;
+
+	if(l1 &#062; l2){
+
+		diff = l1-l2;
+
+		toInsert = head2;
+
+	}
+
+	else{
+
+		diff = l2-l1;
+
+		toInsert = head1;
+
+	}Link temp = toInsert;
+
+	for(i=0;inext = temp;
+
+		temp = newnode;
+
+	}
+
+	if(l1l2)
+
+		head2 = temp;
+
+	sumUtil(&#038;head1,head2,&#038;carry);
+
+	if(carry != 0){
+
+		Link newnode = createNode(carry);
+
+		newnode-&#062;next = head1;
+
+		head1 = newnode;
+
+	}
+
+	return head1;
+
+}
+
+void sumUtil(Link* head1, Link head2, int* carry ){
+
+	if(*head1 == NULL &#038;&#038; head2 == NULL)
+
+		return;
+
+	sumUtil(&#038;((*head1)-&#062;next), head2-&#062;next, carry);
+
+	(*head1)-&#062;d-&#062;n = (*head1)-&#062;d-&#062;n  + head2-&#062;d-&#062;n + *carry;
+
+	*carry = (*head1)-&#062;d-&#062;n / 10;
+
+	(*head1)-&#062;d-&#062;n = (*head1)-&#062;d-&#062;n % 10;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Recursive Approach:<br />
+typedef struct node* Link;<br />
+Link sumList(Link head1, Link head2){</p>
+<p>	int carry = 0;</p>
+<p>	int i=0;</p>
+<p>	int l1 = getLength(head1);</p>
+<p>	int l2 = getLength(head2);</p>
+<p>	int diff;</p>
+<p>	Link toInsert;</p>
+<p>	if(l1 &gt; l2){</p>
+<p>		diff = l1-l2;</p>
+<p>		toInsert = head2;</p>
+<p>	}</p>
+<p>	else{</p>
+<p>		diff = l2-l1;</p>
+<p>		toInsert = head1;</p>
+<p>	}Link temp = toInsert;</p>
+<p>	for(i=0;inext = temp;</p>
+<p>		temp = newnode;</p>
+<p>	}</p>
+<p>	if(l1l2)</p>
+<p>		head2 = temp;</p>
+<p>	sumUtil(&amp;head1,head2,&amp;carry);</p>
+<p>	if(carry != 0){</p>
+<p>		Link newnode = createNode(carry);</p>
+<p>		newnode-&gt;next = head1;</p>
+<p>		head1 = newnode;</p>
+<p>	}</p>
+<p>	return head1;</p>
+<p>}</p>
+<p>void sumUtil(Link* head1, Link head2, int* carry ){</p>
+<p>	if(*head1 == NULL &amp;&amp; head2 == NULL)</p>
+<p>		return;</p>
+<p>	sumUtil(&amp;((*head1)-&gt;next), head2-&gt;next, carry);</p>
+<p>	(*head1)-&gt;d-&gt;n = (*head1)-&gt;d-&gt;n  + head2-&gt;d-&gt;n + *carry;</p>
+<p>	*carry = (*head1)-&gt;d-&gt;n / 10;</p>
+<p>	(*head1)-&gt;d-&gt;n = (*head1)-&gt;d-&gt;n % 10;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kinshuk chandra</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-35734</link>
+		<dc:creator><![CDATA[kinshuk chandra]]></dc:creator>
+		<pubDate>Tue, 06 May 2014 20:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-35734</guid>
+		<description><![CDATA[Here is the code from http://k2code.blogspot.in/2009/12/write-program-to-add-two-long-positive.html:
+
+node *long_add(mynode *h1, mynode *h2, mynode *h3)    //h3 = h2+h1
+{
+  node *c, *c1, *c2;
+  int sum, carry, digit;
+ 
+  carry = 0;
+  c1 = h1-&#062;next;
+  c2 = h2-&#062;next;
+ 
+  while(c1 != h1 &#038;&#038; c2 != h2)
+  {
+     sum   = c1-&#062;value + c2-&#062;value + carry;
+     digit = sum % 10;
+     carry = sum / 10;
+ 
+     h3 = insertNode(digit, h3);
+ 
+     c1 = c1-&#062;next;
+     c2 = c2-&#062;next;
+  }
+ 
+  if(c1 != h1)
+  {
+     c = c1;
+     h = h1;
+  }
+  else
+  {
+     c = c2;
+     h = h2;
+  }
+ 
+  while(c != h)
+  {
+    sum   = c-&#062;value + carry;
+    digit = sum % 10;
+    carry = sum / 10;
+    h3 = insertNode(digit, h3);
+    c = c-&#062;next;
+  }
+ 
+  if(carry==1)
+  {
+     h3 = insertNode(carry, h3);
+  }
+ 
+  return(h3);
+}
+]]></description>
+		<content:encoded><![CDATA[<p>Here is the code from <a href="http://k2code.blogspot.in/2009/12/write-program-to-add-two-long-positive.html" rel="nofollow">http://k2code.blogspot.in/2009/12/write-program-to-add-two-long-positive.html</a>:</p>
+<p>node *long_add(mynode *h1, mynode *h2, mynode *h3)    //h3 = h2+h1<br />
+{<br />
+  node *c, *c1, *c2;<br />
+  int sum, carry, digit;</p>
+<p>  carry = 0;<br />
+  c1 = h1-&gt;next;<br />
+  c2 = h2-&gt;next;</p>
+<p>  while(c1 != h1 &amp;&amp; c2 != h2)<br />
+  {<br />
+     sum   = c1-&gt;value + c2-&gt;value + carry;<br />
+     digit = sum % 10;<br />
+     carry = sum / 10;</p>
+<p>     h3 = insertNode(digit, h3);</p>
+<p>     c1 = c1-&gt;next;<br />
+     c2 = c2-&gt;next;<br />
+  }</p>
+<p>  if(c1 != h1)<br />
+  {<br />
+     c = c1;<br />
+     h = h1;<br />
+  }<br />
+  else<br />
+  {<br />
+     c = c2;<br />
+     h = h2;<br />
+  }</p>
+<p>  while(c != h)<br />
+  {<br />
+    sum   = c-&gt;value + carry;<br />
+    digit = sum % 10;<br />
+    carry = sum / 10;<br />
+    h3 = insertNode(digit, h3);<br />
+    c = c-&gt;next;<br />
+  }</p>
+<p>  if(carry==1)<br />
+  {<br />
+     h3 = insertNode(carry, h3);<br />
+  }</p>
+<p>  return(h3);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vishal</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-33220</link>
+		<dc:creator><![CDATA[Vishal]]></dc:creator>
+		<pubDate>Wed, 05 Mar 2014 06:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-33220</guid>
+		<description><![CDATA[I have tried as well... the simplest logic :)
+
+ode *AddTwoList(Node *head, Node *head2)
+{
+    Node *i = head;
+    Node *j = head2;
+    int decimal = 1;
+    int sum1 =0;
+    int sum2 =0;
+    while(i &#124;&#124; j)
+    {
+        if(i){
+            sum1 = sum1 +(i-&#062;info)*decimal;        
+            i = i-&#062;next;
+        }
+        if(j){
+            sum2 = sum2 +(j-&#062;info)*decimal;
+            j = j-&#062;next;
+        }
+        decimal = decimal*10;
+    }
+    sum1 = sum1+sum2;
+    Node *temp = NULL;
+    Node *temphead = new Node;
+    temphead-&#062;next=NULL;
+    temp = temphead;
+    temphead-&#062;info = sum1%10;
+    sum1 = sum1/10;
+    while(sum1)
+    {
+        Node *q = new Node;
+        
+        q-&#062;info = sum1%10;
+        sum1 = sum1/10;
+        
+        temphead-&#062;next = q;
+        q-&#062;next = NULL;
+        temphead = q;
+    }
+    return temp;
+}]]></description>
+		<content:encoded><![CDATA[<p>I have tried as well&#8230; the simplest logic 🙂</p>
+<p>ode *AddTwoList(Node *head, Node *head2)<br />
+{<br />
+    Node *i = head;<br />
+    Node *j = head2;<br />
+    int decimal = 1;<br />
+    int sum1 =0;<br />
+    int sum2 =0;<br />
+    while(i || j)<br />
+    {<br />
+        if(i){<br />
+            sum1 = sum1 +(i-&gt;info)*decimal;<br />
+            i = i-&gt;next;<br />
+        }<br />
+        if(j){<br />
+            sum2 = sum2 +(j-&gt;info)*decimal;<br />
+            j = j-&gt;next;<br />
+        }<br />
+        decimal = decimal*10;<br />
+    }<br />
+    sum1 = sum1+sum2;<br />
+    Node *temp = NULL;<br />
+    Node *temphead = new Node;<br />
+    temphead-&gt;next=NULL;<br />
+    temp = temphead;<br />
+    temphead-&gt;info = sum1%10;<br />
+    sum1 = sum1/10;<br />
+    while(sum1)<br />
+    {<br />
+        Node *q = new Node;</p>
+<p>        q-&gt;info = sum1%10;<br />
+        sum1 = sum1/10;</p>
+<p>        temphead-&gt;next = q;<br />
+        q-&gt;next = NULL;<br />
+        temphead = q;<br />
+    }<br />
+    return temp;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vishal</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-33219</link>
+		<dc:creator><![CDATA[Vishal]]></dc:creator>
+		<pubDate>Wed, 05 Mar 2014 06:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-33219</guid>
+		<description><![CDATA[this program will work only for single digit numbers......... ????]]></description>
+		<content:encoded><![CDATA[<p>this program will work only for single digit numbers&#8230;&#8230;&#8230; ????</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mohaan Raja</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-32320</link>
+		<dc:creator><![CDATA[Mohaan Raja]]></dc:creator>
+		<pubDate>Fri, 07 Feb 2014 18:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-32320</guid>
+		<description><![CDATA[Hi I have a solution. Please give your comments...
+// Getting the actual number from the list for two lists
+// Adding the numbers directly and getting the sum.
+// Then creating the resultant list from the sum.
+
+struct node 
+{
+int data;
+struct node *next ;
+};
+
+struct node * AddTwoList(struct node* a, struct node * b)
+{
+if(a==null)
+return b;
+if(b==null)
+return a;
+
+int num1 = GetNum(a);
+int num2 = GetNum(b);
+int num3 = num1+num2;
+struct node * result = FormList(num3);
+return result;
+}
+
+
+
+int GetNum(struct node *a)
+{
+int num=0, multiplier = 1;
+while(a!= null)
+{
+num += (a-&#062;data)*multiplier;
+multiplier *= 10;
+a= a-&#062;next;
+}
+return num;
+}
+
+
+FormList(int num)
+{
+struct node * result;
+while(num &#062; 0)
+{
+int quo = num%10;
+struct node* temp = (struct node*)malloc(sizeof(struct node));
+temp-&#062;data= quo;
+
+temp-&#062;next = null;
+if(result==null)
+{
+result = temp;
+
+}
+result-&#062;next = temp;
+num = num/10;
+}
+return result;
+}
+
+}
+
+
+
+}
+
+
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Hi I have a solution. Please give your comments&#8230;<br />
+// Getting the actual number from the list for two lists<br />
+// Adding the numbers directly and getting the sum.<br />
+// Then creating the resultant list from the sum.</p>
+<p>struct node<br />
+{<br />
+int data;<br />
+struct node *next ;<br />
+};</p>
+<p>struct node * AddTwoList(struct node* a, struct node * b)<br />
+{<br />
+if(a==null)<br />
+return b;<br />
+if(b==null)<br />
+return a;</p>
+<p>int num1 = GetNum(a);<br />
+int num2 = GetNum(b);<br />
+int num3 = num1+num2;<br />
+struct node * result = FormList(num3);<br />
+return result;<br />
+}</p>
+<p>int GetNum(struct node *a)<br />
+{<br />
+int num=0, multiplier = 1;<br />
+while(a!= null)<br />
+{<br />
+num += (a-&gt;data)*multiplier;<br />
+multiplier *= 10;<br />
+a= a-&gt;next;<br />
+}<br />
+return num;<br />
+}</p>
+<p>FormList(int num)<br />
+{<br />
+struct node * result;<br />
+while(num &gt; 0)<br />
+{<br />
+int quo = num%10;<br />
+struct node* temp = (struct node*)malloc(sizeof(struct node));<br />
+temp-&gt;data= quo;</p>
+<p>temp-&gt;next = null;<br />
+if(result==null)<br />
+{<br />
+result = temp;</p>
+<p>}<br />
+result-&gt;next = temp;<br />
+num = num/10;<br />
+}<br />
+return result;<br />
+}</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jayanth</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-30329</link>
+		<dc:creator><![CDATA[Jayanth]]></dc:creator>
+		<pubDate>Mon, 02 Dec 2013 14:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-30329</guid>
+		<description><![CDATA[An even more simpler and neat solution
+
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+
+        if(l1 == NULL &#038;&#038; l2==NULL)
+
+        return NULL;
+
+        
+
+        else if(l1 == NULL)
+
+        return l2;
+
+        
+
+        else if(l2 == NULL)
+
+        return l1;
+
+        
+
+        return add(l1,l2,0);
+
+        
+
+        
+
+    }
+
+    
+
+    ListNode *add(ListNode *l1,ListNode *l2,int carry)
+
+    {
+
+        if(l1 == NULL &#038;&#038; l2 == NULL &#038;&#038; carry == 0)
+
+        return NULL;
+
+        
+
+        int ldata =0 ,rdata=0;
+
+        
+
+        if(l1 != NULL)
+
+        ldata = l1-&#062;val;
+
+        
+
+        if(l2!=NULL)
+
+        rdata = l2-&#062;val;
+
+        
+
+        ListNode *newnode = (ListNode *)malloc(sizeof(ListNode));
+
+        newnode-&#062;val = (ldata+rdata+carry)%10;
+
+        newnode-&#062;next = add(l1?l1-&#062;next:NULL,l2?l2-&#062;next:NULL,(ldata+rdata+carry)/10);
+
+        
+
+        return newnode;
+
+    }]]></description>
+		<content:encoded><![CDATA[<p>An even more simpler and neat solution</p>
+<p>ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {</p>
+<p>        if(l1 == NULL &amp;&amp; l2==NULL)</p>
+<p>        return NULL;</p>
+<p>        else if(l1 == NULL)</p>
+<p>        return l2;</p>
+<p>        else if(l2 == NULL)</p>
+<p>        return l1;</p>
+<p>        return add(l1,l2,0);</p>
+<p>    }</p>
+<p>    ListNode *add(ListNode *l1,ListNode *l2,int carry)</p>
+<p>    {</p>
+<p>        if(l1 == NULL &amp;&amp; l2 == NULL &amp;&amp; carry == 0)</p>
+<p>        return NULL;</p>
+<p>        int ldata =0 ,rdata=0;</p>
+<p>        if(l1 != NULL)</p>
+<p>        ldata = l1-&gt;val;</p>
+<p>        if(l2!=NULL)</p>
+<p>        rdata = l2-&gt;val;</p>
+<p>        ListNode *newnode = (ListNode *)malloc(sizeof(ListNode));</p>
+<p>        newnode-&gt;val = (ldata+rdata+carry)%10;</p>
+<p>        newnode-&gt;next = add(l1?l1-&gt;next:NULL,l2?l2-&gt;next:NULL,(ldata+rdata+carry)/10);</p>
+<p>        return newnode;</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: yeefoo</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-30193</link>
+		<dc:creator><![CDATA[yeefoo]]></dc:creator>
+		<pubDate>Thu, 28 Nov 2013 05:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-30193</guid>
+		<description><![CDATA[Pretty neat, thanks!
+One comment, you can create a dummy node for result to avoid unnecessary branches. The code looks more cleaner that way in my opinion.]]></description>
+		<content:encoded><![CDATA[<p>Pretty neat, thanks!<br />
+One comment, you can create a dummy node for result to avoid unnecessary branches. The code looks more cleaner that way in my opinion.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-29317</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 26 Oct 2013 10:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-29317</guid>
+		<description><![CDATA[On a similar note, how do you solve this when your LL pointer points to the MSB, and you are asked to subtract two large linked lists without reversing them?]]></description>
+		<content:encoded><![CDATA[<p>On a similar note, how do you solve this when your LL pointer points to the MSB, and you are asked to subtract two large linked lists without reversing them?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Malhotra</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-17287</link>
+		<dc:creator><![CDATA[Ankit Malhotra]]></dc:creator>
+		<pubDate>Sat, 13 Apr 2013 03:21:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-17287</guid>
+		<description><![CDATA[You can make a function to multiply a linked list with a single digit extracted from the other list. You can add 0 to the result according to the place value of the digit in the list. You then need to add all the results using the addition solution given in this page.]]></description>
+		<content:encoded><![CDATA[<p>You can make a function to multiply a linked list with a single digit extracted from the other list. You can add 0 to the result according to the place value of the digit in the list. You then need to add all the results using the addition solution given in this page.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:59:51 -->
+
+<!-- Compression = gzip -->

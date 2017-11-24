@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: When do we pass arguments by reference or pointer?</title>
+	<atom:link href="http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: gandhi_rahul</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-28602</link>
+		<dc:creator><![CDATA[gandhi_rahul]]></dc:creator>
+		<pubDate>Tue, 08 Oct 2013 21:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-28602</guid>
+		<description><![CDATA[make the getDescription function virtual!]]></description>
+		<content:encoded><![CDATA[<p>make the getDescription function virtual!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-19756</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Fri, 14 Jun 2013 16:24:47 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-19756</guid>
+		<description><![CDATA[refrences can also be used to achieve overloading on the basis of constness of arguments..as if we pass argument by value then their is no mean of a parameter to be const so no overloading takes place but in case of passing value as refrence overloading can take place as const refrence has significance..]]></description>
+		<content:encoded><![CDATA[<p>refrences can also be used to achieve overloading on the basis of constness of arguments..as if we pass argument by value then their is no mean of a parameter to be const so no overloading takes place but in case of passing value as refrence overloading can take place as const refrence has significance..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amit</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-18850</link>
+		<dc:creator><![CDATA[Amit]]></dc:creator>
+		<pubDate>Wed, 29 May 2013 18:11:33 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-18850</guid>
+		<description><![CDATA[Hi jia,
+The output in your case is &quot;This is Pet class&quot; because getDescription() methods are not virtual in both Pet and Dog classes and so the p.getDescription() call is not able to find the run time type of the argument being passed. 
+Consult the section on virtual method mechanism.
+
+If you make the getDescription methods virtual, you will be able to see the correct version of method being called depending on the type of the object being passed, rather than the base (Pet) class always.
+
+Here is the correct version of method
+
+
+&lt;pre&gt; &lt;code language=&quot;CPP&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+#include &#060;iostream&#062;
+#include &#060;string&#062;
+
+using namespace std;
+
+class Pet
+{
+    public:
+        virtual string getDescription() const {return &#034;This is Pet class&#034;;}
+};
+
+class Dog : public Pet
+{
+        public:
+            virtual string getDescription() const {return &#034;This is Dog class&#034;;}
+};
+
+void describe(Pet &#038;p) { // Slices the derived class object
+    cout&#060;&#060;p.getDescription()&#060;&#060;endl;
+}
+
+int main() {
+    Dog d;
+    describe(d);
+    return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi jia,<br />
+The output in your case is &#8220;This is Pet class&#8221; because getDescription() methods are not virtual in both Pet and Dog classes and so the p.getDescription() call is not able to find the run time type of the argument being passed.<br />
+Consult the section on virtual method mechanism.</p>
+<p>If you make the getDescription methods virtual, you will be able to see the correct version of method being called depending on the type of the object being passed, rather than the base (Pet) class always.</p>
+<p>Here is the correct version of method</p>
+<pre> <code language="CPP">
+/* Paste your code here (You may delete these lines if not writing code) */
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Pet
+{
+    public:
+        virtual string getDescription() const {return &quot;This is Pet class&quot;;}
+};
+
+class Dog : public Pet
+{
+        public:
+            virtual string getDescription() const {return &quot;This is Dog class&quot;;}
+};
+
+void describe(Pet &amp;p) { // Slices the derived class object
+    cout&lt;&lt;p.getDescription()&lt;&lt;endl;
+}
+
+int main() {
+    Dog d;
+    describe(d);
+    return 0;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Naveen Goyal</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-16719</link>
+		<dc:creator><![CDATA[Naveen Goyal]]></dc:creator>
+		<pubDate>Tue, 26 Mar 2013 07:37:36 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-16719</guid>
+		<description><![CDATA[@jia 
+please make the function &quot;getDescription() &quot; as virtual in the parent (pet) class then try
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>@jia<br />
+please make the function &#8220;getDescription() &#8221; as virtual in the parent (pet) class then try<br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhimanyu Vohra</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-6441</link>
+		<dc:creator><![CDATA[Abhimanyu Vohra]]></dc:creator>
+		<pubDate>Sat, 12 Nov 2011 06:31:37 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-6441</guid>
+		<description><![CDATA[Can you please give more info on &quot;How exactly static type checking creates the difference in case we pass by reference or by value?&quot;
+Nice Post, Thanks]]></description>
+		<content:encoded><![CDATA[<p>Can you please give more info on &#8220;How exactly static type checking creates the difference in case we pass by reference or by value?&#8221;<br />
+Nice Post, Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jia</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-5615</link>
+		<dc:creator><![CDATA[jia]]></dc:creator>
+		<pubDate>Thu, 06 Oct 2011 11:46:20 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-5615</guid>
+		<description><![CDATA[i thing point 3 is not true ...actually  that is the run time 
+Polymorphism ..see the code..see the example bellow..
+ #include 
+#include
+ 
+using namespace std;
+ 
+class Pet {
+public:
+     string getDescription() const {
+        return &quot;This is Pet class&quot;;
+    }
+};
+ 
+class Dog : public Pet {
+public:
+     string getDescription() const {
+        return &quot;This is Dog class&quot;;
+    }
+};
+ 
+void describe(Pet p) { // Slices the derived class object
+    cout&#060;&#060;p.getDescription()&#060;&#060;endl;
+}
+ 
+int main() {
+    Dog d;
+    describe(d);
+    return 0;
+}
+output: This is Pet class
+#include 
+#include
+ 
+using namespace std;
+ 
+class Pet {
+public:
+     string getDescription() const {
+        return &quot;This is Pet class&quot;;
+    }
+};
+ 
+class Dog : public Pet {
+public:
+     string getDescription() const {
+        return &quot;This is Dog class&quot;;
+    }
+};
+ 
+void describe(Pet &#038;p) { // Slices the derived class object
+    cout&#060;&#060;p.getDescription()&#060;&#060;endl;
+}
+ 
+int main() {
+    Dog d;
+    describe(d);
+    return 0;
+}
+output:This is Pet class
+please correct me if i am wrong..]]></description>
+		<content:encoded><![CDATA[<p>i thing point 3 is not true &#8230;actually  that is the run time<br />
+Polymorphism ..see the code..see the example bellow..<br />
+ #include<br />
+#include</p>
+<p>using namespace std;</p>
+<p>class Pet {<br />
+public:<br />
+     string getDescription() const {<br />
+        return &#8220;This is Pet class&#8221;;<br />
+    }<br />
+};</p>
+<p>class Dog : public Pet {<br />
+public:<br />
+     string getDescription() const {<br />
+        return &#8220;This is Dog class&#8221;;<br />
+    }<br />
+};</p>
+<p>void describe(Pet p) { // Slices the derived class object<br />
+    cout&lt;&lt;p.getDescription()&lt;&lt;endl;<br />
+}</p>
+<p>int main() {<br />
+    Dog d;<br />
+    describe(d);<br />
+    return 0;<br />
+}<br />
+output: This is Pet class<br />
+#include<br />
+#include</p>
+<p>using namespace std;</p>
+<p>class Pet {<br />
+public:<br />
+     string getDescription() const {<br />
+        return &#8220;This is Pet class&#8221;;<br />
+    }<br />
+};</p>
+<p>class Dog : public Pet {<br />
+public:<br />
+     string getDescription() const {<br />
+        return &#8220;This is Dog class&#8221;;<br />
+    }<br />
+};</p>
+<p>void describe(Pet &amp;p) { // Slices the derived class object<br />
+    cout&lt;&lt;p.getDescription()&lt;&lt;endl;<br />
+}</p>
+<p>int main() {<br />
+    Dog d;<br />
+    describe(d);<br />
+    return 0;<br />
+}<br />
+output:This is Pet class<br />
+please correct me if i am wrong..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/#comment-4714</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Mon, 25 Jul 2011 09:36:52 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13292#comment-4714</guid>
+		<description><![CDATA[@Sandeep, Here are my comments,
+
+1. References add value by avoiding unnecessary -&#062; operator as compared pointers. It is as good as accessing local variable, with lasting modifications.
+
+2. Large sized objects can be passed by reference, so that the compiler will pass only the 4 byte (on 32 bit machine) pointer to the object to be accessed. Implicitly compiler does this when it is safe to do.
+
+3. Passing objects as &quot;const Object Reference&quot; can easy the compiler in making few decisions to generate efficient code.
+
+4. Major Advantage - We can achieve polymorphic behaviour at runtime using references. Object slicing is side-effect due to static type checking of objects at compile time, it is not added feature.]]></description>
+		<content:encoded><![CDATA[<p>@Sandeep, Here are my comments,</p>
+<p>1. References add value by avoiding unnecessary -&gt; operator as compared pointers. It is as good as accessing local variable, with lasting modifications.</p>
+<p>2. Large sized objects can be passed by reference, so that the compiler will pass only the 4 byte (on 32 bit machine) pointer to the object to be accessed. Implicitly compiler does this when it is safe to do.</p>
+<p>3. Passing objects as &#8220;const Object Reference&#8221; can easy the compiler in making few decisions to generate efficient code.</p>
+<p>4. Major Advantage &#8211; We can achieve polymorphic behaviour at runtime using references. Object slicing is side-effect due to static type checking of objects at compile time, it is not added feature.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.068 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:04 -->
+
+<!-- Compression = gzip -->

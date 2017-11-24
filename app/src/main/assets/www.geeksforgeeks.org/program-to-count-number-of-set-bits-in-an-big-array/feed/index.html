@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Program to count number of set bits in an (big) array</title>
+	<atom:link href="http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-29572</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 05 Nov 2013 13:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-29572</guid>
+		<description><![CDATA[other way to count the number of set bit.
+int countSetbit(int n)
+{
+      int count=0;
+
+      while(n&#038;n-1)
+     {
+         n=n&#038;n-1;
+         count++;
+
+     }
+
+      return count;
+
+}
+take an example :
+n=13  
+
+bits: 1101 
+
+n&#038;n-1= 1101&#038;1100=1100  count++;now count-&#062;1
+1100&#062;0 so..
+
+n&#038;n-1=1100&#038;1011=1000 count++ ,now count-&#062;2
+1000&#062;0 so..
+
+n&#038;n-1=1000&#038;0111=0 ,count++, now count-&#062;3
+n=0
+out site  while ;loop
+count=3]]></description>
+		<content:encoded><![CDATA[<p>other way to count the number of set bit.<br />
+int countSetbit(int n)<br />
+{<br />
+      int count=0;</p>
+<p>      while(n&amp;n-1)<br />
+     {<br />
+         n=n&amp;n-1;<br />
+         count++;</p>
+<p>     }</p>
+<p>      return count;</p>
+<p>}<br />
+take an example :<br />
+n=13  </p>
+<p>bits: 1101 </p>
+<p>n&amp;n-1= 1101&amp;1100=1100  count++;now count-&gt;1<br />
+1100&gt;0 so..</p>
+<p>n&amp;n-1=1100&amp;1011=1000 count++ ,now count-&gt;2<br />
+1000&gt;0 so..</p>
+<p>n&amp;n-1=1000&amp;0111=0 ,count++, now count-&gt;3<br />
+n=0<br />
+out site  while ;loop<br />
+count=3</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bohemia</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-27910</link>
+		<dc:creator><![CDATA[Bohemia]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2013 10:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-27910</guid>
+		<description><![CDATA[#   define SB2(n) n,     n+1,     n+1,     n+2
+
+#   define SB4(n) SB2(n), SB2(n+1), SB2(n+1), SB2(n+2)
+
+#   define SB6(n) SB4(n), SB4(n+1), SB4(n+1), SB4(n+2)
+
+//The macros basically generate the number of set bits in integers from 0 to 255
+
+int main()
+
+{
+
+    int Table256[256]={SB6(0),SB6(1),SB6(1),SB6(2)};//My LookUp Table
+
+    int arr[]={1,3,7,15};//My N- element Array
+
+    int n=sizeof(arr)/sizeof(arr[0]);//N
+
+    int i;//to iterate over the array
+
+    int sumSetBits=0;//contains # of set bit
+
+    for(i=0;i&#062; 8) &#038; 0xff] + Table256[(arr[i] &#062;&#062; 16) &#038; 0xff] + Table256[arr[i] &#062;&#062; 24];
+
+    }
+
+    //0xff to get first byte,shift by 8 and 0xff for 2nd byte , shift by 16 and 0xff for 3rd byte and finally the fourth byte (32- ints)
+
+    printf(&quot;%dn&quot;,sumSetBits);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#   define SB2(n) n,     n+1,     n+1,     n+2</p>
+<p>#   define SB4(n) SB2(n), SB2(n+1), SB2(n+1), SB2(n+2)</p>
+<p>#   define SB6(n) SB4(n), SB4(n+1), SB4(n+1), SB4(n+2)</p>
+<p>//The macros basically generate the number of set bits in integers from 0 to 255</p>
+<p>int main()</p>
+<p>{</p>
+<p>    int Table256[256]={SB6(0),SB6(1),SB6(1),SB6(2)};//My LookUp Table</p>
+<p>    int arr[]={1,3,7,15};//My N- element Array</p>
+<p>    int n=sizeof(arr)/sizeof(arr[0]);//N</p>
+<p>    int i;//to iterate over the array</p>
+<p>    int sumSetBits=0;//contains # of set bit</p>
+<p>    for(i=0;i&gt; 8) &amp; 0xff] + Table256[(arr[i] &gt;&gt; 16) &amp; 0xff] + Table256[arr[i] &gt;&gt; 24];</p>
+<p>    }</p>
+<p>    //0xff to get first byte,shift by 8 and 0xff for 2nd byte , shift by 16 and 0xff for 3rd byte and finally the fourth byte (32- ints)</p>
+<p>    printf(&#8220;%dn&#8221;,sumSetBits);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hanish Bansal</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-19397</link>
+		<dc:creator><![CDATA[Hanish Bansal]]></dc:creator>
+		<pubDate>Sat, 08 Jun 2013 20:32:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-19397</guid>
+		<description><![CDATA[## concatenates what is before it with what is after it]]></description>
+		<content:encoded><![CDATA[<p>## concatenates what is before it with what is after it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sindhu</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-9432</link>
+		<dc:creator><![CDATA[Sindhu]]></dc:creator>
+		<pubDate>Wed, 04 Jul 2012 16:07:06 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-9432</guid>
+		<description><![CDATA[Hi venki,
+I tried executing this code on a borland compiler.META_LOOK_UP(C)gives error.wher do you find this function. is this defined as standard function. do u know its implementation.
+
+Also groups should be defined the way u hav defined?
+
+i still didnt get clear idea abt groups. how do u generalise defining groups]]></description>
+		<content:encoded><![CDATA[<p>Hi venki,<br />
+I tried executing this code on a borland compiler.META_LOOK_UP(C)gives error.wher do you find this function. is this defined as standard function. do u know its implementation.</p>
+<p>Also groups should be defined the way u hav defined?</p>
+<p>i still didnt get clear idea abt groups. how do u generalise defining groups</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-5737</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Thu, 13 Oct 2011 19:11:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-5737</guid>
+		<description><![CDATA[@pranav, the idea is to create table of 256 entries. The table contains number of set bits in the sequential index of table. The macro META_LOOK_UP(C) generates the table. After preprocessing stage the definition of look_up will be something like
+
+static unsigned char const look_up[] = { 0, 1, 1, 2, 1, 2, 2, 3, ... 6, 7, 7, 8 };
+
+The code in main, simply splits the array into individual bytes and looks up the bit count value in the table.]]></description>
+		<content:encoded><![CDATA[<p>@pranav, the idea is to create table of 256 entries. The table contains number of set bits in the sequential index of table. The macro META_LOOK_UP(C) generates the table. After preprocessing stage the definition of look_up will be something like</p>
+<p>static unsigned char const look_up[] = { 0, 1, 1, 2, 1, 2, 2, 3, &#8230; 6, 7, 7, 8 };</p>
+<p>The code in main, simply splits the array into individual bytes and looks up the bit count value in the table.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pranav</title>
+		<link>http://www.geeksforgeeks.org/program-to-count-number-of-set-bits-in-an-big-array/#comment-5736</link>
+		<dc:creator><![CDATA[pranav]]></dc:creator>
+		<pubDate>Thu, 13 Oct 2011 14:27:49 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11263#comment-5736</guid>
+		<description><![CDATA[please someone explain clearly GROUP_A, GROUP_B, etc. concept and meaning of the definition of :
+#define META_LOOK_UP(PARAMETER) \
+   GROUP_##PARAMETER(0),  \
+   GROUP_##PARAMETER(1),  \
+   GROUP_##PARAMETER(1),  \
+   GROUP_##PARAMETER(2)   \]]></description>
+		<content:encoded><![CDATA[<p>please someone explain clearly GROUP_A, GROUP_B, etc. concept and meaning of the definition of :<br />
+#define META_LOOK_UP(PARAMETER) \<br />
+   GROUP_##PARAMETER(0),  \<br />
+   GROUP_##PARAMETER(1),  \<br />
+   GROUP_##PARAMETER(1),  \<br />
+   GROUP_##PARAMETER(2)   \</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.037 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:16:03 -->
+
+<!-- Compression = gzip -->

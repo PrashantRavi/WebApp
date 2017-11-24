@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 18 (Partition problem)</title>
+	<atom:link href="http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-39222</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 07:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-39222</guid>
+		<description><![CDATA[no its NP- Complete... the DP solution is a Pseudo Polynomial time solution.]]></description>
+		<content:encoded><![CDATA[<p>no its NP- Complete&#8230; the DP solution is a Pseudo Polynomial time solution.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: madan raj</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-38386</link>
+		<dc:creator><![CDATA[madan raj]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 06:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-38386</guid>
+		<description><![CDATA[add to both]]></description>
+		<content:encoded><![CDATA[<p>add to both</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Sharma</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-38161</link>
+		<dc:creator><![CDATA[Rohit Sharma]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 03:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-38161</guid>
+		<description><![CDATA[this is a dynamic programming problem !!....that means polynomial solution.....how can you say that please justify your ans.]]></description>
+		<content:encoded><![CDATA[<p>this is a dynamic programming problem !!&#8230;.that means polynomial solution&#8230;..how can you say that please justify your ans.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dante Fan</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-35760</link>
+		<dc:creator><![CDATA[Dante Fan]]></dc:creator>
+		<pubDate>Wed, 07 May 2014 17:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-35760</guid>
+		<description><![CDATA[It&#039;s an NP-complete problem, no polynomial solution yet...]]></description>
+		<content:encoded><![CDATA[<p>It&#8217;s an NP-complete problem, no polynomial solution yet&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Sharma</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-34704</link>
+		<dc:creator><![CDATA[Rohit Sharma]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 13:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-34704</guid>
+		<description><![CDATA[here is the code with time complexity-0(nlog(n))
+
+==================================
+
+algorithm---
+
+1-find sum of array.
+
+   if odd return false;
+
+sum=sum/2;
+
+2.sort array by using any method(quick_sort).
+
+3.apply knapsack or greedy algorithm similar to find sub array with given sum.
+
+here is code !!
+
+==============
+
+#include
+#include
+
+bool sub_array_sum(int [],int);
+
+int main()
+
+{
+
+	int a[100],n,i,sum;
+
+	printf(&quot;nEnter the value of n :&quot;);
+
+	scanf(&quot;%d&quot;,&#038;n);
+
+	printf(&quot;nEnter the elements :n&quot;);
+
+	for(i=0;i&#060;n;i++)
+
+	 scanf(&#034;%d&#034;,&#038;a[i]);
+
+	if(sub_array_sum(a,n) == true)
+
+	 printf(&#034;nPartition possible !!&#034;);
+
+	else 
+
+	 printf(&#034;nNo partition is possible !!&#034;);
+
+	return 0;
+
+}
+
+int compare(const void *a,int const void *b)
+{
+return (*(int *)a - *(int *)b);
+}
+
+int findSubArray(int a[], int n, int sum)
+{
+    /* Initialize curr_sum as value of first element
+       and starting point as 0 */
+    int curr_sum = a[0], start = 0, i;
+ 
+    /* Add elements one by one to curr_sum and if the curr_sum exceeds the
+       sum, then remove starting element */
+    for (i = 1; i  sum &#038;&#038; start &#060; i-1)
+        {
+            curr_sum = curr_sum - a[start];
+            start++;
+        }
+ 
+        // If curr_sum becomes equal to sum, then return true
+        if (curr_sum == sum)
+        {
+            printf (&#034;Sum found between indexes %d and %d&#034;, start, i-1);
+            return 1;
+        }
+ 
+        // Add this element to curr_sum
+        if (i &#060; n)
+          curr_sum = curr_sum + a[i];
+    }
+ 
+    // If we reach here, then no subarray
+    printf(&#034;No subarray found&#034;);
+    return 0;
+}
+
+
+bool sub_array_sum(int a[],int n)
+{
+
+	int i,sum=0;
+
+	for(i=0;i&#060;n;i++)
+
+	 sum += a[i];
+
+	if(sum % 2 == 1)
+
+	 return false;
+
+    qsort(a,n,sizeof(int),compare);
+
+    printf(&#034;nThe array after sorting !!&#034;);
+
+	for(i=0;i&#060;n;i++)
+
+	 printf(&#034;%d &#034;,a[i]);
+
+	return findSubArray(a,n,sum/2);
+}]]></description>
+		<content:encoded><![CDATA[<p>here is the code with time complexity-0(nlog(n))</p>
+<p>==================================</p>
+<p>algorithm&#8212;</p>
+<p>1-find sum of array.</p>
+<p>   if odd return false;</p>
+<p>sum=sum/2;</p>
+<p>2.sort array by using any method(quick_sort).</p>
+<p>3.apply knapsack or greedy algorithm similar to find sub array with given sum.</p>
+<p>here is code !!</p>
+<p>==============</p>
+<p>#include<br />
+#include</p>
+<p>bool sub_array_sum(int [],int);</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int a[100],n,i,sum;</p>
+<p>	printf(&#8220;nEnter the value of n :&#8221;);</p>
+<p>	scanf(&#8220;%d&#8221;,&amp;n);</p>
+<p>	printf(&#8220;nEnter the elements :n&#8221;);</p>
+<p>	for(i=0;i&lt;n;i++)</p>
+<p>	 scanf(&quot;%d&quot;,&amp;a[i]);</p>
+<p>	if(sub_array_sum(a,n) == true)</p>
+<p>	 printf(&quot;nPartition possible !!&quot;);</p>
+<p>	else </p>
+<p>	 printf(&quot;nNo partition is possible !!&quot;);</p>
+<p>	return 0;</p>
+<p>}</p>
+<p>int compare(const void *a,int const void *b)<br />
+{<br />
+return (*(int *)a &#8211; *(int *)b);<br />
+}</p>
+<p>int findSubArray(int a[], int n, int sum)<br />
+{<br />
+    /* Initialize curr_sum as value of first element<br />
+       and starting point as 0 */<br />
+    int curr_sum = a[0], start = 0, i;</p>
+<p>    /* Add elements one by one to curr_sum and if the curr_sum exceeds the<br />
+       sum, then remove starting element */<br />
+    for (i = 1; i  sum &amp;&amp; start &lt; i-1)<br />
+        {<br />
+            curr_sum = curr_sum &#8211; a[start];<br />
+            start++;<br />
+        }</p>
+<p>        // If curr_sum becomes equal to sum, then return true<br />
+        if (curr_sum == sum)<br />
+        {<br />
+            printf (&quot;Sum found between indexes %d and %d&quot;, start, i-1);<br />
+            return 1;<br />
+        }</p>
+<p>        // Add this element to curr_sum<br />
+        if (i &lt; n)<br />
+          curr_sum = curr_sum + a[i];<br />
+    }</p>
+<p>    // If we reach here, then no subarray<br />
+    printf(&quot;No subarray found&quot;);<br />
+    return 0;<br />
+}</p>
+<p>bool sub_array_sum(int a[],int n)<br />
+{</p>
+<p>	int i,sum=0;</p>
+<p>	for(i=0;i&lt;n;i++)</p>
+<p>	 sum += a[i];</p>
+<p>	if(sum % 2 == 1)</p>
+<p>	 return false;</p>
+<p>    qsort(a,n,sizeof(int),compare);</p>
+<p>    printf(&quot;nThe array after sorting !!&quot;);</p>
+<p>	for(i=0;i&lt;n;i++)</p>
+<p>	 printf(&quot;%d &quot;,a[i]);</p>
+<p>	return findSubArray(a,n,sum/2);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-31920</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Tue, 28 Jan 2014 06:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-31920</guid>
+		<description><![CDATA[for this {5, 5, 4, 3, 3} .. ??]]></description>
+		<content:encoded><![CDATA[<p>for this {5, 5, 4, 3, 3} .. ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-31918</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Tue, 28 Jan 2014 05:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-31918</guid>
+		<description><![CDATA[if sum1 = sum2, then what to do? add to which sum?]]></description>
+		<content:encoded><![CDATA[<p>if sum1 = sum2, then what to do? add to which sum?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-31572</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Thu, 16 Jan 2014 20:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-31572</guid>
+		<description><![CDATA[here is the naive recursive approach which returns the min differnece detween two partiotins
+
+/*
+
+int min(int a,int b)
+
+{
+
+	return a&#062;b?b:a;
+
+}
+
+int fun(int arr[],int low,int high,int s1,int s2)
+
+{
+
+	if(low&#062;high)
+
+	   return s1&#062;s2?(s1-s2):(s2-s1);
+
+	return min(fun(arr,low+1,high,s1+arr[low],s2),fun(arr,low+1,high,s1,s2+arr[low]));
+
+}
+
+int main()
+
+{
+
+	int arr[]={3, 1, 5, 9, 12};
+
+	int n=sizeof(arr)/sizeof(arr[0]);
+
+	cout&#060;&#060;fun(arr,0,n-1,0,0)&#060;&#060;&#034; is the min parttiotion,n&#034;;
+
+	return 0;
+
+}
+
+*/]]></description>
+		<content:encoded><![CDATA[<p>here is the naive recursive approach which returns the min differnece detween two partiotins</p>
+<p>/*</p>
+<p>int min(int a,int b)</p>
+<p>{</p>
+<p>	return a&gt;b?b:a;</p>
+<p>}</p>
+<p>int fun(int arr[],int low,int high,int s1,int s2)</p>
+<p>{</p>
+<p>	if(low&gt;high)</p>
+<p>	   return s1&gt;s2?(s1-s2):(s2-s1);</p>
+<p>	return min(fun(arr,low+1,high,s1+arr[low],s2),fun(arr,low+1,high,s1,s2+arr[low]));</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int arr[]={3, 1, 5, 9, 12};</p>
+<p>	int n=sizeof(arr)/sizeof(arr[0]);</p>
+<p>	cout&lt;&lt;fun(arr,0,n-1,0,0)&lt;&lt;&quot; is the min parttiotion,n&quot;;</p>
+<p>	return 0;</p>
+<p>}</p>
+<p>*/</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siddhartha's Father</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-29883</link>
+		<dc:creator><![CDATA[Siddhartha's Father]]></dc:creator>
+		<pubDate>Sat, 16 Nov 2013 13:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-29883</guid>
+		<description><![CDATA[What are you son? Blind! Your Array contains 3 elements.]]></description>
+		<content:encoded><![CDATA[<p>What are you son? Blind! Your Array contains 3 elements.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aja Huang</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-28765</link>
+		<dc:creator><![CDATA[Aja Huang]]></dc:creator>
+		<pubDate>Sat, 12 Oct 2013 10:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-28765</guid>
+		<description><![CDATA[There is a much faster and simpler solution using STL bitset.
+https://github.com/swem/UVa-Online-Judge/blob/master/10664.cpp]]></description>
+		<content:encoded><![CDATA[<p>There is a much faster and simpler solution using STL bitset.<br />
+<a href="https://github.com/swem/UVa-Online-Judge/blob/master/10664.cpp" rel="nofollow">https://github.com/swem/UVa-Online-Judge/blob/master/10664.cpp</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sumit dey</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-18-partition-problem/#comment-25587</link>
+		<dc:creator><![CDATA[sumit dey]]></dc:creator>
+		<pubDate>Sun, 18 Aug 2013 12:38:34 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21579#comment-25587</guid>
+		<description><![CDATA[Here is the java version of the same problem, it will also print the solution of the subset which has leads to the solution. No need of sorted input and it works for negative solution. The printed solution will print the one of the subset, other subset will be the excluded element.
+
+
+&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+/**
+ * 
+ */
+
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class PartitionSumSubsetProblem {
+
+	public static class CachedDataAttr {
+		int sum;
+		int indexOfArray;
+		int bfrSumDiff;
+
+		CachedDataAttr(int pSum, int pIndexOfArry, int pAfterSumDiff) {
+			this.sum = pSum;
+			this.indexOfArray = pIndexOfArry;
+			this.bfrSumDiff = pAfterSumDiff;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+
+			if (o instanceof CachedDataAttr) {
+				CachedDataAttr arg = (CachedDataAttr) o;
+				this.sum = arg.sum;
+				this.indexOfArray = arg.indexOfArray;
+			}
+			return false;
+		}
+
+		public String toString() {
+			return &#034;sum =&#034; + this.sum + &#034; :: index = &#034; + (this.indexOfArray + 1)
+					+ &#034; :: bfrSumDiff= &#034; + this.bfrSumDiff + &#034;\t&#034;;
+		}
+	}
+
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		int arr[] = { 5,5,4,3,3};//{ 11, 1, 5, 11, 5, -11, 0, 2 }
+
+		System.out
+				.println(sumOfSubsetIsPossible(arr) ? &#034;Solution is possible&#034; : &#034;No subset exists&#034;);
+
+	}
+
+	private static boolean sumOfSubsetIsPossible(int[] arr) {
+
+		if (arr == null &#124;&#124; arr.length == 0)
+			return false;
+		int size = arr.length;
+		int sum = 0;
+		for (int i = 0; i &#060; size; i++)
+			sum = sum + arr[i];
+		if (sum % 2 == 1)
+			return false;
+		Map&#060;PartitionSumSubsetProblem.CachedDataAttr, Boolean&#062; CachedData = new LinkedHashMap&#060;PartitionSumSubsetProblem.CachedDataAttr, Boolean&#062;();
+
+		boolean result = mainLogisOfSumOfSubsetIsPossible(arr, sum / 2, size - 1, CachedData);
+
+		System.out.println(CachedData);
+		printSolution(CachedData, arr);
+		return result;
+
+	}
+
+	private static void printSolution(Map&#060;CachedDataAttr, Boolean&#062; cachedData, int[] arr) {
+
+		int sum = 0;
+
+		for (Map.Entry&#060;CachedDataAttr, Boolean&#062; cachedMap : cachedData.entrySet()) {
+
+			if (sum == cachedMap.getKey().sum &#038;&#038; cachedMap.getValue()) {
+				// find the next sum value
+				if (sum + arr[cachedMap.getKey().indexOfArray] == cachedMap.getKey().bfrSumDiff) {
+					sum = sum + arr[cachedMap.getKey().indexOfArray];
+					System.out.print(arr[cachedMap.getKey().indexOfArray] + &#034;,&#034;);
+				}
+			}
+		}
+
+		System.out.println(&#034;\b&#034;);
+
+	}
+
+	/**
+	 *  This methods contain the main logic for the problem
+	 * @param arr
+	 * @param sum
+	 * @param size
+	 * @param cachedData
+	 * @return
+	 */
+	private static boolean mainLogisOfSumOfSubsetIsPossible(int[] arr, int sum, int size,
+			Map&#060;CachedDataAttr, Boolean&#062; cachedData) {
+
+		// base cases , when sum==0, we found the solution
+		if (sum == 0)
+			return true;
+		// base case if size &#060;0 &#038;&#038; sum!=0, we have not include few elements that
+		if (size &#060; 0 &#038;&#038; sum != 0)
+			return false;
+		// base case, if the solution is already computed, return the solution
+		PartitionSumSubsetProblem.CachedDataAttr exData = new PartitionSumSubsetProblem.CachedDataAttr(
+				sum, size, sum);// excluded
+		PartitionSumSubsetProblem.CachedDataAttr inData = new PartitionSumSubsetProblem.CachedDataAttr(
+				sum - arr[size], size, sum);// include
+		if (cachedData.containsKey(exData))
+			return cachedData.get(exData);
+		if (cachedData.containsKey(inData))
+			return cachedData.get(inData);
+
+		boolean includeSolution = mainLogisOfSumOfSubsetIsPossible(arr, sum - arr[size], size - 1,
+				cachedData);
+		boolean excludeSolution = includeSolution
+				&#124;&#124; mainLogisOfSumOfSubsetIsPossible(arr, sum, size - 1, cachedData);
+		cachedData.put(inData, includeSolution);
+		if (!includeSolution)
+			cachedData.put(exData, excludeSolution);
+		return excludeSolution;
+	}
+
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Here is the java version of the same problem, it will also print the solution of the subset which has leads to the solution. No need of sorted input and it works for negative solution. The printed solution will print the one of the subset, other subset will be the excluded element.</p>
+<pre> <code language="Java">
+/**
+ * 
+ */
+
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class PartitionSumSubsetProblem {
+
+	public static class CachedDataAttr {
+		int sum;
+		int indexOfArray;
+		int bfrSumDiff;
+
+		CachedDataAttr(int pSum, int pIndexOfArry, int pAfterSumDiff) {
+			this.sum = pSum;
+			this.indexOfArray = pIndexOfArry;
+			this.bfrSumDiff = pAfterSumDiff;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+
+			if (o instanceof CachedDataAttr) {
+				CachedDataAttr arg = (CachedDataAttr) o;
+				this.sum = arg.sum;
+				this.indexOfArray = arg.indexOfArray;
+			}
+			return false;
+		}
+
+		public String toString() {
+			return &quot;sum =&quot; + this.sum + &quot; :: index = &quot; + (this.indexOfArray + 1)
+					+ &quot; :: bfrSumDiff= &quot; + this.bfrSumDiff + &quot;\t&quot;;
+		}
+	}
+
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		int arr[] = { 5,5,4,3,3};//{ 11, 1, 5, 11, 5, -11, 0, 2 }
+
+		System.out
+				.println(sumOfSubsetIsPossible(arr) ? &quot;Solution is possible&quot; : &quot;No subset exists&quot;);
+
+	}
+
+	private static boolean sumOfSubsetIsPossible(int[] arr) {
+
+		if (arr == null || arr.length == 0)
+			return false;
+		int size = arr.length;
+		int sum = 0;
+		for (int i = 0; i &lt; size; i++)
+			sum = sum + arr[i];
+		if (sum % 2 == 1)
+			return false;
+		Map&lt;PartitionSumSubsetProblem.CachedDataAttr, Boolean&gt; CachedData = new LinkedHashMap&lt;PartitionSumSubsetProblem.CachedDataAttr, Boolean&gt;();
+
+		boolean result = mainLogisOfSumOfSubsetIsPossible(arr, sum / 2, size - 1, CachedData);
+
+		System.out.println(CachedData);
+		printSolution(CachedData, arr);
+		return result;
+
+	}
+
+	private static void printSolution(Map&lt;CachedDataAttr, Boolean&gt; cachedData, int[] arr) {
+
+		int sum = 0;
+
+		for (Map.Entry&lt;CachedDataAttr, Boolean&gt; cachedMap : cachedData.entrySet()) {
+
+			if (sum == cachedMap.getKey().sum &amp;&amp; cachedMap.getValue()) {
+				// find the next sum value
+				if (sum + arr[cachedMap.getKey().indexOfArray] == cachedMap.getKey().bfrSumDiff) {
+					sum = sum + arr[cachedMap.getKey().indexOfArray];
+					System.out.print(arr[cachedMap.getKey().indexOfArray] + &quot;,&quot;);
+				}
+			}
+		}
+
+		System.out.println(&quot;\b&quot;);
+
+	}
+
+	/**
+	 *  This methods contain the main logic for the problem
+	 * @param arr
+	 * @param sum
+	 * @param size
+	 * @param cachedData
+	 * @return
+	 */
+	private static boolean mainLogisOfSumOfSubsetIsPossible(int[] arr, int sum, int size,
+			Map&lt;CachedDataAttr, Boolean&gt; cachedData) {
+
+		// base cases , when sum==0, we found the solution
+		if (sum == 0)
+			return true;
+		// base case if size &lt;0 &amp;&amp; sum!=0, we have not include few elements that
+		if (size &lt; 0 &amp;&amp; sum != 0)
+			return false;
+		// base case, if the solution is already computed, return the solution
+		PartitionSumSubsetProblem.CachedDataAttr exData = new PartitionSumSubsetProblem.CachedDataAttr(
+				sum, size, sum);// excluded
+		PartitionSumSubsetProblem.CachedDataAttr inData = new PartitionSumSubsetProblem.CachedDataAttr(
+				sum - arr[size], size, sum);// include
+		if (cachedData.containsKey(exData))
+			return cachedData.get(exData);
+		if (cachedData.containsKey(inData))
+			return cachedData.get(inData);
+
+		boolean includeSolution = mainLogisOfSumOfSubsetIsPossible(arr, sum - arr[size], size - 1,
+				cachedData);
+		boolean excludeSolution = includeSolution
+				|| mainLogisOfSumOfSubsetIsPossible(arr, sum, size - 1, cachedData);
+		cachedData.put(inData, includeSolution);
+		if (!includeSolution)
+			cachedData.put(exData, excludeSolution);
+		return excludeSolution;
+	}
+
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:09:11 -->
+
+<!-- Compression = gzip -->

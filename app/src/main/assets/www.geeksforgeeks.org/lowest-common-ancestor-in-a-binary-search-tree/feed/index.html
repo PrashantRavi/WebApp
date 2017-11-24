@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Lowest Common Ancestor in a Binary Search Tree.</title>
+	<atom:link href="http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-39458</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 14:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-39458</guid>
+		<description><![CDATA[Pefect...As far as I tested..The code works perfectly fine...Thanx...:)]]></description>
+		<content:encoded><![CDATA[<p>Pefect&#8230;As far as I tested..The code works perfectly fine&#8230;Thanx&#8230;:)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Deepesh Panjabi</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-39250</link>
+		<dc:creator><![CDATA[Deepesh Panjabi]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 13:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-39250</guid>
+		<description><![CDATA[http://ideone.com/1j9OAs]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/1j9OAs" rel="nofollow">http://ideone.com/1j9OAs</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-39047</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 14:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-39047</guid>
+		<description><![CDATA[no this is not a bst. because 12 and 14 are in the left subtree of 10.
+bst depends on the sequence in which the values are inserted,if 10 is inserted earlier then when 12 comes it will be inserted in the right subtree of 10.]]></description>
+		<content:encoded><![CDATA[<p>no this is not a bst. because 12 and 14 are in the left subtree of 10.<br />
+bst depends on the sequence in which the values are inserted,if 10 is inserted earlier then when 12 comes it will be inserted in the right subtree of 10.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-39045</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 14:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-39045</guid>
+		<description><![CDATA[extended solution if atleast one node is not present in tree
+please check and let me know if something is wrong ??
+
+// A recursive C program to find LCA of two nodes n1 and n2.
+#include 
+#include 
+//#include 
+struct node
+{
+    int data;
+    struct node* left, *right;
+};
+ 
+/* Function to find LCA of n1 and n2. The function assumes that both
+   n1 and n2 are present in BST */
+struct node *lca(struct node* root, int n1, int n2)
+{
+       static int v1=0,v2=0,f;
+       static struct node*p;
+    if (root == NULL) return NULL;
+     if(root-&#062;data==n1)
+                       v1=1;
+     if(root-&#062;data==n2)
+                       v2=1;
+    // If both n1 and n2 are smaller than root, then LCA lies in left
+    
+    
+    if (root-&#062;data &#062; n1 &#038;&#038; root-&#062;data &#062; n2)
+         lca(root-&#062;left, n1, n2);
+ 
+    // If both n1 and n2 are greater than root, then LCA lies in right
+    else if (root-&#062;data data right, n1, n2);
+    else
+    {
+        if(f==0)
+             p=root;
+            f=1;
+             lca(root-&#062;left,n1,n2);
+             lca(root-&#062;right,n1,n2);
+    }
+    
+         
+    if(v1==1&#038;&#038;v2==1)
+                    return p;
+}
+ 
+/* Helper function that allocates a new node with the given data.*/
+struct node* newNode(int data)
+{
+    struct node* node = (struct node*)malloc(sizeof(struct node));
+    node-&#062;data  = data;
+    node-&#062;left  = node-&#062;right = NULL;
+    return(node);
+}
+ 
+/* Driver program to test mirror() */
+int main()
+{
+
+
+    struct node *root        = newNode(20);
+    root-&#062;left               = newNode(8);
+    root-&#062;right              = newNode(22);
+    root-&#062;left-&#062;left         = newNode(4);
+    root-&#062;left-&#062;right        = newNode(12);
+    root-&#062;left-&#062;right-&#062;left  = newNode(10);
+    root-&#062;left-&#062;right-&#062;right = newNode(14);
+ 
+    int n1 = 2, n2 = 8;
+    struct node *t = lca(root, n1, n2);
+    if(t!=NULL)
+    printf(&quot;LCA of %d and %d is %d n&quot;, n1, n2, t-&#062;data);
+    else
+    printf(&quot;atleast one is not presentn&quot;);
+ 
+ 
+//    getchar();
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>extended solution if atleast one node is not present in tree<br />
+please check and let me know if something is wrong ??</p>
+<p>// A recursive C program to find LCA of two nodes n1 and n2.<br />
+#include<br />
+#include<br />
+//#include<br />
+struct node<br />
+{<br />
+    int data;<br />
+    struct node* left, *right;<br />
+};</p>
+<p>/* Function to find LCA of n1 and n2. The function assumes that both<br />
+   n1 and n2 are present in BST */<br />
+struct node *lca(struct node* root, int n1, int n2)<br />
+{<br />
+       static int v1=0,v2=0,f;<br />
+       static struct node*p;<br />
+    if (root == NULL) return NULL;<br />
+     if(root-&gt;data==n1)<br />
+                       v1=1;<br />
+     if(root-&gt;data==n2)<br />
+                       v2=1;<br />
+    // If both n1 and n2 are smaller than root, then LCA lies in left</p>
+<p>    if (root-&gt;data &gt; n1 &amp;&amp; root-&gt;data &gt; n2)<br />
+         lca(root-&gt;left, n1, n2);</p>
+<p>    // If both n1 and n2 are greater than root, then LCA lies in right<br />
+    else if (root-&gt;data data right, n1, n2);<br />
+    else<br />
+    {<br />
+        if(f==0)<br />
+             p=root;<br />
+            f=1;<br />
+             lca(root-&gt;left,n1,n2);<br />
+             lca(root-&gt;right,n1,n2);<br />
+    }</p>
+<p>    if(v1==1&amp;&amp;v2==1)<br />
+                    return p;<br />
+}</p>
+<p>/* Helper function that allocates a new node with the given data.*/<br />
+struct node* newNode(int data)<br />
+{<br />
+    struct node* node = (struct node*)malloc(sizeof(struct node));<br />
+    node-&gt;data  = data;<br />
+    node-&gt;left  = node-&gt;right = NULL;<br />
+    return(node);<br />
+}</p>
+<p>/* Driver program to test mirror() */<br />
+int main()<br />
+{</p>
+<p>    struct node *root        = newNode(20);<br />
+    root-&gt;left               = newNode(8);<br />
+    root-&gt;right              = newNode(22);<br />
+    root-&gt;left-&gt;left         = newNode(4);<br />
+    root-&gt;left-&gt;right        = newNode(12);<br />
+    root-&gt;left-&gt;right-&gt;left  = newNode(10);<br />
+    root-&gt;left-&gt;right-&gt;right = newNode(14);</p>
+<p>    int n1 = 2, n2 = 8;<br />
+    struct node *t = lca(root, n1, n2);<br />
+    if(t!=NULL)<br />
+    printf(&#8220;LCA of %d and %d is %d n&#8221;, n1, n2, t-&gt;data);<br />
+    else<br />
+    printf(&#8220;atleast one is not presentn&#8221;);</p>
+<p>//    getchar();<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sarunac</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-38126</link>
+		<dc:creator><![CDATA[sarunac]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 16:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-38126</guid>
+		<description><![CDATA[No, 12 and 14 are on the right subtrees of 10. My tree is the same as the one told in the question, but with just 10 inserted between 8 and 20.]]></description>
+		<content:encoded><![CDATA[<p>No, 12 and 14 are on the right subtrees of 10. My tree is the same as the one told in the question, but with just 10 inserted between 8 and 20.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kradmour</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-38051</link>
+		<dc:creator><![CDATA[kradmour]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 05:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-38051</guid>
+		<description><![CDATA[You can&#039;t have 12 and 14 in the left sub tree of 10. That violates the structural property of the BST.]]></description>
+		<content:encoded><![CDATA[<p>You can&#8217;t have 12 and 14 in the left sub tree of 10. That violates the structural property of the BST.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sarunac</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-37947</link>
+		<dc:creator><![CDATA[sarunac]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 01:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-37947</guid>
+		<description><![CDATA[If I build the tree like below,
+
+    struct node *root        = newNode(20);
+    root-&#062;left               = newNode(10);
+    root-&#062;right              = newNode(22);
+    root-&#062;left-&#062;left         = newNode(8);
+    root-&#062;left-&#062;left-&#062;left  = newNode(4);
+    root-&#062;left-&#062;left-&#062;right = newNode(12);
+    root-&#062;left-&#062;left-&#062;right-&#062;right = newNode(14);
+
+Pictorially, I have just taken the 10 and inserted it to be a parent of 8 and left child of 20. 
+
+This is still a valid BST and the LCA for this tree, according to the above algorithm seems to return 10 , instead of 8. Am I overlooking some very important property of BST or LCA? It would be really helpful, if anyone could shed some light on this.]]></description>
+		<content:encoded><![CDATA[<p>If I build the tree like below,</p>
+<p>    struct node *root        = newNode(20);<br />
+    root-&gt;left               = newNode(10);<br />
+    root-&gt;right              = newNode(22);<br />
+    root-&gt;left-&gt;left         = newNode(8);<br />
+    root-&gt;left-&gt;left-&gt;left  = newNode(4);<br />
+    root-&gt;left-&gt;left-&gt;right = newNode(12);<br />
+    root-&gt;left-&gt;left-&gt;right-&gt;right = newNode(14);</p>
+<p>Pictorially, I have just taken the 10 and inserted it to be a parent of 8 and left child of 20. </p>
+<p>This is still a valid BST and the LCA for this tree, according to the above algorithm seems to return 10 , instead of 8. Am I overlooking some very important property of BST or LCA? It would be really helpful, if anyone could shed some light on this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-37669</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 11:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-37669</guid>
+		<description><![CDATA[you should use &quot;else if &quot; in place of third &quot;if&quot; case]]></description>
+		<content:encoded><![CDATA[<p>you should use &#8220;else if &#8221; in place of third &#8220;if&#8221; case</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-37668</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 11:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-37668</guid>
+		<description><![CDATA[go through level order search recursively make two arrays which stores addresses of nodes visited (for both array)
+
+then after doing this, start matching addresses from last of both arrays .
+
+matched address will be address of the node :)]]></description>
+		<content:encoded><![CDATA[<p>go through level order search recursively make two arrays which stores addresses of nodes visited (for both array)</p>
+<p>then after doing this, start matching addresses from last of both arrays .</p>
+<p>matched address will be address of the node 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mayank yadav</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-36152</link>
+		<dc:creator><![CDATA[mayank yadav]]></dc:creator>
+		<pubDate>Sat, 17 May 2014 05:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-36152</guid>
+		<description><![CDATA[I have a problem, 
+can there be any case when both the nodes are present in the BST and LCA comes out to be NULL?
+
+If not, then why do we need to check  &quot;  if(root == NULL)  &quot; in the code above?]]></description>
+		<content:encoded><![CDATA[<p>I have a problem,<br />
+can there be any case when both the nodes are present in the BST and LCA comes out to be NULL?</p>
+<p>If not, then why do we need to check  &#8221;  if(root == NULL)  &#8221; in the code above?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kp</title>
+		<link>http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/#comment-36055</link>
+		<dc:creator><![CDATA[kp]]></dc:creator>
+		<pubDate>Wed, 14 May 2014 19:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1029#comment-36055</guid>
+		<description><![CDATA[if the tree is not bst then how to solve this....]]></description>
+		<content:encoded><![CDATA[<p>if the tree is not bst then how to solve this&#8230;.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.050 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:24:03 -->
+
+<!-- Compression = gzip -->

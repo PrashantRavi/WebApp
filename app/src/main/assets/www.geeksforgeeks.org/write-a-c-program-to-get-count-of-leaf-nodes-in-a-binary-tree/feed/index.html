@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Program to count leaf nodes in a binary tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: abc</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-39557</link>
+		<dc:creator><![CDATA[abc]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 17:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-39557</guid>
+		<description><![CDATA[is this fine ??
+
+int count(node *root){
+    static int c=0;
+    if(root==NULL){
+        return 0;
+    }
+    
+    count(root-&#062;left);
+    count(root-&#062;right);
+    
+    if(root-&#062;left==NULL&#038;&#038;root-&#062;right==NULL){
+      c++;
+      
+    }
+    return c;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>is this fine ??</p>
+<p>int count(node *root){<br />
+    static int c=0;<br />
+    if(root==NULL){<br />
+        return 0;<br />
+    }</p>
+<p>    count(root-&gt;left);<br />
+    count(root-&gt;right);</p>
+<p>    if(root-&gt;left==NULL&amp;&amp;root-&gt;right==NULL){<br />
+      c++;</p>
+<p>    }<br />
+    return c;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Deepesh Panjabi</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-39279</link>
+		<dc:creator><![CDATA[Deepesh Panjabi]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 17:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-39279</guid>
+		<description><![CDATA[http://ideone.com/pdjk1Y]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/pdjk1Y" rel="nofollow">http://ideone.com/pdjk1Y</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: groomnestle</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-30304</link>
+		<dc:creator><![CDATA[groomnestle]]></dc:creator>
+		<pubDate>Sun, 01 Dec 2013 20:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-30304</guid>
+		<description><![CDATA[Traverse the tree in any order (in-order, pre-order or post-order) and count++ for nodes with no children.]]></description>
+		<content:encoded><![CDATA[<p>Traverse the tree in any order (in-order, pre-order or post-order) and count++ for nodes with no children.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: munai</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-28233</link>
+		<dc:creator><![CDATA[munai]]></dc:creator>
+		<pubDate>Sun, 29 Sep 2013 15:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-28233</guid>
+		<description><![CDATA[#include 
+#include 
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+typedef struct node node;
+struct list
+{
+    node *a;
+    struct list *next;
+};
+typedef struct list list;
+list *head,*cur_node,*prev_node;
+node *NewNode(int val)
+{
+    node *temp=(node *)malloc(sizeof(node));
+    temp-&#062;data=val;
+    temp-&#062;left=temp-&#062;right=NULL;
+    return temp;
+}
+void enqueue(node *a)
+{
+    list *temp=(list *)malloc(sizeof(list));
+    temp-&#062;a=a;
+    temp-&#062;next=NULL;
+    if(!head)
+    {
+        head=temp;
+        cur_node=temp;
+    }
+    else
+    {
+        prev_node=cur_node;
+        cur_node-&#062;next=temp;
+        cur_node=temp;
+    }
+}
+int IsEmpty()
+{
+    if(!head)
+        return 1;
+    else
+        return 0;
+}
+node *dequeue()
+{
+    list *temp;
+    node *a;
+    if(IsEmpty())
+        return NULL;
+    temp=head;
+    head=head-&#062;next;
+    a=temp-&#062;a;
+    free(temp); 
+    return a;
+}
+int leaf(node *root)
+{
+    node *temp;
+    int count=0;
+    if(!root)
+        return count;
+    enqueue(root);
+    while(!IsEmpty())
+    {
+        temp=dequeue();
+        if(!(temp-&#062;left) &#038;&#038; !(temp-&#062;right))
+            count++;
+        if(temp-&#062;left)
+            enqueue(temp-&#062;left);
+        if(temp-&#062;right)
+            enqueue(temp-&#062;right);
+    }
+    return count;
+}
+int main()
+{
+    node *root=NewNode(1);
+    root-&#062;left=NewNode(2);
+    root-&#062;right=NewNode(3);
+    root-&#062;left-&#062;left=NewNode(4);
+    root-&#062;left-&#062;right=NewNode(5);
+    root-&#062;right-&#062;left=NewNode(6);
+    root-&#062;right-&#062;right=NewNode(7);
+    head=cur_node=prev_node=NULL;
+    printf(&quot;Total leaf : %dn&quot;,leaf(root));
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+struct node<br />
+{<br />
+    int data;<br />
+    struct node *left,*right;<br />
+};<br />
+typedef struct node node;<br />
+struct list<br />
+{<br />
+    node *a;<br />
+    struct list *next;<br />
+};<br />
+typedef struct list list;<br />
+list *head,*cur_node,*prev_node;<br />
+node *NewNode(int val)<br />
+{<br />
+    node *temp=(node *)malloc(sizeof(node));<br />
+    temp-&gt;data=val;<br />
+    temp-&gt;left=temp-&gt;right=NULL;<br />
+    return temp;<br />
+}<br />
+void enqueue(node *a)<br />
+{<br />
+    list *temp=(list *)malloc(sizeof(list));<br />
+    temp-&gt;a=a;<br />
+    temp-&gt;next=NULL;<br />
+    if(!head)<br />
+    {<br />
+        head=temp;<br />
+        cur_node=temp;<br />
+    }<br />
+    else<br />
+    {<br />
+        prev_node=cur_node;<br />
+        cur_node-&gt;next=temp;<br />
+        cur_node=temp;<br />
+    }<br />
+}<br />
+int IsEmpty()<br />
+{<br />
+    if(!head)<br />
+        return 1;<br />
+    else<br />
+        return 0;<br />
+}<br />
+node *dequeue()<br />
+{<br />
+    list *temp;<br />
+    node *a;<br />
+    if(IsEmpty())<br />
+        return NULL;<br />
+    temp=head;<br />
+    head=head-&gt;next;<br />
+    a=temp-&gt;a;<br />
+    free(temp);<br />
+    return a;<br />
+}<br />
+int leaf(node *root)<br />
+{<br />
+    node *temp;<br />
+    int count=0;<br />
+    if(!root)<br />
+        return count;<br />
+    enqueue(root);<br />
+    while(!IsEmpty())<br />
+    {<br />
+        temp=dequeue();<br />
+        if(!(temp-&gt;left) &amp;&amp; !(temp-&gt;right))<br />
+            count++;<br />
+        if(temp-&gt;left)<br />
+            enqueue(temp-&gt;left);<br />
+        if(temp-&gt;right)<br />
+            enqueue(temp-&gt;right);<br />
+    }<br />
+    return count;<br />
+}<br />
+int main()<br />
+{<br />
+    node *root=NewNode(1);<br />
+    root-&gt;left=NewNode(2);<br />
+    root-&gt;right=NewNode(3);<br />
+    root-&gt;left-&gt;left=NewNode(4);<br />
+    root-&gt;left-&gt;right=NewNode(5);<br />
+    root-&gt;right-&gt;left=NewNode(6);<br />
+    root-&gt;right-&gt;right=NewNode(7);<br />
+    head=cur_node=prev_node=NULL;<br />
+    printf(&#8220;Total leaf : %dn&#8221;,leaf(root));<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhikumar18</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-20665</link>
+		<dc:creator><![CDATA[abhikumar18]]></dc:creator>
+		<pubDate>Wed, 26 Jun 2013 12:51:06 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-20665</guid>
+		<description><![CDATA[i think nikhil it will work...
+c code...
+
+
+#include&lt;stdlib.h&gt;
+#include&lt;stdio.h&gt;
+#include&lt;conio.h&gt;
+typedef struct Node
+{
+	struct Node* left;
+	int data;
+	struct Node* right;
+}tNode;
+tNode* memory_Alloc(int item)
+{
+	tNode* ptr=NULL;
+	ptr=(tNode*)malloc(sizeof(tNode));
+	ptr-&gt;left=NULL;
+	ptr-&gt;data=item;
+	ptr-&gt;right=NULL;
+	return ptr;
+}
+void post_Order(tNode* root)
+{
+	if(root==NULL)
+	{
+		return;
+	}
+	else
+	{
+		post_Order(root-&gt;left);
+		post_Order(root-&gt;right);
+		printf(&quot;%d &quot;,root-&gt;data);
+
+	}
+}
+int calculate_Leaf_Nodes(tNode* root)
+{
+	int count;
+	if(root==NULL)
+	{
+		return 0;
+	}
+	if(root-&gt;left==NULL &amp;&amp; root-&gt;right==NULL)
+	{
+		count=1;
+		return count;
+	}
+	if(root-&gt;left==NULL &#124;&#124; root-&gt;right==NULL)
+	{
+		return 1;
+	}
+	if(root-&gt;left!=NULL &amp;&amp; root-&gt;right!=NULL)
+	{
+       count=(calculate_Leaf_Nodes(root-&gt;left)+calculate_Leaf_Nodes(root-&gt;right));
+	   return count;
+	}
+}
+
+void main()
+{
+	tNode* root=memory_Alloc(1);
+	root-&gt;left=memory_Alloc(2);
+	root-&gt;left-&gt;left=memory_Alloc(4);
+	root-&gt;left-&gt;right=memory_Alloc(6);
+	root-&gt;right=memory_Alloc(3);
+	root-&gt;left-&gt;left-&gt;left=memory_Alloc(5);
+	root-&gt;left-&gt;left-&gt;right=memory_Alloc(7);
+	root-&gt;left-&gt;left-&gt;left-&gt;right=memory_Alloc(8);
+	printf(&quot;Given tree is:&quot;);
+	post_Order(root);
+	printf(&quot;\n&quot;);
+	printf(&quot;Leaf nodes in given tree is : &quot;);
+	printf(&quot;%d&quot;,calculate_Leaf_Nodes(root));
+	getch();
+}]]></description>
+		<content:encoded><![CDATA[<p>i think nikhil it will work&#8230;<br />
+c code&#8230;</p>
+<p>#include<stdlib .h><br />
+#include<stdio .h><br />
+#include<conio .h><br />
+typedef struct Node<br />
+{<br />
+	struct Node* left;<br />
+	int data;<br />
+	struct Node* right;<br />
+}tNode;<br />
+tNode* memory_Alloc(int item)<br />
+{<br />
+	tNode* ptr=NULL;<br />
+	ptr=(tNode*)malloc(sizeof(tNode));<br />
+	ptr->left=NULL;<br />
+	ptr->data=item;<br />
+	ptr->right=NULL;<br />
+	return ptr;<br />
+}<br />
+void post_Order(tNode* root)<br />
+{<br />
+	if(root==NULL)<br />
+	{<br />
+		return;<br />
+	}<br />
+	else<br />
+	{<br />
+		post_Order(root->left);<br />
+		post_Order(root->right);<br />
+		printf(&#8220;%d &#8220;,root->data);</p>
+<p>	}<br />
+}<br />
+int calculate_Leaf_Nodes(tNode* root)<br />
+{<br />
+	int count;<br />
+	if(root==NULL)<br />
+	{<br />
+		return 0;<br />
+	}<br />
+	if(root->left==NULL &#038;&#038; root->right==NULL)<br />
+	{<br />
+		count=1;<br />
+		return count;<br />
+	}<br />
+	if(root->left==NULL || root->right==NULL)<br />
+	{<br />
+		return 1;<br />
+	}<br />
+	if(root->left!=NULL &#038;&#038; root->right!=NULL)<br />
+	{<br />
+       count=(calculate_Leaf_Nodes(root->left)+calculate_Leaf_Nodes(root->right));<br />
+	   return count;<br />
+	}<br />
+}</p>
+<p>void main()<br />
+{<br />
+	tNode* root=memory_Alloc(1);<br />
+	root->left=memory_Alloc(2);<br />
+	root->left->left=memory_Alloc(4);<br />
+	root->left->right=memory_Alloc(6);<br />
+	root->right=memory_Alloc(3);<br />
+	root->left->left->left=memory_Alloc(5);<br />
+	root->left->left->right=memory_Alloc(7);<br />
+	root->left->left->left->right=memory_Alloc(8);<br />
+	printf(&#8220;Given tree is:&#8221;);<br />
+	post_Order(root);<br />
+	printf(&#8220;\n&#8221;);<br />
+	printf(&#8220;Leaf nodes in given tree is : &#8220;);<br />
+	printf(&#8220;%d&#8221;,calculate_Leaf_Nodes(root));<br />
+	getch();<br />
+}</conio></stdio></stdlib></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Agrawal</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-18973</link>
+		<dc:creator><![CDATA[Nikhil Agrawal]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 13:05:41 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-18973</guid>
+		<description><![CDATA[Sorry this solution will NOT work for following tree:
+                 1
+                / \
+               2   3
+              / \
+             4   6
+            /     \
+           5       7
+                    \
+                     8]]></description>
+		<content:encoded><![CDATA[<p>Sorry this solution will NOT work for following tree:<br />
+                 1<br />
+                / \<br />
+               2   3<br />
+              / \<br />
+             4   6<br />
+            /     \<br />
+           5       7<br />
+                    \<br />
+                     8</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Agrawal</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-18972</link>
+		<dc:creator><![CDATA[Nikhil Agrawal]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 12:38:29 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-18972</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+public void numberofleafs(Node root)
+{
+      int max=-1;
+        int value=0;
+    if(root==null)
+    {
+        System.out.println(&#034;Number of leaf nodes=0&#034;);
+        return;
+    }
+    else
+    {
+        Node temp=null;
+        Queue&#060;Node&#062; q=new LinkedList&#060;&#062;();
+        q.add(root);
+        q.add(temp);
+      
+        while(!q.isEmpty())
+        {
+            Node t=q.remove();
+            
+            if(t!=null)
+            {
+                value=0;
+                while(t!=null)
+                {
+                    value++;                    
+                if(t.left!=null)
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+                
+                    t=q.remove();
+                }
+                
+                q.add(temp);
+                if(value&#062;max)
+                    max=value;                
+            }
+            else if(t==null)
+            {
+                continue;
+            }
+            
+        }
+        System.out.println(&#034;Number of leaf Nodes=&#034;+max);
+    }
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+public void numberofleafs(Node root)
+{
+      int max=-1;
+        int value=0;
+    if(root==null)
+    {
+        System.out.println(&quot;Number of leaf nodes=0&quot;);
+        return;
+    }
+    else
+    {
+        Node temp=null;
+        Queue&lt;Node&gt; q=new LinkedList&lt;&gt;();
+        q.add(root);
+        q.add(temp);
+      
+        while(!q.isEmpty())
+        {
+            Node t=q.remove();
+            
+            if(t!=null)
+            {
+                value=0;
+                while(t!=null)
+                {
+                    value++;                    
+                if(t.left!=null)
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+                
+                    t=q.remove();
+                }
+                
+                q.add(temp);
+                if(value&gt;max)
+                    max=value;                
+            }
+            else if(t==null)
+            {
+                continue;
+            }
+            
+        }
+        System.out.println(&quot;Number of leaf Nodes=&quot;+max);
+    }
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Agrawal</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-18970</link>
+		<dc:creator><![CDATA[Nikhil Agrawal]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 12:34:59 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-18970</guid>
+		<description><![CDATA[Below code is simple iterative version for finding number of leaf nodes using queue. The key concept is add all element of a particular level and then add null to queue. For finding number of leaf nodes just count number nodes between last null in the queue and second last null in the queue. 
+
+
+[sourcecode language=&quot;Java&quot; 1=&quot;void&quot; 2=&quot;numberofleafs(Node&quot; 3=&quot;root)&quot; 4=&quot;{&quot; 5=&quot;int&quot; max=&quot;value;&quot; 6=&quot;int&quot; value=&quot;0;&quot; 7=&quot;if(root==null)&quot; 8=&quot;{&quot; 9=&quot;System.out.println(&#034;Number&quot; 10=&quot;of&quot; 11=&quot;leaf&quot; 12=&quot;nodes=0&#034;);&quot; 13=&quot;return;&quot; 14=&quot;}&quot; 15=&quot;else&quot; 16=&quot;{&quot; 17=&quot;Node&quot; temp=&quot;null;&quot; 18=&quot;Queue&#060;Node&#062;&quot; q=&quot;new&quot; 19=&quot;LinkedList&#060;&#062;();&quot; 20=&quot;q.add(root);&quot; 21=&quot;q.add(temp);&quot; 22=&quot;while(!q.isEmpty())&quot; 23=&quot;{&quot; 24=&quot;Node&quot; t=&quot;q.remove();&quot; 25=&quot;if(t!=null)&quot; 26=&quot;{&quot; 27=&quot;while(t!=null)&quot; 28=&quot;{&quot; 29=&quot;value++;&quot; 30=&quot;if(t.left!=null)&quot; 31=&quot;q.add(t.left);&quot; 32=&quot;if(t.right!=null)&quot; 33=&quot;q.add(t.right);&quot; 34=&quot;}&quot; 35=&quot;q.add(temp);&quot; 36=&quot;if(value&#062;max)&quot; 37=&quot;}&quot; 38=&quot;else&quot; 39=&quot;if(t==null)&quot; 40=&quot;{&quot; 41=&quot;continue;&quot; 42=&quot;}&quot; 43=&quot;}&quot; 44=&quot;System.out.println(&#034;Number&quot; 45=&quot;of&quot; 46=&quot;leaf&quot; 47=&quot;Nodes=&#034;+max);&quot; 48=&quot;}&quot; 49=&quot;}&quot; 50=&quot;[/sourcecode&quot;]&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Below code is simple iterative version for finding number of leaf nodes using queue. The key concept is add all element of a particular level and then add null to queue. For finding number of leaf nodes just count number nodes between last null in the queue and second last null in the queue. </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sagar2693</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-18686</link>
+		<dc:creator><![CDATA[sagar2693]]></dc:creator>
+		<pubDate>Sun, 26 May 2013 19:21:36 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-18686</guid>
+		<description><![CDATA[@kartik your code falters when a node has only one leaf child .....
+what would be the most obvious way for dat???
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>@kartik your code falters when a node has only one leaf child &#8230;..<br />
+what would be the most obvious way for dat???</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-18054</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Thu, 09 May 2013 19:52:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-18054</guid>
+		<description><![CDATA[C++ code:
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;iostream&#062;
+#include &#060;stdlib.h&#062;
+using namespace std;
+ 
+class tree_node {
+  private:
+    int data;
+    tree_node * left;
+    tree_node * right;
+  public:
+    tree_node() {
+      left=NULL;
+      right=NULL;
+    }
+    void set_data(int data) {
+      this-&#062;data=data;
+    }
+    int get_data() {
+      return this-&#062;data;
+    }
+    void set_left(tree_node * left) {
+      this-&#062;left=left;
+    }
+    tree_node * get_left() {
+      return this-&#062;left;
+    }
+    void set_right(tree_node * right) {
+      this-&#062;right=right;
+    }
+    tree_node * get_right() {
+      return this-&#062;right;
+    }
+    tree_node ** get_left_ref() {
+      return &#038;(this-&#062;left);
+    }
+    tree_node ** get_right_ref() {
+      return &#038;(this-&#062;right);
+    }
+};
+ 
+class tree {
+  private:
+    tree_node * root;
+    int size;
+    void _recursive_insert(tree_node ** root_ref, int value);
+    void _print_preorder(tree_node * root);
+    void _print_inorder(tree_node * root);
+    void _print_postorder(tree_node * root);
+    int _find_size(tree_node * root);
+    int _are_identical(tree_node * tn1, tree_node * tn2);
+    int _find_height(tree_node * root);
+    void _delete_tree(tree_node ** root);
+    void _mirror(tree_node * root);
+    void _print_paths(tree_node * root, int * path_nodes, int next_vacant_position);
+    void _print_array(int * array, int len);
+    tree_node * _lowest_common_ancestor(tree_node * parent, tree_node * root, int a, int b);
+    tree_node * _find_node(tree_node * root, int value);
+    tree_node * _min_node(tree_node * root);
+    void _print_level_order(tree_node * root);
+    int _count_leaf_nodes(tree_node * root);
+  public:
+    tree() {
+      root=NULL;
+      size=0;
+    }
+    void insert(int value);
+    void recursive_insert(int value);
+    void print_preorder();
+    void print_inorder();
+    void print_postorder();
+    int find_size();
+    int get_size() {
+      return this-&#062;size;
+    }
+    int are_identical(tree t);
+    int find_height();
+    void delete_tree();
+    void mirror();
+    void print_paths();
+    tree_node * lowest_common_ancestor(int a, int b);
+    tree_node * find_node(int value);
+    tree_node * min_node();
+    void print_level_order();
+    int count_leaf_nodes();
+};
+ 
+void tree::insert(int value) {
+  if(root==NULL) {
+    root=new tree_node;
+    root-&#062;set_data(value);
+  } else {
+    tree_node * parent=NULL;
+    tree_node * current=root;
+    tree_node * new_node=new tree_node;
+    new_node-&#062;set_data(value);
+    while(current!=NULL) {
+      if(value&#060;=current-&#062;get_data()) {
+        parent=current;
+        current=current-&#062;get_left();
+      } else {
+        parent=current;
+        current=current-&#062;get_right();
+      }
+    }
+    if(value&#060;=parent-&#062;get_data() &#038;&#038; parent-&#062;get_left()==NULL) {
+      parent-&#062;set_left(new_node);
+    } else if(value&#062;parent-&#062;get_data() &#038;&#038; parent-&#062;get_right()==NULL) {
+      parent-&#062;set_right(new_node);
+    }
+  }
+  size++;
+}
+ 
+void tree::recursive_insert(int value) {
+  _recursive_insert(&#038;root, value);
+  size++;
+}
+ 
+void tree::_recursive_insert(tree_node ** root_ref, int value) {
+  if(*root_ref==NULL) {
+    tree_node * new_node=new tree_node;
+    new_node-&#062;set_data(value);
+    *root_ref=new_node;   
+  } else {
+    if(value&#060;=(*root_ref)-&#062;get_data()) {
+      _recursive_insert((*root_ref)-&#062;get_left_ref(), value);
+    } else {
+      _recursive_insert((*root_ref)-&#062;get_right_ref(), value);
+    }
+  }
+}
+ 
+void tree::print_preorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_preorder(root);
+  cout&#060;&#060;endl;
+}
+ 
+void tree::_print_preorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  cout&#060;&#060;root-&#062;get_data()&#060;&#060;&#034; &#034;;
+  if(root-&#062;get_left()!=NULL)
+    _print_preorder(root-&#062;get_left());
+  if(root-&#062;get_right()!=NULL)
+    _print_preorder(root-&#062;get_right());
+}
+ 
+void tree::print_inorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_inorder(root);
+  cout&#060;&#060;endl;
+}
+ 
+void tree::_print_inorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  if(root-&#062;get_left()!=NULL)
+    _print_inorder(root-&#062;get_left());
+  cout&#060;&#060;root-&#062;get_data()&#060;&#060;&#034; &#034;;
+  if(root-&#062;get_right()!=NULL)
+    _print_inorder(root-&#062;get_right());
+}
+ 
+void tree::print_postorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_postorder(root);
+  cout&#060;&#060;endl;
+}
+ 
+void tree::_print_postorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  if(root-&#062;get_left()!=NULL)
+    _print_postorder(root-&#062;get_left());
+  if(root-&#062;get_right()!=NULL)
+    _print_postorder(root-&#062;get_right());
+  cout&#060;&#060;root-&#062;get_data()&#060;&#060;&#034; &#034;;
+}
+
+int tree::find_size() {
+  return _find_size(root);
+}
+
+int tree::_find_size(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  } else {
+    return 1+_find_size(root-&#062;get_left())+_find_size(root-&#062;get_right());
+  }
+}
+
+int tree::are_identical(tree t) {
+  return _are_identical(this-&#062;root, t.root);
+}
+
+int tree::_are_identical(tree_node * tn1, tree_node * tn2) {
+  if(tn1==NULL &#038;&#038; tn2==NULL) {
+    return 1;
+  } else if((tn1==NULL &#038;&#038; tn2!=NULL) &#124;&#124; (tn1!=NULL &#038;&#038; tn2==NULL) &#124;&#124; (tn1-&#062;get_data()!=tn2-&#062;get_data())) {
+    return 0;
+  } else {
+    return _are_identical(tn1-&#062;get_left(), tn2-&#062;get_left()) &#038;&#038; _are_identical(tn1-&#062;get_right(), tn2-&#062;get_right());
+  }
+}
+
+int tree::find_height() {
+  return _find_height(root);
+}
+
+int tree::_find_height(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  }
+  else {
+    return 1+max(_find_height(root-&#062;get_left()), _find_height(root-&#062;get_right()));
+  }
+}
+
+void tree::delete_tree() {
+  _delete_tree(&#038;root);
+  size=0;
+}
+
+void tree::_delete_tree(tree_node ** root) {
+  if(*root==NULL) {
+    return;
+  } else {
+    if((*root)-&#062;get_left()!=NULL) {
+      _delete_tree((*root)-&#062;get_left_ref());
+    }
+    if((*root)-&#062;get_right()!=NULL) {
+      _delete_tree((*root)-&#062;get_right_ref());
+    }
+    delete(*root);
+    *root=NULL;
+  }
+}
+
+/* alternate _delete_tree */
+/*
+void tree::_delete_tree(tree_node ** root) {
+  if(*root==NULL) {
+    return;
+  } else {
+    if((*root)-&#062;get_left()!=NULL) {
+      tree_node * left_ref=(*root)-&#062;get_left();
+      _delete_tree(&#038;left_ref);
+    }
+    if((*root)-&#062;get_right()!=NULL) {
+      tree_node * right_ref=(*root)-&#062;get_right();
+      _delete_tree(&#038;right_ref);
+    }
+    delete(*root);
+    *root=NULL;
+  }
+}
+*/
+
+void tree::mirror() {
+  _mirror(root);
+}
+
+void tree::_mirror(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+
+  tree_node * temp=root-&#062;get_left();
+  root-&#062;set_left(root-&#062;get_right());
+  root-&#062;set_right(temp);
+  _mirror(root-&#062;get_left());
+  _mirror(root-&#062;get_right());
+}
+
+void tree::print_paths(){
+   int max_path_length=find_height();
+   int * path_nodes=(int *)calloc(sizeof(int), max_path_length);
+  _print_paths(root, path_nodes, 0);
+}
+
+void tree::_print_paths(tree_node * root, int * path_nodes, int next_vacant_position){
+  if(root==NULL) {
+    return;
+  } else if(root-&#062;get_left()==NULL &#038;&#038; root-&#062;get_right()==NULL) {
+    *(path_nodes+next_vacant_position)=root-&#062;get_data();
+    _print_array(path_nodes, next_vacant_position);
+  } else {
+    *(path_nodes+next_vacant_position)=root-&#062;get_data();
+    _print_paths(root-&#062;get_left(), path_nodes, next_vacant_position+1);
+    _print_paths(root-&#062;get_right(), path_nodes, next_vacant_position+1);
+  }
+}
+
+void tree::_print_array(int * array, int len) {
+  int i;
+  for(i=0; i&#060;=len; i++) {
+    cout&#060;&#060;*(array+i)&#060;&#060;&#034; &#034;;
+  }
+  cout&#060;&#060;endl;
+}
+
+tree_node * tree::find_node(int value) {
+  return _find_node(root, value);
+}
+
+tree_node * tree::_find_node(tree_node * root, int value) {
+  if(root==NULL &#124;&#124; root-&#062;get_data()==value) {
+    return root;
+  } else if(value&#060;=root-&#062;get_data()) {
+    return _find_node(root-&#062;get_left(), value);
+  } else {
+    return _find_node(root-&#062;get_right(), value);
+  }
+}
+
+tree_node * tree::lowest_common_ancestor(int a, int b) {
+  return _lowest_common_ancestor(NULL, root, a, b);
+}
+
+tree_node * tree::_lowest_common_ancestor(tree_node * parent, tree_node * root, int a, int b) {
+  if(root==NULL) {
+    return root;
+  } else if((root-&#062;get_data()==a &#038;&#038; (root-&#062;get_left()-&#062;get_data()==b &#124;&#124; root-&#062;get_right()-&#062;get_data()==b))
+             &#124;&#124; (root-&#062;get_data()==b &#038;&#038; (root-&#062;get_left()-&#062;get_data()==a &#124;&#124; root-&#062;get_right()-&#062;get_data()==a))) {
+    return parent;
+  } else if((_find_node(root-&#062;get_left(), a)!=NULL &#038;&#038; _find_node(root-&#062;get_right(), b)!=NULL)
+        &#124;&#124; (_find_node(root-&#062;get_left(), b)!=NULL &#038;&#038; _find_node(root-&#062;get_right(), a)!=NULL)) {
+    return root; 
+  } else if(_find_node(root-&#062;get_left(), a)!=NULL &#038;&#038; _find_node(root-&#062;get_left(), b)!=NULL) {
+    return _lowest_common_ancestor(root, root-&#062;get_left(), a, b);
+  } else if(_find_node(root-&#062;get_right(), a)!=NULL &#038;&#038; _find_node(root-&#062;get_right(), b)!=NULL) {
+    return _lowest_common_ancestor(root, root-&#062;get_right(), a, b);
+  } else {
+    return NULL;
+  }
+}
+
+tree_node * tree::min_node() {
+  return _min_node(root);
+}
+
+tree_node * tree::_min_node(tree_node * root) {
+  if(root==NULL &#124;&#124; root-&#062;get_left()==NULL) {
+    return root;
+  } else {
+    return _min_node(root-&#062;get_left());
+  }
+}
+
+int tree::count_leaf_nodes() {
+  return _count_leaf_nodes(root);
+}
+
+int tree::_count_leaf_nodes(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  } else if(root-&#062;get_left()==NULL &#038;&#038; root-&#062;get_right()==NULL) {
+    return 1;
+  } else {
+    return _count_leaf_nodes(root-&#062;get_left())+_count_leaf_nodes(root-&#062;get_right());
+  }
+}
+
+int main() {
+  tree t1;
+
+  t1.recursive_insert(5);
+  t1.recursive_insert(3);
+  t1.insert(10);
+  t1.insert(7);
+  t1.recursive_insert(50);
+  t1.recursive_insert(6);
+  t1.recursive_insert(1);
+  t1.recursive_insert(45);
+  t1.recursive_insert(55);
+  t1.recursive_insert(4);
+
+  cout&#060;&#060;&#034;Inorder Traversal&#034;&#060;&#060;endl;
+  t1.print_inorder();
+  cout&#060;&#060;&#034;No. of leaf nodes are: &#034;&#060;&#060;t1.count_leaf_nodes()&#060;&#060;endl;
+
+  return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+Inorder Traversal
+1 3 4 5 6 7 10 45 50 55 
+No. of leaf nodes are: 5]]></description>
+		<content:encoded><![CDATA[<p>C++ code:</p>
+<pre> <code language="C">
+#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;
+using namespace std;
+ 
+class tree_node {
+  private:
+    int data;
+    tree_node * left;
+    tree_node * right;
+  public:
+    tree_node() {
+      left=NULL;
+      right=NULL;
+    }
+    void set_data(int data) {
+      this-&gt;data=data;
+    }
+    int get_data() {
+      return this-&gt;data;
+    }
+    void set_left(tree_node * left) {
+      this-&gt;left=left;
+    }
+    tree_node * get_left() {
+      return this-&gt;left;
+    }
+    void set_right(tree_node * right) {
+      this-&gt;right=right;
+    }
+    tree_node * get_right() {
+      return this-&gt;right;
+    }
+    tree_node ** get_left_ref() {
+      return &amp;(this-&gt;left);
+    }
+    tree_node ** get_right_ref() {
+      return &amp;(this-&gt;right);
+    }
+};
+ 
+class tree {
+  private:
+    tree_node * root;
+    int size;
+    void _recursive_insert(tree_node ** root_ref, int value);
+    void _print_preorder(tree_node * root);
+    void _print_inorder(tree_node * root);
+    void _print_postorder(tree_node * root);
+    int _find_size(tree_node * root);
+    int _are_identical(tree_node * tn1, tree_node * tn2);
+    int _find_height(tree_node * root);
+    void _delete_tree(tree_node ** root);
+    void _mirror(tree_node * root);
+    void _print_paths(tree_node * root, int * path_nodes, int next_vacant_position);
+    void _print_array(int * array, int len);
+    tree_node * _lowest_common_ancestor(tree_node * parent, tree_node * root, int a, int b);
+    tree_node * _find_node(tree_node * root, int value);
+    tree_node * _min_node(tree_node * root);
+    void _print_level_order(tree_node * root);
+    int _count_leaf_nodes(tree_node * root);
+  public:
+    tree() {
+      root=NULL;
+      size=0;
+    }
+    void insert(int value);
+    void recursive_insert(int value);
+    void print_preorder();
+    void print_inorder();
+    void print_postorder();
+    int find_size();
+    int get_size() {
+      return this-&gt;size;
+    }
+    int are_identical(tree t);
+    int find_height();
+    void delete_tree();
+    void mirror();
+    void print_paths();
+    tree_node * lowest_common_ancestor(int a, int b);
+    tree_node * find_node(int value);
+    tree_node * min_node();
+    void print_level_order();
+    int count_leaf_nodes();
+};
+ 
+void tree::insert(int value) {
+  if(root==NULL) {
+    root=new tree_node;
+    root-&gt;set_data(value);
+  } else {
+    tree_node * parent=NULL;
+    tree_node * current=root;
+    tree_node * new_node=new tree_node;
+    new_node-&gt;set_data(value);
+    while(current!=NULL) {
+      if(value&lt;=current-&gt;get_data()) {
+        parent=current;
+        current=current-&gt;get_left();
+      } else {
+        parent=current;
+        current=current-&gt;get_right();
+      }
+    }
+    if(value&lt;=parent-&gt;get_data() &amp;&amp; parent-&gt;get_left()==NULL) {
+      parent-&gt;set_left(new_node);
+    } else if(value&gt;parent-&gt;get_data() &amp;&amp; parent-&gt;get_right()==NULL) {
+      parent-&gt;set_right(new_node);
+    }
+  }
+  size++;
+}
+ 
+void tree::recursive_insert(int value) {
+  _recursive_insert(&amp;root, value);
+  size++;
+}
+ 
+void tree::_recursive_insert(tree_node ** root_ref, int value) {
+  if(*root_ref==NULL) {
+    tree_node * new_node=new tree_node;
+    new_node-&gt;set_data(value);
+    *root_ref=new_node;   
+  } else {
+    if(value&lt;=(*root_ref)-&gt;get_data()) {
+      _recursive_insert((*root_ref)-&gt;get_left_ref(), value);
+    } else {
+      _recursive_insert((*root_ref)-&gt;get_right_ref(), value);
+    }
+  }
+}
+ 
+void tree::print_preorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_preorder(root);
+  cout&lt;&lt;endl;
+}
+ 
+void tree::_print_preorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  cout&lt;&lt;root-&gt;get_data()&lt;&lt;&quot; &quot;;
+  if(root-&gt;get_left()!=NULL)
+    _print_preorder(root-&gt;get_left());
+  if(root-&gt;get_right()!=NULL)
+    _print_preorder(root-&gt;get_right());
+}
+ 
+void tree::print_inorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_inorder(root);
+  cout&lt;&lt;endl;
+}
+ 
+void tree::_print_inorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  if(root-&gt;get_left()!=NULL)
+    _print_inorder(root-&gt;get_left());
+  cout&lt;&lt;root-&gt;get_data()&lt;&lt;&quot; &quot;;
+  if(root-&gt;get_right()!=NULL)
+    _print_inorder(root-&gt;get_right());
+}
+ 
+void tree::print_postorder() {
+  if(root==NULL) {
+    return;
+  }
+  _print_postorder(root);
+  cout&lt;&lt;endl;
+}
+ 
+void tree::_print_postorder(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+  if(root-&gt;get_left()!=NULL)
+    _print_postorder(root-&gt;get_left());
+  if(root-&gt;get_right()!=NULL)
+    _print_postorder(root-&gt;get_right());
+  cout&lt;&lt;root-&gt;get_data()&lt;&lt;&quot; &quot;;
+}
+
+int tree::find_size() {
+  return _find_size(root);
+}
+
+int tree::_find_size(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  } else {
+    return 1+_find_size(root-&gt;get_left())+_find_size(root-&gt;get_right());
+  }
+}
+
+int tree::are_identical(tree t) {
+  return _are_identical(this-&gt;root, t.root);
+}
+
+int tree::_are_identical(tree_node * tn1, tree_node * tn2) {
+  if(tn1==NULL &amp;&amp; tn2==NULL) {
+    return 1;
+  } else if((tn1==NULL &amp;&amp; tn2!=NULL) || (tn1!=NULL &amp;&amp; tn2==NULL) || (tn1-&gt;get_data()!=tn2-&gt;get_data())) {
+    return 0;
+  } else {
+    return _are_identical(tn1-&gt;get_left(), tn2-&gt;get_left()) &amp;&amp; _are_identical(tn1-&gt;get_right(), tn2-&gt;get_right());
+  }
+}
+
+int tree::find_height() {
+  return _find_height(root);
+}
+
+int tree::_find_height(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  }
+  else {
+    return 1+max(_find_height(root-&gt;get_left()), _find_height(root-&gt;get_right()));
+  }
+}
+
+void tree::delete_tree() {
+  _delete_tree(&amp;root);
+  size=0;
+}
+
+void tree::_delete_tree(tree_node ** root) {
+  if(*root==NULL) {
+    return;
+  } else {
+    if((*root)-&gt;get_left()!=NULL) {
+      _delete_tree((*root)-&gt;get_left_ref());
+    }
+    if((*root)-&gt;get_right()!=NULL) {
+      _delete_tree((*root)-&gt;get_right_ref());
+    }
+    delete(*root);
+    *root=NULL;
+  }
+}
+
+/* alternate _delete_tree */
+/*
+void tree::_delete_tree(tree_node ** root) {
+  if(*root==NULL) {
+    return;
+  } else {
+    if((*root)-&gt;get_left()!=NULL) {
+      tree_node * left_ref=(*root)-&gt;get_left();
+      _delete_tree(&amp;left_ref);
+    }
+    if((*root)-&gt;get_right()!=NULL) {
+      tree_node * right_ref=(*root)-&gt;get_right();
+      _delete_tree(&amp;right_ref);
+    }
+    delete(*root);
+    *root=NULL;
+  }
+}
+*/
+
+void tree::mirror() {
+  _mirror(root);
+}
+
+void tree::_mirror(tree_node * root) {
+  if(root==NULL) {
+    return;
+  }
+
+  tree_node * temp=root-&gt;get_left();
+  root-&gt;set_left(root-&gt;get_right());
+  root-&gt;set_right(temp);
+  _mirror(root-&gt;get_left());
+  _mirror(root-&gt;get_right());
+}
+
+void tree::print_paths(){
+   int max_path_length=find_height();
+   int * path_nodes=(int *)calloc(sizeof(int), max_path_length);
+  _print_paths(root, path_nodes, 0);
+}
+
+void tree::_print_paths(tree_node * root, int * path_nodes, int next_vacant_position){
+  if(root==NULL) {
+    return;
+  } else if(root-&gt;get_left()==NULL &amp;&amp; root-&gt;get_right()==NULL) {
+    *(path_nodes+next_vacant_position)=root-&gt;get_data();
+    _print_array(path_nodes, next_vacant_position);
+  } else {
+    *(path_nodes+next_vacant_position)=root-&gt;get_data();
+    _print_paths(root-&gt;get_left(), path_nodes, next_vacant_position+1);
+    _print_paths(root-&gt;get_right(), path_nodes, next_vacant_position+1);
+  }
+}
+
+void tree::_print_array(int * array, int len) {
+  int i;
+  for(i=0; i&lt;=len; i++) {
+    cout&lt;&lt;*(array+i)&lt;&lt;&quot; &quot;;
+  }
+  cout&lt;&lt;endl;
+}
+
+tree_node * tree::find_node(int value) {
+  return _find_node(root, value);
+}
+
+tree_node * tree::_find_node(tree_node * root, int value) {
+  if(root==NULL || root-&gt;get_data()==value) {
+    return root;
+  } else if(value&lt;=root-&gt;get_data()) {
+    return _find_node(root-&gt;get_left(), value);
+  } else {
+    return _find_node(root-&gt;get_right(), value);
+  }
+}
+
+tree_node * tree::lowest_common_ancestor(int a, int b) {
+  return _lowest_common_ancestor(NULL, root, a, b);
+}
+
+tree_node * tree::_lowest_common_ancestor(tree_node * parent, tree_node * root, int a, int b) {
+  if(root==NULL) {
+    return root;
+  } else if((root-&gt;get_data()==a &amp;&amp; (root-&gt;get_left()-&gt;get_data()==b || root-&gt;get_right()-&gt;get_data()==b))
+             || (root-&gt;get_data()==b &amp;&amp; (root-&gt;get_left()-&gt;get_data()==a || root-&gt;get_right()-&gt;get_data()==a))) {
+    return parent;
+  } else if((_find_node(root-&gt;get_left(), a)!=NULL &amp;&amp; _find_node(root-&gt;get_right(), b)!=NULL)
+        || (_find_node(root-&gt;get_left(), b)!=NULL &amp;&amp; _find_node(root-&gt;get_right(), a)!=NULL)) {
+    return root; 
+  } else if(_find_node(root-&gt;get_left(), a)!=NULL &amp;&amp; _find_node(root-&gt;get_left(), b)!=NULL) {
+    return _lowest_common_ancestor(root, root-&gt;get_left(), a, b);
+  } else if(_find_node(root-&gt;get_right(), a)!=NULL &amp;&amp; _find_node(root-&gt;get_right(), b)!=NULL) {
+    return _lowest_common_ancestor(root, root-&gt;get_right(), a, b);
+  } else {
+    return NULL;
+  }
+}
+
+tree_node * tree::min_node() {
+  return _min_node(root);
+}
+
+tree_node * tree::_min_node(tree_node * root) {
+  if(root==NULL || root-&gt;get_left()==NULL) {
+    return root;
+  } else {
+    return _min_node(root-&gt;get_left());
+  }
+}
+
+int tree::count_leaf_nodes() {
+  return _count_leaf_nodes(root);
+}
+
+int tree::_count_leaf_nodes(tree_node * root) {
+  if(root==NULL) {
+    return 0;
+  } else if(root-&gt;get_left()==NULL &amp;&amp; root-&gt;get_right()==NULL) {
+    return 1;
+  } else {
+    return _count_leaf_nodes(root-&gt;get_left())+_count_leaf_nodes(root-&gt;get_right());
+  }
+}
+
+int main() {
+  tree t1;
+
+  t1.recursive_insert(5);
+  t1.recursive_insert(3);
+  t1.insert(10);
+  t1.insert(7);
+  t1.recursive_insert(50);
+  t1.recursive_insert(6);
+  t1.recursive_insert(1);
+  t1.recursive_insert(45);
+  t1.recursive_insert(55);
+  t1.recursive_insert(4);
+
+  cout&lt;&lt;&quot;Inorder Traversal&quot;&lt;&lt;endl;
+  t1.print_inorder();
+  cout&lt;&lt;&quot;No. of leaf nodes are: &quot;&lt;&lt;t1.count_leaf_nodes()&lt;&lt;endl;
+
+  return 0;
+}
+</code> </pre>
+<p>Inorder Traversal<br />
+1 3 4 5 6 7 10 45 50 55<br />
+No. of leaf nodes are: 5</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Sablok</title>
+		<link>http://www.geeksforgeeks.org/write-a-c-program-to-get-count-of-leaf-nodes-in-a-binary-tree/#comment-16321</link>
+		<dc:creator><![CDATA[Ankit Sablok]]></dc:creator>
+		<pubDate>Thu, 14 Mar 2013 06:02:43 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2755#comment-16321</guid>
+		<description><![CDATA[your logic only holds for a complete binary tree not for general or skewed binary trees, even if you are given the depth of the tree lets say 6, there can be different number of leaf node briefly one can have leaves on the 5th level, 4th, 3rd and so on and hence this calculation seems to be wrong
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>your logic only holds for a complete binary tree not for general or skewed binary trees, even if you are given the depth of the tree lets say 6, there can be different number of leaf node briefly one can have leaves on the 5th level, 4th, 3rd and so on and hence this calculation seems to be wrong</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.048 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:32 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Trie &#124; (Delete)</title>
+	<atom:link href="http://www.geeksforgeeks.org/trie-delete/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/trie-delete/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: tvbgeek</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-39205</link>
+		<dc:creator><![CDATA[tvbgeek]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 05:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-39205</guid>
+		<description><![CDATA[We are not taking care of decrementing the global counter 
+PTrie-&#062;count if delete was successful. Also not handling invalid 
+input strings in case of delete.]]></description>
+		<content:encoded><![CDATA[<p>We are not taking care of decrementing the global counter<br />
+PTrie-&gt;count if delete was successful. Also not handling invalid<br />
+input strings in case of delete.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: gaurav</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-35326</link>
+		<dc:creator><![CDATA[gaurav]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 15:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-35326</guid>
+		<description><![CDATA[Just one query, in the base case, if it is already a leaf node, do we need to check whether there are any children to it]]></description>
+		<content:encoded><![CDATA[<p>Just one query, in the base case, if it is already a leaf node, do we need to check whether there are any children to it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-35046</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 01:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-35046</guid>
+		<description><![CDATA[Elegant solution :) All the cases are handled very nicely.]]></description>
+		<content:encoded><![CDATA[<p>Elegant solution 🙂 All the cases are handled very nicely.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pavansrinivas</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-29229</link>
+		<dc:creator><![CDATA[pavansrinivas]]></dc:creator>
+		<pubDate>Wed, 23 Oct 2013 07:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-29229</guid>
+		<description><![CDATA[Entire TrieCode in JAVA
+&lt;code&gt;
+public class TrieNode {
+    char content;
+    Collection child;
+    boolean isWord;
+    public TrieNode(char c) {
+        content = c;
+        child = new LinkedList();
+        isWord = false;
+    }
+    TrieNode getchild(char c){
+        if(child!=null){
+            for(TrieNode current:child){
+                if(current.content==c){
+                    return current;
+                }
+            } 
+        }
+        return null;
+    }
+}
+
+public class Trie {
+    TrieNode root;
+    public Trie() {    
+        root = new TrieNode(&#039; &#039;);
+    }
+    void insert(String word){
+        TrieNode current = root;
+            for (int i = 0; i &#060; word.length(); i++) {
+                if(current.getchild(word.charAt(i))==null){
+                    TrieNode newNode = new TrieNode(word.charAt(i));
+                    current.child.add(newNode);
+                    current = newNode;
+                }else{
+                    current = current.getchild(word.charAt(i));
+                }
+                if(i==word.length()-1){
+                    current.isWord=true;
+                }
+            }
+        }
+    boolean search(String key){
+        TrieNode current = root;
+        for(int i=0;i&#060;key.length();i++){
+            if(current.getchild(key.charAt(i))==null){
+                return false;
+            }else{
+                current = current.getchild(key.charAt(i));
+            }
+        }
+        if(current.isWord==true){
+            return true;
+        }
+        return false;
+    }
+    void delete(String key){
+        TrieNode current = root;
+        TrieNode lastMarkedNode =null; 
+        int p=-1;
+        for(int i=0;i&#060;key.length();i++){
+            if(current.getchild(key.charAt(i))==null){
+                System.out.println(&#034;Word Does not exist&#034;);
+                return;
+            }else{            
+                current = current.getchild(key.charAt(i));
+                if(current.isWord==true&#038;&#038;i!=key.length()-1){
+                    p=i;
+                    lastMarkedNode = current;
+                }
+            }
+        }
+         if(current.isWord==false){
+            System.out.println(&#034;Word Does not exist&#034;);
+            return;
+         }        
+         else if(!current.child.isEmpty()){                
+            current.isWord = false;
+        }
+        else if(current.child.isEmpty()&#038;&#038;lastMarkedNode==null){
+            TrieNode del = root.getchild(key.charAt(0));
+            root.child.remove(del);
+        }
+         else if(current.child.isEmpty()&#038;&#038;lastMarkedNode!=null){
+            TrieNode del = lastMarkedNode.getchild(key.charAt(p+1));
+            lastMarkedNode.child.remove(del);
+        }
+    }
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Entire TrieCode in JAVA<br />
+<code><br />
+public class TrieNode {<br />
+    char content;<br />
+    Collection child;<br />
+    boolean isWord;<br />
+    public TrieNode(char c) {<br />
+        content = c;<br />
+        child = new LinkedList();<br />
+        isWord = false;<br />
+    }<br />
+    TrieNode getchild(char c){<br />
+        if(child!=null){<br />
+            for(TrieNode current:child){<br />
+                if(current.content==c){<br />
+                    return current;<br />
+                }<br />
+            }<br />
+        }<br />
+        return null;<br />
+    }<br />
+}</p>
+<p>public class Trie {<br />
+    TrieNode root;<br />
+    public Trie() {<br />
+        root = new TrieNode(' ');<br />
+    }<br />
+    void insert(String word){<br />
+        TrieNode current = root;<br />
+            for (int i = 0; i &lt; word.length(); i++) {<br />
+                if(current.getchild(word.charAt(i))==null){<br />
+                    TrieNode newNode = new TrieNode(word.charAt(i));<br />
+                    current.child.add(newNode);<br />
+                    current = newNode;<br />
+                }else{<br />
+                    current = current.getchild(word.charAt(i));<br />
+                }<br />
+                if(i==word.length()-1){<br />
+                    current.isWord=true;<br />
+                }<br />
+            }<br />
+        }<br />
+    boolean search(String key){<br />
+        TrieNode current = root;<br />
+        for(int i=0;i&lt;key.length();i++){<br />
+            if(current.getchild(key.charAt(i))==null){<br />
+                return false;<br />
+            }else{<br />
+                current = current.getchild(key.charAt(i));<br />
+            }<br />
+        }<br />
+        if(current.isWord==true){<br />
+            return true;<br />
+        }<br />
+        return false;<br />
+    }<br />
+    void delete(String key){<br />
+        TrieNode current = root;<br />
+        TrieNode lastMarkedNode =null;<br />
+        int p=-1;<br />
+        for(int i=0;i&lt;key.length();i++){<br />
+            if(current.getchild(key.charAt(i))==null){<br />
+                System.out.println(&quot;Word Does not exist&quot;);<br />
+                return;<br />
+            }else{<br />
+                current = current.getchild(key.charAt(i));<br />
+                if(current.isWord==true&amp;&amp;i!=key.length()-1){<br />
+                    p=i;<br />
+                    lastMarkedNode = current;<br />
+                }<br />
+            }<br />
+        }<br />
+         if(current.isWord==false){<br />
+            System.out.println(&quot;Word Does not exist&quot;);<br />
+            return;<br />
+         }<br />
+         else if(!current.child.isEmpty()){<br />
+            current.isWord = false;<br />
+        }<br />
+        else if(current.child.isEmpty()&amp;&amp;lastMarkedNode==null){<br />
+            TrieNode del = root.getchild(key.charAt(0));<br />
+            root.child.remove(del);<br />
+        }<br />
+         else if(current.child.isEmpty()&amp;&amp;lastMarkedNode!=null){<br />
+            TrieNode del = lastMarkedNode.getchild(key.charAt(p+1));<br />
+            lastMarkedNode.child.remove(del);<br />
+        }<br />
+    }<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-20940</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Sun, 30 Jun 2013 10:30:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-20940</guid>
+		<description><![CDATA[@shri 
+Note that the above program takes care of this case.
+See we free the node only when it&#039;s children is free. This is checked using isItfreenode(). And this goes up the level recursively.
+Hope it clears your doubt.]]></description>
+		<content:encoded><![CDATA[<p>@shri<br />
+Note that the above program takes care of this case.<br />
+See we free the node only when it&#8217;s children is free. This is checked using isItfreenode(). And this goes up the level recursively.<br />
+Hope it clears your doubt.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-20939</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Sun, 30 Jun 2013 10:25:43 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-20939</guid>
+		<description><![CDATA[@venki @geeksforgeeks
+In the deletekey() function should not we decrement the count of the trie node as well.
+Correct me if I am wrong]]></description>
+		<content:encoded><![CDATA[<p>@venki @geeksforgeeks<br />
+In the deletekey() function should not we decrement the count of the trie node as well.<br />
+Correct me if I am wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-18354</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Sun, 19 May 2013 07:21:14 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-18354</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shri</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-16498</link>
+		<dc:creator><![CDATA[Shri]]></dc:creator>
+		<pubDate>Tue, 19 Mar 2013 15:58:07 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-16498</guid>
+		<description><![CDATA[Though i did not verify.
+I guess if we have words &quot;any&quot; and &quot;answer&quot; and we try to delete &quot;answer&quot; it seems the logic deletes whole of characters &quot;answer&quot; leaving just &quot;y&quot; of &quot;any&quot; hanging or some corruption state .
+
+Am i missing anything here?
+Venki could you please let me know hoe the above case is handled
+&quot;any&quot; should be present even after we delete &quot;answer&quot; and point of taking turn the character &quot;n&quot; is a non leaf node and gets deleted
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Though i did not verify.<br />
+I guess if we have words &#8220;any&#8221; and &#8220;answer&#8221; and we try to delete &#8220;answer&#8221; it seems the logic deletes whole of characters &#8220;answer&#8221; leaving just &#8220;y&#8221; of &#8220;any&#8221; hanging or some corruption state .</p>
+<p>Am i missing anything here?<br />
+Venki could you please let me know hoe the above case is handled<br />
+&#8220;any&#8221; should be present even after we delete &#8220;answer&#8221; and point of taking turn the character &#8220;n&#8221; is a non leaf node and gets deleted</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Keshava</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-8261</link>
+		<dc:creator><![CDATA[Keshava]]></dc:creator>
+		<pubDate>Mon, 30 Apr 2012 23:50:48 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-8261</guid>
+		<description><![CDATA[Lovely code!! I am in love :)]]></description>
+		<content:encoded><![CDATA[<p>Lovely code!! I am in love 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-8083</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Fri, 13 Apr 2012 14:50:14 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-8083</guid>
+		<description><![CDATA[@PriC, The site is under maintenance, please bear with us.]]></description>
+		<content:encoded><![CDATA[<p>@PriC, The site is under maintenance, please bear with us.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: PriC</title>
+		<link>http://www.geeksforgeeks.org/trie-delete/#comment-8076</link>
+		<dc:creator><![CDATA[PriC]]></dc:creator>
+		<pubDate>Fri, 13 Apr 2012 05:34:12 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15886#comment-8076</guid>
+		<description><![CDATA[Hi,
+The link to the &#039;previous post&#039; referenced in the first line of this post throws a 403. Could the coordinators please look into it?]]></description>
+		<content:encoded><![CDATA[<p>Hi,<br />
+The link to the &#8216;previous post&#8217; referenced in the first line of this post throws a 403. Could the coordinators please look into it?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.045 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:08:32 -->
+
+<!-- Compression = gzip -->

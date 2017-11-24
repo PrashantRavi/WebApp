@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Boundary Traversal of binary tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: xyz</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-39661</link>
+		<dc:creator><![CDATA[xyz]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 16:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-39661</guid>
+		<description><![CDATA[what about duplicate nodes in result as left view or right view of tree will also contain  leaf nodes]]></description>
+		<content:encoded><![CDATA[<p>what about duplicate nodes in result as left view or right view of tree will also contain  leaf nodes</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yatin</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-39461</link>
+		<dc:creator><![CDATA[Yatin]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 14:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-39461</guid>
+		<description><![CDATA[This is not code. This is piece of art. Such an elegant solution! Thank you GeeksForGeeks.]]></description>
+		<content:encoded><![CDATA[<p>This is not code. This is piece of art. Such an elegant solution! Thank you GeeksForGeeks.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tvbgeek</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-39350</link>
+		<dc:creator><![CDATA[tvbgeek]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 12:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-39350</guid>
+		<description><![CDATA[Ya makes sense. I also couldn&#039;t get why one need to check right child of root (root-&#062;right) in function printBoundaryleft(), same comment for function printboundaryright()]]></description>
+		<content:encoded><![CDATA[<p>Ya makes sense. I also couldn&#8217;t get why one need to check right child of root (root-&gt;right) in function printBoundaryleft(), same comment for function printboundaryright()</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: saurabh</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-39304</link>
+		<dc:creator><![CDATA[saurabh]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 06:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-39304</guid>
+		<description><![CDATA[With few deletions in given code let me know this looks good, works good for me:
+
+/* program for boundary traversal of a binary tree */
+
+#include 
+#include 
+
+struct node {
+    int data;
+    struct node *left, *right;
+};
+
+void printLeaves(struct node* root) {
+    if ( root ) {
+        printLeaves(root-&#062;left);
+        // Print it if it is a leaf node
+        if ( !(root-&#062;left)  &#038;&#038;  !(root-&#062;right) )
+             printf(&quot;%d &quot;, root-&#062;data);
+         printLeaves(root-&#062;right);
+    }
+}
+
+void printBoundaryLeft(struct node* root) {
+    if (root) {
+       if (root-&#062;left){
+           printf(&quot;%d &quot;, root-&#062;data);
+           printBoundaryLeft(root-&#062;left);
+       }
+   }
+}
+
+void printBoundaryRight(struct node* root) {
+    if (root) {
+    if ( root-&#062;right ) {
+        printBoundaryRight(root-&#062;right);
+        printf(&quot;%d &quot;, root-&#062;data);
+}
+    }
+}
+
+void printBoundary (struct node* root) {
+    if (root) {
+     printf(&quot;%d &quot;,root-&#062;data);
+      // Print the left boundary in top-down manner.
+      printBoundaryLeft(root-&#062;left);
+      // Print all leaf nodes
+      printLeaves(root);
+      //printLeaves(root-&#062;right);
+      // Print the right boundary in bottom-up manner
+      printBoundaryRight(root-&#062;right);
+ }
+}
+
+struct node* newNode( int data ) {
+    struct node* temp = (struct node *) malloc( sizeof(struct node) ); 
+    temp-&#062;data = data;
+    temp-&#062;left = temp-&#062;right = NULL;
+    return temp;
+}
+// Driver program to test above functions
+int main() {
+     struct node *root         = newNode(20);
+     root-&#062;left                = newNode(8);
+     root-&#062;left-&#062;left          = newNode(4);
+     root-&#062;left-&#062;right         = newNode(12);
+     root-&#062;left-&#062;right-&#062;left   = newNode(10);
+     root-&#062;left-&#062;right-&#062;right  = newNode(14);
+     root-&#062;right               = newNode(22);
+     root-&#062;right-&#062;right        = newNode(25);
+     printBoundary( root );
+     return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>With few deletions in given code let me know this looks good, works good for me:</p>
+<p>/* program for boundary traversal of a binary tree */</p>
+<p>#include<br />
+#include </p>
+<p>struct node {<br />
+    int data;<br />
+    struct node *left, *right;<br />
+};</p>
+<p>void printLeaves(struct node* root) {<br />
+    if ( root ) {<br />
+        printLeaves(root-&gt;left);<br />
+        // Print it if it is a leaf node<br />
+        if ( !(root-&gt;left)  &amp;&amp;  !(root-&gt;right) )<br />
+             printf(&#8220;%d &#8220;, root-&gt;data);<br />
+         printLeaves(root-&gt;right);<br />
+    }<br />
+}</p>
+<p>void printBoundaryLeft(struct node* root) {<br />
+    if (root) {<br />
+       if (root-&gt;left){<br />
+           printf(&#8220;%d &#8220;, root-&gt;data);<br />
+           printBoundaryLeft(root-&gt;left);<br />
+       }<br />
+   }<br />
+}</p>
+<p>void printBoundaryRight(struct node* root) {<br />
+    if (root) {<br />
+    if ( root-&gt;right ) {<br />
+        printBoundaryRight(root-&gt;right);<br />
+        printf(&#8220;%d &#8220;, root-&gt;data);<br />
+}<br />
+    }<br />
+}</p>
+<p>void printBoundary (struct node* root) {<br />
+    if (root) {<br />
+     printf(&#8220;%d &#8220;,root-&gt;data);<br />
+      // Print the left boundary in top-down manner.<br />
+      printBoundaryLeft(root-&gt;left);<br />
+      // Print all leaf nodes<br />
+      printLeaves(root);<br />
+      //printLeaves(root-&gt;right);<br />
+      // Print the right boundary in bottom-up manner<br />
+      printBoundaryRight(root-&gt;right);<br />
+ }<br />
+}</p>
+<p>struct node* newNode( int data ) {<br />
+    struct node* temp = (struct node *) malloc( sizeof(struct node) );<br />
+    temp-&gt;data = data;<br />
+    temp-&gt;left = temp-&gt;right = NULL;<br />
+    return temp;<br />
+}<br />
+// Driver program to test above functions<br />
+int main() {<br />
+     struct node *root         = newNode(20);<br />
+     root-&gt;left                = newNode(8);<br />
+     root-&gt;left-&gt;left          = newNode(4);<br />
+     root-&gt;left-&gt;right         = newNode(12);<br />
+     root-&gt;left-&gt;right-&gt;left   = newNode(10);<br />
+     root-&gt;left-&gt;right-&gt;right  = newNode(14);<br />
+     root-&gt;right               = newNode(22);<br />
+     root-&gt;right-&gt;right        = newNode(25);<br />
+     printBoundary( root );<br />
+     return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Niket</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-39072</link>
+		<dc:creator><![CDATA[Niket]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 19:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-39072</guid>
+		<description><![CDATA[i think that we can print the first node in level order traversel of each level and at the same time push the last one in stack and when the last level comes , simply print all the values in queue and then pop the stack till it becomes empty.....]]></description>
+		<content:encoded><![CDATA[<p>i think that we can print the first node in level order traversel of each level and at the same time push the last one in stack and when the last level comes , simply print all the values in queue and then pop the stack till it becomes empty&#8230;..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-38192</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 10:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-38192</guid>
+		<description><![CDATA[https://ideone.com/PeuAuF]]></description>
+		<content:encoded><![CDATA[<p><a href="https://ideone.com/PeuAuF" rel="nofollow">https://ideone.com/PeuAuF</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-38190</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 10:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-38190</guid>
+		<description><![CDATA[every leaf will be the part of boundary]]></description>
+		<content:encoded><![CDATA[<p>every leaf will be the part of boundary</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-37875</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 20:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-37875</guid>
+		<description><![CDATA[in other words the left and right boundary can envelope a leaf node..
+so it is not always true that every leaf node will also be a part of boundary
+
+..????????]]></description>
+		<content:encoded><![CDATA[<p>in other words the left and right boundary can envelope a leaf node..<br />
+so it is not always true that every leaf node will also be a part of boundary</p>
+<p>..????????</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-37873</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 20:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-37873</guid>
+		<description><![CDATA[1
+   /   
+ 2      6
+/         
+3    4     7
+           /
+    5    8
+         /
+       9
+
+the boundary should 1,2,3,5,6,7,8,9
+
+but 2 . Print all leaf nodes from left to right,
+this point will include 4 also ryt..??
+can someone clarify the definition boundary  or is above algo wrong?]]></description>
+		<content:encoded><![CDATA[<p>1<br />
+   /<br />
+ 2      6<br />
+/<br />
+3    4     7<br />
+           /<br />
+    5    8<br />
+         /<br />
+       9</p>
+<p>the boundary should 1,2,3,5,6,7,8,9</p>
+<p>but 2 . Print all leaf nodes from left to right,<br />
+this point will include 4 also ryt..??<br />
+can someone clarify the definition boundary  or is above algo wrong?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: siddhant</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-37645</link>
+		<dc:creator><![CDATA[siddhant]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 05:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-37645</guid>
+		<description><![CDATA[Can anyone tell why was there a need for 2 calls for printing leaf nodes 
+printLeaves(root-&#062;left);
+printLeaves(root-&#062;right);
+
+
+cant we just write printLeaves(root);
+and it should print all the leaf nodes]]></description>
+		<content:encoded><![CDATA[<p>Can anyone tell why was there a need for 2 calls for printing leaf nodes<br />
+printLeaves(root-&gt;left);<br />
+printLeaves(root-&gt;right);</p>
+<p>cant we just write printLeaves(root);<br />
+and it should print all the leaf nodes</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Soumya Mukhopadhyay</title>
+		<link>http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/#comment-37627</link>
+		<dc:creator><![CDATA[Soumya Mukhopadhyay]]></dc:creator>
+		<pubDate>Wed, 04 Jun 2014 19:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=23796#comment-37627</guid>
+		<description><![CDATA[A correction is needed for this code please add the return statement in the first if block for this function and same goes for printBoundaryRight otherwise it will print few node values more than once.Please make the correction
+
+
+void printBoundaryLeft(struct node* root)
+{
+    if (root)
+    {
+        if (root-&#062;left)
+        {
+            // to ensure top down order, print the node
+            // before calling itself for left subtree
+            printf(&quot;%d &quot;, root-&#062;data);
+            printBoundaryLeft(root-&#062;left);
+            return;
+        }
+        else if( root-&#062;right )
+        {
+            printf(&quot;%d &quot;, root-&#062;data);
+            printBoundaryLeft(root-&#062;right);
+        }
+        // do nothing if it is a leaf node, this way we avoid
+        // duplicates in output
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>A correction is needed for this code please add the return statement in the first if block for this function and same goes for printBoundaryRight otherwise it will print few node values more than once.Please make the correction</p>
+<p>void printBoundaryLeft(struct node* root)<br />
+{<br />
+    if (root)<br />
+    {<br />
+        if (root-&gt;left)<br />
+        {<br />
+            // to ensure top down order, print the node<br />
+            // before calling itself for left subtree<br />
+            printf(&#8220;%d &#8220;, root-&gt;data);<br />
+            printBoundaryLeft(root-&gt;left);<br />
+            return;<br />
+        }<br />
+        else if( root-&gt;right )<br />
+        {<br />
+            printf(&#8220;%d &#8220;, root-&gt;data);<br />
+            printBoundaryLeft(root-&gt;right);<br />
+        }<br />
+        // do nothing if it is a leaf node, this way we avoid<br />
+        // duplicates in output<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:23:58 -->
+
+<!-- Compression = gzip -->

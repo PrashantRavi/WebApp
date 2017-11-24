@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Delete nodes which have a greater value on right side</title>
+	<atom:link href="http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: KeshaShah</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-40165</link>
+		<dc:creator><![CDATA[KeshaShah]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 14:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-40165</guid>
+		<description><![CDATA[This can also be done iteratively, without using recursion, I guess in O(n). Scan through the list one by one. Maintain two pointers, tempnode and nextnode. Initialize tempnode to head and nextnode to tempnode-&#062;next. Check if(tempnode-&#062;data data). If yes, then call delete(tempnode). Continue with tempnode=nextnode and nextnode=tempnode-&#062;next and continue this while(nextnode &#038;&#038; nextnode-&#062;next) both exist.]]></description>
+		<content:encoded><![CDATA[<p>This can also be done iteratively, without using recursion, I guess in O(n). Scan through the list one by one. Maintain two pointers, tempnode and nextnode. Initialize tempnode to head and nextnode to tempnode-&gt;next. Check if(tempnode-&gt;data data). If yes, then call delete(tempnode). Continue with tempnode=nextnode and nextnode=tempnode-&gt;next and continue this while(nextnode &amp;&amp; nextnode-&gt;next) both exist.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prakhar Gairola</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-39568</link>
+		<dc:creator><![CDATA[Prakhar Gairola]]></dc:creator>
+		<pubDate>Mon, 23 Jun 2014 19:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-39568</guid>
+		<description><![CDATA[I tried recursive approach and it also worked.
+
+struct node {
+
+    int data;
+
+    struct node *next;
+
+};
+
+struct node *remove(struct node *prev, struct node *current)
+
+{
+
+    static int max = 0;
+
+    if (current-&#062;next == NULL) {
+
+        max = current-&#062;data;
+
+        return current;
+
+    }
+
+    remove(current, current-&#062;next);
+
+    
+
+    if (current-&#062;data &#062;= max)
+
+        max = current-&#062;data;
+
+    else {
+
+        if (prev != NULL) {
+
+            prev-&#062;next = current-&#062;next;
+
+            delete current;
+
+            return prev;
+
+        }
+
+        else {
+
+            struct node *tmp = current-&#062;next;
+
+            delete current;
+
+            return tmp;
+
+        }
+
+    }
+
+        return current;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I tried recursive approach and it also worked.</p>
+<p>struct node {</p>
+<p>    int data;</p>
+<p>    struct node *next;</p>
+<p>};</p>
+<p>struct node *remove(struct node *prev, struct node *current)</p>
+<p>{</p>
+<p>    static int max = 0;</p>
+<p>    if (current-&gt;next == NULL) {</p>
+<p>        max = current-&gt;data;</p>
+<p>        return current;</p>
+<p>    }</p>
+<p>    remove(current, current-&gt;next);</p>
+<p>    if (current-&gt;data &gt;= max)</p>
+<p>        max = current-&gt;data;</p>
+<p>    else {</p>
+<p>        if (prev != NULL) {</p>
+<p>            prev-&gt;next = current-&gt;next;</p>
+<p>            delete current;</p>
+<p>            return prev;</p>
+<p>        }</p>
+<p>        else {</p>
+<p>            struct node *tmp = current-&gt;next;</p>
+<p>            delete current;</p>
+<p>            return tmp;</p>
+<p>        }</p>
+<p>    }</p>
+<p>        return current;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vinayak</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-39478</link>
+		<dc:creator><![CDATA[Vinayak]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 17:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-39478</guid>
+		<description><![CDATA[Hi. My code works for lists having more than two elements.
+How can it be modified to work for two element list.I&#039;m unable to debug it.
+also, it checks the list from 2nd element as i thought changing head would be costly.
+how to modify it so that it can start changing from 1st element(some optimized code to modify head, if needs to be deleted). Thanks
+
+struct node*deletegr(struct node*start){
+    struct node*a, *b, *preva;
+    if(start-&#062;next==NULL)return start;//only one element
+    preva=start;
+    a=start-&#062;next;
+    preva=start;    
+    if(a-&#062;next!=NULL)b=a-&#062;next;
+    while(a!=NULL &#124;&#124;b!=NULL){
+        if(a-&#062;info&lt;b&gt;info){
+            preva-&#062;next=b;
+            free(a);
+            a=b;
+            if(a-&#062;next!=NULL)b=a-&#062;next;else break;
+        }
+        else {
+            preva=a;
+            if(a!=NULL)
+            a=a-&#062;next;
+            if(a-&#062;next!=NULL)
+            b=a-&#062;next;
+            else break;
+        }}return start;}]]></description>
+		<content:encoded><![CDATA[<p>Hi. My code works for lists having more than two elements.<br />
+How can it be modified to work for two element list.I&#8217;m unable to debug it.<br />
+also, it checks the list from 2nd element as i thought changing head would be costly.<br />
+how to modify it so that it can start changing from 1st element(some optimized code to modify head, if needs to be deleted). Thanks</p>
+<p>struct node*deletegr(struct node*start){<br />
+    struct node*a, *b, *preva;<br />
+    if(start-&gt;next==NULL)return start;//only one element<br />
+    preva=start;<br />
+    a=start-&gt;next;<br />
+    preva=start;<br />
+    if(a-&gt;next!=NULL)b=a-&gt;next;<br />
+    while(a!=NULL ||b!=NULL){<br />
+        if(a-&gt;info<b>info){<br />
+            preva-&gt;next=b;<br />
+            free(a);<br />
+            a=b;<br />
+            if(a-&gt;next!=NULL)b=a-&gt;next;else break;<br />
+        }<br />
+        else {<br />
+            preva=a;<br />
+            if(a!=NULL)<br />
+            a=a-&gt;next;<br />
+            if(a-&gt;next!=NULL)<br />
+            b=a-&gt;next;<br />
+            else break;<br />
+        }}return start;}</b></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lz</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-39241</link>
+		<dc:creator><![CDATA[lz]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 11:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-39241</guid>
+		<description><![CDATA[That&#039;s why I used recursion here.]]></description>
+		<content:encoded><![CDATA[<p>That&#8217;s why I used recursion here.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dhruv Bansal</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-38718</link>
+		<dc:creator><![CDATA[Dhruv Bansal]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 16:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-38718</guid>
+		<description><![CDATA[it can also be done via recursion , passing max as pointer and initialising when a-&#062;next ==NULL;]]></description>
+		<content:encoded><![CDATA[<p>it can also be done via recursion , passing max as pointer and initialising when a-&gt;next ==NULL;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bhuwnesh Dhakar</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-38590</link>
+		<dc:creator><![CDATA[Bhuwnesh Dhakar]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 17:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-38590</guid>
+		<description><![CDATA[its not a Doubly linked list so cant traverse it  in reverse direction.]]></description>
+		<content:encoded><![CDATA[<p>its not a Doubly linked list so cant traverse it  in reverse direction.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MK</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-38100</link>
+		<dc:creator><![CDATA[MK]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 11:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-38100</guid>
+		<description><![CDATA[Can use method-2 without using &quot;current&quot; pointer. Just &quot;maxnode&quot; will do the needful. Essentially all the time they are pointing to same node and so the &quot;current&quot; can be eliminated.
+
+
+Please let me know if there is any mistake in my understanding.]]></description>
+		<content:encoded><![CDATA[<p>Can use method-2 without using &#8220;current&#8221; pointer. Just &#8220;maxnode&#8221; will do the needful. Essentially all the time they are pointing to same node and so the &#8220;current&#8221; can be eliminated.</p>
+<p>Please let me know if there is any mistake in my understanding.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: lz</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-37926</link>
+		<dc:creator><![CDATA[lz]]></dc:creator>
+		<pubDate>Sun, 08 Jun 2014 16:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-37926</guid>
+		<description><![CDATA[Can be done via traversing the list in reverse order ( without actually reversing the list ) : 
+
+	public void deleteGreater() {
+
+		Integer maxSoFar = 0;
+
+        maxSoFar = deleteGreater(head, maxSoFar);
+
+		
+
+		if(head.getData() = maxSoFar)
+
+				return currNode.getData();
+
+			else {
+
+				node.setLeftNode(currNode.getLeftNode());
+
+				return maxSoFar;
+
+			}
+
+		}
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>Can be done via traversing the list in reverse order ( without actually reversing the list ) : </p>
+<p>	public void deleteGreater() {</p>
+<p>		Integer maxSoFar = 0;</p>
+<p>        maxSoFar = deleteGreater(head, maxSoFar);</p>
+<p>		if(head.getData() = maxSoFar)</p>
+<p>				return currNode.getData();</p>
+<p>			else {</p>
+<p>				node.setLeftNode(currNode.getLeftNode());</p>
+<p>				return maxSoFar;</p>
+<p>			}</p>
+<p>		}</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: The Big Idiot</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-37583</link>
+		<dc:creator><![CDATA[The Big Idiot]]></dc:creator>
+		<pubDate>Wed, 04 Jun 2014 07:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-37583</guid>
+		<description><![CDATA[Iterative O(n) solution
+http://ideone.com/P6Vvp5]]></description>
+		<content:encoded><![CDATA[<p>Iterative O(n) solution<br />
+<a href="http://ideone.com/P6Vvp5" rel="nofollow">http://ideone.com/P6Vvp5</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-37521</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 15:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-37521</guid>
+		<description><![CDATA[iterative solution
+
+
+
+
+void greater_in_right( struct node **first)
+
+ {
+
+      *first = reverse_1(*first);
+
+      struct node *temp = *first;
+
+      int curmax =  temp-&#062;data;
+
+      struct node *prev = temp;
+
+      temp = temp-&#062;next;
+
+      while ( temp != NULL ) {
+
+           if (temp-&#062;data next = temp-&#062;next;
+
+           }
+
+           else {
+
+                prev = temp;
+
+                curmax = temp-&#062;data;
+
+           }
+
+           temp = temp-&#062;next;
+
+      }
+      *first = reverse_1(*first);
+ }]]></description>
+		<content:encoded><![CDATA[<p>iterative solution</p>
+<p>void greater_in_right( struct node **first)</p>
+<p> {</p>
+<p>      *first = reverse_1(*first);</p>
+<p>      struct node *temp = *first;</p>
+<p>      int curmax =  temp-&gt;data;</p>
+<p>      struct node *prev = temp;</p>
+<p>      temp = temp-&gt;next;</p>
+<p>      while ( temp != NULL ) {</p>
+<p>           if (temp-&gt;data next = temp-&gt;next;</p>
+<p>           }</p>
+<p>           else {</p>
+<p>                prev = temp;</p>
+<p>                curmax = temp-&gt;data;</p>
+<p>           }</p>
+<p>           temp = temp-&gt;next;</p>
+<p>      }<br />
+      *first = reverse_1(*first);<br />
+ }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/delete-nodes-which-have-a-greater-value-on-right-side/#comment-37455</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Mon, 02 Jun 2014 19:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11604#comment-37455</guid>
+		<description><![CDATA[link to the program ITERATIVELY DONE =D :)
+http://ideone.com/isoXEs]]></description>
+		<content:encoded><![CDATA[<p>link to the program ITERATIVELY DONE =D 🙂<br />
+<a href="http://ideone.com/isoXEs" rel="nofollow">http://ideone.com/isoXEs</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:48 -->
+
+<!-- Compression = gzip -->

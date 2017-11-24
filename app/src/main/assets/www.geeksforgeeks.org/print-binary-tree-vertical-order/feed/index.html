@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print a Binary Tree in Vertical Order &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-binary-tree-vertical-order/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Bismith Blac</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-39782</link>
+		<dc:creator><![CDATA[Bismith Blac]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 12:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-39782</guid>
+		<description><![CDATA[As pointed out in SET-2 of this same question.
+This solution using inorder traversal will also give wrong answer....consider the input 
+Node *root = newNode(1);
+root-&#062;left = newNode(2);
+root-&#062;right = newNode(3);
+root-&#062;left-&#062;left = newNode(4);
+root-&#062;left-&#062;right = newNode(5);
+root-&#062;left-&#062;right-&#062;right = newNode(10);
+root-&#062;left-&#062;right-&#062;right-&#062;left = newNode(15);
+root-&#062;right-&#062;left = newNode(6);
+root-&#062;right-&#062;right = newNode(7);
+root-&#062;right-&#062;left-&#062;right = newNode(8);
+root-&#062;right-&#062;right-&#062;right = newNode(9);
+Check output at http://ideone.com/QH27Yx
+4 
+2 
+1 5 15 6 
+10 3 8 
+7 
+9
+it should be 
+4
+2
+1 5 6 15
+3 10 8
+7
+9]]></description>
+		<content:encoded><![CDATA[<p>As pointed out in SET-2 of this same question.<br />
+This solution using inorder traversal will also give wrong answer&#8230;.consider the input<br />
+Node *root = newNode(1);<br />
+root-&gt;left = newNode(2);<br />
+root-&gt;right = newNode(3);<br />
+root-&gt;left-&gt;left = newNode(4);<br />
+root-&gt;left-&gt;right = newNode(5);<br />
+root-&gt;left-&gt;right-&gt;right = newNode(10);<br />
+root-&gt;left-&gt;right-&gt;right-&gt;left = newNode(15);<br />
+root-&gt;right-&gt;left = newNode(6);<br />
+root-&gt;right-&gt;right = newNode(7);<br />
+root-&gt;right-&gt;left-&gt;right = newNode(8);<br />
+root-&gt;right-&gt;right-&gt;right = newNode(9);<br />
+Check output at <a href="http://ideone.com/QH27Yx" rel="nofollow">http://ideone.com/QH27Yx</a><br />
+4<br />
+2<br />
+1 5 15 6<br />
+10 3 8<br />
+7<br />
+9<br />
+it should be<br />
+4<br />
+2<br />
+1 5 6 15<br />
+3 10 8<br />
+7<br />
+9</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akshay Johri</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-38472</link>
+		<dc:creator><![CDATA[Akshay Johri]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 19:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-38472</guid>
+		<description><![CDATA[This can be done with no extra space in Time Complexity O(n)
+
+Attaching the code
+
+int inorderTraversal(Node root, int num,int prev) {
+    if (root == NULL)
+        return prev;
+    prev = inorderTraversal(root-&#062;left, num-1,prev);
+    if (prev!=num)
+        printf(&quot;n&quot;);
+    printf(&quot;%d&quot;, root-&#062;val);
+    prev = num;
+    prev = inorderTraversal(root-&#062;right, num+1,prev);
+    return prev;
+}
+
+int main() {
+    Node root = createTree1(); // A function which creates
+    inorderTraversal(root,0,0);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>This can be done with no extra space in Time Complexity O(n)</p>
+<p>Attaching the code</p>
+<p>int inorderTraversal(Node root, int num,int prev) {<br />
+    if (root == NULL)<br />
+        return prev;<br />
+    prev = inorderTraversal(root-&gt;left, num-1,prev);<br />
+    if (prev!=num)<br />
+        printf(&#8220;n&#8221;);<br />
+    printf(&#8220;%d&#8221;, root-&gt;val);<br />
+    prev = num;<br />
+    prev = inorderTraversal(root-&gt;right, num+1,prev);<br />
+    return prev;<br />
+}</p>
+<p>int main() {<br />
+    Node root = createTree1(); // A function which creates<br />
+    inorderTraversal(root,0,0);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kirtika Salhotra</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-34740</link>
+		<dc:creator><![CDATA[Kirtika Salhotra]]></dc:creator>
+		<pubDate>Wed, 16 Apr 2014 09:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-34740</guid>
+		<description><![CDATA[Java Implementation for the same can be find below :
+
+public void findMinimumDistance(Node root, int minDistance,HashMap&#060;Integer,LinkedList&#062; hm) {
+        
+        LinkedList temp = null;
+        
+        if(root != null)
+        {
+            
+            findMinimumDistance(root.leftChild,minDistance-1,hm);
+            //root.minDistance = minDistance++;
+            
+            findMinimumDistance(root.rightChild,minDistance+1,hm);
+            
+            if(hm.get(minDistance) != null)
+            {
+                temp = hm.get(minDistance);
+            }
+            else
+            {
+                temp = new LinkedList();
+            }
+            temp.add(root.value);
+            hm.put(minDistance,temp);
+        }
+        
+    }
+
+Map contains nodes sorted as per their HD]]></description>
+		<content:encoded><![CDATA[<p>Java Implementation for the same can be find below :</p>
+<p>public void findMinimumDistance(Node root, int minDistance,HashMap&lt;Integer,LinkedList&gt; hm) {</p>
+<p>        LinkedList temp = null;</p>
+<p>        if(root != null)<br />
+        {</p>
+<p>            findMinimumDistance(root.leftChild,minDistance-1,hm);<br />
+            //root.minDistance = minDistance++;</p>
+<p>            findMinimumDistance(root.rightChild,minDistance+1,hm);</p>
+<p>            if(hm.get(minDistance) != null)<br />
+            {<br />
+                temp = hm.get(minDistance);<br />
+            }<br />
+            else<br />
+            {<br />
+                temp = new LinkedList();<br />
+            }<br />
+            temp.add(root.value);<br />
+            hm.put(minDistance,temp);<br />
+        }</p>
+<p>    }</p>
+<p>Map contains nodes sorted as per their HD</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: newbie</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-34735</link>
+		<dc:creator><![CDATA[newbie]]></dc:creator>
+		<pubDate>Wed, 16 Apr 2014 06:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-34735</guid>
+		<description><![CDATA[add root-&#062;left-&#062;right-&#062;right= newNode(11);
+
+it will produce wrong results as the case when there are more elements in right node of left sub tree or left node of right sub tree is not taken care of here.]]></description>
+		<content:encoded><![CDATA[<p>add root-&gt;left-&gt;right-&gt;right= newNode(11);</p>
+<p>it will produce wrong results as the case when there are more elements in right node of left sub tree or left node of right sub tree is not taken care of here.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-34469</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 08 Apr 2014 14:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-34469</guid>
+		<description><![CDATA[An O(n) solution [Space complexity = Time complexity = O(n)] :
+(Language: C++)  
+&lt;b&gt;Complete Program: http://ideone.com/sGMGGk&lt;/b&gt;
+&lt;code&gt;
+// Global variables &quot;mapped&quot;, &quot;mini&quot; and &quot;maxi&quot;
+map mapped;
+int mini, maxi;
+
+void vertical(struct node *root, int dist, vector ans[]) {
+	if(root == NULL)
+		return;
+
+	mini = min(mini, dist);
+	maxi = max(maxi, dist);
+
+	int index = mapped[dist];	
+
+	ans[index].push_back(root-&#062;data);
+
+	vertical(root-&#062;left, dist-1, ans);
+	vertical(root-&#062;right, dist+1, ans);
+}
+
+// &quot;printVertical(struct node *) is called from &quot;main()&quot;
+void printVertical(struct node *root) {
+	for(int i=-44; i&#060;44; i++)
+		mapped[i] = 44 + i;	
+
+	vector ans[100];
+	vector::iterator it;	
+
+	vertical(root, 0, ans);	
+
+	for(int i=mini; i&#060;=maxi; i++, printf(&#034;n&#034;)) {
+		for(it = ans[mapped[i]].begin(); it!=ans[mapped[i]].end(); it++) {
+			printf(&#034;%d &#034;, *it);
+                }
+	}
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>An O(n) solution [Space complexity = Time complexity = O(n)] :<br />
+(Language: C++)<br />
+<b>Complete Program: <a href="http://ideone.com/sGMGGk" rel="nofollow">http://ideone.com/sGMGGk</a></b><br />
+<code><br />
+// Global variables "mapped", "mini" and "maxi"<br />
+map mapped;<br />
+int mini, maxi;</p>
+<p>void vertical(struct node *root, int dist, vector ans[]) {<br />
+	if(root == NULL)<br />
+		return;</p>
+<p>	mini = min(mini, dist);<br />
+	maxi = max(maxi, dist);</p>
+<p>	int index = mapped[dist];	</p>
+<p>	ans[index].push_back(root-&gt;data);</p>
+<p>	vertical(root-&gt;left, dist-1, ans);<br />
+	vertical(root-&gt;right, dist+1, ans);<br />
+}</p>
+<p>// "printVertical(struct node *) is called from "main()"<br />
+void printVertical(struct node *root) {<br />
+	for(int i=-44; i&lt;44; i++)<br />
+		mapped[i] = 44 + i;	</p>
+<p>	vector ans[100];<br />
+	vector::iterator it;	</p>
+<p>	vertical(root, 0, ans);	</p>
+<p>	for(int i=mini; i&lt;=maxi; i++, printf(&quot;n&quot;)) {<br />
+		for(it = ans[mapped[i]].begin(); it!=ans[mapped[i]].end(); it++) {<br />
+			printf(&quot;%d &quot;, *it);<br />
+                }<br />
+	}<br />
+}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Zheng Luo</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33783</link>
+		<dc:creator><![CDATA[Zheng Luo]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 05:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33783</guid>
+		<description><![CDATA[Very interested question!!!]]></description>
+		<content:encoded><![CDATA[<p>Very interested question!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suman</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33733</link>
+		<dc:creator><![CDATA[Suman]]></dc:creator>
+		<pubDate>Sat, 22 Mar 2014 09:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33733</guid>
+		<description><![CDATA[java code that uses hashmap
+
+http://ideone.com/J2Inia]]></description>
+		<content:encoded><![CDATA[<p>java code that uses hashmap</p>
+<p><a href="http://ideone.com/J2Inia" rel="nofollow">http://ideone.com/J2Inia</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suman</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33728</link>
+		<dc:creator><![CDATA[Suman]]></dc:creator>
+		<pubDate>Sat, 22 Mar 2014 05:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33728</guid>
+		<description><![CDATA[import java.util.HashMap;
+
+import java.util.LinkedList;
+
+import java.util.List;
+
+import java.util.Map;
+
+import java.util.TreeMap;
+
+//http://www.geeksforgeeks.org/print-binary-tree-vertical-order/
+
+public class PrintBinaryTreeInVerticalOrder 
+
+{
+
+	static class Node
+
+	{
+
+		int data;
+
+		Node left;
+
+		Node right;
+
+		
+
+		public Node(int data)
+
+		{
+
+			this.data = data;
+
+		}
+
+	}
+
+    
+
+	private Map&#060;Integer, List&#062; map = new HashMap&#060;Integer, List&#062;();
+
+	
+
+	
+
+	public void printVertical(Node root)
+
+	{
+
+		buildMapRecursive(root, 0);
+
+		Map&#060;Integer, List&#062; newMap = new TreeMap&#060;Integer, List&#062;(map);
+
+		
+
+		for(Map.Entry&#060;Integer, List&#062; entry : newMap.entrySet())
+
+		{
+
+			System.out.println(entry.getValue());
+
+		}
+
+	}	
+
+	
+
+	
+
+	private void buildMapRecursive(Node root, int index) 
+
+	{
+
+		if ( root == null)
+
+		{
+
+			return;
+
+		}
+
+		if (map.get(index) != null)
+
+		{
+
+			List list = map.get(index);
+
+			list.add(root.data);
+
+		}
+
+		else
+
+		{
+
+			List list = new LinkedList();
+
+			list.add(root.data);
+
+			map.put(index, list);
+
+		}
+
+		buildMapRecursive(root.left , index-1);
+
+		buildMapRecursive(root.right, index+1);
+
+	}
+
+	/**
+
+	 * @param args
+
+	 */
+
+	public static void main(String[] args) 
+
+	{
+
+		Node root = new Node(1);
+
+		root.left = new Node(2);
+
+		root.right = new Node(3);
+
+		
+
+		root.left.left = new Node(4);
+
+		root.left.right = new Node(5);
+
+		
+
+		root.right.left = new Node(6);
+
+		root.right.left.right = new Node(8);
+
+		
+
+		root.right.right = new Node(7);
+
+		root.right.right.right = new Node(9);
+
+        new PrintBinaryTreeInVerticalOrder().printVertical(root);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>import java.util.HashMap;</p>
+<p>import java.util.LinkedList;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>import java.util.TreeMap;</p>
+<p>//http://www.geeksforgeeks.org/print-binary-tree-vertical-order/</p>
+<p>public class PrintBinaryTreeInVerticalOrder </p>
+<p>{</p>
+<p>	static class Node</p>
+<p>	{</p>
+<p>		int data;</p>
+<p>		Node left;</p>
+<p>		Node right;</p>
+<p>		public Node(int data)</p>
+<p>		{</p>
+<p>			this.data = data;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	private Map&lt;Integer, List&gt; map = new HashMap&lt;Integer, List&gt;();</p>
+<p>	public void printVertical(Node root)</p>
+<p>	{</p>
+<p>		buildMapRecursive(root, 0);</p>
+<p>		Map&lt;Integer, List&gt; newMap = new TreeMap&lt;Integer, List&gt;(map);</p>
+<p>		for(Map.Entry&lt;Integer, List&gt; entry : newMap.entrySet())</p>
+<p>		{</p>
+<p>			System.out.println(entry.getValue());</p>
+<p>		}</p>
+<p>	}	</p>
+<p>	private void buildMapRecursive(Node root, int index) </p>
+<p>	{</p>
+<p>		if ( root == null)</p>
+<p>		{</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		if (map.get(index) != null)</p>
+<p>		{</p>
+<p>			List list = map.get(index);</p>
+<p>			list.add(root.data);</p>
+<p>		}</p>
+<p>		else</p>
+<p>		{</p>
+<p>			List list = new LinkedList();</p>
+<p>			list.add(root.data);</p>
+<p>			map.put(index, list);</p>
+<p>		}</p>
+<p>		buildMapRecursive(root.left , index-1);</p>
+<p>		buildMapRecursive(root.right, index+1);</p>
+<p>	}</p>
+<p>	/**</p>
+<p>	 * @param args</p>
+<p>	 */</p>
+<p>	public static void main(String[] args) </p>
+<p>	{</p>
+<p>		Node root = new Node(1);</p>
+<p>		root.left = new Node(2);</p>
+<p>		root.right = new Node(3);</p>
+<p>		root.left.left = new Node(4);</p>
+<p>		root.left.right = new Node(5);</p>
+<p>		root.right.left = new Node(6);</p>
+<p>		root.right.left.right = new Node(8);</p>
+<p>		root.right.right = new Node(7);</p>
+<p>		root.right.right.right = new Node(9);</p>
+<p>        new PrintBinaryTreeInVerticalOrder().printVertical(root);</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Chirag</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33684</link>
+		<dc:creator><![CDATA[Chirag]]></dc:creator>
+		<pubDate>Thu, 20 Mar 2014 07:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33684</guid>
+		<description><![CDATA[C++ code using map and vector
+Time Complexity : O(n) , Space Complexity : O(n)
+http://ideone.com/wIZrLt]]></description>
+		<content:encoded><![CDATA[<p>C++ code using map and vector<br />
+Time Complexity : O(n) , Space Complexity : O(n)<br />
+<a href="http://ideone.com/wIZrLt" rel="nofollow">http://ideone.com/wIZrLt</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Chirag</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33683</link>
+		<dc:creator><![CDATA[Chirag]]></dc:creator>
+		<pubDate>Thu, 20 Mar 2014 07:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33683</guid>
+		<description><![CDATA[C++ code using map and vector
+http://ideone.com/wIZrLt
+]]></description>
+		<content:encoded><![CDATA[<p>C++ code using map and vector<br />
+<a href="http://ideone.com/wIZrLt" rel="nofollow">http://ideone.com/wIZrLt</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dhruv Bansal</title>
+		<link>http://www.geeksforgeeks.org/print-binary-tree-vertical-order/#comment-33681</link>
+		<dc:creator><![CDATA[Dhruv Bansal]]></dc:creator>
+		<pubDate>Thu, 20 Mar 2014 07:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127598#comment-33681</guid>
+		<description><![CDATA[if we use a hashmap with key as distance and value as linked list having nodes with key as distance from root , we restrict it to O(n) time complexity but with space complexity increased.]]></description>
+		<content:encoded><![CDATA[<p>if we use a hashmap with key as distance and value as linked list having nodes with key as distance from root , we restrict it to O(n) time complexity but with space complexity increased.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:00 -->
+
+<!-- Compression = gzip -->

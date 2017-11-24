@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Given an array arr[], find the maximum j &#8211; i such that arr[j] &gt; arr[i]</title>
+	<atom:link href="http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: vivek27</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39991</link>
+		<dc:creator><![CDATA[vivek27]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 19:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39991</guid>
+		<description><![CDATA[#include
+#include
+void main(){
+int arr[]={9,2,3,4,5,6,7,8,18,0};
+int n=sizeof(arr)/sizeof(arr[0]);
+int max_diff=-1;
+clrscr();
+max_diff=maxindexdiff(arr,n);
+printf(&quot;nmaxindexdiff=%d&quot;,max_diff);
+getch();
+}
+
+
+int maxindexdiff(int arr[],int n){
+int brr[10]={0};
+int max=0,maxdiff_r=0,maxdiff_l=0;
+int maxindexdiff=-1;
+int index_j=0,diff,j;
+for(j=n-1;j&#062;=0;j--){
+if(arr[j]&#062;max){
+max=arr[j];
+index_j=j;
+brr[j]=0;
+}
+else{
+brr[j]=index_j;
+}
+}
+
+		for(j=0;jmaxindexdiff){
+maxindexdiff=diff;
+maxdiff_r=brr[j];
+maxdiff_l=j;
+}
+}
+printf(&quot;nj is %d,ni is %d&quot;,maxdiff_r,maxdiff_l);
+return(maxindexdiff);
+}
+
+In above given program T(n)=O(n); and S(n)=O(1.n)(means i am taking only one array as an auxiliary space ) please check it and this will work fine if elements are negative in array....only modification will be there as max=(-INT_max )]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+void main(){<br />
+int arr[]={9,2,3,4,5,6,7,8,18,0};<br />
+int n=sizeof(arr)/sizeof(arr[0]);<br />
+int max_diff=-1;<br />
+clrscr();<br />
+max_diff=maxindexdiff(arr,n);<br />
+printf(&#8220;nmaxindexdiff=%d&#8221;,max_diff);<br />
+getch();<br />
+}</p>
+<p>int maxindexdiff(int arr[],int n){<br />
+int brr[10]={0};<br />
+int max=0,maxdiff_r=0,maxdiff_l=0;<br />
+int maxindexdiff=-1;<br />
+int index_j=0,diff,j;<br />
+for(j=n-1;j&gt;=0;j&#8211;){<br />
+if(arr[j]&gt;max){<br />
+max=arr[j];<br />
+index_j=j;<br />
+brr[j]=0;<br />
+}<br />
+else{<br />
+brr[j]=index_j;<br />
+}<br />
+}</p>
+<p>		for(j=0;jmaxindexdiff){<br />
+maxindexdiff=diff;<br />
+maxdiff_r=brr[j];<br />
+maxdiff_l=j;<br />
+}<br />
+}<br />
+printf(&#8220;nj is %d,ni is %d&#8221;,maxdiff_r,maxdiff_l);<br />
+return(maxindexdiff);<br />
+}</p>
+<p>In above given program T(n)=O(n); and S(n)=O(1.n)(means i am taking only one array as an auxiliary space ) please check it and this will work fine if elements are negative in array&#8230;.only modification will be there as max=(-INT_max )</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prokilogram</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39783</link>
+		<dc:creator><![CDATA[prokilogram]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 12:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39783</guid>
+		<description><![CDATA[int maximumDistance(int *arr,int low,int high){	
+
+	int i=0,k,temp;
+int  max_diff=0;
+int index_diff=high-i;
+
+	while(imax_diff){                                                            k=high;                                                                                                        while(arr[k]max_diff){
+                k--;
+     }
+     temp=k-i;
+     if(temp&#062;max_diff){
+                max_diff=temp;
+     }
+     i++;
+}
+
+	if(max_diff==0){
+      return -1;
+}else{
+      return max_diff;
+}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>int maximumDistance(int *arr,int low,int high){	</p>
+<p>	int i=0,k,temp;<br />
+int  max_diff=0;<br />
+int index_diff=high-i;</p>
+<p>	while(imax_diff){                                                            k=high;                                                                                                        while(arr[k]max_diff){<br />
+                k&#8211;;<br />
+     }<br />
+     temp=k-i;<br />
+     if(temp&gt;max_diff){<br />
+                max_diff=temp;<br />
+     }<br />
+     i++;<br />
+}</p>
+<p>	if(max_diff==0){<br />
+      return -1;<br />
+}else{<br />
+      return max_diff;<br />
+}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39417</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 07:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39417</guid>
+		<description><![CDATA[Please check for this input: 99, 100 , 1, 2, 3, 4, 5, 6, 7
+
+
+The answer should be 6, but ur approach gives 1.
+because  for i=2 and j=8, j-i gives 6 and arr[j]&#062;arr[i] ]]></description>
+		<content:encoded><![CDATA[<p>Please check for this input: 99, 100 , 1, 2, 3, 4, 5, 6, 7</p>
+<p>The answer should be 6, but ur approach gives 1.<br />
+because  for i=2 and j=8, j-i gives 6 and arr[j]&gt;arr[i] </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39410</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 06:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39410</guid>
+		<description><![CDATA[Wow Rajesh, Its a wonderful approach u ve used. and Thnaks for providing your method.
+As an extension for ur approach, We can directly return the &quot;maxdist&quot; value for the first time when we find it in the loop as it is the maximum (j-i) and moreover the difference (j-i) decreases as we keep going. A fantastic approach with O(n) time and O(1) space complexity.
+
+And please check for all boundary cases, I ve checked and its working.]]></description>
+		<content:encoded><![CDATA[<p>Wow Rajesh, Its a wonderful approach u ve used. and Thnaks for providing your method.<br />
+As an extension for ur approach, We can directly return the &#8220;maxdist&#8221; value for the first time when we find it in the loop as it is the maximum (j-i) and moreover the difference (j-i) decreases as we keep going. A fantastic approach with O(n) time and O(1) space complexity.</p>
+<p>And please check for all boundary cases, I ve checked and its working.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rajesh Yadav</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39376</link>
+		<dc:creator><![CDATA[Rajesh Yadav]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 18:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39376</guid>
+		<description><![CDATA[http://ideone.com/Bz5NfS...i have done it with some other way]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/Bz5NfS" rel="nofollow">http://ideone.com/Bz5NfS</a>&#8230;i have done it with some other way</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: shivam1729</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39034</link>
+		<dc:creator><![CDATA[shivam1729]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 10:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39034</guid>
+		<description><![CDATA[please dont post codes until u are sure abt the working!
+ur code fails for this:
+9
+99 100 1 2 3 4 5 6 7
+gives 1 as the answer!]]></description>
+		<content:encoded><![CDATA[<p>please dont post codes until u are sure abt the working!<br />
+ur code fails for this:<br />
+9<br />
+99 100 1 2 3 4 5 6 7<br />
+gives 1 as the answer!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Emmanuel Livingstone</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-39001</link>
+		<dc:creator><![CDATA[Emmanuel Livingstone]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 05:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-39001</guid>
+		<description><![CDATA[Fails for {10, 2, 3, 4, 5, 6, 7, 8, 18, 9}
+Should have seen i=1 and j=9. But skips and goes to i=1 and j=8. So returns 8 instead of 9.]]></description>
+		<content:encoded><![CDATA[<p>Fails for {10, 2, 3, 4, 5, 6, 7, 8, 18, 9}<br />
+Should have seen i=1 and j=9. But skips and goes to i=1 and j=8. So returns 8 instead of 9.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mohaan Raja</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-38857</link>
+		<dc:creator><![CDATA[Mohaan Raja]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 16:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-38857</guid>
+		<description><![CDATA[Is there any flaw in this code??? I hope this works in  O(n) time and O(1) space...
+https://ideone.com/hrAoYK
+ 
+int maxIndexDiff(int arr[], int n)
+{
+    int i=0, j=n-1, max = 0;
+    while(i&#060;j)
+    {
+        if(arr[i] &#060; arr[j])
+        {
+            if(max &#060; j-i)
+            {
+                max = j-i;
+            }
+        }
+        i++;
+        j--;
+    }
+    return max + 1;
+}]]></description>
+		<content:encoded><![CDATA[<p>Is there any flaw in this code??? I hope this works in  O(n) time and O(1) space&#8230;<br />
+<a href="https://ideone.com/hrAoYK" rel="nofollow">https://ideone.com/hrAoYK</a></p>
+<p>int maxIndexDiff(int arr[], int n)<br />
+{<br />
+    int i=0, j=n-1, max = 0;<br />
+    while(i&lt;j)<br />
+    {<br />
+        if(arr[i] &lt; arr[j])<br />
+        {<br />
+            if(max &lt; j-i)<br />
+            {<br />
+                max = j-i;<br />
+            }<br />
+        }<br />
+        i++;<br />
+        j&#8211;;<br />
+    }<br />
+    return max + 1;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-37795</link>
+		<dc:creator><![CDATA[Vivek]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 04:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-37795</guid>
+		<description><![CDATA[sort the array elements in increasing order along with their index.
+now find the largest contiguous sum in difference array for the the index array.
+complexity O(nlogn)]]></description>
+		<content:encoded><![CDATA[<p>sort the array elements in increasing order along with their index.<br />
+now find the largest contiguous sum in difference array for the the index array.<br />
+complexity O(nlogn)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-37683</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 13:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-37683</guid>
+		<description><![CDATA[Here&#039;s a correct code for O(n) time complexity and constant space... Please go through this link and provide your inputs....
+
+http://ideone.com/YAzRcN]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s a correct code for O(n) time complexity and constant space&#8230; Please go through this link and provide your inputs&#8230;.</p>
+<p><a href="http://ideone.com/YAzRcN" rel="nofollow">http://ideone.com/YAzRcN</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/#comment-37682</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 13:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12450#comment-37682</guid>
+		<description><![CDATA[A very efficient solution to above problem with 
+Time complexity: O(n) and
+Space Complexity: O(1)
+
+Ideone link:http: //ideone.com/YAzRcN
+
+Function snippet:
+
+int dist(int a[],int n)
+
+{
+
+int i,j,maxdist=-1,max=0,min=9999;
+
+for(int k=0;kmax)
+
+max=a[k];
+
+if(a[k]&#060;min)
+
+min=a[k]; 
+
+}
+
+i=(a[0]==max?1:0);
+
+j=(a[n-1]==min?n-2:n-1);
+
+while(ia[i] &#038;&#038; (j-i)&#062;maxdist)
+
+{ maxdist=(j-i);
+
+}
+
+else if(a[i+1]&#060;a[i])
+
+i++;
+
+else
+
+j--;
+
+}
+
+return maxdist;
+
+}
+
+
+
+Please comment if it fails for some input cases and @geeksforgeeks, include this solution in your post if you find it correct...]]></description>
+		<content:encoded><![CDATA[<p>A very efficient solution to above problem with<br />
+Time complexity: O(n) and<br />
+Space Complexity: O(1)</p>
+<p>Ideone link:http: //ideone.com/YAzRcN</p>
+<p>Function snippet:</p>
+<p>int dist(int a[],int n)</p>
+<p>{</p>
+<p>int i,j,maxdist=-1,max=0,min=9999;</p>
+<p>for(int k=0;kmax)</p>
+<p>max=a[k];</p>
+<p>if(a[k]&lt;min)</p>
+<p>min=a[k]; </p>
+<p>}</p>
+<p>i=(a[0]==max?1:0);</p>
+<p>j=(a[n-1]==min?n-2:n-1);</p>
+<p>while(ia[i] &amp;&amp; (j-i)&gt;maxdist)</p>
+<p>{ maxdist=(j-i);</p>
+<p>}</p>
+<p>else if(a[i+1]&lt;a[i])</p>
+<p>i++;</p>
+<p>else</p>
+<p>j&#8211;;</p>
+<p>}</p>
+<p>return maxdist;</p>
+<p>}</p>
+<p>Please comment if it fails for some input cases and @geeksforgeeks, include this solution in your post if you find it correct&#8230;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:13:27 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Why copy constructor argument should be const in C++?</title>
+	<atom:link href="http://www.geeksforgeeks.org/copy-constructor-argument-const/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rakesh</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-39850</link>
+		<dc:creator><![CDATA[Rakesh]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 07:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-39850</guid>
+		<description><![CDATA[What you said is right, when an object is returned from a function, a temporary object is created to hold the returned object data. Hence &#039;Test(Test &#038;t)&#039; will wont work in this case.
+
+I think &#039;Test(Test &#038;t)&#039; will work fine in the following case,
+-----------
+Test t1;
+Test t2 = t1;
+---------------
+Here also copy constructor is called for assigning t1 to t2. In this case we are not holding the t1 object in a temporary memory. So, no error should come. I haven&#039;t tested this.]]></description>
+		<content:encoded><![CDATA[<p>What you said is right, when an object is returned from a function, a temporary object is created to hold the returned object data. Hence &#8216;Test(Test &amp;t)&#8217; will wont work in this case.</p>
+<p>I think &#8216;Test(Test &amp;t)&#8217; will work fine in the following case,<br />
+&#8212;&#8212;&#8212;&#8211;<br />
+Test t1;<br />
+Test t2 = t1;<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;<br />
+Here also copy constructor is called for assigning t1 to t2. In this case we are not holding the t1 object in a temporary memory. So, no error should come. I haven&#8217;t tested this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: satyam</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-38520</link>
+		<dc:creator><![CDATA[satyam]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 06:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-38520</guid>
+		<description><![CDATA[even if I  add const in copy constructor still copy constructor is not being executed .I think it must be executed 2 times ...a.)while returning object t in function fun() and b.)initializing object returned by fun() to t2.
+But I don&#039;t why is that not happening? Please clarify...]]></description>
+		<content:encoded><![CDATA[<p>even if I  add const in copy constructor still copy constructor is not being executed .I think it must be executed 2 times &#8230;a.)while returning object t in function fun() and b.)initializing object returned by fun() to t2.<br />
+But I don&#8217;t why is that not happening? Please clarify&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mohaan</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-36865</link>
+		<dc:creator><![CDATA[Mohaan]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 11:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-36865</guid>
+		<description><![CDATA[This also works, once we give reference to the return value by fun() function call... 
+
+#include
+using namespace std;
+ 
+class Test
+{
+   /* Class data members */
+public:
+   Test(Test &#038;t) { /* Copy data members from t*/}
+   Test()        { /* Initialize data members */ }
+};
+ 
+Test&#038; fun()
+{
+    cout &#060;&#060; &#034;fun() Calledn&#034;;
+    Test t;
+    return t;
+}
+ 
+int main()
+{
+    Test t1;
+    Test t2 = fun();
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>This also works, once we give reference to the return value by fun() function call&#8230; </p>
+<p>#include<br />
+using namespace std;</p>
+<p>class Test<br />
+{<br />
+   /* Class data members */<br />
+public:<br />
+   Test(Test &amp;t) { /* Copy data members from t*/}<br />
+   Test()        { /* Initialize data members */ }<br />
+};</p>
+<p>Test&amp; fun()<br />
+{<br />
+    cout &lt;&lt; &quot;fun() Calledn&quot;;<br />
+    Test t;<br />
+    return t;<br />
+}</p>
+<p>int main()<br />
+{<br />
+    Test t1;<br />
+    Test t2 = fun();<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mrX</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-34148</link>
+		<dc:creator><![CDATA[mrX]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 08:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-34148</guid>
+		<description><![CDATA[this is a new knowledge for me. thanks for sharing knowledge !!!!]]></description>
+		<content:encoded><![CDATA[<p>this is a new knowledge for me. thanks for sharing knowledge !!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akil</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-29128</link>
+		<dc:creator><![CDATA[Akil]]></dc:creator>
+		<pubDate>Sun, 20 Oct 2013 17:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-29128</guid>
+		<description><![CDATA[In that Overloaded Assignment Operator Shoold be invoked in this scneario also  Test t2=fun();]]></description>
+		<content:encoded><![CDATA[<p>In that Overloaded Assignment Operator Shoold be invoked in this scneario also  Test t2=fun();</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gan</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28836</link>
+		<dc:creator><![CDATA[Gan]]></dc:creator>
+		<pubDate>Sun, 13 Oct 2013 18:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28836</guid>
+		<description><![CDATA[class Test
+{
+   /* Class data members */
+public:
+   Test(Test &#038;t) { /* Copy data members from t*/}
+   Test()        { /* Initialize data members */ }
+};
+ 
+Test fun()
+{
+    cout &#060;&#060; &#034;fun() Calledn&#034;;
+    Test t;
+    return t;
+}
+ 
+int main()
+{
+    Test t1;
+    Test t2 = fun();
+    return 0;
+}
+this code works fine. copy constructor is called for t2. 
+I&#039;m using compiler available in visual studio 2008 
+
+-Gan]]></description>
+		<content:encoded><![CDATA[<p>class Test<br />
+{<br />
+   /* Class data members */<br />
+public:<br />
+   Test(Test &amp;t) { /* Copy data members from t*/}<br />
+   Test()        { /* Initialize data members */ }<br />
+};</p>
+<p>Test fun()<br />
+{<br />
+    cout &lt;&lt; &quot;fun() Calledn&quot;;<br />
+    Test t;<br />
+    return t;<br />
+}</p>
+<p>int main()<br />
+{<br />
+    Test t1;<br />
+    Test t2 = fun();<br />
+    return 0;<br />
+}<br />
+this code works fine. copy constructor is called for t2.<br />
+I&#039;m using compiler available in visual studio 2008 </p>
+<p>-Gan</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GuruSimhe</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28499</link>
+		<dc:creator><![CDATA[GuruSimhe]]></dc:creator>
+		<pubDate>Sat, 05 Oct 2013 20:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28499</guid>
+		<description><![CDATA[Dear Swati, In second case it works fine as here we are using overloaded assignment operator instead of the copy ctor.]]></description>
+		<content:encoded><![CDATA[<p>Dear Swati, In second case it works fine as here we are using overloaded assignment operator instead of the copy ctor.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: swati</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28095</link>
+		<dc:creator><![CDATA[swati]]></dc:creator>
+		<pubDate>Wed, 25 Sep 2013 05:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28095</guid>
+		<description><![CDATA[Why program works fine with following changes
+Test t2;
+t2=fun();
+
+and not with 
+
+Test t2=fun();
+
+Please make it clear I am not getting.]]></description>
+		<content:encoded><![CDATA[<p>Why program works fine with following changes<br />
+Test t2;<br />
+t2=fun();</p>
+<p>and not with </p>
+<p>Test t2=fun();</p>
+<p>Please make it clear I am not getting.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Manish</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28054</link>
+		<dc:creator><![CDATA[Manish]]></dc:creator>
+		<pubDate>Mon, 23 Sep 2013 15:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28054</guid>
+		<description><![CDATA[To make it simple const is required to allow compiler to call constructor for const object .If you want for volatile you need to add volatile also.]]></description>
+		<content:encoded><![CDATA[<p>To make it simple const is required to allow compiler to call constructor for const object .If you want for volatile you need to add volatile also.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bharath</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28033</link>
+		<dc:creator><![CDATA[Bharath]]></dc:creator>
+		<pubDate>Mon, 23 Sep 2013 00:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28033</guid>
+		<description><![CDATA[haha .... this video will explain it in very detail. You can go thru it completely. Or first 30min should help understand lvalue and rvalue references
+
+http://skillsmatter.com/podcast/home/move-semanticsperfect-forwarding-and-rvalue-references]]></description>
+		<content:encoded><![CDATA[<p>haha &#8230;. this video will explain it in very detail. You can go thru it completely. Or first 30min should help understand lvalue and rvalue references</p>
+<p><a href="http://skillsmatter.com/podcast/home/move-semanticsperfect-forwarding-and-rvalue-references" rel="nofollow">http://skillsmatter.com/podcast/home/move-semanticsperfect-forwarding-and-rvalue-references</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil</title>
+		<link>http://www.geeksforgeeks.org/copy-constructor-argument-const/#comment-28021</link>
+		<dc:creator><![CDATA[Nikhil]]></dc:creator>
+		<pubDate>Sun, 22 Sep 2013 18:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123157#comment-28021</guid>
+		<description><![CDATA[Bhai, yeh kya keh diya aapne?
+Sar ke upar se udd gaya mere to.]]></description>
+		<content:encoded><![CDATA[<p>Bhai, yeh kya keh diya aapne?<br />
+Sar ke upar se udd gaya mere to.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:31 -->
+
+<!-- Compression = gzip -->

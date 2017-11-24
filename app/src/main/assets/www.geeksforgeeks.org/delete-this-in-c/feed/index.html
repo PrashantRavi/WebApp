@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: &#8220;delete this&#8221; in C++</title>
+	<atom:link href="http://www.geeksforgeeks.org/delete-this-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/delete-this-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rajesh Pal</title>
+		<link>http://www.geeksforgeeks.org/delete-this-in-c/#comment-31811</link>
+		<dc:creator><![CDATA[Rajesh Pal]]></dc:creator>
+		<pubDate>Sat, 25 Jan 2014 11:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8561#comment-31811</guid>
+		<description><![CDATA[#include
+#include
+using namespace std;
+class A
+{
+  public:
+    void fun()
+    {
+        delete this;
+    }
+};
+
+int main()
+{
+  /* Following is Valid */
+  A *ptr = new A;
+  ptr-&#062;fun();
+  ptr = NULL; // make ptr NULL to make sure that things are not accessed using ptr.
+
+
+  /* And following is Invalid: Undefined Behavior */
+  A a;
+  a.fun();
+
+  getchar();
+  return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+using namespace std;<br />
+class A<br />
+{<br />
+  public:<br />
+    void fun()<br />
+    {<br />
+        delete this;<br />
+    }<br />
+};</p>
+<p>int main()<br />
+{<br />
+  /* Following is Valid */<br />
+  A *ptr = new A;<br />
+  ptr-&gt;fun();<br />
+  ptr = NULL; // make ptr NULL to make sure that things are not accessed using ptr.</p>
+<p>  /* And following is Invalid: Undefined Behavior */<br />
+  A a;<br />
+  a.fun();</p>
+<p>  getchar();<br />
+  return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: groomnestle</title>
+		<link>http://www.geeksforgeeks.org/delete-this-in-c/#comment-30807</link>
+		<dc:creator><![CDATA[groomnestle]]></dc:creator>
+		<pubDate>Wed, 18 Dec 2013 06:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8561#comment-30807</guid>
+		<description><![CDATA[There is a typo in the example. there should be a &#039;;&#039; after  ptr = NULL]]></description>
+		<content:encoded><![CDATA[<p>There is a typo in the example. there should be a &#8216;;&#8217; after  ptr = NULL</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rajendra</title>
+		<link>http://www.geeksforgeeks.org/delete-this-in-c/#comment-22566</link>
+		<dc:creator><![CDATA[Rajendra]]></dc:creator>
+		<pubDate>Tue, 23 Jul 2013 08:54:01 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8561#comment-22566</guid>
+		<description><![CDATA[#include
+using namespace std;
+ 
+class Test
+{
+private:
+  int x;
+  int y;
+public:
+  Test(int x = 100, int y = 20) { this-&#062;x = x; this-&#062;y = y;  }
+  void setX(int a) { x = a; }
+  void setY(int b) { y = b; }
+  void destroy()  { delete this; }
+  void print() { cout &#060;&#060; &#034;x = &#034; &#060;&#060; x &#060;&#060; &#034; y = &#034; &#060;&#060; y &#060;destroy();
+  obj-&#062;print();
+  return 0;
+}
+
+output:
+x = 0 y = 20
+
+I am not able to understand the output... :-(]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;</p>
+<p>class Test<br />
+{<br />
+private:<br />
+  int x;<br />
+  int y;<br />
+public:<br />
+  Test(int x = 100, int y = 20) { this-&gt;x = x; this-&gt;y = y;  }<br />
+  void setX(int a) { x = a; }<br />
+  void setY(int b) { y = b; }<br />
+  void destroy()  { delete this; }<br />
+  void print() { cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot; y = &quot; &lt;&lt; y &lt;destroy();<br />
+  obj-&gt;print();<br />
+  return 0;<br />
+}</p>
+<p>output:<br />
+x = 0 y = 20</p>
+<p>I am not able to understand the output&#8230; 🙁</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anil Tyagi</title>
+		<link>http://www.geeksforgeeks.org/delete-this-in-c/#comment-19005</link>
+		<dc:creator><![CDATA[Anil Tyagi]]></dc:creator>
+		<pubDate>Sat, 01 Jun 2013 09:16:36 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8561#comment-19005</guid>
+		<description><![CDATA[I have compile the above program on ubuntu and getting some abnormal results. Please explain why it is happening.
+
+My code is as follows-
+
+class A
+{
+  public:
+    void func1()
+    {
+        cout&#060;&#060;&#034;func1 is called\n&#034;;
+        delete this;
+    }
+    void func2()
+    {
+        cout&#060;func1();
+  ptr-&#062;func2();
+  
+}
+
+The output that i am getting is 
+func1 is called
+func2 is called
+
+Please explain why this is coming.
+I think that core dump or seg. fault should come as i am accessing the object of class after calling &quot;delete this&quot;.
+
+Thanks in advance
+ 
+ 
+  /* And following is Invalid: Undefined Behavior */
+  A a;
+  a.fun();
+ 
+  getchar();
+  return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>I have compile the above program on ubuntu and getting some abnormal results. Please explain why it is happening.</p>
+<p>My code is as follows-</p>
+<p>class A<br />
+{<br />
+  public:<br />
+    void func1()<br />
+    {<br />
+        cout&lt;&lt;&quot;func1 is called\n&quot;;<br />
+        delete this;<br />
+    }<br />
+    void func2()<br />
+    {<br />
+        cout&lt;func1();<br />
+  ptr-&gt;func2();</p>
+<p>}</p>
+<p>The output that i am getting is<br />
+func1 is called<br />
+func2 is called</p>
+<p>Please explain why this is coming.<br />
+I think that core dump or seg. fault should come as i am accessing the object of class after calling &#8220;delete this&#8221;.</p>
+<p>Thanks in advance</p>
+<p>  /* And following is Invalid: Undefined Behavior */<br />
+  A a;<br />
+  a.fun();</p>
+<p>  getchar();<br />
+  return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.072 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:05 -->
+
+<!-- Compression = gzip -->

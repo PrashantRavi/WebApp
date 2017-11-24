@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Remove duplicates from an unsorted linked list</title>
+	<atom:link href="http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: kumar praharsh Rakheja</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-39176</link>
+		<dc:creator><![CDATA[kumar praharsh Rakheja]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 17:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-39176</guid>
+		<description><![CDATA[Not getting the output......can someone explain.....???
+
+#include&quot;stdio.h&quot;
+#include&quot;malloc.h&quot;
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void insert(int num)
+{
+    struct node *q = (struct node *)malloc(sizeof(struct node));
+    q-&#062;next = NULL;
+    q-&#062;data = num;
+    if(head==NULL)
+    {
+        head = q;
+        return;
+    }
+    q-&#062;next = head;
+    head = q;
+}
+
+void remdup()
+{
+    struct node *current = head;
+    struct node *nextnext = NULL;
+    if(head==NULL)
+    {
+        return;
+    }
+    if(current-&#062;data==current-&#062;next-&#062;data)
+    {
+        nextnext = current-&#062;next-&#062;next;
+        current-&#062;next-&#062;next = NULL;
+        free(current-&#062;next);
+        current-&#062;next = nextnext;
+    }
+    else
+    {
+        current = current-&#062;next;
+    }
+}
+
+void sort(int n)
+{
+    int i,j,temp;
+    struct node *q = head;
+    for(i=0;i&#060;n-1;i++)
+    {
+        for(j=0;jdata &#062; (q-&#062;next)-&#062;data)
+            {
+                temp = q-&#062;data;
+                q-&#062;data = (q-&#062;next)-&#062;data;
+                (q-&#062;next)-&#062;data = temp;
+            }
+            q = q-&#062;next;
+        }
+        q = head;
+    }
+}
+
+void print()
+{
+    struct node *q = head;
+    printf(&quot;nnLinked list : &quot;);
+    while(q!=NULL)
+    {
+        printf(&quot; %d&quot;,q-&#062;data);
+        q = q-&#062;next;
+    }
+    printf(&quot;n&quot;);
+}
+
+int main()
+{
+    int i,n,num;
+    printf(&quot;nnEnter the number of elements : &quot;);
+    scanf(&quot;%d&quot;,&#038;n);
+    printf(&quot;nnEnter the elements : &quot;);
+    for(i=0;i&#060;n;i++)
+    {
+        scanf(&#034;%d&#034;,&#038;num);
+        insert(num);
+    }
+    print();
+    sort(n);
+    print();
+    remdup();
+    print();
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>Not getting the output&#8230;&#8230;can someone explain&#8230;..???</p>
+<p>#include&#8221;stdio.h&#8221;<br />
+#include&#8221;malloc.h&#8221;</p>
+<p>struct node<br />
+{<br />
+    int data;<br />
+    struct node *next;<br />
+};</p>
+<p>struct node *head = NULL;</p>
+<p>void insert(int num)<br />
+{<br />
+    struct node *q = (struct node *)malloc(sizeof(struct node));<br />
+    q-&gt;next = NULL;<br />
+    q-&gt;data = num;<br />
+    if(head==NULL)<br />
+    {<br />
+        head = q;<br />
+        return;<br />
+    }<br />
+    q-&gt;next = head;<br />
+    head = q;<br />
+}</p>
+<p>void remdup()<br />
+{<br />
+    struct node *current = head;<br />
+    struct node *nextnext = NULL;<br />
+    if(head==NULL)<br />
+    {<br />
+        return;<br />
+    }<br />
+    if(current-&gt;data==current-&gt;next-&gt;data)<br />
+    {<br />
+        nextnext = current-&gt;next-&gt;next;<br />
+        current-&gt;next-&gt;next = NULL;<br />
+        free(current-&gt;next);<br />
+        current-&gt;next = nextnext;<br />
+    }<br />
+    else<br />
+    {<br />
+        current = current-&gt;next;<br />
+    }<br />
+}</p>
+<p>void sort(int n)<br />
+{<br />
+    int i,j,temp;<br />
+    struct node *q = head;<br />
+    for(i=0;i&lt;n-1;i++)<br />
+    {<br />
+        for(j=0;jdata &gt; (q-&gt;next)-&gt;data)<br />
+            {<br />
+                temp = q-&gt;data;<br />
+                q-&gt;data = (q-&gt;next)-&gt;data;<br />
+                (q-&gt;next)-&gt;data = temp;<br />
+            }<br />
+            q = q-&gt;next;<br />
+        }<br />
+        q = head;<br />
+    }<br />
+}</p>
+<p>void print()<br />
+{<br />
+    struct node *q = head;<br />
+    printf(&#8220;nnLinked list : &#8220;);<br />
+    while(q!=NULL)<br />
+    {<br />
+        printf(&#8221; %d&#8221;,q-&gt;data);<br />
+        q = q-&gt;next;<br />
+    }<br />
+    printf(&#8220;n&#8221;);<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int i,n,num;<br />
+    printf(&#8220;nnEnter the number of elements : &#8220;);<br />
+    scanf(&#8220;%d&#8221;,&amp;n);<br />
+    printf(&#8220;nnEnter the elements : &#8220;);<br />
+    for(i=0;i&lt;n;i++)<br />
+    {<br />
+        scanf(&quot;%d&quot;,&amp;num);<br />
+        insert(num);<br />
+    }<br />
+    print();<br />
+    sort(n);<br />
+    print();<br />
+    remdup();<br />
+    print();<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sonu431</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-38374</link>
+		<dc:creator><![CDATA[sonu431]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 04:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-38374</guid>
+		<description><![CDATA[In the method 3 what is key and value for the process to carried out? plz explain]]></description>
+		<content:encoded><![CDATA[<p>In the method 3 what is key and value for the process to carried out? plz explain</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek Garg</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-36155</link>
+		<dc:creator><![CDATA[Vivek Garg]]></dc:creator>
+		<pubDate>Sat, 17 May 2014 08:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-36155</guid>
+		<description><![CDATA[Here is c++ implementation for this topic using hashTable..
+
+void removeDuplicates(linkedlist list){
+
+node *temp=list.head;
+
+linkedlist hashlist[100];
+
+node *prevNode=NULL;/*It is used because my pop function take the prevNode as input and remove the node after prevNode.*/
+
+while(temp!=NULL)
+
+{
+
+if(isNodeInhashlist(temp,hashlist))
+
+{
+
+list.pop(prevNode);
+
+}
+
+else
+
+{
+
+hashlist[hashFunction(temp-&#062;data)].push(temp-&#062;data);
+
+}
+
+prevNode=temp;
+
+temp=temp-&#062;next;
+
+}
+
+}
+
+bool isNodeInhashlist(node *checkingNode,linkedlist hashlist[]){
+
+int index=hashFunction(checkingNode-&#062;data);
+
+node *tempHead=hashlist[index].head;
+
+while(tempHead!=NULL)
+
+{
+
+if(tempHead-&#062;data==checkingNode-&#062;data) return true;
+
+}
+
+return false;
+
+}
+
+int hashFunction(int elem){
+
+return elem%100;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is c++ implementation for this topic using hashTable..</p>
+<p>void removeDuplicates(linkedlist list){</p>
+<p>node *temp=list.head;</p>
+<p>linkedlist hashlist[100];</p>
+<p>node *prevNode=NULL;/*It is used because my pop function take the prevNode as input and remove the node after prevNode.*/</p>
+<p>while(temp!=NULL)</p>
+<p>{</p>
+<p>if(isNodeInhashlist(temp,hashlist))</p>
+<p>{</p>
+<p>list.pop(prevNode);</p>
+<p>}</p>
+<p>else</p>
+<p>{</p>
+<p>hashlist[hashFunction(temp-&gt;data)].push(temp-&gt;data);</p>
+<p>}</p>
+<p>prevNode=temp;</p>
+<p>temp=temp-&gt;next;</p>
+<p>}</p>
+<p>}</p>
+<p>bool isNodeInhashlist(node *checkingNode,linkedlist hashlist[]){</p>
+<p>int index=hashFunction(checkingNode-&gt;data);</p>
+<p>node *tempHead=hashlist[index].head;</p>
+<p>while(tempHead!=NULL)</p>
+<p>{</p>
+<p>if(tempHead-&gt;data==checkingNode-&gt;data) return true;</p>
+<p>}</p>
+<p>return false;</p>
+<p>}</p>
+<p>int hashFunction(int elem){</p>
+<p>return elem%100;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arun Dixit</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-35259</link>
+		<dc:creator><![CDATA[Arun Dixit]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 02:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-35259</guid>
+		<description><![CDATA[Following is java implementation using hashSet:
+
+public void removeDuplicatesUnsorted(Node head){
+
+    HashSet elem = new HashSet();
+
+    Node curr=head.next;
+
+    Node prev=head;
+
+    elem.add(head.data);
+
+    while(curr!=null){
+
+        if(elem.contains(curr.data)){
+
+            prev.next=curr.next;
+
+            curr=null;
+
+            curr=prev.next;
+
+            }
+
+        else{
+
+            elem.add(curr.data);
+
+            prev=curr;
+
+            curr=curr.next;
+
+            }
+
+        }
+
+    }]]></description>
+		<content:encoded><![CDATA[<p>Following is java implementation using hashSet:</p>
+<p>public void removeDuplicatesUnsorted(Node head){</p>
+<p>    HashSet elem = new HashSet();</p>
+<p>    Node curr=head.next;</p>
+<p>    Node prev=head;</p>
+<p>    elem.add(head.data);</p>
+<p>    while(curr!=null){</p>
+<p>        if(elem.contains(curr.data)){</p>
+<p>            prev.next=curr.next;</p>
+<p>            curr=null;</p>
+<p>            curr=prev.next;</p>
+<p>            }</p>
+<p>        else{</p>
+<p>            elem.add(curr.data);</p>
+<p>            prev=curr;</p>
+<p>            curr=curr.next;</p>
+<p>            }</p>
+<p>        }</p>
+<p>    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Dagar</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-35115</link>
+		<dc:creator><![CDATA[Himanshu Dagar]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 17:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-35115</guid>
+		<description><![CDATA[Hashing is Perfect method for this
+We can use map for this (one is key and another one is mapped value)]]></description>
+		<content:encoded><![CDATA[<p>Hashing is Perfect method for this<br />
+We can use map for this (one is key and another one is mapped value)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Niks</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-35077</link>
+		<dc:creator><![CDATA[Niks]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 14:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-35077</guid>
+		<description><![CDATA[The above solution is basically trying to store the occurrence of a number in a 32 bit integer. What if I have two numbers like 5 and 37. When 5 is encountered the code sets bit5 to 1 and when 37 is encountered the 32 bit number wraps and again bit 5 is set. Does this not cause 5 and 32 to be treated as duplicates??]]></description>
+		<content:encoded><![CDATA[<p>The above solution is basically trying to store the occurrence of a number in a 32 bit integer. What if I have two numbers like 5 and 37. When 5 is encountered the code sets bit5 to 1 and when 37 is encountered the 32 bit number wraps and again bit 5 is set. Does this not cause 5 and 32 to be treated as duplicates??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sunil</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-35072</link>
+		<dc:creator><![CDATA[Sunil]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 13:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-35072</guid>
+		<description><![CDATA[I have a better solution for this. For hashtable we need to again use extra memory. space constraint. If the interviewer asks you to give a solution with linear time O(n) with no extra space. please try using bit vectors. It will solve the problem.
+
+private void removeDuplicates(Node head) {
+
+		Node iter = head;
+
+		int checker = 0;
+
+		while(iter != null) {
+
+			if((checker &#038; (1 &#060;&#060; iter.data)) != 0) {
+
+				// Found duplicate
+
+				
+
+				if(iter.next != null) {
+
+					iter.data = iter.next.data;
+
+					iter.next = iter.next.next;
+
+				} else {
+
+					iter = null;
+
+					return;
+
+				}
+
+			} else {
+
+				checker &#124;= (1 &#060;&#060; iter.data);
+
+				iter = iter.next;
+
+			}			
+
+		}		
+
+	}
+
+
+
+
+
+This does the removal of duplicates in just one single run with O(n) speed. with space complexity of just O(1).
+
+
+However, in my solution you would get one extra duplicate at the end of the list, i think you can figure out the issue and fix it. 
+
+
+Ex: right now for input like 1,2,3,0,1,2,3,0
+output would be 1,2,3,0,0
+
+
+The last repeated one is coming at the end. tweak my code to remove that as well. If you feel my solution is wrong, please mail me to &#034;sunilebiz2007@gmail.com&#034;]]></description>
+		<content:encoded><![CDATA[<p>I have a better solution for this. For hashtable we need to again use extra memory. space constraint. If the interviewer asks you to give a solution with linear time O(n) with no extra space. please try using bit vectors. It will solve the problem.</p>
+<p>private void removeDuplicates(Node head) {</p>
+<p>		Node iter = head;</p>
+<p>		int checker = 0;</p>
+<p>		while(iter != null) {</p>
+<p>			if((checker &amp; (1 &lt;&lt; iter.data)) != 0) {</p>
+<p>				// Found duplicate</p>
+<p>				if(iter.next != null) {</p>
+<p>					iter.data = iter.next.data;</p>
+<p>					iter.next = iter.next.next;</p>
+<p>				} else {</p>
+<p>					iter = null;</p>
+<p>					return;</p>
+<p>				}</p>
+<p>			} else {</p>
+<p>				checker |= (1 &lt;&lt; iter.data);</p>
+<p>				iter = iter.next;</p>
+<p>			}			</p>
+<p>		}		</p>
+<p>	}</p>
+<p>This does the removal of duplicates in just one single run with O(n) speed. with space complexity of just O(1).</p>
+<p>However, in my solution you would get one extra duplicate at the end of the list, i think you can figure out the issue and fix it. </p>
+<p>Ex: right now for input like 1,2,3,0,1,2,3,0<br />
+output would be 1,2,3,0,0</p>
+<p>The last repeated one is coming at the end. tweak my code to remove that as well. If you feel my solution is wrong, please mail me to &quot;sunilebiz2007@gmail.com&quot;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Akash Panda</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-34464</link>
+		<dc:creator><![CDATA[Akash Panda]]></dc:creator>
+		<pubDate>Tue, 08 Apr 2014 09:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-34464</guid>
+		<description><![CDATA[Full source code for solution using the Hashing method. 
+
+void RemoveDuplicatesInUnsorted(struct node **head_ref)
+
+{
+
+    struct node *current=*head_ref;
+
+    int a[100]={0};
+
+    struct node *prev=current;
+
+    a[current-&#062;data]=1;
+
+    current=current-&#062;next;
+
+    while(current!=NULL)
+
+    {
+
+        if(a[current-&#062;data]==1)
+
+        {
+
+            prev-&#062;next=current-&#062;next;
+
+            free(current);
+
+            current=prev-&#062;next;
+
+        }
+
+        else
+
+        {
+
+            a[current-&#062;data]=1;
+
+            current=current-&#062;next;
+
+            prev=prev-&#062;next;
+
+        }
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Full source code for solution using the Hashing method. </p>
+<p>void RemoveDuplicatesInUnsorted(struct node **head_ref)</p>
+<p>{</p>
+<p>    struct node *current=*head_ref;</p>
+<p>    int a[100]={0};</p>
+<p>    struct node *prev=current;</p>
+<p>    a[current-&gt;data]=1;</p>
+<p>    current=current-&gt;next;</p>
+<p>    while(current!=NULL)</p>
+<p>    {</p>
+<p>        if(a[current-&gt;data]==1)</p>
+<p>        {</p>
+<p>            prev-&gt;next=current-&gt;next;</p>
+<p>            free(current);</p>
+<p>            current=prev-&gt;next;</p>
+<p>        }</p>
+<p>        else</p>
+<p>        {</p>
+<p>            a[current-&gt;data]=1;</p>
+<p>            current=current-&gt;next;</p>
+<p>            prev=prev-&gt;next;</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kumar</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-32662</link>
+		<dc:creator><![CDATA[Kumar]]></dc:creator>
+		<pubDate>Mon, 17 Feb 2014 17:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-32662</guid>
+		<description><![CDATA[Removing the element from hash table if its repeated may not work if the element is repeated odd number of times. (2nd repeat, remove the element and third repeat will cause insert as the element is not there in the hash table). Instead we can store the element as key and number of times repeated as value and print only the keys which are having value as 1.]]></description>
+		<content:encoded><![CDATA[<p>Removing the element from hash table if its repeated may not work if the element is repeated odd number of times. (2nd repeat, remove the element and third repeat will cause insert as the element is not there in the hash table). Instead we can store the element as key and number of times repeated as value and print only the keys which are having value as 1.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kunal Arora</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-32461</link>
+		<dc:creator><![CDATA[Kunal Arora]]></dc:creator>
+		<pubDate>Tue, 11 Feb 2014 18:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-32461</guid>
+		<description><![CDATA[1.) We will map every value of linked list to hash table.
+2.) While mapping we can compare if the two values hash to same location in hash table,then we get the address of the hashed value in linked list and delete it.
+3.)Arrange pointers of the linked list .]]></description>
+		<content:encoded><![CDATA[<p>1.) We will map every value of linked list to hash table.<br />
+2.) While mapping we can compare if the two values hash to same location in hash table,then we get the address of the hashed value in linked list and delete it.<br />
+3.)Arrange pointers of the linked list .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rich</title>
+		<link>http://www.geeksforgeeks.org/remove-duplicates-from-an-unsorted-linked-list/#comment-31935</link>
+		<dc:creator><![CDATA[Rich]]></dc:creator>
+		<pubDate>Tue, 28 Jan 2014 16:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5036#comment-31935</guid>
+		<description><![CDATA[Don&#039;t understand the following statement: 
+
+/* Pick elements one by one */
+
+  while (ptr1 != NULL &#038;&#038; ptr1-&#062;next != NULL)
+{ 
+        . . . 
+}
+
+I think we could write like this:
+
+/* Pick elements one by one */
+
+  while (ptr1 != NULL)
+
+{
+        . . . 
+}]]></description>
+		<content:encoded><![CDATA[<p>Don&#8217;t understand the following statement: </p>
+<p>/* Pick elements one by one */</p>
+<p>  while (ptr1 != NULL &amp;&amp; ptr1-&gt;next != NULL)<br />
+{<br />
+        . . .<br />
+}</p>
+<p>I think we could write like this:</p>
+<p>/* Pick elements one by one */</p>
+<p>  while (ptr1 != NULL)</p>
+<p>{<br />
+        . . .<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.049 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:43 -->
+
+<!-- Compression = gzip -->

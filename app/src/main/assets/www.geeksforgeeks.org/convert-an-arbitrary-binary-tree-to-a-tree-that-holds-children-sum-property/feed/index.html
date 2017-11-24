@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Convert an arbitrary Binary Tree to a tree that holds Children Sum Property</title>
+	<atom:link href="http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: shine</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-39894</link>
+		<dc:creator><![CDATA[shine]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 15:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-39894</guid>
+		<description><![CDATA[O(n) solution:
+
+Traverse the tree in post order manner.
+
+While tracing a path from root to leaf,keep the track of maximum value in that path and if leaf is lesser than that maximum value then make leaf equal to that value..For non leaf nodes make their value equal to sum of left and right child values..
+
+Here is the C++ implementation
+//maxval is -INFINTY initially
+void func(node *root,int maxval)
+
+{
+
+if(!root)return;
+
+if(isleaf(root))
+
+{
+
+if(root-&#062;datadata=maxval;
+
+return;
+
+}
+
+func(root-&#062;left,max(root-&#062;data,maxval));
+
+func(root-&#062;right,max(root-&#062;data, maxval));
+
+
+int sum=0;
+
+
+if(root-&#062;left)
+sum+=root-&#062;left-&#062;data;
+
+
+if(root&#062;right)
+sum+=root-&#062;right-&#062;data;
+
+
+root-&#062;data=sum;
+
+
+}]]></description>
+		<content:encoded><![CDATA[<p>O(n) solution:</p>
+<p>Traverse the tree in post order manner.</p>
+<p>While tracing a path from root to leaf,keep the track of maximum value in that path and if leaf is lesser than that maximum value then make leaf equal to that value..For non leaf nodes make their value equal to sum of left and right child values..</p>
+<p>Here is the C++ implementation<br />
+//maxval is -INFINTY initially<br />
+void func(node *root,int maxval)</p>
+<p>{</p>
+<p>if(!root)return;</p>
+<p>if(isleaf(root))</p>
+<p>{</p>
+<p>if(root-&gt;datadata=maxval;</p>
+<p>return;</p>
+<p>}</p>
+<p>func(root-&gt;left,max(root-&gt;data,maxval));</p>
+<p>func(root-&gt;right,max(root-&gt;data, maxval));</p>
+<p>int sum=0;</p>
+<p>if(root-&gt;left)<br />
+sum+=root-&gt;left-&gt;data;</p>
+<p>if(root&gt;right)<br />
+sum+=root-&gt;right-&gt;data;</p>
+<p>root-&gt;data=sum;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ROHIT ASATI</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-39280</link>
+		<dc:creator><![CDATA[ROHIT ASATI]]></dc:creator>
+		<pubDate>Fri, 20 Jun 2014 17:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-39280</guid>
+		<description><![CDATA[code can be easily done without incrementation use  by
+
+void makesum(struct node *a)
+
+{
+
+    int L=0,R=0 ;
+
+    if(a==NULL&#124;&#124;(a-&#062;left==NULL &#038;&#038; a-&#062;right==NULL))
+
+    return  ;
+
+    else
+
+    {
+
+        makesum(a-&#062;left);
+
+    makesum(a-&#062;right);
+
+    if(a-&#062;left!= NULL)
+
+    L=a-&#062;left-&#062;data ;
+
+    if(a-&#062;right!= NULL)
+
+    R= a-&#062;right-&#062;data ;
+
+    a-&#062;data= L + R ;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>code can be easily done without incrementation use  by</p>
+<p>void makesum(struct node *a)</p>
+<p>{</p>
+<p>    int L=0,R=0 ;</p>
+<p>    if(a==NULL||(a-&gt;left==NULL &amp;&amp; a-&gt;right==NULL))</p>
+<p>    return  ;</p>
+<p>    else</p>
+<p>    {</p>
+<p>        makesum(a-&gt;left);</p>
+<p>    makesum(a-&gt;right);</p>
+<p>    if(a-&gt;left!= NULL)</p>
+<p>    L=a-&gt;left-&gt;data ;</p>
+<p>    if(a-&gt;right!= NULL)</p>
+<p>    R= a-&gt;right-&gt;data ;</p>
+<p>    a-&gt;data= L + R ;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karthikeyan</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-38809</link>
+		<dc:creator><![CDATA[Karthikeyan]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 09:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-38809</guid>
+		<description><![CDATA[Is it wrong if the root is 39 ?]]></description>
+		<content:encoded><![CDATA[<p>Is it wrong if the root is 39 ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-38391</link>
+		<dc:creator><![CDATA[Nitin]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 07:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-38391</guid>
+		<description><![CDATA[I believe a O(n) solution is possible :
+
+#include
+
+#include
+
+using namespace std;
+
+struct node
+
+{
+
+	node(int data)
+
+	{
+
+		this-&#062;data = data;
+
+		this-&#062;left = nullptr;
+
+		this-&#062;right = nullptr;
+
+	}
+
+	int data;
+
+	node* left;
+
+	node* right;
+
+};
+
+int AdjustCSP(node* root, int val)
+
+{
+
+	if (root-&#062;data data = val;
+
+	if (root-&#062;left == nullptr &#038;&#038; root-&#062;right == nullptr)
+
+		return root-&#062;data;
+
+	int incVal = 0;
+
+	int rightVal = 0;
+
+	if (root-&#062;left == nullptr)
+
+		incVal = root-&#062;data;
+
+	if (root-&#062;right)
+
+	{
+
+		rightVal = AdjustCSP(root-&#062;right, incVal);
+
+	}
+
+	if (rightVal data)
+
+		incVal = root-&#062;data - rightVal;
+
+	int leftVal = 0;
+
+	if (root-&#062;left)
+
+	{
+
+		leftVal = AdjustCSP(root-&#062;left, incVal);
+
+	}
+
+	root-&#062;data = leftVal + rightVal;
+
+	return root-&#062;data;
+
+}
+
+int main()
+
+{
+
+node* root = new node(50);
+
+	root-&#062;left = new node(7);
+
+	root-&#062;left-&#062;left = new node(3);
+
+	root-&#062;left-&#062;right = new node(5);
+
+	root-&#062;right = new node(30);
+
+	root-&#062;right-&#062;left = new node(10);
+
+	root-&#062;right-&#062;right = new node(20);
+
+	AdjustCSP(root, root-&#062;data);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I believe a O(n) solution is possible :</p>
+<p>#include</p>
+<p>#include</p>
+<p>using namespace std;</p>
+<p>struct node</p>
+<p>{</p>
+<p>	node(int data)</p>
+<p>	{</p>
+<p>		this-&gt;data = data;</p>
+<p>		this-&gt;left = nullptr;</p>
+<p>		this-&gt;right = nullptr;</p>
+<p>	}</p>
+<p>	int data;</p>
+<p>	node* left;</p>
+<p>	node* right;</p>
+<p>};</p>
+<p>int AdjustCSP(node* root, int val)</p>
+<p>{</p>
+<p>	if (root-&gt;data data = val;</p>
+<p>	if (root-&gt;left == nullptr &amp;&amp; root-&gt;right == nullptr)</p>
+<p>		return root-&gt;data;</p>
+<p>	int incVal = 0;</p>
+<p>	int rightVal = 0;</p>
+<p>	if (root-&gt;left == nullptr)</p>
+<p>		incVal = root-&gt;data;</p>
+<p>	if (root-&gt;right)</p>
+<p>	{</p>
+<p>		rightVal = AdjustCSP(root-&gt;right, incVal);</p>
+<p>	}</p>
+<p>	if (rightVal data)</p>
+<p>		incVal = root-&gt;data &#8211; rightVal;</p>
+<p>	int leftVal = 0;</p>
+<p>	if (root-&gt;left)</p>
+<p>	{</p>
+<p>		leftVal = AdjustCSP(root-&gt;left, incVal);</p>
+<p>	}</p>
+<p>	root-&gt;data = leftVal + rightVal;</p>
+<p>	return root-&gt;data;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>node* root = new node(50);</p>
+<p>	root-&gt;left = new node(7);</p>
+<p>	root-&gt;left-&gt;left = new node(3);</p>
+<p>	root-&gt;left-&gt;right = new node(5);</p>
+<p>	root-&gt;right = new node(30);</p>
+<p>	root-&gt;right-&gt;left = new node(10);</p>
+<p>	root-&gt;right-&gt;right = new node(20);</p>
+<p>	AdjustCSP(root, root-&gt;data);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek Garg</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-36854</link>
+		<dc:creator><![CDATA[Vivek Garg]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 06:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-36854</guid>
+		<description><![CDATA[c++ function for this conversion is as below:
+
+void childSumTree(node *root)
+
+{
+
+    if(root==NULL) return ;
+
+    if(root-&#062;left==NULL &#038;&#038; root-&#062;right==NULL)
+
+    return ;
+
+    int diff=0;
+
+    if(root-&#062;left!=NULL)
+
+    diff=root-&#062;left-&#062;data;
+
+    if(root-&#062;right!=NULL)
+
+    diff+=root-&#062;right-&#062;data;
+
+    diff-=root-&#062;data;
+
+    if(diff&#062;0)
+
+    {
+
+        root-&#062;data+=diff;
+
+        childSumTree(root);
+
+    }
+
+    else
+
+        if(diffleft!=NULL)
+
+            {root-&#062;left-&#062;data-=diff;
+
+             childSumTree(root-&#062;left);
+
+             childSumTree(root-&#062;right);}
+
+            else
+
+                if(root-&#062;right!=NULL)
+
+                {root-&#062;right-&#062;data-=diff;
+
+                childSumTree(root-&#062;right);
+
+                childSumTree(root-&#062;left);}
+
+        }
+
+        else
+
+        {
+
+            childSumTree(root-&#062;left);
+
+             childSumTree(root-&#062;right);
+
+        }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>c++ function for this conversion is as below:</p>
+<p>void childSumTree(node *root)</p>
+<p>{</p>
+<p>    if(root==NULL) return ;</p>
+<p>    if(root-&gt;left==NULL &amp;&amp; root-&gt;right==NULL)</p>
+<p>    return ;</p>
+<p>    int diff=0;</p>
+<p>    if(root-&gt;left!=NULL)</p>
+<p>    diff=root-&gt;left-&gt;data;</p>
+<p>    if(root-&gt;right!=NULL)</p>
+<p>    diff+=root-&gt;right-&gt;data;</p>
+<p>    diff-=root-&gt;data;</p>
+<p>    if(diff&gt;0)</p>
+<p>    {</p>
+<p>        root-&gt;data+=diff;</p>
+<p>        childSumTree(root);</p>
+<p>    }</p>
+<p>    else</p>
+<p>        if(diffleft!=NULL)</p>
+<p>            {root-&gt;left-&gt;data-=diff;</p>
+<p>             childSumTree(root-&gt;left);</p>
+<p>             childSumTree(root-&gt;right);}</p>
+<p>            else</p>
+<p>                if(root-&gt;right!=NULL)</p>
+<p>                {root-&gt;right-&gt;data-=diff;</p>
+<p>                childSumTree(root-&gt;right);</p>
+<p>                childSumTree(root-&gt;left);}</p>
+<p>        }</p>
+<p>        else</p>
+<p>        {</p>
+<p>            childSumTree(root-&gt;left);</p>
+<p>             childSumTree(root-&gt;right);</p>
+<p>        }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sri</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-36066</link>
+		<dc:creator><![CDATA[sri]]></dc:creator>
+		<pubDate>Thu, 15 May 2014 04:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-36066</guid>
+		<description><![CDATA[Decrementing  the node&#039;s value is not allowed.]]></description>
+		<content:encoded><![CDATA[<p>Decrementing  the node&#8217;s value is not allowed.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Kumar</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-35879</link>
+		<dc:creator><![CDATA[Nikhil Kumar]]></dc:creator>
+		<pubDate>Sat, 10 May 2014 18:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-35879</guid>
+		<description><![CDATA[will work, i guess if negetive  values are also allowed as data values:)]]></description>
+		<content:encoded><![CDATA[<p>will work, i guess if negetive  values are also allowed as data values:)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-33989</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 16:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-33989</guid>
+		<description><![CDATA[A O(n) solution is possible :-
+Algorithm.. 
+We take the Top-Bottom approach
+ Step-1:-    Check the parents value and Sum of child&#039;s value
+               take, diff=(parent value-sum of child&#039;s value).
+               If diff&#062;0,
+                    then, arbitrary choose either left and right child and add the diff                                         to the                     child value.
+               Else, 
+                    arbitrary choose either left and right child and subtract the diff                                         to the                       child value.
+Step-2:-     Recursively Call for left and right child.
+
+Please comment and correct me if I am making some mistake or if my concept is wrong.....]]></description>
+		<content:encoded><![CDATA[<p>A O(n) solution is possible :-<br />
+Algorithm..<br />
+We take the Top-Bottom approach<br />
+ Step-1:-    Check the parents value and Sum of child&#8217;s value<br />
+               take, diff=(parent value-sum of child&#8217;s value).<br />
+               If diff&gt;0,<br />
+                    then, arbitrary choose either left and right child and add the diff                                         to the                     child value.<br />
+               Else,<br />
+                    arbitrary choose either left and right child and subtract the diff                                         to the                       child value.<br />
+Step-2:-     Recursively Call for left and right child.</p>
+<p>Please comment and correct me if I am making some mistake or if my concept is wrong&#8230;..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ameet Chhatwal</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-33329</link>
+		<dc:creator><![CDATA[Ameet Chhatwal]]></dc:creator>
+		<pubDate>Mon, 10 Mar 2014 03:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-33329</guid>
+		<description><![CDATA[A clean O(n) Solution:
+1. Keep adding the root value to its child value and keep traversing down the tree.  Note(IMP) if the value is negative make it positive * (-1)
+2. once a node&#039;s right and left child are visited update the  node&#039;s value to left child + right child (Trick is nodes value will always increase since you have already added value of root to child)
+
+
+Any feedback is appreciated]]></description>
+		<content:encoded><![CDATA[<p>A clean O(n) Solution:<br />
+1. Keep adding the root value to its child value and keep traversing down the tree.  Note(IMP) if the value is negative make it positive * (-1)<br />
+2. once a node&#8217;s right and left child are visited update the  node&#8217;s value to left child + right child (Trick is nodes value will always increase since you have already added value of root to child)</p>
+<p>Any feedback is appreciated</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sumit Poddar</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-29905</link>
+		<dc:creator><![CDATA[Sumit Poddar]]></dc:creator>
+		<pubDate>Sun, 17 Nov 2013 10:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-29905</guid>
+		<description><![CDATA[Kindly check my JAVA implementation for the same. I believe the solution will have O(n) time complexity. Requesting groups to review it and let me know in case of any issues..
+
+---------------------------------------------------------------------------------------
+
+public class TreeToCSPTree {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        Node n1 = new Node(5, new Node(2, null, null), new Node(5, null, null));
+        Node n2 = new Node(3, null, null);
+        Node n3 = new Node(7, n2, n1);
+        Node n4 = new Node(1, null, null);
+        Node n5 = new Node(50, n4, new Node(30, null, null));
+        Node n = new Node(50, n3, n5);
+        Node partn = convert(n, null, new ChangeAttr());
+        System.out.println(partn);
+
+    }
+
+    public static Node convert(Node root, Node parent, ChangeAttr chngeAttr) {
+        if ((root.left == null) &#038;&#038; (root.right == null)) {
+            return root;
+        }
+        Node left = new Node(0), right = new Node(0);
+        if (root.left != null) {
+            left = convert(root.left, root, chngeAttr);
+        }
+        if (root.right != null) {
+            right = convert(root.right, root, chngeAttr);
+        }
+        if ((chngeAttr.data &#062; -1) &#038;&#038; (chngeAttr.toChange)) {
+            if (root.left != null
+                    &#038;&#038; root.left.data &#060; root.left.data + chngeAttr.data) {
+                root.left.data = root.left.data + chngeAttr.data;
+                left = root.left;
+            } else if (root.right != null
+                    &#038;&#038; root.right.data  root.data) {
+            if (parent == null) {
+                root.data = left.data + right.data;
+            } else {
+                if (parent.left.data == root.data) {
+                    parent.left.data = left.data + right.data;
+                } else {
+                    parent.right.data = left.data + right.data;
+                }
+            }
+        } else if ((left.data + right.data) &#060; root.data) {
+            chngeAttr.data = root.data - (left.data + right.data);
+            chngeAttr.toChange = true;
+            convert(root, root, chngeAttr);
+        }
+        return root;
+    }
+}
+
+class ChangeAttr {
+    int data = -1;
+    boolean toChange = false;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Kindly check my JAVA implementation for the same. I believe the solution will have O(n) time complexity. Requesting groups to review it and let me know in case of any issues..</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>public class TreeToCSPTree {</p>
+<p>    /**<br />
+     * @param args<br />
+     */<br />
+    public static void main(String[] args) {<br />
+        Node n1 = new Node(5, new Node(2, null, null), new Node(5, null, null));<br />
+        Node n2 = new Node(3, null, null);<br />
+        Node n3 = new Node(7, n2, n1);<br />
+        Node n4 = new Node(1, null, null);<br />
+        Node n5 = new Node(50, n4, new Node(30, null, null));<br />
+        Node n = new Node(50, n3, n5);<br />
+        Node partn = convert(n, null, new ChangeAttr());<br />
+        System.out.println(partn);</p>
+<p>    }</p>
+<p>    public static Node convert(Node root, Node parent, ChangeAttr chngeAttr) {<br />
+        if ((root.left == null) &amp;&amp; (root.right == null)) {<br />
+            return root;<br />
+        }<br />
+        Node left = new Node(0), right = new Node(0);<br />
+        if (root.left != null) {<br />
+            left = convert(root.left, root, chngeAttr);<br />
+        }<br />
+        if (root.right != null) {<br />
+            right = convert(root.right, root, chngeAttr);<br />
+        }<br />
+        if ((chngeAttr.data &gt; -1) &amp;&amp; (chngeAttr.toChange)) {<br />
+            if (root.left != null<br />
+                    &amp;&amp; root.left.data &lt; root.left.data + chngeAttr.data) {<br />
+                root.left.data = root.left.data + chngeAttr.data;<br />
+                left = root.left;<br />
+            } else if (root.right != null<br />
+                    &amp;&amp; root.right.data  root.data) {<br />
+            if (parent == null) {<br />
+                root.data = left.data + right.data;<br />
+            } else {<br />
+                if (parent.left.data == root.data) {<br />
+                    parent.left.data = left.data + right.data;<br />
+                } else {<br />
+                    parent.right.data = left.data + right.data;<br />
+                }<br />
+            }<br />
+        } else if ((left.data + right.data) &lt; root.data) {<br />
+            chngeAttr.data = root.data &#8211; (left.data + right.data);<br />
+            chngeAttr.toChange = true;<br />
+            convert(root, root, chngeAttr);<br />
+        }<br />
+        return root;<br />
+    }<br />
+}</p>
+<p>class ChangeAttr {<br />
+    int data = -1;<br />
+    boolean toChange = false;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vaibhav</title>
+		<link>http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/#comment-27642</link>
+		<dc:creator><![CDATA[vaibhav]]></dc:creator>
+		<pubDate>Sat, 14 Sep 2013 12:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=4386#comment-27642</guid>
+		<description><![CDATA[my code if problem arises ill be thankful to critic :)
+#include
+
+#include
+
+#include
+
+using namespace std;
+
+void add(int);
+
+typedef struct node { int value; 
+
+struct node *left; 
+
+struct node *right; }mynode;
+
+int child(mynode*root)
+
+{if(!root)
+
+ return 0;
+
+ int h1,h2;
+
+ h1=child(root-&#062;left);
+
+ h2=child(root-&#062;right);
+
+ if(root-&#062;value&#062;h1+h2&#038;&#038;h1&#038;&#038;h2)
+
+   {root-&#062;right-&#062;value=root-&#062;value-root-&#062;left-&#062;value;
+
+   child(root-&#062;right);
+
+   return(root-&#062;value);
+
+   }
+
+    if(root-&#062;value&#062;h1+h2&#038;&#038;!h1&#038;&#038;h2)
+
+   {root-&#062;right-&#062;value+=root-&#062;value-root-&#062;right-&#062;value;
+
+   child(root-&#062;right);
+
+   return(root-&#062;value);
+
+   }
+
+  if(root-&#062;value&#062;h1+h2&#038;&#038;h1&#038;&#038;!h2)
+
+   {root-&#062;left-&#062;value=root-&#062;value;
+
+   child(root-&#062;left);
+
+   return(root-&#062;value);
+
+   }  
+
+ if(root-&#062;valuevalue=h1+h2;
+
+ 
+
+return(root-&#062;value);
+
+}
+
+return(root-&#062;value);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>my code if problem arises ill be thankful to critic 🙂<br />
+#include</p>
+<p>#include</p>
+<p>#include</p>
+<p>using namespace std;</p>
+<p>void add(int);</p>
+<p>typedef struct node { int value; </p>
+<p>struct node *left; </p>
+<p>struct node *right; }mynode;</p>
+<p>int child(mynode*root)</p>
+<p>{if(!root)</p>
+<p> return 0;</p>
+<p> int h1,h2;</p>
+<p> h1=child(root-&gt;left);</p>
+<p> h2=child(root-&gt;right);</p>
+<p> if(root-&gt;value&gt;h1+h2&amp;&amp;h1&amp;&amp;h2)</p>
+<p>   {root-&gt;right-&gt;value=root-&gt;value-root-&gt;left-&gt;value;</p>
+<p>   child(root-&gt;right);</p>
+<p>   return(root-&gt;value);</p>
+<p>   }</p>
+<p>    if(root-&gt;value&gt;h1+h2&amp;&amp;!h1&amp;&amp;h2)</p>
+<p>   {root-&gt;right-&gt;value+=root-&gt;value-root-&gt;right-&gt;value;</p>
+<p>   child(root-&gt;right);</p>
+<p>   return(root-&gt;value);</p>
+<p>   }</p>
+<p>  if(root-&gt;value&gt;h1+h2&amp;&amp;h1&amp;&amp;!h2)</p>
+<p>   {root-&gt;left-&gt;value=root-&gt;value;</p>
+<p>   child(root-&gt;left);</p>
+<p>   return(root-&gt;value);</p>
+<p>   }  </p>
+<p> if(root-&gt;valuevalue=h1+h2;</p>
+<p>return(root-&gt;value);</p>
+<p>}</p>
+<p>return(root-&gt;value);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:10 -->
+
+<!-- Compression = gzip -->

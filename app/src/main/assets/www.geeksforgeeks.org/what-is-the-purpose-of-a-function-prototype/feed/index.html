@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: What is the purpose of a function prototype?</title>
+	<atom:link href="http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ramdas</title>
+		<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/#comment-33634</link>
+		<dc:creator><![CDATA[ramdas]]></dc:creator>
+		<pubDate>Tue, 18 Mar 2014 13:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1061#comment-33634</guid>
+		<description><![CDATA[@ varun : compiler dependent bro. we cant expect will it work for all compiler or not...... :)]]></description>
+		<content:encoded><![CDATA[<p>@ varun : compiler dependent bro. we cant expect will it work for all compiler or not&#8230;&#8230; 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samkit001</title>
+		<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/#comment-33175</link>
+		<dc:creator><![CDATA[samkit001]]></dc:creator>
+		<pubDate>Tue, 04 Mar 2014 02:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1061#comment-33175</guid>
+		<description><![CDATA[/* Compile and run this code commenting and un commenting //double function(void); to understand the concept */
+
+#include 
+#include 
+
+//double function(void);
+
+int main(){
+   double val;
+   val = function();
+   printf(&quot;%uln&quot;,val);
+}
+
+double function(void){
+   double num;
+   num = DBL_MAX;
+   printf(&quot;%uln&quot;,num);
+   return num;
+}]]></description>
+		<content:encoded><![CDATA[<p>/* Compile and run this code commenting and un commenting //double function(void); to understand the concept */</p>
+<p>#include<br />
+#include </p>
+<p>//double function(void);</p>
+<p>int main(){<br />
+   double val;<br />
+   val = function();<br />
+   printf(&#8220;%uln&#8221;,val);<br />
+}</p>
+<p>double function(void){<br />
+   double num;<br />
+   num = DBL_MAX;<br />
+   printf(&#8220;%uln&#8221;,num);<br />
+   return num;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: varun</title>
+		<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/#comment-16990</link>
+		<dc:creator><![CDATA[varun]]></dc:creator>
+		<pubDate>Mon, 01 Apr 2013 15:58:31 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1061#comment-16990</guid>
+		<description><![CDATA[then why the above given code is working correctly even without function prototype?]]></description>
+		<content:encoded><![CDATA[<p>then why the above given code is working correctly even without function prototype?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ravi</title>
+		<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/#comment-2482</link>
+		<dc:creator><![CDATA[Ravi]]></dc:creator>
+		<pubDate>Tue, 23 Nov 2010 09:33:55 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1061#comment-2482</guid>
+		<description><![CDATA[Gud explanation!]]></description>
+		<content:encoded><![CDATA[<p>Gud explanation!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shriram</title>
+		<link>http://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/#comment-2152</link>
+		<dc:creator><![CDATA[Shriram]]></dc:creator>
+		<pubDate>Tue, 07 Sep 2010 00:30:09 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1061#comment-2152</guid>
+		<description><![CDATA[I feel that you can order the definition of your function any how if you declare the function prototype since the compiler knows before hand looking at the prototype that it is going to encounter the function at some point of time. For eg:
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+
+void foo()
+{
+   printf(&#034;foo called&#034;);
+}
+
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+would work fine since when foo() is called the compiler has already seen the foo() defined above.
+However, the following will not work,
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+void foo() /*Not OK since we do not have a prototype defined */
+{
+   printf(&#034;foo called&#034;);
+}
+&lt;/code&gt; &lt;/pre&gt;
+In order for this to work, you insert a function prototype for foo() so that you can define it anywhere in the file and not necessarily before the point it is called. Hence, this would work fine:
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+
+void foo(void); /* function prototype */
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+void foo() /* function is defined after the point it is called. It is OK since we have a function prototype. */
+{
+   printf(&#034;foo called&#034;);
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>I feel that you can order the definition of your function any how if you declare the function prototype since the compiler knows before hand looking at the prototype that it is going to encounter the function at some point of time. For eg:</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+
+void foo()
+{
+   printf(&quot;foo called&quot;);
+}
+
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+</code> </pre>
+<p>would work fine since when foo() is called the compiler has already seen the foo() defined above.<br />
+However, the following will not work,</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+void foo() /*Not OK since we do not have a prototype defined */
+{
+   printf(&quot;foo called&quot;);
+}
+</code> </pre>
+<p>In order for this to work, you insert a function prototype for foo() so that you can define it anywhere in the file and not necessarily before the point it is called. Hence, this would work fine:</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+
+void foo(void); /* function prototype */
+int main()
+{
+   foo();
+   getchar();
+   return 0;
+}
+void foo() /* function is defined after the point it is called. It is OK since we have a function prototype. */
+{
+   printf(&quot;foo called&quot;);
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.037 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:54:15 -->
+
+<!-- Compression = gzip -->

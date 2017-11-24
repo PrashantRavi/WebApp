@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Graph Coloring &#124; Set 1 (Introduction and Applications)</title>
+	<atom:link href="http://www.geeksforgeeks.org/graph-coloring-applications/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/graph-coloring-applications/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rajat</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-applications/#comment-37059</link>
+		<dc:creator><![CDATA[Rajat]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 10:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123887#comment-37059</guid>
+		<description><![CDATA[Here is my solution, plz suggest if you find out any possibilities of optimization :
+
+#include 
+typedef struct _graph{
+int			V;
+	list	*adj;
+}graph;
+
+void initGraph(
+ graph	&#038;	g,
+ int			nVer
+)
+{
+ g.V		= nVer;
+ g.adj	= new list[nVer];
+}
+
+void deinitGraph(
+ graph	&#038;	g
+)
+{
+ delete[] g.adj;
+}
+
+void addEdge(
+ graph &#038;		g,
+ int			first,
+ int			second
+)
+{
+ g.adj[first].push_back( second );
+ g.adj[second].push_back( first );
+}
+
+#include 
+int getColor(
+ graph &#038;		g,
+ int			child,
+ int			*color
+)
+{
+ int tempCol		= color[child] + 1;
+ int find		= 0;
+ while( !find )
+ {
+ 	find	= 1;
+ 	list::iterator		lt;
+ 	for( lt = g.adj[child].begin(); lt != g.adj[child].end(); ++lt )
+ 	{
+  	if( color[*lt] == tempCol )
+  	{
+   	find	= 0;
+   	tempCol++;
+   	break;
+  	}
+ 	}
+ }
+ return tempCol;
+}
+
+void findMinColor(
+ graph		g
+)
+{
+ int			*color		= new int[g.V]();
+ int			*visited	= new int[g.V]();
+ int			tCol		= 0;
+ stack	bfs;
+ bfs.push( 0 );
+ color[0]	= 1;
+ while( !bfs.empty() )
+ {
+ 	int	v	= bfs.top();
+ 	bfs.pop();
+ 	visited[v]	= 1;
+ 	list::iterator		lt;
+ 	for( lt = g.adj[v].begin(); lt != g.adj[v].end(); ++lt )
+ 	{
+  	if( !visited[*lt] )
+  	{
+   	bfs.push( *lt );
+  	}
+  	if( color[*lt] == 0 )
+  	{
+   	if( color[v] == 1 )
+    	color[*lt]	= color[v] + 1;
+   	else
+    	color[*lt]	= color[v] - 1;
+  	}
+  	else if( color[*lt] == color[v] )
+  	{
+   	color[*lt]	= getColor( g, *lt, color );
+   	if( tCol &#060; color[*lt] )
+    	tCol	= color[*lt];
+  	}
+ 	}
+ }
+ for( int i = 0; i &#060; g.V; i++ )
+ 	cout &#060;&#060; i &#060;&#060; &#034; color : &#034; &#060;&#060; color[i] &#060;&#060; endl;
+ cout &#060;&#060; &#034;Total Color : &#034; &#060;&#060; tCol &#060;&#060; endl;
+ delete[] visited;
+ delete[] color;
+}
+
+int main()
+{
+ graph	g;
+ 
+	initGraph( g, 3 );
+
+	addEdge( g, 0, 1 );
+ addEdge( g, 1, 2 );
+ addEdge( g, 2, 0 );
+
+ findMinColor( g );
+
+	deinitGraph( g );
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is my solution, plz suggest if you find out any possibilities of optimization :</p>
+<p>#include<br />
+typedef struct _graph{<br />
+int			V;<br />
+	list	*adj;<br />
+}graph;</p>
+<p>void initGraph(<br />
+ graph	&amp;	g,<br />
+ int			nVer<br />
+)<br />
+{<br />
+ g.V		= nVer;<br />
+ g.adj	= new list[nVer];<br />
+}</p>
+<p>void deinitGraph(<br />
+ graph	&amp;	g<br />
+)<br />
+{<br />
+ delete[] g.adj;<br />
+}</p>
+<p>void addEdge(<br />
+ graph &amp;		g,<br />
+ int			first,<br />
+ int			second<br />
+)<br />
+{<br />
+ g.adj[first].push_back( second );<br />
+ g.adj[second].push_back( first );<br />
+}</p>
+<p>#include<br />
+int getColor(<br />
+ graph &amp;		g,<br />
+ int			child,<br />
+ int			*color<br />
+)<br />
+{<br />
+ int tempCol		= color[child] + 1;<br />
+ int find		= 0;<br />
+ while( !find )<br />
+ {<br />
+ 	find	= 1;<br />
+ 	list::iterator		lt;<br />
+ 	for( lt = g.adj[child].begin(); lt != g.adj[child].end(); ++lt )<br />
+ 	{<br />
+  	if( color[*lt] == tempCol )<br />
+  	{<br />
+   	find	= 0;<br />
+   	tempCol++;<br />
+   	break;<br />
+  	}<br />
+ 	}<br />
+ }<br />
+ return tempCol;<br />
+}</p>
+<p>void findMinColor(<br />
+ graph		g<br />
+)<br />
+{<br />
+ int			*color		= new int[g.V]();<br />
+ int			*visited	= new int[g.V]();<br />
+ int			tCol		= 0;<br />
+ stack	bfs;<br />
+ bfs.push( 0 );<br />
+ color[0]	= 1;<br />
+ while( !bfs.empty() )<br />
+ {<br />
+ 	int	v	= bfs.top();<br />
+ 	bfs.pop();<br />
+ 	visited[v]	= 1;<br />
+ 	list::iterator		lt;<br />
+ 	for( lt = g.adj[v].begin(); lt != g.adj[v].end(); ++lt )<br />
+ 	{<br />
+  	if( !visited[*lt] )<br />
+  	{<br />
+   	bfs.push( *lt );<br />
+  	}<br />
+  	if( color[*lt] == 0 )<br />
+  	{<br />
+   	if( color[v] == 1 )<br />
+    	color[*lt]	= color[v] + 1;<br />
+   	else<br />
+    	color[*lt]	= color[v] &#8211; 1;<br />
+  	}<br />
+  	else if( color[*lt] == color[v] )<br />
+  	{<br />
+   	color[*lt]	= getColor( g, *lt, color );<br />
+   	if( tCol &lt; color[*lt] )<br />
+    	tCol	= color[*lt];<br />
+  	}<br />
+ 	}<br />
+ }<br />
+ for( int i = 0; i &lt; g.V; i++ )<br />
+ 	cout &lt;&lt; i &lt;&lt; &quot; color : &quot; &lt;&lt; color[i] &lt;&lt; endl;<br />
+ cout &lt;&lt; &quot;Total Color : &quot; &lt;&lt; tCol &lt;&lt; endl;<br />
+ delete[] visited;<br />
+ delete[] color;<br />
+}</p>
+<p>int main()<br />
+{<br />
+ graph	g;</p>
+<p>	initGraph( g, 3 );</p>
+<p>	addEdge( g, 0, 1 );<br />
+ addEdge( g, 1, 2 );<br />
+ addEdge( g, 2, 0 );</p>
+<p> findMinColor( g );</p>
+<p>	deinitGraph( g );</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: its_dark</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-applications/#comment-29867</link>
+		<dc:creator><![CDATA[its_dark]]></dc:creator>
+		<pubDate>Fri, 15 Nov 2013 21:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123887#comment-29867</guid>
+		<description><![CDATA[awesome !]]></description>
+		<content:encoded><![CDATA[<p>awesome !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bornHacker</title>
+		<link>http://www.geeksforgeeks.org/graph-coloring-applications/#comment-29785</link>
+		<dc:creator><![CDATA[bornHacker]]></dc:creator>
+		<pubDate>Tue, 12 Nov 2013 13:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123887#comment-29785</guid>
+		<description><![CDATA[Awesome!]]></description>
+		<content:encoded><![CDATA[<p>Awesome!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:18:58 -->
+
+<!-- Compression = gzip -->

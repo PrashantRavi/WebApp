@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: k largest(or smallest) elements in an array &#124; added Min Heap method</title>
+	<atom:link href="http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Goku</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-39633</link>
+		<dc:creator><![CDATA[Goku]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 11:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-39633</guid>
+		<description><![CDATA[Code using method 5.
+
+Running time : O(N)
+
+Language Used : C++
+
+http://ideone.com/Iq2nre]]></description>
+		<content:encoded><![CDATA[<p>Code using method 5.</p>
+<p>Running time : O(N)</p>
+<p>Language Used : C++</p>
+<p><a href="http://ideone.com/Iq2nre" rel="nofollow">http://ideone.com/Iq2nre</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Paparao Veeragandham</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-39380</link>
+		<dc:creator><![CDATA[Paparao Veeragandham]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 19:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-39380</guid>
+		<description><![CDATA[Median of Medians Algo:
+void smallestKelemets(int data[], int n int k)
+{
+   int ind = Kelements(data, 0 , n-1, k -1 );
+    partitioned(data, n, ind);   //O(n)
+    heapsort(data, k);     //O(klogk)
+}
+int Kelemets(int data[] , int low , int high, int rank)
+{
+       int i , j, n = high - low + 1;
+       int temp[n], tmp[n];
+       memcpy(data, temp, n * sizeof(int));
+       int ele = MedianofMedians(temp, low , high, tmp,0); //O(n) times
+       int index = FindEleIndex(data, low , high, val);
+       if( index == rank)
+          return index;
+       elseif(index &#062; k)
+       return Kelements(data, low , index -1 , index - k -1);
+       else
+        return Kelements(data, index, high, k - index -1);
+}
+//Here recursion will happes fixed number of times may be 5 or 10 you will find the k th smallest element.
+int MedianofMedians(int data[] , int low , int high, int temp[] , int count)
+{//O(n) times time complexcity.
+      int i , j, k = 0, n= (high -low)/5;
+        if( low == high )
+           return data[low];
+        if( count == 2)
+          return data[ (high - low)/2];
+     for( i = 0 ; i &#060; n; i = i +5)
+     {
+       sort5ele(data, low + i , low +  i + 5);
+       temp[k++] = data[ low + i + 2];
+     }
+     if( (low + i) &#060; high)
+     {  sort5ele(data, low + i , high);
+        temp[k++] = data[ (high -(low + i))/2];
+     }
+   memcpy(temp,data, k * sizeof(int));
+   return MedianofMedians(data, 0 , k-1, temp, count++);
+}]]></description>
+		<content:encoded><![CDATA[<p>Median of Medians Algo:<br />
+void smallestKelemets(int data[], int n int k)<br />
+{<br />
+   int ind = Kelements(data, 0 , n-1, k -1 );<br />
+    partitioned(data, n, ind);   //O(n)<br />
+    heapsort(data, k);     //O(klogk)<br />
+}<br />
+int Kelemets(int data[] , int low , int high, int rank)<br />
+{<br />
+       int i , j, n = high &#8211; low + 1;<br />
+       int temp[n], tmp[n];<br />
+       memcpy(data, temp, n * sizeof(int));<br />
+       int ele = MedianofMedians(temp, low , high, tmp,0); //O(n) times<br />
+       int index = FindEleIndex(data, low , high, val);<br />
+       if( index == rank)<br />
+          return index;<br />
+       elseif(index &gt; k)<br />
+       return Kelements(data, low , index -1 , index &#8211; k -1);<br />
+       else<br />
+        return Kelements(data, index, high, k &#8211; index -1);<br />
+}<br />
+//Here recursion will happes fixed number of times may be 5 or 10 you will find the k th smallest element.<br />
+int MedianofMedians(int data[] , int low , int high, int temp[] , int count)<br />
+{//O(n) times time complexcity.<br />
+      int i , j, k = 0, n= (high -low)/5;<br />
+        if( low == high )<br />
+           return data[low];<br />
+        if( count == 2)<br />
+          return data[ (high &#8211; low)/2];<br />
+     for( i = 0 ; i &lt; n; i = i +5)<br />
+     {<br />
+       sort5ele(data, low + i , low +  i + 5);<br />
+       temp[k++] = data[ low + i + 2];<br />
+     }<br />
+     if( (low + i) &lt; high)<br />
+     {  sort5ele(data, low + i , high);<br />
+        temp[k++] = data[ (high -(low + i))/2];<br />
+     }<br />
+   memcpy(temp,data, k * sizeof(int));<br />
+   return MedianofMedians(data, 0 , k-1, temp, count++);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rushil Ahuja</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-39022</link>
+		<dc:creator><![CDATA[Rushil Ahuja]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 08:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-39022</guid>
+		<description><![CDATA[#include
+
+#include
+
+#define INT_MIN -10000
+
+void restoredown(int*heap,int pos,int size)
+
+{
+
+    int val=heap[pos],i;
+
+    while(pos&#060;=size/2)
+
+    {
+
+        i=2*pos;
+
+        if(i&#060;size&#038;&#038;heap[i]=heap[i])
+
+            break;
+
+        heap[pos]=heap[i];
+
+        pos=i;
+
+    }
+
+    heap[pos]=val;
+
+}
+
+void makeheap(int*heap,int size)
+
+{
+
+    int i;
+
+    for(i=size/2;i&#062;=1;i--)
+
+        restoredown(heap,i,size);
+
+}
+
+int replace(int*heap,int size,int num)
+
+{
+
+    int r=heap[1];
+
+    heap[1]=num;
+
+    restoredown(heap,1,size);
+
+    return r;
+
+}
+
+void findkmax(int*a,int size,int k)
+
+{
+
+    int heap[size+1],i,min;
+
+    heap[0]=INT_MIN;
+
+    for(i=0;i&#060;size;i++)
+
+        heap[i+1]=a[i];
+
+    makeheap(heap,size);
+
+    for(i=0;i&#060;k;i++)
+
+    {
+
+        min=replace(heap,size,INT_MIN);
+
+        printf(&#034;%d  &#034;,min);
+
+    }
+
+}
+
+int main()
+
+{
+
+    int a[]={1, 23, 12, 9, 30, 2, 50};
+
+    int size=sizeof(a)/sizeof(int),i,k=3;
+
+    findkmax(a,size,k);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>#include</p>
+<p>#define INT_MIN -10000</p>
+<p>void restoredown(int*heap,int pos,int size)</p>
+<p>{</p>
+<p>    int val=heap[pos],i;</p>
+<p>    while(pos&lt;=size/2)</p>
+<p>    {</p>
+<p>        i=2*pos;</p>
+<p>        if(i&lt;size&amp;&amp;heap[i]=heap[i])</p>
+<p>            break;</p>
+<p>        heap[pos]=heap[i];</p>
+<p>        pos=i;</p>
+<p>    }</p>
+<p>    heap[pos]=val;</p>
+<p>}</p>
+<p>void makeheap(int*heap,int size)</p>
+<p>{</p>
+<p>    int i;</p>
+<p>    for(i=size/2;i&gt;=1;i&#8211;)</p>
+<p>        restoredown(heap,i,size);</p>
+<p>}</p>
+<p>int replace(int*heap,int size,int num)</p>
+<p>{</p>
+<p>    int r=heap[1];</p>
+<p>    heap[1]=num;</p>
+<p>    restoredown(heap,1,size);</p>
+<p>    return r;</p>
+<p>}</p>
+<p>void findkmax(int*a,int size,int k)</p>
+<p>{</p>
+<p>    int heap[size+1],i,min;</p>
+<p>    heap[0]=INT_MIN;</p>
+<p>    for(i=0;i&lt;size;i++)</p>
+<p>        heap[i+1]=a[i];</p>
+<p>    makeheap(heap,size);</p>
+<p>    for(i=0;i&lt;k;i++)</p>
+<p>    {</p>
+<p>        min=replace(heap,size,INT_MIN);</p>
+<p>        printf(&quot;%d  &quot;,min);</p>
+<p>    }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    int a[]={1, 23, 12, 9, 30, 2, 50};</p>
+<p>    int size=sizeof(a)/sizeof(int),i,k=3;</p>
+<p>    findkmax(a,size,k);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tushar</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-38028</link>
+		<dc:creator><![CDATA[tushar]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 19:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-38028</guid>
+		<description><![CDATA[one more solution
+1 create a BST of array n elements
+2 print reversed inorder traversel upto k elements]]></description>
+		<content:encoded><![CDATA[<p>one more solution<br />
+1 create a BST of array n elements<br />
+2 print reversed inorder traversel upto k elements</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-37712</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 02:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-37712</guid>
+		<description><![CDATA[Agreed :)]]></description>
+		<content:encoded><![CDATA[<p>Agreed 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-37711</link>
+		<dc:creator><![CDATA[Vivek]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 02:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-37711</guid>
+		<description><![CDATA[building a bst takes O(nlogn) time]]></description>
+		<content:encoded><![CDATA[<p>building a bst takes O(nlogn) time</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: theCuriosityEnthusiast</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-37055</link>
+		<dc:creator><![CDATA[theCuriosityEnthusiast]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 10:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-37055</guid>
+		<description><![CDATA[That was a very neat observation..]]></description>
+		<content:encoded><![CDATA[<p>That was a very neat observation..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: theCuriosityEnthusiast</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-37054</link>
+		<dc:creator><![CDATA[theCuriosityEnthusiast]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 10:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-37054</guid>
+		<description><![CDATA[what if the heap is really skewed for ex. max node call it m= 100, left of m= 99 and right of m= 90, below left we have 94 and 95, so we make two comparisons here and not one.. Similarly as the height increases the number of comparisons will go up exponentially?? so for a big heap, the complexity will differ from O(n), Is this true or am I missing something..]]></description>
+		<content:encoded><![CDATA[<p>what if the heap is really skewed for ex. max node call it m= 100, left of m= 99 and right of m= 90, below left we have 94 and 95, so we make two comparisons here and not one.. Similarly as the height increases the number of comparisons will go up exponentially?? so for a big heap, the complexity will differ from O(n), Is this true or am I missing something..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-37049</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 06:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-37049</guid>
+		<description><![CDATA[will this work ? 
+Construct a Binary search tree with the array elements...takes O(n) . Now for every query &#039;k&#039; ....do inorder traversal of BST and increment the counter upto k and return value...takes O(k) =&#062;O(n) in worst case.]]></description>
+		<content:encoded><![CDATA[<p>will this work ?<br />
+Construct a Binary search tree with the array elements&#8230;takes O(n) . Now for every query &#8216;k&#8217; &#8230;.do inorder traversal of BST and increment the counter upto k and return value&#8230;takes O(k) =&gt;O(n) in worst case.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Unknown</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-36984</link>
+		<dc:creator><![CDATA[Unknown]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 03:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-36984</guid>
+		<description><![CDATA[@GeeksforGeeks : can be solved in linear time. Refer to Medians and order statistics of Introduction to Algorithms 3rd Edition by Coreman.]]></description>
+		<content:encoded><![CDATA[<p>@GeeksforGeeks : can be solved in linear time. Refer to Medians and order statistics of Introduction to Algorithms 3rd Edition by Coreman.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mizhao</title>
+		<link>http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/#comment-35687</link>
+		<dc:creator><![CDATA[mizhao]]></dc:creator>
+		<pubDate>Mon, 05 May 2014 18:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=2392#comment-35687</guid>
+		<description><![CDATA[Suppose the heap is stored in an array starting from index 1. If the index of the element in h1 is k, its children will be located at index 2*k and 2*k+1. Thus, accessing the children with an known index element costs O(1). And you add them to h2 using the standard add operation.]]></description>
+		<content:encoded><![CDATA[<p>Suppose the heap is stored in an array starting from index 1. If the index of the element in h1 is k, its children will be located at index 2*k and 2*k+1. Thus, accessing the children with an known index element costs O(1). And you add them to h2 using the standard add operation.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:24:36 -->
+
+<!-- Compression = gzip -->

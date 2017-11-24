@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: 8 queen problem</title>
+	<atom:link href="http://www.geeksforgeeks.org/8-queen-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/8-queen-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Neeraj Dixit</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-26933</link>
+		<dc:creator><![CDATA[Neeraj Dixit]]></dc:creator>
+		<pubDate>Sun, 25 Aug 2013 11:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-26933</guid>
+		<description><![CDATA[#include
+int mat[10][10],row,col,sol;
+int check(int r,int c)
+{
+    int i,j;
+    for(i=0;i&#060;row;i++)
+    {
+        if(mat[i][c][/c]==1)
+            return 0;
+    }
+    for(i=0;i=0&#038;&#038;j&#062;=0;i--,j--)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+    for(i=r+1,j=c+1;i&#060;row&#038;&#038;j&#060;col;i++,j++)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+    for(i=r+1,j=c-1;i=0;i++,j--)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+     for(i=r-1,j=c+1;i&#062;=0&#038;&#038;jcol)
+        return 1;
+    else if(mycol==col)
+    {
+        sol++;
+        printf(&quot;nsolution no %dn&quot;,sol);
+        for(i=0;i&#060;row;i++)
+    {
+        for(j=0;j&#060;col;j++)
+        printf(&#034;%dt&#034;,mat[i][j]);
+        printf(&#034;n&#034;);
+    }
+        return 0;
+    }
+    else
+    {
+        for(i=0;i&#060;row;i++)
+        {
+            if(check(i,mycol))
+            {
+                mat[i][mycol]=1;
+               // printf(&#034;%d %dn&#034;,i,mycol);
+                if(solution(mycol+1))
+                    return 1;
+                else
+                    mat[i][mycol]=0;
+            }
+        }
+        return 0;
+    }
+
+}
+int main()
+{
+    int i,j;
+    printf(&#034;enter the matrix dimension n&#034;);
+    scanf(&#034;%d%d&#034;,&#038;row,&#038;col);
+    for(i=0;i&#060;row;i++)
+        for(j=0;j&#060;col;j++)
+        mat[i][j]=0;
+
+    solution(0);
+   /* for(i=0;i&#060;row;i++)
+    {
+        for(j=0;j&#060;col;j++)
+        printf(&#034;%dt&#034;,mat[i][j]);
+        printf(&#034;n&#034;);
+    }
+   // printf(&#034;%d&#034;,sol);*/
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+int mat[10][10],row,col,sol;<br />
+int check(int r,int c)<br />
+{<br />
+    int i,j;<br />
+    for(i=0;i&lt;row;i++)<br />
+    {<br />
+        if(mat[i]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=0;i=0&amp;&amp;j&gt;=0;i&#8211;,j&#8211;)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=r+1,j=c+1;i&lt;row&amp;&amp;j&lt;col;i++,j++)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=r+1,j=c-1;i=0;i++,j&#8211;)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+     for(i=r-1,j=c+1;i&gt;=0&amp;&amp;jcol)<br />
+        return 1;<br />
+    else if(mycol==col)<br />
+    {<br />
+        sol++;<br />
+        printf(&#8220;nsolution no %dn&#8221;,sol);<br />
+        for(i=0;i&lt;row;i++)<br />
+    {<br />
+        for(j=0;j&lt;col;j++)<br />
+        printf(&quot;%dt&quot;,mat[i][j]);<br />
+        printf(&quot;n&quot;);<br />
+    }<br />
+        return 0;<br />
+    }<br />
+    else<br />
+    {<br />
+        for(i=0;i&lt;row;i++)<br />
+        {<br />
+            if(check(i,mycol))<br />
+            {<br />
+                mat[i][mycol]=1;<br />
+               // printf(&quot;%d %dn&quot;,i,mycol);<br />
+                if(solution(mycol+1))<br />
+                    return 1;<br />
+                else<br />
+                    mat[i][mycol]=0;<br />
+            }<br />
+        }<br />
+        return 0;<br />
+    }</p>
+<p>}<br />
+int main()<br />
+{<br />
+    int i,j;<br />
+    printf(&quot;enter the matrix dimension n&quot;);<br />
+    scanf(&quot;%d%d&quot;,&amp;row,&amp;col);<br />
+    for(i=0;i&lt;row;i++)<br />
+        for(j=0;j&lt;col;j++)<br />
+        mat[i][j]=0;</p>
+<p>    solution(0);<br />
+   /* for(i=0;i&lt;row;i++)<br />
+    {<br />
+        for(j=0;j&lt;col;j++)<br />
+        printf(&quot;%dt&quot;,mat[i][j]);<br />
+        printf(&quot;n&quot;);<br />
+    }<br />
+   // printf(&quot;%d&quot;,sol);*/</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-26932</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sun, 25 Aug 2013 10:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-26932</guid>
+		<description><![CDATA[#include
+int mat[10][10],row,col,sol;
+int check(int r,int c)
+{
+    int i,j;
+    for(i=0;i&#060;row;i++)
+    {
+        if(mat[i][c][/c]==1)
+            return 0;
+    }
+    for(i=0;i=0&#038;&#038;j&#062;=0;i--,j--)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+    for(i=r+1,j=c+1;i&#060;row&#038;&#038;j&#060;col;i++,j++)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+    for(i=r+1,j=c-1;i=0;i++,j--)
+    {
+        if(mat[i][j]==1)
+            return 0;
+    }
+     for(i=r-1,j=c+1;i&#062;=0&#038;&#038;jcol)
+        return 1;
+    else if(mycol==col)
+    {
+        sol++;
+        printf(&quot;nsolution no %dn&quot;,sol);
+        for(i=0;i&#060;row;i++)
+    {
+        for(j=0;j&#060;col;j++)
+        printf(&#034;%dt&#034;,mat[i][j]);
+        printf(&#034;n&#034;);
+    }
+        return 0;
+    }
+    else
+    {
+        for(i=0;i&#060;row;i++)
+        {
+            if(check(i,mycol))
+            {
+                mat[i][mycol]=1;
+               // printf(&#034;%d %dn&#034;,i,mycol);
+                if(solution(mycol+1))
+                    return 1;
+                else
+                    mat[i][mycol]=0;
+            }
+        }
+        return 0;
+    }
+
+}
+int main()
+{
+    int i,j;
+    printf(&#034;enter the matrix dimension n&#034;);
+    scanf(&#034;%d%d&#034;,&#038;row,&#038;col);
+    for(i=0;i&#060;row;i++)
+        for(j=0;j&#060;col;j++)
+        mat[i][j]=0;
+
+    solution(0);
+   /* for(i=0;i&#060;row;i++)
+    {
+        for(j=0;j&#060;col;j++)
+        printf(&#034;%dt&#034;,mat[i][j]);
+        printf(&#034;n&#034;);
+    }
+   // printf(&#034;%d&#034;,sol);*/
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+int mat[10][10],row,col,sol;<br />
+int check(int r,int c)<br />
+{<br />
+    int i,j;<br />
+    for(i=0;i&lt;row;i++)<br />
+    {<br />
+        if(mat[i]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=0;i=0&amp;&amp;j&gt;=0;i&#8211;,j&#8211;)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=r+1,j=c+1;i&lt;row&amp;&amp;j&lt;col;i++,j++)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+    for(i=r+1,j=c-1;i=0;i++,j&#8211;)<br />
+    {<br />
+        if(mat[i][j]==1)<br />
+            return 0;<br />
+    }<br />
+     for(i=r-1,j=c+1;i&gt;=0&amp;&amp;jcol)<br />
+        return 1;<br />
+    else if(mycol==col)<br />
+    {<br />
+        sol++;<br />
+        printf(&#8220;nsolution no %dn&#8221;,sol);<br />
+        for(i=0;i&lt;row;i++)<br />
+    {<br />
+        for(j=0;j&lt;col;j++)<br />
+        printf(&quot;%dt&quot;,mat[i][j]);<br />
+        printf(&quot;n&quot;);<br />
+    }<br />
+        return 0;<br />
+    }<br />
+    else<br />
+    {<br />
+        for(i=0;i&lt;row;i++)<br />
+        {<br />
+            if(check(i,mycol))<br />
+            {<br />
+                mat[i][mycol]=1;<br />
+               // printf(&quot;%d %dn&quot;,i,mycol);<br />
+                if(solution(mycol+1))<br />
+                    return 1;<br />
+                else<br />
+                    mat[i][mycol]=0;<br />
+            }<br />
+        }<br />
+        return 0;<br />
+    }</p>
+<p>}<br />
+int main()<br />
+{<br />
+    int i,j;<br />
+    printf(&quot;enter the matrix dimension n&quot;);<br />
+    scanf(&quot;%d%d&quot;,&amp;row,&amp;col);<br />
+    for(i=0;i&lt;row;i++)<br />
+        for(j=0;j&lt;col;j++)<br />
+        mat[i][j]=0;</p>
+<p>    solution(0);<br />
+   /* for(i=0;i&lt;row;i++)<br />
+    {<br />
+        for(j=0;j&lt;col;j++)<br />
+        printf(&quot;%dt&quot;,mat[i][j]);<br />
+        printf(&quot;n&quot;);<br />
+    }<br />
+   // printf(&quot;%d&quot;,sol);*/</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aruna Gupta</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-26119</link>
+		<dc:creator><![CDATA[Aruna Gupta]]></dc:creator>
+		<pubDate>Fri, 09 Aug 2013 13:32:47 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-26119</guid>
+		<description><![CDATA[tell  me the complexity of the 8 queen problem.]]></description>
+		<content:encoded><![CDATA[<p>tell  me the complexity of the 8 queen problem.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Santa</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-17867</link>
+		<dc:creator><![CDATA[Santa]]></dc:creator>
+		<pubDate>Sat, 04 May 2013 12:04:55 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-17867</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+//Chapter 6 Exercise
+//6.26 Eight Queens
+
+#include &#060;stdio.h&#062;
+#include &#060;stdlib.h&#062;
+#include &#060;conio.h&#062;
+#include &#060;windows.h&#062;
+#include &#060;time.h&#062;
+
+//Function prototypes
+//FUNCTION printBoard
+void printBoard(int b[][8]);
+//FUNCTION assignVertical
+void assignVertical(int b[][8], int column);
+//FUNCTION assignHorizontal
+void assignHorizontal(int b[][8], int row);
+//FUNCTION assignDiagonal
+void assignDiagonal(int b[][8], int row, int column);
+//FUNCTION changeEliminationNumber
+void changeEliminationNumber(int b[][8], int e[][8]);
+//FUNCTION findMinEliminationNumber
+int findMinEliminationNumber(int b[][8], int e[][8]);
+
+//Function main begins program execution
+int main (void)
+{
+	int board[8][8] = {0};
+	int currentRow;
+	int currentColumn;
+	int eliminationNumber[8][8];
+	int rowRecord[8] = {0};
+	int columnRecord[8] = {0};
+
+	srand(time(NULL));
+
+	puts(&#034;Eight Queens&#034;);
+	puts(&#034;&#034;);
+	puts(&#034;Is it possible to place eight queens on an empty chessboard so that no queen is&#034;);
+	puts(&#034;\&#034;attacking\&#034; any other?&#034;);
+	puts(&#034;&#034;);
+	printf(&#034;Press any key to continue . . . &#034;);
+	_getch();
+	Sleep(500);
+	system(&#034;cls&#034;);
+	printf(&#034;Generating chess board&#034;);
+	Sleep(300);
+	printf(&#034; .&#034;);
+	Sleep(300);
+	printf(&#034; .&#034;);
+	Sleep(300);
+	printf(&#034; .&#034;);
+	Sleep(500);
+	system(&#034;cls&#034;);
+		
+	changeEliminationNumber(board, eliminationNumber);//initialize elimination number
+
+	for(int counter = 1; counter &#060;= 8; counter++){
+		
+		printBoard(board);
+
+		if(findMinEliminationNumber(board, eliminationNumber) != 100){
+			do{
+				currentRow = rand() % 8;
+				currentColumn = rand() % 8;
+			}while(board[currentRow][currentColumn] != 0 &#038;&#038; eliminationNumber[currentRow][currentColumn] != findMinEliminationNumber(board, eliminationNumber));
+		}
+
+		rowRecord[counter - 1] = currentRow;
+		columnRecord[counter - 1] = currentColumn;
+
+		if(board[currentRow][currentColumn] == 0){
+			assignVertical(board, currentColumn);
+			assignHorizontal(board, currentRow);
+			assignDiagonal(board, currentRow, currentColumn);
+		}
+		else{
+			counter--;
+			
+		}
+		
+		for(int i = 1; i &#060;= counter; i++){		
+				printf(&#034;Move %d\nA queen lands on Row %d Column %d.\n&#034;, i, rowRecord[i - 1], columnRecord[i - 1]);
+			}
+		printf(&#034;Eliminating squares&#034;);
+		Sleep(100);
+		printf(&#034; .&#034;);
+		Sleep(100);
+		printf(&#034; .&#034;);
+		Sleep(100);
+		printf(&#034; .&#034;);
+		Sleep(100);
+	
+		system(&#034;cls&#034;);
+
+		if(counter == 0){
+			break;
+		}
+
+		changeEliminationNumber(board, eliminationNumber);
+
+	}
+
+	for(int i = 1; i &#060;= 8; i++){		
+				printf(&#034;Move %d\nA queen lands on Row %d Column %d.\n&#034;, i, rowRecord[i - 1], columnRecord[i - 1]);
+			}
+
+	return 0;
+}//End function main
+
+//User-defined function
+//FUNCTION printBoard
+void printBoard(int b[][8])
+{
+	puts(&#034;&#034;);
+	puts(&#034;    [0][1][2][3][4][5][6][7]&#034;);
+	for(int row = 0; row &#060;= 7; row++){
+		printf(&#034;[%d] &#034;, row);
+		for(int column = 0; column &#060;= 7; column++){
+			if(b[row][column] == 0){
+				printf(&#034;[ ]&#034;);
+			}
+			else if(b[row][column] == 1){
+				printf(&#034;[#]&#034;, b[row][column]);
+			}
+		}
+		puts(&#034;&#034;);
+	}
+	puts(&#034;&#034;);
+}
+
+//FUNCTION assignVertical
+void assignVertical(int b[][8], int column)
+{
+	for(int i = 0; i &#060;= 7; i++){
+		b[i][column] = 1;
+	}
+}
+//FUNCTION assignHorizontal
+void assignHorizontal(int b[][8], int row)
+{
+	for(int i = 0; i &#060;= 7; i++){
+		b[row][i] = 1;
+	}
+}
+//FUNCTION assignDiagonal
+void assignDiagonal(int b[][8], int row, int column)
+{
+	for(int i = row, j = 0; i &#060;= 7 &#038;&#038; column + j &#060;= 7; i++, j++){
+		b[i][column + j] = 1;
+	}
+
+	for(int i = row, j = 0; i &#060;= 7 &#038;&#038; column - j &#062;= 0; i++, j++){
+		b[i][column - j] = 1;
+	}
+
+	for(int i = row, j = 0; i &#062;= 0 &#038;&#038; column + j &#060;= 7; i--, j++){
+		b[i][column + j] = 1;
+	}
+
+	for(int i = row, j = 0; i &#062;= 0 &#038;&#038; column - j &#062;= 0; i--, j++){
+		b[i][column - j] = 1;
+	}
+}
+
+//FUNCTION changeEliminationNumber
+void changeEliminationNumber(int b[][8], int e[][8])
+{
+	int counter;
+	int row, column;
+
+	for(row = 0; row &#060;= 7; row++){//outer for
+		for(column = 0; column &#060;= 7; column++){//inner for
+			counter = 0;
+			if(b[row][column] == 0){
+				counter++;
+			}
+
+			for(int i = 0; i &#060; row; i++){
+				if(b[i][column] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 7; i &#062; row; i--){
+				if(b[i][column] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 0; i &#060; column; i++){
+				if(b[row][i] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 7; i &#062; column; i--){
+				if(b[row][i] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row + 1, j = 1; i &#060;= 7 &#038;&#038; column + j &#060;= 7; i++, j++){
+				if(b[i][column + j] == 0){
+					counter++;
+				}
+			}
+	
+			for(int i = row + 1, j = 1; i &#060;= 7 &#038;&#038; column - j &#062;= 0; i++, j++){
+				if(b[i][column - j] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row - 1, j = 1; i &#062;= 0 &#038;&#038; column + j &#060;= 7; i--, j++){
+				if(b[i][column + j] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row - 1, j = 1; i &#062;= 0 &#038;&#038; column - j &#062;= 0; i--, j++){
+				if(b[i][column - j] == 0){
+					counter++;
+				}
+			}
+			e[row][column] = counter;
+		}//end inner for
+		
+	}//end outer for
+}
+
+//FUNCTION findMinEliminationNumber
+int findMinEliminationNumber(int b[][8], int e[][8])
+{
+	int min = 100;
+
+	for(int row = 0; row &#060;= 7; row++){
+		for(int column = 0; column &#060;= 7; column++){
+			if(e[row][column] &#060; min &#038;&#038; b[row][column] == 0){
+				min = e[row][column];
+			}
+		}
+	}
+
+	return min;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+//Chapter 6 Exercise
+//6.26 Eight Queens
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;conio.h&gt;
+#include &lt;windows.h&gt;
+#include &lt;time.h&gt;
+
+//Function prototypes
+//FUNCTION printBoard
+void printBoard(int b[][8]);
+//FUNCTION assignVertical
+void assignVertical(int b[][8], int column);
+//FUNCTION assignHorizontal
+void assignHorizontal(int b[][8], int row);
+//FUNCTION assignDiagonal
+void assignDiagonal(int b[][8], int row, int column);
+//FUNCTION changeEliminationNumber
+void changeEliminationNumber(int b[][8], int e[][8]);
+//FUNCTION findMinEliminationNumber
+int findMinEliminationNumber(int b[][8], int e[][8]);
+
+//Function main begins program execution
+int main (void)
+{
+	int board[8][8] = {0};
+	int currentRow;
+	int currentColumn;
+	int eliminationNumber[8][8];
+	int rowRecord[8] = {0};
+	int columnRecord[8] = {0};
+
+	srand(time(NULL));
+
+	puts(&quot;Eight Queens&quot;);
+	puts(&quot;&quot;);
+	puts(&quot;Is it possible to place eight queens on an empty chessboard so that no queen is&quot;);
+	puts(&quot;\&quot;attacking\&quot; any other?&quot;);
+	puts(&quot;&quot;);
+	printf(&quot;Press any key to continue . . . &quot;);
+	_getch();
+	Sleep(500);
+	system(&quot;cls&quot;);
+	printf(&quot;Generating chess board&quot;);
+	Sleep(300);
+	printf(&quot; .&quot;);
+	Sleep(300);
+	printf(&quot; .&quot;);
+	Sleep(300);
+	printf(&quot; .&quot;);
+	Sleep(500);
+	system(&quot;cls&quot;);
+		
+	changeEliminationNumber(board, eliminationNumber);//initialize elimination number
+
+	for(int counter = 1; counter &lt;= 8; counter++){
+		
+		printBoard(board);
+
+		if(findMinEliminationNumber(board, eliminationNumber) != 100){
+			do{
+				currentRow = rand() % 8;
+				currentColumn = rand() % 8;
+			}while(board[currentRow][currentColumn] != 0 &amp;&amp; eliminationNumber[currentRow][currentColumn] != findMinEliminationNumber(board, eliminationNumber));
+		}
+
+		rowRecord[counter - 1] = currentRow;
+		columnRecord[counter - 1] = currentColumn;
+
+		if(board[currentRow][currentColumn] == 0){
+			assignVertical(board, currentColumn);
+			assignHorizontal(board, currentRow);
+			assignDiagonal(board, currentRow, currentColumn);
+		}
+		else{
+			counter--;
+			
+		}
+		
+		for(int i = 1; i &lt;= counter; i++){		
+				printf(&quot;Move %d\nA queen lands on Row %d Column %d.\n&quot;, i, rowRecord[i - 1], columnRecord[i - 1]);
+			}
+		printf(&quot;Eliminating squares&quot;);
+		Sleep(100);
+		printf(&quot; .&quot;);
+		Sleep(100);
+		printf(&quot; .&quot;);
+		Sleep(100);
+		printf(&quot; .&quot;);
+		Sleep(100);
+	
+		system(&quot;cls&quot;);
+
+		if(counter == 0){
+			break;
+		}
+
+		changeEliminationNumber(board, eliminationNumber);
+
+	}
+
+	for(int i = 1; i &lt;= 8; i++){		
+				printf(&quot;Move %d\nA queen lands on Row %d Column %d.\n&quot;, i, rowRecord[i - 1], columnRecord[i - 1]);
+			}
+
+	return 0;
+}//End function main
+
+//User-defined function
+//FUNCTION printBoard
+void printBoard(int b[][8])
+{
+	puts(&quot;&quot;);
+	puts(&quot;    [0][1][2][3][4][5][6][7]&quot;);
+	for(int row = 0; row &lt;= 7; row++){
+		printf(&quot;[%d] &quot;, row);
+		for(int column = 0; column &lt;= 7; column++){
+			if(b[row][column] == 0){
+				printf(&quot;[ ]&quot;);
+			}
+			else if(b[row][column] == 1){
+				printf(&quot;[#]&quot;, b[row][column]);
+			}
+		}
+		puts(&quot;&quot;);
+	}
+	puts(&quot;&quot;);
+}
+
+//FUNCTION assignVertical
+void assignVertical(int b[][8], int column)
+{
+	for(int i = 0; i &lt;= 7; i++){
+		b[i][column] = 1;
+	}
+}
+//FUNCTION assignHorizontal
+void assignHorizontal(int b[][8], int row)
+{
+	for(int i = 0; i &lt;= 7; i++){
+		b[row][i] = 1;
+	}
+}
+//FUNCTION assignDiagonal
+void assignDiagonal(int b[][8], int row, int column)
+{
+	for(int i = row, j = 0; i &lt;= 7 &amp;&amp; column + j &lt;= 7; i++, j++){
+		b[i][column + j] = 1;
+	}
+
+	for(int i = row, j = 0; i &lt;= 7 &amp;&amp; column - j &gt;= 0; i++, j++){
+		b[i][column - j] = 1;
+	}
+
+	for(int i = row, j = 0; i &gt;= 0 &amp;&amp; column + j &lt;= 7; i--, j++){
+		b[i][column + j] = 1;
+	}
+
+	for(int i = row, j = 0; i &gt;= 0 &amp;&amp; column - j &gt;= 0; i--, j++){
+		b[i][column - j] = 1;
+	}
+}
+
+//FUNCTION changeEliminationNumber
+void changeEliminationNumber(int b[][8], int e[][8])
+{
+	int counter;
+	int row, column;
+
+	for(row = 0; row &lt;= 7; row++){//outer for
+		for(column = 0; column &lt;= 7; column++){//inner for
+			counter = 0;
+			if(b[row][column] == 0){
+				counter++;
+			}
+
+			for(int i = 0; i &lt; row; i++){
+				if(b[i][column] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 7; i &gt; row; i--){
+				if(b[i][column] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 0; i &lt; column; i++){
+				if(b[row][i] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = 7; i &gt; column; i--){
+				if(b[row][i] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row + 1, j = 1; i &lt;= 7 &amp;&amp; column + j &lt;= 7; i++, j++){
+				if(b[i][column + j] == 0){
+					counter++;
+				}
+			}
+	
+			for(int i = row + 1, j = 1; i &lt;= 7 &amp;&amp; column - j &gt;= 0; i++, j++){
+				if(b[i][column - j] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row - 1, j = 1; i &gt;= 0 &amp;&amp; column + j &lt;= 7; i--, j++){
+				if(b[i][column + j] == 0){
+					counter++;
+				}
+			}
+
+			for(int i = row - 1, j = 1; i &gt;= 0 &amp;&amp; column - j &gt;= 0; i--, j++){
+				if(b[i][column - j] == 0){
+					counter++;
+				}
+			}
+			e[row][column] = counter;
+		}//end inner for
+		
+	}//end outer for
+}
+
+//FUNCTION findMinEliminationNumber
+int findMinEliminationNumber(int b[][8], int e[][8])
+{
+	int min = 100;
+
+	for(int row = 0; row &lt;= 7; row++){
+		for(int column = 0; column &lt;= 7; column++){
+			if(e[row][column] &lt; min &amp;&amp; b[row][column] == 0){
+				min = e[row][column];
+			}
+		}
+	}
+
+	return min;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sunil Singh</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-24531</link>
+		<dc:creator><![CDATA[Sunil Singh]]></dc:creator>
+		<pubDate>Fri, 03 May 2013 05:49:16 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-24531</guid>
+		<description><![CDATA[thanks Guddu sharma.]]></description>
+		<content:encoded><![CDATA[<p>thanks Guddu sharma.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sunil Singh</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-26118</link>
+		<dc:creator><![CDATA[Sunil Singh]]></dc:creator>
+		<pubDate>Fri, 03 May 2013 05:49:16 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-26118</guid>
+		<description><![CDATA[thanks Guddu sharma.]]></description>
+		<content:encoded><![CDATA[<p>thanks Guddu sharma.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guddu sharma</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-8921</link>
+		<dc:creator><![CDATA[Guddu sharma]]></dc:creator>
+		<pubDate>Fri, 08 Jun 2012 18:22:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-8921</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;stdio.h&#062;
+#define N 8
+int count;
+int place(int k,int i,int *x)
+{
+	int j;
+	for(j=0;j&#060;k;j++) //checkattack  as old queen is placed at jth position
+	{
+		  //old queen is placed at jth row of x[j] column
+		  //new queen to be placed at kth row of ith column
+		if(i==x[j] &#124;&#124; abs(k-j)==abs(i-x[j]))
+			return 0;
+	}
+	return 1;
+}
+
+void Nqueen(int k)
+{
+	int i,j;
+	static int x[N];  //solution vector contains column number of queen
+	for(i=0;i&#060;N;i++)  //determines appropriate column number of the kth queen to be placed
+	{
+		if(place(k,i,x))
+		{
+			x[k]=i;
+			if(k==N-1)
+			{
+				count++;
+				for(j=0;j&#060;=k;j++)
+					printf(&#034;%d  &#034;,x[j]);
+				printf(&#034;\n&#034;);
+			}
+			else
+				Nqueen(k+1);
+		}
+	}
+
+}
+
+int main()
+{
+	Nqueen(0);
+	printf(&#034;Total %d solutions are possible\n&#034;,count);
+	return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+#include &lt;stdio.h&gt;
+#define N 8
+int count;
+int place(int k,int i,int *x)
+{
+	int j;
+	for(j=0;j&lt;k;j++) //checkattack  as old queen is placed at jth position
+	{
+		  //old queen is placed at jth row of x[j] column
+		  //new queen to be placed at kth row of ith column
+		if(i==x[j] || abs(k-j)==abs(i-x[j]))
+			return 0;
+	}
+	return 1;
+}
+
+void Nqueen(int k)
+{
+	int i,j;
+	static int x[N];  //solution vector contains column number of queen
+	for(i=0;i&lt;N;i++)  //determines appropriate column number of the kth queen to be placed
+	{
+		if(place(k,i,x))
+		{
+			x[k]=i;
+			if(k==N-1)
+			{
+				count++;
+				for(j=0;j&lt;=k;j++)
+					printf(&quot;%d  &quot;,x[j]);
+				printf(&quot;\n&quot;);
+			}
+			else
+				Nqueen(k+1);
+		}
+	}
+
+}
+
+int main()
+{
+	Nqueen(0);
+	printf(&quot;Total %d solutions are possible\n&quot;,count);
+	return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kumar</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-7862</link>
+		<dc:creator><![CDATA[Kumar]]></dc:creator>
+		<pubDate>Thu, 22 Mar 2012 19:15:40 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-7862</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+#define N 8
+
+void printSolution(int board[N][N])
+{
+ int i,j;
+ for(i=0;i&#060;N;i++) {
+  for(j=0;j&#060;N;j++)
+	printf(&#034;%d &#034;,board[i][j]);
+  printf(&#034;\n&#034;);    }
+
+}
+int isSafe(int row,int col,int board[N][N])
+{
+  //check for all column in this row (since this is first one placing in this column
+  int i,j;
+  for(i=0;i&#060;col;i++){
+	if(board[row][i])
+	 return 0;        }
+
+  //check for upper diagonal
+  for(i=row,j=col;i&#062;=0&#038;&#038;j&#062;=0;i--,j--)
+  {	if(board[i][j])
+		 return 0;
+	}
+  //check for lower diagonal
+ for(i=row,j=col;i&#060;N&#038;&#038;j&#062;=0;i++,j--)
+ {	if(board[i][j])
+	 return 0;    }
+
+ return 1;
+}
+int solveNQUtil(int board[N][N], int col)
+{
+  
+	int k;
+  if(col&#062;=N)
+	return 1;
+
+	  for(k=0;k&#060;N;k++)
+		{
+		  if(isSafe(k,col,board))
+		  {
+				board[k][col]=1;
+
+				if(solveNQUtil(board,col+1))
+				  return 1;
+
+				board[k][col]=0;
+		  }
+		}
+		return 0;
+}
+
+void solveNQ()
+{
+	 int board[N][N] = { {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0}
+	 };
+
+  if ( !solveNQUtil(board, 0)  )
+	 {
+		printf(&#034;Solution does not exist&#034;);
+		return;
+	 }
+
+	 printSolution(board);
+}
+
+// driver program to test above function
+int main()
+{
+	 solveNQ();
+
+	 getchar();
+	 return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#define N 8
+
+void printSolution(int board[N][N])
+{
+ int i,j;
+ for(i=0;i&lt;N;i++) {
+  for(j=0;j&lt;N;j++)
+	printf(&quot;%d &quot;,board[i][j]);
+  printf(&quot;\n&quot;);    }
+
+}
+int isSafe(int row,int col,int board[N][N])
+{
+  //check for all column in this row (since this is first one placing in this column
+  int i,j;
+  for(i=0;i&lt;col;i++){
+	if(board[row][i])
+	 return 0;        }
+
+  //check for upper diagonal
+  for(i=row,j=col;i&gt;=0&amp;&amp;j&gt;=0;i--,j--)
+  {	if(board[i][j])
+		 return 0;
+	}
+  //check for lower diagonal
+ for(i=row,j=col;i&lt;N&amp;&amp;j&gt;=0;i++,j--)
+ {	if(board[i][j])
+	 return 0;    }
+
+ return 1;
+}
+int solveNQUtil(int board[N][N], int col)
+{
+  
+	int k;
+  if(col&gt;=N)
+	return 1;
+
+	  for(k=0;k&lt;N;k++)
+		{
+		  if(isSafe(k,col,board))
+		  {
+				board[k][col]=1;
+
+				if(solveNQUtil(board,col+1))
+				  return 1;
+
+				board[k][col]=0;
+		  }
+		}
+		return 0;
+}
+
+void solveNQ()
+{
+	 int board[N][N] = { {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0},
+		  {0, 0, 0, 0, 0, 0, 0, 0}
+	 };
+
+  if ( !solveNQUtil(board, 0)  )
+	 {
+		printf(&quot;Solution does not exist&quot;);
+		return;
+	 }
+
+	 printSolution(board);
+}
+
+// driver program to test above function
+int main()
+{
+	 solveNQ();
+
+	 getchar();
+	 return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anand</title>
+		<link>http://www.geeksforgeeks.org/8-queen-problem/#comment-4781</link>
+		<dc:creator><![CDATA[Anand]]></dc:creator>
+		<pubDate>Tue, 02 Aug 2011 22:46:49 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=605#comment-4781</guid>
+		<description><![CDATA[http://anandtechblog.blogspot.com/2011/08/8-queen-problem.html]]></description>
+		<content:encoded><![CDATA[<p><a href="http://anandtechblog.blogspot.com/2011/08/8-queen-problem.html" rel="nofollow">http://anandtechblog.blogspot.com/2011/08/8-queen-problem.html</a></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:58:43 -->
+
+<!-- Compression = gzip -->

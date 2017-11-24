@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Remove all nodes which don&#8217;t lie in any path with sum&gt;= k</title>
+	<atom:link href="http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rajeev</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38852</link>
+		<dc:creator><![CDATA[Rajeev]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 14:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38852</guid>
+		<description><![CDATA[I have a smple solution for this problem correct me if i am wrong : 
+pass sum = 0 initially
+
+tree *truncateNode(tree *root,int k,int sum)
+
+{
+
+	if(root==NULL)
+
+	return root;
+
+	sum+=root-&#062;data;
+
+	root-&#062;left = truncateNode(root-&#062;left,k,sum);
+
+	root-&#062;right = truncateNode(root-&#062;right,k,sum);
+
+	if(sumleft==NULL&#038;&#038;root-&#062;right==NULL)
+
+	{
+
+		delete(root);
+
+		root = NULL;
+
+	}
+
+	return root;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I have a smple solution for this problem correct me if i am wrong :<br />
+pass sum = 0 initially</p>
+<p>tree *truncateNode(tree *root,int k,int sum)</p>
+<p>{</p>
+<p>	if(root==NULL)</p>
+<p>	return root;</p>
+<p>	sum+=root-&gt;data;</p>
+<p>	root-&gt;left = truncateNode(root-&gt;left,k,sum);</p>
+<p>	root-&gt;right = truncateNode(root-&gt;right,k,sum);</p>
+<p>	if(sumleft==NULL&amp;&amp;root-&gt;right==NULL)</p>
+<p>	{</p>
+<p>		delete(root);</p>
+<p>		root = NULL;</p>
+<p>	}</p>
+<p>	return root;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: x</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38834</link>
+		<dc:creator><![CDATA[x]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 11:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38834</guid>
+		<description><![CDATA[struct node *prune(struct node *root,int k)
+
+{
+
+	   if(root==NULL)return NULL;
+
+	   if(root-&#062;left==NULL&#038;&#038;root-&#062;right==NULL&#038;&#038;k&#062;root-&#062;data)
+
+	   {
+
+	   	   free(root);
+
+	   	   return NULL;
+
+	   }
+
+	   if(root-&#062;left==NULL&#038;&#038;root-&#062;right==NULL&#038;&#038;kdata)
+
+	   {
+
+	   	  
+
+	   	   return root;
+
+	   }
+
+	   root-&#062;left=prune(root-&#062;left,k-root-&#062;data);
+
+	   
+
+	
+
+	   root-&#062;right=prune(root-&#062;right,k-root-&#062;data);
+
+	   if(root-&#062;left==NULL&#038;&#038;root-&#062;right==NULL)return NULL;
+
+	   return root;
+
+	   
+
+}]]></description>
+		<content:encoded><![CDATA[<p>struct node *prune(struct node *root,int k)</p>
+<p>{</p>
+<p>	   if(root==NULL)return NULL;</p>
+<p>	   if(root-&gt;left==NULL&amp;&amp;root-&gt;right==NULL&amp;&amp;k&gt;root-&gt;data)</p>
+<p>	   {</p>
+<p>	   	   free(root);</p>
+<p>	   	   return NULL;</p>
+<p>	   }</p>
+<p>	   if(root-&gt;left==NULL&amp;&amp;root-&gt;right==NULL&amp;&amp;kdata)</p>
+<p>	   {</p>
+<p>	   	   return root;</p>
+<p>	   }</p>
+<p>	   root-&gt;left=prune(root-&gt;left,k-root-&gt;data);</p>
+<p>	   root-&gt;right=prune(root-&gt;right,k-root-&gt;data);</p>
+<p>	   if(root-&gt;left==NULL&amp;&amp;root-&gt;right==NULL)return NULL;</p>
+<p>	   return root;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38648</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 11:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38648</guid>
+		<description><![CDATA[nice :D]]></description>
+		<content:encoded><![CDATA[<p>nice 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vicky</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38588</link>
+		<dc:creator><![CDATA[vicky]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 17:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38588</guid>
+		<description><![CDATA[the above pruneUtil function can be chaged to the following simpler form. since it avoids repeated call to max() function  it is somewhat efficient than the one given above(decreases time complexity by constant time)  and it also avoids the use of wrapper function too..
+
+http://ideone.com/uNVPBX
+
+@GeeksforGeeks]]></description>
+		<content:encoded><![CDATA[<p>the above pruneUtil function can be chaged to the following simpler form. since it avoids repeated call to max() function  it is somewhat efficient than the one given above(decreases time complexity by constant time)  and it also avoids the use of wrapper function too..</p>
+<p><a href="http://ideone.com/uNVPBX" rel="nofollow">http://ideone.com/uNVPBX</a></p>
+<p>@GeeksforGeeks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ganesh</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38587</link>
+		<dc:creator><![CDATA[ganesh]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 17:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38587</guid>
+		<description><![CDATA[struct Node *pruneUtil(struct Node *root, int k)
+
+{
+    // Base Case
+    if (root == NULL)  return NULL;
+ 
+    root-&#062;left = pruneUtil(root-&#062;left, k-root-&#062;data);
+    root-&#062;right = pruneUtil(root-&#062;right, k-root-&#062;data);
+ 
+    if (root-&#062;left==NULL&#038;&#038;root-&#062;right==NULL)
+    {
+		if(root-&#062;data&#060;k){
+        free(root);
+        return NULL;
+		}
+    }
+ 
+    return root;
+}
+
+
+
+
+
+PruneUtil function can be changed to the following simpler form. This code eliminates the need for max function and wrapper class etc.. @GeeksforGeeks]]></description>
+		<content:encoded><![CDATA[<p>struct Node *pruneUtil(struct Node *root, int k)</p>
+<p>{<br />
+    // Base Case<br />
+    if (root == NULL)  return NULL;</p>
+<p>    root-&gt;left = pruneUtil(root-&gt;left, k-root-&gt;data);<br />
+    root-&gt;right = pruneUtil(root-&gt;right, k-root-&gt;data);</p>
+<p>    if (root-&gt;left==NULL&amp;&amp;root-&gt;right==NULL)<br />
+    {<br />
+		if(root-&gt;data&lt;k){<br />
+        free(root);<br />
+        return NULL;<br />
+		}<br />
+    }</p>
+<p>    return root;<br />
+}</p>
+<p>PruneUtil function can be changed to the following simpler form. This code eliminates the need for max function and wrapper class etc.. @GeeksforGeeks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38475</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 19:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38475</guid>
+		<description><![CDATA[what is the use of rsum or lsum??]]></description>
+		<content:encoded><![CDATA[<p>what is the use of rsum or lsum??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-38474</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 19:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-38474</guid>
+		<description><![CDATA[void remove(btnode *&#038;t,int k,int sum)
+{
+    if(t!=NULL)
+    {
+        sum+=t-&#062;data;
+        remove(t-&#062;lchild,k,sum);
+        remove(t-&#062;rchild,k,sum);
+        
+        if(!t-&#062;lchild &#038;&#038; !t-&#062;rchild &#038;&#038; sum&#060;k)
+        {    btnode *temp=t;
+            t=NULL;
+            delete temp;
+        }
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>void remove(btnode *&amp;t,int k,int sum)<br />
+{<br />
+    if(t!=NULL)<br />
+    {<br />
+        sum+=t-&gt;data;<br />
+        remove(t-&gt;lchild,k,sum);<br />
+        remove(t-&gt;rchild,k,sum);</p>
+<p>        if(!t-&gt;lchild &amp;&amp; !t-&gt;rchild &amp;&amp; sum&lt;k)<br />
+        {    btnode *temp=t;<br />
+            t=NULL;<br />
+            delete temp;<br />
+        }<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dinesh Babu</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-35307</link>
+		<dc:creator><![CDATA[Dinesh Babu]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 05:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-35307</guid>
+		<description><![CDATA[Will this not do ?
+
+
+struct node* prune(struct node *root,int sum,int k) 
+
+{
+
+	if(root==null)
+
+		return null;
+
+	sum=sum+root-&#062;data;
+
+	if(root-&#062;left==null &#038;&#038; root-&#062;right==null)
+
+	{
+
+			if(sum&#062;=k)
+
+				return root;
+
+			else
+
+			{
+
+				free(root);
+
+				return null;
+
+			}
+
+	}
+
+	
+
+	if( prune(root-&#062;left,sum,k)!=null &#124;&#124; prune(root-&#062;right,sum,k) !=null)
+
+		return root;
+
+	else
+
+	{
+
+		free(root);
+
+		return null;
+
+	}
+
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Will this not do ?</p>
+<p>struct node* prune(struct node *root,int sum,int k) </p>
+<p>{</p>
+<p>	if(root==null)</p>
+<p>		return null;</p>
+<p>	sum=sum+root-&gt;data;</p>
+<p>	if(root-&gt;left==null &amp;&amp; root-&gt;right==null)</p>
+<p>	{</p>
+<p>			if(sum&gt;=k)</p>
+<p>				return root;</p>
+<p>			else</p>
+<p>			{</p>
+<p>				free(root);</p>
+<p>				return null;</p>
+<p>			}</p>
+<p>	}</p>
+<p>	if( prune(root-&gt;left,sum,k)!=null || prune(root-&gt;right,sum,k) !=null)</p>
+<p>		return root;</p>
+<p>	else</p>
+<p>	{</p>
+<p>		free(root);</p>
+<p>		return null;</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-35256</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 23:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-35256</guid>
+		<description><![CDATA[Even I thought the same solution. I think this solution is more intuitive than the one provided.]]></description>
+		<content:encoded><![CDATA[<p>Even I thought the same solution. I think this solution is more intuitive than the one provided.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-35234</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 11:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-35234</guid>
+		<description><![CDATA[#include
+#include
+using namespace std;
+#define max 999
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+ 
+ 
+void create(tnode* &#038;root,int d)
+{
+	int n;
+	if(d==0)
+	  return;
+	root=new tnode(d);
+	cout&#060;&#060;&#034;enter the left child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;lchild,n);
+	cout&#060;&#060;&#034;enter thr right child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;rchild,n);
+}
+tnode* fun(tnode* root,int sum)
+{
+	if((!root)&#038;&#038;(sumlchild)&#038;&#038;(!root-&#062;rchild)&#038;&#038;(sumdata))
+	    return root;
+	if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild)&#038;&#038;(sum&#062;root-&#062;data))
+	{
+		tnode* temp;
+		temp=root;
+		free(temp);
+		return NULL;
+	}
+	if(root-&#062;lchild)
+	      root-&#062;lchild=fun(root-&#062;lchild,sum-(root-&#062;data));
+    if(root-&#062;rchild)
+	      root-&#062;rchild=fun(root-&#062;rchild,sum-(root-&#062;data));
+	if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild)&#038;&#038;(sum&#062;root-&#062;data))
+	{
+		tnode* temp;
+		temp=root;
+		free(temp);
+		return NULL;
+	}
+	return root;
+}
+void display(tnode* root)
+{
+	if(root!=NULL)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+int main()
+{
+	tnode* root=NULL;int n,sum;
+	cout&#060;&#062;n;
+	create(root,n);
+	cout&#060;&#062;sum;
+	display(fun(root,sum));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+using namespace std;<br />
+#define max 999<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};</p>
+<p>void create(tnode* &amp;root,int d)<br />
+{<br />
+	int n;<br />
+	if(d==0)<br />
+	  return;<br />
+	root=new tnode(d);<br />
+	cout&lt;&lt;&quot;enter the left child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;lchild,n);<br />
+	cout&lt;&lt;&quot;enter thr right child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;rchild,n);<br />
+}<br />
+tnode* fun(tnode* root,int sum)<br />
+{<br />
+	if((!root)&amp;&amp;(sumlchild)&amp;&amp;(!root-&gt;rchild)&amp;&amp;(sumdata))<br />
+	    return root;<br />
+	if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild)&amp;&amp;(sum&gt;root-&gt;data))<br />
+	{<br />
+		tnode* temp;<br />
+		temp=root;<br />
+		free(temp);<br />
+		return NULL;<br />
+	}<br />
+	if(root-&gt;lchild)<br />
+	      root-&gt;lchild=fun(root-&gt;lchild,sum-(root-&gt;data));<br />
+    if(root-&gt;rchild)<br />
+	      root-&gt;rchild=fun(root-&gt;rchild,sum-(root-&gt;data));<br />
+	if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild)&amp;&amp;(sum&gt;root-&gt;data))<br />
+	{<br />
+		tnode* temp;<br />
+		temp=root;<br />
+		free(temp);<br />
+		return NULL;<br />
+	}<br />
+	return root;<br />
+}<br />
+void display(tnode* root)<br />
+{<br />
+	if(root!=NULL)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;int n,sum;<br />
+	cout&lt;&gt;n;<br />
+	create(root,n);<br />
+	cout&lt;&gt;sum;<br />
+	display(fun(root,sum));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tesla</title>
+		<link>http://www.geeksforgeeks.org/remove-all-nodes-which-lie-on-a-path-having-sum-less-than-k/#comment-35063</link>
+		<dc:creator><![CDATA[tesla]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 11:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=123241#comment-35063</guid>
+		<description><![CDATA[i had a similar soln.. it think its correct...]]></description>
+		<content:encoded><![CDATA[<p>i had a similar soln.. it think its correct&#8230;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.048 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:42 -->
+
+<!-- Compression = gzip -->

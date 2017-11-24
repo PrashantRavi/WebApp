@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Foldable Binary Trees</title>
+	<atom:link href="http://www.geeksforgeeks.org/foldable-binary-trees/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/foldable-binary-trees/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Vãîbhåv Joshî</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-40142</link>
+		<dc:creator><![CDATA[Vãîbhåv Joshî]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 12:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-40142</guid>
+		<description><![CDATA[Java Code For Foldable 
+
+
+public boolean isFoldable(){
+     	if(root==null)
+     	   return true;
+     	return isFoldable(root.getLeft(),root.getRight());
+     }
+     
+  public boolean isFoldable(BSTNode l , BSTNode r){
+     	if(l==null &#038;&#038; r==null)
+     	 return true;
+ 
+     	if(l==null &#124;&#124; r==null)
+     	 return false;
+ 
+     	return isFoldable( l.getLeft(), r.getRight() ) &#038;&#038; isFoldable(l.getRight(), r.getLeft()); 
+     }
+ }]]></description>
+		<content:encoded><![CDATA[<p>Java Code For Foldable </p>
+<p>public boolean isFoldable(){<br />
+     	if(root==null)<br />
+     	   return true;<br />
+     	return isFoldable(root.getLeft(),root.getRight());<br />
+     }</p>
+<p>  public boolean isFoldable(BSTNode l , BSTNode r){<br />
+     	if(l==null &amp;&amp; r==null)<br />
+     	 return true;</p>
+<p>     	if(l==null || r==null)<br />
+     	 return false;</p>
+<p>     	return isFoldable( l.getLeft(), r.getRight() ) &amp;&amp; isFoldable(l.getRight(), r.getLeft());<br />
+     }<br />
+ }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suvodip Bhattacharya</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-38569</link>
+		<dc:creator><![CDATA[Suvodip Bhattacharya]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 14:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-38569</guid>
+		<description><![CDATA[#include
+using namespace std;
+
+struct tree{
+    int data;
+    struct tree *rc,*lc;
+    };
+
+tree* newNode(int n)
+{
+    struct tree *temp=new tree;
+    temp-&#062;lc=temp-&#062;rc=NULL;
+    temp-&#062;data=n;
+    return temp;
+}
+
+int foldableUtil(struct tree *root1,struct tree *root2)
+{
+    if(root1==NULL &#038;&#038; root2==NULL) return 1;
+    if( (root1!=NULL &#038;&#038; root2==NULL) &#124;&#124; (root1==NULL &#038;&#038; root2!=NULL) ) return 0;
+
+    return foldableUtil(root1-&#062;lc,root2-&#062;rc)&#038;&#038;foldableUtil(root1-&#062;rc,root2-&#062;lc);
+    
+}
+
+int foldable(struct tree *root)
+{
+    return foldableUtil(root-&#062;lc,root-&#062;rc);
+}
+
+int main()
+{
+struct tree *root1=NULL,*root2=NULL;
+int flag=0;
+
+    root1=newNode(10);
+    root1-&#062;lc=newNode(7);
+    root1-&#062;rc=newNode(15);
+    root1-&#062;lc-&#062;rc=newNode(9);
+    root1-&#062;rc-&#062;lc=newNode(11);
+    root1-&#062;lc-&#062;rc=newNode(9);
+
+    if(foldable(root1))
+    cout&#060;&#060;&#034;Mirror&#034;&#060;&#060;endl;
+    else
+    cout&#060;&#060;&#034;Not Mirror&#034;&#060;&#060;endl;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;</p>
+<p>struct tree{<br />
+    int data;<br />
+    struct tree *rc,*lc;<br />
+    };</p>
+<p>tree* newNode(int n)<br />
+{<br />
+    struct tree *temp=new tree;<br />
+    temp-&gt;lc=temp-&gt;rc=NULL;<br />
+    temp-&gt;data=n;<br />
+    return temp;<br />
+}</p>
+<p>int foldableUtil(struct tree *root1,struct tree *root2)<br />
+{<br />
+    if(root1==NULL &amp;&amp; root2==NULL) return 1;<br />
+    if( (root1!=NULL &amp;&amp; root2==NULL) || (root1==NULL &amp;&amp; root2!=NULL) ) return 0;</p>
+<p>    return foldableUtil(root1-&gt;lc,root2-&gt;rc)&amp;&amp;foldableUtil(root1-&gt;rc,root2-&gt;lc);</p>
+<p>}</p>
+<p>int foldable(struct tree *root)<br />
+{<br />
+    return foldableUtil(root-&gt;lc,root-&gt;rc);<br />
+}</p>
+<p>int main()<br />
+{<br />
+struct tree *root1=NULL,*root2=NULL;<br />
+int flag=0;</p>
+<p>    root1=newNode(10);<br />
+    root1-&gt;lc=newNode(7);<br />
+    root1-&gt;rc=newNode(15);<br />
+    root1-&gt;lc-&gt;rc=newNode(9);<br />
+    root1-&gt;rc-&gt;lc=newNode(11);<br />
+    root1-&gt;lc-&gt;rc=newNode(9);</p>
+<p>    if(foldable(root1))<br />
+    cout&lt;&lt;&quot;Mirror&quot;&lt;&lt;endl;<br />
+    else<br />
+    cout&lt;&lt;&quot;Not Mirror&quot;&lt;&lt;endl;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: typing..</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-37504</link>
+		<dc:creator><![CDATA[typing..]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 11:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-37504</guid>
+		<description><![CDATA[this is not foldable, actually the question is asking whether root-&#062;left and root-&#062;right are mirror image of each other or not..]]></description>
+		<content:encoded><![CDATA[<p>this is not foldable, actually the question is asking whether root-&gt;left and root-&gt;right are mirror image of each other or not..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-35207</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 23:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-35207</guid>
+		<description><![CDATA[What should be the answer to following tree?
+
+       10
+     /     
+   7      15
+  /          
+1     2       3
+
+
+
+This can be considered as foldable as 10-15-3 can lie on 10-7-1. If this should return true, than both methods provided would be wrong.]]></description>
+		<content:encoded><![CDATA[<p>What should be the answer to following tree?</p>
+<p>       10<br />
+     /<br />
+   7      15<br />
+  /<br />
+1     2       3</p>
+<p>This can be considered as foldable as 10-15-3 can lie on 10-7-1. If this should return true, than both methods provided would be wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Harjit Singh</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-35185</link>
+		<dc:creator><![CDATA[Harjit Singh]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 08:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-35185</guid>
+		<description><![CDATA[bool mirror(struct node*root1,struct node*root2)
+
+{
+
+     if(root1==NULL&#038;&#038; root2==NULL)
+
+        return true;
+
+      if(root1==NULL&#124;&#124;root2==NULL)
+
+         return false;
+
+      return(mirror(root1-&#062;left,root2-&#062;right)&#038;&#038;mirror(root1-&#062;right,root2-&#062;left));
+
+} 
+
+ 
+
+/* Returns true if the given tree is foldable */
+
+bool isFoldable(struct node *root)
+
+{
+
+   if(root==NULL)
+
+      return true;
+
+   return(mirror(root-&#062;left,root-&#062;right));
+
+}]]></description>
+		<content:encoded><![CDATA[<p>bool mirror(struct node*root1,struct node*root2)</p>
+<p>{</p>
+<p>     if(root1==NULL&amp;&amp; root2==NULL)</p>
+<p>        return true;</p>
+<p>      if(root1==NULL||root2==NULL)</p>
+<p>         return false;</p>
+<p>      return(mirror(root1-&gt;left,root2-&gt;right)&amp;&amp;mirror(root1-&gt;right,root2-&gt;left));</p>
+<p>} </p>
+<p>/* Returns true if the given tree is foldable */</p>
+<p>bool isFoldable(struct node *root)</p>
+<p>{</p>
+<p>   if(root==NULL)</p>
+<p>      return true;</p>
+<p>   return(mirror(root-&gt;left,root-&gt;right));</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-32840</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 21 Feb 2014 12:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-32840</guid>
+		<description><![CDATA[bool isStructSame(struct node *a, struct node *b)
+{
+  if (a == NULL &#038;&#038; b == NULL)
+    return true; 
+  if ( !(a &#038;&#038; b))
+      return false;
+  return (true &#038;&#038; isStructSame(a-&#062;left, b-&#062;left) &#038;&#038; isStructSame(a-&#062;right,b-&#062;right));
+  }]]></description>
+		<content:encoded><![CDATA[<p>bool isStructSame(struct node *a, struct node *b)<br />
+{<br />
+  if (a == NULL &amp;&amp; b == NULL)<br />
+    return true;<br />
+  if ( !(a &amp;&amp; b))<br />
+      return false;<br />
+  return (true &amp;&amp; isStructSame(a-&gt;left, b-&gt;left) &amp;&amp; isStructSame(a-&gt;right,b-&gt;right));<br />
+  }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: aspire</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-22564</link>
+		<dc:creator><![CDATA[aspire]]></dc:creator>
+		<pubDate>Tue, 23 Jul 2013 08:44:49 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-22564</guid>
+		<description><![CDATA[We can solve this problem by putting the left and right trees in queue in preorder fashion. And then comparing their structure while popping them from the queue.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+#include&#060;stdbool.h&#062;
+#include&#060;queue&#062;
+using namespace std;
+typedef struct tree
+{
+    int data;
+    struct tree *left,*right;
+} *Node;
+
+Node newNode(int data)
+{
+    Node temp = (Node)malloc(sizeof(struct tree));
+    temp-&#062;left=temp-&#062;right=NULL;
+    temp-&#062;data=data;
+    return temp;
+}
+
+/**Recursive**/
+void preorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    printf(&#034;%d &#034;,root-&#062;data);
+    preorder(root-&#062;left);
+    preorder(root-&#062;right);
+}
+
+void inorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    preorder(root-&#062;left);
+    printf(&#034;%d &#034;,root-&#062;data);
+    preorder(root-&#062;right);
+}
+
+void postorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    preorder(root-&#062;left);
+    preorder(root-&#062;right);
+    printf(&#034;%d &#034;,root-&#062;data);
+}
+
+
+Node insertTree(Node root,int data)
+{
+    if(root==NULL)
+        return newNode(data);
+    else if(root-&#062;data&#062;=data)
+        root-&#062;left = insertTree(root-&#062;left,data);
+    else
+        root-&#062;right = insertTree(root-&#062;right,data);
+    return root;
+}
+
+void fillQueue(queue&#060;Node&#062; &#038;s,Node root)
+{
+    if(!root)
+        return;
+
+    s.push(root);
+    fillQueue(s,root-&#062;left);
+    fillQueue(s,root-&#062;right);
+}
+
+bool isFoldable(Node root)
+{
+    if(!root&#124;&#124;(!(root-&#062;left)&#038;&#038;!(root-&#062;right)))
+        return true;
+
+    queue&#060;Node&#062; left,right;
+    fillQueue(left,root-&#062;left);
+    fillQueue(right,root-&#062;right);
+    Node a,b;
+    while(!left.empty()&#124;&#124;!right.empty())
+    {
+        a=left.front();
+        left.pop();
+        b=right.front();
+        right.pop();
+
+        printf(&#034;a = %d b = %d\n&#034;,a-&#062;data,b-&#062;data);
+        if(!(a-&#062;left)&#038;&#038;a-&#062;right&#038;&#038;!(b-&#062;right)&#038;&#038;b-&#062;left)
+            continue;
+
+        else if(a-&#062;left&#038;&#038;!(a-&#062;right)&#038;&#038;a-&#062;right&#038;&#038;!(b-&#062;left))
+            continue;
+
+        else if(a-&#062;left&#038;&#038;a-&#062;right&#038;&#038;a-&#062;right&#038;&#038;b-&#062;left)
+            continue;
+
+        else if(!(a-&#062;left)&#038;&#038;!(a-&#062;right)&#038;&#038;!(a-&#062;right)&#038;&#038;!(b-&#062;left))
+            continue;
+        else
+            return false;
+    }
+
+    if(left.empty()&#038;&#038;right.empty())
+        return true;
+    return false;
+}
+
+int main()
+{
+    Node root = newNode(1);
+    root-&#062;left        = newNode(2);
+    root-&#062;right       = newNode(3);
+    root-&#062;left-&#062;right  = newNode(4);
+    root-&#062;right-&#062;left = newNode(5);
+
+    if(isFoldable(root))
+        printf(&#034;Is foldable\n&#034;);
+    else
+        printf(&#034;Is NOT foldable\n&#034;);
+    preorder(root);
+    return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>We can solve this problem by putting the left and right trees in queue in preorder fashion. And then comparing their structure while popping them from the queue.</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;stdbool.h&gt;
+#include&lt;queue&gt;
+using namespace std;
+typedef struct tree
+{
+    int data;
+    struct tree *left,*right;
+} *Node;
+
+Node newNode(int data)
+{
+    Node temp = (Node)malloc(sizeof(struct tree));
+    temp-&gt;left=temp-&gt;right=NULL;
+    temp-&gt;data=data;
+    return temp;
+}
+
+/**Recursive**/
+void preorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    printf(&quot;%d &quot;,root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+void inorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    preorder(root-&gt;left);
+    printf(&quot;%d &quot;,root-&gt;data);
+    preorder(root-&gt;right);
+}
+
+void postorder(Node root)
+{
+    if(root==NULL)
+        return;
+
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+    printf(&quot;%d &quot;,root-&gt;data);
+}
+
+
+Node insertTree(Node root,int data)
+{
+    if(root==NULL)
+        return newNode(data);
+    else if(root-&gt;data&gt;=data)
+        root-&gt;left = insertTree(root-&gt;left,data);
+    else
+        root-&gt;right = insertTree(root-&gt;right,data);
+    return root;
+}
+
+void fillQueue(queue&lt;Node&gt; &amp;s,Node root)
+{
+    if(!root)
+        return;
+
+    s.push(root);
+    fillQueue(s,root-&gt;left);
+    fillQueue(s,root-&gt;right);
+}
+
+bool isFoldable(Node root)
+{
+    if(!root||(!(root-&gt;left)&amp;&amp;!(root-&gt;right)))
+        return true;
+
+    queue&lt;Node&gt; left,right;
+    fillQueue(left,root-&gt;left);
+    fillQueue(right,root-&gt;right);
+    Node a,b;
+    while(!left.empty()||!right.empty())
+    {
+        a=left.front();
+        left.pop();
+        b=right.front();
+        right.pop();
+
+        printf(&quot;a = %d b = %d\n&quot;,a-&gt;data,b-&gt;data);
+        if(!(a-&gt;left)&amp;&amp;a-&gt;right&amp;&amp;!(b-&gt;right)&amp;&amp;b-&gt;left)
+            continue;
+
+        else if(a-&gt;left&amp;&amp;!(a-&gt;right)&amp;&amp;a-&gt;right&amp;&amp;!(b-&gt;left))
+            continue;
+
+        else if(a-&gt;left&amp;&amp;a-&gt;right&amp;&amp;a-&gt;right&amp;&amp;b-&gt;left)
+            continue;
+
+        else if(!(a-&gt;left)&amp;&amp;!(a-&gt;right)&amp;&amp;!(a-&gt;right)&amp;&amp;!(b-&gt;left))
+            continue;
+        else
+            return false;
+    }
+
+    if(left.empty()&amp;&amp;right.empty())
+        return true;
+    return false;
+}
+
+int main()
+{
+    Node root = newNode(1);
+    root-&gt;left        = newNode(2);
+    root-&gt;right       = newNode(3);
+    root-&gt;left-&gt;right  = newNode(4);
+    root-&gt;right-&gt;left = newNode(5);
+
+    if(isFoldable(root))
+        printf(&quot;Is foldable\n&quot;);
+    else
+        printf(&quot;Is NOT foldable\n&quot;);
+    preorder(root);
+    return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: shek8034</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-19886</link>
+		<dc:creator><![CDATA[shek8034]]></dc:creator>
+		<pubDate>Sun, 16 Jun 2013 16:01:12 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-19886</guid>
+		<description><![CDATA[This wont work because you have to consider their structure, not their values. If you store the traversals in arrays, then finally you end up with comparing the two arrays, which is wrong since you have to check if the left structure is mirror of right structure or not, not their values. (See the definition of Folded trees).]]></description>
+		<content:encoded><![CDATA[<p>This wont work because you have to consider their structure, not their values. If you store the traversals in arrays, then finally you end up with comparing the two arrays, which is wrong since you have to check if the left structure is mirror of right structure or not, not their values. (See the definition of Folded trees).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: logic_bomber</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-19789</link>
+		<dc:creator><![CDATA[logic_bomber]]></dc:creator>
+		<pubDate>Sat, 15 Jun 2013 12:35:07 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-19789</guid>
+		<description><![CDATA[Hope this can be done more easily as follows ... Do drop here if i am wrong
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+    bool isFoldableUtil(TreeNode *root1,TreeNode *root2)
+    {
+        if(root1==NULL &#038;&#038; root2==NULL)
+            return true;
+        if(root1==NULL &#124;&#124; root2==NULL)    
+            return false;
+        return ((root1-&#062;val == root2-&#062;val)&#038;&#038;          (isFoldableUtil(root1-&#062;left,root2-&#062;right))&#038;&#038;(isFoldableUtil(root1-&#062;right,root2-&#062;left)));
+    }
+    bool isFoldable(TreeNode *root) {
+        
+        if(root==NULL)
+            return true;
+        return isFoldableUtil(root-&#062;left,root-&#062;right);    
+    }
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hope this can be done more easily as follows &#8230; Do drop here if i am wrong</p>
+<pre> <code language="C">
+    bool isFoldableUtil(TreeNode *root1,TreeNode *root2)
+    {
+        if(root1==NULL &amp;&amp; root2==NULL)
+            return true;
+        if(root1==NULL || root2==NULL)    
+            return false;
+        return ((root1-&gt;val == root2-&gt;val)&amp;&amp;          (isFoldableUtil(root1-&gt;left,root2-&gt;right))&amp;&amp;(isFoldableUtil(root1-&gt;right,root2-&gt;left)));
+    }
+    bool isFoldable(TreeNode *root) {
+        
+        if(root==NULL)
+            return true;
+        return isFoldableUtil(root-&gt;left,root-&gt;right);    
+    }
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prashant Agarwal</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-19190</link>
+		<dc:creator><![CDATA[Prashant Agarwal]]></dc:creator>
+		<pubDate>Tue, 04 Jun 2013 12:31:04 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-19190</guid>
+		<description><![CDATA[We can find the inorder and postorder traversals of the tree and compare both the arrays....
+Thats i think easiest way...]]></description>
+		<content:encoded><![CDATA[<p>We can find the inorder and postorder traversals of the tree and compare both the arrays&#8230;.<br />
+Thats i think easiest way&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/foldable-binary-trees/#comment-18117</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Sat, 11 May 2013 12:38:45 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=7956#comment-18117</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.049 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:35 -->
+
+<!-- Compression = gzip -->

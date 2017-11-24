@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Can a C++ class have an object of self type?</title>
+	<atom:link href="http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: sharwan</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-34776</link>
+		<dc:creator><![CDATA[sharwan]]></dc:creator>
+		<pubDate>Thu, 17 Apr 2014 15:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-34776</guid>
+		<description><![CDATA[@Tejas 
+Below post has Answer for :what is the use of static object self type..]]></description>
+		<content:encoded><![CDATA[<p>@Tejas<br />
+Below post has Answer for :what is the use of static object self type..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sharwan</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-34775</link>
+		<dc:creator><![CDATA[sharwan]]></dc:creator>
+		<pubDate>Thu, 17 Apr 2014 15:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-34775</guid>
+		<description><![CDATA[#include 
+
+using namespace std;
+
+class Singleton
+{
+private:
+    static bool instanceFlag;
+    static Singleton *single;
+    Singleton()
+    {
+        //private constructor
+    }
+public:
+    static Singleton* getInstance();
+    void method();
+    ~Singleton()
+    {
+        instanceFlag = false;
+    }
+};
+
+bool Singleton::instanceFlag = false;
+Singleton* Singleton::single = NULL;
+Singleton* Singleton::getInstance()
+{
+    if(! instanceFlag)
+    {
+        single = new Singleton();
+        instanceFlag = true;
+        return single;
+    }
+    else
+    {
+        return single;
+    }
+}
+
+void Singleton::method()
+{
+    cout &#060;&#060; &#034;Method of the singleton class&#034; &#060;method();
+    sc2 = Singleton::getInstance();
+    sc2-&#062;method();
+
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include </p>
+<p>using namespace std;</p>
+<p>class Singleton<br />
+{<br />
+private:<br />
+    static bool instanceFlag;<br />
+    static Singleton *single;<br />
+    Singleton()<br />
+    {<br />
+        //private constructor<br />
+    }<br />
+public:<br />
+    static Singleton* getInstance();<br />
+    void method();<br />
+    ~Singleton()<br />
+    {<br />
+        instanceFlag = false;<br />
+    }<br />
+};</p>
+<p>bool Singleton::instanceFlag = false;<br />
+Singleton* Singleton::single = NULL;<br />
+Singleton* Singleton::getInstance()<br />
+{<br />
+    if(! instanceFlag)<br />
+    {<br />
+        single = new Singleton();<br />
+        instanceFlag = true;<br />
+        return single;<br />
+    }<br />
+    else<br />
+    {<br />
+        return single;<br />
+    }<br />
+}</p>
+<p>void Singleton::method()<br />
+{<br />
+    cout &lt;&lt; &quot;Method of the singleton class&quot; &lt;method();<br />
+    sc2 = Singleton::getInstance();<br />
+    sc2-&gt;method();</p>
+<p>    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin Jain</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-33172</link>
+		<dc:creator><![CDATA[Nitin Jain]]></dc:creator>
+		<pubDate>Mon, 03 Mar 2014 22:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-33172</guid>
+		<description><![CDATA[#include &quot;stdafx.h&quot;
+#include 
+using namespace std;
+
+class Dummy
+{
+char c;
+int current;
+
+//Dummy dummyObj; //compilation error
+
+public :
+
+//Dummy dummyObj; //compilation error  
+
+Dummy()
+{
+c = &#039;N&#039;;
+//Dummy dummyObj; //no compilation error but infinite loop
+}
+
+	void updateDummy(int curr)
+{
+current = curr;
+Dummy dummyObj_1;  //Working fine without any error
+}
+
+	void printDummy ()
+{
+cout &#060;&#060; current &#060;&#060; endl;
+Dummy dummyObj_2; // Working without any error
+}
+};
+int main()
+{
+cout &#060;&#060; &#034;sizeof(Dummy) &#034; &#060;&#060; sizeof(Dummy) &#060;&#060; endl;
+Dummy d;
+d.updateDummy(786);
+d.printDummy();
+Dummy d2(d);
+d2.printDummy();
+return 0;
+}
+
+//It means we can have class object as a variable in member function but not in constructor. 
+]]></description>
+		<content:encoded><![CDATA[<p>#include &#8220;stdafx.h&#8221;<br />
+#include<br />
+using namespace std;</p>
+<p>class Dummy<br />
+{<br />
+char c;<br />
+int current;</p>
+<p>//Dummy dummyObj; //compilation error</p>
+<p>public :</p>
+<p>//Dummy dummyObj; //compilation error  </p>
+<p>Dummy()<br />
+{<br />
+c = &#8216;N&#8217;;<br />
+//Dummy dummyObj; //no compilation error but infinite loop<br />
+}</p>
+<p>	void updateDummy(int curr)<br />
+{<br />
+current = curr;<br />
+Dummy dummyObj_1;  //Working fine without any error<br />
+}</p>
+<p>	void printDummy ()<br />
+{<br />
+cout &lt;&lt; current &lt;&lt; endl;<br />
+Dummy dummyObj_2; // Working without any error<br />
+}<br />
+};<br />
+int main()<br />
+{<br />
+cout &lt;&lt; &quot;sizeof(Dummy) &quot; &lt;&lt; sizeof(Dummy) &lt;&lt; endl;<br />
+Dummy d;<br />
+d.updateDummy(786);<br />
+d.printDummy();<br />
+Dummy d2(d);<br />
+d2.printDummy();<br />
+return 0;<br />
+}</p>
+<p>//It means we can have class object as a variable in member function but not in constructor. </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tejas</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-28879</link>
+		<dc:creator><![CDATA[Tejas]]></dc:creator>
+		<pubDate>Tue, 15 Oct 2013 02:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-28879</guid>
+		<description><![CDATA[what is the use of static object self type ???? please give some examples.....]]></description>
+		<content:encoded><![CDATA[<p>what is the use of static object self type ???? please give some examples&#8230;..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-24555</link>
+		<dc:creator><![CDATA[Rohit]]></dc:creator>
+		<pubDate>Tue, 06 Aug 2013 09:05:21 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-24555</guid>
+		<description><![CDATA[We use static member of self type for implement &quot;singleton design pattern&quot;.]]></description>
+		<content:encoded><![CDATA[<p>We use static member of self type for implement &#8220;singleton design pattern&#8221;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: romeo</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-24253</link>
+		<dc:creator><![CDATA[romeo]]></dc:creator>
+		<pubDate>Sun, 04 Aug 2013 12:18:50 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-24253</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Praveen</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-22638</link>
+		<dc:creator><![CDATA[Praveen]]></dc:creator>
+		<pubDate>Wed, 24 Jul 2013 18:09:55 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-22638</guid>
+		<description><![CDATA[I am trying to think a use case for the first scenario i.e when does a class need to have a static member of self type. I could not get any use case. Can any body show any practical example for this scenario.]]></description>
+		<content:encoded><![CDATA[<p>I am trying to think a use case for the first scenario i.e when does a class need to have a static member of self type. I could not get any use case. Can any body show any practical example for this scenario.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Gupta</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-25503</link>
+		<dc:creator><![CDATA[Himanshu Gupta]]></dc:creator>
+		<pubDate>Mon, 17 Jun 2013 12:28:26 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-25503</guid>
+		<description><![CDATA[if u r using new to create an object in dis case u will get a dynamic memory from heap. and its starting address will be return .... but if u r not using new than memory will be allocated at  compile time ,...  ]]></description>
+		<content:encoded><![CDATA[<p>if u r using new to create an object in dis case u will get a dynamic memory from heap. and its starting address will be return &#8230;. but if u r not using new than memory will be allocated at  compile time ,&#8230;  </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prashant Rathi</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-25502</link>
+		<dc:creator><![CDATA[Prashant Rathi]]></dc:creator>
+		<pubDate>Fri, 31 May 2013 04:45:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-25502</guid>
+		<description><![CDATA[Hi , 
+What will happen if we create an object without new keyword? I mean what is the difference between creating object with new and without new?
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>Hi ,<br />
+What will happen if we create an object without new keyword? I mean what is the difference between creating object with new and without new?<br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ashish</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-16477</link>
+		<dc:creator><![CDATA[Ashish]]></dc:creator>
+		<pubDate>Mon, 18 Mar 2013 19:41:19 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-16477</guid>
+		<description><![CDATA[Infinite Loop :)
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Infinite Loop 🙂</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/can-a-c-class-have-an-object-of-self-type/#comment-2449</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Sun, 14 Nov 2010 01:00:17 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8565#comment-2449</guid>
+		<description><![CDATA[@Techiee, your code won&#039;t even compile. That is what exactly the post is emphasizing. Please read the post and the links completely.]]></description>
+		<content:encoded><![CDATA[<p>@Techiee, your code won&#8217;t even compile. That is what exactly the post is emphasizing. Please read the post and the links completely.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:23:42 -->
+
+<!-- Compression = gzip -->

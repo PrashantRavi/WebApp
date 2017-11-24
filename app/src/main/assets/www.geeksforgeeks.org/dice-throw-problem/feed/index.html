@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 30 (Dice Throw)</title>
+	<atom:link href="http://www.geeksforgeeks.org/dice-throw-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/dice-throw-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-38052</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 05:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-38052</guid>
+		<description><![CDATA[Recursive method in C:
+
+void sum(int m, int n, int x, int *total)
+
+{
+
+		int cur_sum = 0;
+
+		
+
+		// base case - 1 
+
+		if(n==0 &#038;&#038; x== 0)
+
+		{
+
+			*total = *total + 1;
+
+			return;
+
+		}
+
+		
+
+		// base case 2
+
+		if((n==0 &#038;&#038; x!=0) &#124;&#124; (n!=0 &#038;&#038; x==0))
+
+			return;
+
+		
+
+		for(int i=1;i&#060;=m;i++)
+
+			sum(m,n-1,x-i,total);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Recursive method in C:</p>
+<p>void sum(int m, int n, int x, int *total)</p>
+<p>{</p>
+<p>		int cur_sum = 0;</p>
+<p>		// base case &#8211; 1 </p>
+<p>		if(n==0 &amp;&amp; x== 0)</p>
+<p>		{</p>
+<p>			*total = *total + 1;</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		// base case 2</p>
+<p>		if((n==0 &amp;&amp; x!=0) || (n!=0 &amp;&amp; x==0))</p>
+<p>			return;</p>
+<p>		for(int i=1;i&lt;=m;i++)</p>
+<p>			sum(m,n-1,x-i,total);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arnab sen</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-37326</link>
+		<dc:creator><![CDATA[Arnab sen]]></dc:creator>
+		<pubDate>Sat, 31 May 2014 21:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-37326</guid>
+		<description><![CDATA[public static void main(String[] args){
+
+int m=4,n=3,x=5;
+
+	int[][] count=new int[x+1][n+1];
+
+	for(int[] row:count)
+
+	Arrays.fill(row,0);
+
+	
+
+	for(int i=1;i&#060;=x;i++){
+
+	if(i&#060;=m)	
+
+		count[i][1]=1;
+
+	}
+
+	for(int l=1;l&#060;=n;l++)
+
+	{
+
+     for(int sum=1;sum&#060;=x;sum++)	
+
+     {
+
+    	 for(int j=1;j&#060;=l/2;j++)
+
+    	 {
+
+    		 for(int s=0;s&#060;=sum;s++)
+
+    		 {
+
+    count[sum][l]+=count[s][j]*count[sum-s][l-j];	 
+
+    	 
+
+    		 }
+
+    	}
+
+     }	
+
+			
+
+	}
+
+	
+
+		System.out.println(&#034;# of way= &#034;+count[x][n]);
+
+}
+
+	
+
+}]]></description>
+		<content:encoded><![CDATA[<p>public static void main(String[] args){</p>
+<p>int m=4,n=3,x=5;</p>
+<p>	int[][] count=new int[x+1][n+1];</p>
+<p>	for(int[] row:count)</p>
+<p>	Arrays.fill(row,0);</p>
+<p>	for(int i=1;i&lt;=x;i++){</p>
+<p>	if(i&lt;=m)	</p>
+<p>		count[i][1]=1;</p>
+<p>	}</p>
+<p>	for(int l=1;l&lt;=n;l++)</p>
+<p>	{</p>
+<p>     for(int sum=1;sum&lt;=x;sum++)	</p>
+<p>     {</p>
+<p>    	 for(int j=1;j&lt;=l/2;j++)</p>
+<p>    	 {</p>
+<p>    		 for(int s=0;s&lt;=sum;s++)</p>
+<p>    		 {</p>
+<p>    count[sum][l]+=count[s][j]*count[sum-s][l-j];	 </p>
+<p>    		 }</p>
+<p>    	}</p>
+<p>     }	</p>
+<p>	}</p>
+<p>		System.out.println(&quot;# of way= &quot;+count[x][n]);</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-30907</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sat, 21 Dec 2013 11:32:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-30907</guid>
+		<description><![CDATA[void fun(int n,int m,int s,int &#038;cnt)
+
+{
+
+	if(n==1)
+
+	  {
+
+	  	if((s=1))
+
+	  	 cnt++;
+
+	  	return;
+
+	  }
+
+	  
+
+    for(int k=1;k&#060;=m;k++)
+
+    {
+
+       fun(n-1,m,s-k,cnt);
+
+    }
+
+    
+
+}
+
+int main()
+
+{
+
+	int cnt=0;
+
+	fun(3,6,8,cnt);
+
+	cout&#060;&#060;cnt;
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>void fun(int n,int m,int s,int &amp;cnt)</p>
+<p>{</p>
+<p>	if(n==1)</p>
+<p>	  {</p>
+<p>	  	if((s=1))</p>
+<p>	  	 cnt++;</p>
+<p>	  	return;</p>
+<p>	  }</p>
+<p>    for(int k=1;k&lt;=m;k++)</p>
+<p>    {</p>
+<p>       fun(n-1,m,s-k,cnt);</p>
+<p>    }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int cnt=0;</p>
+<p>	fun(3,6,8,cnt);</p>
+<p>	cout&lt;&lt;cnt;</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-30906</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sat, 21 Dec 2013 11:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-30906</guid>
+		<description><![CDATA[&lt;code&gt;
+
+void fun(int n,int m,int s,int &#038;cnt)
+
+{
+
+	if(n==1)
+
+	  {
+
+	  	if((s=1))
+
+	  	 cnt++;
+
+	  	return;
+
+	  }
+
+	  
+
+    for(int k=1;k&#060;=m;k++)
+
+    {
+
+       fun(n-1,m,s-k,cnt);
+
+    }
+
+    
+
+}
+
+int main()
+
+{
+
+	int cnt=0;
+
+	fun(3,6,8,cnt);
+
+	cout&#060;&#060;cnt;
+
+	return 0;
+
+}
+
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code></p>
+<p>void fun(int n,int m,int s,int &amp;cnt)</p>
+<p>{</p>
+<p>	if(n==1)</p>
+<p>	  {</p>
+<p>	  	if((s=1))</p>
+<p>	  	 cnt++;</p>
+<p>	  	return;</p>
+<p>	  }</p>
+<p>    for(int k=1;k&lt;=m;k++)</p>
+<p>    {</p>
+<p>       fun(n-1,m,s-k,cnt);</p>
+<p>    }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int cnt=0;</p>
+<p>	fun(3,6,8,cnt);</p>
+<p>	cout&lt;&lt;cnt;</p>
+<p>	return 0;</p>
+<p>}</p>
+<p></code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-30905</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sat, 21 Dec 2013 11:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-30905</guid>
+		<description><![CDATA[/*
+
+#include
+
+using namespace std;
+
+int fun(int n,int m,int s)
+
+{
+
+	if((!n)&#038;&#038;(s))
+
+	    return 0;
+
+    if((!n)&#038;&#038;(!s))
+
+         return 1;
+
+    for(int k=1;k&#060;=m;k++)
+
+    {
+
+    	int p=fun(n-1,m,s-k);
+
+    	if(p)
+
+    	{
+
+    		cout&#060;&#060;k&#060;&#060;&#034; &#034;;
+
+    		return 1;
+
+    	}
+
+    	else
+
+    	  continue;
+
+    }
+
+    return 0;
+*/
+
+}
+
+int main()
+
+{
+
+	int k=fun(6,6,19);
+
+	if(!k)
+
+	cout&#060;&#060;&#034;sum dont exist.n&#034;;
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>/*</p>
+<p>#include</p>
+<p>using namespace std;</p>
+<p>int fun(int n,int m,int s)</p>
+<p>{</p>
+<p>	if((!n)&amp;&amp;(s))</p>
+<p>	    return 0;</p>
+<p>    if((!n)&amp;&amp;(!s))</p>
+<p>         return 1;</p>
+<p>    for(int k=1;k&lt;=m;k++)</p>
+<p>    {</p>
+<p>    	int p=fun(n-1,m,s-k);</p>
+<p>    	if(p)</p>
+<p>    	{</p>
+<p>    		cout&lt;&lt;k&lt;&lt;&quot; &quot;;</p>
+<p>    		return 1;</p>
+<p>    	}</p>
+<p>    	else</p>
+<p>    	  continue;</p>
+<p>    }</p>
+<p>    return 0;<br />
+*/</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	int k=fun(6,6,19);</p>
+<p>	if(!k)</p>
+<p>	cout&lt;&lt;&quot;sum dont exist.n&quot;;</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhiram</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-30903</link>
+		<dc:creator><![CDATA[Abhiram]]></dc:creator>
+		<pubDate>Sat, 21 Dec 2013 10:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-30903</guid>
+		<description><![CDATA[theres actually a formula for this
+http://equax.blogspot.in/2013/11/summing-dice-throws.html]]></description>
+		<content:encoded><![CDATA[<p>theres actually a formula for this<br />
+<a href="http://equax.blogspot.in/2013/11/summing-dice-throws.html" rel="nofollow">http://equax.blogspot.in/2013/11/summing-dice-throws.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Gulumkar</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-30184</link>
+		<dc:creator><![CDATA[Nikhil Gulumkar]]></dc:creator>
+		<pubDate>Wed, 27 Nov 2013 16:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-30184</guid>
+		<description><![CDATA[My answer for 6,3,8 is coming 10
+
+Cant figure out the problem
+
+The code is in Java
+
+package DiceThrow;
+
+public class mainClass {
+
+	public static void main(String[] args) {
+
+		int x=8,n=3,m=6;
+
+		System.out.println(findNum(x,n,m));
+
+	}
+
+	private static int findNum(int x, int n, int m) {
+
+		int table[][]=new int[n+1][x+1];
+
+		for(int i=1;i&#060;=Math.min(x, m) ;i++)
+
+		table[1][i]=1;	
+
+		
+
+		 for (int i = 2; i &#060;= n; i++)
+
+		        for (int j = 1; j &#060;= x; j++)
+
+		            for (int k = 1; k &#060;= m &#038;&#038; k &#060; j; k++)
+
+		                table[i][j] += table[i-1][j-k];
+
+		
+		return table[n][m];
+
+		
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>My answer for 6,3,8 is coming 10</p>
+<p>Cant figure out the problem</p>
+<p>The code is in Java</p>
+<p>package DiceThrow;</p>
+<p>public class mainClass {</p>
+<p>	public static void main(String[] args) {</p>
+<p>		int x=8,n=3,m=6;</p>
+<p>		System.out.println(findNum(x,n,m));</p>
+<p>	}</p>
+<p>	private static int findNum(int x, int n, int m) {</p>
+<p>		int table[][]=new int[n+1][x+1];</p>
+<p>		for(int i=1;i&lt;=Math.min(x, m) ;i++)</p>
+<p>		table[1][i]=1;	</p>
+<p>		 for (int i = 2; i &lt;= n; i++)</p>
+<p>		        for (int j = 1; j &lt;= x; j++)</p>
+<p>		            for (int k = 1; k &lt;= m &amp;&amp; k &lt; j; k++)</p>
+<p>		                table[i][j] += table[i-1][j-k];</p>
+<p>		return table[n][m];</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vinodhini</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-22629</link>
+		<dc:creator><![CDATA[Vinodhini]]></dc:creator>
+		<pubDate>Wed, 24 Jul 2013 15:05:16 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-22629</guid>
+		<description><![CDATA[How could we extend it to print all the combinations?
+lets say for no of dice =2 of face 6, we need all combination that sums to 6
+then I need to print all combinations.
+(1,5) (2,4) (3,3) (4,2) (5,1)]]></description>
+		<content:encoded><![CDATA[<p>How could we extend it to print all the combinations?<br />
+lets say for no of dice =2 of face 6, we need all combination that sums to 6<br />
+then I need to print all combinations.<br />
+(1,5) (2,4) (3,3) (4,2) (5,1)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Garg</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-22450</link>
+		<dc:creator><![CDATA[Garg]]></dc:creator>
+		<pubDate>Sat, 20 Jul 2013 23:54:15 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-22450</guid>
+		<description><![CDATA[We can do better! Time complexity if this sol is O(n*min(X-n+1))
+using f(m,n,X) = f(m,n,X-1) + f(m,n-1,X-1) hence calculating any f() in O(1) time.
+Here is the code!
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;string.h&#062;
+#define min(a,b) ((a&#060;b)? (a) : (b))
+
+int findWays(int m, int n, int X){
+	if(X&#060;n &#124;&#124; X&#062;n*m)		return 0;
+	int dp[min(X-n+1,m)],i,j;
+	int len = sizeof(dp)/sizeof(dp[0]);
+	for(i=0; i&#060;len; i++)
+		dp[i] = 1;
+	for(i=1; i&#060;n; i++){
+		for(j=1; j&#060;len; j++)
+			dp[j] += dp[j-1];
+	}
+	return dp[len-1];
+}
+
+int main(){
+	int n,m,X;
+	printf(&#034;Enter n,m,x : &#034;);
+	scanf(&#034;%d %d %d&#034;,&#038;n,&#038;m,&#038;X);
+    printf(&#034;\nfindWays(4, 2, 1) : %d&#034;,findWay(m,n,X));
+	printf(&#034;\nfindWays(4, 2, 1) : %d&#034;,findWay(4, 2, 1));
+	printf(&#034;\nfindWays(2, 2, 3) : %d&#034;,findWay(2, 2, 3));
+    printf(&#034;\nfindWays(6, 3, 8) : %d&#034;,findWay(6, 3, 8));
+    printf(&#034;\nfindWays(4, 2, 5) : %d&#034;,findWay(4, 2, 5));
+	printf(&#034;\nfindWays(4, 3, 5) : %d&#034;,findWay(15, 5, 11));
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>We can do better! Time complexity if this sol is O(n*min(X-n+1))<br />
+using f(m,n,X) = f(m,n,X-1) + f(m,n-1,X-1) hence calculating any f() in O(1) time.<br />
+Here is the code!</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#define min(a,b) ((a&lt;b)? (a) : (b))
+
+int findWays(int m, int n, int X){
+	if(X&lt;n || X&gt;n*m)		return 0;
+	int dp[min(X-n+1,m)],i,j;
+	int len = sizeof(dp)/sizeof(dp[0]);
+	for(i=0; i&lt;len; i++)
+		dp[i] = 1;
+	for(i=1; i&lt;n; i++){
+		for(j=1; j&lt;len; j++)
+			dp[j] += dp[j-1];
+	}
+	return dp[len-1];
+}
+
+int main(){
+	int n,m,X;
+	printf(&quot;Enter n,m,x : &quot;);
+	scanf(&quot;%d %d %d&quot;,&amp;n,&amp;m,&amp;X);
+    printf(&quot;\nfindWays(4, 2, 1) : %d&quot;,findWay(m,n,X));
+	printf(&quot;\nfindWays(4, 2, 1) : %d&quot;,findWay(4, 2, 1));
+	printf(&quot;\nfindWays(2, 2, 3) : %d&quot;,findWay(2, 2, 3));
+    printf(&quot;\nfindWays(6, 3, 8) : %d&quot;,findWay(6, 3, 8));
+    printf(&quot;\nfindWays(4, 2, 5) : %d&quot;,findWay(4, 2, 5));
+	printf(&quot;\nfindWays(4, 3, 5) : %d&quot;,findWay(15, 5, 11));
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RAUHL</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-21273</link>
+		<dc:creator><![CDATA[RAUHL]]></dc:creator>
+		<pubDate>Thu, 04 Jul 2013 09:58:04 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-21273</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+hey i wanted to ask some questions :
+1. what if the value of face i is not i ..i.e all faces have           different values(unsorted). 
+
+2.should we not find the table for all possible sums in above post i.e m*n in one time only
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+hey i wanted to ask some questions :
+1. what if the value of face i is not i ..i.e all faces have           different values(unsorted). 
+
+2.should we not find the table for all possible sums in above post i.e m*n in one time only
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Born Actor</title>
+		<link>http://www.geeksforgeeks.org/dice-throw-problem/#comment-20119</link>
+		<dc:creator><![CDATA[Born Actor]]></dc:creator>
+		<pubDate>Wed, 19 Jun 2013 19:44:09 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=117526#comment-20119</guid>
+		<description><![CDATA[The above mentioned code gives one of the feasible solutions and not the number of ways of finding the solution. It follows Back-tracking.
+I am not able to estimate the complexity of the algorithm.
+Are all back-tracking algorithms exponential in the worst case?]]></description>
+		<content:encoded><![CDATA[<p>The above mentioned code gives one of the feasible solutions and not the number of ways of finding the solution. It follows Back-tracking.<br />
+I am not able to estimate the complexity of the algorithm.<br />
+Are all back-tracking algorithms exponential in the worst case?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.058 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:54:12 -->
+
+<!-- Compression = gzip -->

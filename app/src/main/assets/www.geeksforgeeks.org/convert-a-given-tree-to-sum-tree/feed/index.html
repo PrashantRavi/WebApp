@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Convert a given tree to its Sum Tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: kaushik Lele</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-39443</link>
+		<dc:creator><![CDATA[kaushik Lele]]></dc:creator>
+		<pubDate>Sun, 22 Jun 2014 11:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-39443</guid>
+		<description><![CDATA[In  http://www.geeksforgeeks.org/amazon-interview-set-88/
+a different variation is asked. 
+viz. 
+&quot;Given a BST, transform it into sum tree where each node contains sum of all nodes greater than that node.&quot;
+
+Use depth first traversal. It should be in-order traversal with right(bigger) child visited first.
+Keep a variable that indicates sum of values of nodes visited till now. 
+Every time u visit a node, save its current value in temp variable. Change node value to global sum. And then update global sum by adding temp into it.]]></description>
+		<content:encoded><![CDATA[<p>In  <a href="http://www.geeksforgeeks.org/amazon-interview-set-88/" rel="nofollow">http://www.geeksforgeeks.org/amazon-interview-set-88/</a><br />
+a different variation is asked.<br />
+viz.<br />
+&#8220;Given a BST, transform it into sum tree where each node contains sum of all nodes greater than that node.&#8221;</p>
+<p>Use depth first traversal. It should be in-order traversal with right(bigger) child visited first.<br />
+Keep a variable that indicates sum of values of nodes visited till now.<br />
+Every time u visit a node, save its current value in temp variable. Change node value to global sum. And then update global sum by adding temp into it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nishant</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-35076</link>
+		<dc:creator><![CDATA[Nishant]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 14:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-35076</guid>
+		<description><![CDATA[{code}
+
+Node createReqTree(Node root){
+    if(root == NULL)
+        return NULL;
+
+    Node l=createReqTree(root-&#062;left);
+    Node r=createReqTree(root-&#062;right);
+    
+    int total= ((l==NULL)?0:l-&#062;value) + ((r==NULL)?0:r-&#062;value);
+    total+= ((root-&#062;left == NULL) ? 0:root-&#062;left-&#062;value) + ((root-&#062;right == NULL)?0:root-&#062;right-&#062;value);
+    Node n = createNode(total);
+    n-&#062;left=l;
+    n-&#062;right=r;
+    
+    return n;
+
+}
+
+{code}]]></description>
+		<content:encoded><![CDATA[<p>{code}</p>
+<p>Node createReqTree(Node root){<br />
+    if(root == NULL)<br />
+        return NULL;</p>
+<p>    Node l=createReqTree(root-&gt;left);<br />
+    Node r=createReqTree(root-&gt;right);</p>
+<p>    int total= ((l==NULL)?0:l-&gt;value) + ((r==NULL)?0:r-&gt;value);<br />
+    total+= ((root-&gt;left == NULL) ? 0:root-&gt;left-&gt;value) + ((root-&gt;right == NULL)?0:root-&gt;right-&gt;value);<br />
+    Node n = createNode(total);<br />
+    n-&gt;left=l;<br />
+    n-&gt;right=r;</p>
+<p>    return n;</p>
+<p>}</p>
+<p>{code}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nishant</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-35075</link>
+		<dc:creator><![CDATA[Nishant]]></dc:creator>
+		<pubDate>Thu, 24 Apr 2014 14:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-35075</guid>
+		<description><![CDATA[Below code creates new binary tree required:
+----------------------------------------------------------
+Node createReqTree(Node root){
+    if(root == NULL)
+        return NULL;
+
+    Node l=createReqTree(root-&#062;left);
+    Node r=createReqTree(root-&#062;right);
+    
+    int total= ((l==NULL)?0:l-&#062;value) + ((r==NULL)?0:r-&#062;value);
+    total+= ((root-&#062;left == NULL) ? 0:root-&#062;left-&#062;value) + ((root-&#062;right == NULL)?0:root-&#062;right-&#062;value);
+    Node n = createNode(total);
+    n-&#062;left=l;
+    n-&#062;right=r;
+    
+    return n;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Below code creates new binary tree required:<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br />
+Node createReqTree(Node root){<br />
+    if(root == NULL)<br />
+        return NULL;</p>
+<p>    Node l=createReqTree(root-&gt;left);<br />
+    Node r=createReqTree(root-&gt;right);</p>
+<p>    int total= ((l==NULL)?0:l-&gt;value) + ((r==NULL)?0:r-&gt;value);<br />
+    total+= ((root-&gt;left == NULL) ? 0:root-&gt;left-&gt;value) + ((root-&gt;right == NULL)?0:root-&gt;right-&gt;value);<br />
+    Node n = createNode(total);<br />
+    n-&gt;left=l;<br />
+    n-&gt;right=r;</p>
+<p>    return n;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-34634</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 13 Apr 2014 01:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-34634</guid>
+		<description><![CDATA[@Geeksforgeeks:
+
+The above problem can be solved in o(n) time and o(n) space. The solution is as below. Please consider it.
+
+// Convert a given tree to a tree where every node contains sum of values of
+
+// nodes in left and right subtrees in the original tree
+
+int toSumTree(struct node *root)
+
+{
+
+    // Base case
+
+    if(root == NULL)
+
+      return 0;
+
+      
+
+	if(root-&#062;left == NULL &#038;&#038; root-&#062;right == NULL)
+
+	{
+
+		int temp = root-&#062;data;
+
+		root-&#062;data =0;
+
+		return temp;
+
+	}
+
+ 
+
+   int left = toSumTree(root-&#062;left);
+
+   int right = toSumTree(root-&#062;right);
+
+   
+
+   int temp = root-&#062;data;
+
+   root-&#062;data = left + right;
+
+   
+
+   return (root-&#062;data+temp);
+
+   
+
+}]]></description>
+		<content:encoded><![CDATA[<p>@Geeksforgeeks:</p>
+<p>The above problem can be solved in o(n) time and o(n) space. The solution is as below. Please consider it.</p>
+<p>// Convert a given tree to a tree where every node contains sum of values of</p>
+<p>// nodes in left and right subtrees in the original tree</p>
+<p>int toSumTree(struct node *root)</p>
+<p>{</p>
+<p>    // Base case</p>
+<p>    if(root == NULL)</p>
+<p>      return 0;</p>
+<p>	if(root-&gt;left == NULL &amp;&amp; root-&gt;right == NULL)</p>
+<p>	{</p>
+<p>		int temp = root-&gt;data;</p>
+<p>		root-&gt;data =0;</p>
+<p>		return temp;</p>
+<p>	}</p>
+<p>   int left = toSumTree(root-&gt;left);</p>
+<p>   int right = toSumTree(root-&gt;right);</p>
+<p>   int temp = root-&gt;data;</p>
+<p>   root-&gt;data = left + right;</p>
+<p>   return (root-&gt;data+temp);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pullikesi</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-31167</link>
+		<dc:creator><![CDATA[Pullikesi]]></dc:creator>
+		<pubDate>Wed, 01 Jan 2014 12:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-31167</guid>
+		<description><![CDATA[void sumtree(struct tree* root)
+{
+  int ldata,rdata,lsum,rsum;
+  
+  ldata=rdata=0;
+
+
+  if root == null return 0;
+  
+  if root-&#062;left!=null ldata=root-&#062;left-&#062;data
+
+
+  if root-&#062;right!=null rdata=root-&#062;right-&#062;data
+
+
+  root-&#062;data=sumtree(root-&#062;left) + sumtree(root-&#062;right) + ldata + rdata ;
+
+
+   return (root-&#062;data)
+}]]></description>
+		<content:encoded><![CDATA[<p>void sumtree(struct tree* root)<br />
+{<br />
+  int ldata,rdata,lsum,rsum;</p>
+<p>  ldata=rdata=0;</p>
+<p>  if root == null return 0;</p>
+<p>  if root-&gt;left!=null ldata=root-&gt;left-&gt;data</p>
+<p>  if root-&gt;right!=null rdata=root-&gt;right-&gt;data</p>
+<p>  root-&gt;data=sumtree(root-&gt;left) + sumtree(root-&gt;right) + ldata + rdata ;</p>
+<p>   return (root-&gt;data)<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: James Fraser</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-28078</link>
+		<dc:creator><![CDATA[James Fraser]]></dc:creator>
+		<pubDate>Tue, 24 Sep 2013 17:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-28078</guid>
+		<description><![CDATA[Given a tree where
+each node has a key value, compute the sum of key values of all the nodes in
+the sub-tree rooted at each tree node. One restriction on the problem was that
+each node has a pointer to its parent node, but not to its children.
+
+How to solve the restriction?]]></description>
+		<content:encoded><![CDATA[<p>Given a tree where<br />
+each node has a key value, compute the sum of key values of all the nodes in<br />
+the sub-tree rooted at each tree node. One restriction on the problem was that<br />
+each node has a pointer to its parent node, but not to its children.</p>
+<p>How to solve the restriction?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Subrahmanyan Sankaran</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-27238</link>
+		<dc:creator><![CDATA[Subrahmanyan Sankaran]]></dc:creator>
+		<pubDate>Sun, 01 Sep 2013 05:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-27238</guid>
+		<description><![CDATA[&lt;code&gt;
+// SumTree.cpp : Defines the entry point for the console application.
+#include 
+struct Node
+{
+    int data;
+    Node *left;
+    Node *right;
+    Node *link;
+    Node *parent;
+    int depth;
+};
+class Tree
+{
+    static int sum;
+    static Node * prev; 
+    static int l;
+public:
+     Node *head;
+     int maxdepth;
+Tree()
+{
+    head = NULL;
+    maxdepth = 0;
+}
+void InsertNode(Node *node,int data)
+{
+     Node * tmp = node;
+     if(head == NULL)
+     {
+         head = new Node;
+         head-&#062;data = data;
+          head-&#062;left = NULL;
+          head-&#062;right = NULL;
+         head-&#062;link = NULL;
+         head-&#062;parent = NULL;
+         head-&#062;depth = 0;
+        return;
+}
+else if(tmp)
+{
+           prev = tmp;
+                if(data &#062; tmp-&#062;data)
+                {
+                     l=0;
+                      tmp = tmp -&#062; right;
+                      InsertNode(tmp,data);
+                }
+                else
+                 {
+                      l=1;
+                      InsertNode(tmp-&#062;left,data);
+               }
+ }
+     if(l == 1)
+     {
+        prev-&#062;left = new Node;
+        prev-&#062;left-&#062;data = data;
+        prev-&#062;left-&#062;left = NULL;
+        prev-&#062;left-&#062;right = NULL;
+         l = -1;
+         return;
+      }
+      else if(l == 0)
+     {
+        prev-&#062;right = new Node;
+        prev-&#062;right-&#062;data = data;
+        prev-&#062;right-&#062;left = NULL;
+        prev-&#062;right-&#062;right = NULL;
+         l = -1;
+         return;
+      }
+}
+     void Sum(Node *node)
+     {
+        if(node)
+        {
+            Sum(node-&#062;left);
+            Sum(node-&#062;right);
+            if(node-&#062;left)
+            node-&#062;data = node-&#062;left-&#062;data;
+             if(node-&#062;right)
+              node-&#062;data = node-&#062;data +  node-&#062;right-&#062;data;
+          }
+      }
+      void Inorder(Node *node)
+      {
+            if(node)
+            {
+                   Inorder(node-&#062;left);
+                   std::cout&#060;data;
+                   Inorder(node-&#062;right);
+             }
+      }
+};
+Node * Tree::prev = NULL;
+int Tree::l =0;
+
+int main(int argc, char* argv[])
+{
+Tree t;
+t.InsertNode(t.head,10); 
+t.InsertNode(t.head,7);
+t.InsertNode(t.head,13);
+t.InsertNode(t.head,5);
+t.InsertNode(t.head,9);
+t.InsertNode(t.head,12);
+t.InsertNode(t.head,15);
+t.InsertNode(t.head,3);
+t.InsertNode(t.head,6);
+t.InsertNode(t.head,8);
+t.InsertNode(t.head,11);
+t.InsertNode(t.head,1);
+t.InsertNode(t.head,4);
+t.InsertNode(t.head,2);
+t.Sum(t.head);
+t.Inorder(t.head);
+return 0;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+// SumTree.cpp : Defines the entry point for the console application.<br />
+#include<br />
+struct Node<br />
+{<br />
+    int data;<br />
+    Node *left;<br />
+    Node *right;<br />
+    Node *link;<br />
+    Node *parent;<br />
+    int depth;<br />
+};<br />
+class Tree<br />
+{<br />
+    static int sum;<br />
+    static Node * prev;<br />
+    static int l;<br />
+public:<br />
+     Node *head;<br />
+     int maxdepth;<br />
+Tree()<br />
+{<br />
+    head = NULL;<br />
+    maxdepth = 0;<br />
+}<br />
+void InsertNode(Node *node,int data)<br />
+{<br />
+     Node * tmp = node;<br />
+     if(head == NULL)<br />
+     {<br />
+         head = new Node;<br />
+         head-&gt;data = data;<br />
+          head-&gt;left = NULL;<br />
+          head-&gt;right = NULL;<br />
+         head-&gt;link = NULL;<br />
+         head-&gt;parent = NULL;<br />
+         head-&gt;depth = 0;<br />
+        return;<br />
+}<br />
+else if(tmp)<br />
+{<br />
+           prev = tmp;<br />
+                if(data &gt; tmp-&gt;data)<br />
+                {<br />
+                     l=0;<br />
+                      tmp = tmp -&gt; right;<br />
+                      InsertNode(tmp,data);<br />
+                }<br />
+                else<br />
+                 {<br />
+                      l=1;<br />
+                      InsertNode(tmp-&gt;left,data);<br />
+               }<br />
+ }<br />
+     if(l == 1)<br />
+     {<br />
+        prev-&gt;left = new Node;<br />
+        prev-&gt;left-&gt;data = data;<br />
+        prev-&gt;left-&gt;left = NULL;<br />
+        prev-&gt;left-&gt;right = NULL;<br />
+         l = -1;<br />
+         return;<br />
+      }<br />
+      else if(l == 0)<br />
+     {<br />
+        prev-&gt;right = new Node;<br />
+        prev-&gt;right-&gt;data = data;<br />
+        prev-&gt;right-&gt;left = NULL;<br />
+        prev-&gt;right-&gt;right = NULL;<br />
+         l = -1;<br />
+         return;<br />
+      }<br />
+}<br />
+     void Sum(Node *node)<br />
+     {<br />
+        if(node)<br />
+        {<br />
+            Sum(node-&gt;left);<br />
+            Sum(node-&gt;right);<br />
+            if(node-&gt;left)<br />
+            node-&gt;data = node-&gt;left-&gt;data;<br />
+             if(node-&gt;right)<br />
+              node-&gt;data = node-&gt;data +  node-&gt;right-&gt;data;<br />
+          }<br />
+      }<br />
+      void Inorder(Node *node)<br />
+      {<br />
+            if(node)<br />
+            {<br />
+                   Inorder(node-&gt;left);<br />
+                   std::cout&lt;data;<br />
+                   Inorder(node-&gt;right);<br />
+             }<br />
+      }<br />
+};<br />
+Node * Tree::prev = NULL;<br />
+int Tree::l =0;</p>
+<p>int main(int argc, char* argv[])<br />
+{<br />
+Tree t;<br />
+t.InsertNode(t.head,10);<br />
+t.InsertNode(t.head,7);<br />
+t.InsertNode(t.head,13);<br />
+t.InsertNode(t.head,5);<br />
+t.InsertNode(t.head,9);<br />
+t.InsertNode(t.head,12);<br />
+t.InsertNode(t.head,15);<br />
+t.InsertNode(t.head,3);<br />
+t.InsertNode(t.head,6);<br />
+t.InsertNode(t.head,8);<br />
+t.InsertNode(t.head,11);<br />
+t.InsertNode(t.head,1);<br />
+t.InsertNode(t.head,4);<br />
+t.InsertNode(t.head,2);<br />
+t.Sum(t.head);<br />
+t.Inorder(t.head);<br />
+return 0;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shivendu Kumar</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-26191</link>
+		<dc:creator><![CDATA[Shivendu Kumar]]></dc:creator>
+		<pubDate>Fri, 16 Aug 2013 01:42:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-26191</guid>
+		<description><![CDATA[code won&#039;t work if any of the nodes don&#039;t have left child]]></description>
+		<content:encoded><![CDATA[<p>code won&#039;t work if any of the nodes don&#039;t have left child</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul Sawhney</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-26190</link>
+		<dc:creator><![CDATA[Rahul Sawhney]]></dc:creator>
+		<pubDate>Sat, 10 Aug 2013 15:52:03 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-26190</guid>
+		<description><![CDATA[#include&#060;stdio.h&#062;
+
+/* A tree node structure */.
+struct node
+{
+  int data;.
+  struct node *left;.
+  struct node *right;.
+};
+
+// Convert a given tree to a tree where every node contains sum of values of.
+// nodes in left and right subtrees in the original tree.
+int toSumTree(struct node *node).
+{
+	 // Base case.
+	 if(node == NULL).
+		return 0;
+
+	  if(toSumTree(node-&#062;left) &#038;&#038; toSumTree(node-&#062;right)).
+	  {.
+	  node-&#062;data=node-&#062;left-&#062;data+node-&#062;data+node-&#062;right-&#062;data;.
+
+	  }.
+
+	  return (node-&#062;data);.
+}
+
+// A utility function to print inorder traversal of a Binary Tree.
+void printInorder(struct node* node).
+{
+	  if (node == NULL).
+			 return;
+	  printInorder(node-&#062;left);.
+	  printf(&#034;%d &#034;, node-&#062;data);.
+	  printInorder(node-&#062;right);.
+}
+
+/* Utility function to create a new Binary Tree node */.
+struct node* newNode(int data).
+{
+  struct node *temp = new struct node;.
+  temp-&#062;data = data;.
+  temp-&#062;left = NULL;.
+  temp-&#062;right = NULL;.
+
+  return temp;.
+}
+
+/* Driver function to test above functions */.
+int main()
+{
+  struct node *root = NULL;.
+  int x;.
+
+  /* Constructing tree given in the above figure */.
+  root = newNode(10);.
+  root-&#062;left = newNode(-2);.
+  root-&#062;right = newNode(6);.
+  root-&#062;left-&#062;left = newNode(8);.
+  root-&#062;left-&#062;right = newNode(-4);.
+  root-&#062;right-&#062;left = newNode(7);.
+  root-&#062;right-&#062;right = newNode(5);.
+
+  toSumTree(root);.
+
+  // Print inorder traversal of the converted tree to test result of toSumTree().
+  printf(&#034;Inorder Traversal of the resultant tree is: n&#034;);.
+  printInorder(root);.
+
+  getchar();.
+  return 0;.
+}]]></description>
+		<content:encoded><![CDATA[<p>#include&lt;stdio.h&gt;</p>
+<p>/* A tree node structure */.<br />
+struct node<br />
+{<br />
+  int data;.<br />
+  struct node *left;.<br />
+  struct node *right;.<br />
+};</p>
+<p>// Convert a given tree to a tree where every node contains sum of values of.<br />
+// nodes in left and right subtrees in the original tree.<br />
+int toSumTree(struct node *node).<br />
+{<br />
+	 // Base case.<br />
+	 if(node == NULL).<br />
+		return 0;</p>
+<p>	  if(toSumTree(node-&gt;left) &amp;&amp; toSumTree(node-&gt;right)).<br />
+	  {.<br />
+	  node-&gt;data=node-&gt;left-&gt;data+node-&gt;data+node-&gt;right-&gt;data;.</p>
+<p>	  }.</p>
+<p>	  return (node-&gt;data);.<br />
+}</p>
+<p>// A utility function to print inorder traversal of a Binary Tree.<br />
+void printInorder(struct node* node).<br />
+{<br />
+	  if (node == NULL).<br />
+			 return;<br />
+	  printInorder(node-&gt;left);.<br />
+	  printf(&quot;%d &quot;, node-&gt;data);.<br />
+	  printInorder(node-&gt;right);.<br />
+}</p>
+<p>/* Utility function to create a new Binary Tree node */.<br />
+struct node* newNode(int data).<br />
+{<br />
+  struct node *temp = new struct node;.<br />
+  temp-&gt;data = data;.<br />
+  temp-&gt;left = NULL;.<br />
+  temp-&gt;right = NULL;.</p>
+<p>  return temp;.<br />
+}</p>
+<p>/* Driver function to test above functions */.<br />
+int main()<br />
+{<br />
+  struct node *root = NULL;.<br />
+  int x;.</p>
+<p>  /* Constructing tree given in the above figure */.<br />
+  root = newNode(10);.<br />
+  root-&gt;left = newNode(-2);.<br />
+  root-&gt;right = newNode(6);.<br />
+  root-&gt;left-&gt;left = newNode(8);.<br />
+  root-&gt;left-&gt;right = newNode(-4);.<br />
+  root-&gt;right-&gt;left = newNode(7);.<br />
+  root-&gt;right-&gt;right = newNode(5);.</p>
+<p>  toSumTree(root);.</p>
+<p>  // Print inorder traversal of the converted tree to test result of toSumTree().<br />
+  printf(&quot;Inorder Traversal of the resultant tree is: n&quot;);.<br />
+  printInorder(root);.</p>
+<p>  getchar();.<br />
+  return 0;.<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ultimate_coder</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-19784</link>
+		<dc:creator><![CDATA[ultimate_coder]]></dc:creator>
+		<pubDate>Sat, 15 Jun 2013 08:45:33 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-19784</guid>
+		<description><![CDATA[nice ! ! easy to understand]]></description>
+		<content:encoded><![CDATA[<p>nice ! ! easy to understand</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vishal</title>
+		<link>http://www.geeksforgeeks.org/convert-a-given-tree-to-sum-tree/#comment-19380</link>
+		<dc:creator><![CDATA[vishal]]></dc:creator>
+		<pubDate>Sat, 08 Jun 2013 16:17:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17855#comment-19380</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+int sum_tree(node_t* root)
+{
+	if(root)
+	{
+		return ( root-&#062; key + sum_tree(root-&#062; left) +         sum_tree(root -&#062; right));
+		
+	}
+}
+void change_to_sum_tree(node_t* root)
+{
+	int temp = 0;
+	if(root)
+	{
+		if(root -&#062; left == NULL &#038;&#038; root -&#062; right ==NULL)
+			root -&#062; key = 0;
+		else
+		{
+			
+			root -&#062; key = -(root -&#062; key) +              sum_tree(root);
+		}
+		
+		change_to_sum_tree( root -&#062; left);
+	
+		change_to_sum_tree( root -&#062; right);
+	}
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+int sum_tree(node_t* root)
+{
+	if(root)
+	{
+		return ( root-&gt; key + sum_tree(root-&gt; left) +         sum_tree(root -&gt; right));
+		
+	}
+}
+void change_to_sum_tree(node_t* root)
+{
+	int temp = 0;
+	if(root)
+	{
+		if(root -&gt; left == NULL &amp;&amp; root -&gt; right ==NULL)
+			root -&gt; key = 0;
+		else
+		{
+			
+			root -&gt; key = -(root -&gt; key) +              sum_tree(root);
+		}
+		
+		change_to_sum_tree( root -&gt; left);
+	
+		change_to_sum_tree( root -&gt; right);
+	}
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.047 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:13 -->
+
+<!-- Compression = gzip -->

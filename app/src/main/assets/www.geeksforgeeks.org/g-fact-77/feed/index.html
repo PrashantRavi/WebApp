@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Type of &#8216;this&#8217; pointer in C++</title>
+	<atom:link href="http://www.geeksforgeeks.org/g-fact-77/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/g-fact-77/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/g-fact-77/#comment-18915</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Thu, 30 May 2013 18:17:13 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10044#comment-18915</guid>
+		<description><![CDATA[Should not the types be as below in the three cases?
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+Code 1
+#include&#060;iostream&#062;
+class X {
+   void fun() const {
+    // this is passed as hidden argument to fun().
+    // Type of this is const X* const
+    }
+};
+
+Code 2
+#include&#060;iostream&#062;
+class X {
+   void fun() volatile {
+     // this is passed as hidden argument to fun().
+     // Type of this is volatile X* const
+    }
+};
+
+Code 3
+#include&#060;iostream&#062;
+class X {
+   void fun() const volatile {
+     // this is passed as hidden argument to fun().
+     // Type of this is const volatile X* const
+    }
+};
+&lt;/code&gt; &lt;/pre&gt;
+
+As we cannot make &quot;this&quot; point to some other object inside a member function. Please clarify.]]></description>
+		<content:encoded><![CDATA[<p>Should not the types be as below in the three cases?</p>
+<pre> <code language="C">
+Code 1
+#include&lt;iostream&gt;
+class X {
+   void fun() const {
+    // this is passed as hidden argument to fun().
+    // Type of this is const X* const
+    }
+};
+
+Code 2
+#include&lt;iostream&gt;
+class X {
+   void fun() volatile {
+     // this is passed as hidden argument to fun().
+     // Type of this is volatile X* const
+    }
+};
+
+Code 3
+#include&lt;iostream&gt;
+class X {
+   void fun() const volatile {
+     // this is passed as hidden argument to fun().
+     // Type of this is const volatile X* const
+    }
+};
+</code> </pre>
+<p>As we cannot make &#8220;this&#8221; point to some other object inside a member function. Please clarify.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhimanyu Vohra</title>
+		<link>http://www.geeksforgeeks.org/g-fact-77/#comment-6453</link>
+		<dc:creator><![CDATA[Abhimanyu Vohra]]></dc:creator>
+		<pubDate>Sun, 13 Nov 2011 07:01:10 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10044#comment-6453</guid>
+		<description><![CDATA[Just to Add:
+In an ordinary nonconst member function, the type of this is a const pointer to the class type. We may change the value to which this points but cannot change the address that this holds. In a const member function, the type of this is a const pointer to a const class - type object. We may change neither the object to which this points nor the address that this holds.]]></description>
+		<content:encoded><![CDATA[<p>Just to Add:<br />
+In an ordinary nonconst member function, the type of this is a const pointer to the class type. We may change the value to which this points but cannot change the address that this holds. In a const member function, the type of this is a const pointer to a const class &#8211; type object. We may change neither the object to which this points nor the address that this holds.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/g-fact-77/#comment-2883</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Thu, 20 Jan 2011 09:22:03 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10044#comment-2883</guid>
+		<description><![CDATA[See http://stackoverflow.com/questions/2444734/what-is-the-purpose-of-a-volatile-member-function-in-c]]></description>
+		<content:encoded><![CDATA[<p>See <a href="http://stackoverflow.com/questions/2444734/what-is-the-purpose-of-a-volatile-member-function-in-c" rel="nofollow">http://stackoverflow.com/questions/2444734/what-is-the-purpose-of-a-volatile-member-function-in-c</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rick</title>
+		<link>http://www.geeksforgeeks.org/g-fact-77/#comment-2799</link>
+		<dc:creator><![CDATA[Rick]]></dc:creator>
+		<pubDate>Thu, 13 Jan 2011 20:29:28 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10044#comment-2799</guid>
+		<description><![CDATA[Good one!! 
+Just wondering, what are volatile and const volatile member functions? what is the use of these functions?]]></description>
+		<content:encoded><![CDATA[<p>Good one!!<br />
+Just wondering, what are volatile and const volatile member functions? what is the use of these functions?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.035 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:27:09 -->
+
+<!-- Compression = gzip -->

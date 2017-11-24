@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Transform a BST to greater sum tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/transform-bst-sum-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Lawrance</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-40078</link>
+		<dc:creator><![CDATA[Lawrance]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 15:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-40078</guid>
+		<description><![CDATA[Thank you so much. I am trying to learn this topic, preparing for interviews well in advance!]]></description>
+		<content:encoded><![CDATA[<p>Thank you so much. I am trying to learn this topic, preparing for interviews well in advance!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rajan Chaudhary</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39966</link>
+		<dc:creator><![CDATA[Rajan Chaudhary]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 12:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39966</guid>
+		<description><![CDATA[solution in ruby http://rajanchaudhary01.blogspot.in/2014/06/wap-to-transform-bst-to-greater-sum.html]]></description>
+		<content:encoded><![CDATA[<p>solution in ruby <a href="http://rajanchaudhary01.blogspot.in/2014/06/wap-to-transform-bst-to-greater-sum.html" rel="nofollow">http://rajanchaudhary01.blogspot.in/2014/06/wap-to-transform-bst-to-greater-sum.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39965</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 12:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39965</guid>
+		<description><![CDATA[Solution in Ruby
+
+#!/usr/local/bin/ruby -w
+
+class Tree
+
+  attr_accessor :left, :right, :value
+
+  def initialize(v)
+
+    @value = v
+
+  end
+
+  def to_s
+
+    puts @value
+
+  end
+
+end
+
+class TreeTraversal
+
+def createTree
+
+node = root = Tree.new(1)
+
+node.left =  Tree.new(2)
+
+node = node.left
+
+node.left =  Tree.new(3)
+
+node.right = Tree.new(4)
+
+node = node.right
+
+node.right = Tree.new(6)
+
+node.left =  Tree.new(5)
+
+return root
+
+end
+
+def traverseTree(root)
+
+  stack = []
+
+  nodeArray = []
+
+  stack.push(root)
+
+  node = root.left
+
+  while node != nil do
+
+    stack.push(node)
+
+    node = node.left
+
+  end
+
+  while stack.length &#062; 0 do
+
+  node = stack.pop()
+
+  #puts node.value
+
+  nodeArray.push( node)
+
+  if node != nil &#038;&#038; node.right != nil
+
+   nodeArray += traverseTree(node.right)
+
+  end
+
+  end
+
+  return nodeArray
+
+end
+
+  def getTraversedTree
+
+    root = createTree
+
+    return traverseTree root
+
+  end
+
+end
+
+class GreaterSumTree
+
+  def findGreaterSumTree
+
+    newTree = []
+
+    tree = TreeTraversal.new
+
+    nodes = tree.getTraversedTree
+
+    nodes.each do &#124;node&#124;
+
+      sum = 0
+
+      nodes.each do &#124;n&#124;
+
+        if node.value &#060; n.value
+
+          sum = sum + n.value
+
+        end
+
+      end
+
+      x = node.clone
+
+      x.value = sum
+
+      newTree.push(x)
+
+    end
+
+    puts newTree
+
+  end
+
+end
+
+puts GreaterSumTree.new.findGreaterSumTree]]></description>
+		<content:encoded><![CDATA[<p>Solution in Ruby</p>
+<p>#!/usr/local/bin/ruby -w</p>
+<p>class Tree</p>
+<p>  attr_accessor :left, :right, :value</p>
+<p>  def initialize(v)</p>
+<p>    @value = v</p>
+<p>  end</p>
+<p>  def to_s</p>
+<p>    puts @value</p>
+<p>  end</p>
+<p>end</p>
+<p>class TreeTraversal</p>
+<p>def createTree</p>
+<p>node = root = Tree.new(1)</p>
+<p>node.left =  Tree.new(2)</p>
+<p>node = node.left</p>
+<p>node.left =  Tree.new(3)</p>
+<p>node.right = Tree.new(4)</p>
+<p>node = node.right</p>
+<p>node.right = Tree.new(6)</p>
+<p>node.left =  Tree.new(5)</p>
+<p>return root</p>
+<p>end</p>
+<p>def traverseTree(root)</p>
+<p>  stack = []</p>
+<p>  nodeArray = []</p>
+<p>  stack.push(root)</p>
+<p>  node = root.left</p>
+<p>  while node != nil do</p>
+<p>    stack.push(node)</p>
+<p>    node = node.left</p>
+<p>  end</p>
+<p>  while stack.length &gt; 0 do</p>
+<p>  node = stack.pop()</p>
+<p>  #puts node.value</p>
+<p>  nodeArray.push( node)</p>
+<p>  if node != nil &amp;&amp; node.right != nil</p>
+<p>   nodeArray += traverseTree(node.right)</p>
+<p>  end</p>
+<p>  end</p>
+<p>  return nodeArray</p>
+<p>end</p>
+<p>  def getTraversedTree</p>
+<p>    root = createTree</p>
+<p>    return traverseTree root</p>
+<p>  end</p>
+<p>end</p>
+<p>class GreaterSumTree</p>
+<p>  def findGreaterSumTree</p>
+<p>    newTree = []</p>
+<p>    tree = TreeTraversal.new</p>
+<p>    nodes = tree.getTraversedTree</p>
+<p>    nodes.each do |node|</p>
+<p>      sum = 0</p>
+<p>      nodes.each do |n|</p>
+<p>        if node.value &lt; n.value</p>
+<p>          sum = sum + n.value</p>
+<p>        end</p>
+<p>      end</p>
+<p>      x = node.clone</p>
+<p>      x.value = sum</p>
+<p>      newTree.push(x)</p>
+<p>    end</p>
+<p>    puts newTree</p>
+<p>  end</p>
+<p>end</p>
+<p>puts GreaterSumTree.new.findGreaterSumTree</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dheeraj Sharma</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39958</link>
+		<dc:creator><![CDATA[Dheeraj Sharma]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 09:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39958</guid>
+		<description><![CDATA[I am not in touch with algothm very much.. But I guess if bst contains duplicates then this method fails.. As it counts the node which had value equal to the current value and not greater. 
+For such cases you need to handle previous pointer and do comparison on current and pervious value and then assign the sum or previous node value]]></description>
+		<content:encoded><![CDATA[<p>I am not in touch with algothm very much.. But I guess if bst contains duplicates then this method fails.. As it counts the node which had value equal to the current value and not greater.<br />
+For such cases you need to handle previous pointer and do comparison on current and pervious value and then assign the sum or previous node value</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suman</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39956</link>
+		<dc:creator><![CDATA[Suman]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 09:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39956</guid>
+		<description><![CDATA[java code http://ideone.com/pxeLNq]]></description>
+		<content:encoded><![CDATA[<p>java code <a href="http://ideone.com/pxeLNq" rel="nofollow">http://ideone.com/pxeLNq</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhilash</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39944</link>
+		<dc:creator><![CDATA[abhilash]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 07:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39944</guid>
+		<description><![CDATA[#include
+#include
+struct tree
+{
+    int data;
+    struct tree *left;
+    struct tree *right;
+
+};
+struct tree *create(struct tree *root,int data)
+{
+    struct tree *new=(struct tree *)malloc(sizeof(struct tree));
+    if(!new)
+    {
+        printf(&quot;memory error n&quot;);
+        exit(0);
+    }
+    //printf(&quot;in creation for the value %d  n&quot;,data);
+    if(!root)
+    {
+        new-&#062;data=data;
+        new-&#062;left=new-&#062;right=NULL;
+        return new;
+    }
+    if(root-&#062;dataright=create(root-&#062;right,data);
+    }
+    else 
+        root-&#062;left=create(root-&#062;left,data);
+    return root;
+
+}
+void sum_tree(struct tree *root,int *max,int *sum)
+{
+    int t;
+    
+    if(root)
+    {
+        printf(&quot;entering in to great tree with root= %dn&quot;,root-&#062;data);
+        sum_tree(root-&#062;right,max,sum);
+        printf(&quot;entering in to great tree with  333 root= %dn&quot;,root-&#062;data);
+        if(*maxdata)
+        {
+            *max=root-&#062;data;
+            *sum=*max;
+            printf(&quot;maximum is %dn&quot;,*max);
+        }
+    
+        if(root-&#062;data==*max)
+            root-&#062;data=0;
+        else
+        {
+            t=root-&#062;data;
+            root-&#062;data=*sum;
+            *sum+=t;
+        
+        
+    
+        }
+    sum_tree(root-&#062;left,max,sum);
+    }
+
+
+}
+void display(struct tree *root)
+{
+    if(root)
+    {
+        display(root-&#062;left);
+        printf(&quot;%d  &quot;,root-&#062;data);
+        display(root-&#062;right);
+    
+    }
+    
+}
+int main()
+{
+    struct tree *root=NULL;
+    int i=0,j=0;
+    root=create(root,11);
+    root=create(root,2);
+    root=create(root,7);
+    root=create(root,1);
+    root=create(root,29);
+    root=create(root,15);
+    root=create(root,40);
+    root=create(root,35);
+    display(root);
+    sum_tree(root,&#038;i,&#038;j);
+    display(root);
+    
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+struct tree<br />
+{<br />
+    int data;<br />
+    struct tree *left;<br />
+    struct tree *right;</p>
+<p>};<br />
+struct tree *create(struct tree *root,int data)<br />
+{<br />
+    struct tree *new=(struct tree *)malloc(sizeof(struct tree));<br />
+    if(!new)<br />
+    {<br />
+        printf(&#8220;memory error n&#8221;);<br />
+        exit(0);<br />
+    }<br />
+    //printf(&#8220;in creation for the value %d  n&#8221;,data);<br />
+    if(!root)<br />
+    {<br />
+        new-&gt;data=data;<br />
+        new-&gt;left=new-&gt;right=NULL;<br />
+        return new;<br />
+    }<br />
+    if(root-&gt;dataright=create(root-&gt;right,data);<br />
+    }<br />
+    else<br />
+        root-&gt;left=create(root-&gt;left,data);<br />
+    return root;</p>
+<p>}<br />
+void sum_tree(struct tree *root,int *max,int *sum)<br />
+{<br />
+    int t;</p>
+<p>    if(root)<br />
+    {<br />
+        printf(&#8220;entering in to great tree with root= %dn&#8221;,root-&gt;data);<br />
+        sum_tree(root-&gt;right,max,sum);<br />
+        printf(&#8220;entering in to great tree with  333 root= %dn&#8221;,root-&gt;data);<br />
+        if(*maxdata)<br />
+        {<br />
+            *max=root-&gt;data;<br />
+            *sum=*max;<br />
+            printf(&#8220;maximum is %dn&#8221;,*max);<br />
+        }</p>
+<p>        if(root-&gt;data==*max)<br />
+            root-&gt;data=0;<br />
+        else<br />
+        {<br />
+            t=root-&gt;data;<br />
+            root-&gt;data=*sum;<br />
+            *sum+=t;</p>
+<p>        }<br />
+    sum_tree(root-&gt;left,max,sum);<br />
+    }</p>
+<p>}<br />
+void display(struct tree *root)<br />
+{<br />
+    if(root)<br />
+    {<br />
+        display(root-&gt;left);<br />
+        printf(&#8220;%d  &#8220;,root-&gt;data);<br />
+        display(root-&gt;right);</p>
+<p>    }</p>
+<p>}<br />
+int main()<br />
+{<br />
+    struct tree *root=NULL;<br />
+    int i=0,j=0;<br />
+    root=create(root,11);<br />
+    root=create(root,2);<br />
+    root=create(root,7);<br />
+    root=create(root,1);<br />
+    root=create(root,29);<br />
+    root=create(root,15);<br />
+    root=create(root,40);<br />
+    root=create(root,35);<br />
+    display(root);<br />
+    sum_tree(root,&amp;i,&amp;j);<br />
+    display(root);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Roger</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39941</link>
+		<dc:creator><![CDATA[Roger]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 07:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39941</guid>
+		<description><![CDATA[#include 
+#include 
+
+struct node
+{
+    int data;
+    struct node *left, *right;
+};
+
+struct node* nnode(int data)
+{
+    struct node *tmp=(struct node *)malloc(sizeof(struct node));
+    tmp-&#062;data=data;
+    tmp-&#062;left=NULL;
+    tmp-&#062;right=NULL;
+    return tmp;
+}
+
+void replacesum(struct node *root,int *t)
+{
+    if(root!=NULL)
+    {
+        replacesum(root-&#062;right,t);
+        int tmp=root-&#062;data;
+        root-&#062;data=*t;
+        *t=*t+tmp;
+        replacesum(root-&#062;left,t);
+    }
+
+}
+
+void printinorder(struct node *root)
+{
+if(root!=NULL)
+{
+    printinorder(root-&#062;left);
+    printf(&quot;%dt&quot;,root-&#062;data);
+    printinorder(root-&#062;right);
+}
+}
+
+int main()
+{
+    struct node *root=nnode(4);
+    root-&#062;left=nnode(2);
+    root-&#062;left-&#062;left=nnode(1);
+    root-&#062;left-&#062;right=nnode(3);
+    root-&#062;right=nnode(6);
+    root-&#062;right-&#062;left=nnode(5);
+    root-&#062;right-&#062;right=nnode(8);
+    root-&#062;right-&#062;right-&#062;left=nnode(7);
+    printinorder(root);
+    int sum=0;
+    replacesum(root,&#038;sum);
+    printf(&quot;n&quot;);
+    printinorder(root);
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include </p>
+<p>struct node<br />
+{<br />
+    int data;<br />
+    struct node *left, *right;<br />
+};</p>
+<p>struct node* nnode(int data)<br />
+{<br />
+    struct node *tmp=(struct node *)malloc(sizeof(struct node));<br />
+    tmp-&gt;data=data;<br />
+    tmp-&gt;left=NULL;<br />
+    tmp-&gt;right=NULL;<br />
+    return tmp;<br />
+}</p>
+<p>void replacesum(struct node *root,int *t)<br />
+{<br />
+    if(root!=NULL)<br />
+    {<br />
+        replacesum(root-&gt;right,t);<br />
+        int tmp=root-&gt;data;<br />
+        root-&gt;data=*t;<br />
+        *t=*t+tmp;<br />
+        replacesum(root-&gt;left,t);<br />
+    }</p>
+<p>}</p>
+<p>void printinorder(struct node *root)<br />
+{<br />
+if(root!=NULL)<br />
+{<br />
+    printinorder(root-&gt;left);<br />
+    printf(&#8220;%dt&#8221;,root-&gt;data);<br />
+    printinorder(root-&gt;right);<br />
+}<br />
+}</p>
+<p>int main()<br />
+{<br />
+    struct node *root=nnode(4);<br />
+    root-&gt;left=nnode(2);<br />
+    root-&gt;left-&gt;left=nnode(1);<br />
+    root-&gt;left-&gt;right=nnode(3);<br />
+    root-&gt;right=nnode(6);<br />
+    root-&gt;right-&gt;left=nnode(5);<br />
+    root-&gt;right-&gt;right=nnode(8);<br />
+    root-&gt;right-&gt;right-&gt;left=nnode(7);<br />
+    printinorder(root);<br />
+    int sum=0;<br />
+    replacesum(root,&amp;sum);<br />
+    printf(&#8220;n&#8221;);<br />
+    printinorder(root);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek Garg</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39930</link>
+		<dc:creator><![CDATA[Vivek Garg]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 04:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39930</guid>
+		<description><![CDATA[The inorder traversal of BST gives us an sequence in increasing order . If we do reverse inorder then it results into an decreasing sequence which can be done by just calling the right subtree recursion before left subtree.]]></description>
+		<content:encoded><![CDATA[<p>The inorder traversal of BST gives us an sequence in increasing order . If we do reverse inorder then it results into an decreasing sequence which can be done by just calling the right subtree recursion before left subtree.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: acharyayogesh</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39928</link>
+		<dc:creator><![CDATA[acharyayogesh]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 04:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39928</guid>
+		<description><![CDATA[#include 
+
+using namespace std;
+
+class Node
+
+{
+
+public:
+
+	int data;
+
+	Node *left, *right;
+
+	Node (int d)
+
+	{
+
+		data = d;
+
+		left = right = NULL;
+
+	}
+
+};
+
+Node *newNode(int d)
+
+{
+
+	return new Node(d);
+
+}
+
+void Inorder(Node* root, int *sum)
+
+{
+
+	if (root == NULL)
+
+		return;
+
+	Inorder(root-&#062;left, sum);
+
+	cout &#060;data &#060;data;
+
+	Inorder(root-&#062;right, sum);
+
+}
+
+void Modify(Node *root, int *sum)
+
+{
+
+	if (root == NULL)
+
+		return;
+
+	Modify(root-&#062;left, sum);
+
+	
+
+	int tmp = root-&#062;data;
+
+	root-&#062;data = *sum-root-&#062;data;
+
+	*sum -= tmp;
+
+	
+
+	cout &#060;data &#060;right, sum);
+
+}
+
+int main()
+
+{
+
+	Node *root = newNode(11);
+
+    root-&#062;left = newNode(2);
+
+    root-&#062;right = newNode(29);
+
+    root-&#062;left-&#062;left = newNode(1);
+
+    root-&#062;left-&#062;right = newNode(7);
+
+    root-&#062;right-&#062;left = newNode(15);
+
+    root-&#062;right-&#062;right = newNode(40);
+
+    root-&#062;right-&#062;right-&#062;left = newNode(35);
+
+	int sum = 0;
+
+	Inorder(root, &#038;sum);
+
+	cout &#060;&#060; endl;
+
+	Modify(root, &#038;sum);
+
+	cout &#060;&#060; endl;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include </p>
+<p>using namespace std;</p>
+<p>class Node</p>
+<p>{</p>
+<p>public:</p>
+<p>	int data;</p>
+<p>	Node *left, *right;</p>
+<p>	Node (int d)</p>
+<p>	{</p>
+<p>		data = d;</p>
+<p>		left = right = NULL;</p>
+<p>	}</p>
+<p>};</p>
+<p>Node *newNode(int d)</p>
+<p>{</p>
+<p>	return new Node(d);</p>
+<p>}</p>
+<p>void Inorder(Node* root, int *sum)</p>
+<p>{</p>
+<p>	if (root == NULL)</p>
+<p>		return;</p>
+<p>	Inorder(root-&gt;left, sum);</p>
+<p>	cout &lt;data &lt;data;</p>
+<p>	Inorder(root-&gt;right, sum);</p>
+<p>}</p>
+<p>void Modify(Node *root, int *sum)</p>
+<p>{</p>
+<p>	if (root == NULL)</p>
+<p>		return;</p>
+<p>	Modify(root-&gt;left, sum);</p>
+<p>	int tmp = root-&gt;data;</p>
+<p>	root-&gt;data = *sum-root-&gt;data;</p>
+<p>	*sum -= tmp;</p>
+<p>	cout &lt;data &lt;right, sum);</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	Node *root = newNode(11);</p>
+<p>    root-&gt;left = newNode(2);</p>
+<p>    root-&gt;right = newNode(29);</p>
+<p>    root-&gt;left-&gt;left = newNode(1);</p>
+<p>    root-&gt;left-&gt;right = newNode(7);</p>
+<p>    root-&gt;right-&gt;left = newNode(15);</p>
+<p>    root-&gt;right-&gt;right = newNode(40);</p>
+<p>    root-&gt;right-&gt;right-&gt;left = newNode(35);</p>
+<p>	int sum = 0;</p>
+<p>	Inorder(root, &amp;sum);</p>
+<p>	cout &lt;&lt; endl;</p>
+<p>	Modify(root, &amp;sum);</p>
+<p>	cout &lt;&lt; endl;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/transform-bst-sum-tree/#comment-39918</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 26 Jun 2014 22:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129888#comment-39918</guid>
+		<description><![CDATA[can u elaborate how its calling in dcreasing order???]]></description>
+		<content:encoded><![CDATA[<p>can u elaborate how its calling in dcreasing order???</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:15 -->
+
+<!-- Compression = gzip -->

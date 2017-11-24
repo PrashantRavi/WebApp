@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Inorder Successor in Binary Search Tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-39592</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 05:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-39592</guid>
+		<description><![CDATA[In method 2,shouldnt the second condition be n-&#062;data&#062;=root-&#062;data?]]></description>
+		<content:encoded><![CDATA[<p>In method 2,shouldnt the second condition be n-&gt;data&gt;=root-&gt;data?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prianca__</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-36999</link>
+		<dc:creator><![CDATA[prianca__]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 09:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-36999</guid>
+		<description><![CDATA[we can also do it by inorder traversal, by storing the previous value as
+
+void check(struct node *root, struct node **temp)
+
+{   
+
+    static struct node *prev = NULL;
+
+    if (root == NULL)
+
+       return;
+
+    if (root) 
+
+    {
+
+             check(root-&#062;left, &#038;(*temp));
+
+             if (((*temp) != NULL) &#038;&#038; (prev != NULL) &#038;&#038; ((*temp)-&#062;data == prev -&#062;data)) {
+
+                        printf(&quot;inorder successor of %d is %dn&quot;,(*temp) -&#062;data, root-&#062;data);
+
+                        free(*temp);
+
+                        *temp = NULL;
+
+                        return;
+
+              }
+
+    
+
+              prev = root;
+
+              check(root -&#062;right, &#038;(*temp));
+
+    }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>we can also do it by inorder traversal, by storing the previous value as</p>
+<p>void check(struct node *root, struct node **temp)</p>
+<p>{   </p>
+<p>    static struct node *prev = NULL;</p>
+<p>    if (root == NULL)</p>
+<p>       return;</p>
+<p>    if (root) </p>
+<p>    {</p>
+<p>             check(root-&gt;left, &amp;(*temp));</p>
+<p>             if (((*temp) != NULL) &amp;&amp; (prev != NULL) &amp;&amp; ((*temp)-&gt;data == prev -&gt;data)) {</p>
+<p>                        printf(&#8220;inorder successor of %d is %dn&#8221;,(*temp) -&gt;data, root-&gt;data);</p>
+<p>                        free(*temp);</p>
+<p>                        *temp = NULL;</p>
+<p>                        return;</p>
+<p>              }</p>
+<p>              prev = root;</p>
+<p>              check(root -&gt;right, &amp;(*temp));</p>
+<p>    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aman</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-36216</link>
+		<dc:creator><![CDATA[Aman]]></dc:creator>
+		<pubDate>Sun, 18 May 2014 18:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-36216</guid>
+		<description><![CDATA[Passing parent of a node as one of the argument in the function:
+
+Function called in main:
+  Node* temp = InOrder_Successor(root,,NULL);
+
+Node* InOrder_Successor(Node* root,int x,Node* parent)
+{
+    if(root == NULL)
+        return NULL;
+        
+    else if(root-&#062;data == x){    
+        if(root-&#062;right != NULL)
+            return Min_Right_Sub_Tree(root-&#062;right);
+        else
+            return parent;
+            }
+            
+    else if(root-&#062;data &#062; x) 
+        return InOrder_Successor(root-&#062;left,x,root);
+            
+    else 
+        return InOrder_Successor(root-&#062;right,x,root);
+    }]]></description>
+		<content:encoded><![CDATA[<p>Passing parent of a node as one of the argument in the function:</p>
+<p>Function called in main:<br />
+  Node* temp = InOrder_Successor(root,,NULL);</p>
+<p>Node* InOrder_Successor(Node* root,int x,Node* parent)<br />
+{<br />
+    if(root == NULL)<br />
+        return NULL;</p>
+<p>    else if(root-&gt;data == x){<br />
+        if(root-&gt;right != NULL)<br />
+            return Min_Right_Sub_Tree(root-&gt;right);<br />
+        else<br />
+            return parent;<br />
+            }</p>
+<p>    else if(root-&gt;data &gt; x)<br />
+        return InOrder_Successor(root-&gt;left,x,root);</p>
+<p>    else<br />
+        return InOrder_Successor(root-&gt;right,x,root);<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tesla</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-35239</link>
+		<dc:creator><![CDATA[tesla]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 13:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-35239</guid>
+		<description><![CDATA[modifying the condition that the ceil cannot be equal to the given value..]]></description>
+		<content:encoded><![CDATA[<p>modifying the condition that the ceil cannot be equal to the given value..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: tesla</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-35238</link>
+		<dc:creator><![CDATA[tesla]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 13:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-35238</guid>
+		<description><![CDATA[isn&#039;t this question equivalent to finding the ceil of a node in a BST?]]></description>
+		<content:encoded><![CDATA[<p>isn&#8217;t this question equivalent to finding the ceil of a node in a BST?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Naimish Agarwal</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-33991</link>
+		<dc:creator><![CDATA[Naimish Agarwal]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 16:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-33991</guid>
+		<description><![CDATA[I feel its perfectly correct. Please verify and comment.]]></description>
+		<content:encoded><![CDATA[<p>I feel its perfectly correct. Please verify and comment.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-33990</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 28 Mar 2014 16:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-33990</guid>
+		<description><![CDATA[//inorderSuccessorContinue = 0 where 0 means to continue and 1 means to discontinue
+
+//inorderSuccessorContinue is a global variable of type int
+
+void inorderSuccessor(struct node *root, int key)
+
+{
+
+	if (root != NULL) {	
+
+		if (inorderSuccessorContinue != 1)	
+
+			inorderSuccessor(root-&#062;left, key);
+
+		if (root-&#062;key &#062; key &#038;&#038; inorderSuccessorContinue != 1) {
+
+			cout &#060;key &#060;right, key);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>//inorderSuccessorContinue = 0 where 0 means to continue and 1 means to discontinue</p>
+<p>//inorderSuccessorContinue is a global variable of type int</p>
+<p>void inorderSuccessor(struct node *root, int key)</p>
+<p>{</p>
+<p>	if (root != NULL) {	</p>
+<p>		if (inorderSuccessorContinue != 1)	</p>
+<p>			inorderSuccessor(root-&gt;left, key);</p>
+<p>		if (root-&gt;key &gt; key &amp;&amp; inorderSuccessorContinue != 1) {</p>
+<p>			cout &lt;key &lt;right, key);</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-33427</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 12 Mar 2014 10:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-33427</guid>
+		<description><![CDATA[Made some minor changes :) code seems to be working ok
+
+
+void inorder_successor(struct node* root,int num)
+
+{
+
+static int flag=0;
+
+if(root)
+
+{
+
+inorder_successor(root-&#062;left,num);
+
+if(flag)
+
+{
+
+printf(&quot;%dn&quot;,root-&#062;data);
+
+flag=0;
+
+}
+
+if(root-&#062;data==num) flag=1;
+
+inorder_successor(root-&#062;right,num);
+
+}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Made some minor changes 🙂 code seems to be working ok</p>
+<p>void inorder_successor(struct node* root,int num)</p>
+<p>{</p>
+<p>static int flag=0;</p>
+<p>if(root)</p>
+<p>{</p>
+<p>inorder_successor(root-&gt;left,num);</p>
+<p>if(flag)</p>
+<p>{</p>
+<p>printf(&#8220;%dn&#8221;,root-&gt;data);</p>
+<p>flag=0;</p>
+<p>}</p>
+<p>if(root-&gt;data==num) flag=1;</p>
+<p>inorder_successor(root-&gt;right,num);</p>
+<p>}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: KS</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-31790</link>
+		<dc:creator><![CDATA[KS]]></dc:creator>
+		<pubDate>Fri, 24 Jan 2014 12:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-31790</guid>
+		<description><![CDATA[hello geeksforgeeks,
+
+few things: in method1 above, dont we need to consider first whether the node for which we are trying to find out successor is present in the tree or not?
+
+- in the function insert(), it is better to send the address of the node itself without having a return type, otherwise after a newnode is being inserted we are unncessarily adjusting parent pointers for the nodes which are already there in place. 
+
+-Thanks...]]></description>
+		<content:encoded><![CDATA[<p>hello geeksforgeeks,</p>
+<p>few things: in method1 above, dont we need to consider first whether the node for which we are trying to find out successor is present in the tree or not?</p>
+<p>&#8211; in the function insert(), it is better to send the address of the node itself without having a return type, otherwise after a newnode is being inserted we are unncessarily adjusting parent pointers for the nodes which are already there in place. </p>
+<p>-Thanks&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-31112</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Sun, 29 Dec 2013 12:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-31112</guid>
+		<description><![CDATA[Instead of this, what we can do is keep track of previously visited element and do a reverse inorder traversal( Right Root Left). As soon as we encounter the key, we know that the previous element was the inorder successor.]]></description>
+		<content:encoded><![CDATA[<p>Instead of this, what we can do is keep track of previously visited element and do a reverse inorder traversal( Right Root Left). As soon as we encounter the key, we know that the previous element was the inorder successor.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nikhil Agrawal</title>
+		<link>http://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/#comment-30792</link>
+		<dc:creator><![CDATA[Nikhil Agrawal]]></dc:creator>
+		<pubDate>Tue, 17 Dec 2013 11:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=9999#comment-30792</guid>
+		<description><![CDATA[Your Code is perfect working for all types of tress. 
+
+Great !!]]></description>
+		<content:encoded><![CDATA[<p>Your Code is perfect working for all types of tress. </p>
+<p>Great !!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.045 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:06:26 -->
+
+<!-- Compression = gzip -->

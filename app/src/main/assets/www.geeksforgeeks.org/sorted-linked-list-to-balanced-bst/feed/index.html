@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Sorted Linked List to Balanced BST</title>
+	<atom:link href="http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: tweety</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-40176</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-40176</guid>
+		<description><![CDATA[hello everyone.... i have done this problem in a different way... my logic is that... firstly i have constructed a empty binary tree.... then i have inserted nodes in appropriate place.. complexity of my code is O(n)... please check....
+
+
+#include
+#include
+#include
+struct node 
+{
+       int data;
+       struct node* left,*right;
+}*root=NULL;
+int rear=0,front=0;
+struct node* q[50];
+void enqueue(struct node* n)
+{
+     q[rear++]=n;
+}
+struct node* dequeue()
+{
+    struct node* x=q[front++];
+    return x;
+}
+void emptytree(int);
+void makebst(int a[],struct node*p);
+void inorder(struct node*p);
+
+
+int main()
+{
+    int n,i;
+    printf(&quot;enter no of elements u want to insert in treen&quot;);
+    scanf(&quot;%d&quot;,&#038;n);
+    int a[n];
+    for(i=0;i&#060;n;i++)
+                    
+    scanf(&#034;%d&#034;,&#038;a[i]);
+    
+    emptytree(n);
+    
+    makebst(a,root);
+    
+    printf(&#034;here is the inorder traversal of the binary search treen&#034;);
+    
+   inorder(root);
+  
+   getch();
+}
+void emptytree(int n)
+{
+     static struct node*q;
+     int i;
+     for(i=0;idata=-1;
+                     p-&#062;left=p-&#062;right=NULL;
+                     enqueue(p);
+                     if(root==NULL)
+                                   root=p;
+                     else
+                     {
+                         if(i%2!=0)
+                         {
+                                q=dequeue();
+                                     q-&#062;left=p;
+                         }
+                                else
+                                    q-&#062;right=p;
+                     }
+     }
+}        
+void makebst(int a[],struct node*p)
+{
+     static int count=0;
+     if(p!=NULL)
+     {
+                makebst(a,p-&#062;left);
+                p-&#062;data=a[count++];
+                makebst(a,p-&#062;right);
+     }
+}
+void inorder(struct node* p)
+{
+     if(p!=NULL)
+     {
+                inorder(p-&#062;left);
+                printf(&quot;%dn&quot;,p-&#062;data);
+                inorder(p-&#062;right);
+     }
+}]]></description>
+		<content:encoded><![CDATA[<p>hello everyone&#8230;. i have done this problem in a different way&#8230; my logic is that&#8230; firstly i have constructed a empty binary tree&#8230;. then i have inserted nodes in appropriate place.. complexity of my code is O(n)&#8230; please check&#8230;.</p>
+<p>#include<br />
+#include<br />
+#include<br />
+struct node<br />
+{<br />
+       int data;<br />
+       struct node* left,*right;<br />
+}*root=NULL;<br />
+int rear=0,front=0;<br />
+struct node* q[50];<br />
+void enqueue(struct node* n)<br />
+{<br />
+     q[rear++]=n;<br />
+}<br />
+struct node* dequeue()<br />
+{<br />
+    struct node* x=q[front++];<br />
+    return x;<br />
+}<br />
+void emptytree(int);<br />
+void makebst(int a[],struct node*p);<br />
+void inorder(struct node*p);</p>
+<p>int main()<br />
+{<br />
+    int n,i;<br />
+    printf(&#8220;enter no of elements u want to insert in treen&#8221;);<br />
+    scanf(&#8220;%d&#8221;,&amp;n);<br />
+    int a[n];<br />
+    for(i=0;i&lt;n;i++)</p>
+<p>    scanf(&quot;%d&quot;,&amp;a[i]);</p>
+<p>    emptytree(n);</p>
+<p>    makebst(a,root);</p>
+<p>    printf(&quot;here is the inorder traversal of the binary search treen&quot;);</p>
+<p>   inorder(root);</p>
+<p>   getch();<br />
+}<br />
+void emptytree(int n)<br />
+{<br />
+     static struct node*q;<br />
+     int i;<br />
+     for(i=0;idata=-1;<br />
+                     p-&gt;left=p-&gt;right=NULL;<br />
+                     enqueue(p);<br />
+                     if(root==NULL)<br />
+                                   root=p;<br />
+                     else<br />
+                     {<br />
+                         if(i%2!=0)<br />
+                         {<br />
+                                q=dequeue();<br />
+                                     q-&gt;left=p;<br />
+                         }<br />
+                                else<br />
+                                    q-&gt;right=p;<br />
+                     }<br />
+     }<br />
+}<br />
+void makebst(int a[],struct node*p)<br />
+{<br />
+     static int count=0;<br />
+     if(p!=NULL)<br />
+     {<br />
+                makebst(a,p-&gt;left);<br />
+                p-&gt;data=a[count++];<br />
+                makebst(a,p-&gt;right);<br />
+     }<br />
+}<br />
+void inorder(struct node* p)<br />
+{<br />
+     if(p!=NULL)<br />
+     {<br />
+                inorder(p-&gt;left);<br />
+                printf(&#8220;%dn&#8221;,p-&gt;data);<br />
+                inorder(p-&gt;right);<br />
+     }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-40018</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 07:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-40018</guid>
+		<description><![CDATA[http://ideone.com/38hvqB
+here is my tested code and a short code @geeksforgeeks:disqus 
+main function is like this
+int add(struct node*a,struct node*b,struct node**c,int n,int m)
+{if(n==0&#038;&#038;m==0)
+return 0;
+int sum;
+if(nnext,c,n,m-1);
+sum+=b-&#062;data;
+}
+else if(n&#062;m)
+{sum=add(a-&#062;next,b,c,n-1,m);
+sum+=a-&#062;data;
+}
+else
+{sum=add(a-&#062;next,b-&#062;next,c,n-1,m-1);
+sum+=a-&#062;data+b-&#062;data;
+}
+push(c,sum%10);
+return(sum/10);
+ 
+}
+void add1(struct node *a,struct node *b,struct node **c)
+{
+int n=size(a);
+int m=size(b);
+int sum=add(a,b,c,n,m);
+if(sum)
+push(c,sum);
+}]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/38hvqB" rel="nofollow">http://ideone.com/38hvqB</a><br />
+here is my tested code and a short code @geeksforgeeks:disqus<br />
+main function is like this<br />
+int add(struct node*a,struct node*b,struct node**c,int n,int m)<br />
+{if(n==0&amp;&amp;m==0)<br />
+return 0;<br />
+int sum;<br />
+if(nnext,c,n,m-1);<br />
+sum+=b-&gt;data;<br />
+}<br />
+else if(n&gt;m)<br />
+{sum=add(a-&gt;next,b,c,n-1,m);<br />
+sum+=a-&gt;data;<br />
+}<br />
+else<br />
+{sum=add(a-&gt;next,b-&gt;next,c,n-1,m-1);<br />
+sum+=a-&gt;data+b-&gt;data;<br />
+}<br />
+push(c,sum%10);<br />
+return(sum/10);</p>
+<p>}<br />
+void add1(struct node *a,struct node *b,struct node **c)<br />
+{<br />
+int n=size(a);<br />
+int m=size(b);<br />
+int sum=add(a,b,c,n,m);<br />
+if(sum)<br />
+push(c,sum);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tuhin</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-37762</link>
+		<dc:creator><![CDATA[Tuhin]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 17:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-37762</guid>
+		<description><![CDATA[Can someone please the time complexities of the two solutions?]]></description>
+		<content:encoded><![CDATA[<p>Can someone please the time complexities of the two solutions?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-36270</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Mon, 19 May 2014 12:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-36270</guid>
+		<description><![CDATA[u can reduce complexity of case 1 by skip list ??]]></description>
+		<content:encoded><![CDATA[<p>u can reduce complexity of case 1 by skip list ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-32828</link>
+		<dc:creator><![CDATA[Abhishek]]></dc:creator>
+		<pubDate>Fri, 21 Feb 2014 06:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-32828</guid>
+		<description><![CDATA[Awesome solution]]></description>
+		<content:encoded><![CDATA[<p>Awesome solution</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-30473</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 06 Dec 2013 10:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-30473</guid>
+		<description><![CDATA[Yes, had the list been doubly linked list, complexity is O(nlogn)else it is
+O(n^2+nlogn) which is nothing but O(n^2)....]]></description>
+		<content:encoded><![CDATA[<p>Yes, had the list been doubly linked list, complexity is O(nlogn)else it is<br />
+O(n^2+nlogn) which is nothing but O(n^2)&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav Baingalia</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-28942</link>
+		<dc:creator><![CDATA[Gaurav Baingalia]]></dc:creator>
+		<pubDate>Wed, 16 Oct 2013 08:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-28942</guid>
+		<description><![CDATA[can some one help me in this code ..&#062;&#062;
+
+having prblm in sorting out the error..&#062;&#062;
+
+#include 
+
+#include 
+
+#include 
+
+using namespace std;
+
+int i=0;
+
+struct lnode
+
+{
+
+    int item;
+
+    struct lnode* next;
+
+};
+
+struct tnode
+
+{
+
+    int info;
+
+    struct tnode* left;
+
+    struct tnode* right;
+
+};
+
+typedef struct lnode* ndptr;
+
+typedef struct tnode* tndptr;
+
+ndptr lgetnode()
+
+{
+
+    ndptr new_node=(ndptr)malloc(sizeof(ndptr));
+
+    return new_node;
+
+}
+
+tndptr tgetnode()
+
+{
+
+    tndptr p=(tndptr)malloc(sizeof(tndptr));
+
+    return p;
+
+}
+
+void push_node(ndptr &#038;head,int x)
+
+{
+
+    ndptr new_node;
+
+    new_node=lgetnode();
+
+    new_node-&#062;item=x;
+
+    new_node-&#062;next=head;
+
+    head=new_node;
+
+}
+
+tndptr maketree(int x)
+
+{
+
+    tndptr p=tgetnode();
+
+    p-&#062;info=x;
+
+    p-&#062;left=NULL;
+
+    p-&#062;right=NULL;
+
+    return p;
+
+}
+
+tndptr list2BST(ndptr &#038;head,int n)
+
+{
+
+    if(nitem);
+
+    root-&#062;left=left_tree;
+
+    head=head-&#062;next;
+
+    root-&#062;right=list2BST(head,n-n/2-1);
+
+    return root;
+
+}
+
+void pre_trav(tndptr tree)
+
+{
+
+    if(tree!=NULL)
+
+    {
+
+        cout&#060;info;
+
+        pre_trav(tree-&#062;left);
+
+        pre_trav(tree-&#062;right);
+
+    }
+
+}
+
+int countnode(ndptr head)
+
+{
+
+    int count=0;
+
+    while(head!=NULL)
+
+    {
+
+        count++;
+
+        head=head-&#062;next;
+
+    }
+
+    return count;
+
+}
+
+void print_list(ndptr head)
+
+{
+
+    while(head!=NULL)
+
+    {
+
+        cout&#060;item;
+
+        head=head-&#062;next;
+
+        if(head!=NULL)
+
+            cout&#060;&quot;;
+
+    }
+
+}
+
+int main()
+
+{
+
+    ndptr head=NULL;
+
+    int num=0,count;
+
+    while(num!=-1)
+
+    {
+
+        cout&#060;&#062;num;
+
+        if(num!=-1)
+
+            push_node(head,num);
+
+    }
+
+    cout&#060;&#060;&#034;nthe list is :n&#034;;
+
+    print_list(head);
+
+    cout&#060;&#060;&#034;nthe no of nodes in list is :&#034;;
+
+    count=countnode(head);
+
+    cout&#060;&#060;count;
+
+    tndptr root=list2BST(head,count);
+
+    cout&#060;info;
+
+    cout&#060;&#060;&#034;nthe preorder traversal of tree is :n&#034;;
+
+    pre_trav(root);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>can some one help me in this code ..&gt;&gt;</p>
+<p>having prblm in sorting out the error..&gt;&gt;</p>
+<p>#include </p>
+<p>#include </p>
+<p>#include </p>
+<p>using namespace std;</p>
+<p>int i=0;</p>
+<p>struct lnode</p>
+<p>{</p>
+<p>    int item;</p>
+<p>    struct lnode* next;</p>
+<p>};</p>
+<p>struct tnode</p>
+<p>{</p>
+<p>    int info;</p>
+<p>    struct tnode* left;</p>
+<p>    struct tnode* right;</p>
+<p>};</p>
+<p>typedef struct lnode* ndptr;</p>
+<p>typedef struct tnode* tndptr;</p>
+<p>ndptr lgetnode()</p>
+<p>{</p>
+<p>    ndptr new_node=(ndptr)malloc(sizeof(ndptr));</p>
+<p>    return new_node;</p>
+<p>}</p>
+<p>tndptr tgetnode()</p>
+<p>{</p>
+<p>    tndptr p=(tndptr)malloc(sizeof(tndptr));</p>
+<p>    return p;</p>
+<p>}</p>
+<p>void push_node(ndptr &amp;head,int x)</p>
+<p>{</p>
+<p>    ndptr new_node;</p>
+<p>    new_node=lgetnode();</p>
+<p>    new_node-&gt;item=x;</p>
+<p>    new_node-&gt;next=head;</p>
+<p>    head=new_node;</p>
+<p>}</p>
+<p>tndptr maketree(int x)</p>
+<p>{</p>
+<p>    tndptr p=tgetnode();</p>
+<p>    p-&gt;info=x;</p>
+<p>    p-&gt;left=NULL;</p>
+<p>    p-&gt;right=NULL;</p>
+<p>    return p;</p>
+<p>}</p>
+<p>tndptr list2BST(ndptr &amp;head,int n)</p>
+<p>{</p>
+<p>    if(nitem);</p>
+<p>    root-&gt;left=left_tree;</p>
+<p>    head=head-&gt;next;</p>
+<p>    root-&gt;right=list2BST(head,n-n/2-1);</p>
+<p>    return root;</p>
+<p>}</p>
+<p>void pre_trav(tndptr tree)</p>
+<p>{</p>
+<p>    if(tree!=NULL)</p>
+<p>    {</p>
+<p>        cout&lt;info;</p>
+<p>        pre_trav(tree-&gt;left);</p>
+<p>        pre_trav(tree-&gt;right);</p>
+<p>    }</p>
+<p>}</p>
+<p>int countnode(ndptr head)</p>
+<p>{</p>
+<p>    int count=0;</p>
+<p>    while(head!=NULL)</p>
+<p>    {</p>
+<p>        count++;</p>
+<p>        head=head-&gt;next;</p>
+<p>    }</p>
+<p>    return count;</p>
+<p>}</p>
+<p>void print_list(ndptr head)</p>
+<p>{</p>
+<p>    while(head!=NULL)</p>
+<p>    {</p>
+<p>        cout&lt;item;</p>
+<p>        head=head-&gt;next;</p>
+<p>        if(head!=NULL)</p>
+<p>            cout&lt;&#8220;;</p>
+<p>    }</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>    ndptr head=NULL;</p>
+<p>    int num=0,count;</p>
+<p>    while(num!=-1)</p>
+<p>    {</p>
+<p>        cout&lt;&gt;num;</p>
+<p>        if(num!=-1)</p>
+<p>            push_node(head,num);</p>
+<p>    }</p>
+<p>    cout&lt;&lt;&quot;nthe list is :n&quot;;</p>
+<p>    print_list(head);</p>
+<p>    cout&lt;&lt;&quot;nthe no of nodes in list is :&quot;;</p>
+<p>    count=countnode(head);</p>
+<p>    cout&lt;&lt;count;</p>
+<p>    tndptr root=list2BST(head,count);</p>
+<p>    cout&lt;info;</p>
+<p>    cout&lt;&lt;&quot;nthe preorder traversal of tree is :n&quot;;</p>
+<p>    pre_trav(root);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: BePositive</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-27927</link>
+		<dc:creator><![CDATA[BePositive]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2013 17:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-27927</guid>
+		<description><![CDATA[Method 2 is also wrong based on the same logic as told in earlier comment.]]></description>
+		<content:encoded><![CDATA[<p>Method 2 is also wrong based on the same logic as told in earlier comment.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: BePositive</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-27925</link>
+		<dc:creator><![CDATA[BePositive]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2013 16:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-27925</guid>
+		<description><![CDATA[Method 1 is wrong. It doesn&#039;t work for 9 elements 1,2,....,9
+In order to make it right, we first need to find the number of elements which are required to make a complete balanced BST. And then only, we can apply method 1 to those.
+Let&#039;s say n be the number of elements. And x be the number of elements less than n which can make a complete balanced BST (e.g. 1 or 3 or 7), then,
+
+
+x = pow(2, ceil( log2(n) )) - 1.
+
+
+e.g. for n = 9, x = 7. n = 5, x = 3
+
+
+Now we need to create complete balanced BST using these x elements (using method 1 as specified above). And then need to add the (n - x) elements to the leaf nodes, using post order traversal of the tree.]]></description>
+		<content:encoded><![CDATA[<p>Method 1 is wrong. It doesn&#8217;t work for 9 elements 1,2,&#8230;.,9<br />
+In order to make it right, we first need to find the number of elements which are required to make a complete balanced BST. And then only, we can apply method 1 to those.<br />
+Let&#8217;s say n be the number of elements. And x be the number of elements less than n which can make a complete balanced BST (e.g. 1 or 3 or 7), then,</p>
+<p>x = pow(2, ceil( log2(n) )) &#8211; 1.</p>
+<p>e.g. for n = 9, x = 7. n = 5, x = 3</p>
+<p>Now we need to create complete balanced BST using these x elements (using method 1 as specified above). And then need to add the (n &#8211; x) elements to the leaf nodes, using post order traversal of the tree.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: BePositive</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-27921</link>
+		<dc:creator><![CDATA[BePositive]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2013 15:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-27921</guid>
+		<description><![CDATA[Order of the first solution should be O(N2) and not O(nlogn) as we are not discarding one half part of the list.]]></description>
+		<content:encoded><![CDATA[<p>Order of the first solution should be O(N2) and not O(nlogn) as we are not discarding one half part of the list.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Swastik Sahu</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-26959</link>
+		<dc:creator><![CDATA[Swastik Sahu]]></dc:creator>
+		<pubDate>Sun, 25 Aug 2013 18:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-26959</guid>
+		<description><![CDATA[How is the complexity of first method O(n log n) ?
+If we create a hash of pointers to each node, i.e- hash[1] = pointer to 1st node, hash[2] = pointer to 2nd node..so on. 
+
+Then it can be done in O(n).]]></description>
+		<content:encoded><![CDATA[<p>How is the complexity of first method O(n log n) ?<br />
+If we create a hash of pointers to each node, i.e- hash[1] = pointer to 1st node, hash[2] = pointer to 2nd node..so on. </p>
+<p>Then it can be done in O(n).</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.049 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:36:37 -->
+
+<!-- Compression = gzip -->

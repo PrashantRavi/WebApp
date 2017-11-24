@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print all nodes at distance k from a given node</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: zxcve</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-38632</link>
+		<dc:creator><![CDATA[zxcve]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 06:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-38632</guid>
+		<description><![CDATA[Another approach easy to understand:
+
+void print_distance_k(node *head, T data, T k)
+{
+    T max_path = -1;
+    node *prev = NULL;
+print_distance_k_predecessor(head, data, k, 0, &#038;max_path, &#038;prev);
+}
+
+void print_distance_k_predecessor(node *head, T data, T k, T path, T *max_path, node **prev)
+{
+    if (!head &#124;&#124; (*max_path &#062;= 0))
+        return;
+    if (head-&#062;data == data)
+        *max_path = path;
+    print_distance_k_predecessor(head-&#062;left, data, k, path + 1, max_path, prev);
+    print_distance_k_predecessor(head-&#062;right, data, k, path + 1, max_path, prev);
+    if (*max_path &#062;= 0)
+    {
+       k = k - (*max_path - path);
+       if (k &#062;= 0)
+       {
+            print_distance_k_successor(head, k, *prev);
+            *prev = head;
+       }
+    }
+}
+
+void print_distance_k_successor(node *head, T k, node *prev)
+{
+    if (!head &#124;&#124; k data);
+        return;
+    }
+    k--;
+    print_distance_k_successor(head-&#062;left, k, prev);
+    print_distance_k_successor(head-&#062;right, k, prev);
+}]]></description>
+		<content:encoded><![CDATA[<p>Another approach easy to understand:</p>
+<p>void print_distance_k(node *head, T data, T k)<br />
+{<br />
+    T max_path = -1;<br />
+    node *prev = NULL;<br />
+print_distance_k_predecessor(head, data, k, 0, &amp;max_path, &amp;prev);<br />
+}</p>
+<p>void print_distance_k_predecessor(node *head, T data, T k, T path, T *max_path, node **prev)<br />
+{<br />
+    if (!head || (*max_path &gt;= 0))<br />
+        return;<br />
+    if (head-&gt;data == data)<br />
+        *max_path = path;<br />
+    print_distance_k_predecessor(head-&gt;left, data, k, path + 1, max_path, prev);<br />
+    print_distance_k_predecessor(head-&gt;right, data, k, path + 1, max_path, prev);<br />
+    if (*max_path &gt;= 0)<br />
+    {<br />
+       k = k &#8211; (*max_path &#8211; path);<br />
+       if (k &gt;= 0)<br />
+       {<br />
+            print_distance_k_successor(head, k, *prev);<br />
+            *prev = head;<br />
+       }<br />
+    }<br />
+}</p>
+<p>void print_distance_k_successor(node *head, T k, node *prev)<br />
+{<br />
+    if (!head || k data);<br />
+        return;<br />
+    }<br />
+    k&#8211;;<br />
+    print_distance_k_successor(head-&gt;left, k, prev);<br />
+    print_distance_k_successor(head-&gt;right, k, prev);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: boom_bam_boom</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-37081</link>
+		<dc:creator><![CDATA[boom_bam_boom]]></dc:creator>
+		<pubDate>Fri, 30 May 2014 18:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-37081</guid>
+		<description><![CDATA[Another easy to understand solution that uses a previous node pointer to avoid visiting the same node again and first fetches the node:
+
+void Visit(INode* prev, INode* next, int count)
+{
+        if(count &#060; 0 &#124;&#124; next == NULL)
+		                      return;
+ 
+           	std::cout &#060;key &#060;parent != prev)
+                      		Visit(next, next-&#062;parent, count-1);
+           	if(next-&#062;left != prev)
+                      		Visit(next, next-&#062;left, count-1);
+           	if(next-&#062;right != prev)
+                      		Visit(next, next-&#062;right, count-1);
+}
+ 
+void BST::PrintKNodesFromNode(int key, int numOfNodes)
+{
+        // find the node with the given key first
+           	INode* n = GetNode(key);
+           	if(n == NULL)
+                      		return;
+            	Visit(n, n, numOfNodes);
+}]]></description>
+		<content:encoded><![CDATA[<p>Another easy to understand solution that uses a previous node pointer to avoid visiting the same node again and first fetches the node:</p>
+<p>void Visit(INode* prev, INode* next, int count)<br />
+{<br />
+        if(count &lt; 0 || next == NULL)<br />
+		                      return;</p>
+<p>           	std::cout &lt;key &lt;parent != prev)<br />
+                      		Visit(next, next-&gt;parent, count-1);<br />
+           	if(next-&gt;left != prev)<br />
+                      		Visit(next, next-&gt;left, count-1);<br />
+           	if(next-&gt;right != prev)<br />
+                      		Visit(next, next-&gt;right, count-1);<br />
+}</p>
+<p>void BST::PrintKNodesFromNode(int key, int numOfNodes)<br />
+{<br />
+        // find the node with the given key first<br />
+           	INode* n = GetNode(key);<br />
+           	if(n == NULL)<br />
+                      		return;<br />
+            	Visit(n, n, numOfNodes);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Miki</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-36268</link>
+		<dc:creator><![CDATA[Miki]]></dc:creator>
+		<pubDate>Mon, 19 May 2014 11:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-36268</guid>
+		<description><![CDATA[Once dl+1 or dr+1 becomes equal to k for a node, can&#039;t we straightaway return -1?
+Because nodes with distance=k, will not be found in it&#039;s parent tree nor in it&#039;s right/left subtree.
+Returning dl+1, will make the caller perform an unnecessary check :
+
+dl+2 (in caller) &#062;k, and also a call to   printkdistanceNodeDown will be made
+with level=k-ld-2&#060;0 (nothing will be printed).]]></description>
+		<content:encoded><![CDATA[<p>Once dl+1 or dr+1 becomes equal to k for a node, can&#8217;t we straightaway return -1?<br />
+Because nodes with distance=k, will not be found in it&#8217;s parent tree nor in it&#8217;s right/left subtree.<br />
+Returning dl+1, will make the caller perform an unnecessary check :</p>
+<p>dl+2 (in caller) &gt;k, and also a call to   printkdistanceNodeDown will be made<br />
+with level=k-ld-2&lt;0 (nothing will be printed).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-35231</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 11:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-35231</guid>
+		<description><![CDATA[push the ancestors of the node in the stack and get the distances from each ancestors in path different from path to node
+
+#include
+#define size 50
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+struct stack
+{
+	tnode* arr[size];
+	int top;
+	void push(tnode*);
+	tnode* pop();
+	stack()
+	{
+		top=-1;
+	}
+}st;
+void stack::push(tnode* ptr)
+{
+	arr[++top]=ptr;
+}
+tnode* stack::pop()
+{
+	tnode* p1=arr[top];
+	top--;
+	return p1;
+}
+void create(tnode* &#038;root,int d)
+{
+	int n;
+	if(d==0)
+	  return;
+	root=new tnode(d);
+	cout&#060;&#060;&#034;enter the left child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;lchild,n);
+	cout&#060;&#060;&#034;enter thr right child of &#034;&#060;data&#060;&#062;n;
+	create(root-&#062;rchild,n);
+}
+int getstack(tnode* root,int n)
+{
+	if(!root)  
+	   return 0;
+	if(root-&#062;data==n)
+	{
+		st.push(root);
+		return 1;
+	}
+    int k1=getstack(root-&#062;lchild,n);
+    int k2=getstack(root-&#062;rchild,n);
+    if((k1)&#124;&#124;(k2))
+    {
+    	st.push(root);
+    	return 1;
+    }
+    return 0;
+}
+void print_node(tnode* root,int k)
+{
+	if(!root)
+	   return;
+	if(k==0)
+	{
+		cout&#060;data&#060;lchild,k-1);
+	print_node(root-&#062;rchild,k-1);
+}
+void fun(int k)
+{
+	while(st.top!=0)
+	{
+		int d=k-st.top;
+		tnode* p1=st.pop();
+		if(d&#062;=0)
+		{
+		tnode* p2=st.pop();
+		if(p1-&#062;lchild==p2)
+		{
+			st.push(p2);
+			if(d==0)
+			{
+				cout&#060;data&#060;rchild,d-1);
+			}
+		}
+		else
+		{
+			st.push(p2);
+			if(d==0)
+			{
+				cout&#060;data&#060;lchild,d-1);
+			}
+		}
+	   }
+    }
+    print_node(st.pop(),k);
+}
+ 
+ 
+int main()
+{
+	tnode* root=NULL;
+	int n,k;
+	cout&#060;&#062;n;
+	create(root,n);
+	cout&#060;&#062;n;
+	int p=getstack(root,n);
+	cout&#060;&#062;k;
+	fun(k);
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>push the ancestors of the node in the stack and get the distances from each ancestors in path different from path to node</p>
+<p>#include<br />
+#define size 50<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+struct stack<br />
+{<br />
+	tnode* arr[size];<br />
+	int top;<br />
+	void push(tnode*);<br />
+	tnode* pop();<br />
+	stack()<br />
+	{<br />
+		top=-1;<br />
+	}<br />
+}st;<br />
+void stack::push(tnode* ptr)<br />
+{<br />
+	arr[++top]=ptr;<br />
+}<br />
+tnode* stack::pop()<br />
+{<br />
+	tnode* p1=arr[top];<br />
+	top&#8211;;<br />
+	return p1;<br />
+}<br />
+void create(tnode* &amp;root,int d)<br />
+{<br />
+	int n;<br />
+	if(d==0)<br />
+	  return;<br />
+	root=new tnode(d);<br />
+	cout&lt;&lt;&quot;enter the left child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;lchild,n);<br />
+	cout&lt;&lt;&quot;enter thr right child of &quot;&lt;data&lt;&gt;n;<br />
+	create(root-&gt;rchild,n);<br />
+}<br />
+int getstack(tnode* root,int n)<br />
+{<br />
+	if(!root)<br />
+	   return 0;<br />
+	if(root-&gt;data==n)<br />
+	{<br />
+		st.push(root);<br />
+		return 1;<br />
+	}<br />
+    int k1=getstack(root-&gt;lchild,n);<br />
+    int k2=getstack(root-&gt;rchild,n);<br />
+    if((k1)||(k2))<br />
+    {<br />
+    	st.push(root);<br />
+    	return 1;<br />
+    }<br />
+    return 0;<br />
+}<br />
+void print_node(tnode* root,int k)<br />
+{<br />
+	if(!root)<br />
+	   return;<br />
+	if(k==0)<br />
+	{<br />
+		cout&lt;data&lt;lchild,k-1);<br />
+	print_node(root-&gt;rchild,k-1);<br />
+}<br />
+void fun(int k)<br />
+{<br />
+	while(st.top!=0)<br />
+	{<br />
+		int d=k-st.top;<br />
+		tnode* p1=st.pop();<br />
+		if(d&gt;=0)<br />
+		{<br />
+		tnode* p2=st.pop();<br />
+		if(p1-&gt;lchild==p2)<br />
+		{<br />
+			st.push(p2);<br />
+			if(d==0)<br />
+			{<br />
+				cout&lt;data&lt;rchild,d-1);<br />
+			}<br />
+		}<br />
+		else<br />
+		{<br />
+			st.push(p2);<br />
+			if(d==0)<br />
+			{<br />
+				cout&lt;data&lt;lchild,d-1);<br />
+			}<br />
+		}<br />
+	   }<br />
+    }<br />
+    print_node(st.pop(),k);<br />
+}</p>
+<p>int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int n,k;<br />
+	cout&lt;&gt;n;<br />
+	create(root,n);<br />
+	cout&lt;&gt;n;<br />
+	int p=getstack(root,n);<br />
+	cout&lt;&gt;k;<br />
+	fun(k);<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-35208</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 00:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-35208</guid>
+		<description><![CDATA[GeeksforGeeks:
+
+This is another approach to print nodes at k distance from leaf. This solution has o(1) space complexity and o(n) time complexity and is similar to Print nodes at k distance from target node. Below is the source code in C. I request you to kindly consider this.
+
+int printkdistanceNode(struct node *root, int k)
+
+{
+
+    // Base Case 1: If tree is empty, return -1
+
+    if (root == NULL) return -1;
+
+    if (isLeaf(root))
+
+    {
+
+        return 0;
+
+    }
+
+ 
+
+    // Recur for left subtree
+
+    int dl = printkdistanceNode(root-&#062;left, k);
+
+ 
+
+    // Check if target node was found in left subtree
+
+    if (dl != -1)
+
+    {
+
+         
+
+         if (dl + 1 == k)
+
+            printf(&quot;%d, &quot;,root-&#062;data); 
+
+         dl = dl+1;
+
+    }
+
+ 
+
+    int dr = printkdistanceNode(root-&#062;right, k);
+
+    if (dr != -1)
+
+    {
+
+         if (dr + 1 == k)
+
+           printf(&quot;%d, &quot;,root-&#062;data);
+
+         dr = 1 + dr;
+
+    }
+
+ 
+
+    if(dl!=-1 &#038;&#038; dr!=-1)
+
+    	return min(dl,dr);
+
+    else if(dl==-1)
+
+    	return dr;
+
+    else if(dr==-1)
+
+    	return dl;
+
+	else   
+
+	    return -1;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>GeeksforGeeks:</p>
+<p>This is another approach to print nodes at k distance from leaf. This solution has o(1) space complexity and o(n) time complexity and is similar to Print nodes at k distance from target node. Below is the source code in C. I request you to kindly consider this.</p>
+<p>int printkdistanceNode(struct node *root, int k)</p>
+<p>{</p>
+<p>    // Base Case 1: If tree is empty, return -1</p>
+<p>    if (root == NULL) return -1;</p>
+<p>    if (isLeaf(root))</p>
+<p>    {</p>
+<p>        return 0;</p>
+<p>    }</p>
+<p>    // Recur for left subtree</p>
+<p>    int dl = printkdistanceNode(root-&gt;left, k);</p>
+<p>    // Check if target node was found in left subtree</p>
+<p>    if (dl != -1)</p>
+<p>    {</p>
+<p>         if (dl + 1 == k)</p>
+<p>            printf(&#8220;%d, &#8220;,root-&gt;data); </p>
+<p>         dl = dl+1;</p>
+<p>    }</p>
+<p>    int dr = printkdistanceNode(root-&gt;right, k);</p>
+<p>    if (dr != -1)</p>
+<p>    {</p>
+<p>         if (dr + 1 == k)</p>
+<p>           printf(&#8220;%d, &#8220;,root-&gt;data);</p>
+<p>         dr = 1 + dr;</p>
+<p>    }</p>
+<p>    if(dl!=-1 &amp;&amp; dr!=-1)</p>
+<p>    	return min(dl,dr);</p>
+<p>    else if(dl==-1)</p>
+<p>    	return dr;</p>
+<p>    else if(dr==-1)</p>
+<p>    	return dl;</p>
+<p>	else   </p>
+<p>	    return -1;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Jain</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-34783</link>
+		<dc:creator><![CDATA[Ankit Jain]]></dc:creator>
+		<pubDate>Thu, 17 Apr 2014 17:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-34783</guid>
+		<description><![CDATA[/*Print vertical tree*/
+#include
+#include
+
+struct BTree
+{
+    int data;
+    struct BTree *left;
+    struct BTree *right;
+    int flag;
+};
+struct BTree* insert(struct BTree *root,int data)
+{
+    struct BTree *temp=root;
+    if(temp==NULL)
+    {
+        temp=(struct BTree*)malloc(sizeof(struct BTree));
+        temp-&#062;data=data;
+        temp-&#062;left=temp-&#062;right=NULL;
+    }
+    else if(temp-&#062;data&#062;data)
+    {
+        temp-&#062;left=insert(temp-&#062;left,data);
+    }
+    else 
+    {
+        temp-&#062;right=insert(temp-&#062;right,data);
+    }
+    return temp;
+}
+void firstType(struct BTree *root,int k,int h)
+{
+    if((root==NULL)&#124;&#124;(h&#062;k))
+        return;
+    else
+    {
+        if(h==k)
+            printf(&quot;%d &quot;,root-&#062;data);
+        firstType(root-&#062;left,k,h+1);
+        firstType(root-&#062;right,k,h+1);
+    }
+}
+int flag;
+int check(struct BTree *root,int target,int h)
+{
+    if(root)
+    {
+        if(root-&#062;data==target)
+        {
+            flag=h;
+        }
+        else
+        {
+            check(root-&#062;left,target,h+1);
+            check(root-&#062;right,target,h+1);
+        }
+    }    
+}    
+
+void secondType(struct BTree *root,int target,int k)
+{
+    int h;
+
+    if(root==NULL)
+        return;
+
+    else 
+    {
+        flag=-1;
+        if(root-&#062;data&#062;target)
+        {
+            check(root,target,0);
+            if(flag==-1)
+                return;
+
+            else if(flag==k)
+                printf(&quot;%d &quot;,root-&#062;data);    
+            else 
+            {
+                firstType(root-&#062;right,k-flag,1);    
+        
+            }
+        }
+
+        else
+        {
+            check(root,target,0);
+            if(flag==-1)
+                return;
+
+            else if(flag==k)
+                printf(&quot;%d &quot;,root-&#062;data);    
+            else 
+            {
+                firstType(root-&#062;left,k-flag,1);    
+        
+            }
+        }
+    }
+
+    secondType(root-&#062;left,target,k);
+    secondType(root-&#062;right,target,k);
+
+}
+
+
+void callFirstType(struct BTree *root,int target,int k)
+{
+    if(root==NULL)
+        return;
+    else
+    {
+        if(root-&#062;data==target)
+        {
+            firstType(root,k,0);
+        }
+        callFirstType(root-&#062;left,target,k);
+        callFirstType(root-&#062;right,target,k);
+    }
+}
+
+
+main()
+{
+    struct BTree *root=NULL;
+    //int i,a[]={10,5,20,3,7,15,25,18,30};
+    int i,a[]={20,8,22,4,12,10,14};
+    for(i=0;i&#060;7;i++)
+    {
+        root=insert(root,a[i]);
+    }
+    callFirstType(root,14,3);
+    secondType(root,14,3)    ;
+    //inorder(root);    
+    
+    //printf(&#034;n&#034;);
+}]]></description>
+		<content:encoded><![CDATA[<p>/*Print vertical tree*/<br />
+#include<br />
+#include</p>
+<p>struct BTree<br />
+{<br />
+    int data;<br />
+    struct BTree *left;<br />
+    struct BTree *right;<br />
+    int flag;<br />
+};<br />
+struct BTree* insert(struct BTree *root,int data)<br />
+{<br />
+    struct BTree *temp=root;<br />
+    if(temp==NULL)<br />
+    {<br />
+        temp=(struct BTree*)malloc(sizeof(struct BTree));<br />
+        temp-&gt;data=data;<br />
+        temp-&gt;left=temp-&gt;right=NULL;<br />
+    }<br />
+    else if(temp-&gt;data&gt;data)<br />
+    {<br />
+        temp-&gt;left=insert(temp-&gt;left,data);<br />
+    }<br />
+    else<br />
+    {<br />
+        temp-&gt;right=insert(temp-&gt;right,data);<br />
+    }<br />
+    return temp;<br />
+}<br />
+void firstType(struct BTree *root,int k,int h)<br />
+{<br />
+    if((root==NULL)||(h&gt;k))<br />
+        return;<br />
+    else<br />
+    {<br />
+        if(h==k)<br />
+            printf(&#8220;%d &#8220;,root-&gt;data);<br />
+        firstType(root-&gt;left,k,h+1);<br />
+        firstType(root-&gt;right,k,h+1);<br />
+    }<br />
+}<br />
+int flag;<br />
+int check(struct BTree *root,int target,int h)<br />
+{<br />
+    if(root)<br />
+    {<br />
+        if(root-&gt;data==target)<br />
+        {<br />
+            flag=h;<br />
+        }<br />
+        else<br />
+        {<br />
+            check(root-&gt;left,target,h+1);<br />
+            check(root-&gt;right,target,h+1);<br />
+        }<br />
+    }<br />
+}    </p>
+<p>void secondType(struct BTree *root,int target,int k)<br />
+{<br />
+    int h;</p>
+<p>    if(root==NULL)<br />
+        return;</p>
+<p>    else<br />
+    {<br />
+        flag=-1;<br />
+        if(root-&gt;data&gt;target)<br />
+        {<br />
+            check(root,target,0);<br />
+            if(flag==-1)<br />
+                return;</p>
+<p>            else if(flag==k)<br />
+                printf(&#8220;%d &#8220;,root-&gt;data);<br />
+            else<br />
+            {<br />
+                firstType(root-&gt;right,k-flag,1);    </p>
+<p>            }<br />
+        }</p>
+<p>        else<br />
+        {<br />
+            check(root,target,0);<br />
+            if(flag==-1)<br />
+                return;</p>
+<p>            else if(flag==k)<br />
+                printf(&#8220;%d &#8220;,root-&gt;data);<br />
+            else<br />
+            {<br />
+                firstType(root-&gt;left,k-flag,1);    </p>
+<p>            }<br />
+        }<br />
+    }</p>
+<p>    secondType(root-&gt;left,target,k);<br />
+    secondType(root-&gt;right,target,k);</p>
+<p>}</p>
+<p>void callFirstType(struct BTree *root,int target,int k)<br />
+{<br />
+    if(root==NULL)<br />
+        return;<br />
+    else<br />
+    {<br />
+        if(root-&gt;data==target)<br />
+        {<br />
+            firstType(root,k,0);<br />
+        }<br />
+        callFirstType(root-&gt;left,target,k);<br />
+        callFirstType(root-&gt;right,target,k);<br />
+    }<br />
+}</p>
+<p>main()<br />
+{<br />
+    struct BTree *root=NULL;<br />
+    //int i,a[]={10,5,20,3,7,15,25,18,30};<br />
+    int i,a[]={20,8,22,4,12,10,14};<br />
+    for(i=0;i&lt;7;i++)<br />
+    {<br />
+        root=insert(root,a[i]);<br />
+    }<br />
+    callFirstType(root,14,3);<br />
+    secondType(root,14,3)    ;<br />
+    //inorder(root);    </p>
+<p>    //printf(&quot;n&quot;);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: algo1</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-34712</link>
+		<dc:creator><![CDATA[algo1]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 18:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-34712</guid>
+		<description><![CDATA[Someone please help me understand this]]></description>
+		<content:encoded><![CDATA[<p>Someone please help me understand this</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ravi Kiran</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-34519</link>
+		<dc:creator><![CDATA[Ravi Kiran]]></dc:creator>
+		<pubDate>Wed, 09 Apr 2014 17:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-34519</guid>
+		<description><![CDATA[-&#062;find the height of given node 
+-&#062;height of given node -/+ height of other node = distance 
+  then print node 
+
+
+
+
+void printNodeatDistanceK(bnode* root,int givenNodesHeight,int level,int distance)
+{
+     if(root== NULL)
+      return;
+    
+    if((level-givenNodesHeight == distance) &#124;&#124; (level+givenNodesHeight == distance))
+    {
+       //print node                     
+    }
+    
+    printNodeatDistanceK(root-&#062;left,givenNodesHeight,level+1,distance);
+    printNodeatDistanceK(root-&#062;right,givenNodesHeight,level+1,distance);
+     
+}
+
+
+
+
+void FindNodeHeight(bnode* root,bnode* givenNode,int level,int * height)
+{
+    if(root== NULL)
+      return;
+      
+      if(root==givenNode)
+      {
+         *height = level;                
+      }
+    
+    FindNodeHeight(root-&#062;left,givenNode,level+1,height);
+    FindNodeHeight(root-&#062;right,givenNode,level+1,height);
+}
+
+
+
+
+main()
+{
+
+int a;
+    FindNodeHeight(root,randomNode,0,&#038;a);  
+    int distance = 2;
+    printNodeatDistanceK(root,a,0,distance);
+}]]></description>
+		<content:encoded><![CDATA[<p>-&gt;find the height of given node<br />
+-&gt;height of given node -/+ height of other node = distance<br />
+  then print node </p>
+<p>void printNodeatDistanceK(bnode* root,int givenNodesHeight,int level,int distance)<br />
+{<br />
+     if(root== NULL)<br />
+      return;</p>
+<p>    if((level-givenNodesHeight == distance) || (level+givenNodesHeight == distance))<br />
+    {<br />
+       //print node<br />
+    }</p>
+<p>    printNodeatDistanceK(root-&gt;left,givenNodesHeight,level+1,distance);<br />
+    printNodeatDistanceK(root-&gt;right,givenNodesHeight,level+1,distance);</p>
+<p>}</p>
+<p>void FindNodeHeight(bnode* root,bnode* givenNode,int level,int * height)<br />
+{<br />
+    if(root== NULL)<br />
+      return;</p>
+<p>      if(root==givenNode)<br />
+      {<br />
+         *height = level;<br />
+      }</p>
+<p>    FindNodeHeight(root-&gt;left,givenNode,level+1,height);<br />
+    FindNodeHeight(root-&gt;right,givenNode,level+1,height);<br />
+}</p>
+<p>main()<br />
+{</p>
+<p>int a;<br />
+    FindNodeHeight(root,randomNode,0,&amp;a);<br />
+    int distance = 2;<br />
+    printNodeatDistanceK(root,a,0,distance);<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Hiccup</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-34141</link>
+		<dc:creator><![CDATA[Hiccup]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 06:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-34141</guid>
+		<description><![CDATA[----------
+
+tree.h
+
+----------
+
+#include 
+
+#ifndef TREE_H
+
+#define TREE_H
+
+using namespace std;
+
+struct Node {
+
+    int key;
+
+    Node *left , *right;
+
+    Node() : key(-1), left(NULL), right(NULL) {
+
+    }
+
+    ~Node() {
+
+     }
+
+};
+
+class Tree {
+
+    Node *root;
+
+    Node *targetNode;
+
+    int k, found, exitFlag, left;
+
+public:
+
+    Tree() : root(NULL), targetNode(NULL), k(-1),
+
+             found(0), exitFlag(0), left(-1) {}
+
+    ~Tree();
+
+    void insert(int key);
+
+    void inorder();
+
+    void preorder();
+
+    void postorder();
+
+    void print(int key, int d);
+
+private:
+
+    void insert(Node *root, int key);
+
+    void inorder(Node *root);
+
+    void preorder(Node *root);
+
+    void postorder(Node *root);
+
+    void freeTree(Node *root);
+
+    void forwardPrint(Node *node, int d);
+
+    void print(Node *root);
+
+    int searchTarget(Node *root, int k);
+
+    void reset_flags();
+
+};
+
+#endif
+
+--------------
+
+tree.cpp
+
+-------------
+
+#include &quot;tree.h&quot;
+
+using namespace std;
+
+const int SUCCESS = 1;
+
+void Tree::insert(int key) {
+
+     if (root == NULL) {
+
+         Node *newNode = new Node();
+
+         newNode-&#062;key = key;
+
+         root = newNode;
+
+     } else {
+
+         insert(root, key);
+
+     }
+
+}
+
+void Tree::insert(Node *node, int key) {
+
+     Node *newNode = new Node();
+
+     newNode-&#062;key = key;
+
+     if (key &#062; node-&#062;key) {
+
+        if (node-&#062;right) {
+
+           insert(node-&#062;right, key);
+
+        } else {
+
+           node-&#062;right = newNode;
+
+        }
+
+     } else {
+
+        if (node-&#062;left) {
+
+            insert(node-&#062;left, key);
+
+        } else {
+
+            node-&#062;left = newNode;
+
+        }
+
+     }
+
+}
+
+void Tree::inorder() {
+
+     inorder(root);
+
+}
+
+void Tree::inorder(Node *node) {
+
+     if (node) {
+
+         inorder(node-&#062;left);
+
+         cout &#060;key &#060;right);
+
+     }
+
+}
+
+void Tree::preorder() {
+
+     preorder(root);
+
+}
+
+void Tree::preorder(Node *node) {
+
+     if (node) {
+
+         cout &#060;key &#060;left);
+
+         preorder(node-&#062;right);
+
+     }
+
+}
+
+void Tree::postorder() {
+
+     postorder(root);
+
+}
+
+void Tree::postorder(Node *node) {
+
+     if (node) {
+
+         postorder(node-&#062;left);
+
+         postorder(node-&#062;right);
+
+         cout &#060;key &#060;&#060; &#034; &#034;;
+
+     }
+
+}
+
+void Tree::forwardPrint(Node *node, int d) {
+
+    if (node) {
+
+        if (d == k) {
+
+            cout &#060;key &#060;left, d + 1);
+
+        forwardPrint(node-&#062;right, d + 1);
+
+    }
+
+}
+
+void Tree::reset_flags() {
+
+    found = 0;
+
+    targetNode = NULL;
+
+    k = -1;
+
+    exitFlag = 0;
+
+    left = -1;
+
+}
+
+void Tree::print(int key, int d) {
+
+     reset_flags();
+
+     if (searchTarget(root, key) == SUCCESS) {
+
+         k = d;
+
+         if (key key)
+
+           left = 1;
+
+         else
+
+           left = 0;
+
+         print(root);
+
+     } else {
+
+        cout &#060;key == k) {
+
+           targetNode = node;
+
+           return 1;
+
+        }
+
+        if (k key)
+
+            searchTarget(node-&#062;left, k);
+
+        else
+
+            searchTarget(node-&#062;right, k);
+
+    } else {
+
+       return 0;
+
+    }
+
+}
+
+void Tree::print(Node *node) {
+
+     if (node &#038;&#038; !exitFlag) {
+
+         if (node == targetNode) {
+
+            found = 1;
+
+            forwardPrint(targetNode, 0);
+
+         } else {
+
+            print(node-&#062;left);
+
+            print(node-&#062;right);
+
+         }
+
+         if (found) {
+
+             if (node != targetNode) {
+
+                if (k == 0 &#038;&#038; node == root)
+
+                {
+
+                   cout &#060;key &#060; 0 &#038;&#038; node == root) {
+
+                  if (left)
+
+                     forwardPrint(node-&#062;right, 1);
+
+                  else
+
+                     forwardPrint(node-&#062;left, 1);
+
+                  exitFlag = 1;
+
+                } else {
+
+                  k--;
+
+                  if (targetNode-&#062;key key)
+
+                      forwardPrint(node-&#062;right, 1);
+
+                  else
+
+                      forwardPrint(node-&#062;left, 1);
+
+                }
+
+             }
+
+         }
+
+     }
+
+}
+
+Tree::~Tree() {
+
+    freeTree(root);
+
+}
+
+void Tree::freeTree(Node *node) {
+
+     if (node) {
+
+         freeTree(node-&#062;left);
+
+         freeTree(node-&#062;right);
+
+         delete node;
+
+     }
+
+}
+
+-----------------
+
+driver.cpp
+
+------------------
+
+#include 
+
+#include &quot;tree.h&quot;
+
+using namespace std;
+
+int main() {
+
+     Tree *tree = new Tree();
+
+     tree-&#062;insert(20);
+
+     tree-&#062;insert(22);
+
+     tree-&#062;insert(8);
+
+     tree-&#062;insert(12);
+
+     tree-&#062;insert(4);
+
+     tree-&#062;insert(10);
+
+     tree-&#062;insert(14);
+
+     cout &#060;&#060; &#034;In-order :: &#034; &#060;inorder();
+
+     cout &#060;print(14, 3);
+
+     cout &#060;print(8, 2);
+
+     cout &#060;print(8, 1);
+
+     cout &#060;print(20, 2);
+
+     delete tree;
+
+return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>&#8212;&#8212;&#8212;-</p>
+<p>tree.h</p>
+<p>&#8212;&#8212;&#8212;-</p>
+<p>#include </p>
+<p>#ifndef TREE_H</p>
+<p>#define TREE_H</p>
+<p>using namespace std;</p>
+<p>struct Node {</p>
+<p>    int key;</p>
+<p>    Node *left , *right;</p>
+<p>    Node() : key(-1), left(NULL), right(NULL) {</p>
+<p>    }</p>
+<p>    ~Node() {</p>
+<p>     }</p>
+<p>};</p>
+<p>class Tree {</p>
+<p>    Node *root;</p>
+<p>    Node *targetNode;</p>
+<p>    int k, found, exitFlag, left;</p>
+<p>public:</p>
+<p>    Tree() : root(NULL), targetNode(NULL), k(-1),</p>
+<p>             found(0), exitFlag(0), left(-1) {}</p>
+<p>    ~Tree();</p>
+<p>    void insert(int key);</p>
+<p>    void inorder();</p>
+<p>    void preorder();</p>
+<p>    void postorder();</p>
+<p>    void print(int key, int d);</p>
+<p>private:</p>
+<p>    void insert(Node *root, int key);</p>
+<p>    void inorder(Node *root);</p>
+<p>    void preorder(Node *root);</p>
+<p>    void postorder(Node *root);</p>
+<p>    void freeTree(Node *root);</p>
+<p>    void forwardPrint(Node *node, int d);</p>
+<p>    void print(Node *root);</p>
+<p>    int searchTarget(Node *root, int k);</p>
+<p>    void reset_flags();</p>
+<p>};</p>
+<p>#endif</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>tree.cpp</p>
+<p>&#8212;&#8212;&#8212;&#8212;-</p>
+<p>#include &#8220;tree.h&#8221;</p>
+<p>using namespace std;</p>
+<p>const int SUCCESS = 1;</p>
+<p>void Tree::insert(int key) {</p>
+<p>     if (root == NULL) {</p>
+<p>         Node *newNode = new Node();</p>
+<p>         newNode-&gt;key = key;</p>
+<p>         root = newNode;</p>
+<p>     } else {</p>
+<p>         insert(root, key);</p>
+<p>     }</p>
+<p>}</p>
+<p>void Tree::insert(Node *node, int key) {</p>
+<p>     Node *newNode = new Node();</p>
+<p>     newNode-&gt;key = key;</p>
+<p>     if (key &gt; node-&gt;key) {</p>
+<p>        if (node-&gt;right) {</p>
+<p>           insert(node-&gt;right, key);</p>
+<p>        } else {</p>
+<p>           node-&gt;right = newNode;</p>
+<p>        }</p>
+<p>     } else {</p>
+<p>        if (node-&gt;left) {</p>
+<p>            insert(node-&gt;left, key);</p>
+<p>        } else {</p>
+<p>            node-&gt;left = newNode;</p>
+<p>        }</p>
+<p>     }</p>
+<p>}</p>
+<p>void Tree::inorder() {</p>
+<p>     inorder(root);</p>
+<p>}</p>
+<p>void Tree::inorder(Node *node) {</p>
+<p>     if (node) {</p>
+<p>         inorder(node-&gt;left);</p>
+<p>         cout &lt;key &lt;right);</p>
+<p>     }</p>
+<p>}</p>
+<p>void Tree::preorder() {</p>
+<p>     preorder(root);</p>
+<p>}</p>
+<p>void Tree::preorder(Node *node) {</p>
+<p>     if (node) {</p>
+<p>         cout &lt;key &lt;left);</p>
+<p>         preorder(node-&gt;right);</p>
+<p>     }</p>
+<p>}</p>
+<p>void Tree::postorder() {</p>
+<p>     postorder(root);</p>
+<p>}</p>
+<p>void Tree::postorder(Node *node) {</p>
+<p>     if (node) {</p>
+<p>         postorder(node-&gt;left);</p>
+<p>         postorder(node-&gt;right);</p>
+<p>         cout &lt;key &lt;&lt; &quot; &quot;;</p>
+<p>     }</p>
+<p>}</p>
+<p>void Tree::forwardPrint(Node *node, int d) {</p>
+<p>    if (node) {</p>
+<p>        if (d == k) {</p>
+<p>            cout &lt;key &lt;left, d + 1);</p>
+<p>        forwardPrint(node-&gt;right, d + 1);</p>
+<p>    }</p>
+<p>}</p>
+<p>void Tree::reset_flags() {</p>
+<p>    found = 0;</p>
+<p>    targetNode = NULL;</p>
+<p>    k = -1;</p>
+<p>    exitFlag = 0;</p>
+<p>    left = -1;</p>
+<p>}</p>
+<p>void Tree::print(int key, int d) {</p>
+<p>     reset_flags();</p>
+<p>     if (searchTarget(root, key) == SUCCESS) {</p>
+<p>         k = d;</p>
+<p>         if (key key)</p>
+<p>           left = 1;</p>
+<p>         else</p>
+<p>           left = 0;</p>
+<p>         print(root);</p>
+<p>     } else {</p>
+<p>        cout &lt;key == k) {</p>
+<p>           targetNode = node;</p>
+<p>           return 1;</p>
+<p>        }</p>
+<p>        if (k key)</p>
+<p>            searchTarget(node-&gt;left, k);</p>
+<p>        else</p>
+<p>            searchTarget(node-&gt;right, k);</p>
+<p>    } else {</p>
+<p>       return 0;</p>
+<p>    }</p>
+<p>}</p>
+<p>void Tree::print(Node *node) {</p>
+<p>     if (node &amp;&amp; !exitFlag) {</p>
+<p>         if (node == targetNode) {</p>
+<p>            found = 1;</p>
+<p>            forwardPrint(targetNode, 0);</p>
+<p>         } else {</p>
+<p>            print(node-&gt;left);</p>
+<p>            print(node-&gt;right);</p>
+<p>         }</p>
+<p>         if (found) {</p>
+<p>             if (node != targetNode) {</p>
+<p>                if (k == 0 &amp;&amp; node == root)</p>
+<p>                {</p>
+<p>                   cout &lt;key &lt; 0 &amp;&amp; node == root) {</p>
+<p>                  if (left)</p>
+<p>                     forwardPrint(node-&gt;right, 1);</p>
+<p>                  else</p>
+<p>                     forwardPrint(node-&gt;left, 1);</p>
+<p>                  exitFlag = 1;</p>
+<p>                } else {</p>
+<p>                  k&#8211;;</p>
+<p>                  if (targetNode-&gt;key key)</p>
+<p>                      forwardPrint(node-&gt;right, 1);</p>
+<p>                  else</p>
+<p>                      forwardPrint(node-&gt;left, 1);</p>
+<p>                }</p>
+<p>             }</p>
+<p>         }</p>
+<p>     }</p>
+<p>}</p>
+<p>Tree::~Tree() {</p>
+<p>    freeTree(root);</p>
+<p>}</p>
+<p>void Tree::freeTree(Node *node) {</p>
+<p>     if (node) {</p>
+<p>         freeTree(node-&gt;left);</p>
+<p>         freeTree(node-&gt;right);</p>
+<p>         delete node;</p>
+<p>     }</p>
+<p>}</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>driver.cpp</p>
+<p>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</p>
+<p>#include </p>
+<p>#include &#8220;tree.h&#8221;</p>
+<p>using namespace std;</p>
+<p>int main() {</p>
+<p>     Tree *tree = new Tree();</p>
+<p>     tree-&gt;insert(20);</p>
+<p>     tree-&gt;insert(22);</p>
+<p>     tree-&gt;insert(8);</p>
+<p>     tree-&gt;insert(12);</p>
+<p>     tree-&gt;insert(4);</p>
+<p>     tree-&gt;insert(10);</p>
+<p>     tree-&gt;insert(14);</p>
+<p>     cout &lt;&lt; &quot;In-order :: &quot; &lt;inorder();</p>
+<p>     cout &lt;print(14, 3);</p>
+<p>     cout &lt;print(8, 2);</p>
+<p>     cout &lt;print(8, 1);</p>
+<p>     cout &lt;print(20, 2);</p>
+<p>     delete tree;</p>
+<p>return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Siva Krishna</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-33917</link>
+		<dc:creator><![CDATA[Siva Krishna]]></dc:creator>
+		<pubDate>Thu, 27 Mar 2014 08:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-33917</guid>
+		<description><![CDATA[a and b can be any nodes. Dist(root, Node) can be find by traversing the given tree in level order and LCA of two nodes can be found using any standard approach.]]></description>
+		<content:encoded><![CDATA[<p>a and b can be any nodes. Dist(root, Node) can be find by traversing the given tree in level order and LCA of two nodes can be found using any standard approach.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/#comment-33911</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 27 Mar 2014 05:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=127739#comment-33911</guid>
+		<description><![CDATA[What is a and b here. How do you find it?]]></description>
+		<content:encoded><![CDATA[<p>What is a and b here. How do you find it?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.060 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:50 -->
+
+<!-- Compression = gzip -->

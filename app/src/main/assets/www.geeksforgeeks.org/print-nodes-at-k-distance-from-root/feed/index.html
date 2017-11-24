@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print nodes at k distance from root</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: nitesh78</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-39716</link>
+		<dc:creator><![CDATA[nitesh78]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 05:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-39716</guid>
+		<description><![CDATA[same as printing level order]]></description>
+		<content:encoded><![CDATA[<p>same as printing level order</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: dimple</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-39326</link>
+		<dc:creator><![CDATA[dimple]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 08:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-39326</guid>
+		<description><![CDATA[you cannot use level order traversal for this pblm..preorder traversal would be very fine :)]]></description>
+		<content:encoded><![CDATA[<p>you cannot use level order traversal for this pblm..preorder traversal would be very fine 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-39194</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 19:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-39194</guid>
+		<description><![CDATA[??]]></description>
+		<content:encoded><![CDATA[<p>??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ultimate_coder</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-39152</link>
+		<dc:creator><![CDATA[ultimate_coder]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 13:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-39152</guid>
+		<description><![CDATA[You don&#039;t say !]]></description>
+		<content:encoded><![CDATA[<p>You don&#8217;t say !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit Kumar</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-38610</link>
+		<dc:creator><![CDATA[Rohit Kumar]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 23:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-38610</guid>
+		<description><![CDATA[//Given a root of a tree, and an integer k.
+//Print all the nodes which are at k distance from root
+#include
+#include
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node* next;
+};
+void traverse(struct node*,int k);
+struct node* create(struct node*,int);
+int main()
+{
+    int n;
+    struct node*head;
+    head=NULL;
+    head=create(head,4);
+    create(head,2);
+    create(head,6);
+    create(head,1);
+    create(head,3);
+    create(head,5);
+    create(head,8);
+    create(head,7);
+    create(head,9);
+    create(head,10);
+   n=3;
+    printf(&quot;nodes at level %d are:n&quot;,n);
+    traverse(head,n);
+
+    return 0;
+}
+struct node* create(struct node*root,int n)
+{
+    if(root==NULL)
+    {
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));
+        newnode-&#062;data=n;
+        newnode-&#062;next=NULL;
+        newnode-&#062;prev=NULL;
+        root=newnode;
+    }
+    else if(root-&#062;data&#062;=n)
+    {
+        if(root-&#062;prev==NULL)
+        {
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));
+        newnode-&#062;data=n;
+        newnode-&#062;next=NULL;
+        newnode-&#062;prev=NULL;
+         root-&#062;prev=newnode;
+        }
+        else
+            create(root-&#062;prev,n);
+    }
+    else
+    {
+        if(root-&#062;next==NULL)
+        {
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));
+        newnode-&#062;data=n;
+        newnode-&#062;next=NULL;
+        newnode-&#062;prev=NULL;
+         root-&#062;next=newnode;
+        }
+        else
+            create(root-&#062;next,n);
+    }
+    return(root);
+}
+void traverse(struct node*root,int n)
+{
+    static struct node*a[10];
+  static int i,j,level;
+  int k;
+  if(root==NULL)return;
+  a[0]=root;level=1;
+  while(i&#060;=j)
+  {
+     if(level==n)
+     {
+        k=i;
+        while(kdata);
+        }
+        return;
+     }
+     k=j;
+      while(iprev!=NULL)
+          a[++j]=a[i]-&#062;prev;
+       if(a[i]-&#062;next!=NULL)
+          a[++j]=a[i]-&#062;next;
+          i++;
+       }level++;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>//Given a root of a tree, and an integer k.<br />
+//Print all the nodes which are at k distance from root<br />
+#include<br />
+#include<br />
+struct node<br />
+{<br />
+    int data;<br />
+    struct node *prev;<br />
+    struct node* next;<br />
+};<br />
+void traverse(struct node*,int k);<br />
+struct node* create(struct node*,int);<br />
+int main()<br />
+{<br />
+    int n;<br />
+    struct node*head;<br />
+    head=NULL;<br />
+    head=create(head,4);<br />
+    create(head,2);<br />
+    create(head,6);<br />
+    create(head,1);<br />
+    create(head,3);<br />
+    create(head,5);<br />
+    create(head,8);<br />
+    create(head,7);<br />
+    create(head,9);<br />
+    create(head,10);<br />
+   n=3;<br />
+    printf(&#8220;nodes at level %d are:n&#8221;,n);<br />
+    traverse(head,n);</p>
+<p>    return 0;<br />
+}<br />
+struct node* create(struct node*root,int n)<br />
+{<br />
+    if(root==NULL)<br />
+    {<br />
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));<br />
+        newnode-&gt;data=n;<br />
+        newnode-&gt;next=NULL;<br />
+        newnode-&gt;prev=NULL;<br />
+        root=newnode;<br />
+    }<br />
+    else if(root-&gt;data&gt;=n)<br />
+    {<br />
+        if(root-&gt;prev==NULL)<br />
+        {<br />
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));<br />
+        newnode-&gt;data=n;<br />
+        newnode-&gt;next=NULL;<br />
+        newnode-&gt;prev=NULL;<br />
+         root-&gt;prev=newnode;<br />
+        }<br />
+        else<br />
+            create(root-&gt;prev,n);<br />
+    }<br />
+    else<br />
+    {<br />
+        if(root-&gt;next==NULL)<br />
+        {<br />
+        struct node* newnode=(struct node*)malloc(sizeof(struct node*));<br />
+        newnode-&gt;data=n;<br />
+        newnode-&gt;next=NULL;<br />
+        newnode-&gt;prev=NULL;<br />
+         root-&gt;next=newnode;<br />
+        }<br />
+        else<br />
+            create(root-&gt;next,n);<br />
+    }<br />
+    return(root);<br />
+}<br />
+void traverse(struct node*root,int n)<br />
+{<br />
+    static struct node*a[10];<br />
+  static int i,j,level;<br />
+  int k;<br />
+  if(root==NULL)return;<br />
+  a[0]=root;level=1;<br />
+  while(i&lt;=j)<br />
+  {<br />
+     if(level==n)<br />
+     {<br />
+        k=i;<br />
+        while(kdata);<br />
+        }<br />
+        return;<br />
+     }<br />
+     k=j;<br />
+      while(iprev!=NULL)<br />
+          a[++j]=a[i]-&gt;prev;<br />
+       if(a[i]-&gt;next!=NULL)<br />
+          a[++j]=a[i]-&gt;next;<br />
+          i++;<br />
+       }level++;<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-38027</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 18:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-38027</guid>
+		<description><![CDATA[if( k == 0 )
+   {
+      printf( &quot;%d &quot;, root-&#062;data );
+      return ;
+   }
+
+
+is return in this statement required ? i think it will work without   it also.]]></description>
+		<content:encoded><![CDATA[<p>if( k == 0 )<br />
+   {<br />
+      printf( &#8220;%d &#8220;, root-&gt;data );<br />
+      return ;<br />
+   }</p>
+<p>is return in this statement required ? i think it will work without   it also.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alien</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-34611</link>
+		<dc:creator><![CDATA[alien]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 06:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-34611</guid>
+		<description><![CDATA[We can use Level order traversal for this. It is the implied travesal for this problem]]></description>
+		<content:encoded><![CDATA[<p>We can use Level order traversal for this. It is the implied travesal for this problem</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gandalf</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-33488</link>
+		<dc:creator><![CDATA[Gandalf]]></dc:creator>
+		<pubDate>Fri, 14 Mar 2014 05:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-33488</guid>
+		<description><![CDATA[public boolean printNodesAtKDistanceFromLeaf(Node node, int k) {
+
+		if (node == null)
+
+			return false;
+
+		if (node.left == null &#038; node.right == null) {
+
+			kDistance[0] = 1;
+
+			return true;
+
+		}
+
+		if (printNodesAtKDistanceFromLeaf(node.left, k) &#038;&#038; kDistance[0] &#060;= k) {
+
+			System.out.println(node.left.data);
+
+		}
+
+		if (printNodesAtKDistanceFromLeaf(node.right, k) &#038;&#038; kDistance[0] &#060;= k) {
+
+			System.out.println(node.right.data);
+
+		}
+
+		kDistance[0]++;
+
+		return true;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>public boolean printNodesAtKDistanceFromLeaf(Node node, int k) {</p>
+<p>		if (node == null)</p>
+<p>			return false;</p>
+<p>		if (node.left == null &amp; node.right == null) {</p>
+<p>			kDistance[0] = 1;</p>
+<p>			return true;</p>
+<p>		}</p>
+<p>		if (printNodesAtKDistanceFromLeaf(node.left, k) &amp;&amp; kDistance[0] &lt;= k) {</p>
+<p>			System.out.println(node.left.data);</p>
+<p>		}</p>
+<p>		if (printNodesAtKDistanceFromLeaf(node.right, k) &amp;&amp; kDistance[0] &lt;= k) {</p>
+<p>			System.out.println(node.right.data);</p>
+<p>		}</p>
+<p>		kDistance[0]++;</p>
+<p>		return true;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MacM</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-32863</link>
+		<dc:creator><![CDATA[MacM]]></dc:creator>
+		<pubDate>Sat, 22 Feb 2014 07:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-32863</guid>
+		<description><![CDATA[If we want to get all nodes which are at &quot;K&quot; from any given node
+Here in this example I used value of node (int required node) .. from this value i WIll find my starting node and them track all nodes which are at &quot;K&quot; distance.
+
+
+public int PrintNodesAtKDistance(Node root, int requiredNode, int iDistance)
+        {
+            if ((root == null) &#124;&#124; (iDistance  0)
+            {
+                PrintChildNodes(root.right, lPath - 1);
+                return lPath - 1;
+            }
+            else if(lPath == 0)
+            {
+                Debug.WriteLine(root.value);
+            }
+
+            if(rPath &#062; 0)
+            {
+                PrintChildNodes(root.left, rPath - 1);
+                return rPath - 1;
+            }
+            else if (rPath == 0)
+            {
+                Debug.WriteLine(root.value);
+            }
+
+            return -1;
+        }
+
+        public void PrintChildNodes(Node aNode, int iDistance)
+        {
+            if (aNode == null)
+                return;
+
+            if(iDistance == 0)
+            {
+                Debug.WriteLine(aNode.value);
+            }
+
+            PrintChildNodes(aNode.left, iDistance - 1);
+            PrintChildNodes(aNode.right, iDistance - 1);
+        }]]></description>
+		<content:encoded><![CDATA[<p>If we want to get all nodes which are at &#8220;K&#8221; from any given node<br />
+Here in this example I used value of node (int required node) .. from this value i WIll find my starting node and them track all nodes which are at &#8220;K&#8221; distance.</p>
+<p>public int PrintNodesAtKDistance(Node root, int requiredNode, int iDistance)<br />
+        {<br />
+            if ((root == null) || (iDistance  0)<br />
+            {<br />
+                PrintChildNodes(root.right, lPath &#8211; 1);<br />
+                return lPath &#8211; 1;<br />
+            }<br />
+            else if(lPath == 0)<br />
+            {<br />
+                Debug.WriteLine(root.value);<br />
+            }</p>
+<p>            if(rPath &gt; 0)<br />
+            {<br />
+                PrintChildNodes(root.left, rPath &#8211; 1);<br />
+                return rPath &#8211; 1;<br />
+            }<br />
+            else if (rPath == 0)<br />
+            {<br />
+                Debug.WriteLine(root.value);<br />
+            }</p>
+<p>            return -1;<br />
+        }</p>
+<p>        public void PrintChildNodes(Node aNode, int iDistance)<br />
+        {<br />
+            if (aNode == null)<br />
+                return;</p>
+<p>            if(iDistance == 0)<br />
+            {<br />
+                Debug.WriteLine(aNode.value);<br />
+            }</p>
+<p>            PrintChildNodes(aNode.left, iDistance &#8211; 1);<br />
+            PrintChildNodes(aNode.right, iDistance &#8211; 1);<br />
+        }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-32796</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2014 11:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-32796</guid>
+		<description><![CDATA[// Print_K_Distance_Nodes.cpp : Defines the entry point for the console application.
+//
+
+/*
+Problem: Given a Source Node in a binary tree, Print all nodes that are &quot;K&quot; hops from the given node.These nodes can be the children / grand - children, parent / grand - parent or  siblings / grand - siblings.
+Note : -You cannot use a parent pointer to solve this problem.
+
+   Example1:
+		   Input : k = 2, Node = 70
+
+	   			  45
+                               /      
+                             /          
+			   /              
+	                  /		 
+		    22   		  70
+                 /     		 /    
+                /       		/      
+               15	 27       60        80
+             /                               /	  
+           /     	        	    /     
+	8	  17			75	     90
+				      /    	
+				72      78
+	   
+
+
+	   Output = 90,75,22
+
+	      Example2:
+		   Input : k = 2, Node = 22
+
+	   
+
+	   			  45
+                               /      
+                             /          
+			   /              
+	                  /		 
+		    22   		  70
+                 /     		 /    
+                /       		/      
+               15	 27       60        80
+             /                               /	  
+           /     	        	    /     
+	8	  17			75	     90
+				      /    	
+				72      78
+	   
+
+
+	   Output = 8,17,70
+
+
+	   Solution Approach : In a binary tree if a node is numbered as N, then left and right children are numbered 2N and 2N+1
+	   So for the given &quot;Source Node&quot;, find this tree_value, ie node &quot;70&quot; will have tree_value  &quot;3&quot;.
+
+	   From the given Source Node&#039;s tree_value, divide its tree value 2 ^ K times to reach k hops on parent side, and multiply the source node&#039;s tree_value 2^k times to reach children 
+	   then are K hops down.
+
+ */
+
+#include &quot;stdafx.h&quot;
+#include 
+	   using namespace std;
+
+		 struct Node
+		 {
+			 Node *left;
+			 int data;
+			 Node *right;
+		 };
+
+
+		 class Tree
+		 {
+		 public:
+			 Node *head;
+			 Node *prev;
+			 Node * tmp;
+			 bool l;
+			 bool r;
+			 int val;
+			 int max_val;
+			 int a[100];
+			 Tree()
+			 {
+				 head = NULL;
+				 r = false;
+				 l = false;
+				 val = 0;
+				 max_val = 0;
+				 int array_index = 0;
+				 for (int i = 0; i &#060; 100; i++)
+					 a[i] = 0;
+			 }
+			 void  PopulateParentValues(int k, int tree_value, int &#038;array_index, bool comingfromleft, bool comingfromright)
+			 {
+				 if (k  0)
+				 {
+					 if (tree_value % 2 == 0)
+					 {
+						 comingfromleft = true;
+						 comingfromright = false;
+						 PopulateChildrenValues(k - 2, ((tree_value/2) *2)+1, array_index);
+						 PopulateParentValues(k-1, tree_value/2, array_index, comingfromleft, comingfromright);
+					 }
+					 else
+					 {
+						 comingfromleft = false;
+						 comingfromright = true;
+						 PopulateChildrenValues(k - 2, ((tree_value/2) * 2), array_index);
+						 PopulateParentValues(k - 1, tree_value/2, array_index, comingfromleft, comingfromright);
+					 }
+				 }
+				 else
+					 return;
+			 }
+
+			 void PopulateChildrenValues(int k, int tree_value, int &#038;array_index)
+			 {
+				 if (tree_value &#062;0)
+				 if (k == 0)
+				 {
+					 a[array_index] = tree_value;
+					 array_index++;
+				 }
+				 else 
+				 {
+					 if (k &#062; 0)
+					 {
+
+						 PopulateChildrenValues(k - 1, tree_value * 2, array_index);
+						 PopulateChildrenValues(k - 1, (tree_value * 2) + 1, array_index);
+					 }
+				 }
+			 }
+			 void PrintArray()
+			 {
+				 for (int i = 0; i  0)
+					 cout &#060;&#060; &#034;[&#034; &#060;&#060; a[i] &#060;&#060; &#034;]&#034; &#060;data = data;
+					 head-&#062;left = NULL;
+					 head-&#062;right = NULL;
+				 }
+				 else
+				 {
+					 tmp = head;
+					 l = false;
+					 r = false;
+					 while (tmp != NULL)
+					 {
+						 prev = tmp;
+						 if (tmp-&#062;data &#062;= data)
+						 {
+							 l = true;
+							 r = false;
+							 tmp = tmp-&#062;left;
+						 }
+						 else
+						 {
+							 r = true;
+							 l = false;
+							 tmp = tmp-&#062;right;
+						 }
+					 }
+					 if (r)
+					 {
+						 prev-&#062;right = new Node;
+						 prev-&#062;right-&#062;data = data;
+						 prev-&#062;right-&#062;left = NULL;
+						 prev-&#062;right-&#062;right = NULL;
+					 }
+					 if (l)
+					 {
+						 prev-&#062;left = new Node;
+						 prev-&#062;left-&#062;data = data;
+						 prev-&#062;left-&#062;left = NULL;
+						 prev-&#062;left-&#062;right = NULL;
+					 }
+				 }
+			 }
+			 void Inorder(Node *node)
+			 {
+				 if (node)
+				 {
+					 Inorder(node-&#062;left);
+					 //	cout &#060;&#060; &#034;[&#034; &#060;data &#060;&#060; &#034;]&#034; &#060; max_val)
+						 max_val = val;
+					 Inorder(node-&#062;right);
+				 }
+			 }
+
+			 void GetVal(Node *node, int k, int node_val)
+			 {
+				 if (node)
+				 {
+					 GetVal(node-&#062;left, k, node_val * 2);
+					 if (node-&#062;data == k)
+					 {
+						 val = node_val;
+					 }
+					 GetVal(node-&#062;right, k, node_val * 2 + 1);
+				 }
+			 }
+			 void Print_K_Distance_Nodes(Node *node, int node_val)
+			 {
+				 if (node)
+				 {
+					 Print_K_Distance_Nodes(node-&#062;left, node_val * 2);
+					 for (int i = 0; i &#060; 100; i++)
+					 if (node_val == a[i])
+					 {
+						 cout &#060;&quot; &#060;data &#060;right, node_val * 2 + 1);
+				 }
+			 }
+
+			 void Populate_Parent_and_Children(int k, int tree_value, int &#038;array_index)
+			 {
+				 PopulateChildrenValues(k, tree_value, array_index);
+				 PopulateParentValues(k, tree_value, array_index, false, false);
+			 }
+		 };
+
+		 int _tmain(int argc, _TCHAR* argv[])
+		 {
+			 Tree t;
+			 t.Insert(45);
+			 t.Insert(22);
+			 t.Insert(70);
+			 t.Insert(15);
+			 t.Insert(27);
+			 t.Insert(60);
+			 t.Insert(80);
+			 t.Insert(8);
+			 t.Insert(17);
+			 t.Insert(75);
+			 t.Insert(90);
+			 t.Insert(72);
+			 t.Insert(78);
+			 t.Inorder(t.head);
+			 t.GetVal(t.head, 80, 1);
+			 int h = 0;
+
+			 t.Populate_Parent_and_Children(1, t.val, h);
+			 //t.PopulateChildrenValues(1, t.val, h);
+			 //t.PopulateParentValues(1,t.val,h,false,false);
+			 cout &#060;&#060; endl;
+			 cout &#060;&#060; &#034;-------------------------&#034; &#060;&#060; endl;
+			 t.PrintArray();
+			 t.Print_K_Distance_Nodes(t.head, 1);
+			 return 0;
+		 }]]></description>
+		<content:encoded><![CDATA[<p>// Print_K_Distance_Nodes.cpp : Defines the entry point for the console application.<br />
+//</p>
+<p>/*<br />
+Problem: Given a Source Node in a binary tree, Print all nodes that are &#8220;K&#8221; hops from the given node.These nodes can be the children / grand &#8211; children, parent / grand &#8211; parent or  siblings / grand &#8211; siblings.<br />
+Note : -You cannot use a parent pointer to solve this problem.</p>
+<p>   Example1:<br />
+		   Input : k = 2, Node = 70</p>
+<p>	   			  45<br />
+                               /<br />
+                             /<br />
+			   /<br />
+	                  /<br />
+		    22   		  70<br />
+                 /     		 /<br />
+                /       		/<br />
+               15	 27       60        80<br />
+             /                               /<br />
+           /     	        	    /<br />
+	8	  17			75	     90<br />
+				      /<br />
+				72      78</p>
+<p>	   Output = 90,75,22</p>
+<p>	      Example2:<br />
+		   Input : k = 2, Node = 22</p>
+<p>	   			  45<br />
+                               /<br />
+                             /<br />
+			   /<br />
+	                  /<br />
+		    22   		  70<br />
+                 /     		 /<br />
+                /       		/<br />
+               15	 27       60        80<br />
+             /                               /<br />
+           /     	        	    /<br />
+	8	  17			75	     90<br />
+				      /<br />
+				72      78</p>
+<p>	   Output = 8,17,70</p>
+<p>	   Solution Approach : In a binary tree if a node is numbered as N, then left and right children are numbered 2N and 2N+1<br />
+	   So for the given &#8220;Source Node&#8221;, find this tree_value, ie node &#8220;70&#8221; will have tree_value  &#8220;3&#8221;.</p>
+<p>	   From the given Source Node&#8217;s tree_value, divide its tree value 2 ^ K times to reach k hops on parent side, and multiply the source node&#8217;s tree_value 2^k times to reach children<br />
+	   then are K hops down.</p>
+<p> */</p>
+<p>#include &#8220;stdafx.h&#8221;<br />
+#include<br />
+	   using namespace std;</p>
+<p>		 struct Node<br />
+		 {<br />
+			 Node *left;<br />
+			 int data;<br />
+			 Node *right;<br />
+		 };</p>
+<p>		 class Tree<br />
+		 {<br />
+		 public:<br />
+			 Node *head;<br />
+			 Node *prev;<br />
+			 Node * tmp;<br />
+			 bool l;<br />
+			 bool r;<br />
+			 int val;<br />
+			 int max_val;<br />
+			 int a[100];<br />
+			 Tree()<br />
+			 {<br />
+				 head = NULL;<br />
+				 r = false;<br />
+				 l = false;<br />
+				 val = 0;<br />
+				 max_val = 0;<br />
+				 int array_index = 0;<br />
+				 for (int i = 0; i &lt; 100; i++)<br />
+					 a[i] = 0;<br />
+			 }<br />
+			 void  PopulateParentValues(int k, int tree_value, int &amp;array_index, bool comingfromleft, bool comingfromright)<br />
+			 {<br />
+				 if (k  0)<br />
+				 {<br />
+					 if (tree_value % 2 == 0)<br />
+					 {<br />
+						 comingfromleft = true;<br />
+						 comingfromright = false;<br />
+						 PopulateChildrenValues(k &#8211; 2, ((tree_value/2) *2)+1, array_index);<br />
+						 PopulateParentValues(k-1, tree_value/2, array_index, comingfromleft, comingfromright);<br />
+					 }<br />
+					 else<br />
+					 {<br />
+						 comingfromleft = false;<br />
+						 comingfromright = true;<br />
+						 PopulateChildrenValues(k &#8211; 2, ((tree_value/2) * 2), array_index);<br />
+						 PopulateParentValues(k &#8211; 1, tree_value/2, array_index, comingfromleft, comingfromright);<br />
+					 }<br />
+				 }<br />
+				 else<br />
+					 return;<br />
+			 }</p>
+<p>			 void PopulateChildrenValues(int k, int tree_value, int &amp;array_index)<br />
+			 {<br />
+				 if (tree_value &gt;0)<br />
+				 if (k == 0)<br />
+				 {<br />
+					 a[array_index] = tree_value;<br />
+					 array_index++;<br />
+				 }<br />
+				 else<br />
+				 {<br />
+					 if (k &gt; 0)<br />
+					 {</p>
+<p>						 PopulateChildrenValues(k &#8211; 1, tree_value * 2, array_index);<br />
+						 PopulateChildrenValues(k &#8211; 1, (tree_value * 2) + 1, array_index);<br />
+					 }<br />
+				 }<br />
+			 }<br />
+			 void PrintArray()<br />
+			 {<br />
+				 for (int i = 0; i  0)<br />
+					 cout &lt;&lt; &quot;[&quot; &lt;&lt; a[i] &lt;&lt; &quot;]&quot; &lt;data = data;<br />
+					 head-&gt;left = NULL;<br />
+					 head-&gt;right = NULL;<br />
+				 }<br />
+				 else<br />
+				 {<br />
+					 tmp = head;<br />
+					 l = false;<br />
+					 r = false;<br />
+					 while (tmp != NULL)<br />
+					 {<br />
+						 prev = tmp;<br />
+						 if (tmp-&gt;data &gt;= data)<br />
+						 {<br />
+							 l = true;<br />
+							 r = false;<br />
+							 tmp = tmp-&gt;left;<br />
+						 }<br />
+						 else<br />
+						 {<br />
+							 r = true;<br />
+							 l = false;<br />
+							 tmp = tmp-&gt;right;<br />
+						 }<br />
+					 }<br />
+					 if (r)<br />
+					 {<br />
+						 prev-&gt;right = new Node;<br />
+						 prev-&gt;right-&gt;data = data;<br />
+						 prev-&gt;right-&gt;left = NULL;<br />
+						 prev-&gt;right-&gt;right = NULL;<br />
+					 }<br />
+					 if (l)<br />
+					 {<br />
+						 prev-&gt;left = new Node;<br />
+						 prev-&gt;left-&gt;data = data;<br />
+						 prev-&gt;left-&gt;left = NULL;<br />
+						 prev-&gt;left-&gt;right = NULL;<br />
+					 }<br />
+				 }<br />
+			 }<br />
+			 void Inorder(Node *node)<br />
+			 {<br />
+				 if (node)<br />
+				 {<br />
+					 Inorder(node-&gt;left);<br />
+					 //	cout &lt;&lt; &quot;[&quot; &lt;data &lt;&lt; &quot;]&quot; &lt; max_val)<br />
+						 max_val = val;<br />
+					 Inorder(node-&gt;right);<br />
+				 }<br />
+			 }</p>
+<p>			 void GetVal(Node *node, int k, int node_val)<br />
+			 {<br />
+				 if (node)<br />
+				 {<br />
+					 GetVal(node-&gt;left, k, node_val * 2);<br />
+					 if (node-&gt;data == k)<br />
+					 {<br />
+						 val = node_val;<br />
+					 }<br />
+					 GetVal(node-&gt;right, k, node_val * 2 + 1);<br />
+				 }<br />
+			 }<br />
+			 void Print_K_Distance_Nodes(Node *node, int node_val)<br />
+			 {<br />
+				 if (node)<br />
+				 {<br />
+					 Print_K_Distance_Nodes(node-&gt;left, node_val * 2);<br />
+					 for (int i = 0; i &lt; 100; i++)<br />
+					 if (node_val == a[i])<br />
+					 {<br />
+						 cout &lt;&#8221; &lt;data &lt;right, node_val * 2 + 1);<br />
+				 }<br />
+			 }</p>
+<p>			 void Populate_Parent_and_Children(int k, int tree_value, int &amp;array_index)<br />
+			 {<br />
+				 PopulateChildrenValues(k, tree_value, array_index);<br />
+				 PopulateParentValues(k, tree_value, array_index, false, false);<br />
+			 }<br />
+		 };</p>
+<p>		 int _tmain(int argc, _TCHAR* argv[])<br />
+		 {<br />
+			 Tree t;<br />
+			 t.Insert(45);<br />
+			 t.Insert(22);<br />
+			 t.Insert(70);<br />
+			 t.Insert(15);<br />
+			 t.Insert(27);<br />
+			 t.Insert(60);<br />
+			 t.Insert(80);<br />
+			 t.Insert(8);<br />
+			 t.Insert(17);<br />
+			 t.Insert(75);<br />
+			 t.Insert(90);<br />
+			 t.Insert(72);<br />
+			 t.Insert(78);<br />
+			 t.Inorder(t.head);<br />
+			 t.GetVal(t.head, 80, 1);<br />
+			 int h = 0;</p>
+<p>			 t.Populate_Parent_and_Children(1, t.val, h);<br />
+			 //t.PopulateChildrenValues(1, t.val, h);<br />
+			 //t.PopulateParentValues(1,t.val,h,false,false);<br />
+			 cout &lt;&lt; endl;<br />
+			 cout &lt;&lt; &quot;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-&quot; &lt;&lt; endl;<br />
+			 t.PrintArray();<br />
+			 t.Print_K_Distance_Nodes(t.head, 1);<br />
+			 return 0;<br />
+		 }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/#comment-32795</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2014 10:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8615#comment-32795</guid>
+		<description><![CDATA[test]]></description>
+		<content:encoded><![CDATA[<p>test</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.056 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:03:57 -->
+
+<!-- Compression = gzip -->

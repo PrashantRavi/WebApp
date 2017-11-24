@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Segregate even and odd nodes in a Linked List</title>
+	<atom:link href="http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Abhishek Kannojia</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-39623</link>
+		<dc:creator><![CDATA[Abhishek Kannojia]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 10:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-39623</guid>
+		<description><![CDATA[My iterative implementation. Let me know if it there are errors
+http://ideone.com/nJnEPQ]]></description>
+		<content:encoded><![CDATA[<p>My iterative implementation. Let me know if it there are errors<br />
+<a href="http://ideone.com/nJnEPQ" rel="nofollow">http://ideone.com/nJnEPQ</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vikash Kumaran</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-39144</link>
+		<dc:creator><![CDATA[Vikash Kumaran]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 13:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-39144</guid>
+		<description><![CDATA[instead of inserting odd elements at the end we can insert the even elements at even pointer which points to the next even node pos.
+
+This method simpler and has less num of cases to handle than the method one of this post
+
+void segregateEvenOdd(struct node **head_ref)
+
+{  
+
+    struct node dummy;
+
+    dummy.next=*head_ref;
+
+    struct node *even = &#038;dummy;
+
+    struct node *prev = *head_ref;
+
+    struct node *curr = *head_ref;
+
+    int count=0; 
+
+    /* Get pointer to the last node */
+
+    while (curr!= NULL)
+
+          {
+
+                      if((curr-&#062;data%2)==0)
+
+                      {
+
+                                  if(prev!=curr)         
+
+                                  {   
+
+                                   prev-&#062;next=curr-&#062;next;
+
+                                   curr-&#062;next=even-&#062;next;
+
+                                   even-&#062;next=curr;
+
+                                  }
+
+                                  even=even-&#062;next;
+
+                                  count++;
+
+                      }
+
+                      prev=curr; 
+
+                      curr=prev-&#062;next;
+
+                      if(count==1)
+
+                       *head_ref=even;
+
+          }
+
+}]]></description>
+		<content:encoded><![CDATA[<p>instead of inserting odd elements at the end we can insert the even elements at even pointer which points to the next even node pos.</p>
+<p>This method simpler and has less num of cases to handle than the method one of this post</p>
+<p>void segregateEvenOdd(struct node **head_ref)</p>
+<p>{  </p>
+<p>    struct node dummy;</p>
+<p>    dummy.next=*head_ref;</p>
+<p>    struct node *even = &amp;dummy;</p>
+<p>    struct node *prev = *head_ref;</p>
+<p>    struct node *curr = *head_ref;</p>
+<p>    int count=0; </p>
+<p>    /* Get pointer to the last node */</p>
+<p>    while (curr!= NULL)</p>
+<p>          {</p>
+<p>                      if((curr-&gt;data%2)==0)</p>
+<p>                      {</p>
+<p>                                  if(prev!=curr)         </p>
+<p>                                  {   </p>
+<p>                                   prev-&gt;next=curr-&gt;next;</p>
+<p>                                   curr-&gt;next=even-&gt;next;</p>
+<p>                                   even-&gt;next=curr;</p>
+<p>                                  }</p>
+<p>                                  even=even-&gt;next;</p>
+<p>                                  count++;</p>
+<p>                      }</p>
+<p>                      prev=curr; </p>
+<p>                      curr=prev-&gt;next;</p>
+<p>                      if(count==1)</p>
+<p>                       *head_ref=even;</p>
+<p>          }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MK</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-38096</link>
+		<dc:creator><![CDATA[MK]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 11:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-38096</guid>
+		<description><![CDATA[Please let me know if there is any fault in the following code for Method-2. It is working fine for the test cases I have checked.
+
+void oddevenSegregate(struct node **head)
+
+{
+
+	struct node *curr= *head;
+
+	struct node *prev = NULL;
+
+	struct node* odd_head = NULL;
+
+	struct node* odd_head_last;
+
+	while(curr!=NULL)
+
+	{
+
+		if((curr-&#062;data)%2 == 0)
+
+		{
+
+			prev= curr;
+
+			curr = curr-&#062;next;
+
+		}
+
+		else
+
+		{
+
+			prev-&#062;next = curr-&#062;next;
+
+			curr-&#062;next = NULL;
+
+			if(odd_head == NULL)
+
+			{
+
+				odd_head = curr;
+
+				odd_head_last =  curr;
+
+			}
+
+			else
+
+			{
+
+				odd_head_last-&#062;next = curr;
+
+				odd_head_last = curr;
+
+			}
+
+			curr = prev-&#062;next;
+
+		}
+
+		
+
+	}
+
+	prev-&#062;next = odd_head;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Please let me know if there is any fault in the following code for Method-2. It is working fine for the test cases I have checked.</p>
+<p>void oddevenSegregate(struct node **head)</p>
+<p>{</p>
+<p>	struct node *curr= *head;</p>
+<p>	struct node *prev = NULL;</p>
+<p>	struct node* odd_head = NULL;</p>
+<p>	struct node* odd_head_last;</p>
+<p>	while(curr!=NULL)</p>
+<p>	{</p>
+<p>		if((curr-&gt;data)%2 == 0)</p>
+<p>		{</p>
+<p>			prev= curr;</p>
+<p>			curr = curr-&gt;next;</p>
+<p>		}</p>
+<p>		else</p>
+<p>		{</p>
+<p>			prev-&gt;next = curr-&gt;next;</p>
+<p>			curr-&gt;next = NULL;</p>
+<p>			if(odd_head == NULL)</p>
+<p>			{</p>
+<p>				odd_head = curr;</p>
+<p>				odd_head_last =  curr;</p>
+<p>			}</p>
+<p>			else</p>
+<p>			{</p>
+<p>				odd_head_last-&gt;next = curr;</p>
+<p>				odd_head_last = curr;</p>
+<p>			}</p>
+<p>			curr = prev-&gt;next;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	prev-&gt;next = odd_head;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sooraj</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-38081</link>
+		<dc:creator><![CDATA[sooraj]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 09:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-38081</guid>
+		<description><![CDATA[//2nd method, time complexity= O(n)
+#include
+#include
+typedef struct node{
+        int data;
+        struct node *next;        
+        
+}node;
+int print(node **head){
+              node *p=*head;
+              while(p!=NULL){
+                       printf(&quot;%d &quot;,p-&#062;data);               
+                       p=p-&#062;next;
+              }    
+    return 0;
+}
+
+node* segregate(node *head){
+      node *head1,*head2;
+      node *p=head;
+      node *e,*o;
+      head1=(node*)malloc(sizeof(node));
+      head2=(node*)malloc(sizeof(node));
+      e=head1;
+      o=head2;
+      while(p!=NULL){
+                     if(p-&#062;data%2==0){
+                                      e-&#062;next=p;
+                                      e=e-&#062;next;
+                     }
+                     else{
+                          o-&#062;next=p;
+                          o=o-&#062;next;    
+                     }               
+                     p=p-&#062;next;                
+      }
+      head2=head2-&#062;next;
+      e-&#062;next=head2;
+      o-&#062;next=NULL;
+      head=head1-&#062;next;
+      return head;            
+      
+}
+node* create(int n){
+      node *head,*p,*q;
+      head=(node*)malloc(sizeof(node));
+      scanf(&quot;%d&quot;,&#038;head-&#062;data);
+      head-&#062;next=NULL;
+      p=head;
+      while((n-1)&#062;0){
+             q=(node*)malloc(sizeof(node));        
+             scanf(&quot;%d&quot;,&#038;q-&#062;data);
+             p-&#062;next=q;
+             q-&#062;next=NULL;
+             p=q;
+             n--;
+      }
+      return head;
+            
+}
+int main(){
+    
+           node *head=create(10);
+           head=segregate(head);
+           printf(&quot;nn&quot;);
+           print(&#038;head);
+           getch();
+           return 0;    
+}]]></description>
+		<content:encoded><![CDATA[<p>//2nd method, time complexity= O(n)<br />
+#include<br />
+#include<br />
+typedef struct node{<br />
+        int data;<br />
+        struct node *next;        </p>
+<p>}node;<br />
+int print(node **head){<br />
+              node *p=*head;<br />
+              while(p!=NULL){<br />
+                       printf(&#8220;%d &#8220;,p-&gt;data);<br />
+                       p=p-&gt;next;<br />
+              }<br />
+    return 0;<br />
+}</p>
+<p>node* segregate(node *head){<br />
+      node *head1,*head2;<br />
+      node *p=head;<br />
+      node *e,*o;<br />
+      head1=(node*)malloc(sizeof(node));<br />
+      head2=(node*)malloc(sizeof(node));<br />
+      e=head1;<br />
+      o=head2;<br />
+      while(p!=NULL){<br />
+                     if(p-&gt;data%2==0){<br />
+                                      e-&gt;next=p;<br />
+                                      e=e-&gt;next;<br />
+                     }<br />
+                     else{<br />
+                          o-&gt;next=p;<br />
+                          o=o-&gt;next;<br />
+                     }<br />
+                     p=p-&gt;next;<br />
+      }<br />
+      head2=head2-&gt;next;<br />
+      e-&gt;next=head2;<br />
+      o-&gt;next=NULL;<br />
+      head=head1-&gt;next;<br />
+      return head;            </p>
+<p>}<br />
+node* create(int n){<br />
+      node *head,*p,*q;<br />
+      head=(node*)malloc(sizeof(node));<br />
+      scanf(&#8220;%d&#8221;,&amp;head-&gt;data);<br />
+      head-&gt;next=NULL;<br />
+      p=head;<br />
+      while((n-1)&gt;0){<br />
+             q=(node*)malloc(sizeof(node));<br />
+             scanf(&#8220;%d&#8221;,&amp;q-&gt;data);<br />
+             p-&gt;next=q;<br />
+             q-&gt;next=NULL;<br />
+             p=q;<br />
+             n&#8211;;<br />
+      }<br />
+      return head;</p>
+<p>}<br />
+int main(){</p>
+<p>           node *head=create(10);<br />
+           head=segregate(head);<br />
+           printf(&#8220;nn&#8221;);<br />
+           print(&amp;head);<br />
+           getch();<br />
+           return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jun</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-38066</link>
+		<dc:creator><![CDATA[Jun]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 08:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-38066</guid>
+		<description><![CDATA[Implementation of METHOD-2 
+
+
+
+#include
+#include
+struct node
+{
+  int data;
+  struct node *next;
+};
+
+void push(struct node **p, int num)
+ {
+    struct node *new;
+    new=(struct node*)malloc(sizeof(struct node));
+    new-&#062;data=num;
+    new-&#062;next=*p;
+    *p=new;
+}
+
+void printlist(struct node *p)
+{
+   while(p!=NULL)
+   {
+     printf(&quot;%5d&quot;,p-&#062;data);
+     p=p-&#062;next;
+   }
+   printf(&quot;n&quot;);
+ }
+ 
+ void reverse(struct node **x)
+ {
+   struct node *q,*r,*s;
+   q=*x;
+   r=NULL;
+   while(q!=NULL)
+   {
+      s=r;
+      r=q;
+      q=q-&#062;next;
+      r-&#062;next=s;
+   }
+   *x=r;
+}
+ 
+ void segregate(struct node **head)
+ {
+    struct node *even, *end=*head,*curr, *prev;
+    curr=*head;
+    while(end-&#062;next!=NULL)
+     end=end-&#062;next;
+    
+    while(curr-&#062;data%2!=0 &#038;&#038; curr!=end)
+    {
+       push(&#038;even,curr-&#062;data);
+       curr=curr-&#062;next;
+    }
+    if(curr-&#062;data%2==0)
+    {
+       *head=curr;
+       while(curr!=end)
+       {
+          if((curr-&#062;data%2)==0)
+          {
+             prev=curr;
+             curr=curr-&#062;next;
+          }
+          else
+          {
+            prev-&#062;next=curr-&#062;next;
+            curr-&#062;next=NULL;
+            push(&#038;even,curr-&#062;data);
+            curr=prev-&#062;next;
+         }
+      }
+   }
+   else
+    prev=curr;
+    printf(&quot;Yon&quot;);
+   printlist(even);
+   reverse(&#038;even);
+   printf(&quot;After reversaln&quot;);
+   printlist(even);
+   curr-&#062;next=even;
+ }
+      
+void main()
+{
+   struct node *p=NULL;
+   push(&#038;p,11);
+   push(&#038;p,67);
+   push(&#038;p,7);
+   push(&#038;p,1);
+   push(&#038;p,4);
+   push(&#038;p,5);
+   push(&#038;p,10);
+   push(&#038;p,12);
+   push(&#038;p,8);
+   push(&#038;p,15);
+   push(&#038;p,17);
+   printf(&quot;The original linked lis isn&quot;);
+   printlist(p);
+   segregate(&#038;p);
+   printf(&quot;Linked list after segregation isn&quot;);
+   printlist(p);
+ }]]></description>
+		<content:encoded><![CDATA[<p>Implementation of METHOD-2 </p>
+<p>#include<br />
+#include<br />
+struct node<br />
+{<br />
+  int data;<br />
+  struct node *next;<br />
+};</p>
+<p>void push(struct node **p, int num)<br />
+ {<br />
+    struct node *new;<br />
+    new=(struct node*)malloc(sizeof(struct node));<br />
+    new-&gt;data=num;<br />
+    new-&gt;next=*p;<br />
+    *p=new;<br />
+}</p>
+<p>void printlist(struct node *p)<br />
+{<br />
+   while(p!=NULL)<br />
+   {<br />
+     printf(&#8220;%5d&#8221;,p-&gt;data);<br />
+     p=p-&gt;next;<br />
+   }<br />
+   printf(&#8220;n&#8221;);<br />
+ }</p>
+<p> void reverse(struct node **x)<br />
+ {<br />
+   struct node *q,*r,*s;<br />
+   q=*x;<br />
+   r=NULL;<br />
+   while(q!=NULL)<br />
+   {<br />
+      s=r;<br />
+      r=q;<br />
+      q=q-&gt;next;<br />
+      r-&gt;next=s;<br />
+   }<br />
+   *x=r;<br />
+}</p>
+<p> void segregate(struct node **head)<br />
+ {<br />
+    struct node *even, *end=*head,*curr, *prev;<br />
+    curr=*head;<br />
+    while(end-&gt;next!=NULL)<br />
+     end=end-&gt;next;</p>
+<p>    while(curr-&gt;data%2!=0 &amp;&amp; curr!=end)<br />
+    {<br />
+       push(&amp;even,curr-&gt;data);<br />
+       curr=curr-&gt;next;<br />
+    }<br />
+    if(curr-&gt;data%2==0)<br />
+    {<br />
+       *head=curr;<br />
+       while(curr!=end)<br />
+       {<br />
+          if((curr-&gt;data%2)==0)<br />
+          {<br />
+             prev=curr;<br />
+             curr=curr-&gt;next;<br />
+          }<br />
+          else<br />
+          {<br />
+            prev-&gt;next=curr-&gt;next;<br />
+            curr-&gt;next=NULL;<br />
+            push(&amp;even,curr-&gt;data);<br />
+            curr=prev-&gt;next;<br />
+         }<br />
+      }<br />
+   }<br />
+   else<br />
+    prev=curr;<br />
+    printf(&#8220;Yon&#8221;);<br />
+   printlist(even);<br />
+   reverse(&amp;even);<br />
+   printf(&#8220;After reversaln&#8221;);<br />
+   printlist(even);<br />
+   curr-&gt;next=even;<br />
+ }</p>
+<p>void main()<br />
+{<br />
+   struct node *p=NULL;<br />
+   push(&amp;p,11);<br />
+   push(&amp;p,67);<br />
+   push(&amp;p,7);<br />
+   push(&amp;p,1);<br />
+   push(&amp;p,4);<br />
+   push(&amp;p,5);<br />
+   push(&amp;p,10);<br />
+   push(&amp;p,12);<br />
+   push(&amp;p,8);<br />
+   push(&amp;p,15);<br />
+   push(&amp;p,17);<br />
+   printf(&#8220;The original linked lis isn&#8221;);<br />
+   printlist(p);<br />
+   segregate(&amp;p);<br />
+   printf(&#8220;Linked list after segregation isn&#8221;);<br />
+   printlist(p);<br />
+ }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: typing..</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-36952</link>
+		<dc:creator><![CDATA[typing..]]></dc:creator>
+		<pubDate>Wed, 28 May 2014 12:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-36952</guid>
+		<description><![CDATA[we can also maintain 2 queues while traversing the linked list, one Q for even and one Q for odd. Then again go through the L.L. and Ist move all even numbers to L.L, then all Odd numbers...]]></description>
+		<content:encoded><![CDATA[<p>we can also maintain 2 queues while traversing the linked list, one Q for even and one Q for odd. Then again go through the L.L. and Ist move all even numbers to L.L, then all Odd numbers&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-36892</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 27 May 2014 01:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-36892</guid>
+		<description><![CDATA[both the above methods will try to make changes in a list with all complete odd nodes..
+here is my approch ..a modification if the second which will not do any modyfication in case of completely odd or even list..
+
+
+lnode *segregate(lnode *l)
+{
+    if(l==NULL)
+    {    return NULL;
+    }
+    lnode *head=l;
+    lnode *dummy=new(lnode);
+    dummy-&#062;data=-1;
+    dummy-&#062;next=NULL;
+    lnode *new_list=dummy;
+    int rem=l-&#062;data%2;
+    while(1)
+    {
+        while(l-&#062;next!=NULL &#038;&#038; l-&#062;next-&#062;data%2==rem)
+        {    l=l-&#062;next;
+        }
+        if(l-&#062;next==NULL)
+        {    if(rem==0)
+                {    l-&#062;next=dummy-&#062;next;
+                    return head;
+                }
+                else
+                {    new_list-&#062;next=head;
+                    return dummy-&#062;next;
+                }
+        }
+        else
+        {    //adding to the tail of the new list
+            new_list-&#062;next=l-&#062;next;
+            //joining the previous link
+            l-&#062;next=l-&#062;next-&#062;next;
+            
+            //updating the tail
+            new_list=new_list-&#062;next;
+            //imp as the nodes will be linked;
+            new_list-&#062;next=NULL;
+        
+            
+        }
+    }
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>both the above methods will try to make changes in a list with all complete odd nodes..<br />
+here is my approch ..a modification if the second which will not do any modyfication in case of completely odd or even list..</p>
+<p>lnode *segregate(lnode *l)<br />
+{<br />
+    if(l==NULL)<br />
+    {    return NULL;<br />
+    }<br />
+    lnode *head=l;<br />
+    lnode *dummy=new(lnode);<br />
+    dummy-&gt;data=-1;<br />
+    dummy-&gt;next=NULL;<br />
+    lnode *new_list=dummy;<br />
+    int rem=l-&gt;data%2;<br />
+    while(1)<br />
+    {<br />
+        while(l-&gt;next!=NULL &amp;&amp; l-&gt;next-&gt;data%2==rem)<br />
+        {    l=l-&gt;next;<br />
+        }<br />
+        if(l-&gt;next==NULL)<br />
+        {    if(rem==0)<br />
+                {    l-&gt;next=dummy-&gt;next;<br />
+                    return head;<br />
+                }<br />
+                else<br />
+                {    new_list-&gt;next=head;<br />
+                    return dummy-&gt;next;<br />
+                }<br />
+        }<br />
+        else<br />
+        {    //adding to the tail of the new list<br />
+            new_list-&gt;next=l-&gt;next;<br />
+            //joining the previous link<br />
+            l-&gt;next=l-&gt;next-&gt;next;</p>
+<p>            //updating the tail<br />
+            new_list=new_list-&gt;next;<br />
+            //imp as the nodes will be linked;<br />
+            new_list-&gt;next=NULL;</p>
+<p>        }<br />
+    }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: v3gA</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-36457</link>
+		<dc:creator><![CDATA[v3gA]]></dc:creator>
+		<pubDate>Thu, 22 May 2014 14:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-36457</guid>
+		<description><![CDATA[Second method also has O(1) space complexity. The new lists are made by changing the links only, no new space is allocated.  Any memory difference is negligible. Besides, second method does it in a single pass through the list and is also IMHO cleaner code
+Code at http://ideone.com/CyN9QB ]]></description>
+		<content:encoded><![CDATA[<p>Second method also has O(1) space complexity. The new lists are made by changing the links only, no new space is allocated.  Any memory difference is negligible. Besides, second method does it in a single pass through the list and is also IMHO cleaner code<br />
+Code at <a href="http://ideone.com/CyN9QB" rel="nofollow">http://ideone.com/CyN9QB</a> </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-35764</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Wed, 07 May 2014 18:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-35764</guid>
+		<description><![CDATA[Simple &#038; clean approach!!!]]></description>
+		<content:encoded><![CDATA[<p>Simple &amp; clean approach!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rahul Dadoriya</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-35248</link>
+		<dc:creator><![CDATA[Rahul Dadoriya]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 16:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-35248</guid>
+		<description><![CDATA[Hey guys we can also do this question by just swapping the data.
+Function for that is as fallow
+
+void segregateLL(struct node *list)
+{
+    struct node *curr, *nNext;
+    curr = list;
+    nNext= list-&#062;next;
+    
+    while (curr != NULL &#038;&#038; nNext != NULL)    
+    {
+        if (curr-&#062;data % 2 == 0 &#038;&#038; nNext-&#062;data % 2 != 0)
+        {
+            curr = curr-&#062;next;
+            nNext= nNext-&#062;next;
+        }
+        
+        if (curr-&#062;data % 2 != 0 &#038;&#038; nNext-&#062;data % 2 != 0)
+        {
+            nNext= nNext-&#062;next;
+        }
+        
+        if (curr-&#062;data % 2 != 0 &#038;&#038; nNext-&#062;data % 2 == 0)
+        {
+            swap(&#038;curr-&#062;data, &#038;nNext-&#062;data);
+            curr = curr-&#062;next;
+            nNext= nNext-&#062;next;
+        } 
+        if (curr-&#062;data % 2 == 0 &#038;&#038; nNext-&#062;data % 2 == 0)
+        {
+            curr = curr-&#062;next;
+            nNext= nNext-&#062;next;
+        }        
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>Hey guys we can also do this question by just swapping the data.<br />
+Function for that is as fallow</p>
+<p>void segregateLL(struct node *list)<br />
+{<br />
+    struct node *curr, *nNext;<br />
+    curr = list;<br />
+    nNext= list-&gt;next;</p>
+<p>    while (curr != NULL &amp;&amp; nNext != NULL)<br />
+    {<br />
+        if (curr-&gt;data % 2 == 0 &amp;&amp; nNext-&gt;data % 2 != 0)<br />
+        {<br />
+            curr = curr-&gt;next;<br />
+            nNext= nNext-&gt;next;<br />
+        }</p>
+<p>        if (curr-&gt;data % 2 != 0 &amp;&amp; nNext-&gt;data % 2 != 0)<br />
+        {<br />
+            nNext= nNext-&gt;next;<br />
+        }</p>
+<p>        if (curr-&gt;data % 2 != 0 &amp;&amp; nNext-&gt;data % 2 == 0)<br />
+        {<br />
+            swap(&amp;curr-&gt;data, &amp;nNext-&gt;data);<br />
+            curr = curr-&gt;next;<br />
+            nNext= nNext-&gt;next;<br />
+        }<br />
+        if (curr-&gt;data % 2 == 0 &amp;&amp; nNext-&gt;data % 2 == 0)<br />
+        {<br />
+            curr = curr-&gt;next;<br />
+            nNext= nNext-&gt;next;<br />
+        }<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/#comment-35133</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 21:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12000#comment-35133</guid>
+		<description><![CDATA[Method 1 Java Implementation
+
+public class LinkedList implements Cloneable {
+
+	Node head = null;
+
+	// Adding at the End
+
+	class Node {
+
+		T value;
+
+		Node nextReference;
+
+		public Node(T value) {
+
+			this.value = value;
+
+			this.nextReference = null;
+
+		}
+
+		public Node(T value, Node ref) {
+
+			this.value = value;
+
+			this.nextReference = ref;
+
+		}
+
+		public Node() {
+
+			// TODO Auto-generated constructor stub
+
+		}
+
+		public T getValue() {
+
+			return value;
+
+		}
+
+		public void setValue(T value) {
+
+			this.value = value;
+
+		}
+
+		public Node getNextReference() {
+
+			return nextReference;
+
+		}
+
+		public void setNextReference(Node nextReference) {
+
+			this.nextReference = nextReference;
+
+		}
+
+	}
+
+	public void add(E value) {
+
+		Node nodeToBeAdded = head;
+
+		if (validate(head)) {
+
+			head = new Node(value);
+
+			return;
+
+		}
+
+		while (nodeToBeAdded.getNextReference() != null) {
+
+			nodeToBeAdded = nodeToBeAdded.getNextReference();
+
+		}
+
+		Node node = new Node(value);
+
+		nodeToBeAdded.setNextReference(node);
+
+	}
+
+	void printAll(Node head) {
+
+		Node node = head;
+
+		while (node != null) {
+
+			System.out.println(node.getValue());
+
+			node = node.getNextReference();
+
+		}
+
+	}
+
+	Node tail = new Node();
+
+	Node head1 = null;
+
+	void researchOnreverse(Node node) {
+
+		if (node == null) {
+
+			return;
+
+		}
+
+		researchOnreverse(node.getNextReference());
+
+		System.out.println(node.getValue());
+
+		add(node.getValue());
+
+	}
+
+	void segragateEvenAndOddNodes() {
+
+		Node node = head;
+
+		Node tail = null;
+
+		int count = 0;
+
+		int count1 = 0;
+
+		while (node.getNextReference() != null) {
+
+			node = node.getNextReference();
+
+			count++;
+
+		}
+
+		tail = node;
+
+		Node prevNode = null;
+
+		Node currentNode = head;
+
+		while (count1 &#060; count + 1) {
+
+			if (!((currentNode.getValue().doubleValue() % 2) == 0)) {
+
+				Node newNode = new Node(currentNode.getValue());
+
+				tail.setNextReference(newNode);
+
+				tail = tail.getNextReference();
+
+				if (prevNode != null) {
+
+					prevNode.setNextReference(currentNode.getNextReference());
+
+				}
+
+				if (prevNode == null) {
+
+					head = currentNode.getNextReference();
+
+				}
+
+			}
+
+			prevNode = currentNode;
+
+			currentNode = currentNode.getNextReference();
+
+			count1++;
+
+		}
+
+	}
+
+	void add(Node val) {
+
+		Node node = new Node(val.getValue());
+
+		tail = node;
+
+		if (head1 == null) {
+
+			head1 = tail;
+
+			return;
+
+		}
+
+		tail.setNextReference(node);
+
+	}
+
+	/*
+
+	 * public void add(Node evenNodes,E value) {
+
+	 * 
+
+	 * if (validate(head)) { head = node;
+
+	 * 
+
+	 * } else { tail.setNextReference(node); }
+
+	 * 
+
+	 * 
+
+	 * }
+
+	 */
+
+	public boolean validate(Node head) {
+
+		if (head == null) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+	public static void main(String[] args) {
+
+		LinkedList linkedList = new LinkedList();
+
+		for (int i = 1; i &#060; 9; i++) {
+
+			linkedList.add(i);
+
+		}
+
+		linkedList.segragateEvenAndOddNodes();
+
+		linkedList.printAll(linkedList.head);
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Method 1 Java Implementation</p>
+<p>public class LinkedList implements Cloneable {</p>
+<p>	Node head = null;</p>
+<p>	// Adding at the End</p>
+<p>	class Node {</p>
+<p>		T value;</p>
+<p>		Node nextReference;</p>
+<p>		public Node(T value) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = null;</p>
+<p>		}</p>
+<p>		public Node(T value, Node ref) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = ref;</p>
+<p>		}</p>
+<p>		public Node() {</p>
+<p>			// TODO Auto-generated constructor stub</p>
+<p>		}</p>
+<p>		public T getValue() {</p>
+<p>			return value;</p>
+<p>		}</p>
+<p>		public void setValue(T value) {</p>
+<p>			this.value = value;</p>
+<p>		}</p>
+<p>		public Node getNextReference() {</p>
+<p>			return nextReference;</p>
+<p>		}</p>
+<p>		public void setNextReference(Node nextReference) {</p>
+<p>			this.nextReference = nextReference;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void add(E value) {</p>
+<p>		Node nodeToBeAdded = head;</p>
+<p>		if (validate(head)) {</p>
+<p>			head = new Node(value);</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		while (nodeToBeAdded.getNextReference() != null) {</p>
+<p>			nodeToBeAdded = nodeToBeAdded.getNextReference();</p>
+<p>		}</p>
+<p>		Node node = new Node(value);</p>
+<p>		nodeToBeAdded.setNextReference(node);</p>
+<p>	}</p>
+<p>	void printAll(Node head) {</p>
+<p>		Node node = head;</p>
+<p>		while (node != null) {</p>
+<p>			System.out.println(node.getValue());</p>
+<p>			node = node.getNextReference();</p>
+<p>		}</p>
+<p>	}</p>
+<p>	Node tail = new Node();</p>
+<p>	Node head1 = null;</p>
+<p>	void researchOnreverse(Node node) {</p>
+<p>		if (node == null) {</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		researchOnreverse(node.getNextReference());</p>
+<p>		System.out.println(node.getValue());</p>
+<p>		add(node.getValue());</p>
+<p>	}</p>
+<p>	void segragateEvenAndOddNodes() {</p>
+<p>		Node node = head;</p>
+<p>		Node tail = null;</p>
+<p>		int count = 0;</p>
+<p>		int count1 = 0;</p>
+<p>		while (node.getNextReference() != null) {</p>
+<p>			node = node.getNextReference();</p>
+<p>			count++;</p>
+<p>		}</p>
+<p>		tail = node;</p>
+<p>		Node prevNode = null;</p>
+<p>		Node currentNode = head;</p>
+<p>		while (count1 &lt; count + 1) {</p>
+<p>			if (!((currentNode.getValue().doubleValue() % 2) == 0)) {</p>
+<p>				Node newNode = new Node(currentNode.getValue());</p>
+<p>				tail.setNextReference(newNode);</p>
+<p>				tail = tail.getNextReference();</p>
+<p>				if (prevNode != null) {</p>
+<p>					prevNode.setNextReference(currentNode.getNextReference());</p>
+<p>				}</p>
+<p>				if (prevNode == null) {</p>
+<p>					head = currentNode.getNextReference();</p>
+<p>				}</p>
+<p>			}</p>
+<p>			prevNode = currentNode;</p>
+<p>			currentNode = currentNode.getNextReference();</p>
+<p>			count1++;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	void add(Node val) {</p>
+<p>		Node node = new Node(val.getValue());</p>
+<p>		tail = node;</p>
+<p>		if (head1 == null) {</p>
+<p>			head1 = tail;</p>
+<p>			return;</p>
+<p>		}</p>
+<p>		tail.setNextReference(node);</p>
+<p>	}</p>
+<p>	/*</p>
+<p>	 * public void add(Node evenNodes,E value) {</p>
+<p>	 * </p>
+<p>	 * if (validate(head)) { head = node;</p>
+<p>	 * </p>
+<p>	 * } else { tail.setNextReference(node); }</p>
+<p>	 * </p>
+<p>	 * </p>
+<p>	 * }</p>
+<p>	 */</p>
+<p>	public boolean validate(Node head) {</p>
+<p>		if (head == null) {</p>
+<p>			return true;</p>
+<p>		}</p>
+<p>		return false;</p>
+<p>	}</p>
+<p>	public static void main(String[] args) {</p>
+<p>		LinkedList linkedList = new LinkedList();</p>
+<p>		for (int i = 1; i &lt; 9; i++) {</p>
+<p>			linkedList.add(i);</p>
+<p>		}</p>
+<p>		linkedList.segragateEvenAndOddNodes();</p>
+<p>		linkedList.printAll(linkedList.head);</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.045 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:49 -->
+
+<!-- Compression = gzip -->

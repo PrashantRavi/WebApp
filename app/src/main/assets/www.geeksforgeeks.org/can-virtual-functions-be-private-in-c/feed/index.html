@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Can virtual functions be private in C++?</title>
+	<atom:link href="http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Gallon</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-33139</link>
+		<dc:creator><![CDATA[Gallon]]></dc:creator>
+		<pubDate>Sun, 02 Mar 2014 22:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-33139</guid>
+		<description><![CDATA[This seems to be a bug to me...]]></description>
+		<content:encoded><![CDATA[<p>This seems to be a bug to me&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Avinash</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30756</link>
+		<dc:creator><![CDATA[Avinash]]></dc:creator>
+		<pubDate>Mon, 16 Dec 2013 06:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30756</guid>
+		<description><![CDATA[This is because, you have Base class pointer (*ptr). For Base class, in the vTable, vptr is a public pointer variable.
+
+Now, on deriving and Base *ptr = new Derived, vptr of now points to derived func(), and vptr is public accessible. Hence this is happening.]]></description>
+		<content:encoded><![CDATA[<p>This is because, you have Base class pointer (*ptr). For Base class, in the vTable, vptr is a public pointer variable.</p>
+<p>Now, on deriving and Base *ptr = new Derived, vptr of now points to derived func(), and vptr is public accessible. Hence this is happening.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kapoios</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30350</link>
+		<dc:creator><![CDATA[kapoios]]></dc:creator>
+		<pubDate>Tue, 03 Dec 2013 00:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30350</guid>
+		<description><![CDATA[private is an access specifier for the type i.e Base. virtual specifies that the pointer to this function with signature void Base::*fun(void) is to be placed at the virtual table of Base. The friendship specifies that main has access up to private section. Which permits execution of the Derived::*fun() through Base::*fun() . If virtual was missing Base::*fun would fave been called. That is why having private virtual function makes sense.]]></description>
+		<content:encoded><![CDATA[<p>private is an access specifier for the type i.e Base. virtual specifies that the pointer to this function with signature void Base::*fun(void) is to be placed at the virtual table of Base. The friendship specifies that main has access up to private section. Which permits execution of the Derived::*fun() through Base::*fun() . If virtual was missing Base::*fun would fave been called. That is why having private virtual function makes sense.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: michael</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30138</link>
+		<dc:creator><![CDATA[michael]]></dc:creator>
+		<pubDate>Tue, 26 Nov 2013 08:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30138</guid>
+		<description><![CDATA[any use of private virtual functions
+
+&lt;a href=&#039;http://functionhallsinhyderabad.blogspot.com&#039; rel=&quot;nofollow&quot;&gt;Function halls in hyderabad&lt;/a&gt;]]></description>
+		<content:encoded><![CDATA[<p>any use of private virtual functions</p>
+<p><a href='http://functionhallsinhyderabad.blogspot.com' rel="nofollow">Function halls in hyderabad</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vinod</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30106</link>
+		<dc:creator><![CDATA[Vinod]]></dc:creator>
+		<pubDate>Mon, 25 Nov 2013 06:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30106</guid>
+		<description><![CDATA[Even we can access derived class private virtual function:
+
+#include
+
+using namespace std;
+
+ 
+
+class Derived;
+
+ 
+
+class Base {
+
+public:
+
+    virtual void fun() { cout &#060;&#060; &#034;Base Fun&#034;; }
+
+};
+
+ 
+
+class Derived: public Base {
+
+private:
+
+    void fun() { cout &#060;fun();
+
+   return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Even we can access derived class private virtual function:</p>
+<p>#include</p>
+<p>using namespace std;</p>
+<p>class Derived;</p>
+<p>class Base {</p>
+<p>public:</p>
+<p>    virtual void fun() { cout &lt;&lt; &quot;Base Fun&quot;; }</p>
+<p>};</p>
+<p>class Derived: public Base {</p>
+<p>private:</p>
+<p>    void fun() { cout &lt;fun();</p>
+<p>   return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Kartik</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30065</link>
+		<dc:creator><![CDATA[Kartik]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 12:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30065</guid>
+		<description><![CDATA[See http://www.gotw.ca/publications/mill18.htm]]></description>
+		<content:encoded><![CDATA[<p>See <a href="http://www.gotw.ca/publications/mill18.htm" rel="nofollow">http://www.gotw.ca/publications/mill18.htm</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jay</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30064</link>
+		<dc:creator><![CDATA[Jay]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 12:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30064</guid>
+		<description><![CDATA[Is there any use of private virtual functions, they seem useless, that is why not supported in Java]]></description>
+		<content:encoded><![CDATA[<p>Is there any use of private virtual functions, they seem useless, that is why not supported in Java</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gangadhara</title>
+		<link>http://www.geeksforgeeks.org/can-virtual-functions-be-private-in-c/#comment-30062</link>
+		<dc:creator><![CDATA[Gangadhara]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 09:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=124070#comment-30062</guid>
+		<description><![CDATA[&lt;code&gt;
+#include
+using namespace std;
+struct X
+{
+    virtual void f()
+    {
+        cout&#060;&#060;&#034;X::f&#034;&#060;&#060;endl;
+    }
+};
+struct Y:X
+{
+    private:
+    virtual void f()
+    {
+        cout&#060;&#060;&#034;Y::f&#034;&#060;f();
+    return 0;
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code><br />
+#include<br />
+using namespace std;<br />
+struct X<br />
+{<br />
+    virtual void f()<br />
+    {<br />
+        cout&lt;&lt;&quot;X::f&quot;&lt;&lt;endl;<br />
+    }<br />
+};<br />
+struct Y:X<br />
+{<br />
+    private:<br />
+    virtual void f()<br />
+    {<br />
+        cout&lt;&lt;&quot;Y::f&quot;&lt;f();<br />
+    return 0;<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:04:20 -->
+
+<!-- Compression = gzip -->

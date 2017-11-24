@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: How to check if a given point lies inside or outside a polygon?</title>
+	<atom:link href="http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Abhimanyu Dogra</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-36030</link>
+		<dc:creator><![CDATA[Abhimanyu Dogra]]></dc:creator>
+		<pubDate>Wed, 14 May 2014 13:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-36030</guid>
+		<description><![CDATA[From wikipedia : The issue is solved as follows: If the intersection point is a vertex of
+ a tested polygon side, then the intersection counts only if the second 
+vertex of the side lies below the ray. This is effectively equivalent to
+ considering vertices on the ray as lying slightly above the ray.
+
+This is how you fix it :-
+replace the following piece of code in the section tagged &quot;general case&quot; :-
+
+&lt;code&gt;
+if (o1 != o2 &#038;&#038; o3 != o4)
+        return true;
+&lt;/code&gt;
+with :- (This code now detects intersection ONLY if the second second vertex of edge is below the extreme ray) 
+&lt;code&gt;
+if (o1 != o2 &#038;&#038; o3 != o4)
+    {
+        if (!o4)
+        {
+            return false;
+        }
+        if (!o3)
+        {
+            if (o4 != 1)
+            {
+                return false;
+            }            
+        }
+        return true;
+    }
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>From wikipedia : The issue is solved as follows: If the intersection point is a vertex of<br />
+ a tested polygon side, then the intersection counts only if the second<br />
+vertex of the side lies below the ray. This is effectively equivalent to<br />
+ considering vertices on the ray as lying slightly above the ray.</p>
+<p>This is how you fix it :-<br />
+replace the following piece of code in the section tagged &#8220;general case&#8221; :-</p>
+<p><code><br />
+if (o1 != o2 &amp;&amp; o3 != o4)<br />
+        return true;<br />
+</code><br />
+with :- (This code now detects intersection ONLY if the second second vertex of edge is below the extreme ray)<br />
+<code><br />
+if (o1 != o2 &amp;&amp; o3 != o4)<br />
+    {<br />
+        if (!o4)<br />
+        {<br />
+            return false;<br />
+        }<br />
+        if (!o3)<br />
+        {<br />
+            if (o4 != 1)<br />
+            {<br />
+                return false;<br />
+            }<br />
+        }<br />
+        return true;<br />
+    }<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhimanyu Dogra</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-36027</link>
+		<dc:creator><![CDATA[Abhimanyu Dogra]]></dc:creator>
+		<pubDate>Wed, 14 May 2014 12:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-36027</guid>
+		<description><![CDATA[The algorithm is still incorrect.
+As couple of users below mentioned, if the &quot;extreme&quot; ray passes through a vertex of the polygon, 2 intersections are counted. Which makes the algorithm automatically assume the point lies outside although the point CAN lie inside.
+Example :
+For polygon {&quot;1,4&quot;, &quot;1,6&quot;, &quot;2,7&quot;, &quot;4,7&quot;, &quot;5,6&quot;, &quot;2,3&quot;}
+Point  &quot;3,6&quot; is inside but the algorithm assumes it to be outside.]]></description>
+		<content:encoded><![CDATA[<p>The algorithm is still incorrect.<br />
+As couple of users below mentioned, if the &#8220;extreme&#8221; ray passes through a vertex of the polygon, 2 intersections are counted. Which makes the algorithm automatically assume the point lies outside although the point CAN lie inside.<br />
+Example :<br />
+For polygon {&#8220;1,4&#8221;, &#8220;1,6&#8221;, &#8220;2,7&#8221;, &#8220;4,7&#8221;, &#8220;5,6&#8221;, &#8220;2,3&#8221;}<br />
+Point  &#8220;3,6&#8221; is inside but the algorithm assumes it to be outside.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CNatka</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-36006</link>
+		<dc:creator><![CDATA[CNatka]]></dc:creator>
+		<pubDate>Tue, 13 May 2014 20:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-36006</guid>
+		<description><![CDATA[The code has a flaw- If the point lies outside of the polygon but one of the vertex lies on the ray then it will return true where the expectation is to get false from the function.
+For Example : Polygon {(3,6), (1,0), (5,5)} and point (0,5).]]></description>
+		<content:encoded><![CDATA[<p>The code has a flaw- If the point lies outside of the polygon but one of the vertex lies on the ray then it will return true where the expectation is to get false from the function.<br />
+For Example : Polygon {(3,6), (1,0), (5,5)} and point (0,5).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Piyush</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-33047</link>
+		<dc:creator><![CDATA[Piyush]]></dc:creator>
+		<pubDate>Thu, 27 Feb 2014 12:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-33047</guid>
+		<description><![CDATA[what if segment joining point and extreme pass through the vertex ?. for e.g. if our polygon is Point polygon1[] = {{2,-2}, {4,0}, {2, 2}, {0, 0}}; and point is (2,0) it gives NO for that case. So condition for this case should be added.]]></description>
+		<content:encoded><![CDATA[<p>what if segment joining point and extreme pass through the vertex ?. for e.g. if our polygon is Point polygon1[] = {{2,-2}, {4,0}, {2, 2}, {0, 0}}; and point is (2,0) it gives NO for that case. So condition for this case should be added.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prashanth Reddy</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-30723</link>
+		<dc:creator><![CDATA[Prashanth Reddy]]></dc:creator>
+		<pubDate>Sun, 15 Dec 2013 11:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-30723</guid>
+		<description><![CDATA[Thanks for the info... :)]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the info&#8230; 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: akshat</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-29698</link>
+		<dc:creator><![CDATA[akshat]]></dc:creator>
+		<pubDate>Sat, 09 Nov 2013 18:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-29698</guid>
+		<description><![CDATA[what if the coordinates are very large(order of 10^9) then the multiplication in the orientation method may lead to multiplication of 2 very large coordinates leading to result of a number of order of 10^18 which cannot be stored in long long int also. i tried to solve it by using the actual equation given in the slides i.e i actually calculated two slopes and subtracted them as follows
+ ( y2-y1/x2-x1)-(y3-y2/x3-x2)
+but this sol&#039;n is still not working  maybe because slopes cannot be compared like this. please sort this out]]></description>
+		<content:encoded><![CDATA[<p>what if the coordinates are very large(order of 10^9) then the multiplication in the orientation method may lead to multiplication of 2 very large coordinates leading to result of a number of order of 10^18 which cannot be stored in long long int also. i tried to solve it by using the actual equation given in the slides i.e i actually calculated two slopes and subtracted them as follows<br />
+ ( y2-y1/x2-x1)-(y3-y2/x3-x2)<br />
+but this sol&#8217;n is still not working  maybe because slopes cannot be compared like this. please sort this out</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Deven Bhooshan</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-29656</link>
+		<dc:creator><![CDATA[Deven Bhooshan]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 13:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-29656</guid>
+		<description><![CDATA[yup]]></description>
+		<content:encoded><![CDATA[<p>yup</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nishchay Kala</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-29654</link>
+		<dc:creator><![CDATA[Nishchay Kala]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 12:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-29654</guid>
+		<description><![CDATA[A bit of change is required in code, algorithm is correct though. Nice Observation :)]]></description>
+		<content:encoded><![CDATA[<p>A bit of change is required in code, algorithm is correct though. Nice Observation 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Deven Bhooshan</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-29647</link>
+		<dc:creator><![CDATA[Deven Bhooshan]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 08:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-29647</guid>
+		<description><![CDATA[There is a problem in the algorithm .
+
+Suppose that a point to be checked lies inside the polygon and passes through only one vertex then the above algorithm will fail.
+for example suppose there is a polygon having five vertices as following 
+0 0 
+0 4 
+4 2 
+1 1 
+1 0
+Then if we check Points (1 2) (2 2) (3 2) above algorithm will not work.]]></description>
+		<content:encoded><![CDATA[<p>There is a problem in the algorithm .</p>
+<p>Suppose that a point to be checked lies inside the polygon and passes through only one vertex then the above algorithm will fail.<br />
+for example suppose there is a polygon having five vertices as following<br />
+0 0<br />
+0 4<br />
+4 2<br />
+1 1<br />
+1 0<br />
+Then if we check Points (1 2) (2 2) (3 2) above algorithm will not work.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-28654</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Thu, 10 Oct 2013 07:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-28654</guid>
+		<description><![CDATA[Thanks for pointing this out. We have added this condition to algorithm and code.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for pointing this out. We have added this condition to algorithm and code.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: trying</title>
+		<link>http://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/#comment-27107</link>
+		<dc:creator><![CDATA[trying]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 22:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=120624#comment-27107</guid>
+		<description><![CDATA[what abt the point which is inside the polygon but the ray passes through only one vertex then the  algo will return outside because of even while it is inside. please check.]]></description>
+		<content:encoded><![CDATA[<p>what abt the point which is inside the polygon but the ray passes through only one vertex then the  algo will return outside because of even while it is inside. please check.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:12:46 -->
+
+<!-- Compression = gzip -->

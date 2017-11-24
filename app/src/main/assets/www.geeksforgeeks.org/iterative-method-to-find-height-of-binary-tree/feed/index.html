@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Iterative Method to find Height of Binary Tree</title>
+	<atom:link href="http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-38180</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 08:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-38180</guid>
+		<description><![CDATA[using postorder traversal
+
+
+
+int iterativeHeight(btnode *root)
+{
+    if(root==NULL)
+    return 0;
+    
+    btnode *current=root;
+    stack s;
+    int maxH=0;
+    int height=0;
+    
+    while(1)
+    {
+        while(current!=NULL)
+        {
+            if(current-&#062;rchild)
+            s.push(current-&#062;rchild);
+            
+            height++;
+            s.push(current);
+            current=current-&#062;lchild;
+        }
+        
+        if(!s.empty())
+        {    current=s.top();
+            s.pop();
+        }
+        else
+        {    return maxH;
+        }
+        
+        if(current-&#062;rchild &#038;&#038; !s.empty() &#038;&#038; current-&#062;rchild==s.top())
+        {
+                btnode *temp=current;
+                current=s.top();
+                s.pop();
+                s.push(temp);
+        }
+        else
+        {    if(height&#062;maxH)
+            {    maxH=height;
+            }
+            height--;
+            current=NULL;
+        }
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>using postorder traversal</p>
+<p>int iterativeHeight(btnode *root)<br />
+{<br />
+    if(root==NULL)<br />
+    return 0;</p>
+<p>    btnode *current=root;<br />
+    stack s;<br />
+    int maxH=0;<br />
+    int height=0;</p>
+<p>    while(1)<br />
+    {<br />
+        while(current!=NULL)<br />
+        {<br />
+            if(current-&gt;rchild)<br />
+            s.push(current-&gt;rchild);</p>
+<p>            height++;<br />
+            s.push(current);<br />
+            current=current-&gt;lchild;<br />
+        }</p>
+<p>        if(!s.empty())<br />
+        {    current=s.top();<br />
+            s.pop();<br />
+        }<br />
+        else<br />
+        {    return maxH;<br />
+        }</p>
+<p>        if(current-&gt;rchild &amp;&amp; !s.empty() &amp;&amp; current-&gt;rchild==s.top())<br />
+        {<br />
+                btnode *temp=current;<br />
+                current=s.top();<br />
+                s.pop();<br />
+                s.push(temp);<br />
+        }<br />
+        else<br />
+        {    if(height&gt;maxH)<br />
+            {    maxH=height;<br />
+            }<br />
+            height&#8211;;<br />
+            current=NULL;<br />
+        }<br />
+    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-35579</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sat, 03 May 2014 18:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-35579</guid>
+		<description><![CDATA[we had 2 while loops....second while loop depends on nodecount..its the end condition if nodecount==0]]></description>
+		<content:encoded><![CDATA[<p>we had 2 while loops&#8230;.second while loop depends on nodecount..its the end condition if nodecount==0</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jeffwa</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-35575</link>
+		<dc:creator><![CDATA[jeffwa]]></dc:creator>
+		<pubDate>Sat, 03 May 2014 16:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-35575</guid>
+		<description><![CDATA[I&#039;m confused what the decrementing the nodecount on the dequeue does when the while loop doesn&#039;t depend on it, and nodecount is then recalculated anyways.  It seems to be unnecessary.]]></description>
+		<content:encoded><![CDATA[<p>I&#8217;m confused what the decrementing the nodecount on the dequeue does when the while loop doesn&#8217;t depend on it, and nodecount is then recalculated anyways.  It seems to be unnecessary.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-34325</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sat, 05 Apr 2014 10:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-34325</guid>
+		<description><![CDATA[Here is the implementation of iterative method to find height of a binary tree with linked list queue 
+
+
+
+#include
+
+#include
+
+#include
+
+struct Treenode
+
+{
+
+	int data;
+
+	struct Treenode * left;
+
+	struct Treenode *right;
+
+};
+
+struct Treenode* newnode(int data)
+
+{
+
+	struct Treenode* temp=(struct Treenode *)malloc(sizeof(struct Treenode));
+
+	temp-&#062;data=data;
+
+	temp-&#062;left=NULL;
+
+	temp-&#062;right=NULL;
+
+	return temp;
+
+}
+
+struct List
+
+{
+
+	struct Treenode* node;
+
+	struct List *next;
+
+};
+
+struct queue
+
+{
+
+ 	struct List * front;
+
+	 struct List *rear;	
+
+};
+
+struct queue* createqueue()
+
+{
+
+	struct queue* ptr= (struct queue *)malloc(sizeof(struct queue));
+
+	if(!ptr)return NULL;
+
+	ptr-&#062;front= NULL;
+
+	ptr-&#062;rear=NULL;
+
+	return ptr;
+
+}
+
+void enqueue(struct queue* q,struct Treenode *root )
+
+{
+
+	struct List *newnode=(struct List *)malloc(sizeof(struct List));
+
+	newnode-&#062;node=root;
+
+	newnode-&#062;next=NULL;
+
+	if(q-&#062;rear==NULL)
+
+	{
+
+			q-&#062;rear=newnode;
+
+	}
+
+	else
+
+	{	
+
+		q-&#062;rear-&#062;next=newnode;
+
+		q-&#062;rear=newnode;	
+
+	}
+
+	if(q-&#062;front==NULL)
+
+		q-&#062;front=q-&#062;rear;
+
+}
+
+int isempty(struct queue* q)
+
+{
+
+	return (q-&#062;front==NULL);
+
+}
+
+struct Treenode* dequeue(struct queue* q)
+
+{
+
+	struct Treenode* dq;
+
+	struct List *temp;
+
+	if(isempty(q))
+
+	{
+
+		printf(&quot;No elements in queue&quot;);
+
+		return NULL;
+
+	}
+
+	else
+
+	{
+
+		temp=q-&#062;front;
+
+		dq=q-&#062;front-&#062;node;
+
+		q-&#062;front=q-&#062;front-&#062;next;
+
+		free(temp);
+
+	}
+
+	return dq;
+
+}
+
+struct Treenode* get_top(struct queue *q)
+
+{
+
+	return q-&#062;front-&#062;next-&#062;node;
+
+} 
+
+void find_height(struct Treenode *root)
+
+{
+
+	struct Treenode* temp;
+
+	struct queue* q=createqueue();
+
+	enqueue(q,root);
+
+	/* Having a NULL to determine the end of each level */
+
+	enqueue(q,NULL);
+
+	int level=0;
+
+	while(!isempty(q))
+
+	{
+
+		temp=dequeue(q);
+
+		if(temp==NULL)
+
+		{
+
+			if(!isempty(q))
+
+				enqueue(q,NULL);
+
+				level++;
+
+		}
+
+	else
+
+	{
+
+		if(temp-&#062;left)
+
+		{
+
+			enqueue(q,temp-&#062;left);
+
+		}
+
+		if(temp-&#062;right)
+
+		{
+
+			enqueue(q,temp-&#062;right);
+
+		}
+
+	}	
+
+	}
+
+	printf(&quot;%d&quot;,level);
+
+}
+
+int main()
+
+{
+
+	struct Treenode* root=newnode(5);
+
+	root-&#062;left 			 =newnode(1);
+
+	root-&#062;right			 =newnode(7);
+
+	root-&#062;left-&#062;right	 =newnode(4);
+
+	root-&#062;left-&#062;left     =newnode(9);
+
+	root-&#062;right-&#062;left    =newnode(10);
+
+	root-&#062;right-&#062;right   =newnode(3);
+
+	find_height(root);
+
+	return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is the implementation of iterative method to find height of a binary tree with linked list queue </p>
+<p>#include</p>
+<p>#include</p>
+<p>#include</p>
+<p>struct Treenode</p>
+<p>{</p>
+<p>	int data;</p>
+<p>	struct Treenode * left;</p>
+<p>	struct Treenode *right;</p>
+<p>};</p>
+<p>struct Treenode* newnode(int data)</p>
+<p>{</p>
+<p>	struct Treenode* temp=(struct Treenode *)malloc(sizeof(struct Treenode));</p>
+<p>	temp-&gt;data=data;</p>
+<p>	temp-&gt;left=NULL;</p>
+<p>	temp-&gt;right=NULL;</p>
+<p>	return temp;</p>
+<p>}</p>
+<p>struct List</p>
+<p>{</p>
+<p>	struct Treenode* node;</p>
+<p>	struct List *next;</p>
+<p>};</p>
+<p>struct queue</p>
+<p>{</p>
+<p> 	struct List * front;</p>
+<p>	 struct List *rear;	</p>
+<p>};</p>
+<p>struct queue* createqueue()</p>
+<p>{</p>
+<p>	struct queue* ptr= (struct queue *)malloc(sizeof(struct queue));</p>
+<p>	if(!ptr)return NULL;</p>
+<p>	ptr-&gt;front= NULL;</p>
+<p>	ptr-&gt;rear=NULL;</p>
+<p>	return ptr;</p>
+<p>}</p>
+<p>void enqueue(struct queue* q,struct Treenode *root )</p>
+<p>{</p>
+<p>	struct List *newnode=(struct List *)malloc(sizeof(struct List));</p>
+<p>	newnode-&gt;node=root;</p>
+<p>	newnode-&gt;next=NULL;</p>
+<p>	if(q-&gt;rear==NULL)</p>
+<p>	{</p>
+<p>			q-&gt;rear=newnode;</p>
+<p>	}</p>
+<p>	else</p>
+<p>	{	</p>
+<p>		q-&gt;rear-&gt;next=newnode;</p>
+<p>		q-&gt;rear=newnode;	</p>
+<p>	}</p>
+<p>	if(q-&gt;front==NULL)</p>
+<p>		q-&gt;front=q-&gt;rear;</p>
+<p>}</p>
+<p>int isempty(struct queue* q)</p>
+<p>{</p>
+<p>	return (q-&gt;front==NULL);</p>
+<p>}</p>
+<p>struct Treenode* dequeue(struct queue* q)</p>
+<p>{</p>
+<p>	struct Treenode* dq;</p>
+<p>	struct List *temp;</p>
+<p>	if(isempty(q))</p>
+<p>	{</p>
+<p>		printf(&#8220;No elements in queue&#8221;);</p>
+<p>		return NULL;</p>
+<p>	}</p>
+<p>	else</p>
+<p>	{</p>
+<p>		temp=q-&gt;front;</p>
+<p>		dq=q-&gt;front-&gt;node;</p>
+<p>		q-&gt;front=q-&gt;front-&gt;next;</p>
+<p>		free(temp);</p>
+<p>	}</p>
+<p>	return dq;</p>
+<p>}</p>
+<p>struct Treenode* get_top(struct queue *q)</p>
+<p>{</p>
+<p>	return q-&gt;front-&gt;next-&gt;node;</p>
+<p>} </p>
+<p>void find_height(struct Treenode *root)</p>
+<p>{</p>
+<p>	struct Treenode* temp;</p>
+<p>	struct queue* q=createqueue();</p>
+<p>	enqueue(q,root);</p>
+<p>	/* Having a NULL to determine the end of each level */</p>
+<p>	enqueue(q,NULL);</p>
+<p>	int level=0;</p>
+<p>	while(!isempty(q))</p>
+<p>	{</p>
+<p>		temp=dequeue(q);</p>
+<p>		if(temp==NULL)</p>
+<p>		{</p>
+<p>			if(!isempty(q))</p>
+<p>				enqueue(q,NULL);</p>
+<p>				level++;</p>
+<p>		}</p>
+<p>	else</p>
+<p>	{</p>
+<p>		if(temp-&gt;left)</p>
+<p>		{</p>
+<p>			enqueue(q,temp-&gt;left);</p>
+<p>		}</p>
+<p>		if(temp-&gt;right)</p>
+<p>		{</p>
+<p>			enqueue(q,temp-&gt;right);</p>
+<p>		}</p>
+<p>	}	</p>
+<p>	}</p>
+<p>	printf(&#8220;%d&#8221;,level);</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>	struct Treenode* root=newnode(5);</p>
+<p>	root-&gt;left 			 =newnode(1);</p>
+<p>	root-&gt;right			 =newnode(7);</p>
+<p>	root-&gt;left-&gt;right	 =newnode(4);</p>
+<p>	root-&gt;left-&gt;left     =newnode(9);</p>
+<p>	root-&gt;right-&gt;left    =newnode(10);</p>
+<p>	root-&gt;right-&gt;right   =newnode(3);</p>
+<p>	find_height(root);</p>
+<p>	return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-34324</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 05 Apr 2014 10:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-34324</guid>
+		<description><![CDATA[Here is the solution for finding the height ( or depth) of a binary tree without recursion (queue implementation). 
+
+http://ideone.com/e.js/ndP4PS  ]]></description>
+		<content:encoded><![CDATA[<p>Here is the solution for finding the height ( or depth) of a binary tree without recursion (queue implementation). </p>
+<p><a href="http://ideone.com/e.js/ndP4PS" rel="nofollow">http://ideone.com/e.js/ndP4PS</a>  </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-30392</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Wed, 04 Dec 2013 07:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-30392</guid>
+		<description><![CDATA[The usual convention says that the height of such a tree should be 2. The number of edges are counted as the height. 
+The only problem with this is that, when you write the recursive function for height, if you want it to be the number of edges, you would have to give the base case as 
+    if(!root)
+        return -1;
+That is, if we count it as the number of edges, then both, a tree with one node has a height of 0, and an empty tree as -1.]]></description>
+		<content:encoded><![CDATA[<p>The usual convention says that the height of such a tree should be 2. The number of edges are counted as the height.<br />
+The only problem with this is that, when you write the recursive function for height, if you want it to be the number of edges, you would have to give the base case as<br />
+    if(!root)<br />
+        return -1;<br />
+That is, if we count it as the number of edges, then both, a tree with one node has a height of 0, and an empty tree as -1.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-30393</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Wed, 04 Dec 2013 07:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-30393</guid>
+		<description><![CDATA[The usual convention says that the height of such a tree should be 2. The number of edges are counted as the height. 
+The only problem with this is that, when you write the recursive function for height, if you want it to be the number of edges, you would have to give the base case as 
+    if(!root)
+        return -1;
+That is, if we count it as the number of edges, then both, a tree with one node has a height of 0, and an empty tree as -1.]]></description>
+		<content:encoded><![CDATA[<p>The usual convention says that the height of such a tree should be 2. The number of edges are counted as the height.<br />
+The only problem with this is that, when you write the recursive function for height, if you want it to be the number of edges, you would have to give the base case as<br />
+    if(!root)<br />
+        return -1;<br />
+That is, if we count it as the number of edges, then both, a tree with one node has a height of 0, and an empty tree as -1.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: isha</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-29908</link>
+		<dc:creator><![CDATA[isha]]></dc:creator>
+		<pubDate>Sun, 17 Nov 2013 11:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-29908</guid>
+		<description><![CDATA[as you have discussed here that we find the height of a tree by the Number of edges on longest path from root to the deepest node then according this what should be the height of a tree 2 or 3 for above example????]]></description>
+		<content:encoded><![CDATA[<p>as you have discussed here that we find the height of a tree by the Number of edges on longest path from root to the deepest node then according this what should be the height of a tree 2 or 3 for above example????</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin Sharma</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-29257</link>
+		<dc:creator><![CDATA[Nitin Sharma]]></dc:creator>
+		<pubDate>Thu, 24 Oct 2013 00:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-29257</guid>
+		<description><![CDATA[/*HEIGHT OF TREE WITHOUT LEVEL ORDER TRAVERSAL*/
+
+#include
+#include
+
+typedef struct node
+{
+    int value;
+    struct node *left,*right;
+}node;
+
+node* newnode(int n)
+{
+    node *tmp;
+
+    tmp = (node*)calloc(1,sizeof(node));
+
+    if(tmp==NULL)
+    {
+        printf(&quot;Memory Underflow.n&quot;);
+        exit(0);
+    }
+
+    tmp-&#062;value=n;
+    tmp-&#062;left=NULL;
+    tmp-&#062;right=NULL;
+
+    return tmp;
+}
+
+void main()
+{
+    node *stack[10],*tmp,*root;
+    int top=-1,max=0,over=0;
+
+    root=newnode(1);
+    root-&#062;left=newnode(2);
+    root-&#062;right=newnode(3);
+    root-&#062;left-&#062;left=newnode(4);
+    root-&#062;left-&#062;right=newnode(5);
+
+    stack[++top]=NULL;
+
+    while(1)
+    {
+        while(root)
+        {
+            stack[++top]=root;
+            root=root-&#062;left;
+        }
+
+        if(maxright==NULL &#124;&#124; stack[top]==tmp)
+        {
+            if(stack[top]==NULL)
+            {
+                over=1;
+                break;
+            }
+            top--;    
+        }
+
+        if(over==1)
+        {
+            break;
+        }
+
+        
+        root=stack[top]-&#062;right;
+        stack[top]=tmp;
+    }
+
+    printf(&quot;Height of tree is : %dn&quot;,max);
+
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>/*HEIGHT OF TREE WITHOUT LEVEL ORDER TRAVERSAL*/</p>
+<p>#include<br />
+#include</p>
+<p>typedef struct node<br />
+{<br />
+    int value;<br />
+    struct node *left,*right;<br />
+}node;</p>
+<p>node* newnode(int n)<br />
+{<br />
+    node *tmp;</p>
+<p>    tmp = (node*)calloc(1,sizeof(node));</p>
+<p>    if(tmp==NULL)<br />
+    {<br />
+        printf(&#8220;Memory Underflow.n&#8221;);<br />
+        exit(0);<br />
+    }</p>
+<p>    tmp-&gt;value=n;<br />
+    tmp-&gt;left=NULL;<br />
+    tmp-&gt;right=NULL;</p>
+<p>    return tmp;<br />
+}</p>
+<p>void main()<br />
+{<br />
+    node *stack[10],*tmp,*root;<br />
+    int top=-1,max=0,over=0;</p>
+<p>    root=newnode(1);<br />
+    root-&gt;left=newnode(2);<br />
+    root-&gt;right=newnode(3);<br />
+    root-&gt;left-&gt;left=newnode(4);<br />
+    root-&gt;left-&gt;right=newnode(5);</p>
+<p>    stack[++top]=NULL;</p>
+<p>    while(1)<br />
+    {<br />
+        while(root)<br />
+        {<br />
+            stack[++top]=root;<br />
+            root=root-&gt;left;<br />
+        }</p>
+<p>        if(maxright==NULL || stack[top]==tmp)<br />
+        {<br />
+            if(stack[top]==NULL)<br />
+            {<br />
+                over=1;<br />
+                break;<br />
+            }<br />
+            top&#8211;;<br />
+        }</p>
+<p>        if(over==1)<br />
+        {<br />
+            break;<br />
+        }</p>
+<p>        root=stack[top]-&gt;right;<br />
+        stack[top]=tmp;<br />
+    }</p>
+<p>    printf(&#8220;Height of tree is : %dn&#8221;,max);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin Sharma</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-29219</link>
+		<dc:creator><![CDATA[Nitin Sharma]]></dc:creator>
+		<pubDate>Wed, 23 Oct 2013 00:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-29219</guid>
+		<description><![CDATA[I think your algorithm will go in infinite loop.....lets see this example
+1
+
+1-&#062;left =2
+1-&#062;right=3
+2-&#062;left=4
+2-&#062;right=5
+
+
+now your algorithm will go in infinite loop in  switching from 2 to 5 and 5 to 2 and it will switch infinitely......]]></description>
+		<content:encoded><![CDATA[<p>I think your algorithm will go in infinite loop&#8230;..lets see this example<br />
+1</p>
+<p>1-&gt;left =2<br />
+1-&gt;right=3<br />
+2-&gt;left=4<br />
+2-&gt;right=5</p>
+<p>now your algorithm will go in infinite loop in  switching from 2 to 5 and 5 to 2 and it will switch infinitely&#8230;&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Patil</title>
+		<link>http://www.geeksforgeeks.org/iterative-method-to-find-height-of-binary-tree/#comment-28397</link>
+		<dc:creator><![CDATA[Patil]]></dc:creator>
+		<pubDate>Thu, 03 Oct 2013 05:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119032#comment-28397</guid>
+		<description><![CDATA[Here is C implementation.
+
+
+int treeHeight(mynode *root)
+{
+if(root == NULL)
+return 0;
+mynode *queue[20];
+int height,front,rear;
+height=0;
+front = 0;
+rear = 1;
+queue[rear] = root;
+while(1)
+{
+int nodeCount = (rear-front);
+if(nodeCount == 0)
+  return height;
+else
+  height++;
+  while(nodeCount &#062; 0)
+{
+ root = queue[++front];
+ if(root-&#062;left)
+ queue[++rear] = root-&#062;left;
+ if(root-&#062;right)
+ queue[++rear] = root-&#062;right;
+ nodeCount--;
+}
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>Here is C implementation.</p>
+<p>int treeHeight(mynode *root)<br />
+{<br />
+if(root == NULL)<br />
+return 0;<br />
+mynode *queue[20];<br />
+int height,front,rear;<br />
+height=0;<br />
+front = 0;<br />
+rear = 1;<br />
+queue[rear] = root;<br />
+while(1)<br />
+{<br />
+int nodeCount = (rear-front);<br />
+if(nodeCount == 0)<br />
+  return height;<br />
+else<br />
+  height++;<br />
+  while(nodeCount &gt; 0)<br />
+{<br />
+ root = queue[++front];<br />
+ if(root-&gt;left)<br />
+ queue[++rear] = root-&gt;left;<br />
+ if(root-&gt;right)<br />
+ queue[++rear] = root-&gt;right;<br />
+ nodeCount&#8211;;<br />
+}<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:38 -->
+
+<!-- Compression = gzip -->

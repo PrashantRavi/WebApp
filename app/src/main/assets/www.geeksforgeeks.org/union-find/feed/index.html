@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Disjoint Set (Or Union-Find) &#124; Set 1 (Detect Cycle in an Undirected Graph)</title>
+	<atom:link href="http://www.geeksforgeeks.org/union-find/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/union-find/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: gbrocks</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-39667</link>
+		<dc:creator><![CDATA[gbrocks]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 17:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-39667</guid>
+		<description><![CDATA[When (1-3) edge comes, x=y=3, so function will return 1(cycle detected) , it will not enter union() function.
+As x and y are values whose parent[x] = -1 and parent[y] = -1, I think find() function call in union() function is redundant.]]></description>
+		<content:encoded><![CDATA[<p>When (1-3) edge comes, x=y=3, so function will return 1(cycle detected) , it will not enter union() function.<br />
+As x and y are values whose parent[x] = -1 and parent[y] = -1, I think find() function call in union() function is redundant.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: brahma</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-38781</link>
+		<dc:creator><![CDATA[brahma]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 06:29:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-38781</guid>
+		<description><![CDATA[Simple Implementation 
+http://ideone.com/UJzI1h]]></description>
+		<content:encoded><![CDATA[<p>Simple Implementation<br />
+<a href="http://ideone.com/UJzI1h" rel="nofollow">http://ideone.com/UJzI1h</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mragank Yadav</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-37563</link>
+		<dc:creator><![CDATA[Mragank Yadav]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 20:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-37563</guid>
+		<description><![CDATA[For all those who are thinking that calling find() function again in Union() is redundant,
+
+It is not and is absolutely mandatory. 
+Here understand it with the following example:
+Consider this your graph:
+0----1--2
+....... &#124;  / 
+........3
+
+now our parent would be:
+0    1    2   3
+-1 -1   -1  -1
+
+On passing Edge (0-1), parent becomes 
+0   1    2  3
+1  -1  -1 -1
+
+Edge (1-2) gives
+
+ 0  1  2  3
+1  2  -1 -1
+
+Edge (2-3) gives
+
+ 0  1  2  3
+ 1  2  3  -1
+
+Now, When Edge (1-3) comes, if there is no find() in Union(), then our resulting parent would be 
+
+ 0  1  2  3     which would be wrong. 
+1  3  3 -1
+
+But cause of find(),  we know that Vertex 1 belongs to the subset {0,1,2}
+
+and so parent would become
+
+0  1  2  3  which would correctly detect the cycle 1-&#062;3-&#062;2.
+
+                                              1  2  3  -1
+
+I hope i am correct and this avoids confusion.]]></description>
+		<content:encoded><![CDATA[<p>For all those who are thinking that calling find() function again in Union() is redundant,</p>
+<p>It is not and is absolutely mandatory.<br />
+Here understand it with the following example:<br />
+Consider this your graph:<br />
+0&#8212;-1&#8211;2<br />
+&#8230;&#8230;. |  /<br />
+&#8230;&#8230;..3</p>
+<p>now our parent would be:<br />
+0    1    2   3<br />
+-1 -1   -1  -1</p>
+<p>On passing Edge (0-1), parent becomes<br />
+0   1    2  3<br />
+1  -1  -1 -1</p>
+<p>Edge (1-2) gives</p>
+<p> 0  1  2  3<br />
+1  2  -1 -1</p>
+<p>Edge (2-3) gives</p>
+<p> 0  1  2  3<br />
+ 1  2  3  -1</p>
+<p>Now, When Edge (1-3) comes, if there is no find() in Union(), then our resulting parent would be </p>
+<p> 0  1  2  3     which would be wrong.<br />
+1  3  3 -1</p>
+<p>But cause of find(),  we know that Vertex 1 belongs to the subset {0,1,2}</p>
+<p>and so parent would become</p>
+<p>0  1  2  3  which would correctly detect the cycle 1-&gt;3-&gt;2.</p>
+<p>                                              1  2  3  -1</p>
+<p>I hope i am correct and this avoids confusion.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Koustav</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-37343</link>
+		<dc:creator><![CDATA[Koustav]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 07:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-37343</guid>
+		<description><![CDATA[what&#039;s the use of calling find() function for d 2nd time from Union() method?? The code will work fine without those redundant function calls.]]></description>
+		<content:encoded><![CDATA[<p>what&#8217;s the use of calling find() function for d 2nd time from Union() method?? The code will work fine without those redundant function calls.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-35148</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 26 Apr 2014 10:25:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-35148</guid>
+		<description><![CDATA[misplaced comment. deleted.]]></description>
+		<content:encoded><![CDATA[<p>misplaced comment. deleted.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-34178</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 23:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-34178</guid>
+		<description><![CDATA[A Union Find Data structure implementation in C#
+
+http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html]]></description>
+		<content:encoded><![CDATA[<p>A Union Find Data structure implementation in C#</p>
+<p><a href="http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html" rel="nofollow">http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Wellwisher</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-33888</link>
+		<dc:creator><![CDATA[Wellwisher]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 19:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-33888</guid>
+		<description><![CDATA[Here is a nice C# implementation ....
+http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html]]></description>
+		<content:encoded><![CDATA[<p>Here is a nice C# implementation &#8230;.<br />
+<a href="http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html" rel="nofollow">http://onestopinterviewprep.blogspot.com/2014/03/union-find-datastructure.html</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-28715</link>
+		<dc:creator><![CDATA[Gaurav]]></dc:creator>
+		<pubDate>Fri, 11 Oct 2013 10:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-28715</guid>
+		<description><![CDATA[int xset = find(parent, x);
+    int yset = find(parent, y);
+Lines inside Union function are not necessary.]]></description>
+		<content:encoded><![CDATA[<p>int xset = find(parent, x);<br />
+    int yset = find(parent, y);<br />
+Lines inside Union function are not necessary.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rohan</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-28649</link>
+		<dc:creator><![CDATA[rohan]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 19:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-28649</guid>
+		<description><![CDATA[My bad....Its true that its e*n worst case..n is for union only...i was taking n as total complexity...we can handle self loop by checking source and dest if same]]></description>
+		<content:encoded><![CDATA[<p>My bad&#8230;.Its true that its e*n worst case..n is for union only&#8230;i was taking n as total complexity&#8230;we can handle self loop by checking source and dest if same</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: rohan</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-28647</link>
+		<dc:creator><![CDATA[rohan]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2013 19:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-28647</guid>
+		<description><![CDATA[how cum it is 0(n) in wort case??it is n^2...
+if tree is skewed
+0
+/
+1
+/
+2
+/
+3
+/
+4
+/
+5
+when 4-5 is inserted 1 operations....//to get parent.
+when 5-3 is inserted 2 operations...//to get parent
+when 5-2 inserted 3 operations
+when 5-1 inserted n-2
+when 5-0 insserted...n-1 operations..
+
+
+so isnt it 0(n^2) in worst case?
+@Geeksforgeeks,plz calarify?]]></description>
+		<content:encoded><![CDATA[<p>how cum it is 0(n) in wort case??it is n^2&#8230;<br />
+if tree is skewed<br />
+0<br />
+/<br />
+1<br />
+/<br />
+2<br />
+/<br />
+3<br />
+/<br />
+4<br />
+/<br />
+5<br />
+when 4-5 is inserted 1 operations&#8230;.//to get parent.<br />
+when 5-3 is inserted 2 operations&#8230;//to get parent<br />
+when 5-2 inserted 3 operations<br />
+when 5-1 inserted n-2<br />
+when 5-0 insserted&#8230;n-1 operations..</p>
+<p>so isnt it 0(n^2) in worst case?<br />
+@Geeksforgeeks,plz calarify?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: KC</title>
+		<link>http://www.geeksforgeeks.org/union-find/#comment-28436</link>
+		<dc:creator><![CDATA[KC]]></dc:creator>
+		<pubDate>Fri, 04 Oct 2013 03:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=26350#comment-28436</guid>
+		<description><![CDATA[The theoretical explanation is very confusing. I am really trying to understand this as part of the Minimum Spanning Tree problem. I wish you could be more clear on all the 0&#039;s, 1&#039;s and 2&#039;s and properly indicate what they each mean.]]></description>
+		<content:encoded><![CDATA[<p>The theoretical explanation is very confusing. I am really trying to understand this as part of the Minimum Spanning Tree problem. I wish you could be more clear on all the 0&#8217;s, 1&#8217;s and 2&#8217;s and properly indicate what they each mean.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.051 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:32:30 -->
+
+<!-- Compression = gzip -->

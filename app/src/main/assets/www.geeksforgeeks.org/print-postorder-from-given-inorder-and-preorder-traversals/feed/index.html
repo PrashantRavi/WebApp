@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print Postorder traversal from given Inorder and Preorder traversals</title>
+	<atom:link href="http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-38408</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Fri, 13 Jun 2014 10:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-38408</guid>
+		<description><![CDATA[void printPost(int pre[],int in[],int begin,int end,int &#038;i1,int n)
+{
+    if(i1&#062;=n&#124;&#124; begin&#062;end)
+    { return;    }
+        int i2=search(in,pre[i1],n);
+        i1++;
+            printPost(pre,in,begin,i2-1,i1,n);
+            printPost(pre,in,i2+1,end,i1,n);
+            cout&#060;&#060;in[i2]&#060;&#060;&#034; &#034;;
+}]]></description>
+		<content:encoded><![CDATA[<p>void printPost(int pre[],int in[],int begin,int end,int &amp;i1,int n)<br />
+{<br />
+    if(i1&gt;=n|| begin&gt;end)<br />
+    { return;    }<br />
+        int i2=search(in,pre[i1],n);<br />
+        i1++;<br />
+            printPost(pre,in,begin,i2-1,i1,n);<br />
+            printPost(pre,in,i2+1,end,i1,n);<br />
+            cout&lt;&lt;in[i2]&lt;&lt;&quot; &quot;;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: eman</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-36156</link>
+		<dc:creator><![CDATA[eman]]></dc:creator>
+		<pubDate>Sat, 17 May 2014 08:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-36156</guid>
+		<description><![CDATA[Hey, I want to implement this algorithm in Java, but i don&#039;t understand one thing:
+if you have int[] pre, what does &quot;pre+1&quot; in &quot;printPostOrder(in, pre+1, root);&quot; mean?]]></description>
+		<content:encoded><![CDATA[<p>Hey, I want to implement this algorithm in Java, but i don&#8217;t understand one thing:<br />
+if you have int[] pre, what does &#8220;pre+1&#8221; in &#8220;printPostOrder(in, pre+1, root);&#8221; mean?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-35235</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 11:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-35235</guid>
+		<description><![CDATA[#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int search(int n,int in[],int low1,int high1)
+{
+	for(int i=low1;ihigh1)
+	    return NULL;
+	if(low1==high1)
+	{
+		ptr=new tnode(in[low1]);
+		return ptr;
+	}
+	if(ptr==NULL)
+	{
+		ptr=new tnode(pre[low2]);
+	}
+	int k=search(pre[low2],in,low1,high1);
+	ptr-&#062;lchild=fun(ptr-&#062;lchild,in,pre,low1,k-1,low2+1,high2);
+	ptr-&#062;rchild=fun(ptr-&#062;rchild,in,pre,k+1,high1,low2+k+1,high2);
+	return ptr;
+}
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		display(root-&#062;rchild);
+		cout&#060;data&#060;&#060;&#034; &#034;;
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int in[]={4,2,5,1,7,3,6};
+	int pre[]={1,2,4,5,3,7,6};
+	int n=sizeof(in)/sizeof(in[0]);
+	display(fun(root,in,pre,0,n-1,0,n-1));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int search(int n,int in[],int low1,int high1)<br />
+{<br />
+	for(int i=low1;ihigh1)<br />
+	    return NULL;<br />
+	if(low1==high1)<br />
+	{<br />
+		ptr=new tnode(in[low1]);<br />
+		return ptr;<br />
+	}<br />
+	if(ptr==NULL)<br />
+	{<br />
+		ptr=new tnode(pre[low2]);<br />
+	}<br />
+	int k=search(pre[low2],in,low1,high1);<br />
+	ptr-&gt;lchild=fun(ptr-&gt;lchild,in,pre,low1,k-1,low2+1,high2);<br />
+	ptr-&gt;rchild=fun(ptr-&gt;rchild,in,pre,k+1,high1,low2+k+1,high2);<br />
+	return ptr;<br />
+}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		display(root-&gt;rchild);<br />
+		cout&lt;data&lt;&lt;&quot; &quot;;<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int in[]={4,2,5,1,7,3,6};<br />
+	int pre[]={1,2,4,5,3,7,6};<br />
+	int n=sizeof(in)/sizeof(in[0]);<br />
+	display(fun(root,in,pre,0,n-1,0,n-1));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: arun kumar</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-29017</link>
+		<dc:creator><![CDATA[arun kumar]]></dc:creator>
+		<pubDate>Fri, 18 Oct 2013 09:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-29017</guid>
+		<description><![CDATA[I have an O(n) solution for the same problem
+
+#include 
+#include 
+#include 
+using namespace std;
+
+int IN[] = {8,9,2,1,6,7,3,5,10,4};
+int PRE[] = {1,2,8,9,5,3,6,7,4,10};
+map pos;
+
+void printPostorder(int s, int e, int count)
+
+{
+
+    if(s==e)
+    {
+        cout&#060;&#060;IN[s]&#060;&#060;endl;
+        return;
+    }
+    int root = PRE[count];
+    int rpos = pos[root];
+    count++;
+    if(rpos != s)
+        printPostorder(s, rpos-1, count);
+    if(rpos != e)    
+    printPostorder(rpos+1, e, count+rpos-s);
+    cout&#060;&#060;root&#060;&#060;endl;
+    
+    
+}
+
+int main()
+{
+      for(int i=0; i&#060;10; i++)
+       pos[IN[i]] = i;
+   printPostorder(0,9,0);
+    
+}]]></description>
+		<content:encoded><![CDATA[<p>I have an O(n) solution for the same problem</p>
+<p>#include<br />
+#include<br />
+#include<br />
+using namespace std;</p>
+<p>int IN[] = {8,9,2,1,6,7,3,5,10,4};<br />
+int PRE[] = {1,2,8,9,5,3,6,7,4,10};<br />
+map pos;</p>
+<p>void printPostorder(int s, int e, int count)</p>
+<p>{</p>
+<p>    if(s==e)<br />
+    {<br />
+        cout&lt;&lt;IN[s]&lt;&lt;endl;<br />
+        return;<br />
+    }<br />
+    int root = PRE[count];<br />
+    int rpos = pos[root];<br />
+    count++;<br />
+    if(rpos != s)<br />
+        printPostorder(s, rpos-1, count);<br />
+    if(rpos != e)<br />
+    printPostorder(rpos+1, e, count+rpos-s);<br />
+    cout&lt;&lt;root&lt;&lt;endl;</p>
+<p>}</p>
+<p>int main()<br />
+{<br />
+      for(int i=0; i&lt;10; i++)<br />
+       pos[IN[i]] = i;<br />
+   printPostorder(0,9,0);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bhavneet</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27249</link>
+		<dc:creator><![CDATA[bhavneet]]></dc:creator>
+		<pubDate>Sun, 01 Sep 2013 14:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27249</guid>
+		<description><![CDATA[#include
+
+int search( int arr[], int start , int end , int se)
+{
+int index;
+      for(index=start ; index end )
+                return ;
+        int in_index = search ( inorder, start , end , preorder[*index]);
+        (*index)++;
+        inprePost( inorder, start, in_index-1, preorder, index);
+        inprePost( inorder, in_index+1, end , preorder, index);
+        printf(&quot;%d&quot;, inorder[in_index]);
+        return;
+
+}
+
+int main()
+{
+   int in[] = {4, 2, 5, 1, 3, 6};
+   int pre[] =  {1, 2, 4, 5, 3, 6};
+   int n = sizeof(in)/sizeof(in[0]);
+   int index=0;
+   inprePost( in, 0, n-1, pre, &#038;index);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>int search( int arr[], int start , int end , int se)<br />
+{<br />
+int index;<br />
+      for(index=start ; index end )<br />
+                return ;<br />
+        int in_index = search ( inorder, start , end , preorder[*index]);<br />
+        (*index)++;<br />
+        inprePost( inorder, start, in_index-1, preorder, index);<br />
+        inprePost( inorder, in_index+1, end , preorder, index);<br />
+        printf(&#8220;%d&#8221;, inorder[in_index]);<br />
+        return;</p>
+<p>}</p>
+<p>int main()<br />
+{<br />
+   int in[] = {4, 2, 5, 1, 3, 6};<br />
+   int pre[] =  {1, 2, 4, 5, 3, 6};<br />
+   int n = sizeof(in)/sizeof(in[0]);<br />
+   int index=0;<br />
+   inprePost( in, 0, n-1, pre, &amp;index);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27099</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 17:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27099</guid>
+		<description><![CDATA[@All:  Thanks for your inputs.  We have updated the post and added time complexity as O(n^2).]]></description>
+		<content:encoded><![CDATA[<p>@All:  Thanks for your inputs.  We have updated the post and added time complexity as O(n^2).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27095</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 16:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27095</guid>
+		<description><![CDATA[Yes, it is O(n^2).]]></description>
+		<content:encoded><![CDATA[<p>Yes, it is O(n^2).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27094</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 16:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27094</guid>
+		<description><![CDATA[So the complexity of the code is O(n^2).]]></description>
+		<content:encoded><![CDATA[<p>So the complexity of the code is O(n^2).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27090</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 15:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27090</guid>
+		<description><![CDATA[Ronny:
+Thanks for pointing this out.  It should be T(n)=T(k)+T(n-k-1)+O(n)
+
+Apologies for the confusion.]]></description>
+		<content:encoded><![CDATA[<p>Ronny:<br />
+Thanks for pointing this out.  It should be T(n)=T(k)+T(n-k-1)+O(n)</p>
+<p>Apologies for the confusion.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27091</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 15:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27091</guid>
+		<description><![CDATA[Ronny:
+Thanks for pointing this out.  It should be T(n)=T(k)+T(n-k-1)+O(n)
+
+Apologies for the confusion.]]></description>
+		<content:encoded><![CDATA[<p>Ronny:<br />
+Thanks for pointing this out.  It should be T(n)=T(k)+T(n-k-1)+O(n)</p>
+<p>Apologies for the confusion.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/#comment-27084</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2013 14:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122254#comment-27084</guid>
+		<description><![CDATA[@GeeksforGeeks:disqus  
+
+How is it
+
+T(n)=T(k)+T(n-k-1)+O(1) ??
+
+Shouldn&#039;t it be 
+T(n)=T(k)+T(n-k-1)+O(n)
+
+because for each recursion we are doing O(n) search.
+
+
+Kindly let us know your thoughts.]]></description>
+		<content:encoded><![CDATA[<p>@GeeksforGeeks:disqus  </p>
+<p>How is it</p>
+<p>T(n)=T(k)+T(n-k-1)+O(1) ??</p>
+<p>Shouldn&#8217;t it be<br />
+T(n)=T(k)+T(n-k-1)+O(n)</p>
+<p>because for each recursion we are doing O(n) search.</p>
+<p>Kindly let us know your thoughts.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:59 -->
+
+<!-- Compression = gzip -->

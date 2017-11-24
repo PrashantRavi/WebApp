@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construct Special Binary Tree from given Inorder traversal</title>
+	<atom:link href="http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Batman_</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-39786</link>
+		<dc:creator><![CDATA[Batman_]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 13:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-39786</guid>
+		<description><![CDATA[int findMaxNo(int arr[],int j,int k)
+
+{
+
+int i,max=0,maxvalue=0;
+
+for(i=j;imaxvalue){
+
+max=i;
+
+maxvalue=arr[i];}
+
+}
+
+return max;
+
+}
+
+createTree(node **root,int first,int last,int arr[])
+
+{
+
+if(first&#062;last)
+
+    return;
+
+int max=findMaxNo(arr,first,last);
+
+*root=addNode(arr[max]);
+
+createTree(&#038;(*root)-&#062;left,first,max-1,arr);
+
+createTree(&#038;(*root)-&#062;right,max+1,last,arr);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>int findMaxNo(int arr[],int j,int k)</p>
+<p>{</p>
+<p>int i,max=0,maxvalue=0;</p>
+<p>for(i=j;imaxvalue){</p>
+<p>max=i;</p>
+<p>maxvalue=arr[i];}</p>
+<p>}</p>
+<p>return max;</p>
+<p>}</p>
+<p>createTree(node **root,int first,int last,int arr[])</p>
+<p>{</p>
+<p>if(first&gt;last)</p>
+<p>    return;</p>
+<p>int max=findMaxNo(arr,first,last);</p>
+<p>*root=addNode(arr[max]);</p>
+<p>createTree(&amp;(*root)-&gt;left,first,max-1,arr);</p>
+<p>createTree(&amp;(*root)-&gt;right,max+1,last,arr);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-35359</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 09:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-35359</guid>
+		<description><![CDATA[searching max which requires 0(n) can be optimized with RMQ algorithm
+construct segment tree for the given traversal and then find max index in 0(logn) time
+t(N)=2t(n/2)+0(logn)]]></description>
+		<content:encoded><![CDATA[<p>searching max which requires 0(n) can be optimized with RMQ algorithm<br />
+construct segment tree for the given traversal and then find max index in 0(logn) time<br />
+t(N)=2t(n/2)+0(logn)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-35358</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 09:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-35358</guid>
+		<description><![CDATA[T(N)=2T(N/2)+0(N)
+its complexity will be 0(nlogn) using masters theorem
+but for the skewed tree worst case analysis comes with 0(n^2)
+note it is not max heap as it is not complete binary tree]]></description>
+		<content:encoded><![CDATA[<p>T(N)=2T(N/2)+0(N)<br />
+its complexity will be 0(nlogn) using masters theorem<br />
+but for the skewed tree worst case analysis comes with 0(n^2)<br />
+note it is not max heap as it is not complete binary tree</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-35357</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 09:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-35357</guid>
+		<description><![CDATA[#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int search(int in[],int low,int high)
+{
+	int max=0,loc;
+	for(int i=low;imax)
+		{
+		   max=in[i];
+		   loc=i;	
+		}
+	}
+	return loc;
+}
+tnode* fun(tnode* root,int in[],int low,int high)
+{
+	if(low&#062;high)
+	   return NULL;
+	if(low==high)
+	{
+		root=new tnode(in[low]);
+		return root;
+	}
+	int k=search(in,low,high);
+	root=new tnode(in[k]);
+	root-&#062;lchild=fun(root-&#062;lchild,in,low,k-1);
+	root-&#062;rchild=fun(root-&#062;rchild,in,k+1,high);
+	return root;
+}
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+ 
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int in[] = {5, 10, 40, 30, 28};
+	int n=sizeof(in)/sizeof(in[0]);
+	display(fun(root,in,0,n-1));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int search(int in[],int low,int high)<br />
+{<br />
+	int max=0,loc;<br />
+	for(int i=low;imax)<br />
+		{<br />
+		   max=in[i];<br />
+		   loc=i;<br />
+		}<br />
+	}<br />
+	return loc;<br />
+}<br />
+tnode* fun(tnode* root,int in[],int low,int high)<br />
+{<br />
+	if(low&gt;high)<br />
+	   return NULL;<br />
+	if(low==high)<br />
+	{<br />
+		root=new tnode(in[low]);<br />
+		return root;<br />
+	}<br />
+	int k=search(in,low,high);<br />
+	root=new tnode(in[k]);<br />
+	root-&gt;lchild=fun(root-&gt;lchild,in,low,k-1);<br />
+	root-&gt;rchild=fun(root-&gt;rchild,in,k+1,high);<br />
+	return root;<br />
+}<br />
+void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);</p>
+<p>	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int in[] = {5, 10, 40, 30, 28};<br />
+	int n=sizeof(in)/sizeof(in[0]);<br />
+	display(fun(root,in,0,n-1));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-35320</link>
+		<dc:creator><![CDATA[prashant]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 10:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-35320</guid>
+		<description><![CDATA[search for maximum key and recur into left and right subtree based on that index....complexity 0(n^2)]]></description>
+		<content:encoded><![CDATA[<p>search for maximum key and recur into left and right subtree based on that index&#8230;.complexity 0(n^2)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sunil</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-33741</link>
+		<dc:creator><![CDATA[sunil]]></dc:creator>
+		<pubDate>Sat, 22 Mar 2014 14:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-33741</guid>
+		<description><![CDATA[/* If this is the only element in inorder[start..end],
+       then return it */
+    if (start == end)
+        return root;
+
+
+is not required, the condition at the start of the function is sufficient.]]></description>
+		<content:encoded><![CDATA[<p>/* If this is the only element in inorder[start..end],<br />
+       then return it */<br />
+    if (start == end)<br />
+        return root;</p>
+<p>is not required, the condition at the start of the function is sufficient.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-21337</link>
+		<dc:creator><![CDATA[AMIT]]></dc:creator>
+		<pubDate>Thu, 04 Jul 2013 19:19:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-21337</guid>
+		<description><![CDATA[only recursion stack is used..if you consider it too,its o(height of tree) space]]></description>
+		<content:encoded><![CDATA[<p>only recursion stack is used..if you consider it too,its o(height of tree) space</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alexander.korobeynikov</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-20556</link>
+		<dc:creator><![CDATA[alexander.korobeynikov]]></dc:creator>
+		<pubDate>Tue, 25 Jun 2013 08:54:12 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-20556</guid>
+		<description><![CDATA[It does not seem to be O(1) extra space]]></description>
+		<content:encoded><![CDATA[<p>It does not seem to be O(1) extra space</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-20548</link>
+		<dc:creator><![CDATA[AMIT]]></dc:creator>
+		<pubDate>Tue, 25 Jun 2013 05:05:44 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-20548</guid>
+		<description><![CDATA[I already posted a cmnt with an algo in o(n)
+ time and o(1) extra space
+see my comment with name ammy
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>I already posted a cmnt with an algo in o(n)<br />
+ time and o(1) extra space<br />
+see my comment with name ammy</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Upendra</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-19550</link>
+		<dc:creator><![CDATA[Upendra]]></dc:creator>
+		<pubDate>Tue, 11 Jun 2013 08:04:16 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-19550</guid>
+		<description><![CDATA[Thanks men I got it.
+
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Thanks men I got it.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alveko</title>
+		<link>http://www.geeksforgeeks.org/construct-binary-tree-from-inorder-traversal/#comment-19533</link>
+		<dc:creator><![CDATA[alveko]]></dc:creator>
+		<pubDate>Tue, 11 Jun 2013 02:52:36 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=21781#comment-19533</guid>
+		<description><![CDATA[The proper name for this &quot;Special Binary Tree&quot; is Cartesian tree which can be constructed in O(n)]]></description>
+		<content:encoded><![CDATA[<p>The proper name for this &#8220;Special Binary Tree&#8221; is Cartesian tree which can be constructed in O(n)</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:06 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Tournament Tree (Winner Tree) and Binary Heap</title>
+	<atom:link href="http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-36125</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Fri, 16 May 2014 10:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-36125</guid>
+		<description><![CDATA[for median of sorted array using tournament tree
+http://ideone.com/aqUeRy]]></description>
+		<content:encoded><![CDATA[<p>for median of sorted array using tournament tree<br />
+<a href="http://ideone.com/aqUeRy" rel="nofollow">http://ideone.com/aqUeRy</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-36124</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Fri, 16 May 2014 10:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-36124</guid>
+		<description><![CDATA[here is my implementation for median of sorted array using tournament tree
+
+#include
+#define infinity 999
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	int *aptr;
+	int ind;
+	tnode()
+	{
+		lchild=NULL;
+		aptr=NULL;
+		ind=0;
+		rchild=NULL;
+	}
+};
+ 
+tnode* create(tnode* root,int *s1,int *s2,int *s3,int level,int &#038;cnt)
+{
+	if(level==0)
+	{
+		root=new tnode();
+		if(cnt==1)
+		{
+			root-&#062;aptr=s1;
+			cnt++;
+			return root;
+		}
+		else if(cnt==2)
+		{
+			root-&#062;aptr=s2;
+			cnt++;
+			return root;
+		}
+		else if(cnt==3)
+		{
+			root-&#062;aptr=s3;
+			cnt++;
+			return root;
+		}
+		else
+		return root;
+	}
+	root=new tnode();
+	root-&#062;lchild=create(root-&#062;lchild,s1,s2,s3,level-1,cnt);
+	root-&#062;rchild=create(root-&#062;rchild,s1,s2,s3,level-1,cnt);
+	return root;
+}
+void fun(tnode* root,int level,int n)
+{
+	if(level==0)
+	{
+		if((root-&#062;ind&#062;=n)&#124;&#124;(root-&#062;aptr==NULL))
+		{
+			root-&#062;data=infinity;
+			return;
+		}
+		else
+		{
+			root-&#062;data=root-&#062;aptr[root-&#062;ind];
+			return;
+		}
+	}
+	fun(root-&#062;lchild,level-1,n);
+	fun(root-&#062;rchild,level-1,n);
+	root-&#062;data=min(root-&#062;lchild-&#062;data,root-&#062;rchild-&#062;data);
+}
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+void get_roottoleaf(tnode* root,int k,int level)
+{
+	if(level==0)
+	{
+		if(root-&#062;data==k)
+		{
+			root-&#062;ind++;
+			return;
+		}
+		else
+		  return;
+    }
+	get_roottoleaf(root-&#062;lchild,k,level-1);
+	get_roottoleaf(root-&#062;rchild,k,level-1);
+}
+int main()
+{
+	tnode* root=NULL;
+	int s1[]={2,5,8,12};
+	int s2[]={1,3,4,6};
+	int s3[]={7,9,10,11};
+	int level=2,cnt=1;
+	int n=sizeof(s1)/sizeof(s1[0]);
+	root=create(root,s1,s2,s3,level,cnt);
+	for(int i=0;idata,level);
+	}
+	cout&#060;data&#060;&#060;&#034; is the median of the sorted array.n&#034;;
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>here is my implementation for median of sorted array using tournament tree</p>
+<p>#include<br />
+#define infinity 999<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	int *aptr;<br />
+	int ind;<br />
+	tnode()<br />
+	{<br />
+		lchild=NULL;<br />
+		aptr=NULL;<br />
+		ind=0;<br />
+		rchild=NULL;<br />
+	}<br />
+};</p>
+<p>tnode* create(tnode* root,int *s1,int *s2,int *s3,int level,int &amp;cnt)<br />
+{<br />
+	if(level==0)<br />
+	{<br />
+		root=new tnode();<br />
+		if(cnt==1)<br />
+		{<br />
+			root-&gt;aptr=s1;<br />
+			cnt++;<br />
+			return root;<br />
+		}<br />
+		else if(cnt==2)<br />
+		{<br />
+			root-&gt;aptr=s2;<br />
+			cnt++;<br />
+			return root;<br />
+		}<br />
+		else if(cnt==3)<br />
+		{<br />
+			root-&gt;aptr=s3;<br />
+			cnt++;<br />
+			return root;<br />
+		}<br />
+		else<br />
+		return root;<br />
+	}<br />
+	root=new tnode();<br />
+	root-&gt;lchild=create(root-&gt;lchild,s1,s2,s3,level-1,cnt);<br />
+	root-&gt;rchild=create(root-&gt;rchild,s1,s2,s3,level-1,cnt);<br />
+	return root;<br />
+}<br />
+void fun(tnode* root,int level,int n)<br />
+{<br />
+	if(level==0)<br />
+	{<br />
+		if((root-&gt;ind&gt;=n)||(root-&gt;aptr==NULL))<br />
+		{<br />
+			root-&gt;data=infinity;<br />
+			return;<br />
+		}<br />
+		else<br />
+		{<br />
+			root-&gt;data=root-&gt;aptr[root-&gt;ind];<br />
+			return;<br />
+		}<br />
+	}<br />
+	fun(root-&gt;lchild,level-1,n);<br />
+	fun(root-&gt;rchild,level-1,n);<br />
+	root-&gt;data=min(root-&gt;lchild-&gt;data,root-&gt;rchild-&gt;data);<br />
+}<br />
+void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+void get_roottoleaf(tnode* root,int k,int level)<br />
+{<br />
+	if(level==0)<br />
+	{<br />
+		if(root-&gt;data==k)<br />
+		{<br />
+			root-&gt;ind++;<br />
+			return;<br />
+		}<br />
+		else<br />
+		  return;<br />
+    }<br />
+	get_roottoleaf(root-&gt;lchild,k,level-1);<br />
+	get_roottoleaf(root-&gt;rchild,k,level-1);<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int s1[]={2,5,8,12};<br />
+	int s2[]={1,3,4,6};<br />
+	int s3[]={7,9,10,11};<br />
+	int level=2,cnt=1;<br />
+	int n=sizeof(s1)/sizeof(s1[0]);<br />
+	root=create(root,s1,s2,s3,level,cnt);<br />
+	for(int i=0;idata,level);<br />
+	}<br />
+	cout&lt;data&lt;&lt;&quot; is the median of the sorted array.n&quot;;<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-34409</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Mon, 07 Apr 2014 06:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-34409</guid>
+		<description><![CDATA[For second best player we need to trace the candidates participated with final winner, that leads to 7 as second best.
+
+It must be 5 instead of 7 please admin correct me if I am wrong, This is the last line to find the second best player.]]></description>
+		<content:encoded><![CDATA[<p>For second best player we need to trace the candidates participated with final winner, that leads to 7 as second best.</p>
+<p>It must be 5 instead of 7 please admin correct me if I am wrong, This is the last line to find the second best player.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: danny</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-34408</link>
+		<dc:creator><![CDATA[danny]]></dc:creator>
+		<pubDate>Mon, 07 Apr 2014 06:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-34408</guid>
+		<description><![CDATA[For second best player we need to trace the candidates participated with final winner, that leads to 7 as second best.
+
+
+
+It must be 5 instead of 7 please admin correct me if I am wrong, This is the last line to find the second best player.]]></description>
+		<content:encoded><![CDATA[<p>For second best player we need to trace the candidates participated with final winner, that leads to 7 as second best.</p>
+<p>It must be 5 instead of 7 please admin correct me if I am wrong, This is the last line to find the second best player.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Avinash Abhi</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-25398</link>
+		<dc:creator><![CDATA[Avinash Abhi]]></dc:creator>
+		<pubDate>Tue, 23 Jul 2013 19:15:41 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-25398</guid>
+		<description><![CDATA[(n-1) comparison for finding the winning  element, so the elements that lost to the winning element in the winning path will be [ log(n)-1 ].
+so for finding the next winning element,
+there will be [{log(n)-1} -1 ] comparison along the winning path.
+
+we see the minimum comparison comes out to be [ n+ log(n) - 3 ].
+
+so how the minimum comparison for second winning element is calculated to be [ n+log(n)-2 ]?]]></description>
+		<content:encoded><![CDATA[<p>(n-1) comparison for finding the winning  element, so the elements that lost to the winning element in the winning path will be [ log(n)-1 ].<br />
+so for finding the next winning element,<br />
+there will be [{log(n)-1} -1 ] comparison along the winning path.</p>
+<p>we see the minimum comparison comes out to be [ n+ log(n) &#8211; 3 ].</p>
+<p>so how the minimum comparison for second winning element is calculated to be [ n+log(n)-2 ]?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pranjal Gupta</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-25397</link>
+		<dc:creator><![CDATA[Pranjal Gupta]]></dc:creator>
+		<pubDate>Sun, 23 Jun 2013 17:50:45 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-25397</guid>
+		<description><![CDATA[awesome article..]]></description>
+		<content:encoded><![CDATA[<p>awesome article..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: geeky</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-11065</link>
+		<dc:creator><![CDATA[geeky]]></dc:creator>
+		<pubDate>Sat, 22 Sep 2012 15:16:32 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-11065</guid>
+		<description><![CDATA[does it means we first make a max heap and then backtrack to find the initial competitor of the 1st best player....it would be great if you post the code..]]></description>
+		<content:encoded><![CDATA[<p>does it means we first make a max heap and then backtrack to find the initial competitor of the 1st best player&#8230;.it would be great if you post the code..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bbqabbq</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-10378</link>
+		<dc:creator><![CDATA[bbqabbq]]></dc:creator>
+		<pubDate>Fri, 24 Aug 2012 19:59:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-10378</guid>
+		<description><![CDATA[the problem description of &quot;second best player&quot; is vague, since 5 and 7 are all losers, what is the second best?
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>the problem description of &#8220;second best player&#8221; is vague, since 5 and 7 are all losers, what is the second best?</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sesha</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-7802</link>
+		<dc:creator><![CDATA[sesha]]></dc:creator>
+		<pubDate>Wed, 14 Mar 2012 03:14:29 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-7802</guid>
+		<description><![CDATA[@venki,
+ I have implemented Tournament Tree for Merging K sorted arrays.
+http://yourbitsandbytes.com/viewtopic.php?f=803&amp;t=5662&amp;p=7851
+Hope this helps.]]></description>
+		<content:encoded><![CDATA[<p>@venki,<br />
+ I have implemented Tournament Tree for Merging K sorted arrays.<br />
+<a href="http://yourbitsandbytes.com/viewtopic.php?f=803&#038;t=5662&#038;p=7851" rel="nofollow">http://yourbitsandbytes.com/viewtopic.php?f=803&#038;t=5662&#038;p=7851</a><br />
+Hope this helps.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-6655</link>
+		<dc:creator><![CDATA[Nitin]]></dc:creator>
+		<pubDate>Thu, 01 Dec 2011 09:45:02 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-6655</guid>
+		<description><![CDATA[can u provide me basic code for tournament trees]]></description>
+		<content:encoded><![CDATA[<p>can u provide me basic code for tournament trees</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: levis</title>
+		<link>http://www.geeksforgeeks.org/tournament-tree-and-binary-heap/#comment-5773</link>
+		<dc:creator><![CDATA[levis]]></dc:creator>
+		<pubDate>Sun, 16 Oct 2011 06:20:15 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=11556#comment-5773</guid>
+		<description><![CDATA[@venki nice post !gives more clarity to the problem !!]]></description>
+		<content:encoded><![CDATA[<p>@venki nice post !gives more clarity to the problem !!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.041 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:06:59 -->
+
+<!-- Compression = gzip -->

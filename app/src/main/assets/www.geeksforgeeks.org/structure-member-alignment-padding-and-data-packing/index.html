@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.">
+<link rel="shortcut icon" href="../gfg.png" type="image/x-icon" />
+
+<meta property="og:image" content="http://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="200">
+<meta property="og:image:height" content="200">
+
+<title>Structure Member Alignment, Padding and Data Packing - GeeksforGeeks</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="" />
+<!--[if lt IE 9]>
+<script src="../wp-content/themes/iconic-one/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<script>
+
+    var arrPostCat = new Array();
+            arrPostCat.push('18');
+            arrPostCat.push('2064');
+        var domain = 1;
+    var arrPost = new Array();
+    var post_id = "9705";
+    var post_type = "post";
+    var post_slug = window.location.href;
+    var ip = "52.15.127.170";
+    var post_title = "Structure Member Alignment, Padding and Data Packing";
+    var post_status = "publish";
+                            var isAdminLoggedIn = 0;
+        </script>
+
+<!-- This site is optimized with the Yoast SEO plugin v3.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Structure Member Alignment, Padding and Data Packing - GeeksforGeeks" />
+<meta property="og:description" content="What do we mean by data alignment, structure packing and padding? Predict the output of following program. Before moving further, write down your answer on… Read More &raquo;" />
+<meta property="og:url" content="http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/" />
+<meta property="og:site_name" content="GeeksforGeeks" />
+<meta property="article:tag" content="C-Struct-Union-Enum" />
+<meta property="article:section" content="Articles" />
+<meta property="article:published_time" content="2011-01-01T14:26:46+00:00" />
+<meta property="article:modified_time" content="2017-05-28T18:22:08+00:00" />
+<meta property="og:updated_time" content="2017-05-28T18:22:08+00:00" />
+<meta property="og:image" content="../wp-content/uploads/MemoryAlignment1.gif" />
+<meta property="og:image" content="../wp-content/uploads/MemoryAlignment2.gif" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='../index.html' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='http://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Feed" href="../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Comments Feed" href="../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="GeeksforGeeks &raquo; Structure Member Alignment, Padding and Data Packing Comments Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.geeksforgeeks.org\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='mtq_CoreStyleSheets-css'  href='../wp-content/plugins/mtouch-quiz/mtq_core_style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mtq_ThemeStyleSheets-css'  href='../wp-content/plugins/mtouch-quiz/mtq_theme_style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-quicklatex-format-css'  href='../wp-content/plugins/wp-quicklatex/css/quicklatex-format.css' type='text/css' media='all' />
+<link rel='stylesheet' id='themonic-fonts-css'  href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-style-css'  href='../wp-content/themes/iconic-one/css/gfg-1.6.css' type='text/css' media='all' />
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='../wp-content/themes/iconic-one/js/gfg-6.8.js'></script>
+<link rel='https://api.w.org/' href='../wp-json/index.html' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.cdn.geeksforgeeks.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.6.8" />
+<link rel='shortlink' href='../index-p=9705.html' />
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed-url=http_%7C%7Cwww.geeksforgeeks.org%7Cstructure-member-alignment-padding-and-data-packing%7C.json" />
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed-url=http_%7C%7Cwww.geeksforgeeks.org%7Cstructure-member-alignment-padding-and-data-packing%7C&format=xml.xml" />
+<style>
+#wpadminbar{
+background: #ff0000 !important;
+}
+</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+
+<script type='text/javascript'>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/27823234/SP', [300, 250], 'div-gpt-ad-1458112424022-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+</head>
+
+<body class="single single-post postid-9705 single-format-standard custom-background custom-background-white custom-font-enabled">
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+
+<div id="page" style="position:relative;" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<div style="margin-bottom: 5px;">	
+				<hgroup class="main_gfg_title">
+			<a href="../index.html" title="GeeksforGeeks" rel="home">GeeksforGeeks</a>
+				<br .../> <a class="site-description">A computer science portal for geeks</a>
+		</hgroup>
+		<span class="responsive-custom-search">
+<script>
+  (function() {
+    var cx = '009682134359037907028:tj6eafkv_be';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+		
+		<gcse:search></gcse:search>  
+		</span>
+
+<div class="top-button-div">
+<hgroup style="float:right;display:inline-block;margin-top:5px;">   
+
+
+<a class="products" href="https://practice.geeksforgeeks.org/">Practice</a>
+
+<a class="products" href="http://quiz.geeksforgeeks.org/gate-corner-2/">GATE CS</a>
+
+<a class="products" href="http://quiz.geeksforgeeks.org/placements/">Placements</a>
+
+<a class="products" href="https://www.youtube.com/geeksforgeeksvideos/">Videos</a>
+
+<a class="products" href="../contribute/index.html">Contribute</a>
+</hgroup><br></br>
+
+
+<div id="profile" style="float: right; margin-top: -1%;margin-right:1%;"></div>
+</div>
+</div>
+
+		
+		
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="index.html#content" title="Skip to content">Skip to content</a>
+			<div class="menu-iconic-container"><ul id="menu-top" class="nav-menu"><li id="menu-item-147519" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147519"><a href="../index.html"><img style="width: 30px;vertical-align: middle;" src="../wp-content/uploads/gfg_transparent_white_small.png"></a></li>
+<li id="menu-item-141975" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-141975"><a href="../fundamentals-of-algorithms/index.html">Algo ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135030" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135030"><a href="../fundamentals-of-algorithms/index.html#AnalysisofAlgorithms">Analysis of Algorithms</a></li>
+	<li id="menu-item-146823" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146823"><a href="../fundamentals-of-algorithms/index.html">Topicwise ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-147774" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147774"><a href="../searching-algorithms/index.html">Searching Algorithms</a></li>
+		<li id="menu-item-147773" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147773"><a href="../sorting-algorithms/index.html">Sorting Algorithms</a></li>
+		<li id="menu-item-135041" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135041"><a href="../graph-data-structure-and-algorithms/index.html">Graph Algorithms</a></li>
+		<li id="menu-item-135040" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135040"><a href="../bitwise-algorithms/index.html">Bit Algorithms</a></li>
+		<li id="menu-item-135034" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135034"><a href="../fundamentals-of-algorithms/index.html#PatternSearching">Pattern Searching</a></li>
+		<li id="menu-item-135038" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135038"><a href="../geometric-algorithms/index.html">Geometric Algorithms</a></li>
+		<li id="menu-item-135039" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135039"><a href="../mathematical-algorithms/index.html">Mathematical Algorithms</a></li>
+		<li id="menu-item-135042" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135042"><a href="../randomized-algorithms/index.html">Randomized Algorithms</a></li>
+		<li id="menu-item-156520" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-156520"><a href="../category/algorithm/game-theory/index.html">Game Theory</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146824" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146824"><a href="../fundamentals-of-algorithms/index.html">Algorithm Paradigms ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-135032" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135032"><a href="../greedy-algorithms/index.html">Greedy Algorithms</a></li>
+		<li id="menu-item-135033" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135033"><a href="../dynamic-programming/index.html">Dynamic Programming</a></li>
+		<li id="menu-item-135037" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135037"><a href="../divide-and-conquer/index.html">Divide and Conquer</a></li>
+		<li id="menu-item-135036" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135036"><a href="../backtracking-algorithms/index.html">Backtracking</a></li>
+		<li id="menu-item-137933" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137933"><a href="../fundamentals-of-algorithms/index.html#BranchandBound">Branch &#038; Bound</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146911" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146911"><a href="../fundamentals-of-algorithms/index.html">All Algorithms</a></li>
+</ul>
+</li>
+<li id="menu-item-142016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-142016"><a href="../data-structures/index.html">DS  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135054" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135054"><a href="../array-data-structure/index.html">Array</a></li>
+	<li id="menu-item-135045" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135045"><a href="../data-structures/linked-list/index.html">LinkedList</a></li>
+	<li id="menu-item-135046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135046"><a href="../stack-data-structure/index.html">Stack</a></li>
+	<li id="menu-item-135047" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135047"><a href="../queue-data-structure/index.html">Queue</a></li>
+	<li id="menu-item-146827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146827"><a href="../data-structures/index.html">Tree based DS ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-135048" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135048"><a href="../binary-tree-data-structure/index.html">Binary Tree</a></li>
+		<li id="menu-item-135049" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135049"><a href="../binary-search-tree-data-structure/index.html">Binary Search Tree</a></li>
+		<li id="menu-item-135050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135050"><a href="../heap-data-structure/index.html">Heap</a></li>
+	</ul>
+</li>
+	<li id="menu-item-135051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135051"><a href="../hashing-data-structure/index.html">Hashing</a></li>
+	<li id="menu-item-135052" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135052"><a href="../graph-data-structure-and-algorithms/index.html">Graph</a></li>
+	<li id="menu-item-135053" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135053"><a href="../advanced-data-structures/index.html">Advanced Data Structure</a></li>
+	<li id="menu-item-135055" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135055"><a href="../matrix/index.html">Matrix</a></li>
+	<li id="menu-item-147716" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147716"><a href="../string-data-structure/index.html">Strings</a></li>
+	<li id="menu-item-135056" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135056"><a href="../data-structures/index.html">All Data Structures</a></li>
+</ul>
+</li>
+<li id="menu-item-147478" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-147478"><a href="../category/program-output/index.html">Languages ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-135006" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135006"><a href="../c/index.html">C</a></li>
+	<li id="menu-item-135007" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135007"><a href="../c-plus-plus/index.html">C++</a></li>
+	<li id="menu-item-135012" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135012"><a href="../java/index.html">Java</a></li>
+	<li id="menu-item-137004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137004"><a href="../python/index.html">Python</a></li>
+	<li id="menu-item-135016" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-135016"><a href="../sql-tutorial/index.html">SQL</a></li>
+	<li id="menu-item-140854" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-140854"><a title="http://www.geeksforgeeks.org/category/program-output/" href="../category/program-output/index.html">Program Output</a></li>
+</ul>
+</li>
+<li id="menu-item-142017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-142017"><a href="../company-interview-corner/index.html">Interview  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-141326" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141326"><a href="../company-preparation/index.html">Company Prep</a></li>
+	<li id="menu-item-137171" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137171"><a href="../interview-preparation-for-software-developer/index.html">Top Topics</a></li>
+	<li id="menu-item-137172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137172"><a href="https://practice.geeksforgeeks.org/company-tags">Practice Company Questions</a></li>
+	<li id="menu-item-137173" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137173"><a href="../company-interview-corner/index.html">Interview Experiences</a></li>
+	<li id="menu-item-137174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137174"><a href="../category/interview-experiences/experienced-interview-experiences/index.html">Experienced Interviews</a></li>
+	<li id="menu-item-137175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137175"><a href="../category/interview-experiences/internship-interview-experiences/index.html">Internship Interviews</a></li>
+	<li id="menu-item-137176" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137176"><a href="../category/competitive-programming/index.html">Competitive Programming</a></li>
+	<li id="menu-item-147581" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147581"><a href="../software-design-patterns/index.html">Design Patterns</a></li>
+	<li id="menu-item-137186" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137186"><a href="http://geeksquiz.com/quiz-corner/">Multiple Choice Quizzes</a></li>
+</ul>
+</li>
+<li id="menu-item-137178" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-137178"><a href="../student-corner/index.html">Students  ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-137183" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137183"><a href="../campus-ambassador-program-by-geeksforgeeks/index.html">Campus Ambassador Program</a></li>
+	<li id="menu-item-137179" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137179"><a href="../geek-of-the-month/index.html">Geek of the Month</a></li>
+	<li id="menu-item-137570" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137570"><a href="http://geeksquiz.com/placements/">Placement Course</a></li>
+	<li id="menu-item-136004" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-136004"><a href="../category/project/index.html">Project</a></li>
+	<li id="menu-item-137180" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137180"><a href="../category/competitive-programming/index.html">Competitive Programming</a></li>
+	<li id="menu-item-137181" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137181"><a href="../testimonials/index.html">Testimonials</a></li>
+	<li id="menu-item-138863" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-138863"><a href="../category/geek-on-the-top/index.html">Geek on the Top</a></li>
+	<li id="menu-item-141974" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141974"><a href="../careers/index.html">Careers</a></li>
+	<li id="menu-item-137378" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-137378"><a href="../internship/index.html">Internship</a></li>
+	<li id="menu-item-147457" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147457"><a href="../school-programming/index.html">School Programming</a></li>
+</ul>
+</li>
+<li id="menu-item-146712" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146712"><a href="../gate-corner-2-gq/index.html">GATE ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146713" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146713"><a href="../gate-corner-2-gq/index.html">GATE CS Corner</a></li>
+	<li id="menu-item-146714" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146714"><a href="../gate-cs-notes-gq/index.html">GATE Notes</a></li>
+	<li id="menu-item-146715" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146715"><a href="../lmns-gq/index.html">Last Minute Notes</a></li>
+	<li id="menu-item-146716" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146716"><a href="../original-gate-previous-year-question-papers-cse-and-it-gq/index.html">Official Papers</a></li>
+	<li id="menu-item-146717" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146717"><a href="../gate-cs-2018-important-dates/index.html">Gate 2018 Important Dates and Links</a></li>
+</ul>
+</li>
+<li id="menu-item-146718" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146718"><a href="../articles-on-computer-science-subjects-gq/index.html">CS Subjects ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146729"><a href="../operating-systems/index.html">Operating Systems</a></li>
+	<li id="menu-item-146724" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146724"><a href="../dbms/index.html">DBMS</a></li>
+	<li id="menu-item-146721" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146721"><a href="../computer-network-tutorials/index.html">Computer Networks</a></li>
+	<li id="menu-item-146720" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146720"><a href="../compiler-design-tutorials/index.html">Compiler Design</a></li>
+	<li id="menu-item-147831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147831"><a href="../web-technology/index.html">Web Technology</a></li>
+	<li id="menu-item-146722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146722"><a href="../computer-organization-and-architecture-tutorials/index.html">Computer Organization &#038; Architecture</a></li>
+	<li id="menu-item-146726" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146726"><a href="../digital-electronics-logic-design-tutorials/index.html">Digital Electronics</a></li>
+	<li id="menu-item-146727" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146727"><a href="../engineering-mathematics-tutorials/index.html">Engg. Mathematics</a></li>
+	<li id="menu-item-146730" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146730"><a href="../theory-of-computation-automata-tutorials/index.html">Theory of Computation</a></li>
+	<li id="menu-item-147512" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-147512"><a href="../advanced-computer-subjects-tutorials/index.html">Advanced Topics</a></li>
+	<li id="menu-item-146725" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146725"><a href="../category/difference-between/index.html">What&#8217;s Difference?</a></li>
+</ul>
+</li>
+<li id="menu-item-140855" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-140855"><a href="http://quiz.geeksforgeeks.org/quiz-corner/">Quizzes ▼</a>
+<ul class="sub-menu">
+	<li id="menu-item-146748" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146748"><a href="../quizzes-on-programming-languages-gq/index.html">Languages ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-146743" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146743"><a href="../quiz-corner-gq/index.html#C%20Programming%20Mock%20Tests">C</a></li>
+		<li id="menu-item-146745" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146745"><a href="../quiz-corner-gq/index.html#C++%20Programming%20Mock%20Tests">C++</a></li>
+		<li id="menu-item-146746" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146746"><a href="../quiz-corner-gq/index.html#Java%20Programming%20Mock%20Tests">Java</a></li>
+		<li id="menu-item-146747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146747"><a href="../quiz-corner-gq/index.html#Python%20Programming%20Mock%20Tests">Python</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146825" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-146825"><a href="../quiz-corner-gq/index.html#Data%20Structures%20Mock%20Tests">CS Subjectwise ►</a>
+	<ul class="sub-menu">
+		<li id="menu-item-146731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146731"><a href="../quiz-corner-gq/index.html#Data%20Structures%20Mock%20Tests">Data Structures</a></li>
+		<li id="menu-item-146732" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146732"><a href="../quiz-corner-gq/index.html#Algorithms%20Mock%20Tests">Algorithms</a></li>
+		<li id="menu-item-146733" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146733"><a href="../quiz-corner-gq/index.html#Operating%20Systems%20Mock%20Tests">Operating Systems</a></li>
+		<li id="menu-item-146734" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146734"><a href="../quiz-corner-gq/index.html#DBMS%20Mock%20Tests">DBMS</a></li>
+		<li id="menu-item-146735" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146735"><a href="../quiz-corner-gq/index.html#Compiler%20Design%20Mock%20Tests">Compiler Design</a></li>
+		<li id="menu-item-146736" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146736"><a href="../quiz-corner-gq/index.html#Computer%20Networks%20Mock%20Tests">Computer Networks</a></li>
+		<li id="menu-item-146737" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146737"><a href="../quiz-corner-gq/index.html#Theory%20of%20Computation%20Mock%20Tests">Theory of Computation</a></li>
+		<li id="menu-item-146738" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146738"><a href="../quiz-corner-gq/index.html#Computer%20Organization%20and%20Architecture">Computer Organization</a></li>
+		<li id="menu-item-146739" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146739"><a href="../software-engineering-gq/index.html">Software Engineering</a></li>
+	</ul>
+</li>
+	<li id="menu-item-146740" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146740"><a href="../html-and-xml-gq/index.html">HTML &#038; XML</a></li>
+	<li id="menu-item-146741" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146741"><a href="../quiz-corner-gq/index.html#Engineering%20Mathematics">Engg. Mathematics</a></li>
+	<li id="menu-item-146742" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-146742"><a href="../quiz-corner-gq/index.html#Aptitude%20Mock%20Tests">Aptitude</a></li>
+</ul>
+</li>
+<li id="menu-item-135367" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-135367"><a href="../category/guestblogs/index.html">GBlog</a></li>
+<li id="menu-item-141885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141885"><a href="../puzzles/index.html">Puzzles</a></li>
+<li id="menu-item-141816" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-141816"><a href="../the-technical-scripter-event-by-geeksforgeeks-2/index.html">What&#8217;s New?</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+<button id="scrollTopBtn" title="Scroll to Top" type="button" class="btn btn-success">&#x25B2;</button>
+	<div id="main" class="wrapper">
+<div class="leftSideBarParent">
+    <div class="leftSideBar">
+        <div class="menuDivForLeftbar"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></div><span class="leftbarDataSpan" data-pid="9705" data-lid="1" data-type="post" data-termid="18"></span><div class="quickLink_S">
+<table>
+<tbody>
+
+
+<tr>
+<td><a href="../write-interview-experience/index.html">How to write an Interview Experience?</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Difficulty Levels</td>
+</tr>
+
+<tr>
+<td><a href="../basic/index.html">Basic</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../easy/index.html">Easy</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../medium/index.html">Medium</a></td>
+</tr>
+
+
+
+<tr>
+<td><a href="../hard/index.html">Hard</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../expert/index.html">Expert</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Popular Tags</td>
+</tr>
+
+
+<tr>
+<td style="padding:2px;line-height:1.7;font-size:13px;"><a href="../tag/amazon/index.html">Amazon</a>, 
+<a href="../tag/microsoft/index.html">Microsoft</a>, <a href="../category/dynamic-programming/index.html">Dynamic Programming</a>, <a href="../tag/samsung/index.html">Samsung</a><br/><a href="../tags/index.html">Click here for more</a></td>
+</tr>
+
+
+
+
+<tr>
+<td class="quickLink-header_S"><b>Interview Preparation</td>
+</tr>
+
+
+<tr>
+<td><a href="../a-complete-step-by-step-guide-for-placement-preparation-by-geeksforgeeks/index.html">Step by Step Preparation</a></td>
+</tr>
+
+<tr>
+<td><a href="../company-preparation/index.html">Company Preparation</a></td>
+</tr>
+
+<tr>
+<td><a href="../interview-preparation-for-software-developer/index.html">Top Topics</a></td>
+</tr>
+
+
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/company-tags">Company Specific Practice</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../software-design-patterns/index.html">Software Design Patterns</a></td>
+</tr>
+
+<tr>
+<td><a href="../placements-gq/index.html">Placements Preparation Course</a></td>
+</tr>
+
+<tr>
+<td><a href="../company-interview-corner/index.html">Interview Corner</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../category/interview-experiences/index.html">Recent Interview Experiences</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../geeksquiz-home/index.html">GQ Home Page</a></td>
+</tr>
+
+<tr>
+<td><a href="../quiz-corner-gq/index.html">Quiz Corner</a></td>
+</tr>
+
+<tr>
+<td><a href="../lmns-gq/index.html">LMNs</a></td>
+</tr>
+
+<tr>
+<td class="quickLink-header_S"><b>Practice Platform</b></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/recent.php?ref=home">What's New ?</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/ranking.php?ref=home">Leaderboard !!</a></td>
+</tr>
+
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/topic-tags/?ref=home">Topic-wise Practice</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/subjective-page.php?ref=home">Subjective Problems</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/School/0/0/?ref=home">Difficulty Level - School</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Basic/0/0/?ref=home">Difficulty Level - Basic</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Easy/0/0/?ref=home">Difficulty Level - Easy</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Medium/0/0/?ref=home">Difficulty Level - Medium</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/Hard/0/0/?ref=home">Difficulty Level - Hard</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/pickACategory.php?ref=home">How to pick a difficulty level?</a></td>
+</tr>
+
+<tr>
+<td><a href="https://practice.geeksforgeeks.org/?ref=home">Explore More...</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Programming Languages</b></td>
+</tr>
+
+<tr>
+<td><a href="../c/index.html">C</a></td>
+</tr>
+
+<tr>
+<td><a href="../c-plus-plus/index.html">C++</a></td>
+</tr>
+
+<tr>
+<td><a href="../java/index.html">Java</a></td>
+</tr>
+
+<tr>
+<td><a href="../python/index.html">Python</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../sql-tutorial/index.html">SQL</a></td>
+</tr>
+
+
+<tr>
+<td class="quickLink-header_S"><b>Important Quick Links</b></td>
+</tr>
+
+<tr>
+<td><a href="../school-programming/index.html">School Programming</a></td>
+</tr>
+
+<tr>
+<td><a href="../operating-systems/index.html">Operating Systems</a></td>
+</tr>
+
+<tr>
+<td><a href="../dbms/index.html">DBMS</a></td>
+</tr>
+
+<tr>
+<td><a href="../computer-network-tutorials/index.html">Computer Networks</a></td>
+</tr>
+
+<tr>
+<td><a href="../engineering-mathematics-tutorials/index.html">Engineering Mathematics</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/design-pattern/index.html">Design Patterns</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/puzzles/index.html">Common Interview Puzzles</a></td>
+</tr>
+
+
+<tr>
+<td><a href="../web-technology/index.html">Web Technology</a></td>
+
+<tr>
+<td><a href="../category/gfact/index.html">G-Facts</a></td>
+</tr>
+
+<tr>
+<td><a href="../tag/computer-graphics/index.html">Computer Graphics</a></td>
+</tr>
+
+<tr>
+<td><a href="../image-processing/index.html">Image Processing</a></td>
+</tr>
+
+<tr>
+<td><a href="../category/project/index.html">Project Ideas</a></td>
+</tr>
+
+</tbody>
+</table>
+</div>    </div>
+</div>
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+                        							 	<article id="post-9705" class="post-9705 post type-post status-publish format-standard hentry category-articles category-c tag-c-structure-union-enum">
+				<header class="entry-header">
+						<h1 class="entry-title">Structure Member Alignment, Padding and Data Packing</h1>
+				
+							<div class="divclass"> 
+					<a href="../hard/index.html" title="Hard"><span class="articleRating alignright level-4">4.7</span></a>
+					</div>
+								</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<p>What do we mean by data alignment, structure packing and padding?</p>
+<p>Predict the output of following program.<span id="more-9705"></span></p>
+<pre class="brush: c; title: ; notranslate" title="">
+#include &lt;stdio.h&gt;
+
+// Alignment requirements
+// (typical 32 bit machine)
+
+// char         1 byte
+// short int    2 bytes
+// int          4 bytes
+// double       8 bytes
+
+// structure A
+typedef struct structa_tag
+{
+   char        c;
+   short int   s;
+} structa_t;
+
+// structure B
+typedef struct structb_tag
+{
+   short int   s;
+   char        c;
+   int         i;
+} structb_t;
+
+// structure C
+typedef struct structc_tag
+{
+   char        c;
+   double      d;
+   int         s;
+} structc_t;
+
+// structure D
+typedef struct structd_tag
+{
+   double      d;
+   int         s;
+   char        c;
+} structd_t;
+
+int main()
+{
+   printf(&quot;sizeof(structa_t) = %d\n&quot;, sizeof(structa_t));
+   printf(&quot;sizeof(structb_t) = %d\n&quot;, sizeof(structb_t));
+   printf(&quot;sizeof(structc_t) = %d\n&quot;, sizeof(structc_t));
+   printf(&quot;sizeof(structd_t) = %d\n&quot;, sizeof(structd_t));
+
+   return 0;
+}
+</pre>
+<p>Before moving further, write down your answer on a paper, and read on. If you urge to see explanation, you may miss to understand any lacuna in your analogy. Also read the <a href="http://www.geeksforgeeks.org/forum/topic/what-is-the-output-2" target="_blank">post</a> by Kartik.</p>
+<p><strong>Data Alignment:</strong></p>
+<p>Every data type in C/C++ will have alignment requirement (infact it is mandated by processor architecture, not by language). A processor will have processing word length as that of data bus size. On a 32 bit machine, the processing word size will be 4 bytes.</p>
+<p><a href="../wp-content/uploads/MemoryAlignment1.gif"><img class="aligncenter size-full wp-image-9731" alt="" src="../wp-content/uploads/MemoryAlignment1.gif" width="590" height="287" /></a></p>
+<p><strong> </strong>Historically memory is byte addressable and arranged sequentially. If the memory is arranged as single bank of one byte width, the processor needs to issue 4 memory read cycles to fetch an integer. It is more economical to read all 4 bytes of integer in one memory cycle. To take such advantage, the memory will be arranged as group of 4 banks as shown in the above figure.</p>
+<p>The memory addressing still be sequential. If bank 0 occupies an address X, bank 1, bank 2 and bank 3 will be at (X + 1), (X + 2) and (X + 3) addresses. If an integer of 4 bytes is allocated on X address (X is multiple of 4), the processor needs only one memory cycle to read entire integer.</p>
+<p>Where as, if the integer is allocated at an address other than multiple of 4, it spans across two rows of the banks as shown in the below figure. Such an integer requires two memory read cycle to fetch the data.</p>
+<p><a href="../wp-content/uploads/MemoryAlignment2.gif"><img class="aligncenter size-full wp-image-9732" alt="" src="../wp-content/uploads/MemoryAlignment2.gif" width="420" height="123" srcset="http://www.geeksforgeeks.org/wp-content/uploads/MemoryAlignment2.gif 454w, http://www.geeksforgeeks.org/wp-content/uploads/MemoryAlignment2-300x87.gif 300w" sizes="(max-width: 420px) 100vw, 420px" /></a></p>
+<p>A variable&#8217;s <em><strong>data alignment</strong></em> deals with the way the data stored in these banks. For example, the natural alignment of <em><strong>int</strong></em> on 32-bit machine is 4 bytes. When a data type is naturally aligned, the CPU fetches it in minimum read cycles.</p>
+<p>Similarly, the natural alignment of <strong><em>short int</em></strong> is 2 bytes. It means, a <em><strong>short int</strong></em> can be stored in bank 0 &#8211; bank 1 pair or bank 2 &#8211; bank 3 pair. A <strong><em>double</em></strong> requires 8 bytes, and occupies two rows in the memory banks. Any misalignment of <strong><em>double</em></strong> will force more than two read cycles to fetch <strong><em>double</em></strong> data.</p>
+<p>Note that a <strong>double</strong> variable will be allocated on 8 byte boundary on 32 bit machine and requires two memory read cycles. On a 64 bit machine, based on number of banks, <strong>double</strong> variable will be allocated on 8 byte boundary and requires only one memory read cycle.</p>
+<p><strong>Structure Padding:</strong></p>
+<p><strong> </strong>In C/C++ a structures are used as data pack. It doesn&#8217;t provide any data encapsulation or data hiding features (C++ case is an exception due to its semantic similarity with classes).</p>
+<p>Because of the alignment requirements of various data types, every member of structure should be naturally aligned. The members of structure allocated sequentially increasing order. Let us analyze each struct declared in the above program.</p>
+<p><strong>Output of Above Program:</strong></p>
+<p><strong><span style="color: #3366ff">For the sake of convenience, assume every structure type variable is allocated on 4 byte boundary (say 0x0000), i.e. the base address of structure is multiple of 4 (need not necessary always, see explanation of structc_t).</span></strong></p>
+<p><strong><span style="color: #3366ff">structure A</span></strong></p>
+<p><span style="color: #3366ff">The <em>structa_t</em> first element is <em>char</em> which is one byte aligned, followed by <em>short int</em>. short int is 2 byte aligned. If the the short int element is immediately allocated after the char element, it will start at an odd address boundary. The compiler will insert a padding byte after the char to ensure short int will have an address multiple of 2 (i.e. 2 byte aligned). The total size of structa_t will be sizeof(char) + 1 (padding) + sizeof(short), 1 + 1 + 2 = 4 bytes.</span></p>
+<p><strong><span style="color: #3366ff">structure B</span></strong></p>
+<p><span style="color: #3366ff">The first member of <em>structb_t</em> is short int followed by char. Since char can be on any byte boundary no padding required in between short int and char, on total they occupy 3 bytes. The next member is int. If the int is allocated immediately, it will start at an odd byte boundary. We need 1 byte padding after the char member to make the address of next int member is 4 byte aligned. On total, the <em>structb_t</em> requires 2 + 1 + 1 (padding) + 4 = 8 bytes.</span></p>
+<p><span style="color: #808080"><strong><span style="color: #3366ff">structure C &#8211; Every structure will also have alignment requirements</span></strong></span></p>
+<p><span style="color: #3366ff">Applying same analysis, <em>structc_t</em> needs sizeof(char) + 7 byte padding + sizeof(double) + sizeof(int) = 1 + 7 + 8 + 4 = 20 bytes. However, the sizeof(structc_t) will be 24 bytes. It is because, along with structure members, structure type variables will also have natural alignment. Let us understand it by an example. </span><span style="color: #3366ff">Say, we declared an array of structc_t as shown below</span></p>
+<pre><span style="color: #3366ff">structc_t structc_array[3];</span></pre>
+<p><span style="color: #3366ff">Assume, the base address of <em>structc_array</em> is 0x0000 for easy calculations. If the structc_t occupies 20 (0x14) bytes as we calculated, the second structc_t array element (indexed at 1) will be at 0x0000 + 0x0014 = 0x0014. It is the start address of index 1 element of array. The double member of this structc_t will be allocated on 0x0014 + 0x1 + 0x7 = 0x001C (decimal 28) which is not multiple of 8 and conflicting with the alignment requirements of double. As we mentioned on the top, the alignment requirement of double is 8 bytes.</span></p>
+<p><span style="color: #3366ff">Inorder to avoid such misalignment, compiler will introduce alignment requirement to every structure. It will be as that of the largest member of the structure. In our case alignment of structa_t is 2, structb_t is 4 and structc_t is 8. If we need nested structures, the size of largest inner structure will be the alignment of immediate larger structure.</span></p>
+<p><span style="color: #3366ff">In structc_t of the above program, there will be padding of 4 bytes after int member to make the structure size multiple of its alignment. Thus the sizeof (structc_t) is 24 bytes. It guarantees correct alignment even in arrays. You can cross check.</span></p>
+<p><strong><span style="color: #3366ff">structure D &#8211; How to Reduce Padding?</span></strong></p>
+<p><span style="color: #3366ff">By now, it may be clear that padding is unavoidable. There is a way to minimize padding. The programmer should declare the structure members in their increasing/decreasing order of size. An example is structd_t given in our code, whose size is 16 bytes in lieu of 24 bytes of structc_t.</span></p>
+<p><strong>What is structure packing?</strong></p>
+<p>Some times it is mandatory to avoid padded bytes among the members of structure. For example, reading contents of ELF file header or BMP or JPEG file header. We need to define a structure similar to that of the header layout and map it. However, care should be exercised in accessing such members. Typically reading byte by byte is an option to avoid misaligned exceptions. There will be hit on performance.</p>
+<p>Most of the compilers provide non standard extensions to switch off the default padding like pragmas or command line switches. Consult the documentation of respective compiler for more details.</p>
+<p><strong>Pointer Mishaps:</strong></p>
+<p>There is possibility of potential error while dealing with pointer arithmetic. For example, dereferencing a generic pointer (void *) as shown below can cause misaligned exception,</p>
+<pre>// Deferencing a generic pointer (not safe)
+// There is no guarantee that pGeneric is integer aligned
+*(int *)pGeneric;</pre>
+<p>It is possible above type of code in programming. If the pointer <em>pGeneric</em> is not aligned as per the requirements of casted data type, there is possibility to get misaligned exception.</p>
+<p>Infact few processors will not have the last two bits of address decoding, and there is no way to access <em>misaligned</em> address. The processor generates misaligned exception, if the programmer tries to access such address.</p>
+<p><strong>A note on malloc() returned pointer</strong></p>
+<p>The pointer returned by malloc() is <em>void *</em>. It can be converted to any data type as per the need of programmer. The implementer of malloc() should return a pointer that is aligned to maximum size of primitive data types (those defined by compiler). It is usually aligned to 8 byte boundary on 32 bit machines.</p>
+<p><strong>Object File Alignment, Section Alignment, Page Alignment</strong></p>
+<p>These are specific to operating system implementer, compiler writers and are beyond the scope of this article. Infact, I don&#8217;t have much information.</p>
+<p><strong>General Questions:</strong></p>
+<p><span style="color: #0000ff">1. Is alignment applied for stack?</span></p>
+<p>Yes. The stack is also memory. The system programmer should load the stack pointer with a memory address that is properly aligned. Generally, the processor won&#8217;t check stack alignment, it is the programmer&#8217;s responsibility to ensure proper alignment of stack memory. Any misalignment will cause run time surprises.</p>
+<p>For example, if the processor word length is 32 bit, stack pointer also should be aligned to be multiple of 4 bytes.</p>
+<p><span style="color: #0000ff">2. If <em>char</em> data is placed in a bank other bank 0, it will be placed on wrong data lines during memory read. How the processor handles <em>char</em> type?</span></p>
+<p>Usually, the processor will recognize the data type based on instruction (e.g. LDRB on ARM processor). Depending on the bank it is stored, the processor shifts the byte onto least significant data lines.</p>
+<p><span style="color: #0000ff">3. When arguments passed on stack, are they subjected to alignment?</span></p>
+<p>Yes. The compiler helps programmer in making proper alignment. For example, if a 16-bit value is pushed onto a 32-bit wide stack, the value is automatically padded with zeros out to 32 bits. Consider the following program.</p>
+<pre class="brush: c; title: ; notranslate" title="">
+void argument_alignment_check( char c1, char c2 )
+{
+   // Considering downward stack
+   // (on upward stack the output will be negative)
+   printf(&quot;Displacement %d\n&quot;, (int)&amp;c2 - (int)&amp;c1);
+}
+</pre>
+<p>The output will be 4 on a 32 bit machine. It is because each character occupies 4 bytes due to alignment requirements.</p>
+<p><span style="color: #0000ff">4. What will happen if we try to access a misaligned data?</span></p>
+<p>It depends on processor architecture. If the access is misaligned, the processor automatically issues sufficient memory read cycles and packs the data properly onto the data bus. The penalty is on performance. Where as few processors will not have last two address lines, which means there is no-way to access odd byte boundary. Every data access must be aligned (4 bytes) properly. A misaligned access is critical exception on such processors. If the exception is ignored, read data will be incorrect and hence the results.</p>
+<p><span style="color: #0000ff">5. Is there any way to query alignment requirements of a data type.</span></p>
+<p>Yes. Compilers provide non standard extensions for such needs. For example, __alignof() in Visual Studio helps in getting the alignment requirements of data type. Read MSDN for details.</p>
+<p><span style="color: #0000ff">6. When memory reading is efficient in reading 4 bytes at a time on 32 bit machine, why should a <strong>double</strong> type be aligned on 8 byte boundary?</span></p>
+<p>It is important to note that most of the processors will have math co-processor, called Floating Point Unit (FPU). Any floating point operation in the code will be translated into FPU instructions. The main processor is nothing to do with floating point execution. All this will be done behind the scenes.</p>
+<p>As per standard, double type will occupy 8 bytes. And, every floating point operation performed in FPU will be of 64 bit length. Even float types will be promoted to 64 bit prior to execution.</p>
+<p>The 64 bit length of FPU registers forces double type to be allocated on 8 byte boundary. I am assuming (I don’t have concrete information) in case of FPU operations, data fetch might be different, I mean the data bus, since it goes to FPU. Hence, the address decoding will be different for double types (which is expected to be on 8 byte boundary). It means, <em>the address decoding circuits of floating point unit will not have last 3 pins</em>.</p>
+<p><strong>Answers:</strong></p>
+<pre>sizeof(structa_t) = 4
+sizeof(structb_t) = 8
+sizeof(structc_t) = 24
+sizeof(structd_t) = 16</pre>
+<p><strong>Update: 1-May-2013</strong></p>
+<p>It is observed that on latest processors we are getting size of struct_c as 16 bytes. I yet to read relevant documentation. I will update once I got proper information (written to few experts in hardware).</p>
+<p>On older processors (AMD Athlon X2) using same set of tools (GCC 4.7) I got struct_c size as 24 bytes. The size depends on how memory banking organized at the hardware level.</p>
+<p>&#8211; &#8211; &#8211; by <strong><a href="http://www.linkedin.com/in/ramanawithu" target="_blank">Venki</a></strong>. Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.</p>
+
+			 <div class="AdsParent" style="width:100%;">
+<span class="rectangleAd">
+<!--
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+ Big Rectangle Blog Bottom 
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="4061219431"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+-->
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- GfGDownLeftNew -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="5794942435"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</span>
+<span class="responsiveAd">
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- newMobile2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="1950485631"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</span>
+</div>
+<h1><strong><a href="http://quiz.geeksforgeeks.org/gate-corner-2/">GATE CS Corner</a>
+&nbsp;&nbsp;&nbsp;<a href="https://practice.geeksforgeeks.org/company-tags">Company Wise Coding Practice</a></strong></h1>
+
+		</div><!-- .entry-content -->
+				
+		
+
+		<footer class="entry-meta">
+		<span><div class="categoryButton"><a href="../category/articles/index.html" rel="category tag">Articles</a></div><div class="categoryButton"><a href="../category/programming-language/c/index.html" rel="category tag">C</a></div></span> <span><div class="tagButton"><a href="../tag/c-structure-union-enum/index.html" rel="tag">C-Struct-Union-Enum</a></div></span>
+           	<div id="improveArticle" style="float: right;cursor: pointer;"></div><div class="common-bottom">Please write to us at contribute@geeksforgeeks.org to report any issue with the above content.</div>          	
+							<div class="author-info">
+					<div class="author-avatar">
+											</div><!-- .author-avatar -->
+					<div class="author-description">
+						<h2>About Venki</h2>
+						<p>Software Engineer</p>
+						<div class="author-link">
+							<a href="../index.html" rel="author">
+								View all posts by Venki <span class="meta-nav">&rarr;</span>							</a>
+						</div><!-- .author-link	-->
+					</div><!-- .author-description -->
+				</div><!-- .author-info -->
+					</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+
+<div style="font-size:15px; line-height:22px; margin-left:20px; color:green">
+
+<h2 style='font-size:20px; color: #838383'>Recommended Posts:</h2><br/><ul><li><a href='../g-fact-68/index.html'>Operations on struct variables in C</a></li><li><a href='../bit-fields-c/index.html'>Bit Fields in C</a></li><li><a href='../union-c/index.html'>Union in C</a></li><li><a href='../struct-hack/index.html'>Struct Hack</a></li><li><a href='../memory-layout-of-c-program/index.html'>Memory Layout of C Programs</a></li><li><a href='../join-command-linux/index.html'>join Command in Linux</a></li><li><a href='../cut-command-linux-examples/index.html'>cut command in Linux with examples</a></li><li><a href='../cmp-command-linux-examples/index.html'>cmp Command in Linux with examples</a></li><li><a href='../comm-command-linux-examples/index.html'>comm command in Linux with examples</a></li><li><a href='../commands-in-unix-when-things-go-wrong/index.html'>Commands in Unix when things go wrong</a></li></ul><br/></div>
+
+
+<!-- Added on 29 Oct 2015 for next and previous from same category -->
+<nav class="nav-single">
+					<div class="assistive-text">Post navigation</div>
+					<span class="nav-previous"><a href="../reentrant-function/index.html" rel="prev"><< Previous Post</a></span>
+					<span class="nav-next"><a href="../g-fact-74/index.html" rel="next">Next Post >></a></span>
+				</nav><!-- .nav-single -->
+<!--
+<script type="text/javascript">
+	
+				arrPost.push('');
+	
+		   <?php// } ?>
+
+</script>
+-->
+
+
+
+<div class="plugins">
+<div pid="9705" ptitle="Structure Member Alignment, Padding and Data Packing" id="ratePlugin"><div class="login">
+            (<a href="https://auth.geeksforgeeks.org/?to=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/">Login</a> to Rate)
+            <br><br>
+            </div>
+            <div class="techno">
+            <span id="rating_box" class="avg-rating level-4">4.7</span>
+            <span class="rating-desc"> Average Difficulty : <b id="diff-rating">4.7/5.0</b><br><span id="vote_count">Based on <b>63</b> vote(s)</span></span><br/><br/>
+        <input rating="1" type="button" class="box basic"  value="Basic"/>
+        <input rating="2" type="button" class="box easy"   value="Easy"/>
+        <input rating="3" type="button" class="box medium" value="Medium"/>
+        <input rating="4" type="button" class="box hard"   value="Hard"/>
+        <input rating="5" type="button" class="box expert" value="Expert"/>
+        <br><span class="process"></span></div></div><div pid="9705" ptitle="Structure Member Alignment, Padding and Data Packing" id="markPlugin"><br><br><div class="lists">
+        <input id="todo" type="checkbox" class="mark">
+        <label class="checkbox" for="todo"> Add to TODO List </label>
+        <br>
+        <input id="done" type="checkbox" class="mark">
+        <label class="checkbox" for="done"> Mark as DONE </label>
+        </div></div></div>
+<div id="author" name="Venki"></div>
+<br></br>
+
+<style type="text/css">
+ 
+#share-buttons img {
+width: 35px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+#share-buttons a:hover {
+	text-decoration: none;
+}
+</style>
+
+
+<div id="share-buttons" style="display:none">
+   
+    <!-- Facebook -->
+    <a href="http://www.facebook.com/sharer.php?u=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/" target="_blank" title="Share on Facebook">
+        <img src="../wp-content/uploads/facebook.png" alt="Facebook" />
+    </a>
+    
+    <!-- Google+ -->
+    <a href="https://plus.google.com/share?url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/" target="_blank" title="Share on Google">
+        <img src="../wp-content/uploads/google.png" alt="Google" />
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/" target="_blank" title="Share on LinkedIn">
+        <img src="../wp-content/uploads/linkedin.png" alt="LinkedIn" />
+    </a>
+    
+    <!-- Twitter -->
+    <a href="https://twitter.com/share?url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/&text=Structure%20Member%20Alignment,%20Padding%20and%20Data%20Packing&hashtags=GeeksforGeeks" target="_blank" title="Share on Twitter">
+        <img src="../wp-content/uploads/twitter.png" alt="Twitter" />
+    </a>
+
+    <!-- Pinterest -->
+    <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());" title="Share on Pinterest">
+        <img src="../wp-content/uploads/pinterest.png" alt="Pinterest" />
+    </a>
+    
+    <!-- Reddit -->
+    <a href="http://reddit.com/submit?url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/&title=Structure%20Member%20Alignment,%20Padding%20and%20Data%20Packing" target="_blank" title="Share on Reddit">
+        <img src="../wp-content/uploads/reddit.png" alt="Reddit" />
+    </a>
+    
+    <!-- StumbleUpon-->
+    <a href="http://www.stumbleupon.com/submit?url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/&title=Structure%20Member%20Alignment,%20Padding%20and%20Data%20Packing" target="_blank" title="Share on StumbleUpon">
+        <img src="../wp-content/uploads/stumbleupon.png" alt="StumbleUpon" />
+    </a>
+    
+    <!-- Tumblr-->
+    <a href="http://www.tumblr.com/share/link?url=http://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/&title=Structure%20Member%20Alignment,%20Padding%20and%20Data%20Packing" target="_blank" title="Share on Tumblr">
+        <img src="../wp-content/uploads/tumblr.png" alt="Tumblr" />
+    </a>
+   
+</div>
+
+<br></br>
+<p>Writing code in comment? Please use <a href="https://ide.geeksforgeeks.org/">ide.geeksforgeeks.org</a>, generate link and share the link here.</a></p>
+<br/>
+<div style="display:flex">
+<button id="comment" class="action-button" style="width:45%;cursor: pointer;margin-right:10%;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0);border-color: #4cb96b;border-radius: 4px;">Load Comments</button>
+<button id="share" class="action-button" onclick="document.getElementById('share-buttons').style.display='block';this.style.display='none';" style="width:45%;cursor: pointer;margin-right:10%;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0);border-color: #4cb96b;border-radius: 4px;">Share this post!</button>
+
+</div>
+
+<div id="disqus_thread"></div>
+
+					</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-2" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Big 300x600 Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="4402736037"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-3" class="widget widget_text">			<div class="textwidget"><div class="trendings_gfg">
+					<table width="100%" align="center">
+						<thead>
+							<tr>
+								<th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;">Trending Content</th>
+							</tr>
+						</thead>
+						<tbody>
+
+<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+
+
+							<a href="../longest-common-subsequence/index.html">Longest Common Subsequence</a>
+
+						</td>
+					</tr>			
+												<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+
+
+							<a href="../breadth-first-traversal-for-a-graph/index.html">Breadth First Traversal or BFS</a>
+
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../tag/statistical-algorithms/index.html">Statistical Algorithms</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../longest-repeated-subsequence/index.html">Longest Repeated Subsequence</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../strpbrk-in-c/index.html">strpbrk() in C</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../detect-negative-cycle-graph-bellman-ford/index.html">Detect a negative cycle in a Graph | (Bellman Ford)</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../knapsack-problem/index.html">0-1 Knapsack Problem</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../gate-cs-notes-gq/index.html">GATE CS Notes</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../depth-first-traversal-for-a-graph/index.html">Depth First Traversal or DFS for a Graph</a>
+						</td>
+					</tr>					<tr>
+						<td style="border:1px solid #6AA84F;padding:2px;">
+							<a href="../reverse-a-linked-list/index.html">Reverse a linked list</a>
+
+						</td>
+					</tr>
+						</tbody>
+					</table>
+				</div></div>
+		</aside><aside id="text-4" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ResponsiveRightBarMay16 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="7089558833"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-5" class="widget widget_text">			<div class="textwidget"><table align="center" width="100%">
+    <thead>
+        <tr>
+            <th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;line-height:1.7;">
+                Most Visited Posts
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../top-algorithms-and-data-structures-for-competitive-programming/index.html">Top 10 Algorithms and Data Structures for Competitive Programming</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../top-10-algorithms-in-interview-questions/index.html">Top 10 algorithms in Interview Questions</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../how-to-begin-with-competitive-programming/index.html">How to begin with Competitive Programming?</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../a-complete-step-by-step-guide-for-placement-preparation-by-geeksforgeeks/index.html">Step by Step Guide for Placement Preparation</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../how-to-prepare-for-acm-icpc/index.html">How to prepare for ACM-ICPC?</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="http://quiz.geeksforgeeks.org/insertion-sort/">Insertion Sort</a>,
+                <a href="http://geeksquiz.com/binary-search/">Binary Search</a>,
+                <a href="http://geeksquiz.com/quick-sort/">QuickSort</a>,
+                <a href="http://geeksquiz.com/merge-sort/">MergeSort</a>,
+                <a href="http://geeksquiz.com/heap-sort/">HeapSort</a>
+            </td>
+        </tr>
+    </tbody>
+</table></div>
+		</aside><aside id="text-7" class="widget widget_text">			<div class="textwidget"><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- GfGSideBottomResponsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9465609616171866"
+     data-ad-slot="5749413230"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</aside><aside id="text-6" class="widget widget_text">			<div class="textwidget"><table align="center" width="100%">
+    <thead>
+        <tr>
+            <th style="border:1px solid #6AA84F;background-color:#4CB96B;color:#fff;text-align: center;font-size: 16px;line-height:1.7;">
+                Popular Categories
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/interview-experiences/index.html">Interview Experiences</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../advanced-data-structures/index.html">Advanced Data Structures</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../dynamic-programming/index.html">Dynamic Programming</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/greedy/index.html">Greedy Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/backtracking/index.html">Backtracking</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/pattern-searching/index.html">Pattern Searching</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/divide-and-conquer/index.html">Divide &amp; Conquer</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/geometric/index.html">Geometric Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/searching/index.html">Searching</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/sorting/index.html">Sorting</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/analysis/index.html">Analysis of Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/mathematical/index.html">Mathematical Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/randomized/index.html">Randomized Algorithms</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/recursion/index.html">Recursion</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid #6AA84F;padding:2px;line-height:1.7;font-size:13px;">
+                <a href="../category/algorithm/game-theory/index.html">Game Theory</a>
+            </td>
+        </tr>
+
+    </tbody>
+</table></div>
+		</aside><aside id="text-8" class="widget widget_text">			<div class="textwidget"><!-- BuySellAds Zone Code -->
+<div id="bsap_1306934" class="bsarocks bsap_785bf45b162de1c5511e8baa02854e5c"></div>
+<!-- End BuySellAds Zone Code --></div>
+		</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><p class="widget-title">Tags</p><div class="tagcloud"><a href='../category/advanced-data-structure/index.html' class='tag-link-1762 tag-link-position-1' title='151 topics' style='font-size: 10.210526315789pt;'>Advanced Data Structure</a>
+<a href='../tag/amazon/index.html' class='tag-link-1942 tag-link-position-2' title='466 topics' style='font-size: 15.368421052632pt;'>Amazon</a>
+<a href='../category/quizzes-gq/aptitude-gq/index.html' class='tag-link-2200 tag-link-position-3' title='284 topics' style='font-size: 13.052631578947pt;'>Aptitude</a>
+<a href='../tag/aptitude/index.html' class='tag-link-2159 tag-link-position-4' title='287 topics' style='font-size: 13.157894736842pt;'>Aptitude</a>
+<a href='../category/data-structures/c-arrays/index.html' class='tag-link-3 tag-link-position-5' title='566 topics' style='font-size: 16.210526315789pt;'>Arrays</a>
+<a href='../category/articles/index.html' class='tag-link-18 tag-link-position-6' title='93 topics' style='font-size: 8pt;'>Articles</a>
+<a href='../category/algorithm/bit-magic/index.html' class='tag-link-17 tag-link-position-7' title='185 topics' style='font-size: 11.157894736842pt;'>Bit Magic</a>
+<a href='../tag/c/index.html' class='tag-link-2138 tag-link-position-8' title='397 topics' style='font-size: 14.631578947368pt;'>C</a>
+<a href='../category/programming-language/c/index.html' class='tag-link-2064 tag-link-position-9' title='543 topics' style='font-size: 16.105263157895pt;'>C</a>
+<a href='../category/programming-language/cpp/index.html' class='tag-link-2065 tag-link-position-10' title='657 topics' style='font-size: 16.947368421053pt;'>C++</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/cpp-gq/index.html' class='tag-link-2207 tag-link-position-11' title='130 topics' style='font-size: 9.5789473684211pt;'>C++ Quiz</a>
+<a href='../category/computer-subject/computer-networks/index.html' class='tag-link-2051 tag-link-position-12' title='100 topics' style='font-size: 8.3157894736842pt;'>Computer Networks</a>
+<a href='../tag/cpp-library/index.html' class='tag-link-1964 tag-link-position-13' title='111 topics' style='font-size: 8.8421052631579pt;'>CPP-Library</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/c-gq/index.html' class='tag-link-2206 tag-link-position-14' title='274 topics' style='font-size: 12.947368421053pt;'>C Quiz</a>
+<a href='../category/quizzes-gq/computer-science-quizzes-gq/data-structures-gate-gq/index.html' class='tag-link-2213 tag-link-position-15' title='129 topics' style='font-size: 9.4736842105263pt;'>Data Structures</a>
+<a href='../tag/data-structures/index.html' class='tag-link-2142 tag-link-position-16' title='129 topics' style='font-size: 9.4736842105263pt;'>Data Structures</a>
+<a href='../category/computer-subject/dbms/index.html' class='tag-link-2053 tag-link-position-17' title='99 topics' style='font-size: 8.3157894736842pt;'>DBMS</a>
+<a href='../category/algorithm/dynamic-programming/index.html' class='tag-link-1746 tag-link-position-18' title='257 topics' style='font-size: 12.631578947368pt;'>Dynamic Programming</a>
+<a href='../category/interview-experiences/experienced-interview-experiences/index.html' class='tag-link-1795 tag-link-position-19' title='125 topics' style='font-size: 9.3684210526316pt;'>Experienced</a>
+<a href='../category/guestblogs/index.html' class='tag-link-1710 tag-link-position-20' title='253 topics' style='font-size: 12.526315789474pt;'>GBlog</a>
+<a href='../category/algorithm/geometric/index.html' class='tag-link-1754 tag-link-position-21' title='95 topics' style='font-size: 8.1052631578947pt;'>Geometric</a>
+<a href='../category/data-structures/graph/index.html' class='tag-link-2068 tag-link-position-22' title='182 topics' style='font-size: 11.052631578947pt;'>Graph</a>
+<a href='../category/data-structures/hash/index.html' class='tag-link-1756 tag-link-position-23' title='143 topics' style='font-size: 10pt;'>Hash</a>
+<a href='../category/interview-experiences/internship-interview-experiences/index.html' class='tag-link-1794 tag-link-position-24' title='168 topics' style='font-size: 10.736842105263pt;'>Internship</a>
+<a href='../category/interview-experiences/index.html' class='tag-link-1140 tag-link-position-25' title='1,993 topics' style='font-size: 22pt;'>Interview Experiences</a>
+<a href='../category/programming-language/java/index.html' class='tag-link-2058 tag-link-position-26' title='689 topics' style='font-size: 17.157894736842pt;'>Java</a>
+<a href='../category/data-structures/linked-list/index.html' class='tag-link-8 tag-link-position-27' title='176 topics' style='font-size: 10.947368421053pt;'>Linked Lists</a>
+<a href='../category/algorithm/mathematical/index.html' class='tag-link-1753 tag-link-position-28' title='686 topics' style='font-size: 17.157894736842pt;'>Mathematical</a>
+<a href='../category/data-structures/matrix/index.html' class='tag-link-1760 tag-link-position-29' title='200 topics' style='font-size: 11.473684210526pt;'>Matrix</a>
+<a href='../category/multiple-choice-question/index.html' class='tag-link-66 tag-link-position-30' title='96 topics' style='font-size: 8.2105263157895pt;'>MCQ</a>
+<a href='../tag/microsoft/index.html' class='tag-link-104 tag-link-position-31' title='179 topics' style='font-size: 11.052631578947pt;'>Microsoft</a>
+<a href='../tag/number-digits/index.html' class='tag-link-1911 tag-link-position-32' title='122 topics' style='font-size: 9.2631578947368pt;'>number-digits</a>
+<a href='../category/program-output/index.html' class='tag-link-5 tag-link-position-33' title='182 topics' style='font-size: 11.052631578947pt;'>Program Output</a>
+<a href='../category/project/index.html' class='tag-link-1767 tag-link-position-34' title='124 topics' style='font-size: 9.3684210526316pt;'>Project</a>
+<a href='../category/puzzles/index.html' class='tag-link-2063 tag-link-position-35' title='161 topics' style='font-size: 10.526315789474pt;'>Puzzles</a>
+<a href='../category/programming-language/python/index.html' class='tag-link-1789 tag-link-position-36' title='469 topics' style='font-size: 15.368421052632pt;'>Python</a>
+<a href='../category/quizzes-gq/qa-placement-quizzes-gq/index.html' class='tag-link-2204 tag-link-position-37' title='274 topics' style='font-size: 12.947368421053pt;'>QA - Placement Quizzes</a>
+<a href='../tag/qa-placement-quizzes/index.html' class='tag-link-2187 tag-link-position-38' title='274 topics' style='font-size: 12.947368421053pt;'>QA - Placement Quizzes</a>
+<a href='../category/school-programming/index.html' class='tag-link-2078 tag-link-position-39' title='312 topics' style='font-size: 13.578947368421pt;'>School Programming</a>
+<a href='../category/algorithm/searching/index.html' class='tag-link-1751 tag-link-position-40' title='108 topics' style='font-size: 8.7368421052632pt;'>Searching</a>
+<a href='../category/algorithm/sorting/index.html' class='tag-link-1752 tag-link-position-41' title='215 topics' style='font-size: 11.789473684211pt;'>Sorting</a>
+<a href='../tag/stl/index.html' class='tag-link-1797 tag-link-position-42' title='237 topics' style='font-size: 12.315789473684pt;'>STL</a>
+<a href='../category/data-structures/c-strings/index.html' class='tag-link-7 tag-link-position-43' title='434 topics' style='font-size: 15.052631578947pt;'>Strings</a>
+<a href='../category/technical-scripter/index.html' class='tag-link-1788 tag-link-position-44' title='125 topics' style='font-size: 9.3684210526316pt;'>Technical Scripter</a>
+<a href='../category/data-structures/tree/index.html' class='tag-link-19 tag-link-position-45' title='288 topics' style='font-size: 13.157894736842pt;'>Trees</a></div>
+</aside><aside id="text-9" class="widget widget_text">			<div class="textwidget"><!-- BuySellAds Zone Code -->
+<div id="bsap_1304848" class="bsarocks bsap_785bf45b162de1c5511e8baa02854e5c"></div>
+<!-- End BuySellAds Zone Code --></div>
+		</aside><aside id="text-10" class="widget widget_text">			<div class="textwidget"><a href="../recent-comments/index.html" style="margin-right: 0px !important;">
+  <center>
+    <input type="button" value="Recent Comments" style="background-color: #4cb96b; color:white; width:100%; font-size:large; cursor:pointer;font-weight:bold;">
+  </center>
+</a></div>
+		</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo" style="padding:0; ">
+		<div class="site-info">
+		<div class="clear"></div>
+		</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+<center>
+  <div class="iconic-footer" style="min-height:40px;font-size:14px;padding-bottom: 0px;line-height: 1.5;">
+    @geeksforgeeks, 
+    <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/in/deed.en_US" title="Valid XHTML Strict 1.0">Some rights reserved</a><a href="../about/contact-us/index.html"> &nbsp; &nbsp; &nbsp; &nbsp;Contact Us!</a>
+    <a href="../about/index.html"> &nbsp; &nbsp; &nbsp; &nbsp;About Us!&nbsp; &nbsp; &nbsp;</a>
+    <a href="../careers/index.html"> &nbsp; &nbsp; &nbsp;Careers!&nbsp; &nbsp; </a>
+    <a href="../privacy-policy/index.html">&nbsp; &nbsp; &nbsp; Privacy Policy&nbsp; &nbsp;&nbsp; </a>
+    <!-- adding social buttons on 07 April, 2017 -->
+    <a href="https://www.facebook.com/GeeksforGeeks-316764689022/timeline/" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="facebook">
+      <img src="../wp-content/uploads/square_facebook_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://twitter.com/geeksforgeeks" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="twitter">
+      <img src="../wp-content/uploads/square_twitter_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://www.linkedin.com/company-beta/1299009" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="linkedin">
+      <img src="../wp-content/uploads/square_linkedin_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=free.programming.programming" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="play store">
+      <img src="../wp-content/uploads/square_play_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://www.microsoft.com/en-us/store/apps/geeksforgeeks-official/9nblggh4rh30" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="windows store">
+      <img src="../wp-content/uploads/square_windows_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+    <a href="https://itunes.apple.com/us/app/geeksforgeeks/id1101205459?ls=1&mt=8" style="display: inline-block;margin-left: 10px;border:1px solid #fff;border-radius: 2px;" title="app store">
+      <img src="../wp-content/uploads/square_app_store_green.png" style="width:30px;vertical-align: middle;" />
+    </a>
+  </div>
+</center><!-- .site-info -->
+
+				<div class="clear"></div>
+</div><!-- #page -->
+
+<script type='text/javascript' src='../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore-1.1.js'></script>
+<script type='text/javascript' src='../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushC.js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.geeksforgeeks.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.geeksforgeeks.org/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='../wp-includes/js/wp-embed.min.js'></script>
+
+<script type="text/javascript">
+// below changes to be added in gfg.js in future.
+// load comment button click when page scroll to it and positioned ad in mobile view.
+flag=0;jQuery(window).scroll(function(){if(jQuery('#comment').length !=0 ){var hT=jQuery('#comment').offset().top,hH=jQuery('#comment').outerHeight(),wH=jQuery(window).height(),wS=jQuery(this).scrollTop();if(wS>(hT+hH-wH-70)&&!flag){jQuery('#comment').click();flag=1}}});var temp_width=jQuery(window).width();if(temp_width<468){if(jQuery('article').length>1){jQuery(jQuery('.responsiveAd')).insertAfter('article:eq(2)');jQuery('.rectangleAd').hide()}
+else if(jQuery('#practiceLinkDiv').length>0){jQuery(jQuery('.responsiveAd')).insertAfter('#practiceLinkDiv');jQuery('.rectangleAd').css('width','')}else{jQuery('.responsiveAd').hide();jQuery('.rectangleAd').css('width','')}}
+
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12148232-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>  
+<script async type="text/javascript" src="http://cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=geeksforgeeks" id="_fancybar_js"></script>
+</body>
+</html>
+
+<!-- Dynamic page generated in 0.134 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 04:14:34 -->
+
+<!-- Compression = gzip -->

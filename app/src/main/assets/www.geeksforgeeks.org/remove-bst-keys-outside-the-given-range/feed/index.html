@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Remove BST keys outside the given range</title>
+	<atom:link href="http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: bhargav</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-39351</link>
+		<dc:creator><![CDATA[bhargav]]></dc:creator>
+		<pubDate>Sat, 21 Jun 2014 12:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-39351</guid>
+		<description><![CDATA[how abt this.
+1. perform inorder traversal(worst case O(n))
+2.consider the numbers in the range and construct a BST(worst case O(n)).
+3.point the root to the new bst.
+Total runtime of O(n).
+
+please correct me if i am wrong.]]></description>
+		<content:encoded><![CDATA[<p>how abt this.<br />
+1. perform inorder traversal(worst case O(n))<br />
+2.consider the numbers in the range and construct a BST(worst case O(n)).<br />
+3.point the root to the new bst.<br />
+Total runtime of O(n).</p>
+<p>please correct me if i am wrong.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-38087</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 10:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-38087</guid>
+		<description><![CDATA[using preorder
+void removeKeys(bstnode *&#038;t,int min,int max)
+{
+    if(t!=NULL)
+    {
+        if(t-&#062;datarchild;
+            t-&#062;rchild=NULL;
+            deleteTree(t);
+            t=temp;
+            removeKeys(t,min,max);
+        }
+        else if(t-&#062;data&#062;max)
+        {
+            bstnode *temp=t-&#062;lchild;
+            t-&#062;lchild=NULL;
+            deleteTree(t);
+            t=temp;
+            removeKeys(t,min,max);
+        }
+        else
+        {
+            removeKeys(t-&#062;lchild,min,max);
+            removeKeys(t-&#062;rchild,min,max);
+        }
+        
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>using preorder<br />
+void removeKeys(bstnode *&amp;t,int min,int max)<br />
+{<br />
+    if(t!=NULL)<br />
+    {<br />
+        if(t-&gt;datarchild;<br />
+            t-&gt;rchild=NULL;<br />
+            deleteTree(t);<br />
+            t=temp;<br />
+            removeKeys(t,min,max);<br />
+        }<br />
+        else if(t-&gt;data&gt;max)<br />
+        {<br />
+            bstnode *temp=t-&gt;lchild;<br />
+            t-&gt;lchild=NULL;<br />
+            deleteTree(t);<br />
+            t=temp;<br />
+            removeKeys(t,min,max);<br />
+        }<br />
+        else<br />
+        {<br />
+            removeKeys(t-&gt;lchild,min,max);<br />
+            removeKeys(t-&gt;rchild,min,max);<br />
+        }</p>
+<p>    }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-35315</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 09:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-35315</guid>
+		<description><![CDATA[#include
+#define size 50
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+ 
+void create(tnode* &#038;root,int d)
+{
+	if(root==NULL)
+	{
+		root=new tnode(d);
+		return;
+	}
+	if(d&#062;root-&#062;data)
+	   create(root-&#062;rchild,d);
+	else
+	   create(root-&#062;lchild,d);
+ 
+}
+tnode* fun(tnode* root,int low,int high)
+{
+	if(!root)
+	   return NULL;
+    else if(highdata)
+	   return fun(root-&#062;lchild,low,high);
+	else if(low&#062;root-&#062;data)
+	    return fun(root-&#062;rchild,low,high);
+	else
+	{
+		root-&#062;lchild=fun(root-&#062;lchild,low,root-&#062;data);
+		root-&#062;rchild=fun(root-&#062;rchild,root-&#062;data,high);
+		return root;
+	}
+}
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int low,high;
+	int arr[]={10,7,13,4,9,8,11,15};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	display(root);
+	for(int i=0;i&#060;n;i++)
+	{
+	   create(root,arr[i]);	
+	}
+	cout&#060;&#060;&#034;enter the range of bst to trim.n&#034;;
+	display(fun(root,8,11));
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#define size 50<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};</p>
+<p>void create(tnode* &amp;root,int d)<br />
+{<br />
+	if(root==NULL)<br />
+	{<br />
+		root=new tnode(d);<br />
+		return;<br />
+	}<br />
+	if(d&gt;root-&gt;data)<br />
+	   create(root-&gt;rchild,d);<br />
+	else<br />
+	   create(root-&gt;lchild,d);</p>
+<p>}<br />
+tnode* fun(tnode* root,int low,int high)<br />
+{<br />
+	if(!root)<br />
+	   return NULL;<br />
+    else if(highdata)<br />
+	   return fun(root-&gt;lchild,low,high);<br />
+	else if(low&gt;root-&gt;data)<br />
+	    return fun(root-&gt;rchild,low,high);<br />
+	else<br />
+	{<br />
+		root-&gt;lchild=fun(root-&gt;lchild,low,root-&gt;data);<br />
+		root-&gt;rchild=fun(root-&gt;rchild,root-&gt;data,high);<br />
+		return root;<br />
+	}<br />
+}<br />
+void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int low,high;<br />
+	int arr[]={10,7,13,4,9,8,11,15};<br />
+	int n=sizeof(arr)/sizeof(arr[0]);<br />
+	display(root);<br />
+	for(int i=0;i&lt;n;i++)<br />
+	{<br />
+	   create(root,arr[i]);<br />
+	}<br />
+	cout&lt;&lt;&quot;enter the range of bst to trim.n&quot;;<br />
+	display(fun(root,8,11));<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-35314</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 09:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-35314</guid>
+		<description><![CDATA[suppose the given range is k1,k2
+1-if(k2data) then move to left subtree
+2-if(k1&#062;root-&#062;data) then move to right subtree
+root is in range but  u r not sure about its left and right subtree
+root-&#062;lchild=fun(root,low,root-&#062;data)
+root-&#062;rchild=fun(root,root-&#062;data,high]]></description>
+		<content:encoded><![CDATA[<p>suppose the given range is k1,k2<br />
+1-if(k2data) then move to left subtree<br />
+2-if(k1&gt;root-&gt;data) then move to right subtree<br />
+root is in range but  u r not sure about its left and right subtree<br />
+root-&gt;lchild=fun(root,low,root-&gt;data)<br />
+root-&gt;rchild=fun(root,root-&gt;data,high</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: OP Coder</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-35260</link>
+		<dc:creator><![CDATA[OP Coder]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 02:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-35260</guid>
+		<description><![CDATA[I agree. There is memory leak. But it does what it is expected. 
+
+My solution:
+/*[i,j] represents range*/
+
+node* prune(node *root, int i, int j)
+{
+    if ( root == NULL)
+        return root;
+
+    if (root-&#062;data &lt;i&gt;left;
+delete(root);
+node_delete(temp);// delete the tree rooted &quot;temp&quot;
+        return root = prune(root-&#062;right, i, j);
+}
+
+    else if( root-&#062;data &#062; j){
+node *temp = root-&#062;right;
+delete(root);
+node_delete(temp);// delete the tree rooted &quot;temp&quot;
+        return root = prune(root-&#062;left, i, j);
+}
+
+    else
+    {
+        root-&#062;left = prune(root-&#062;left, i , root-&#062;data - 1);
+        root-&#062;right = prune(root-&#062;right, root-&#062;data, j);
+        return root;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>I agree. There is memory leak. But it does what it is expected. </p>
+<p>My solution:<br />
+/*[i,j] represents range*/</p>
+<p>node* prune(node *root, int i, int j)<br />
+{<br />
+    if ( root == NULL)<br />
+        return root;</p>
+<p>    if (root-&gt;data <i>left;<br />
+delete(root);<br />
+node_delete(temp);// delete the tree rooted &#8220;temp&#8221;<br />
+        return root = prune(root-&gt;right, i, j);<br />
+}</p>
+<p>    else if( root-&gt;data &gt; j){<br />
+node *temp = root-&gt;right;<br />
+delete(root);<br />
+node_delete(temp);// delete the tree rooted &#8220;temp&#8221;<br />
+        return root = prune(root-&gt;left, i, j);<br />
+}</p>
+<p>    else<br />
+    {<br />
+        root-&gt;left = prune(root-&gt;left, i , root-&gt;data &#8211; 1);<br />
+        root-&gt;right = prune(root-&gt;right, root-&gt;data, j);<br />
+        return root;<br />
+    }<br />
+}</i></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-35253</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 28 Apr 2014 19:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-35253</guid>
+		<description><![CDATA[Could you please explain where are you deleting the node? I think you have only written code for traversal not deletion. This may cause memory leak]]></description>
+		<content:encoded><![CDATA[<p>Could you please explain where are you deleting the node? I think you have only written code for traversal not deletion. This may cause memory leak</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: OP Coder</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-32062</link>
+		<dc:creator><![CDATA[OP Coder]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2014 16:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-32062</guid>
+		<description><![CDATA[My solution:
+/*[i,j] represents range*/
+
+
+node* prune(node *root, int i, int j)
+{
+    if ( root == NULL)
+        return root;
+
+
+    if (root-&#062;data &lt;i&gt;right, i, j);
+
+
+    else if( root-&#062;data &#062; j)
+        return root = prune(root-&#062;left, i, j);
+
+
+    else
+    {
+        root-&#062;left = prune(root-&#062;left, i , root-&#062;data - 1);
+        root-&#062;right = prune(root-&#062;right, root-&#062;data, j);
+        return root;
+    }
+}]]></description>
+		<content:encoded><![CDATA[<p>My solution:<br />
+/*[i,j] represents range*/</p>
+<p>node* prune(node *root, int i, int j)<br />
+{<br />
+    if ( root == NULL)<br />
+        return root;</p>
+<p>    if (root-&gt;data <i>right, i, j);</p>
+<p>    else if( root-&gt;data &gt; j)<br />
+        return root = prune(root-&gt;left, i, j);</p>
+<p>    else<br />
+    {<br />
+        root-&gt;left = prune(root-&gt;left, i , root-&gt;data &#8211; 1);<br />
+        root-&gt;right = prune(root-&gt;right, root-&gt;data, j);<br />
+        return root;<br />
+    }<br />
+}</i></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Patil</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-30140</link>
+		<dc:creator><![CDATA[Patil]]></dc:creator>
+		<pubDate>Tue, 26 Nov 2013 08:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-30140</guid>
+		<description><![CDATA[Thanks...]]></description>
+		<content:encoded><![CDATA[<p>Thanks&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-29991</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Tue, 19 Nov 2013 19:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-29991</guid>
+		<description><![CDATA[Wow Solution]]></description>
+		<content:encoded><![CDATA[<p>Wow Solution</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shivam</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-29594</link>
+		<dc:creator><![CDATA[Shivam]]></dc:creator>
+		<pubDate>Wed, 06 Nov 2013 04:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-29594</guid>
+		<description><![CDATA[This can also be done using preorder:  
+
+void distroy(node * root)
+{
+    if(root==NULL)
+        return ;
+    distroy(root-&#062;left);
+    distroy(root-&#062;right);
+    free(root);
+}
+
+node *removeOutsideRange(node* root,int k1,int k2)
+{
+
+    if(root==NULL)
+        return NULL;
+    if(root-&#062;data&#062;=k1 &#038;&#038; root-&#062;dataleft=removeOutsideRange(root-&#062;left,k1,k2);
+        root-&#062;right=removeOutsideRange(root-&#062;right,k1,k2);
+    }
+    else if(root-&#062;dataright;
+        distroy(root-&#062;left);
+        delete (root);
+        return removeOutsideRange(temp,k1,k2);
+    }
+    else if(root-&#062;data&#062;k2)
+    {
+        node* temp=root-&#062;left;
+        distroy(root-&#062;right);
+        delete (root);
+        return removeOutsideRange(temp,k1,k2);
+    }
+
+    return root;
+}
+time complexity-O(n)]]></description>
+		<content:encoded><![CDATA[<p>This can also be done using preorder:  </p>
+<p>void distroy(node * root)<br />
+{<br />
+    if(root==NULL)<br />
+        return ;<br />
+    distroy(root-&gt;left);<br />
+    distroy(root-&gt;right);<br />
+    free(root);<br />
+}</p>
+<p>node *removeOutsideRange(node* root,int k1,int k2)<br />
+{</p>
+<p>    if(root==NULL)<br />
+        return NULL;<br />
+    if(root-&gt;data&gt;=k1 &amp;&amp; root-&gt;dataleft=removeOutsideRange(root-&gt;left,k1,k2);<br />
+        root-&gt;right=removeOutsideRange(root-&gt;right,k1,k2);<br />
+    }<br />
+    else if(root-&gt;dataright;<br />
+        distroy(root-&gt;left);<br />
+        delete (root);<br />
+        return removeOutsideRange(temp,k1,k2);<br />
+    }<br />
+    else if(root-&gt;data&gt;k2)<br />
+    {<br />
+        node* temp=root-&gt;left;<br />
+        distroy(root-&gt;right);<br />
+        delete (root);<br />
+        return removeOutsideRange(temp,k1,k2);<br />
+    }</p>
+<p>    return root;<br />
+}<br />
+time complexity-O(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sreenivas Doosa</title>
+		<link>http://www.geeksforgeeks.org/remove-bst-keys-outside-the-given-range/#comment-29366</link>
+		<dc:creator><![CDATA[Sreenivas Doosa]]></dc:creator>
+		<pubDate>Sun, 27 Oct 2013 15:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116252#comment-29366</guid>
+		<description><![CDATA[If initial root is not in range, then the above code deletes the whole tree and returns NULL. The code works for all the cases.
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>If initial root is not in range, then the above code deletes the whole tree and returns NULL. The code works for all the cases.<br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.074 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:28 -->
+
+<!-- Compression = gzip -->

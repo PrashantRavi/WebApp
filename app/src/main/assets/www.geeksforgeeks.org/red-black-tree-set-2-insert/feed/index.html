@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Red-Black Tree &#124; Set 2 (Insert)</title>
+	<atom:link href="http://www.geeksforgeeks.org/red-black-tree-set-2-insert/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rohit Kumar</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-39677</link>
+		<dc:creator><![CDATA[Rohit Kumar]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 18:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-39677</guid>
+		<description><![CDATA[#include 
+#include 
+#include
+#include
+//#include
+#define BLACK 1
+#define RED 0
+struct node
+{
+    int data;
+    int color;
+    struct node*left;
+    struct node*right;
+    struct node*parent;
+};
+struct node * insert_case1(struct node *,struct node *);
+struct node * insert_case2(struct node *,struct node *);struct node * insert_case3(struct node *,struct node *);struct node * insert_case4(struct node *,struct node *);struct node * insert_case5(struct node *,struct node *);
+struct node * rotate_left(struct node *,struct node *);struct node * rotate_right(struct node *,struct node *);
+struct node *grandparent(struct node *n)
+{
+ if ((n != NULL) &#038;&#038; (n-&#062;parent != NULL))
+  return n-&#062;parent-&#062;parent;
+ else
+  return NULL;
+}
+
+struct node *uncle(struct node *n)
+{
+ struct node *g = grandparent(n);
+ if (g == NULL)
+  return NULL; // No grandparent means no uncle
+ if (n-&#062;parent == g-&#062;left)
+  return g-&#062;right;
+ else
+  return g-&#062;left;
+}
+struct node * insert_case1(struct node *n,struct node *head)
+{
+ if (n-&#062;parent == NULL)
+  n-&#062;color = BLACK;
+ else
+  head=insert_case2(n,head);
+  return head;
+}
+struct node * insert_case2(struct node *n,struct node *head)
+{
+ if (n-&#062;parent-&#062;color == BLACK)
+  return head; /* Tree is still valid */
+ else
+  head=insert_case3(n,head);
+  return head;
+}
+struct node * insert_case3(struct node *n,struct node *head)
+{
+ struct node *u = uncle(n), *g;
+
+ if ((u != NULL) &#038;&#038; (u-&#062;color == RED)) {
+  n-&#062;parent-&#062;color = BLACK;
+  u-&#062;color = BLACK;
+  g = grandparent(n);
+  g-&#062;color = RED;
+  head=insert_case1(g,head);
+ } else {
+  head=insert_case4(n,head);
+ }
+ return head;
+}
+struct node * insert_case4(struct node *n,struct node *head)
+{
+ struct node *g = grandparent(n);
+
+ if ((n == n-&#062;parent-&#062;right) &#038;&#038; (n-&#062;parent == g-&#062;left)) {
+  head=rotate_left(n-&#062;parent,head);
+
+ /*
+ * rotate_left can be the below because of already having *g =  grandparent(n)
+ *
+ * struct node *saved_p=g-&#062;left, *saved_left_n=n-&#062;left;
+ * g-&#062;left=n;
+ * n-&#062;left=saved_p;
+ * saved_p-&#062;right=saved_left_n;
+ *
+ * and modify the parent&#039;s nodes properly
+ */
+
+  n = n-&#062;left;
+
+ } else if ((n == n-&#062;parent-&#062;left) &#038;&#038; (n-&#062;parent == g-&#062;right)) {
+  head=rotate_right(n-&#062;parent,head);
+
+ /*
+ * rotate_right can be the below to take advantage of already having *g =  grandparent(n)
+ *
+ * struct node *saved_p=g-&#062;right, *saved_right_n=n-&#062;right;
+ * g-&#062;right=n;
+ * n-&#062;right=saved_p;
+ * saved_p-&#062;left=saved_right_n;
+ *
+ */
+
+  n = n-&#062;right;
+ }
+ head=insert_case5(n,head);
+ return head;
+}
+struct node * insert_case5(struct node *n,struct node *head)
+{
+ struct node *g = grandparent(n);
+
+ n-&#062;parent-&#062;color = BLACK;
+ g-&#062;color = RED;
+ if (n == n-&#062;parent-&#062;left)
+  head=rotate_right(n,head);
+ else
+  head=rotate_left(n,head);
+  return head;
+}
+struct node * rotate_left(struct node *n,struct node *head)
+{
+
+  struct node *g =  grandparent(n);
+
+  struct node *saved_p=g-&#062;parent, *saved_left_n=n-&#062;parent-&#062;left;
+  n-&#062;parent-&#062;left=g;
+  g-&#062;right=saved_left_n;
+  n-&#062;parent-&#062;parent=saved_p;
+  g-&#062;parent=n-&#062;parent;
+  if(saved_p!=NULL)
+  {
+      if(saved_p-&#062;left==g)saved_p-&#062;left=n-&#062;parent-&#062;parent;
+else if(saved_p-&#062;right==g)saved_p-&#062;right=n-&#062;parent-&#062;parent;
+  }
+ else  head=n-&#062;parent;
+
+  return head;
+  //and modify the parent&#039;s nodes properly
+
+}
+struct node * rotate_right(struct node *n,struct node *head)
+{
+
+ struct node *g =  grandparent(n);
+
+  struct node *saved_p=g-&#062;parent, *saved_right_p=n-&#062;parent-&#062;right;
+  n-&#062;parent-&#062;right=g;
+  g-&#062;left=saved_right_p;
+  n-&#062;parent-&#062;parent=saved_p;
+  g-&#062;parent=n-&#062;parent;
+  if(saved_p!=NULL)
+  {
+      if(saved_p-&#062;left==g)saved_p-&#062;left=n-&#062;parent-&#062;parent;
+else if(saved_p-&#062;right==g)saved_p-&#062;right=n-&#062;parent-&#062;parent;
+  }
+else head=n-&#062;parent;
+return head;
+}
+struct node* finding(struct node* root,int n,int i)
+{
+    //static int i;
+   static struct node* temp=NULL;
+    if(root==NULL)return NULL;
+    if(i==1)return temp;
+    if(root-&#062;data&#062;n)
+    {
+        if(root-&#062;left==NULL)
+        {temp=root;i=1;return temp;}
+        finding(root-&#062;left,n,i);
+    }
+    else
+    {
+        if(root-&#062;right==NULL)
+        {temp=root;i=1;return temp;}
+        finding(root-&#062;right,n,i);
+    }
+    return (temp);
+}
+
+struct node* insertion(struct node*root,int n)
+{
+   //struct node* temp=*root;
+   struct node* current=(struct node*)malloc(sizeof(struct node*));
+   current-&#062;data=n;
+   current-&#062;left=NULL;
+   current-&#062;right=NULL;
+   current-&#062;color=RED;
+   if(root==NULL)
+   {
+       current-&#062;color=BLACK;
+       current-&#062;parent=NULL;
+       root=current;
+       return root;
+   }
+    else
+    {
+        struct node*temp=NULL;
+        temp=finding(root,n,0);
+        current-&#062;parent=temp;
+        if(n&#062;=temp-&#062;data)
+            temp-&#062;right=current;
+        else temp-&#062;left=current;
+    }
+    root=insert_case1(current,root);
+   return root;
+}
+
+
+
+void inorder(struct node* root)
+{
+    if(root==NULL)return;
+    inorder(root-&#062;left);
+    printf(&quot; %d &quot;,root-&#062;data);
+    inorder(root-&#062;right);
+}
+int main()
+{
+    struct node*head;
+    head=NULL;
+    head=insertion(head,10);
+    head=insertion(head,20);
+    head=insertion(head,30);
+    head=insertion(head,15);
+   printf(&quot;tree:n&quot;);
+   inorder(head);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+#include<br />
+#include<br />
+#include<br />
+//#include<br />
+#define BLACK 1<br />
+#define RED 0<br />
+struct node<br />
+{<br />
+    int data;<br />
+    int color;<br />
+    struct node*left;<br />
+    struct node*right;<br />
+    struct node*parent;<br />
+};<br />
+struct node * insert_case1(struct node *,struct node *);<br />
+struct node * insert_case2(struct node *,struct node *);struct node * insert_case3(struct node *,struct node *);struct node * insert_case4(struct node *,struct node *);struct node * insert_case5(struct node *,struct node *);<br />
+struct node * rotate_left(struct node *,struct node *);struct node * rotate_right(struct node *,struct node *);<br />
+struct node *grandparent(struct node *n)<br />
+{<br />
+ if ((n != NULL) &amp;&amp; (n-&gt;parent != NULL))<br />
+  return n-&gt;parent-&gt;parent;<br />
+ else<br />
+  return NULL;<br />
+}</p>
+<p>struct node *uncle(struct node *n)<br />
+{<br />
+ struct node *g = grandparent(n);<br />
+ if (g == NULL)<br />
+  return NULL; // No grandparent means no uncle<br />
+ if (n-&gt;parent == g-&gt;left)<br />
+  return g-&gt;right;<br />
+ else<br />
+  return g-&gt;left;<br />
+}<br />
+struct node * insert_case1(struct node *n,struct node *head)<br />
+{<br />
+ if (n-&gt;parent == NULL)<br />
+  n-&gt;color = BLACK;<br />
+ else<br />
+  head=insert_case2(n,head);<br />
+  return head;<br />
+}<br />
+struct node * insert_case2(struct node *n,struct node *head)<br />
+{<br />
+ if (n-&gt;parent-&gt;color == BLACK)<br />
+  return head; /* Tree is still valid */<br />
+ else<br />
+  head=insert_case3(n,head);<br />
+  return head;<br />
+}<br />
+struct node * insert_case3(struct node *n,struct node *head)<br />
+{<br />
+ struct node *u = uncle(n), *g;</p>
+<p> if ((u != NULL) &amp;&amp; (u-&gt;color == RED)) {<br />
+  n-&gt;parent-&gt;color = BLACK;<br />
+  u-&gt;color = BLACK;<br />
+  g = grandparent(n);<br />
+  g-&gt;color = RED;<br />
+  head=insert_case1(g,head);<br />
+ } else {<br />
+  head=insert_case4(n,head);<br />
+ }<br />
+ return head;<br />
+}<br />
+struct node * insert_case4(struct node *n,struct node *head)<br />
+{<br />
+ struct node *g = grandparent(n);</p>
+<p> if ((n == n-&gt;parent-&gt;right) &amp;&amp; (n-&gt;parent == g-&gt;left)) {<br />
+  head=rotate_left(n-&gt;parent,head);</p>
+<p> /*<br />
+ * rotate_left can be the below because of already having *g =  grandparent(n)<br />
+ *<br />
+ * struct node *saved_p=g-&gt;left, *saved_left_n=n-&gt;left;<br />
+ * g-&gt;left=n;<br />
+ * n-&gt;left=saved_p;<br />
+ * saved_p-&gt;right=saved_left_n;<br />
+ *<br />
+ * and modify the parent&#8217;s nodes properly<br />
+ */</p>
+<p>  n = n-&gt;left;</p>
+<p> } else if ((n == n-&gt;parent-&gt;left) &amp;&amp; (n-&gt;parent == g-&gt;right)) {<br />
+  head=rotate_right(n-&gt;parent,head);</p>
+<p> /*<br />
+ * rotate_right can be the below to take advantage of already having *g =  grandparent(n)<br />
+ *<br />
+ * struct node *saved_p=g-&gt;right, *saved_right_n=n-&gt;right;<br />
+ * g-&gt;right=n;<br />
+ * n-&gt;right=saved_p;<br />
+ * saved_p-&gt;left=saved_right_n;<br />
+ *<br />
+ */</p>
+<p>  n = n-&gt;right;<br />
+ }<br />
+ head=insert_case5(n,head);<br />
+ return head;<br />
+}<br />
+struct node * insert_case5(struct node *n,struct node *head)<br />
+{<br />
+ struct node *g = grandparent(n);</p>
+<p> n-&gt;parent-&gt;color = BLACK;<br />
+ g-&gt;color = RED;<br />
+ if (n == n-&gt;parent-&gt;left)<br />
+  head=rotate_right(n,head);<br />
+ else<br />
+  head=rotate_left(n,head);<br />
+  return head;<br />
+}<br />
+struct node * rotate_left(struct node *n,struct node *head)<br />
+{</p>
+<p>  struct node *g =  grandparent(n);</p>
+<p>  struct node *saved_p=g-&gt;parent, *saved_left_n=n-&gt;parent-&gt;left;<br />
+  n-&gt;parent-&gt;left=g;<br />
+  g-&gt;right=saved_left_n;<br />
+  n-&gt;parent-&gt;parent=saved_p;<br />
+  g-&gt;parent=n-&gt;parent;<br />
+  if(saved_p!=NULL)<br />
+  {<br />
+      if(saved_p-&gt;left==g)saved_p-&gt;left=n-&gt;parent-&gt;parent;<br />
+else if(saved_p-&gt;right==g)saved_p-&gt;right=n-&gt;parent-&gt;parent;<br />
+  }<br />
+ else  head=n-&gt;parent;</p>
+<p>  return head;<br />
+  //and modify the parent&#8217;s nodes properly</p>
+<p>}<br />
+struct node * rotate_right(struct node *n,struct node *head)<br />
+{</p>
+<p> struct node *g =  grandparent(n);</p>
+<p>  struct node *saved_p=g-&gt;parent, *saved_right_p=n-&gt;parent-&gt;right;<br />
+  n-&gt;parent-&gt;right=g;<br />
+  g-&gt;left=saved_right_p;<br />
+  n-&gt;parent-&gt;parent=saved_p;<br />
+  g-&gt;parent=n-&gt;parent;<br />
+  if(saved_p!=NULL)<br />
+  {<br />
+      if(saved_p-&gt;left==g)saved_p-&gt;left=n-&gt;parent-&gt;parent;<br />
+else if(saved_p-&gt;right==g)saved_p-&gt;right=n-&gt;parent-&gt;parent;<br />
+  }<br />
+else head=n-&gt;parent;<br />
+return head;<br />
+}<br />
+struct node* finding(struct node* root,int n,int i)<br />
+{<br />
+    //static int i;<br />
+   static struct node* temp=NULL;<br />
+    if(root==NULL)return NULL;<br />
+    if(i==1)return temp;<br />
+    if(root-&gt;data&gt;n)<br />
+    {<br />
+        if(root-&gt;left==NULL)<br />
+        {temp=root;i=1;return temp;}<br />
+        finding(root-&gt;left,n,i);<br />
+    }<br />
+    else<br />
+    {<br />
+        if(root-&gt;right==NULL)<br />
+        {temp=root;i=1;return temp;}<br />
+        finding(root-&gt;right,n,i);<br />
+    }<br />
+    return (temp);<br />
+}</p>
+<p>struct node* insertion(struct node*root,int n)<br />
+{<br />
+   //struct node* temp=*root;<br />
+   struct node* current=(struct node*)malloc(sizeof(struct node*));<br />
+   current-&gt;data=n;<br />
+   current-&gt;left=NULL;<br />
+   current-&gt;right=NULL;<br />
+   current-&gt;color=RED;<br />
+   if(root==NULL)<br />
+   {<br />
+       current-&gt;color=BLACK;<br />
+       current-&gt;parent=NULL;<br />
+       root=current;<br />
+       return root;<br />
+   }<br />
+    else<br />
+    {<br />
+        struct node*temp=NULL;<br />
+        temp=finding(root,n,0);<br />
+        current-&gt;parent=temp;<br />
+        if(n&gt;=temp-&gt;data)<br />
+            temp-&gt;right=current;<br />
+        else temp-&gt;left=current;<br />
+    }<br />
+    root=insert_case1(current,root);<br />
+   return root;<br />
+}</p>
+<p>void inorder(struct node* root)<br />
+{<br />
+    if(root==NULL)return;<br />
+    inorder(root-&gt;left);<br />
+    printf(&#8221; %d &#8220;,root-&gt;data);<br />
+    inorder(root-&gt;right);<br />
+}<br />
+int main()<br />
+{<br />
+    struct node*head;<br />
+    head=NULL;<br />
+    head=insertion(head,10);<br />
+    head=insertion(head,20);<br />
+    head=insertion(head,30);<br />
+    head=insertion(head,15);<br />
+   printf(&#8220;tree:n&#8221;);<br />
+   inorder(head);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kaushik Lele</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-34618</link>
+		<dc:creator><![CDATA[kaushik Lele]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 11:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-34618</guid>
+		<description><![CDATA[I ran RedBlackTreeViewer.java; mentioned below. But code is not correct. When I entered number in this sequence 4,7,17; it showed a tree with 4 as root and 12 as left node !! that is wrong. So we will need to rectify code.]]></description>
+		<content:encoded><![CDATA[<p>I ran RedBlackTreeViewer.java; mentioned below. But code is not correct. When I entered number in this sequence 4,7,17; it showed a tree with 4 as root and 12 as left node !! that is wrong. So we will need to rectify code.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kaushik Lele</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-34617</link>
+		<dc:creator><![CDATA[kaushik Lele]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 11:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-34617</guid>
+		<description><![CDATA[You can take complete Java code. Take java classes from here. As they are inherited.
+http://cs.lmu.edu/~ray/notes/redblacktrees/
+http://cs.lmu.edu/~ray/notes/binarysearchtrees/
+http://cs.lmu.edu/~ray/notes/binarytrees/
+
+Run RedBlackTreeViewer.java]]></description>
+		<content:encoded><![CDATA[<p>You can take complete Java code. Take java classes from here. As they are inherited.<br />
+<a href="http://cs.lmu.edu/~ray/notes/redblacktrees/" rel="nofollow">http://cs.lmu.edu/~ray/notes/redblacktrees/</a><br />
+<a href="http://cs.lmu.edu/~ray/notes/binarysearchtrees/" rel="nofollow">http://cs.lmu.edu/~ray/notes/binarysearchtrees/</a><br />
+<a href="http://cs.lmu.edu/~ray/notes/binarytrees/" rel="nofollow">http://cs.lmu.edu/~ray/notes/binarytrees/</a></p>
+<p>Run RedBlackTreeViewer.java</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kaushik Lele</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-34616</link>
+		<dc:creator><![CDATA[kaushik Lele]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 11:06:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-34616</guid>
+		<description><![CDATA[Very well Explained. Keep these rules handy and view this animation.
+http://www.youtube.com/watch?v=vDHFF4wjWYU
+
+After every insertion; apply these rule and guess what should be behaviour. You will learn it quite quickly.]]></description>
+		<content:encoded><![CDATA[<p>Very well Explained. Keep these rules handy and view this animation.<br />
+<a href="http://www.youtube.com/watch?v=vDHFF4wjWYU" rel="nofollow">http://www.youtube.com/watch?v=vDHFF4wjWYU</a></p>
+<p>After every insertion; apply these rule and guess what should be behaviour. You will learn it quite quickly.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: robinhood</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-34022</link>
+		<dc:creator><![CDATA[robinhood]]></dc:creator>
+		<pubDate>Sat, 29 Mar 2014 19:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-34022</guid>
+		<description><![CDATA[very well xplained.:)]]></description>
+		<content:encoded><![CDATA[<p>very well xplained.:)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sachi059</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-33355</link>
+		<dc:creator><![CDATA[sachi059]]></dc:creator>
+		<pubDate>Mon, 10 Mar 2014 18:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-33355</guid>
+		<description><![CDATA[Good Explanation :-)]]></description>
+		<content:encoded><![CDATA[<p>Good Explanation 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anuj</title>
+		<link>http://www.geeksforgeeks.org/red-black-tree-set-2-insert/#comment-32637</link>
+		<dc:creator><![CDATA[Anuj]]></dc:creator>
+		<pubDate>Mon, 17 Feb 2014 06:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=126793#comment-32637</guid>
+		<description><![CDATA[First time ever, I understood insertion in red-black tree. Thanks.]]></description>
+		<content:encoded><![CDATA[<p>First time ever, I understood insertion in red-black tree. Thanks.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.073 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:12:21 -->
+
+<!-- Compression = gzip -->

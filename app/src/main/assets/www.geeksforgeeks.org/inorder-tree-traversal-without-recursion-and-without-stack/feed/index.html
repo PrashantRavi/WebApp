@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Inorder Tree Traversal without recursion and without stack!</title>
+	<atom:link href="http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Gallon</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-38753</link>
+		<dc:creator><![CDATA[Gallon]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 22:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-38753</guid>
+		<description><![CDATA[[code]
+
+void MorrisTraversal(struct tNode *root)
+
+{
+
+   struct tNode *current = root;
+
+   
+
+   stack&#038;lt;tNode*&#038;gt; my_stack;
+
+   
+
+   while(current)
+
+   {
+
+       my_stack.push(current);
+
+       current = current-&#038;gt;left;
+
+       
+
+   }
+
+   
+
+   while(!my_stack.empty())
+
+   {
+
+       struct tNode *temp = my_stack.top();
+
+       my_stack.pop();
+
+       cout&#038;lt;&#038;lt;temp-&#038;gt;data&#038;lt;&#038;lt;&#038;quot; &#038;quot;;
+
+       
+
+      
+
+       if(temp-&#038;gt;right)
+
+       {
+
+           my_stack.push(temp-&#038;gt;right);
+
+           
+
+           current = temp-&#038;gt;right;
+
+           
+
+           while(current-&#038;gt;left)
+
+             my_stack.push(current);
+
+            
+
+       }
+
+       else
+
+       {
+
+         //do nothing    
+
+       }
+
+   }
+
+   
+
+}
+
+[/code]]]></description>
+		<content:encoded><![CDATA[<pre class="brush: plain; title: ; notranslate">
+
+void MorrisTraversal(struct tNode *root)
+
+{
+
+   struct tNode *current = root;
+
+   
+
+   stack&amp;lt;tNode*&amp;gt; my_stack;
+
+   
+
+   while(current)
+
+   {
+
+       my_stack.push(current);
+
+       current = current-&amp;gt;left;
+
+       
+
+   }
+
+   
+
+   while(!my_stack.empty())
+
+   {
+
+       struct tNode *temp = my_stack.top();
+
+       my_stack.pop();
+
+       cout&amp;lt;&amp;lt;temp-&amp;gt;data&amp;lt;&amp;lt;&amp;quot; &amp;quot;;
+
+       
+
+      
+
+       if(temp-&amp;gt;right)
+
+       {
+
+           my_stack.push(temp-&amp;gt;right);
+
+           
+
+           current = temp-&amp;gt;right;
+
+           
+
+           while(current-&amp;gt;left)
+
+             my_stack.push(current);
+
+            
+
+       }
+
+       else
+
+       {
+
+         //do nothing    
+
+       }
+
+   }
+
+   
+
+}
+
+</pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-38228</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 17:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-38228</guid>
+		<description><![CDATA[we can even do like this
+void MorrisTraversal(struct Node *root)
+	{  struct Node *p,*pre;
+
+	if(root==0) { return; }
+
+	for(p=root;p!=0;)
+		{
+		if(p-&#062;Left==0) { printf(&quot; %d &quot;,p-&#062;Data); p=p-&#062;Right; continue; }
+
+		for(pre=p-&#062;Left;pre-&#062;Right!=0 &#038;&#038; pre-&#062;Right!=p;pre=pre-&#062;Right) { }
+
+		if(pre-&#062;Right==0)
+			{ pre-&#062;Right=p; p=p-&#062;Left; continue; }
+		else
+			{ pre-&#062;Right=0; printf(&quot; %d &quot;,p-&#062;Data); p=p-&#062;Right; continue; }
+
+		
+		}
+	}]]></description>
+		<content:encoded><![CDATA[<p>we can even do like this<br />
+void MorrisTraversal(struct Node *root)<br />
+	{  struct Node *p,*pre;</p>
+<p>	if(root==0) { return; }</p>
+<p>	for(p=root;p!=0;)<br />
+		{<br />
+		if(p-&gt;Left==0) { printf(&#8221; %d &#8220;,p-&gt;Data); p=p-&gt;Right; continue; }</p>
+<p>		for(pre=p-&gt;Left;pre-&gt;Right!=0 &amp;&amp; pre-&gt;Right!=p;pre=pre-&gt;Right) { }</p>
+<p>		if(pre-&gt;Right==0)<br />
+			{ pre-&gt;Right=p; p=p-&gt;Left; continue; }<br />
+		else<br />
+			{ pre-&gt;Right=0; printf(&#8221; %d &#8220;,p-&gt;Data); p=p-&gt;Right; continue; }</p>
+<p>		}<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: v3gA</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-37828</link>
+		<dc:creator><![CDATA[v3gA]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 11:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-37828</guid>
+		<description><![CDATA[Traverse a tree in O(1) space &#038; O(n) time. Other methods take O(n) space in worst case]]></description>
+		<content:encoded><![CDATA[<p>Traverse a tree in O(1) space &amp; O(n) time. Other methods take O(n) space in worst case</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: v3gA</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-37827</link>
+		<dc:creator><![CDATA[v3gA]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 11:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-37827</guid>
+		<description><![CDATA[No, it is O(n). Just keep track of the no of times a node is being accessed. For verifying, add a count variable to the node initialized to 0 and modify traversal to increment count whenever a node is being touched. 
+Try on a big tree (1000 nodes or something). You can see that each node is touched at most 3 times.]]></description>
+		<content:encoded><![CDATA[<p>No, it is O(n). Just keep track of the no of times a node is being accessed. For verifying, add a count variable to the node initialized to 0 and modify traversal to increment count whenever a node is being touched.<br />
+Try on a big tree (1000 nodes or something). You can see that each node is touched at most 3 times.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: samthebest</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-37672</link>
+		<dc:creator><![CDATA[samthebest]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 12:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-37672</guid>
+		<description><![CDATA[A great approach ...indeed ...i couldnt understand the explanation given ..but going through the code ...i could understand ..
+My explanation
+1. In inorder traversal remeba you have to print left subtress b4 the current node
+2. if you move to the left child of the current node (if present)...
+then you cant come back (during iteravative approach) without stack or recursion
+3. therefore here comes the use of threaded tree or morris traversal
+4. first make link or thread to the current node so you can come back by linking the righmost child of the leftsubtree to the current node ...by making its right pointer point to it
+(the current node will be succesor of it)
+5. now you can move to the left child
+6. second thing regarding checking whether you have printed the left subtree or not (as you can come back to the current node again through the thread)
+
+is checking if the righmost child of the leftsubtree is linked to the current
+if it is linked then you already printed it as you would have while creating the link..
+so here comes the advantage of removing this link and restoring it to the original tree at the same time while chcking.]]></description>
+		<content:encoded><![CDATA[<p>A great approach &#8230;indeed &#8230;i couldnt understand the explanation given ..but going through the code &#8230;i could understand ..<br />
+My explanation<br />
+1. In inorder traversal remeba you have to print left subtress b4 the current node<br />
+2. if you move to the left child of the current node (if present)&#8230;<br />
+then you cant come back (during iteravative approach) without stack or recursion<br />
+3. therefore here comes the use of threaded tree or morris traversal<br />
+4. first make link or thread to the current node so you can come back by linking the righmost child of the leftsubtree to the current node &#8230;by making its right pointer point to it<br />
+(the current node will be succesor of it)<br />
+5. now you can move to the left child<br />
+6. second thing regarding checking whether you have printed the left subtree or not (as you can come back to the current node again through the thread)</p>
+<p>is checking if the righmost child of the leftsubtree is linked to the current<br />
+if it is linked then you already printed it as you would have while creating the link..<br />
+so here comes the advantage of removing this link and restoring it to the original tree at the same time while chcking.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhilash Kumar</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-37461</link>
+		<dc:creator><![CDATA[Abhilash Kumar]]></dc:creator>
+		<pubDate>Mon, 02 Jun 2014 20:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-37461</guid>
+		<description><![CDATA[in the above solution , can anyone
+please explain me the use of this part of code .
+ /* Revert the changes made in if part to restore the original 
+        tree i.e., fix the right child of predecssor */    
+      else  
+      {
+        pre-&#062;right = NULL;
+        printf(&quot; %d &quot;,current-&#062;data);
+        current = current-&#062;right;      
+      } /* End of if condition pre-&#062;right == NULL */]]></description>
+		<content:encoded><![CDATA[<p>in the above solution , can anyone<br />
+please explain me the use of this part of code .<br />
+ /* Revert the changes made in if part to restore the original<br />
+        tree i.e., fix the right child of predecssor */<br />
+      else<br />
+      {<br />
+        pre-&gt;right = NULL;<br />
+        printf(&#8221; %d &#8220;,current-&gt;data);<br />
+        current = current-&gt;right;<br />
+      } /* End of if condition pre-&gt;right == NULL */</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-35206</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 22:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-35206</guid>
+		<description><![CDATA[@Himanshu Dagar: http://stackoverflow.com/questions/6478063/how-is-the-complexity-of-morris-traversal-on
+this link claims it to be o(n). Even its hard for me to agree with them. It would be o(n^2)]]></description>
+		<content:encoded><![CDATA[<p>@Himanshu Dagar: <a href="http://stackoverflow.com/questions/6478063/how-is-the-complexity-of-morris-traversal-on" rel="nofollow">http://stackoverflow.com/questions/6478063/how-is-the-complexity-of-morris-traversal-on</a><br />
+this link claims it to be o(n). Even its hard for me to agree with them. It would be o(n^2)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu Dagar</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-34911</link>
+		<dc:creator><![CDATA[Himanshu Dagar]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 08:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-34911</guid>
+		<description><![CDATA[alien it will be O(n^2)
+b/c every time its going down for setting or erasing the links of inorder successor 
+]]></description>
+		<content:encoded><![CDATA[<p>alien it will be O(n^2)<br />
+b/c every time its going down for setting or erasing the links of inorder successor </p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alien</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-34604</link>
+		<dc:creator><![CDATA[alien]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 00:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-34604</guid>
+		<description><![CDATA[what is the complexity of this algorithm?]]></description>
+		<content:encoded><![CDATA[<p>what is the complexity of this algorithm?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: alien</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-34605</link>
+		<dc:creator><![CDATA[alien]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 00:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-34605</guid>
+		<description><![CDATA[what is the complexity of this algorithm?]]></description>
+		<content:encoded><![CDATA[<p>what is the complexity of this algorithm?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gaurav Gupta</title>
+		<link>http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/#comment-34566</link>
+		<dc:creator><![CDATA[Gaurav Gupta]]></dc:creator>
+		<pubDate>Thu, 10 Apr 2014 19:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=6358#comment-34566</guid>
+		<description><![CDATA[could any one pls explain what is use for threaded binary tree..???]]></description>
+		<content:encoded><![CDATA[<p>could any one pls explain what is use for threaded binary tree..???</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:03:38 -->
+
+<!-- Compression = gzip -->

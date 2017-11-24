@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: The Celebrity Problem</title>
+	<atom:link href="http://www.geeksforgeeks.org/the-celebrity-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/the-celebrity-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: toughtimes</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-38284</link>
+		<dc:creator><![CDATA[toughtimes]]></dc:creator>
+		<pubDate>Thu, 12 Jun 2014 08:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-38284</guid>
+		<description><![CDATA[yes,there is one error you also have to make another loop to check that the candidate should not know everyone...eg. 1 2 3 4 you checked 1 and 2 and found 2 knows 1 so 1 is candidate now you checked 3 and 1 now suppose 3 does not know 1so 3 is potential candidate now,then you check 4 and 3 and 4 knows 3 so 3 is potential candidate...now you run 2nd loop to check wether 1 know 3 suppose it says yes then you check 2 knows 3 suppose it says yes...so your code will give 3 as candidate but you havenot checked that 3 knows 2 or not also wether 3 knows 4 or not!! if 3 knows 2 then 3 cannot be the candidate so 3rd loop will add n comaprisons and more or less your code is just another good alternative to the problem]]></description>
+		<content:encoded><![CDATA[<p>yes,there is one error you also have to make another loop to check that the candidate should not know everyone&#8230;eg. 1 2 3 4 you checked 1 and 2 and found 2 knows 1 so 1 is candidate now you checked 3 and 1 now suppose 3 does not know 1so 3 is potential candidate now,then you check 4 and 3 and 4 knows 3 so 3 is potential candidate&#8230;now you run 2nd loop to check wether 1 know 3 suppose it says yes then you check 2 knows 3 suppose it says yes&#8230;so your code will give 3 as candidate but you havenot checked that 3 knows 2 or not also wether 3 knows 4 or not!! if 3 knows 2 then 3 cannot be the candidate so 3rd loop will add n comaprisons and more or less your code is just another good alternative to the problem</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mohammad Abuomar</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-31146</link>
+		<dc:creator><![CDATA[Mohammad Abuomar]]></dc:creator>
+		<pubDate>Tue, 31 Dec 2013 09:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-31146</guid>
+		<description><![CDATA[@Doom this won&#039;t work since you&#039;re only considering the forward acquaintance not the backward in your first iteration, thus missing potentially the right celebrity. Assume you&#039;ve got 5 persons, where 3 knows 2 but doesn&#039;t know 4 or 5 and 4 is the celebrity. your first loop will keep 3 as the candidate and will ignore 4 and 5. Then the final check will fail thus returning no success.]]></description>
+		<content:encoded><![CDATA[<p>@Doom this won&#8217;t work since you&#8217;re only considering the forward acquaintance not the backward in your first iteration, thus missing potentially the right celebrity. Assume you&#8217;ve got 5 persons, where 3 knows 2 but doesn&#8217;t know 4 or 5 and 4 is the celebrity. your first loop will keep 3 as the candidate and will ignore 4 and 5. Then the final check will fail thus returning no success.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vamos_sagar</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-26741</link>
+		<dc:creator><![CDATA[vamos_sagar]]></dc:creator>
+		<pubDate>Wed, 21 Aug 2013 11:54:17 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-26741</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;Java&quot;&gt;
+package com.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class CelebrityIdentifier {
+
+	/**
+	 * @param args
+	 */
+	
+	Stack&#060;Member&#062; membersStack = new Stack&#060;Member&#062;();
+	static Member noCelebrity = null;
+	
+	private static class Member{
+		private List&#060;Member&#062; acquintanceList = new ArrayList&#060;Member&#062;();
+		String name;
+
+		public List&#060;Member&#062; getAcquintanceList() {
+			return acquintanceList;
+		}
+
+		public void setAcquintanceList(List&#060;Member&#062; acquintanceList) {
+			this.acquintanceList = acquintanceList;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
+	
+	public Member findCelebrity(){
+		while(membersStack.size() != 1){
+			Member m1 = membersStack.pop();
+			Member m2 = membersStack.pop();
+			Member contenderForCelebrity = hasAcquintance(m1,m2);
+			membersStack.push(contenderForCelebrity);
+		}
+		Member canBeCelebrity = membersStack.pop();
+		Boolean isCelebrity = checkIfCelebrity(canBeCelebrity);
+		if(isCelebrity)
+			return canBeCelebrity;
+		return noCelebrity;
+	}
+	
+	private Member hasAcquintance(Member m1,Member m2){
+		if(m1.getAcquintanceList().contains(m2))
+			return m2;
+		else
+			return m1;
+	}
+	
+	private Boolean checkIfCelebrity(Member canBeCelebrity){
+		if(canBeCelebrity.getAcquintanceList().size() == 0)
+			return true;
+		return false;
+	}
+	
+	public CelebrityIdentifier(){
+		Member A = new Member();
+		Member B = new Member();
+		Member C = new Member();
+		Member D = new Member();
+		
+		A.setName(&#034;A&#034;);
+		B.setName(&#034;B&#034;);
+		C.setName(&#034;C&#034;);
+		D.setName(&#034;D&#034;);
+		
+		List&#060;Member&#062; acquintanceListForA = new ArrayList&#060;Member&#062;();
+		List&#060;Member&#062; acquintanceListForB = new ArrayList&#060;Member&#062;();
+		List&#060;Member&#062; acquintanceListForD = new ArrayList&#060;Member&#062;();
+		acquintanceListForA.add(C);
+		acquintanceListForB.add(C);
+		acquintanceListForD.add(C);
+		
+		A.setAcquintanceList(acquintanceListForA);
+		B.setAcquintanceList(acquintanceListForB);
+		D.setAcquintanceList(acquintanceListForD);
+		
+		membersStack.push(A);
+		membersStack.push(B);
+		membersStack.push(C);
+		membersStack.push(D);
+	}
+	
+	public static void main(String[] args) {
+		CelebrityIdentifier ci = new CelebrityIdentifier();
+		Member celebrity = ci.findCelebrity();
+		
+		if(celebrity.equals(noCelebrity))
+			System.out.println(&#034;No celebrities!&#034;);
+		else
+			System.out.println(&#034;Celebrity is--&#062;&#034;+celebrity.getName());
+	}
+
+}
+
+&lt;/code&gt; &lt;/pre&gt;
+
+This is a solution in Java. Basically, for every Member, I store a List with all other members approachable from it. Please review.]]></description>
+		<content:encoded><![CDATA[<pre> <code language="Java">
+package com.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class CelebrityIdentifier {
+
+	/**
+	 * @param args
+	 */
+	
+	Stack&lt;Member&gt; membersStack = new Stack&lt;Member&gt;();
+	static Member noCelebrity = null;
+	
+	private static class Member{
+		private List&lt;Member&gt; acquintanceList = new ArrayList&lt;Member&gt;();
+		String name;
+
+		public List&lt;Member&gt; getAcquintanceList() {
+			return acquintanceList;
+		}
+
+		public void setAcquintanceList(List&lt;Member&gt; acquintanceList) {
+			this.acquintanceList = acquintanceList;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
+	
+	public Member findCelebrity(){
+		while(membersStack.size() != 1){
+			Member m1 = membersStack.pop();
+			Member m2 = membersStack.pop();
+			Member contenderForCelebrity = hasAcquintance(m1,m2);
+			membersStack.push(contenderForCelebrity);
+		}
+		Member canBeCelebrity = membersStack.pop();
+		Boolean isCelebrity = checkIfCelebrity(canBeCelebrity);
+		if(isCelebrity)
+			return canBeCelebrity;
+		return noCelebrity;
+	}
+	
+	private Member hasAcquintance(Member m1,Member m2){
+		if(m1.getAcquintanceList().contains(m2))
+			return m2;
+		else
+			return m1;
+	}
+	
+	private Boolean checkIfCelebrity(Member canBeCelebrity){
+		if(canBeCelebrity.getAcquintanceList().size() == 0)
+			return true;
+		return false;
+	}
+	
+	public CelebrityIdentifier(){
+		Member A = new Member();
+		Member B = new Member();
+		Member C = new Member();
+		Member D = new Member();
+		
+		A.setName(&quot;A&quot;);
+		B.setName(&quot;B&quot;);
+		C.setName(&quot;C&quot;);
+		D.setName(&quot;D&quot;);
+		
+		List&lt;Member&gt; acquintanceListForA = new ArrayList&lt;Member&gt;();
+		List&lt;Member&gt; acquintanceListForB = new ArrayList&lt;Member&gt;();
+		List&lt;Member&gt; acquintanceListForD = new ArrayList&lt;Member&gt;();
+		acquintanceListForA.add(C);
+		acquintanceListForB.add(C);
+		acquintanceListForD.add(C);
+		
+		A.setAcquintanceList(acquintanceListForA);
+		B.setAcquintanceList(acquintanceListForB);
+		D.setAcquintanceList(acquintanceListForD);
+		
+		membersStack.push(A);
+		membersStack.push(B);
+		membersStack.push(C);
+		membersStack.push(D);
+	}
+	
+	public static void main(String[] args) {
+		CelebrityIdentifier ci = new CelebrityIdentifier();
+		Member celebrity = ci.findCelebrity();
+		
+		if(celebrity.equals(noCelebrity))
+			System.out.println(&quot;No celebrities!&quot;);
+		else
+			System.out.println(&quot;Celebrity is--&gt;&quot;+celebrity.getName());
+	}
+
+}
+
+</code> </pre>
+<p>This is a solution in Java. Basically, for every Member, I store a List with all other members approachable from it. Please review.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-21836</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Wed, 10 Jul 2013 15:17:38 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-21836</guid>
+		<description><![CDATA[@GeeksforGeeks
+Shouldn&#039;t N in the stack method be 4 since we have four persons in the party. Is it used deliberately such or is it a typo ??]]></description>
+		<content:encoded><![CDATA[<p>@GeeksforGeeks<br />
+Shouldn&#8217;t N in the stack method be 4 since we have four persons in the party. Is it used deliberately such or is it a typo ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: frugal</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9427</link>
+		<dc:creator><![CDATA[frugal]]></dc:creator>
+		<pubDate>Wed, 04 Jul 2012 10:50:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9427</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+It takes atmost 2n calls to the function HaveAcquaintance.
+in this the first loop checks for the candidate element for the celebrity. that element must know no one. and everybody must know him/her. 
+
+first loop ensures that all element after candidate+1 know candidate and second loop checks if all else 0 to candidate-1 knows or not..
+
+please tell me if anything is wrong in this approach.
+
+int celebrity(int a[],int size)
+{
+ candidate = 0;
+ for(int i = 0; i&#060;size;i++){
+   if(!HaveAcquaintance(a[i],candidate)){
+        candidate = a[i];
+        index = i;
+   }
+ }
+
+for(int i= 0;i&#060;index;i++){
+   if(!HaveAcquaintance(a[i],candidate))
+         return -1;
+}
+return candidate;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+It takes atmost 2n calls to the function HaveAcquaintance.
+in this the first loop checks for the candidate element for the celebrity. that element must know no one. and everybody must know him/her. 
+
+first loop ensures that all element after candidate+1 know candidate and second loop checks if all else 0 to candidate-1 knows or not..
+
+please tell me if anything is wrong in this approach.
+
+int celebrity(int a[],int size)
+{
+ candidate = 0;
+ for(int i = 0; i&lt;size;i++){
+   if(!HaveAcquaintance(a[i],candidate)){
+        candidate = a[i];
+        index = i;
+   }
+ }
+
+for(int i= 0;i&lt;index;i++){
+   if(!HaveAcquaintance(a[i],candidate))
+         return -1;
+}
+return candidate;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: oops</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9426</link>
+		<dc:creator><![CDATA[oops]]></dc:creator>
+		<pubDate>Wed, 04 Jul 2012 10:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9426</guid>
+		<description><![CDATA[it takes atmost 2n calls to the function HaveAcquaintance.
+in this the first loop checks for the candidate element for the celebrity. that element must know no one. and everybody must know him/her. 
+
+first loop ensures that all element after candidate+1 know candidate and second loop checks if all else 0 to candidate-1 knows or not..
+
+please tell me if anything is wrong in this approach.
+
+int celebrity(int a[],int size)
+{
+ candidate = 0;
+ for(int i = 0; i&#060;size;i++){
+   if(!HaveAcquaintance(i,candidate)){
+        candidate = i;
+   }
+ }
+
+for(int i= 0;i&#060;candidate-1;i++){
+   if(!HaveAcquaintance(i,candidate))
+         return -1;
+}
+return candidate;
+}]]></description>
+		<content:encoded><![CDATA[<p>it takes atmost 2n calls to the function HaveAcquaintance.<br />
+in this the first loop checks for the candidate element for the celebrity. that element must know no one. and everybody must know him/her. </p>
+<p>first loop ensures that all element after candidate+1 know candidate and second loop checks if all else 0 to candidate-1 knows or not..</p>
+<p>please tell me if anything is wrong in this approach.</p>
+<p>int celebrity(int a[],int size)<br />
+{<br />
+ candidate = 0;<br />
+ for(int i = 0; i&lt;size;i++){<br />
+   if(!HaveAcquaintance(i,candidate)){<br />
+        candidate = i;<br />
+   }<br />
+ }</p>
+<p>for(int i= 0;i&lt;candidate-1;i++){<br />
+   if(!HaveAcquaintance(i,candidate))<br />
+         return -1;<br />
+}<br />
+return candidate;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: frugal</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9424</link>
+		<dc:creator><![CDATA[frugal]]></dc:creator>
+		<pubDate>Wed, 04 Jul 2012 10:36:31 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9424</guid>
+		<description><![CDATA[This can be done in 2n function calls here is the solution:
+we firstly find the candidate element for the celebrity. 
+first loop takes care of this. after finding the candidate celebrity, we check if it is really the celebrity.
+The approach is that the element who denies to know other element can be the celebrity else if it know somebody then it can&#039;t be.
+so we check through the array to find the same.this part takes atmost n call to the function.
+
+and now the second part checks the element before the candidate element, if they also know him/her, then it is the celebrity .. :)
+
+please tell me if it is wrong...!!
+
+boolean printCelebrity(int arr[], int size) {
+    
+ int candidate = 0;
+ for(int i = 0; i&#060;size; i++){
+    if(!HaveAcquaintance(i, candidate)){
+        candidate = i;
+    }
+ }
+
+ for(int i=0;i&#060;candidate;i++){
+    if(!HaveAcquaintance(i, candidate))
+         return false;
+}
+  return true;
+}]]></description>
+		<content:encoded><![CDATA[<p>This can be done in 2n function calls here is the solution:<br />
+we firstly find the candidate element for the celebrity.<br />
+first loop takes care of this. after finding the candidate celebrity, we check if it is really the celebrity.<br />
+The approach is that the element who denies to know other element can be the celebrity else if it know somebody then it can&#8217;t be.<br />
+so we check through the array to find the same.this part takes atmost n call to the function.</p>
+<p>and now the second part checks the element before the candidate element, if they also know him/her, then it is the celebrity .. 🙂</p>
+<p>please tell me if it is wrong&#8230;!!</p>
+<p>boolean printCelebrity(int arr[], int size) {</p>
+<p> int candidate = 0;<br />
+ for(int i = 0; i&lt;size; i++){<br />
+    if(!HaveAcquaintance(i, candidate)){<br />
+        candidate = i;<br />
+    }<br />
+ }</p>
+<p> for(int i=0;i&lt;candidate;i++){<br />
+    if(!HaveAcquaintance(i, candidate))<br />
+         return false;<br />
+}<br />
+  return true;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: doom</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9133</link>
+		<dc:creator><![CDATA[doom]]></dc:creator>
+		<pubDate>Sun, 17 Jun 2012 02:47:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9133</guid>
+		<description><![CDATA[http://ideone.com/titjR
+
+Here is the code.]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/titjR" rel="nofollow">http://ideone.com/titjR</a></p>
+<p>Here is the code.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: doom</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9132</link>
+		<dc:creator><![CDATA[doom]]></dc:creator>
+		<pubDate>Sun, 17 Jun 2012 02:20:57 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9132</guid>
+		<description><![CDATA[Just to clarify..
+Whether the celebrity knows himself or not is insignificant.
+For every person i, haveAcq(i,i) returns true.
+
+Are the above assumptions correct?]]></description>
+		<content:encoded><![CDATA[<p>Just to clarify..<br />
+Whether the celebrity knows himself or not is insignificant.<br />
+For every person i, haveAcq(i,i) returns true.</p>
+<p>Are the above assumptions correct?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9130</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Sat, 16 Jun 2012 20:15:03 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9130</guid>
+		<description><![CDATA[Your approach seems to be fine. I have used stack to easily explain the elimination criteria, and left direct solution without any data structures as an exercise.
+
+As it not trivial code, I would request you to provide the code. Our logic may look correct, but we get surprises while running code. Don&#039;t forget that we are not interested in whether celebrity knew himself.]]></description>
+		<content:encoded><![CDATA[<p>Your approach seems to be fine. I have used stack to easily explain the elimination criteria, and left direct solution without any data structures as an exercise.</p>
+<p>As it not trivial code, I would request you to provide the code. Our logic may look correct, but we get surprises while running code. Don&#8217;t forget that we are not interested in whether celebrity knew himself.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: doom</title>
+		<link>http://www.geeksforgeeks.org/the-celebrity-problem/#comment-9123</link>
+		<dc:creator><![CDATA[doom]]></dc:creator>
+		<pubDate>Sat, 16 Jun 2012 17:00:13 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19622#comment-9123</guid>
+		<description><![CDATA[I don&#039;t understand the use of auxiliary space for the above problem. The logic to handle top 2 person at a time is already mentioned in the code.
+So why not do this?
+
+keep celeb as index 0.
+run a loop from i=1 to n; 
+if celeb knows i, update celeb to i and increment i;
+else increment i;
+Calls to acq are n-1.
+At the end of above iteration, we get a candidate for being celebrity.
+
+Now check if our celeb does not know anyone (calls to acq n-1) and everyone knows celeb (calls to acq n-1). If yes, return celeb else not found.
+
+Total number of calls are 3(n-1).
+
+Please help me to point out the flaw in this approach.]]></description>
+		<content:encoded><![CDATA[<p>I don&#8217;t understand the use of auxiliary space for the above problem. The logic to handle top 2 person at a time is already mentioned in the code.<br />
+So why not do this?</p>
+<p>keep celeb as index 0.<br />
+run a loop from i=1 to n;<br />
+if celeb knows i, update celeb to i and increment i;<br />
+else increment i;<br />
+Calls to acq are n-1.<br />
+At the end of above iteration, we get a candidate for being celebrity.</p>
+<p>Now check if our celeb does not know anyone (calls to acq n-1) and everyone knows celeb (calls to acq n-1). If yes, return celeb else not found.</p>
+<p>Total number of calls are 3(n-1).</p>
+<p>Please help me to point out the flaw in this approach.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.052 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:00 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Delete N nodes after M nodes of a linked list</title>
+	<atom:link href="http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: lakshman</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-40152</link>
+		<dc:creator><![CDATA[lakshman]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 12:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-40152</guid>
+		<description><![CDATA[quite an easy one!!!
+void delmfromn(list temp,int m,int n)
+{
+	list prev,tempm;
+	int countm=0,countn=0;
+	while(temp!=NULL)
+	{
+		while(m!=0 &#038;&#038; temp!=NULL)
+		{
+			prev = temp;
+			temp = temp-&#062;next;
+			m--;
+			countm++;
+		}
+		m = countm;
+		countm = 0;
+		tempm = prev;
+		while(n!=0 &#038;&#038; temp!=NULL)
+		{
+			prev = temp;
+			temp = temp-&#062;next;
+			n--;
+			countn++;
+		}
+		n = countn;
+		countn = 0;
+		tempm-&#062;next = temp;
+	}
+}]]></description>
+		<content:encoded><![CDATA[<p>quite an easy one!!!<br />
+void delmfromn(list temp,int m,int n)<br />
+{<br />
+	list prev,tempm;<br />
+	int countm=0,countn=0;<br />
+	while(temp!=NULL)<br />
+	{<br />
+		while(m!=0 &amp;&amp; temp!=NULL)<br />
+		{<br />
+			prev = temp;<br />
+			temp = temp-&gt;next;<br />
+			m&#8211;;<br />
+			countm++;<br />
+		}<br />
+		m = countm;<br />
+		countm = 0;<br />
+		tempm = prev;<br />
+		while(n!=0 &amp;&amp; temp!=NULL)<br />
+		{<br />
+			prev = temp;<br />
+			temp = temp-&gt;next;<br />
+			n&#8211;;<br />
+			countn++;<br />
+		}<br />
+		n = countn;<br />
+		countn = 0;<br />
+		tempm-&gt;next = temp;<br />
+	}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abc</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-39137</link>
+		<dc:creator><![CDATA[abc]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 12:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-39137</guid>
+		<description><![CDATA[recursive solution
+
+http://ideone.com/U7Bni2]]></description>
+		<content:encoded><![CDATA[<p>recursive solution</p>
+<p><a href="http://ideone.com/U7Bni2" rel="nofollow">http://ideone.com/U7Bni2</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SANTOSH KUMAR MISHRA</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-36410</link>
+		<dc:creator><![CDATA[SANTOSH KUMAR MISHRA]]></dc:creator>
+		<pubDate>Wed, 21 May 2014 14:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-36410</guid>
+		<description><![CDATA[node *SkipMdeletN(node *head,int M,int N)
+{
+node *temp,*ptr = head;
+int T,i;
+T = M;
+if(head == NULL)
+{
+printf(&quot;n List is empty.&quot;);
+return head;
+}
+while(ptr != NULL)
+{   --M;
+if(M==0 &#038;&#038; ptr-&#062;next !=NULL)
+{    
+for(i=0;inext-&#062;next!=NULL)
+{
+temp = ptr-&#062;next;
+ptr-&#062;next = ptr-&#062;next-&#062;next;
+free(temp);
+}
+else if(inext-&#062;next == NULL)
+{
+temp = ptr-&#062;next;
+ptr-&#062;next = NULL;
+free(temp);
+}
+}
+M = T;	
+}
+ptr = ptr-&#062;next;	
+}
+return head;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>node *SkipMdeletN(node *head,int M,int N)<br />
+{<br />
+node *temp,*ptr = head;<br />
+int T,i;<br />
+T = M;<br />
+if(head == NULL)<br />
+{<br />
+printf(&#8220;n List is empty.&#8221;);<br />
+return head;<br />
+}<br />
+while(ptr != NULL)<br />
+{   &#8211;M;<br />
+if(M==0 &amp;&amp; ptr-&gt;next !=NULL)<br />
+{<br />
+for(i=0;inext-&gt;next!=NULL)<br />
+{<br />
+temp = ptr-&gt;next;<br />
+ptr-&gt;next = ptr-&gt;next-&gt;next;<br />
+free(temp);<br />
+}<br />
+else if(inext-&gt;next == NULL)<br />
+{<br />
+temp = ptr-&gt;next;<br />
+ptr-&gt;next = NULL;<br />
+free(temp);<br />
+}<br />
+}<br />
+M = T;<br />
+}<br />
+ptr = ptr-&gt;next;<br />
+}<br />
+return head;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mani deepak Vandrangi</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-36193</link>
+		<dc:creator><![CDATA[mani deepak Vandrangi]]></dc:creator>
+		<pubDate>Sun, 18 May 2014 06:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-36193</guid>
+		<description><![CDATA[What happens if M&#060;=0?your code doesnt take care of that]]></description>
+		<content:encoded><![CDATA[<p>What happens if M&lt;=0?your code doesnt take care of that</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jitendra Sangar</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-34140</link>
+		<dc:creator><![CDATA[Jitendra Sangar]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 05:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-34140</guid>
+		<description><![CDATA[Where did you free N nodes?]]></description>
+		<content:encoded><![CDATA[<p>Where did you free N nodes?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anand</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-32198</link>
+		<dc:creator><![CDATA[Anand]]></dc:creator>
+		<pubDate>Tue, 04 Feb 2014 20:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-32198</guid>
+		<description><![CDATA[Solved using Recursion :)
+http://ideone.com/hbBoVM]]></description>
+		<content:encoded><![CDATA[<p>Solved using Recursion 🙂<br />
+<a href="http://ideone.com/hbBoVM" rel="nofollow">http://ideone.com/hbBoVM</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AQS.com</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-31964</link>
+		<dc:creator><![CDATA[AQS.com]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2014 14:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-31964</guid>
+		<description><![CDATA[/*its follow all test cases......enjoy*/
+#include 
+#include 
+
+// A linked list node
+
+struct node
+{
+
+    int data;
+
+    struct node *next;
+
+};
+
+/* Function to insert a node at the beginning */
+
+void push(struct node ** head_ref, int new_data)
+
+{
+
+    /* allocate node */
+
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+
+    /* put in the data  */
+
+    new_node-&#062;data  = new_data;
+
+    /* link the old list off the new node */
+
+    new_node-&#062;next = (*head_ref);
+
+    /* move the head to point to the new node */
+
+    (*head_ref)  = new_node;
+
+}
+
+/* Function to print linked list */
+
+void printList(struct node *head)
+
+{
+
+    struct node *temp = head;
+
+    while (temp != NULL)
+
+    {
+
+        printf(&quot;%d &quot;, temp-&#062;data);
+
+        temp = temp-&#062;next;
+
+    }
+
+    printf(&quot;n&quot;);
+
+}
+
+void  skipMdeleteN( node* head, int  m, int n)
+
+{
+
+   if(head==NULL )
+
+     {return ;}
+
+     else
+
+     {
+
+                  if(head-&#062;next==NULL  &#038;&#038;  n&#062;1)
+
+                  {
+
+                                 printf(&quot;nLinked list after deletion is :n&quot;);
+
+                                      printList(head);
+
+                                       return ;
+
+                  }else  if(head-&#062;next==NULL  &#038;&#038;  m=2)
+
+                      {
+
+                                                               printf(&quot;nLinked list after deletion is :n&quot;);
+
+                                                                printList(head);
+
+                                      return ;
+
+                      }
+
+                     else if(head-&#062;next==NULL  &#038;&#038;  mnext;
+
+                            }
+
+                                 if(s1-&#062;next==NULL &#038;&#038; s1!=NULL)
+
+                                 {
+
+                                     printf(&quot;nLinked list after deletion is :n&quot;);
+
+                                      printList(head);
+
+                                      return  ;
+
+                                 }
+
+                                 else
+
+                                 {
+
+                                       s=s1;
+
+                                       count=0;
+
+                                       while(s!=NULL)
+
+                                       {
+
+                                             if(count==n+1)
+
+                                             {
+
+                                                 s2=s;
+
+                                                 break;
+
+                                             }count++;
+
+                                             s=s-&#062;next;
+
+                                            // count++;
+
+                                       }
+
+                                    s1-&#062;next=s2;
+
+                                 } //else
+
+                        } //else
+
+                        printf(&quot;nLinked list after deletion is :n&quot;);
+
+    printList(head);
+
+          }//else
+
+    }
+
+int main()
+
+{
+
+    /* Create following linked list
+
+      1-&#062;2-&#062;3-&#062;4-&#062;5-&#062;6-&#062;7-&#062;8-&#062;9-&#062;10 */
+
+    struct node* head = NULL;
+
+    int M=2, N=3;
+
+    push(&#038;head, 10);
+
+    push(&#038;head, 9);
+
+    push(&#038;head, 8);
+
+    push(&#038;head, 7);
+
+    push(&#038;head, 6);
+
+    push(&#038;head, 5);
+
+    /*push(&#038;head, 4);
+
+    push(&#038;head, 3);
+
+    push(&#038;head, 2);
+
+    push(&#038;head, 1);*/
+
+    printf(&quot;M = %d, N = %d nGiven Linked list is :n&quot;, M, N);
+
+    printList(head);
+
+    skipMdeleteN(head, M, N);
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>/*its follow all test cases&#8230;&#8230;enjoy*/<br />
+#include<br />
+#include </p>
+<p>// A linked list node</p>
+<p>struct node<br />
+{</p>
+<p>    int data;</p>
+<p>    struct node *next;</p>
+<p>};</p>
+<p>/* Function to insert a node at the beginning */</p>
+<p>void push(struct node ** head_ref, int new_data)</p>
+<p>{</p>
+<p>    /* allocate node */</p>
+<p>    struct node* new_node = (struct node*) malloc(sizeof(struct node));</p>
+<p>    /* put in the data  */</p>
+<p>    new_node-&gt;data  = new_data;</p>
+<p>    /* link the old list off the new node */</p>
+<p>    new_node-&gt;next = (*head_ref);</p>
+<p>    /* move the head to point to the new node */</p>
+<p>    (*head_ref)  = new_node;</p>
+<p>}</p>
+<p>/* Function to print linked list */</p>
+<p>void printList(struct node *head)</p>
+<p>{</p>
+<p>    struct node *temp = head;</p>
+<p>    while (temp != NULL)</p>
+<p>    {</p>
+<p>        printf(&#8220;%d &#8220;, temp-&gt;data);</p>
+<p>        temp = temp-&gt;next;</p>
+<p>    }</p>
+<p>    printf(&#8220;n&#8221;);</p>
+<p>}</p>
+<p>void  skipMdeleteN( node* head, int  m, int n)</p>
+<p>{</p>
+<p>   if(head==NULL )</p>
+<p>     {return ;}</p>
+<p>     else</p>
+<p>     {</p>
+<p>                  if(head-&gt;next==NULL  &amp;&amp;  n&gt;1)</p>
+<p>                  {</p>
+<p>                                 printf(&#8220;nLinked list after deletion is :n&#8221;);</p>
+<p>                                      printList(head);</p>
+<p>                                       return ;</p>
+<p>                  }else  if(head-&gt;next==NULL  &amp;&amp;  m=2)</p>
+<p>                      {</p>
+<p>                                                               printf(&#8220;nLinked list after deletion is :n&#8221;);</p>
+<p>                                                                printList(head);</p>
+<p>                                      return ;</p>
+<p>                      }</p>
+<p>                     else if(head-&gt;next==NULL  &amp;&amp;  mnext;</p>
+<p>                            }</p>
+<p>                                 if(s1-&gt;next==NULL &amp;&amp; s1!=NULL)</p>
+<p>                                 {</p>
+<p>                                     printf(&#8220;nLinked list after deletion is :n&#8221;);</p>
+<p>                                      printList(head);</p>
+<p>                                      return  ;</p>
+<p>                                 }</p>
+<p>                                 else</p>
+<p>                                 {</p>
+<p>                                       s=s1;</p>
+<p>                                       count=0;</p>
+<p>                                       while(s!=NULL)</p>
+<p>                                       {</p>
+<p>                                             if(count==n+1)</p>
+<p>                                             {</p>
+<p>                                                 s2=s;</p>
+<p>                                                 break;</p>
+<p>                                             }count++;</p>
+<p>                                             s=s-&gt;next;</p>
+<p>                                            // count++;</p>
+<p>                                       }</p>
+<p>                                    s1-&gt;next=s2;</p>
+<p>                                 } //else</p>
+<p>                        } //else</p>
+<p>                        printf(&#8220;nLinked list after deletion is :n&#8221;);</p>
+<p>    printList(head);</p>
+<p>          }//else</p>
+<p>    }</p>
+<p>int main()</p>
+<p>{</p>
+<p>    /* Create following linked list</p>
+<p>      1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8-&gt;9-&gt;10 */</p>
+<p>    struct node* head = NULL;</p>
+<p>    int M=2, N=3;</p>
+<p>    push(&amp;head, 10);</p>
+<p>    push(&amp;head, 9);</p>
+<p>    push(&amp;head, 8);</p>
+<p>    push(&amp;head, 7);</p>
+<p>    push(&amp;head, 6);</p>
+<p>    push(&amp;head, 5);</p>
+<p>    /*push(&amp;head, 4);</p>
+<p>    push(&amp;head, 3);</p>
+<p>    push(&amp;head, 2);</p>
+<p>    push(&amp;head, 1);*/</p>
+<p>    printf(&#8220;M = %d, N = %d nGiven Linked list is :n&#8221;, M, N);</p>
+<p>    printList(head);</p>
+<p>    skipMdeleteN(head, M, N);</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Harsha Shetty</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-31508</link>
+		<dc:creator><![CDATA[Harsha Shetty]]></dc:creator>
+		<pubDate>Tue, 14 Jan 2014 08:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-31508</guid>
+		<description><![CDATA[Here&#039;s a possible solution in Java -
+
+public static void deleteNNodesAfterMNodes(SLinkedList list, int m, int n) {
+
+		Node save = list.getHead();
+
+		Node del = null;
+
+		int mCounter = 0;
+
+		int nCounter = 0;
+
+		while (save != null) {
+
+			mCounter = m;
+
+			nCounter = n;
+
+			while (mCounter-1 &#062; 0) {
+
+				save = save.getNext();
+
+				if (save != null) {
+
+					mCounter--;
+
+				} else {
+
+					break;
+
+				}
+
+			}
+
+			if (save != null) {
+
+				del = save.getNext();
+
+				while (nCounter - 1 &#062; 0 &#038;&#038; del != null) {
+
+					del = del.getNext();
+
+					if (del != null) {
+
+						nCounter--;
+
+					} else {
+
+						break;
+
+					}
+
+				}
+
+			}
+
+			if (save != null &#038;&#038; del != null) {
+
+				save.setNext(del.getNext());
+
+                save = save.getNext();
+
+			}
+
+		}
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>Here&#8217;s a possible solution in Java &#8211;</p>
+<p>public static void deleteNNodesAfterMNodes(SLinkedList list, int m, int n) {</p>
+<p>		Node save = list.getHead();</p>
+<p>		Node del = null;</p>
+<p>		int mCounter = 0;</p>
+<p>		int nCounter = 0;</p>
+<p>		while (save != null) {</p>
+<p>			mCounter = m;</p>
+<p>			nCounter = n;</p>
+<p>			while (mCounter-1 &gt; 0) {</p>
+<p>				save = save.getNext();</p>
+<p>				if (save != null) {</p>
+<p>					mCounter&#8211;;</p>
+<p>				} else {</p>
+<p>					break;</p>
+<p>				}</p>
+<p>			}</p>
+<p>			if (save != null) {</p>
+<p>				del = save.getNext();</p>
+<p>				while (nCounter &#8211; 1 &gt; 0 &amp;&amp; del != null) {</p>
+<p>					del = del.getNext();</p>
+<p>					if (del != null) {</p>
+<p>						nCounter&#8211;;</p>
+<p>					} else {</p>
+<p>						break;</p>
+<p>					}</p>
+<p>				}</p>
+<p>			}</p>
+<p>			if (save != null &amp;&amp; del != null) {</p>
+<p>				save.setNext(del.getNext());</p>
+<p>                save = save.getNext();</p>
+<p>			}</p>
+<p>		}</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: CoquitlamSJ</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-30602</link>
+		<dc:creator><![CDATA[CoquitlamSJ]]></dc:creator>
+		<pubDate>Mon, 09 Dec 2013 18:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-30602</guid>
+		<description><![CDATA[struct node
+{
+    int data;
+    struct node *next;
+};
+
+void skipMdeleteN(struct node  *head, int M, int N)
+{
+    struct node * cur;
+    struct node * tmpNode1,*tmpNode2;
+    cur = head;
+    int a = M; 
+    int b = N;
+
+    while(cur&#038;cur-&#062;next)
+    {
+       if (a&#062;0)
+       {
+            a--;
+            tmpNode1 = cur;
+            cur = cur-&#062;next;
+       }    
+       else if(b&#062;0 )
+       { 
+            b--;
+            tmpNode2 = cur;
+            cur = cur-&#062;next;
+            delete(tmpNode2);
+         }
+       else
+       {
+            a = M;
+            b = N;
+            tmpNode1-&#062;next = cur;
+        } 
+  }    
+
+}]]></description>
+		<content:encoded><![CDATA[<p>struct node<br />
+{<br />
+    int data;<br />
+    struct node *next;<br />
+};</p>
+<p>void skipMdeleteN(struct node  *head, int M, int N)<br />
+{<br />
+    struct node * cur;<br />
+    struct node * tmpNode1,*tmpNode2;<br />
+    cur = head;<br />
+    int a = M;<br />
+    int b = N;</p>
+<p>    while(cur&amp;cur-&gt;next)<br />
+    {<br />
+       if (a&gt;0)<br />
+       {<br />
+            a&#8211;;<br />
+            tmpNode1 = cur;<br />
+            cur = cur-&gt;next;<br />
+       }<br />
+       else if(b&gt;0 )<br />
+       {<br />
+            b&#8211;;<br />
+            tmpNode2 = cur;<br />
+            cur = cur-&gt;next;<br />
+            delete(tmpNode2);<br />
+         }<br />
+       else<br />
+       {<br />
+            a = M;<br />
+            b = N;<br />
+            tmpNode1-&gt;next = cur;<br />
+        }<br />
+  }    </p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Debojit Choudhury</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-28758</link>
+		<dc:creator><![CDATA[Debojit Choudhury]]></dc:creator>
+		<pubDate>Sat, 12 Oct 2013 07:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-28758</guid>
+		<description><![CDATA[//Java program
+
+public class LinkedListProblemSet {
+
+public static void main(String[] args) 
+{
+		Node headerNode = new Node(1, createLinkedList());
+display(headerNode, &quot;Before operation : &quot;);
+retainAndDeleteFromLinkedList(headerNode, 2, 1);
+display(headerNode, &quot;After operation : &quot;);
+}
+
+private static void retainAndDeleteFromLinkedList(Node headerNode, int retainNumber, int deleteNumber) 
+{
+if (headerNode == null) 
+{
+return;
+}
+
+for (int i = 0; headerNode != null &#038;&#038; i &#060; retainNumber - 1; i++) 
+{
+headerNode = headerNode.nextNode;
+}
+Node temp = headerNode;
+for (int j = 0; headerNode != null &#038;&#038; j &quot;);
+headerNode = headerNode.nextNode;
+}
+System.out.println(headerNode.data);
+}
+
+private static class Node 
+{
+private int data;
+private Node nextNode;
+private Node(int data, Node nextNode) 
+{
+this.data = data;
+this.nextNode = nextNode;
+}
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>//Java program</p>
+<p>public class LinkedListProblemSet {</p>
+<p>public static void main(String[] args)<br />
+{<br />
+		Node headerNode = new Node(1, createLinkedList());<br />
+display(headerNode, &#8220;Before operation : &#8220;);<br />
+retainAndDeleteFromLinkedList(headerNode, 2, 1);<br />
+display(headerNode, &#8220;After operation : &#8220;);<br />
+}</p>
+<p>private static void retainAndDeleteFromLinkedList(Node headerNode, int retainNumber, int deleteNumber)<br />
+{<br />
+if (headerNode == null)<br />
+{<br />
+return;<br />
+}</p>
+<p>for (int i = 0; headerNode != null &amp;&amp; i &lt; retainNumber &#8211; 1; i++)<br />
+{<br />
+headerNode = headerNode.nextNode;<br />
+}<br />
+Node temp = headerNode;<br />
+for (int j = 0; headerNode != null &amp;&amp; j &#8220;);<br />
+headerNode = headerNode.nextNode;<br />
+}<br />
+System.out.println(headerNode.data);<br />
+}</p>
+<p>private static class Node<br />
+{<br />
+private int data;<br />
+private Node nextNode;<br />
+private Node(int data, Node nextNode)<br />
+{<br />
+this.data = data;<br />
+this.nextNode = nextNode;<br />
+}<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Debojit Choudhury</title>
+		<link>http://www.geeksforgeeks.org/delete-n-nodes-after-m-nodes-of-a-linked-list/#comment-28684</link>
+		<dc:creator><![CDATA[Debojit Choudhury]]></dc:creator>
+		<pubDate>Thu, 10 Oct 2013 20:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119222#comment-28684</guid>
+		<description><![CDATA[/*Given a linked list and two integers M and N. Traverse the linked list such that you retain M nodes then delete next N nodes, continue the same till end of the linked list.*/
+
+public class LinkedListProblem {
+
+	public static void main(String[] args) 
+{
+		Node headerNode = new Node(1, createLinkedList());
+		display(headerNode, &quot;Before operation : &quot;);
+		retainAndDeleteFromLinkedList(headerNode, 1, 1);
+		display(headerNode, &quot;After operation : &quot;);
+	}
+
+	private static void retainAndDeleteFromLinkedList(Node headerNode, int retainNumber, int deleteNumber) 
+{
+if (headerNode == null) 
+{
+			return;
+}
+for (int i = 1; i &#060; retainNumber; i++) {
+headerNode = headerNode.nextNode;
+		}
+		Node temp = headerNode;
+		for (int j = 0; j &quot;);
+			headerNode = headerNode.nextNode;
+		}
+System.out.println(headerNode.data);
+	}
+
+	private static class Node 
+{
+		private int data;
+		private Node nextNode;
+		private Node(int data, Node nextNode) 
+{
+			this.data = data;
+			this.nextNode = nextNode;
+		}
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>/*Given a linked list and two integers M and N. Traverse the linked list such that you retain M nodes then delete next N nodes, continue the same till end of the linked list.*/</p>
+<p>public class LinkedListProblem {</p>
+<p>	public static void main(String[] args)<br />
+{<br />
+		Node headerNode = new Node(1, createLinkedList());<br />
+		display(headerNode, &#8220;Before operation : &#8220;);<br />
+		retainAndDeleteFromLinkedList(headerNode, 1, 1);<br />
+		display(headerNode, &#8220;After operation : &#8220;);<br />
+	}</p>
+<p>	private static void retainAndDeleteFromLinkedList(Node headerNode, int retainNumber, int deleteNumber)<br />
+{<br />
+if (headerNode == null)<br />
+{<br />
+			return;<br />
+}<br />
+for (int i = 1; i &lt; retainNumber; i++) {<br />
+headerNode = headerNode.nextNode;<br />
+		}<br />
+		Node temp = headerNode;<br />
+		for (int j = 0; j &#8220;);<br />
+			headerNode = headerNode.nextNode;<br />
+		}<br />
+System.out.println(headerNode.data);<br />
+	}</p>
+<p>	private static class Node<br />
+{<br />
+		private int data;<br />
+		private Node nextNode;<br />
+		private Node(int data, Node nextNode)<br />
+{<br />
+			this.data = data;<br />
+			this.nextNode = nextNode;<br />
+		}<br />
+	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:14:52 -->
+
+<!-- Compression = gzip -->

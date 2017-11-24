@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: AVL Tree &#124; Set 2 (Deletion)</title>
+	<atom:link href="http://www.geeksforgeeks.org/avl-tree-set-2-deletion/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Hero</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-36893</link>
+		<dc:creator><![CDATA[Hero]]></dc:creator>
+		<pubDate>Tue, 27 May 2014 02:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-36893</guid>
+		<description><![CDATA[I think we can improve the code more concisely by combining the insert() and deleteNode()&#039;s code about the balancing node part. Like this replace the balancing node code with one extra function:
+
+Node *balanceNode(Node *n)
+
+	{
+
+		if (!n) return n;
+
+		updateHeight(n);
+
+		int balance = getBalance(n);
+
+		if (balance &#062; 1 &#038;&#038; getBalance(n-&#062;left) &#062;= 0)
+
+			return rightRotate(n);
+
+		if (balance right)  1 &#038;&#038; getBalance(n-&#062;left) left = leftRotate(n-&#062;left);
+
+			return rightRotate(n);
+
+		}
+
+		if (balance right) &#062; 0)
+
+		{
+
+			n-&#062;right = rightRotate(n-&#062;right);
+
+			return leftRotate(n);
+
+		}
+
+		return n;
+
+	}]]></description>
+		<content:encoded><![CDATA[<p>I think we can improve the code more concisely by combining the insert() and deleteNode()&#8217;s code about the balancing node part. Like this replace the balancing node code with one extra function:</p>
+<p>Node *balanceNode(Node *n)</p>
+<p>	{</p>
+<p>		if (!n) return n;</p>
+<p>		updateHeight(n);</p>
+<p>		int balance = getBalance(n);</p>
+<p>		if (balance &gt; 1 &amp;&amp; getBalance(n-&gt;left) &gt;= 0)</p>
+<p>			return rightRotate(n);</p>
+<p>		if (balance right)  1 &amp;&amp; getBalance(n-&gt;left) left = leftRotate(n-&gt;left);</p>
+<p>			return rightRotate(n);</p>
+<p>		}</p>
+<p>		if (balance right) &gt; 0)</p>
+<p>		{</p>
+<p>			n-&gt;right = rightRotate(n-&gt;right);</p>
+<p>			return leftRotate(n);</p>
+<p>		}</p>
+<p>		return n;</p>
+<p>	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-35607</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 06:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-35607</guid>
+		<description><![CDATA[#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int get_height(tnode* root)
+{
+	if(!root)
+	   return 0;
+	int k1=1+get_height(root-&#062;lchild);
+	int k2=1+get_height(root-&#062;rchild);
+	return max(k1,k2);
+}
+int bal_fac(tnode* root)
+{
+	return (get_height(root-&#062;lchild)-get_height(root-&#062;rchild));
+}
+tnode* left_rotate(tnode* root)
+{
+	tnode* lptr,*temp;
+	lptr=root-&#062;rchild;
+	temp=lptr-&#062;lchild;
+	lptr-&#062;lchild=root;
+	root-&#062;rchild=temp;
+	return lptr;
+ 
+}
+tnode* right_rotate(tnode* root)
+{
+	tnode* rptr,*temp;
+	rptr=root-&#062;lchild;
+	temp=rptr-&#062;rchild;
+	rptr-&#062;rchild=root;
+	root-&#062;lchild=temp;
+	return rptr;
+}
+ 
+tnode* insert(tnode* root,int d)
+{
+	if(!root)
+	{
+		root=new tnode(d);
+		return root;
+	}
+	if(d&#062;root-&#062;data)
+	   root-&#062;rchild=insert(root-&#062;rchild,d);
+	if(ddata)
+	    root-&#062;lchild=insert(root-&#062;lchild,d);
+	if(bal_fac(root)==2)
+	{
+		if(bal_fac(root-&#062;lchild)==1)
+		   return right_rotate(root);
+		if(bal_fac(root-&#062;lchild)==-1)
+		{
+			root-&#062;lchild=left_rotate(root-&#062;lchild);
+			return right_rotate(root);
+		}
+	}
+	if(bal_fac(root)==-2)
+	{
+		if(bal_fac(root-&#062;rchild)==-1)
+		   return left_rotate(root);
+		if(bal_fac(root-&#062;rchild)==1)
+		{
+			root-&#062;rchild=right_rotate(root-&#062;rchild);
+			return left_rotate(root);
+		}
+	}
+	return root;
+ 
+}
+int get_insucc(tnode* root)
+{
+	tnode* temp=root-&#062;rchild;
+	while(temp-&#062;lchild!=NULL)
+	{
+		temp=temp-&#062;lchild;
+	}
+	return temp-&#062;data;
+}
+tnode* del(tnode* root,int d)
+{
+	if(root-&#062;data==d)
+	{
+		if((!root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+		{
+			tnode* temp=root;
+			delete(temp);
+			return NULL;
+		}
+		if((root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+		{
+			int k=get_insucc(root);
+			cout&#060;&#060;k&#060;data=k;
+			root-&#062;rchild=del(root-&#062;rchild,k);
+			return root;
+		}
+		if((root-&#062;lchild)&#038;&#038;(!root-&#062;rchild))
+		{
+			tnode* ptr=root;
+			tnode* temp=root-&#062;lchild;
+			delete(ptr);
+			return temp;
+		}
+		if((!root-&#062;lchild)&#038;&#038;(root-&#062;rchild))
+		{
+			tnode* ptr=root;
+			tnode* temp=root-&#062;rchild;
+			delete(ptr);
+			return temp;
+		}
+ 
+	}
+ 
+	if(d&#062;root-&#062;data)
+	   root-&#062;rchild=del(root-&#062;rchild,d);
+	if(ddata)
+	   root-&#062;lchild=del(root-&#062;lchild,d);
+	if(bal_fac(root)==2)
+	{
+		if(bal_fac(root-&#062;lchild)==-1)
+		{
+			root-&#062;lchild=left_rotate(root-&#062;lchild);
+			return right_rotate(root);
+		}
+		else
+		return right_rotate(root);
+	}
+	if(bal_fac(root)==-2)
+	{
+		if(bal_fac(root-&#062;rchild)==1)
+		{
+			root-&#062;rchild=right_rotate(root-&#062;rchild);
+			return left_rotate(root);
+		}
+		else
+		   return left_rotate(root);
+	}
+	return root;
+}
+ 
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		cout&#060;data&#060;rchild);
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int n;
+	cout&#060;&#062;n;
+	while(n!=-1)
+	{
+		root=insert(root,n);
+		cout&#060;&#062;n;
+	}
+	display(root);
+	cout&#060;&#062;n;
+	while(n!=-1)
+	{
+	   root=del(root,n);
+	   display(root);
+	   cout&#060;&#062;n;	
+	}
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int get_height(tnode* root)<br />
+{<br />
+	if(!root)<br />
+	   return 0;<br />
+	int k1=1+get_height(root-&gt;lchild);<br />
+	int k2=1+get_height(root-&gt;rchild);<br />
+	return max(k1,k2);<br />
+}<br />
+int bal_fac(tnode* root)<br />
+{<br />
+	return (get_height(root-&gt;lchild)-get_height(root-&gt;rchild));<br />
+}<br />
+tnode* left_rotate(tnode* root)<br />
+{<br />
+	tnode* lptr,*temp;<br />
+	lptr=root-&gt;rchild;<br />
+	temp=lptr-&gt;lchild;<br />
+	lptr-&gt;lchild=root;<br />
+	root-&gt;rchild=temp;<br />
+	return lptr;</p>
+<p>}<br />
+tnode* right_rotate(tnode* root)<br />
+{<br />
+	tnode* rptr,*temp;<br />
+	rptr=root-&gt;lchild;<br />
+	temp=rptr-&gt;rchild;<br />
+	rptr-&gt;rchild=root;<br />
+	root-&gt;lchild=temp;<br />
+	return rptr;<br />
+}</p>
+<p>tnode* insert(tnode* root,int d)<br />
+{<br />
+	if(!root)<br />
+	{<br />
+		root=new tnode(d);<br />
+		return root;<br />
+	}<br />
+	if(d&gt;root-&gt;data)<br />
+	   root-&gt;rchild=insert(root-&gt;rchild,d);<br />
+	if(ddata)<br />
+	    root-&gt;lchild=insert(root-&gt;lchild,d);<br />
+	if(bal_fac(root)==2)<br />
+	{<br />
+		if(bal_fac(root-&gt;lchild)==1)<br />
+		   return right_rotate(root);<br />
+		if(bal_fac(root-&gt;lchild)==-1)<br />
+		{<br />
+			root-&gt;lchild=left_rotate(root-&gt;lchild);<br />
+			return right_rotate(root);<br />
+		}<br />
+	}<br />
+	if(bal_fac(root)==-2)<br />
+	{<br />
+		if(bal_fac(root-&gt;rchild)==-1)<br />
+		   return left_rotate(root);<br />
+		if(bal_fac(root-&gt;rchild)==1)<br />
+		{<br />
+			root-&gt;rchild=right_rotate(root-&gt;rchild);<br />
+			return left_rotate(root);<br />
+		}<br />
+	}<br />
+	return root;</p>
+<p>}<br />
+int get_insucc(tnode* root)<br />
+{<br />
+	tnode* temp=root-&gt;rchild;<br />
+	while(temp-&gt;lchild!=NULL)<br />
+	{<br />
+		temp=temp-&gt;lchild;<br />
+	}<br />
+	return temp-&gt;data;<br />
+}<br />
+tnode* del(tnode* root,int d)<br />
+{<br />
+	if(root-&gt;data==d)<br />
+	{<br />
+		if((!root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))<br />
+		{<br />
+			tnode* temp=root;<br />
+			delete(temp);<br />
+			return NULL;<br />
+		}<br />
+		if((root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+		{<br />
+			int k=get_insucc(root);<br />
+			cout&lt;&lt;k&lt;data=k;<br />
+			root-&gt;rchild=del(root-&gt;rchild,k);<br />
+			return root;<br />
+		}<br />
+		if((root-&gt;lchild)&amp;&amp;(!root-&gt;rchild))<br />
+		{<br />
+			tnode* ptr=root;<br />
+			tnode* temp=root-&gt;lchild;<br />
+			delete(ptr);<br />
+			return temp;<br />
+		}<br />
+		if((!root-&gt;lchild)&amp;&amp;(root-&gt;rchild))<br />
+		{<br />
+			tnode* ptr=root;<br />
+			tnode* temp=root-&gt;rchild;<br />
+			delete(ptr);<br />
+			return temp;<br />
+		}</p>
+<p>	}</p>
+<p>	if(d&gt;root-&gt;data)<br />
+	   root-&gt;rchild=del(root-&gt;rchild,d);<br />
+	if(ddata)<br />
+	   root-&gt;lchild=del(root-&gt;lchild,d);<br />
+	if(bal_fac(root)==2)<br />
+	{<br />
+		if(bal_fac(root-&gt;lchild)==-1)<br />
+		{<br />
+			root-&gt;lchild=left_rotate(root-&gt;lchild);<br />
+			return right_rotate(root);<br />
+		}<br />
+		else<br />
+		return right_rotate(root);<br />
+	}<br />
+	if(bal_fac(root)==-2)<br />
+	{<br />
+		if(bal_fac(root-&gt;rchild)==1)<br />
+		{<br />
+			root-&gt;rchild=right_rotate(root-&gt;rchild);<br />
+			return left_rotate(root);<br />
+		}<br />
+		else<br />
+		   return left_rotate(root);<br />
+	}<br />
+	return root;<br />
+}</p>
+<p>void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		cout&lt;data&lt;rchild);<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int n;<br />
+	cout&lt;&gt;n;<br />
+	while(n!=-1)<br />
+	{<br />
+		root=insert(root,n);<br />
+		cout&lt;&gt;n;<br />
+	}<br />
+	display(root);<br />
+	cout&lt;&gt;n;<br />
+	while(n!=-1)<br />
+	{<br />
+	   root=del(root,n);<br />
+	   display(root);<br />
+	   cout&lt;&gt;n;<br />
+	}<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-35606</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Sun, 04 May 2014 06:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-35606</guid>
+		<description><![CDATA[here during unwindidng phase of recursion is balance factor of a root is 2 then if the bal fac of root-&#062;lchild is -1 then u hve to perform double rotation else single right totate but in insertion unwinding phase the bal factor of root-&#062;lchild must be either -1 or 1 but here it is nt necesary it may be -1 or 0 ..so fr -1 case u perform doble rotation else single rotation]]></description>
+		<content:encoded><![CDATA[<p>here during unwindidng phase of recursion is balance factor of a root is 2 then if the bal fac of root-&gt;lchild is -1 then u hve to perform double rotation else single right totate but in insertion unwinding phase the bal factor of root-&gt;lchild must be either -1 or 1 but here it is nt necesary it may be -1 or 0 ..so fr -1 case u perform doble rotation else single rotation</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Castle Age</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-32666</link>
+		<dc:creator><![CDATA[Castle Age]]></dc:creator>
+		<pubDate>Mon, 17 Feb 2014 19:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-32666</guid>
+		<description><![CDATA[Height is the height of the current subtree. Leave nodes always have a height of 1.  The node is balanced only when the difference between the height of the left subtree and the height of right subtree is within the range of -1 and 1.
+
+You need to reread every thing about trees and their definitions.]]></description>
+		<content:encoded><![CDATA[<p>Height is the height of the current subtree. Leave nodes always have a height of 1.  The node is balanced only when the difference between the height of the left subtree and the height of right subtree is within the range of -1 and 1.</p>
+<p>You need to reread every thing about trees and their definitions.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Castle Age</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-32665</link>
+		<dc:creator><![CDATA[Castle Age]]></dc:creator>
+		<pubDate>Mon, 17 Feb 2014 19:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-32665</guid>
+		<description><![CDATA[The power of recursion. For every recursive call, it checks the balance of the current node, balance it if it is unbalanced and then move up.]]></description>
+		<content:encoded><![CDATA[<p>The power of recursion. For every recursive call, it checks the balance of the current node, balance it if it is unbalanced and then move up.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ArafatX</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-31499</link>
+		<dc:creator><![CDATA[ArafatX]]></dc:creator>
+		<pubDate>Mon, 13 Jan 2014 20:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-31499</guid>
+		<description><![CDATA[If anyone here want to have the complete source code with this functionality, please follow me at twitter: twitter.com/arafatx and pm me there.
+
+
+[img] http://codegix.com/imagex/avlInsert.png [/img]
+
+
+
+
+Credit to geeksforgeeks to with the precious explanation in order to create this implementation.]]></description>
+		<content:encoded><![CDATA[<p>If anyone here want to have the complete source code with this functionality, please follow me at twitter: twitter.com/arafatx and pm me there.</p>
+<p>[img] <a href="http://codegix.com/imagex/avlInsert.png" rel="nofollow">http://codegix.com/imagex/avlInsert.png</a> [/img]</p>
+<p>Credit to geeksforgeeks to with the precious explanation in order to create this implementation.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mallard</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-31157</link>
+		<dc:creator><![CDATA[mallard]]></dc:creator>
+		<pubDate>Tue, 31 Dec 2013 20:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-31157</guid>
+		<description><![CDATA[can&#039;t we check the check left-&#062;left-&#062;right etc case of deleted nodes just like we do in insert case?]]></description>
+		<content:encoded><![CDATA[<p>can&#8217;t we check the check left-&gt;left-&gt;right etc case of deleted nodes just like we do in insert case?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mallard</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-31156</link>
+		<dc:creator><![CDATA[mallard]]></dc:creator>
+		<pubDate>Tue, 31 Dec 2013 20:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-31156</guid>
+		<description><![CDATA[we are backtracing when we have deleted the node,hence we are checking balance after each backtracing and do appropriate]]></description>
+		<content:encoded><![CDATA[<p>we are backtracing when we have deleted the node,hence we are checking balance after each backtracing and do appropriate</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-31101</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 28 Dec 2013 17:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-31101</guid>
+		<description><![CDATA[Pardon me, now I understand. There are 2 ways of deleting. :)]]></description>
+		<content:encoded><![CDATA[<p>Pardon me, now I understand. There are 2 ways of deleting. 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ArafatX</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-31099</link>
+		<dc:creator><![CDATA[ArafatX]]></dc:creator>
+		<pubDate>Sat, 28 Dec 2013 12:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-31099</guid>
+		<description><![CDATA[I believe this code has error but I&#039;m not sure what (trying to figure out) For example, let&#039;s say we input these data in sequence 10, 20, 30, 40, 50, 60, 70, 80, 90, 99. And we delete 40 (the root), Traversing the tree pre-order should be 30 , 20 ,  10 ,  80 , 60, 50, 70, 90, 99. But the result from your code: 50, 20, 10, 30, 80, 60, 70, 90, 99.
+
+Edit: It&#039;s ok. Now I understand. There are 2 ways of deleting the AVL tree. by considering the Max() and Min() node.]]></description>
+		<content:encoded><![CDATA[<p>I believe this code has error but I&#8217;m not sure what (trying to figure out) For example, let&#8217;s say we input these data in sequence 10, 20, 30, 40, 50, 60, 70, 80, 90, 99. And we delete 40 (the root), Traversing the tree pre-order should be 30 , 20 ,  10 ,  80 , 60, 50, 70, 90, 99. But the result from your code: 50, 20, 10, 30, 80, 60, 70, 90, 99.</p>
+<p>Edit: It&#8217;s ok. Now I understand. There are 2 ways of deleting the AVL tree. by considering the Max() and Min() node.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dimitris Sfounis</title>
+		<link>http://www.geeksforgeeks.org/avl-tree-set-2-deletion/#comment-30165</link>
+		<dc:creator><![CDATA[Dimitris Sfounis]]></dc:creator>
+		<pubDate>Tue, 26 Nov 2013 19:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18009#comment-30165</guid>
+		<description><![CDATA[Hey, one small question:
+
+What do the different height values stand for?
+
+• Does height == 1 mean &quot;the node is balanced&quot; e.g. a node with no children or two children with no children themselves.
+• What height would a node that is left-balanced have, for example a root with only one left child?
+
+• In relation to the upper bulletpoint, what value of height would a root with just a right child have?]]></description>
+		<content:encoded><![CDATA[<p>Hey, one small question:</p>
+<p>What do the different height values stand for?</p>
+<p>• Does height == 1 mean &#8220;the node is balanced&#8221; e.g. a node with no children or two children with no children themselves.<br />
+• What height would a node that is left-balanced have, for example a root with only one left child?</p>
+<p>• In relation to the upper bulletpoint, what value of height would a root with just a right child have?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:11:48 -->
+
+<!-- Compression = gzip -->

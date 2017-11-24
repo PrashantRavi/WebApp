@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construction of Longest Increasing Subsequence (N log N)</title>
+	<atom:link href="http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Ronny</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-20696</link>
+		<dc:creator><![CDATA[Ronny]]></dc:creator>
+		<pubDate>Wed, 26 Jun 2013 20:20:13 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-20696</guid>
+		<description><![CDATA[@venki @geeksforgeeks
+Should not the returned value be abs(y-x)-1
+since the question asks for number of fibonacci numbers BETWEEN a and b
+
+For a fibonacci series starting with 0,
+
+0 1 1 2 3 5 8 13 21 34 55 .... 
+
+pos of 5 is 6
+pos of 8 is 7
+
+the above method returns difference in position of a and b.
+for the above case it will return 1, but there are no fibonacci numbers BETWEEN 5 and 8.
+
+So the return value should be abs(y-x)-1.
+Kindly update the comment to avoid confusion.]]></description>
+		<content:encoded><![CDATA[<p>@venki @geeksforgeeks<br />
+Should not the returned value be abs(y-x)-1<br />
+since the question asks for number of fibonacci numbers BETWEEN a and b</p>
+<p>For a fibonacci series starting with 0,</p>
+<p>0 1 1 2 3 5 8 13 21 34 55 &#8230;. </p>
+<p>pos of 5 is 6<br />
+pos of 8 is 7</p>
+<p>the above method returns difference in position of a and b.<br />
+for the above case it will return 1, but there are no fibonacci numbers BETWEEN 5 and 8.</p>
+<p>So the return value should be abs(y-x)-1.<br />
+Kindly update the comment to avoid confusion.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Manisha Barnwal</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-25494</link>
+		<dc:creator><![CDATA[Manisha Barnwal]]></dc:creator>
+		<pubDate>Fri, 14 Jun 2013 18:37:57 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-25494</guid>
+		<description><![CDATA[/*Construction of Longest Monotonically Increasing Subsequence (N log N).
+what about this?*/.
+#include&#060;iostream&#062;
+
+struct store
+{
+
+
+
+int index;.
+
+
+
+int len;.
+}; 
+using namespace std;.
+
+//O(N LOG N).
+void sort(store *brr, int size).
+{
+
+
+
+int i, j,k;.
+
+
+
+store key;.
+
+
+
+for(i=1;i&#060;size;i++).
+
+
+
+{.
+
+
+
+key=brr[i];.
+
+
+
+for(j=i-1;j&#062;=0 &#038;&#038; key.len &#062; brr[j].len;j--).
+
+
+
+brr[j+1]=brr[j];.
+
+
+
+brr[j+1]=key;.
+
+
+
+}.
+}
+
+int main()
+{
+
+
+
+int arr[]={ 2, 5, 3, 7, 11, 8, 10, 13, 6 };.
+
+
+
+int size=sizeof(arr)/sizeof(arr[0]);.
+
+
+
+store *brr=new store[size];.
+
+
+
+int i, j,next;.
+
+
+
+next=arr[size-1];.       
+
+
+
+for(i=size-1;i &#062;=0 ;i--).
+
+
+
+{.
+
+
+
+brr[i].len=0;.
+
+
+
+brr[i].index=i;.
+
+
+
+for(j=i+1;j &#060; size &#038;&#038; i!=size-1;j++).
+
+
+
+{.
+
+
+
+if(arr[i] &#060; arr[j]).
+
+
+
+{.
+
+
+
+brr[i].len=brr[i].len + 1;.
+
+
+
+}.
+
+
+
+}.
+
+
+
+}.
+
+
+
+
+//sort brr[i].len.
+
+
+
+sort(brr, size);.
+
+
+
+int len=1, prev_index;.
+
+
+
+prev_index=brr[0].index;.
+
+
+
+cout&#060;&#060;arr[brr[0].index];.
+
+
+
+//O(N).
+
+
+
+for(i=1;i&#060;size;i++).
+
+
+
+{.
+
+
+
+if(brr[i].index &#062; prev_index &#038;&#038; arr[brr[i].index] &#062; arr[prev_index]).
+
+
+
+{.
+
+
+
+cout&#060;&#060;&#034; , &#034;&#060;&#060;arr[brr[i].index];.
+
+
+
+prev_index=brr[i].index;.
+
+
+
+len++;.
+
+
+
+}.
+
+
+
+}.
+
+
+
+cout&#060;&#060;&#034;n len is : &#034;&#060;&#060;len;.
+
+
+
+getchar();.
+
+
+
+return 0;.
+}]]></description>
+		<content:encoded><![CDATA[<p>/*Construction of Longest Monotonically Increasing Subsequence (N log N).<br />
+what about this?*/.<br />
+#include&lt;iostream&gt;</p>
+<p>struct store<br />
+{</p>
+<p>int index;.</p>
+<p>int len;.<br />
+};<br />
+using namespace std;.</p>
+<p>//O(N LOG N).<br />
+void sort(store *brr, int size).<br />
+{</p>
+<p>int i, j,k;.</p>
+<p>store key;.</p>
+<p>for(i=1;i&lt;size;i++).</p>
+<p>{.</p>
+<p>key=brr[i];.</p>
+<p>for(j=i-1;j&gt;=0 &amp;&amp; key.len &gt; brr[j].len;j&#8211;).</p>
+<p>brr[j+1]=brr[j];.</p>
+<p>brr[j+1]=key;.</p>
+<p>}.<br />
+}</p>
+<p>int main()<br />
+{</p>
+<p>int arr[]={ 2, 5, 3, 7, 11, 8, 10, 13, 6 };.</p>
+<p>int size=sizeof(arr)/sizeof(arr[0]);.</p>
+<p>store *brr=new store[size];.</p>
+<p>int i, j,next;.</p>
+<p>next=arr[size-1];.       </p>
+<p>for(i=size-1;i &gt;=0 ;i&#8211;).</p>
+<p>{.</p>
+<p>brr[i].len=0;.</p>
+<p>brr[i].index=i;.</p>
+<p>for(j=i+1;j &lt; size &amp;&amp; i!=size-1;j++).</p>
+<p>{.</p>
+<p>if(arr[i] &lt; arr[j]).</p>
+<p>{.</p>
+<p>brr[i].len=brr[i].len + 1;.</p>
+<p>}.</p>
+<p>}.</p>
+<p>}.</p>
+<p>//sort brr[i].len.</p>
+<p>sort(brr, size);.</p>
+<p>int len=1, prev_index;.</p>
+<p>prev_index=brr[0].index;.</p>
+<p>cout&lt;&lt;arr[brr[0].index];.</p>
+<p>//O(N).</p>
+<p>for(i=1;i&lt;size;i++).</p>
+<p>{.</p>
+<p>if(brr[i].index &gt; prev_index &amp;&amp; arr[brr[i].index] &gt; arr[prev_index]).</p>
+<p>{.</p>
+<p>cout&lt;&lt;&quot; , &quot;&lt;&lt;arr[brr[i].index];.</p>
+<p>prev_index=brr[i].index;.</p>
+<p>len++;.</p>
+<p>}.</p>
+<p>}.</p>
+<p>cout&lt;&lt;&quot;n len is : &quot;&lt;&lt;len;.</p>
+<p>getchar();.</p>
+<p>return 0;.<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: binary001</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-18248</link>
+		<dc:creator><![CDATA[binary001]]></dc:creator>
+		<pubDate>Wed, 15 May 2013 16:38:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-18248</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+
+int search(int in [] ,int a[],int i,int j,int x){
+
+	while(i&#060;j){
+		int m=i+(j-i)/2;
+		if(in[m]&#062;x)
+		j=m-1;
+		else
+		i=m+1;
+	}
+return i;
+
+}
+
+int lis(int in[],int n){
+	
+int ans=0;
+int a[n];
+
+	for(int i=0;i&#060;n;i++){
+		int temp=search( in, a, 0, n-1, in[i] );	
+		if(temp==ans){
+		a[temp]=in[i];
+		ans++;
+		}
+		else
+		a[temp]=in[i];
+
+
+
+	}
+
+return ans;
+}
+
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+
+int search(int in [] ,int a[],int i,int j,int x){
+
+	while(i&lt;j){
+		int m=i+(j-i)/2;
+		if(in[m]&gt;x)
+		j=m-1;
+		else
+		i=m+1;
+	}
+return i;
+
+}
+
+int lis(int in[],int n){
+	
+int ans=0;
+int a[n];
+
+	for(int i=0;i&lt;n;i++){
+		int temp=search( in, a, 0, n-1, in[i] );	
+		if(temp==ans){
+		a[temp]=in[i];
+		ans++;
+		}
+		else
+		a[temp]=in[i];
+
+
+
+	}
+
+return ans;
+}
+
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-17766</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Tue, 30 Apr 2013 20:39:47 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-17766</guid>
+		<description><![CDATA[Here is the implementation of above algo with some fixes:
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;stdio.h&#062;
+#include&#060;stdlib.h&#062;
+
+int LongestIncreasingSubsequence(int array[], int n) {
+  int ** greatest=(int **)malloc(sizeof(int *)*n);
+  int i;
+
+  for(i=0; i&#060;n; i++) {
+    *(greatest+i)=(int *)malloc(sizeof(int)*n);
+  }
+
+  int j, largest_on_right;
+  for(i=0, largest_on_right=-9999; i&#060;n; i++) {
+    for(j=n-1; j&#062;=0; j--) {
+      if(j&#062;n-1-i) {
+        greatest[i][j]=-1;  
+      } else if(array[j]&#062;largest_on_right) {
+        greatest[i][j]=1;
+        largest_on_right=array[j];
+      } else if(array[j]&#060;=largest_on_right) {
+        greatest[i][j]=0;
+      }
+    }
+    largest_on_right=-9999;
+  }
+
+  /*
+  printf(&#034;Greatest matrix\n&#034;);
+  for(i=0; i&#060;n; i++) {
+    for(j=0; j&#060;n; j++) {
+      printf(&#034;%*d &#034;, 2, greatest[i][j]);
+    }
+    printf(&#034;\n&#034;);
+  }
+  printf(&#034;\n&#034;);
+  */
+
+  int k=n-1, l=0, last_added_element=-9999, lis_size=0;
+  while(k&#062;=0 &#038;&#038; l&#060;=n-1) {
+    if(greatest[k][l]==1) {
+      if((k-1&#062;=0 &#038;&#038; greatest[k-1][l]!=1) &#124;&#124; k==0) {
+        if(array[l]&#062;last_added_element) {
+          printf(&#034;%d &#034;, array[l]);
+          last_added_element=array[l];
+          k=k-1;
+          l=l+1;
+          lis_size++;
+        } else {
+          k=k-1;
+          l=l+1;          
+        }
+      } else if(k-1&#062;=0 &#038;&#038; greatest[k-1][l]==1) {
+        if(array[l+1]&#062;last_added_element) {
+          k=k-1;
+          l=l+1;
+        } else {
+          printf(&#034;%d &#034;, array[l]);
+          last_added_element=array[l];
+          k=k-1;
+          l=l+1;
+          lis_size++;
+        }
+      }
+    }
+  }
+  return lis_size;
+}
+
+int main() {
+   int array[] = {2, 5, 3, 7, 11, 8, 10, 13, 6};
+   int n = sizeof(array)/sizeof(array[0]);
+ 
+   printf(&#034;\nLIS size %d\n&#034;, LongestIncreasingSubsequence(array, n));
+ 
+   return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;
+
+2 3 7 8 10 13 
+LIS size 6]]></description>
+		<content:encoded><![CDATA[<p>Here is the implementation of above algo with some fixes:</p>
+<pre> <code language="C">
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+int LongestIncreasingSubsequence(int array[], int n) {
+  int ** greatest=(int **)malloc(sizeof(int *)*n);
+  int i;
+
+  for(i=0; i&lt;n; i++) {
+    *(greatest+i)=(int *)malloc(sizeof(int)*n);
+  }
+
+  int j, largest_on_right;
+  for(i=0, largest_on_right=-9999; i&lt;n; i++) {
+    for(j=n-1; j&gt;=0; j--) {
+      if(j&gt;n-1-i) {
+        greatest[i][j]=-1;  
+      } else if(array[j]&gt;largest_on_right) {
+        greatest[i][j]=1;
+        largest_on_right=array[j];
+      } else if(array[j]&lt;=largest_on_right) {
+        greatest[i][j]=0;
+      }
+    }
+    largest_on_right=-9999;
+  }
+
+  /*
+  printf(&quot;Greatest matrix\n&quot;);
+  for(i=0; i&lt;n; i++) {
+    for(j=0; j&lt;n; j++) {
+      printf(&quot;%*d &quot;, 2, greatest[i][j]);
+    }
+    printf(&quot;\n&quot;);
+  }
+  printf(&quot;\n&quot;);
+  */
+
+  int k=n-1, l=0, last_added_element=-9999, lis_size=0;
+  while(k&gt;=0 &amp;&amp; l&lt;=n-1) {
+    if(greatest[k][l]==1) {
+      if((k-1&gt;=0 &amp;&amp; greatest[k-1][l]!=1) || k==0) {
+        if(array[l]&gt;last_added_element) {
+          printf(&quot;%d &quot;, array[l]);
+          last_added_element=array[l];
+          k=k-1;
+          l=l+1;
+          lis_size++;
+        } else {
+          k=k-1;
+          l=l+1;          
+        }
+      } else if(k-1&gt;=0 &amp;&amp; greatest[k-1][l]==1) {
+        if(array[l+1]&gt;last_added_element) {
+          k=k-1;
+          l=l+1;
+        } else {
+          printf(&quot;%d &quot;, array[l]);
+          last_added_element=array[l];
+          k=k-1;
+          l=l+1;
+          lis_size++;
+        }
+      }
+    }
+  }
+  return lis_size;
+}
+
+int main() {
+   int array[] = {2, 5, 3, 7, 11, 8, 10, 13, 6};
+   int n = sizeof(array)/sizeof(array[0]);
+ 
+   printf(&quot;\nLIS size %d\n&quot;, LongestIncreasingSubsequence(array, n));
+ 
+   return 0;
+}
+</code> </pre>
+<p>2 3 7 8 10 13<br />
+LIS size 6</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-17761</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Tue, 30 Apr 2013 18:48:52 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-17761</guid>
+		<description><![CDATA[Trying out something. Shall update later how it performs.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+Given an array of integers: array[n]
+
+1) Create array greatest[n][n]
+
+where,
+
+greatest[i][j]=1, if there is no element in the array between index j+1 and n-1-i which is greater than array[j]
+              =0, if there is atleast one element in the array between index j+1 and n-1-i which is greater than array[j]
+              =-1, if j&#062;n-1-i
+
+2) k=n-1, l=0, last_added_element=Some number lower than all integers in the array
+
+while(k&#062;0 &#038;&#038; l&#060;=n-1)
+  if greatest[k][l]==1
+    if k-1&#062;=0 &#038;&#038; greatest[k-1][l]!=1
+      add array[l] in LIS
+      last_added_element=array[l]
+      k=k-1
+      l=l+1
+    else if k-1&#062;=0 &#038;&#038; greatest[k-1][l]==1
+      if array[l+1]&#062;last_added_element
+        k=k-2
+        l=l+2
+      else
+        add array[l] in LIS
+        last_added_element=array[l]
+        k=k-1
+        l=l+1
+      end if
+    else if k==0 
+      add array[l] in LIS
+      last_added_element=array[l]     
+      k=k-1
+      l=l+1
+    end if
+  end if
+end for
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Trying out something. Shall update later how it performs.</p>
+<pre> <code language="C">
+Given an array of integers: array[n]
+
+1) Create array greatest[n][n]
+
+where,
+
+greatest[i][j]=1, if there is no element in the array between index j+1 and n-1-i which is greater than array[j]
+              =0, if there is atleast one element in the array between index j+1 and n-1-i which is greater than array[j]
+              =-1, if j&gt;n-1-i
+
+2) k=n-1, l=0, last_added_element=Some number lower than all integers in the array
+
+while(k&gt;0 &amp;&amp; l&lt;=n-1)
+  if greatest[k][l]==1
+    if k-1&gt;=0 &amp;&amp; greatest[k-1][l]!=1
+      add array[l] in LIS
+      last_added_element=array[l]
+      k=k-1
+      l=l+1
+    else if k-1&gt;=0 &amp;&amp; greatest[k-1][l]==1
+      if array[l+1]&gt;last_added_element
+        k=k-2
+        l=l+2
+      else
+        add array[l] in LIS
+        last_added_element=array[l]
+        k=k-1
+        l=l+1
+      end if
+    else if k==0 
+      add array[l] in LIS
+      last_added_element=array[l]     
+      k=k-1
+      l=l+1
+    end if
+  end if
+end for
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-17708</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Sun, 28 Apr 2013 11:48:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-17708</guid>
+		<description><![CDATA[log 10 to the base 1.618 = 4.785. Easy one, I expected the reader to know this.]]></description>
+		<content:encoded><![CDATA[<p>log 10 to the base 1.618 = 4.785. Easy one, I expected the reader to know this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sachin</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-17403</link>
+		<dc:creator><![CDATA[sachin]]></dc:creator>
+		<pubDate>Tue, 16 Apr 2013 19:17:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-17403</guid>
+		<description><![CDATA[How did you get 4.785?I am not getting how you are getting the formula?]]></description>
+		<content:encoded><![CDATA[<p>How did you get 4.785?I am not getting how you are getting the formula?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-15740</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Wed, 27 Feb 2013 17:15:50 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-15740</guid>
+		<description><![CDATA[@Anirudh, please be more specific. Where are we searching for min and max?]]></description>
+		<content:encoded><![CDATA[<p>@Anirudh, please be more specific. Where are we searching for min and max?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anirudh beria</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-15703</link>
+		<dc:creator><![CDATA[anirudh beria]]></dc:creator>
+		<pubDate>Tue, 26 Feb 2013 13:52:05 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-15703</guid>
+		<description><![CDATA[won&#039;t the run time be n^2 because of search for min and max elements ?? I  think a maximum finding segment tree will give nlogn sol ( possible if numbers are less than 10^6).]]></description>
+		<content:encoded><![CDATA[<p>won&#8217;t the run time be n^2 because of search for min and max elements ?? I  think a maximum finding segment tree will give nlogn sol ( possible if numbers are less than 10^6).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ashish</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-14920</link>
+		<dc:creator><![CDATA[ashish]]></dc:creator>
+		<pubDate>Thu, 31 Jan 2013 04:23:51 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-14920</guid>
+		<description><![CDATA[#include
+
+    void longest(int *,int);
+
+void main()
+    {
+        int n,i,ary[50];
+      printf(&quot;enter the no of term:- &quot;);
+      scanf(&quot;%d&quot;,&#038;n);
+
+      for(i=0;i&#060;n;i++)
+      scanf(&#034;%d&#034;,&#038;ary[i]);
+
+
+    longest(ary,n);
+    }
+
+   void longest(int ary[],int n)
+
+   {
+       int i,j,l=0,maxlen=0;
+       int start=0,s;
+
+       for(i=0;i=ary[i+1])
+           {
+               start=i+1;
+               l=0;
+           }
+           else
+           l++;
+
+           if(maxlen&#060;l){
+
+             maxlen=l; s=start;}
+
+       }
+      int m=s+maxlen;
+      for(i=s;i&#060;=m;i++)
+   printf(&#034;%d  &#034;,ary[i]);
+
+
+   }]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>    void longest(int *,int);</p>
+<p>void main()<br />
+    {<br />
+        int n,i,ary[50];<br />
+      printf(&#8220;enter the no of term:- &#8220;);<br />
+      scanf(&#8220;%d&#8221;,&amp;n);</p>
+<p>      for(i=0;i&lt;n;i++)<br />
+      scanf(&quot;%d&quot;,&amp;ary[i]);</p>
+<p>    longest(ary,n);<br />
+    }</p>
+<p>   void longest(int ary[],int n)</p>
+<p>   {<br />
+       int i,j,l=0,maxlen=0;<br />
+       int start=0,s;</p>
+<p>       for(i=0;i=ary[i+1])<br />
+           {<br />
+               start=i+1;<br />
+               l=0;<br />
+           }<br />
+           else<br />
+           l++;</p>
+<p>           if(maxlen&lt;l){</p>
+<p>             maxlen=l; s=start;}</p>
+<p>       }<br />
+      int m=s+maxlen;<br />
+      for(i=s;i&lt;=m;i++)<br />
+   printf(&quot;%d  &quot;,ary[i]);</p>
+<p>   }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: suresh</title>
+		<link>http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/#comment-14489</link>
+		<dc:creator><![CDATA[suresh]]></dc:creator>
+		<pubDate>Tue, 15 Jan 2013 17:44:01 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=27614#comment-14489</guid>
+		<description><![CDATA[Why we need array prevIndices when tailIndices stores the Indices coresponding to the elements of the LIS??
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Why we need array prevIndices when tailIndices stores the Indices coresponding to the elements of the LIS??</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.064 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:13:09 -->
+
+<!-- Compression = gzip -->

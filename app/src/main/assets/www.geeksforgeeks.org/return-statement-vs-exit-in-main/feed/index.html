@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: return statement vs exit() in main()</title>
+	<atom:link href="http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3949</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2011 13:33:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3949</guid>
+		<description><![CDATA[@vinit, static variables will be stored in a separate section called data section. Based on format of Application Binary Interface (PE, ELF, COFF etc...), we (the startup library) can jump to data section and will initialize all the default variables to zero, unless specifically initialized to some constants. If any static/global variable is initialized to non-zero, that can be picked up code section.]]></description>
+		<content:encoded><![CDATA[<p>@vinit, static variables will be stored in a separate section called data section. Based on format of Application Binary Interface (PE, ELF, COFF etc&#8230;), we (the startup library) can jump to data section and will initialize all the default variables to zero, unless specifically initialized to some constants. If any static/global variable is initialized to non-zero, that can be picked up code section.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vinit</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3939</link>
+		<dc:creator><![CDATA[vinit]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2011 12:24:59 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3939</guid>
+		<description><![CDATA[@ Venki,
+Prior to calling main(), how come the startup library knows that we are going to create a static variable inside main? so how the initialization of static var happens?]]></description>
+		<content:encoded><![CDATA[<p>@ Venki,<br />
+Prior to calling main(), how come the startup library knows that we are going to create a static variable inside main? so how the initialization of static var happens?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3282</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Mon, 14 Feb 2011 13:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3282</guid>
+		<description><![CDATA[@Himanshu, As explained below, exit() is similar to another function call. If we call exit(), the implementation of exit() may or may not take care of calling global/static destructors.]]></description>
+		<content:encoded><![CDATA[<p>@Himanshu, As explained below, exit() is similar to another function call. If we call exit(), the implementation of exit() may or may not take care of calling global/static destructors.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3281</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Mon, 14 Feb 2011 13:54:45 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3281</guid>
+		<description><![CDATA[@Omair, static object are cleaned up by the startup library. There will some entity that makes call to main(), which is start up library code. Prior to calling main() the startup library does initializations of globals, static variables, global/static constructors, etc... After returning from main() the same library will do clean up, e.g. calling destructors.
+
+The tasks like memory leaks (missing free blocks) will be collected by the OS garbage collector, it varies from OS to OS.]]></description>
+		<content:encoded><![CDATA[<p>@Omair, static object are cleaned up by the startup library. There will some entity that makes call to main(), which is start up library code. Prior to calling main() the startup library does initializations of globals, static variables, global/static constructors, etc&#8230; After returning from main() the same library will do clean up, e.g. calling destructors.</p>
+<p>The tasks like memory leaks (missing free blocks) will be collected by the OS garbage collector, it varies from OS to OS.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Himanshu</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3280</link>
+		<dc:creator><![CDATA[Himanshu]]></dc:creator>
+		<pubDate>Mon, 14 Feb 2011 09:20:23 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3280</guid>
+		<description><![CDATA[What is the reason behind this behavior of exit(0)? Why doesn&#039;t both return statement and exit statement behave in same manner?]]></description>
+		<content:encoded><![CDATA[<p>What is the reason behind this behavior of exit(0)? Why doesn&#8217;t both return statement and exit statement behave in same manner?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Omair</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3279</link>
+		<dc:creator><![CDATA[Omair]]></dc:creator>
+		<pubDate>Mon, 14 Feb 2011 04:43:07 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3279</guid>
+		<description><![CDATA[How are static objects cleared up? Is it in the implementation of exit or is it a general C++ rule?]]></description>
+		<content:encoded><![CDATA[<p>How are static objects cleared up? Is it in the implementation of exit or is it a general C++ rule?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venki</title>
+		<link>http://www.geeksforgeeks.org/return-statement-vs-exit-in-main/#comment-3273</link>
+		<dc:creator><![CDATA[Venki]]></dc:creator>
+		<pubDate>Sun, 13 Feb 2011 01:19:24 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=10377#comment-3273</guid>
+		<description><![CDATA[Thanks @indiarox. This is good post to comply with RAII idiom. Keep sharing knowledge.]]></description>
+		<content:encoded><![CDATA[<p>Thanks @indiarox. This is good post to comply with RAII idiom. Keep sharing knowledge.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:25:20 -->
+
+<!-- Compression = gzip -->

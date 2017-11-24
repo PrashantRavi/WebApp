@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Given a linked list which is sorted, how will you insert in sorted way</title>
+	<atom:link href="http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-39979</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 17:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-39979</guid>
+		<description><![CDATA[i think this function should return the header node
+
+because if data is inserted at front then header will be changed 
+please correct if i&#039;m wrong]]></description>
+		<content:encoded><![CDATA[<p>i think this function should return the header node</p>
+<p>because if data is inserted at front then header will be changed<br />
+please correct if i&#8217;m wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dipankar Jana</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-39019</link>
+		<dc:creator><![CDATA[Dipankar Jana]]></dc:creator>
+		<pubDate>Wed, 18 Jun 2014 08:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-39019</guid>
+		<description><![CDATA[This should work. But it fails if the value to be inserted is less than the value of the head node.
+
+Node *InitList(int key)
+
+{
+
+    Node *newNode = new Node();
+
+    newNode-&#062;data = key;
+
+    newNode-&#062;next = NULL;
+
+    return newNode;
+
+}
+
+Node *SortedInsert(Node *head, int key){
+
+    if(head == NULL) return InitList(key);
+
+    Node *temp = head;
+
+    if(key data){
+
+        Node *tuna = new Node();
+
+        tuna-&#062;data = key;
+
+        tuna-&#062;next = head;
+
+        return tuna;
+
+    }
+
+    Node *prev;
+
+    while(temp != NULL &#038;&#038; !(key data)){
+
+        prev = temp;
+
+        temp = temp-&#062;next;
+
+    }
+
+    Node *newNode = new Node();
+
+    newNode-&#062;data = key;
+
+    prev-&#062;next = newNode;
+
+    if(temp == NULL){
+
+        newNode-&#062;next = NULL;
+
+    }else{
+
+        newNode-&#062;next = temp;
+
+    }
+
+    return newNode;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>This should work. But it fails if the value to be inserted is less than the value of the head node.</p>
+<p>Node *InitList(int key)</p>
+<p>{</p>
+<p>    Node *newNode = new Node();</p>
+<p>    newNode-&gt;data = key;</p>
+<p>    newNode-&gt;next = NULL;</p>
+<p>    return newNode;</p>
+<p>}</p>
+<p>Node *SortedInsert(Node *head, int key){</p>
+<p>    if(head == NULL) return InitList(key);</p>
+<p>    Node *temp = head;</p>
+<p>    if(key data){</p>
+<p>        Node *tuna = new Node();</p>
+<p>        tuna-&gt;data = key;</p>
+<p>        tuna-&gt;next = head;</p>
+<p>        return tuna;</p>
+<p>    }</p>
+<p>    Node *prev;</p>
+<p>    while(temp != NULL &amp;&amp; !(key data)){</p>
+<p>        prev = temp;</p>
+<p>        temp = temp-&gt;next;</p>
+<p>    }</p>
+<p>    Node *newNode = new Node();</p>
+<p>    newNode-&gt;data = key;</p>
+<p>    prev-&gt;next = newNode;</p>
+<p>    if(temp == NULL){</p>
+<p>        newNode-&gt;next = NULL;</p>
+<p>    }else{</p>
+<p>        newNode-&gt;next = temp;</p>
+<p>    }</p>
+<p>    return newNode;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prasun_goyal</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-37702</link>
+		<dc:creator><![CDATA[prasun_goyal]]></dc:creator>
+		<pubDate>Thu, 05 Jun 2014 19:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-37702</guid>
+		<description><![CDATA[a more simple approach 
+
+// SORTED LINKED LIST
+
+// ELEMENTS GET INSERTD IN WAY THAT
+
+// LIST REMAINS SORTED
+
+#include
+
+#include
+
+struct node 
+
+{
+
+int data;
+
+struct node* next;
+
+};
+
+void display(struct node *);
+
+void insert(struct node**,int);
+
+void display(struct node *root)
+
+{
+
+if(root==NULL)
+
+{
+
+printf(&quot;The list is emptyn&quot;);
+
+return ;
+
+}
+
+printf(&quot;The list is:n&quot;);
+
+while(root !=NULL)
+
+{
+
+printf(&quot;%d &quot;,root-&#062;data);
+
+root = root-&#062;next;
+
+} 
+
+printf(&quot;n&quot;);
+
+return ;
+
+}
+
+void insert(struct node **root,int x)
+
+{
+
+struct node *temp,*p;
+
+struct node *newnode = (struct node*) malloc(sizeof(struct node));
+
+newnode-&#062;data = x;
+
+temp = *root;
+
+if(temp == NULL)
+
+{
+
+*root = newnode;
+
+newnode-&#062;next = NULL;
+
+return ;
+
+}
+
+if(temp-&#062;data &#062; x)
+
+{
+
+newnode-&#062;next = temp;
+
+*root = newnode;
+
+return ;
+
+}
+
+while(temp !=NULL &#038;&#038; temp-&#062;data next;
+
+}
+
+p-&#062;next = newnode;
+
+newnode-&#062;next = temp;
+
+return ;
+
+}
+
+int main()
+
+{
+
+struct node *start=NULL;
+
+display(start);	
+
+insert(&#038;start,4);
+
+display(start);
+
+insert(&#038;start,2);
+
+display(start);
+
+insert(&#038;start,3);
+
+display(start);
+
+insert(&#038;start,8);
+
+display(start);
+
+insert(&#038;start,5);
+
+display(start);
+
+insert(&#038;start,1);
+
+display(start);
+
+insert(&#038;start,7);
+
+display(start);
+
+insert(&#038;start,10);
+
+display(start);
+
+return 0 ;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>a more simple approach </p>
+<p>// SORTED LINKED LIST</p>
+<p>// ELEMENTS GET INSERTD IN WAY THAT</p>
+<p>// LIST REMAINS SORTED</p>
+<p>#include</p>
+<p>#include</p>
+<p>struct node </p>
+<p>{</p>
+<p>int data;</p>
+<p>struct node* next;</p>
+<p>};</p>
+<p>void display(struct node *);</p>
+<p>void insert(struct node**,int);</p>
+<p>void display(struct node *root)</p>
+<p>{</p>
+<p>if(root==NULL)</p>
+<p>{</p>
+<p>printf(&#8220;The list is emptyn&#8221;);</p>
+<p>return ;</p>
+<p>}</p>
+<p>printf(&#8220;The list is:n&#8221;);</p>
+<p>while(root !=NULL)</p>
+<p>{</p>
+<p>printf(&#8220;%d &#8220;,root-&gt;data);</p>
+<p>root = root-&gt;next;</p>
+<p>} </p>
+<p>printf(&#8220;n&#8221;);</p>
+<p>return ;</p>
+<p>}</p>
+<p>void insert(struct node **root,int x)</p>
+<p>{</p>
+<p>struct node *temp,*p;</p>
+<p>struct node *newnode = (struct node*) malloc(sizeof(struct node));</p>
+<p>newnode-&gt;data = x;</p>
+<p>temp = *root;</p>
+<p>if(temp == NULL)</p>
+<p>{</p>
+<p>*root = newnode;</p>
+<p>newnode-&gt;next = NULL;</p>
+<p>return ;</p>
+<p>}</p>
+<p>if(temp-&gt;data &gt; x)</p>
+<p>{</p>
+<p>newnode-&gt;next = temp;</p>
+<p>*root = newnode;</p>
+<p>return ;</p>
+<p>}</p>
+<p>while(temp !=NULL &amp;&amp; temp-&gt;data next;</p>
+<p>}</p>
+<p>p-&gt;next = newnode;</p>
+<p>newnode-&gt;next = temp;</p>
+<p>return ;</p>
+<p>}</p>
+<p>int main()</p>
+<p>{</p>
+<p>struct node *start=NULL;</p>
+<p>display(start);	</p>
+<p>insert(&amp;start,4);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,2);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,3);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,8);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,5);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,1);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,7);</p>
+<p>display(start);</p>
+<p>insert(&amp;start,10);</p>
+<p>display(start);</p>
+<p>return 0 ;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jynxta</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-37394</link>
+		<dc:creator><![CDATA[Jynxta]]></dc:creator>
+		<pubDate>Sun, 01 Jun 2014 23:59:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-37394</guid>
+		<description><![CDATA[Sorted Insert done recursively.  Remaining functionality remained the same in this example (although I also opted to just do the node creation and passing by ref at the same time (sortedInsert(&#038;head, NewNode(n)); as I found it more readable.
+
+Note (and reason for edit): I tested this only against the main function provided so... feel free to fix it up if you find faults :)
+
+//function to insert a new_node in list recursively
+void sortedInsert(struct node **head_ref, struct node* new_node)
+  {
+      if ((*head_ref == NULL) &#124;&#124; (new_node-&#062;data data))
+          {
+            new_node-&#062;next = *head_ref;
+            *head_ref = new_node;
+            return;
+      }
+
+    sortedInsert(&#038;((*head_ref)-&#062;next), new_node);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Sorted Insert done recursively.  Remaining functionality remained the same in this example (although I also opted to just do the node creation and passing by ref at the same time (sortedInsert(&amp;head, NewNode(n)); as I found it more readable.</p>
+<p>Note (and reason for edit): I tested this only against the main function provided so&#8230; feel free to fix it up if you find faults 🙂</p>
+<p>//function to insert a new_node in list recursively<br />
+void sortedInsert(struct node **head_ref, struct node* new_node)<br />
+  {<br />
+      if ((*head_ref == NULL) || (new_node-&gt;data data))<br />
+          {<br />
+            new_node-&gt;next = *head_ref;<br />
+            *head_ref = new_node;<br />
+            return;<br />
+      }</p>
+<p>    sortedInsert(&amp;((*head_ref)-&gt;next), new_node);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: superman</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-36191</link>
+		<dc:creator><![CDATA[superman]]></dc:creator>
+		<pubDate>Sun, 18 May 2014 06:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-36191</guid>
+		<description><![CDATA[@geeksforgeeks
+Can you please explain how  Murat M Ozturk&#039;s solution is simplified ? Is it faster or In what sense it is better than solution provided above this?]]></description>
+		<content:encoded><![CDATA[<p>@geeksforgeeks<br />
+Can you please explain how  Murat M Ozturk&#8217;s solution is simplified ? Is it faster or In what sense it is better than solution provided above this?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mareen</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-35154</link>
+		<dc:creator><![CDATA[mareen]]></dc:creator>
+		<pubDate>Sat, 26 Apr 2014 13:54:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-35154</guid>
+		<description><![CDATA[&quot;f&quot; gets printed because &quot;sizeof()&quot; returns unsigned value when it is compared to signed integer &quot;-1&quot; sign bit of &quot;i&quot; is high and of &quot;s&quot; is low ,so &quot;i&quot; is greater]]></description>
+		<content:encoded><![CDATA[<p>&#8220;f&#8221; gets printed because &#8220;sizeof()&#8221; returns unsigned value when it is compared to signed integer &#8220;-1&#8221; sign bit of &#8220;i&#8221; is high and of &#8220;s&#8221; is low ,so &#8220;i&#8221; is greater</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ravi m</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-35120</link>
+		<dc:creator><![CDATA[ravi m]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 18:21:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-35120</guid>
+		<description><![CDATA[#include
+
+#define s sizeof(int) 
+
+void main()
+
+{
+
+   int i = -1;
+
+   
+
+  // printf(&quot;%d&quot;, sizeof(short int));
+
+    
+
+    if( i &#060; s)
+
+    printf(&#034;t&#034;);
+
+    else
+
+    printf(&#034;f&#034;);
+
+}
+
+// answer is f how it is possible to get out put f, condition is if(-1 &#060; sizeof(int)) it is true, but i got it is false..please give me solution...]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>#define s sizeof(int) </p>
+<p>void main()</p>
+<p>{</p>
+<p>   int i = -1;</p>
+<p>  // printf(&#8220;%d&#8221;, sizeof(short int));</p>
+<p>    if( i &lt; s)</p>
+<p>    printf(&quot;t&quot;);</p>
+<p>    else</p>
+<p>    printf(&quot;f&quot;);</p>
+<p>}</p>
+<p>// answer is f how it is possible to get out put f, condition is if(-1 &lt; sizeof(int)) it is true, but i got it is false..please give me solution&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: mareen</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-35113</link>
+		<dc:creator><![CDATA[mareen]]></dc:creator>
+		<pubDate>Fri, 25 Apr 2014 14:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-35113</guid>
+		<description><![CDATA[*current = new_node; 
+i do not get this line . how can it make the node&#039;s (before current) next point to new node ??]]></description>
+		<content:encoded><![CDATA[<p>*current = new_node;<br />
+i do not get this line . how can it make the node&#8217;s (before current) next point to new node ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-34850</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 07:58:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-34850</guid>
+		<description><![CDATA[public class LinkedList implements Cloneable{
+
+	Node head = null;
+
+	//Adding at the End
+
+	
+
+	  class Node {
+
+		T value;
+
+		Node nextReference;
+
+		public Node(T value) {
+
+			this.value = value;
+
+			this.nextReference = null;
+
+		}
+
+		public Node(T value, Node ref) {
+
+			this.value = value;
+
+			this.nextReference = ref;
+
+		}
+
+		public Node() {
+
+			// TODO Auto-generated constructor stub
+
+		}
+
+		public T getValue() {
+
+			return value;
+
+		}
+
+		public void setValue(T value) {
+
+			this.value = value;
+
+		}
+
+		public Node getNextReference() {
+
+			return nextReference;
+
+		}
+
+		public void setNextReference(Node nextReference) {
+
+			this.nextReference = nextReference;
+
+		}
+
+	}
+
+	public void add(E value) {
+
+		Node nodeToBeAdded = head;
+
+		if (head==null) {
+
+			head = new Node(value);
+
+         return;
+
+		}
+
+		while (nodeToBeAdded.getNextReference() != null) {
+
+			nodeToBeAdded = nodeToBeAdded.getNextReference();
+
+		}
+
+		Node node = new Node(value);
+
+		nodeToBeAdded.setNextReference(node);
+
+	}
+
+	
+
+	
+
+	//Printing all elements in LinkedLists
+
+	void printAll() {
+
+		Node node = head;
+
+		while (node != null) {
+
+			System.out.println(node.getValue());
+
+			node = node.getNextReference();
+
+		}
+
+	}
+
+	
+
+public void insertIntoList(E value){
+
+	Node node1= head;
+
+	Node previousNode=null;
+
+if(null==node1){
+
+head= new Node(value);
+
+return;
+
+}	
+
+while(node1!=null &#038;&#038; node1.getValue().doubleValue()&#060;=value.doubleValue()){
+
+	
+
+	previousNode=node1;
+
+	node1=node1.getNextReference();
+
+	}
+
+if(null ==node1){
+
+	previousNode.setNextReference(new Node(value))	;
+
+	return;
+
+}
+
+if(previousNode ==null){
+
+	head=new Node(value, head)	;
+
+	return;
+
+}
+
+	previousNode.setNextReference(new Node(value));
+
+	previousNode.getNextReference().setNextReference(node1);
+
+}
+
+void sortedInsert( E value)
+
+{
+
+	Node new_node=new Node(value);
+
+	Node current;
+
+    /* Special case for the head end */
+
+    if (head == null &#124;&#124; head.getValue().doubleValue() &#062;= new_node.getValue().doubleValue())
+
+    {
+
+        new_node.setNextReference(head);
+
+        head = new_node;
+
+    }
+
+    else
+
+    {
+
+        /* Locate the node before the point of insertion */
+
+        current = head;
+
+        while (current.getNextReference()!=null &#038;&#038;
+
+               current.getNextReference().getValue().doubleValue() &#060; new_node.getValue().doubleValue())
+
+        {
+
+            current = current.getNextReference();
+
+        }
+
+        new_node.setNextReference(current.getNextReference());
+
+        current.setNextReference( new_node);
+
+    }
+
+}
+
+ 
+
+	public static void main(String[] args) {
+
+		LinkedList linkedList = new LinkedList();
+
+		/*linkedList.add(1);
+
+		linkedList.add(2);
+
+		linkedList.add(4);*/
+
+		//linkedList.printAll();
+
+		linkedList.insertIntoList(3);
+
+		linkedList.insertIntoList(5);
+
+		linkedList.insertIntoList(2);
+
+		linkedList.sortedInsert(1);
+
+		linkedList.sortedInsert(2);
+
+		linkedList.sortedInsert(7);
+
+		linkedList.sortedInsert(3);
+
+		//linkedList.add(&quot;5&quot;);
+
+		linkedList.printAll();
+
+		
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>public class LinkedList implements Cloneable{</p>
+<p>	Node head = null;</p>
+<p>	//Adding at the End</p>
+<p>	  class Node {</p>
+<p>		T value;</p>
+<p>		Node nextReference;</p>
+<p>		public Node(T value) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = null;</p>
+<p>		}</p>
+<p>		public Node(T value, Node ref) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = ref;</p>
+<p>		}</p>
+<p>		public Node() {</p>
+<p>			// TODO Auto-generated constructor stub</p>
+<p>		}</p>
+<p>		public T getValue() {</p>
+<p>			return value;</p>
+<p>		}</p>
+<p>		public void setValue(T value) {</p>
+<p>			this.value = value;</p>
+<p>		}</p>
+<p>		public Node getNextReference() {</p>
+<p>			return nextReference;</p>
+<p>		}</p>
+<p>		public void setNextReference(Node nextReference) {</p>
+<p>			this.nextReference = nextReference;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void add(E value) {</p>
+<p>		Node nodeToBeAdded = head;</p>
+<p>		if (head==null) {</p>
+<p>			head = new Node(value);</p>
+<p>         return;</p>
+<p>		}</p>
+<p>		while (nodeToBeAdded.getNextReference() != null) {</p>
+<p>			nodeToBeAdded = nodeToBeAdded.getNextReference();</p>
+<p>		}</p>
+<p>		Node node = new Node(value);</p>
+<p>		nodeToBeAdded.setNextReference(node);</p>
+<p>	}</p>
+<p>	//Printing all elements in LinkedLists</p>
+<p>	void printAll() {</p>
+<p>		Node node = head;</p>
+<p>		while (node != null) {</p>
+<p>			System.out.println(node.getValue());</p>
+<p>			node = node.getNextReference();</p>
+<p>		}</p>
+<p>	}</p>
+<p>public void insertIntoList(E value){</p>
+<p>	Node node1= head;</p>
+<p>	Node previousNode=null;</p>
+<p>if(null==node1){</p>
+<p>head= new Node(value);</p>
+<p>return;</p>
+<p>}	</p>
+<p>while(node1!=null &amp;&amp; node1.getValue().doubleValue()&lt;=value.doubleValue()){</p>
+<p>	previousNode=node1;</p>
+<p>	node1=node1.getNextReference();</p>
+<p>	}</p>
+<p>if(null ==node1){</p>
+<p>	previousNode.setNextReference(new Node(value))	;</p>
+<p>	return;</p>
+<p>}</p>
+<p>if(previousNode ==null){</p>
+<p>	head=new Node(value, head)	;</p>
+<p>	return;</p>
+<p>}</p>
+<p>	previousNode.setNextReference(new Node(value));</p>
+<p>	previousNode.getNextReference().setNextReference(node1);</p>
+<p>}</p>
+<p>void sortedInsert( E value)</p>
+<p>{</p>
+<p>	Node new_node=new Node(value);</p>
+<p>	Node current;</p>
+<p>    /* Special case for the head end */</p>
+<p>    if (head == null || head.getValue().doubleValue() &gt;= new_node.getValue().doubleValue())</p>
+<p>    {</p>
+<p>        new_node.setNextReference(head);</p>
+<p>        head = new_node;</p>
+<p>    }</p>
+<p>    else</p>
+<p>    {</p>
+<p>        /* Locate the node before the point of insertion */</p>
+<p>        current = head;</p>
+<p>        while (current.getNextReference()!=null &amp;&amp;</p>
+<p>               current.getNextReference().getValue().doubleValue() &lt; new_node.getValue().doubleValue())</p>
+<p>        {</p>
+<p>            current = current.getNextReference();</p>
+<p>        }</p>
+<p>        new_node.setNextReference(current.getNextReference());</p>
+<p>        current.setNextReference( new_node);</p>
+<p>    }</p>
+<p>}</p>
+<p>	public static void main(String[] args) {</p>
+<p>		LinkedList linkedList = new LinkedList();</p>
+<p>		/*linkedList.add(1);</p>
+<p>		linkedList.add(2);</p>
+<p>		linkedList.add(4);*/</p>
+<p>		//linkedList.printAll();</p>
+<p>		linkedList.insertIntoList(3);</p>
+<p>		linkedList.insertIntoList(5);</p>
+<p>		linkedList.insertIntoList(2);</p>
+<p>		linkedList.sortedInsert(1);</p>
+<p>		linkedList.sortedInsert(2);</p>
+<p>		linkedList.sortedInsert(7);</p>
+<p>		linkedList.sortedInsert(3);</p>
+<p>		//linkedList.add(&#8220;5&#8221;);</p>
+<p>		linkedList.printAll();</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-34849</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Sat, 19 Apr 2014 07:57:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-34849</guid>
+		<description><![CDATA[IMPLEMENTED IN JAVA GENERIC WAY:
+
+public class LinkedList implements Cloneable{
+
+	Node head = null;
+
+	//Adding at the End
+
+	
+
+	  class Node {
+
+		T value;
+
+		Node nextReference;
+
+		public Node(T value) {
+
+			this.value = value;
+
+			this.nextReference = null;
+
+		}
+
+		public Node(T value, Node ref) {
+
+			this.value = value;
+
+			this.nextReference = ref;
+
+		}
+
+		public Node() {
+
+			// TODO Auto-generated constructor stub
+
+		}
+
+		public T getValue() {
+
+			return value;
+
+		}
+
+		public void setValue(T value) {
+
+			this.value = value;
+
+		}
+
+		public Node getNextReference() {
+
+			return nextReference;
+
+		}
+
+		public void setNextReference(Node nextReference) {
+
+			this.nextReference = nextReference;
+
+		}
+
+	}
+
+	public void add(E value) {
+
+		Node nodeToBeAdded = head;
+
+		if (head==null) {
+
+			head = new Node(value);
+
+         return;
+
+		}
+
+		while (nodeToBeAdded.getNextReference() != null) {
+
+			nodeToBeAdded = nodeToBeAdded.getNextReference();
+
+		}
+
+		Node node = new Node(value);
+
+		nodeToBeAdded.setNextReference(node);
+
+	}
+
+	
+
+	
+
+	//Printing all elements in LinkedLists
+
+	void printAll() {
+
+		Node node = head;
+
+		while (node != null) {
+
+			System.out.println(node.getValue());
+
+			node = node.getNextReference();
+
+		}
+
+	}
+
+	
+
+public void insertIntoList(E value){
+
+	Node node1= head;
+
+	Node previousNode=null;
+
+if(null==node1){
+
+head= new Node(value);
+
+return;
+
+}	
+
+while(node1!=null &#038;&#038; node1.getValue().doubleValue()&#060;=value.doubleValue()){
+
+	
+
+	previousNode=node1;
+
+	node1=node1.getNextReference();
+
+	}
+
+if(null ==node1){
+
+	previousNode.setNextReference(new Node(value))	;
+
+	return;
+
+}
+
+if(previousNode ==null){
+
+	head=new Node(value, head)	;
+
+	return;
+
+}
+
+	previousNode.setNextReference(new Node(value));
+
+	previousNode.getNextReference().setNextReference(node1);
+
+}
+
+void sortedInsert( E value)
+
+{
+
+	Node new_node=new Node(value);
+
+	Node current;
+
+    /* Special case for the head end */
+
+    if (head == null &#124;&#124; head.getValue().doubleValue() &#062;= new_node.getValue().doubleValue())
+
+    {
+
+        new_node.setNextReference(head);
+
+        head = new_node;
+
+    }
+
+    else
+
+    {
+
+        /* Locate the node before the point of insertion */
+
+        current = head;
+
+        while (current.getNextReference()!=null &#038;&#038;
+
+               current.getNextReference().getValue().doubleValue() &#060; new_node.getValue().doubleValue())
+
+        {
+
+            current = current.getNextReference();
+
+        }
+
+        new_node.setNextReference(current.getNextReference());
+
+        current.setNextReference( new_node);
+
+    }
+
+}
+
+ 
+
+	public static void main(String[] args) {
+
+		LinkedList linkedList = new LinkedList();
+
+		/*linkedList.add(1);
+
+		linkedList.add(2);
+
+		linkedList.add(4);*/
+
+		//linkedList.printAll();
+
+		linkedList.insertIntoList(3);
+
+		linkedList.insertIntoList(5);
+
+		linkedList.insertIntoList(2);
+
+		linkedList.sortedInsert(1);
+
+		linkedList.sortedInsert(2);
+
+		linkedList.sortedInsert(7);
+
+		linkedList.sortedInsert(3);
+
+		//linkedList.add(&quot;5&quot;);
+
+		linkedList.printAll();
+
+		
+
+	}
+
+}]]></description>
+		<content:encoded><![CDATA[<p>IMPLEMENTED IN JAVA GENERIC WAY:</p>
+<p>public class LinkedList implements Cloneable{</p>
+<p>	Node head = null;</p>
+<p>	//Adding at the End</p>
+<p>	  class Node {</p>
+<p>		T value;</p>
+<p>		Node nextReference;</p>
+<p>		public Node(T value) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = null;</p>
+<p>		}</p>
+<p>		public Node(T value, Node ref) {</p>
+<p>			this.value = value;</p>
+<p>			this.nextReference = ref;</p>
+<p>		}</p>
+<p>		public Node() {</p>
+<p>			// TODO Auto-generated constructor stub</p>
+<p>		}</p>
+<p>		public T getValue() {</p>
+<p>			return value;</p>
+<p>		}</p>
+<p>		public void setValue(T value) {</p>
+<p>			this.value = value;</p>
+<p>		}</p>
+<p>		public Node getNextReference() {</p>
+<p>			return nextReference;</p>
+<p>		}</p>
+<p>		public void setNextReference(Node nextReference) {</p>
+<p>			this.nextReference = nextReference;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	public void add(E value) {</p>
+<p>		Node nodeToBeAdded = head;</p>
+<p>		if (head==null) {</p>
+<p>			head = new Node(value);</p>
+<p>         return;</p>
+<p>		}</p>
+<p>		while (nodeToBeAdded.getNextReference() != null) {</p>
+<p>			nodeToBeAdded = nodeToBeAdded.getNextReference();</p>
+<p>		}</p>
+<p>		Node node = new Node(value);</p>
+<p>		nodeToBeAdded.setNextReference(node);</p>
+<p>	}</p>
+<p>	//Printing all elements in LinkedLists</p>
+<p>	void printAll() {</p>
+<p>		Node node = head;</p>
+<p>		while (node != null) {</p>
+<p>			System.out.println(node.getValue());</p>
+<p>			node = node.getNextReference();</p>
+<p>		}</p>
+<p>	}</p>
+<p>public void insertIntoList(E value){</p>
+<p>	Node node1= head;</p>
+<p>	Node previousNode=null;</p>
+<p>if(null==node1){</p>
+<p>head= new Node(value);</p>
+<p>return;</p>
+<p>}	</p>
+<p>while(node1!=null &amp;&amp; node1.getValue().doubleValue()&lt;=value.doubleValue()){</p>
+<p>	previousNode=node1;</p>
+<p>	node1=node1.getNextReference();</p>
+<p>	}</p>
+<p>if(null ==node1){</p>
+<p>	previousNode.setNextReference(new Node(value))	;</p>
+<p>	return;</p>
+<p>}</p>
+<p>if(previousNode ==null){</p>
+<p>	head=new Node(value, head)	;</p>
+<p>	return;</p>
+<p>}</p>
+<p>	previousNode.setNextReference(new Node(value));</p>
+<p>	previousNode.getNextReference().setNextReference(node1);</p>
+<p>}</p>
+<p>void sortedInsert( E value)</p>
+<p>{</p>
+<p>	Node new_node=new Node(value);</p>
+<p>	Node current;</p>
+<p>    /* Special case for the head end */</p>
+<p>    if (head == null || head.getValue().doubleValue() &gt;= new_node.getValue().doubleValue())</p>
+<p>    {</p>
+<p>        new_node.setNextReference(head);</p>
+<p>        head = new_node;</p>
+<p>    }</p>
+<p>    else</p>
+<p>    {</p>
+<p>        /* Locate the node before the point of insertion */</p>
+<p>        current = head;</p>
+<p>        while (current.getNextReference()!=null &amp;&amp;</p>
+<p>               current.getNextReference().getValue().doubleValue() &lt; new_node.getValue().doubleValue())</p>
+<p>        {</p>
+<p>            current = current.getNextReference();</p>
+<p>        }</p>
+<p>        new_node.setNextReference(current.getNextReference());</p>
+<p>        current.setNextReference( new_node);</p>
+<p>    }</p>
+<p>}</p>
+<p>	public static void main(String[] args) {</p>
+<p>		LinkedList linkedList = new LinkedList();</p>
+<p>		/*linkedList.add(1);</p>
+<p>		linkedList.add(2);</p>
+<p>		linkedList.add(4);*/</p>
+<p>		//linkedList.printAll();</p>
+<p>		linkedList.insertIntoList(3);</p>
+<p>		linkedList.insertIntoList(5);</p>
+<p>		linkedList.insertIntoList(2);</p>
+<p>		linkedList.sortedInsert(1);</p>
+<p>		linkedList.sortedInsert(2);</p>
+<p>		linkedList.sortedInsert(7);</p>
+<p>		linkedList.sortedInsert(3);</p>
+<p>		//linkedList.add(&#8220;5&#8221;);</p>
+<p>		linkedList.printAll();</p>
+<p>	}</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dark Protocol</title>
+		<link>http://www.geeksforgeeks.org/given-a-linked-list-which-is-sorted-how-will-you-insert-in-sorted-way/#comment-33811</link>
+		<dc:creator><![CDATA[Dark Protocol]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 18:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=1844#comment-33811</guid>
+		<description><![CDATA[For Larger List size (n&#062;10000000), Skip list is more appropriate]]></description>
+		<content:encoded><![CDATA[<p>For Larger List size (n&gt;10000000), Skip list is more appropriate</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.059 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:15:36 -->
+
+<!-- Compression = gzip -->

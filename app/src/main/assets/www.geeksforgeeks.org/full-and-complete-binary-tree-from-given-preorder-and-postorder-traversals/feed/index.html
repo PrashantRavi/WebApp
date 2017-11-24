@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Construct Full Binary Tree from given preorder and postorder traversals</title>
+	<atom:link href="http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Rajeev</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-38936</link>
+		<dc:creator><![CDATA[Rajeev]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 11:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-38936</guid>
+		<description><![CDATA[//utility function to get index for the left and right subtree
+int searchIndex(int post[],int pre[],int k,int size,int start,int end)
+
+{
+
+	int  i;
+
+	for(i=0;i&#060;size;i++)
+
+	if(post[i]==k)
+
+	break;
+
+	int val = post[i-1];
+
+	for(i=start;i=end)
+
+	return NULL;
+
+	tree *root = newNode(pre[start]);
+
+	if(start==end-1)
+
+	return root;
+
+	int index = searchIndex(post,pre,pre[start],size,start,end);
+
+	root-&#062;left = constructTree(pre,post,start+1,index,size);
+
+	root-&#062;right = constructTree(pre,post,index,end,size);
+
+	return root;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>//utility function to get index for the left and right subtree<br />
+int searchIndex(int post[],int pre[],int k,int size,int start,int end)</p>
+<p>{</p>
+<p>	int  i;</p>
+<p>	for(i=0;i&lt;size;i++)</p>
+<p>	if(post[i]==k)</p>
+<p>	break;</p>
+<p>	int val = post[i-1];</p>
+<p>	for(i=start;i=end)</p>
+<p>	return NULL;</p>
+<p>	tree *root = newNode(pre[start]);</p>
+<p>	if(start==end-1)</p>
+<p>	return root;</p>
+<p>	int index = searchIndex(post,pre,pre[start],size,start,end);</p>
+<p>	root-&gt;left = constructTree(pre,post,start+1,index,size);</p>
+<p>	root-&gt;right = constructTree(pre,post,index,end,size);</p>
+<p>	return root;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-35349</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Thu, 01 May 2014 05:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-35349</guid>
+		<description><![CDATA[since u have to make cmplete binary tree so u must have to open two recursive calls for each nodes...the left child will obviously be the next index of preorder and right child index can be found by getting the key that occur just before the node in postorder and find its index in the preorder
+
+#include
+using namespace std;
+struct tnode
+{
+	tnode* lchild;
+	int data;
+	tnode* rchild;
+	tnode(int d)
+	{
+		lchild=NULL;
+		data=d;
+		rchild=NULL;
+	}
+};
+int search(int n,int post[],int pre[],int size)
+{
+	int i;
+	for(i=0;i&#060;=size;i++)
+	{
+		if(post[i]==n)
+		   break;
+	}
+	int k=post[i-1];
+	for(int j=0;jhigh)
+	   return NULL;
+	if(low==high)
+	{
+		root=new tnode(pre[low]);
+		return root;
+	}
+	if(!root)
+	    root=new tnode(pre[low]);
+	int rci=search(pre[low],post,pre,size);
+	root-&#062;lchild=fun(root-&#062;lchild,pre,post,low+1,rci-1,size);
+	root-&#062;rchild=fun(root-&#062;rchild,pre,post,rci,high,size);
+	return root;
+}
+void display(tnode* root)
+{
+	if(root)
+	{
+		display(root-&#062;lchild);
+		display(root-&#062;rchild);
+		cout&#060;data&#060;&#060;&#034; &#034;;
+	}
+}
+int main()
+{
+	tnode* root=NULL;
+	int pre[] = {3,5,2,1,4};
+    int post[] = {2,1,5,4,3};
+	int n=sizeof(pre)/sizeof(pre[0]);
+	display(fun(root,pre,post,0,n-1,n-1));
+	return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>since u have to make cmplete binary tree so u must have to open two recursive calls for each nodes&#8230;the left child will obviously be the next index of preorder and right child index can be found by getting the key that occur just before the node in postorder and find its index in the preorder</p>
+<p>#include<br />
+using namespace std;<br />
+struct tnode<br />
+{<br />
+	tnode* lchild;<br />
+	int data;<br />
+	tnode* rchild;<br />
+	tnode(int d)<br />
+	{<br />
+		lchild=NULL;<br />
+		data=d;<br />
+		rchild=NULL;<br />
+	}<br />
+};<br />
+int search(int n,int post[],int pre[],int size)<br />
+{<br />
+	int i;<br />
+	for(i=0;i&lt;=size;i++)<br />
+	{<br />
+		if(post[i]==n)<br />
+		   break;<br />
+	}<br />
+	int k=post[i-1];<br />
+	for(int j=0;jhigh)<br />
+	   return NULL;<br />
+	if(low==high)<br />
+	{<br />
+		root=new tnode(pre[low]);<br />
+		return root;<br />
+	}<br />
+	if(!root)<br />
+	    root=new tnode(pre[low]);<br />
+	int rci=search(pre[low],post,pre,size);<br />
+	root-&gt;lchild=fun(root-&gt;lchild,pre,post,low+1,rci-1,size);<br />
+	root-&gt;rchild=fun(root-&gt;rchild,pre,post,rci,high,size);<br />
+	return root;<br />
+}<br />
+void display(tnode* root)<br />
+{<br />
+	if(root)<br />
+	{<br />
+		display(root-&gt;lchild);<br />
+		display(root-&gt;rchild);<br />
+		cout&lt;data&lt;&lt;&quot; &quot;;<br />
+	}<br />
+}<br />
+int main()<br />
+{<br />
+	tnode* root=NULL;<br />
+	int pre[] = {3,5,2,1,4};<br />
+    int post[] = {2,1,5,4,3};<br />
+	int n=sizeof(pre)/sizeof(pre[0]);<br />
+	display(fun(root,pre,post,0,n-1,n-1));<br />
+	return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tapan Avasthi</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-33806</link>
+		<dc:creator><![CDATA[Tapan Avasthi]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 17:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-33806</guid>
+		<description><![CDATA[struct node * buildCompletePrePostTree(int *Pe, int sPe, int ePe, int *Po, int sPo, int ePo){
+
+if(sPe&#062;ePe &#124;&#124; sPo&#062;ePo &#124;&#124; Pe==NULL &#124;&#124; Po==NULL)
+
+	return NULL;
+
+struct node *root=newNode(Pe[sPe]);
+
+if(sPe==ePe &#124;&#124; sPo==ePo) //size is 1
+
+	return root;//subtree doesn&#039;t have a child node
+
+root-&#062;left=buildCompletePrePostTree(Pe,sPe+1,searchIndex(Pe,sPe,ePe,Po[ePo-1])-1,Po,sPo,searchIndex(Po,sPo,ePo,Pe[sPe+1]));
+
+root-&#062;right=buildCompletePrePostTree(Pe, searchIndex(Pe,sPe,ePe,Po[ePo-1]),ePe, Po, searchIndex(Po,sPo,ePo,Pe[sPe+1])+1,ePo-1);
+
+return root;
+
+}//end of buildCompletePrePostTree method
+
+//Helper function
+int searchIndex(int *in, int inStart, int inEnd, int value){
+
+	int i=0;
+
+	for(i=inStart;i&#060;=inEnd;i++){
+
+		if(value==in[i])
+
+			return i;
+
+	}
+
+	return -1;
+
+}//end of searchIndex function]]></description>
+		<content:encoded><![CDATA[<p>struct node * buildCompletePrePostTree(int *Pe, int sPe, int ePe, int *Po, int sPo, int ePo){</p>
+<p>if(sPe&gt;ePe || sPo&gt;ePo || Pe==NULL || Po==NULL)</p>
+<p>	return NULL;</p>
+<p>struct node *root=newNode(Pe[sPe]);</p>
+<p>if(sPe==ePe || sPo==ePo) //size is 1</p>
+<p>	return root;//subtree doesn&#8217;t have a child node</p>
+<p>root-&gt;left=buildCompletePrePostTree(Pe,sPe+1,searchIndex(Pe,sPe,ePe,Po[ePo-1])-1,Po,sPo,searchIndex(Po,sPo,ePo,Pe[sPe+1]));</p>
+<p>root-&gt;right=buildCompletePrePostTree(Pe, searchIndex(Pe,sPe,ePe,Po[ePo-1]),ePe, Po, searchIndex(Po,sPo,ePo,Pe[sPe+1])+1,ePo-1);</p>
+<p>return root;</p>
+<p>}//end of buildCompletePrePostTree method</p>
+<p>//Helper function<br />
+int searchIndex(int *in, int inStart, int inEnd, int value){</p>
+<p>	int i=0;</p>
+<p>	for(i=inStart;i&lt;=inEnd;i++){</p>
+<p>		if(value==in[i])</p>
+<p>			return i;</p>
+<p>	}</p>
+<p>	return -1;</p>
+<p>}//end of searchIndex function</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tapan Avasthi</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-33807</link>
+		<dc:creator><![CDATA[Tapan Avasthi]]></dc:creator>
+		<pubDate>Mon, 24 Mar 2014 17:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-33807</guid>
+		<description><![CDATA[struct node * buildCompletePrePostTree(int *Pe, int sPe, int ePe, int *Po, int sPo, int ePo){
+
+if(sPe&#062;ePe &#124;&#124; sPo&#062;ePo &#124;&#124; Pe==NULL &#124;&#124; Po==NULL)
+
+	return NULL;
+
+struct node *root=newNode(Pe[sPe]);
+
+if(sPe==ePe &#124;&#124; sPo==ePo) //size is 1
+
+	return root;//subtree doesn&#039;t have a child node
+
+root-&#062;left=buildCompletePrePostTree(Pe,sPe+1,searchIndex(Pe,sPe,ePe,Po[ePo-1])-1,Po,sPo,searchIndex(Po,sPo,ePo,Pe[sPe+1]));
+
+root-&#062;right=buildCompletePrePostTree(Pe, searchIndex(Pe,sPe,ePe,Po[ePo-1]),ePe, Po, searchIndex(Po,sPo,ePo,Pe[sPe+1])+1,ePo-1);
+
+return root;
+
+}//end of buildCompletePrePostTree method
+
+//Helper function
+int searchIndex(int *in, int inStart, int inEnd, int value){
+
+	int i=0;
+
+	for(i=inStart;i&#060;=inEnd;i++){
+
+		if(value==in[i])
+
+			return i;
+
+	}
+
+	return -1;
+
+}//end of searchIndex function]]></description>
+		<content:encoded><![CDATA[<p>struct node * buildCompletePrePostTree(int *Pe, int sPe, int ePe, int *Po, int sPo, int ePo){</p>
+<p>if(sPe&gt;ePe || sPo&gt;ePo || Pe==NULL || Po==NULL)</p>
+<p>	return NULL;</p>
+<p>struct node *root=newNode(Pe[sPe]);</p>
+<p>if(sPe==ePe || sPo==ePo) //size is 1</p>
+<p>	return root;//subtree doesn&#8217;t have a child node</p>
+<p>root-&gt;left=buildCompletePrePostTree(Pe,sPe+1,searchIndex(Pe,sPe,ePe,Po[ePo-1])-1,Po,sPo,searchIndex(Po,sPo,ePo,Pe[sPe+1]));</p>
+<p>root-&gt;right=buildCompletePrePostTree(Pe, searchIndex(Pe,sPe,ePe,Po[ePo-1]),ePe, Po, searchIndex(Po,sPo,ePo,Pe[sPe+1])+1,ePo-1);</p>
+<p>return root;</p>
+<p>}//end of buildCompletePrePostTree method</p>
+<p>//Helper function<br />
+int searchIndex(int *in, int inStart, int inEnd, int value){</p>
+<p>	int i=0;</p>
+<p>	for(i=inStart;i&lt;=inEnd;i++){</p>
+<p>		if(value==in[i])</p>
+<p>			return i;</p>
+<p>	}</p>
+<p>	return -1;</p>
+<p>}//end of searchIndex function</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sriharsha g.r.v</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-29653</link>
+		<dc:creator><![CDATA[Sriharsha g.r.v]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 12:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-29653</guid>
+		<description><![CDATA[we hav used array &quot;pre&quot; and searched the corresponding value in &quot;pos&quot; 
+and then solved the problem.the other is way is 
+possible and its simple to analyse with above logic,
+i.e use &quot;pos&quot; and searched the corresponding value in &quot;pre&quot; 
+
+#include 
+#include 
+ 
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child */
+int preIndex;
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+ 
+
+struct node* newNode (int data)
+{
+    struct node* temp = (struct node *) malloc( sizeof(struct node) );
+ 
+    temp-&#062;data = data;
+    temp-&#062;left = temp-&#062;right = NULL;
+ 
+    return temp;
+}
+ 
+// A recursive function to construct Full from pre[] and post[].
+// preIndex is used to keep track of index in pre[].
+// l is low index and h is high index for the current subarray in post[]
+struct node* constructTreeUtil (int pre[], int post[],
+                                int l, int h, int size)
+{
+    // Base case
+    if ((preIndex &#062;size-1 ) &#124;&#124; l &#062; h)
+        return NULL;
+ 
+    // The first node in preorder traversal is root. So take the node at
+    // preIndex from preorder and make it root, and increment preIndex
+    struct node* root = newNode ( post[preIndex] );
+    --preIndex;
+ 
+    // If the current subarry has only one element, no need to recur
+    if (l == h)
+        return root;
+ 
+    // Search the next element of pre[] in post[]
+    int i;
+    for (i = l; i &#060;= h; ++i)
+        if (post[preIndex] == pre[i])
+            break;
+ 
+    // Use the index of element found in postorder to divide postorder array in
+    // two parts. Left subtree and right subtree
+    if (i =0)
+    {
+       root-&#062;right = constructTreeUtil (pre, post, i , h, size);
+        root-&#062;left = constructTreeUtil (pre, post, l, i-1, size);
+       
+    }
+ 
+    return root;
+}
+ 
+// The main function to construct Full Binary Tree from given preorder and
+// postorder traversals. This function mainly uses constructTreeUtil()
+struct node *constructTree (int pre[], int post[], int size)
+{
+    int preIndex = size-1;
+    return constructTreeUtil (pre, post, 0, size - 1, size);
+}
+ 
+// A utility function to print inorder traversal of a Binary Tree
+void printInorder (struct node* node)
+{
+    if (node == NULL)
+        return;
+    printInorder(node-&#062;left);
+    printf(&quot;%d &quot;, node-&#062;data);
+    printInorder(node-&#062;right);
+}
+ 
+// Driver program to test above functions
+int main ()
+{
+    int pre[] = {1, 2, 4, 8, 9, 5, 3, 6, 7};
+    int post[] = {8, 9, 4, 5, 2, 6, 7, 3, 1};
+    int size = sizeof( pre ) / sizeof( pre[0] );
+ preIndex=size-1;
+    struct node *root = constructTree(pre, post, size);
+ 
+    printf(&quot;Inorder traversal of the constructed tree: n&quot;);
+    printInorder(root);
+ 
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>we hav used array &#8220;pre&#8221; and searched the corresponding value in &#8220;pos&#8221;<br />
+and then solved the problem.the other is way is<br />
+possible and its simple to analyse with above logic,<br />
+i.e use &#8220;pos&#8221; and searched the corresponding value in &#8220;pre&#8221; </p>
+<p>#include<br />
+#include </p>
+<p>/* A binary tree node has data, pointer to left child<br />
+   and a pointer to right child */<br />
+int preIndex;<br />
+struct node<br />
+{<br />
+    int data;<br />
+    struct node *left;<br />
+    struct node *right;<br />
+};</p>
+<p>struct node* newNode (int data)<br />
+{<br />
+    struct node* temp = (struct node *) malloc( sizeof(struct node) );</p>
+<p>    temp-&gt;data = data;<br />
+    temp-&gt;left = temp-&gt;right = NULL;</p>
+<p>    return temp;<br />
+}</p>
+<p>// A recursive function to construct Full from pre[] and post[].<br />
+// preIndex is used to keep track of index in pre[].<br />
+// l is low index and h is high index for the current subarray in post[]<br />
+struct node* constructTreeUtil (int pre[], int post[],<br />
+                                int l, int h, int size)<br />
+{<br />
+    // Base case<br />
+    if ((preIndex &gt;size-1 ) || l &gt; h)<br />
+        return NULL;</p>
+<p>    // The first node in preorder traversal is root. So take the node at<br />
+    // preIndex from preorder and make it root, and increment preIndex<br />
+    struct node* root = newNode ( post[preIndex] );<br />
+    &#8211;preIndex;</p>
+<p>    // If the current subarry has only one element, no need to recur<br />
+    if (l == h)<br />
+        return root;</p>
+<p>    // Search the next element of pre[] in post[]<br />
+    int i;<br />
+    for (i = l; i &lt;= h; ++i)<br />
+        if (post[preIndex] == pre[i])<br />
+            break;</p>
+<p>    // Use the index of element found in postorder to divide postorder array in<br />
+    // two parts. Left subtree and right subtree<br />
+    if (i =0)<br />
+    {<br />
+       root-&gt;right = constructTreeUtil (pre, post, i , h, size);<br />
+        root-&gt;left = constructTreeUtil (pre, post, l, i-1, size);</p>
+<p>    }</p>
+<p>    return root;<br />
+}</p>
+<p>// The main function to construct Full Binary Tree from given preorder and<br />
+// postorder traversals. This function mainly uses constructTreeUtil()<br />
+struct node *constructTree (int pre[], int post[], int size)<br />
+{<br />
+    int preIndex = size-1;<br />
+    return constructTreeUtil (pre, post, 0, size &#8211; 1, size);<br />
+}</p>
+<p>// A utility function to print inorder traversal of a Binary Tree<br />
+void printInorder (struct node* node)<br />
+{<br />
+    if (node == NULL)<br />
+        return;<br />
+    printInorder(node-&gt;left);<br />
+    printf(&#8220;%d &#8220;, node-&gt;data);<br />
+    printInorder(node-&gt;right);<br />
+}</p>
+<p>// Driver program to test above functions<br />
+int main ()<br />
+{<br />
+    int pre[] = {1, 2, 4, 8, 9, 5, 3, 6, 7};<br />
+    int post[] = {8, 9, 4, 5, 2, 6, 7, 3, 1};<br />
+    int size = sizeof( pre ) / sizeof( pre[0] );<br />
+ preIndex=size-1;<br />
+    struct node *root = constructTree(pre, post, size);</p>
+<p>    printf(&#8220;Inorder traversal of the constructed tree: n&#8221;);<br />
+    printInorder(root);</p>
+<p>    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-29652</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 12:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-29652</guid>
+		<description><![CDATA[here we hav used array &quot;pre&quot; and searched the corresponding value in &quot;pos&quot; 
+and then solved the problem.can any one help if the other is way is 
+possible.
+
+i actually made this change
+initialising preorder with n-1 and
+
+if (i =0)
+    {
+       root-&#062;right = constructTreeUtil (pre, post, i , h, size);
+        root-&#062;left = constructTreeUtil (pre, post, l, i-1, size);
+       
+    }
+
+explanation with code is highly appreciated.thanq]]></description>
+		<content:encoded><![CDATA[<p>here we hav used array &#8220;pre&#8221; and searched the corresponding value in &#8220;pos&#8221;<br />
+and then solved the problem.can any one help if the other is way is<br />
+possible.</p>
+<p>i actually made this change<br />
+initialising preorder with n-1 and</p>
+<p>if (i =0)<br />
+    {<br />
+       root-&gt;right = constructTreeUtil (pre, post, i , h, size);<br />
+        root-&gt;left = constructTreeUtil (pre, post, l, i-1, size);</p>
+<p>    }</p>
+<p>explanation with code is highly appreciated.thanq</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-29651</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2013 12:00:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-29651</guid>
+		<description><![CDATA[here we hav used array pre and searched the corresponding value in pos and then solved the problem.can any one help if the other is way is possible.
+explanation with code is highly appreciated.thanq]]></description>
+		<content:encoded><![CDATA[<p>here we hav used array pre and searched the corresponding value in pos and then solved the problem.can any one help if the other is way is possible.<br />
+explanation with code is highly appreciated.thanq</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prakash</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-27222</link>
+		<dc:creator><![CDATA[prakash]]></dc:creator>
+		<pubDate>Sat, 31 Aug 2013 16:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-27222</guid>
+		<description><![CDATA[root-&#062;right = constructTreeUtil (pre, post, preIndex, i + 1, h, size);
+in this statement upper bound arg for post array must be (h-1) not h. hecause u must exclude the root value in post order array which is already created]]></description>
+		<content:encoded><![CDATA[<p>root-&gt;right = constructTreeUtil (pre, post, preIndex, i + 1, h, size);<br />
+in this statement upper bound arg for post array must be (h-1) not h. hecause u must exclude the root value in post order array which is already created</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nilesh Agrawal</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-26183</link>
+		<dc:creator><![CDATA[Nilesh Agrawal]]></dc:creator>
+		<pubDate>Fri, 26 Jul 2013 15:11:09 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-26183</guid>
+		<description><![CDATA[Great Example]]></description>
+		<content:encoded><![CDATA[<p>Great Example</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sarthak Mall 'shanky'</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-26182</link>
+		<dc:creator><![CDATA[Sarthak Mall 'shanky']]></dc:creator>
+		<pubDate>Thu, 11 Jul 2013 14:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-26182</guid>
+		<description><![CDATA[okk..got it .. I was seeing it as perfect binary tree by mistake... :)]]></description>
+		<content:encoded><![CDATA[<p>okk..got it .. I was seeing it as perfect binary tree by mistake&#8230; 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/#comment-26181</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Thu, 11 Jul 2013 13:49:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24867#comment-26181</guid>
+		<description><![CDATA[The definition in fact seems to be matching with Wikipedia.  The wiki page says &#034;A full binary tree (sometimes proper binary tree or 2-tree or strictly binary tree) is a tree in which every node other than the leaves has two children. Or, perhaps more clearly, every node in a binary tree has exactly (strictly) 0 or 2 children. Sometimes a full tree is ambiguously defined as a perfect tree (see next). Physicists define a binary tree to mean a full binary tree&#034;]]></description>
+		<content:encoded><![CDATA[<p>The definition in fact seems to be matching with Wikipedia.  The wiki page says &quot;A full binary tree (sometimes proper binary tree or 2-tree or strictly binary tree) is a tree in which every node other than the leaves has two children. Or, perhaps more clearly, every node in a binary tree has exactly (strictly) 0 or 2 children. Sometimes a full tree is ambiguously defined as a perfect tree (see next). Physicists define a binary tree to mean a full binary tree&quot;</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:03 -->
+
+<!-- Compression = gzip -->

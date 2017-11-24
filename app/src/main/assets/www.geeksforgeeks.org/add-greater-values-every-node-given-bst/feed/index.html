@@ -1,0 +1,1342 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Add all greater values to every node in a given BST</title>
+	<atom:link href="http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Sanjay Agarwal</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-37847</link>
+		<dc:creator><![CDATA[Sanjay Agarwal]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 16:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-37847</guid>
+		<description><![CDATA[Brilliant solution :)]]></description>
+		<content:encoded><![CDATA[<p>Brilliant solution 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Roxanne</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-30208</link>
+		<dc:creator><![CDATA[Roxanne]]></dc:creator>
+		<pubDate>Thu, 28 Nov 2013 21:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-30208</guid>
+		<description><![CDATA[this is not efficient. Could be modified by-
+inorder traversal = O(n). Store inorder nodes in a orderedhashmap. 
+Iterate over it and find sum of numbers greater than x eg(tree with 3 nodes 3, left2, right 5)
+OrderedHM(
+ key-2 value- 10 (8 +2)
+ key- 3 value - 8 (5+3)
+ key 5 - value-5 (right most in inorder)
+) -&#062; O(n)
+Traverse tree again and find sum in this hashmap with corresponding key - O(n)]]></description>
+		<content:encoded><![CDATA[<p>this is not efficient. Could be modified by-<br />
+inorder traversal = O(n). Store inorder nodes in a orderedhashmap.<br />
+Iterate over it and find sum of numbers greater than x eg(tree with 3 nodes 3, left2, right 5)<br />
+OrderedHM(<br />
+ key-2 value- 10 (8 +2)<br />
+ key- 3 value &#8211; 8 (5+3)<br />
+ key 5 &#8211; value-5 (right most in inorder)<br />
+) -&gt; O(n)<br />
+Traverse tree again and find sum in this hashmap with corresponding key &#8211; O(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: trojansmith</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-30194</link>
+		<dc:creator><![CDATA[trojansmith]]></dc:creator>
+		<pubDate>Thu, 28 Nov 2013 06:18:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-30194</guid>
+		<description><![CDATA[How about this...
+&lt;code&gt;public class Tree {
+int data;
+Tree left;
+Tree right;
+Tree(int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+} class Tree {
+int data;
+Tree left;
+Tree right;
+Tree(int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}int data;
+Tree left;
+Tree right;
+Tree(int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}left;
+Tree right;
+Tree(int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}right;
+Tree(int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}int data,Tree left,Tree right){
+this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}this.data = data;
+this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}this.left = left;
+this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}this.right = right;
+}
+public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}public void inorder(Tree node){
+if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}if(node.left!=null)inorder(node.left);
+System.out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}out.println(node.data);
+if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}if(node.right!=null)inorder(node.right);
+}
+public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}public int addSum(Tree node,int sum){
+if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}if(node.right!=null)sum=addSum(node.right,sum);
+if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}if(node!=null){
+node.data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}data+=sum;
+sum=node.data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}data;
+}
+if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}if(node.left!=null)sum=addSum(node.left,sum);
+return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}return sum;
+}
+public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}public static void main(String[] args){
+Tree node40 = new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(40,null,null);
+Tree node20 = new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(20,null,null);
+Tree node30 = new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(30,node20,node40);
+Tree node60 = new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(60,null,null);
+Tree node80 = new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(80,null,null);
+Tree node70 = new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(70,node60,node80);
+Tree root = new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}new Tree(50,node30,node70);
+root.addSum(root,0);
+root.inorder(root);
+}
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>How about this&#8230;<br />
+<code>public class Tree {<br />
+int data;<br />
+Tree left;<br />
+Tree right;<br />
+Tree(int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+} class Tree {<br />
+int data;<br />
+Tree left;<br />
+Tree right;<br />
+Tree(int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}int data;<br />
+Tree left;<br />
+Tree right;<br />
+Tree(int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}left;<br />
+Tree right;<br />
+Tree(int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}right;<br />
+Tree(int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}int data,Tree left,Tree right){<br />
+this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}this.data = data;<br />
+this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}this.left = left;<br />
+this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}this.right = right;<br />
+}<br />
+public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}public void inorder(Tree node){<br />
+if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}if(node.left!=null)inorder(node.left);<br />
+System.out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}out.println(node.data);<br />
+if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}if(node.right!=null)inorder(node.right);<br />
+}<br />
+public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}public int addSum(Tree node,int sum){<br />
+if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}if(node.right!=null)sum=addSum(node.right,sum);<br />
+if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}if(node!=null){<br />
+node.data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}data+=sum;<br />
+sum=node.data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}data;<br />
+}<br />
+if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}if(node.left!=null)sum=addSum(node.left,sum);<br />
+return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}return sum;<br />
+}<br />
+public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}public static void main(String[] args){<br />
+Tree node40 = new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(40,null,null);<br />
+Tree node20 = new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(20,null,null);<br />
+Tree node30 = new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(30,node20,node40);<br />
+Tree node60 = new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(60,null,null);<br />
+Tree node80 = new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(80,null,null);<br />
+Tree node70 = new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(70,node60,node80);<br />
+Tree root = new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}new Tree(50,node30,node70);<br />
+root.addSum(root,0);<br />
+root.inorder(root);<br />
+}<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-29878</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 16 Nov 2013 12:19:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-29878</guid>
+		<description><![CDATA[Wow Solution]]></description>
+		<content:encoded><![CDATA[<p>Wow Solution</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sriharsha</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-29382</link>
+		<dc:creator><![CDATA[sriharsha]]></dc:creator>
+		<pubDate>Mon, 28 Oct 2013 09:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-29382</guid>
+		<description><![CDATA[please correct me if am wrong;
+
+in the order travesal place the data in an array and then sort in 0(nlogn) time then find all greater values to every node..which takes o(n)..total o(nlogn)+o(n)=o(nlogn) time]]></description>
+		<content:encoded><![CDATA[<p>please correct me if am wrong;</p>
+<p>in the order travesal place the data in an array and then sort in 0(nlogn) time then find all greater values to every node..which takes o(n)..total o(nlogn)+o(n)=o(nlogn) time</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sayali</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-29351</link>
+		<dc:creator><![CDATA[Sayali]]></dc:creator>
+		<pubDate>Sun, 27 Oct 2013 07:53:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-29351</guid>
+		<description><![CDATA[Sorry for the last post.. I meant don&#039;t need to pass sum as a pointer in modifyBSTUtil, we can return it also..]]></description>
+		<content:encoded><![CDATA[<p>Sorry for the last post.. I meant don&#8217;t need to pass sum as a pointer in modifyBSTUtil, we can return it also..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sayali</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-29349</link>
+		<dc:creator><![CDATA[Sayali]]></dc:creator>
+		<pubDate>Sun, 27 Oct 2013 07:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-29349</guid>
+		<description><![CDATA[Don&#039;t need to pass sum as a pointer in modifyBSTUtil]]></description>
+		<content:encoded><![CDATA[<p>Don&#8217;t need to pass sum as a pointer in modifyBSTUtil</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pavansrinivas</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-28509</link>
+		<dc:creator><![CDATA[pavansrinivas]]></dc:creator>
+		<pubDate>Sun, 06 Oct 2013 05:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-28509</guid>
+		<description><![CDATA[Code in JAVA using reverse In-Order
+Validate me
+
+&lt;code&gt;
+
+void addAllgreatValuesBST(){
+		Stack s = new Stack();
+		Node temp = root;
+		int sum = 0;
+		while(true){
+			while(temp!=null){
+				s.push(temp);
+				temp = temp.right;
+			}
+			if(s.isEmpty()){
+				break;
+			}
+			temp = s.pop();
+			sum = sum+temp.i;
+			temp.i = sum;
+			System.out.print(temp.i+&quot;    &quot;);
+			temp = temp.left;
+		}
+	}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>Code in JAVA using reverse In-Order<br />
+Validate me</p>
+<p><code></p>
+<p>void addAllgreatValuesBST(){<br />
+		Stack s = new Stack();<br />
+		Node temp = root;<br />
+		int sum = 0;<br />
+		while(true){<br />
+			while(temp!=null){<br />
+				s.push(temp);<br />
+				temp = temp.right;<br />
+			}<br />
+			if(s.isEmpty()){<br />
+				break;<br />
+			}<br />
+			temp = s.pop();<br />
+			sum = sum+temp.i;<br />
+			temp.i = sum;<br />
+			System.out.print(temp.i+"    ");<br />
+			temp = temp.left;<br />
+		}<br />
+	}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venkatesh</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-28308</link>
+		<dc:creator><![CDATA[Venkatesh]]></dc:creator>
+		<pubDate>Tue, 01 Oct 2013 08:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-28308</guid>
+		<description><![CDATA[@hary : Yess , you are right sum is getting added twice
+ Correct steps are :
+
+root-&#062;data+=sum;
+sum=root-&#062;data;
+
+here for each node  first sum will be added to it &#038; then resulted 
+sum will be placed into sum.
+Please correct me, if i am wrong :)]]></description>
+		<content:encoded><![CDATA[<p>@hary : Yess , you are right sum is getting added twice<br />
+ Correct steps are :</p>
+<p>root-&gt;data+=sum;<br />
+sum=root-&gt;data;</p>
+<p>here for each node  first sum will be added to it &amp; then resulted<br />
+sum will be placed into sum.<br />
+Please correct me, if i am wrong 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: hary</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-28250</link>
+		<dc:creator><![CDATA[hary]]></dc:creator>
+		<pubDate>Mon, 30 Sep 2013 03:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-28250</guid>
+		<description><![CDATA[This will give incorrect result. Correct me If I am wrong in understanding the code, sum is getting added twice (take a closer look)]]></description>
+		<content:encoded><![CDATA[<p>This will give incorrect result. Correct me If I am wrong in understanding the code, sum is getting added twice (take a closer look)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Venkatesh</title>
+		<link>http://www.geeksforgeeks.org/add-greater-values-every-node-given-bst/#comment-28119</link>
+		<dc:creator><![CDATA[Venkatesh]]></dc:creator>
+		<pubDate>Wed, 25 Sep 2013 19:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=122999#comment-28119</guid>
+		<description><![CDATA[//using Inorder traversal Right-Root-Left T(n) : O(n)
+// typedef struct tree mytree
+static int sum=0;
+mytree* addAllGreater(mytree *root)
+{
+if(root)
+{ 
+if(root-&#062;right)
+addAllGreater(root-&#062;right);
+root-&#062;data+=sum;
+sum+=root-&#062;data;
+if(root-&#062;left)
+addAllGreater(root-&#062;left);
+}
+}]]></description>
+		<content:encoded><![CDATA[<p>//using Inorder traversal Right-Root-Left T(n) : O(n)<br />
+// typedef struct tree mytree<br />
+static int sum=0;<br />
+mytree* addAllGreater(mytree *root)<br />
+{<br />
+if(root)<br />
+{<br />
+if(root-&gt;right)<br />
+addAllGreater(root-&gt;right);<br />
+root-&gt;data+=sum;<br />
+sum+=root-&gt;data;<br />
+if(root-&gt;left)<br />
+addAllGreater(root-&gt;left);<br />
+}<br />
+}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:28 -->
+
+<!-- Compression = gzip -->

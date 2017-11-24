@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Count number of occurrences (or frequency) in a sorted array</title>
+	<atom:link href="http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: instance</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-37843</link>
+		<dc:creator><![CDATA[instance]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 15:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-37843</guid>
+		<description><![CDATA[#include
+using namespace std;
+
+//Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 2
+
+void func(int arr[], int start, int end, int freq, int&#038; fL, int&#038; fR)
+{
+    int mid = (start+end)/2;
+    int num = 0;
+    if(start &#062; end)
+    {
+        cout&#060; freq)
+        func(arr, start, mid, freq, fL, fR);
+    else if(arr[mid] &#060; freq)
+        func(arr, mid+1, end, freq, fL, fR);
+    else if(arr[mid] == freq)
+    {
+        if(!fL)
+            func(arr, start, mid, freq, fL, fR);
+        if(!fR)
+            func(arr, mid+1, end, freq, fL, fR);
+    }
+}
+        
+
+int main()
+{
+    int arr[] = {1, 1, 2, 2, 2, 3, 3};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    
+    int freq, fL = 0, fR = 0;
+    cout&#060;&#062;freq;
+    
+    func(arr, 0, size-1, freq, fL, fR);
+    
+    cout&#060;&#060;&#034;   fL = &#034;&#060;&#060;fL&#060;&#060;&#034;  fR = &#034;&#060;&#060;fR&#060;&#060;&#034;  &#034;&#060;&#060;endl;
+    system(&#034;PAUSE&#034;);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;</p>
+<p>//Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 2</p>
+<p>void func(int arr[], int start, int end, int freq, int&amp; fL, int&amp; fR)<br />
+{<br />
+    int mid = (start+end)/2;<br />
+    int num = 0;<br />
+    if(start &gt; end)<br />
+    {<br />
+        cout&lt; freq)<br />
+        func(arr, start, mid, freq, fL, fR);<br />
+    else if(arr[mid] &lt; freq)<br />
+        func(arr, mid+1, end, freq, fL, fR);<br />
+    else if(arr[mid] == freq)<br />
+    {<br />
+        if(!fL)<br />
+            func(arr, start, mid, freq, fL, fR);<br />
+        if(!fR)<br />
+            func(arr, mid+1, end, freq, fL, fR);<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int arr[] = {1, 1, 2, 2, 2, 3, 3};<br />
+    int size = sizeof(arr)/sizeof(arr[0]);</p>
+<p>    int freq, fL = 0, fR = 0;<br />
+    cout&lt;&gt;freq;</p>
+<p>    func(arr, 0, size-1, freq, fL, fR);</p>
+<p>    cout&lt;&lt;&quot;   fL = &quot;&lt;&lt;fL&lt;&lt;&quot;  fR = &quot;&lt;&lt;fR&lt;&lt;&quot;  &quot;&lt;&lt;endl;<br />
+    system(&quot;PAUSE&quot;);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Bhuvan</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-32244</link>
+		<dc:creator><![CDATA[Bhuvan]]></dc:creator>
+		<pubDate>Thu, 06 Feb 2014 00:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-32244</guid>
+		<description><![CDATA[Find_Key(int arr[], int size, int key){
+
+    int begin = 0;
+
+	int end = size - 1;
+
+	int mid = end / 2;
+
+	int res = INT_MIN;
+
+	
+
+	while (begin != mid)
+
+	{
+
+		if (arr[mid] &#060; key)
+
+			begin = mid;
+
+		else
+
+		{
+
+			end = mid;
+
+			if(arr[mid] == key)
+
+				res = mid;
+
+		}
+
+		mid = (end + begin )/2;
+
+	}
+
+	return res;
+
+    }
+
+Assuming the array of ints is in ascending sorted order; Returns the index of the first index of key occurrence or INT_MIN. Runs in O(lg n).]]></description>
+		<content:encoded><![CDATA[<p>Find_Key(int arr[], int size, int key){</p>
+<p>    int begin = 0;</p>
+<p>	int end = size &#8211; 1;</p>
+<p>	int mid = end / 2;</p>
+<p>	int res = INT_MIN;</p>
+<p>	while (begin != mid)</p>
+<p>	{</p>
+<p>		if (arr[mid] &lt; key)</p>
+<p>			begin = mid;</p>
+<p>		else</p>
+<p>		{</p>
+<p>			end = mid;</p>
+<p>			if(arr[mid] == key)</p>
+<p>				res = mid;</p>
+<p>		}</p>
+<p>		mid = (end + begin )/2;</p>
+<p>	}</p>
+<p>	return res;</p>
+<p>    }</p>
+<p>Assuming the array of ints is in ascending sorted order; Returns the index of the first index of key occurrence or INT_MIN. Runs in O(lg n).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sat</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-31601</link>
+		<dc:creator><![CDATA[Sat]]></dc:creator>
+		<pubDate>Sat, 18 Jan 2014 13:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-31601</guid>
+		<description><![CDATA[mid = (low + high)/2 will cause overflow if low and high are high. Java binary search had that issue. It should be written this way -&#062; mid = low + (high - low)/2; But this change alone isn&#039;t sufficient. Once you calculated mid this way, the loop invariant low &#060;= high should be changed to low &#060; high. Once&#039;s that changed, you will have to make other changes when low &#060; high. Overall this post has many hidden issues.]]></description>
+		<content:encoded><![CDATA[<p>mid = (low + high)/2 will cause overflow if low and high are high. Java binary search had that issue. It should be written this way -&gt; mid = low + (high &#8211; low)/2; But this change alone isn&#8217;t sufficient. Once you calculated mid this way, the loop invariant low &lt;= high should be changed to low &lt; high. Once&#039;s that changed, you will have to make other changes when low &lt; high. Overall this post has many hidden issues.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prastut</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-31523</link>
+		<dc:creator><![CDATA[prastut]]></dc:creator>
+		<pubDate>Wed, 15 Jan 2014 06:40:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-31523</guid>
+		<description><![CDATA[#include
+int count(int a[],int start,int end,int num)
+{
+    int mid=(start+end)/2,lcount=0,rcount=0; 
+    while(start&#060;=end)
+    {
+        lcount=count(a,start,mid-1,num);
+        rcount=count(a,mid+1,end,num);
+
+        if(a[mid]==num)
+        {
+            if(lcount==-1)
+                lcount=0;
+            if(rcount==-1)
+                rcount=0;
+            return 1+lcount+rcount;
+        }
+        else
+        {
+            if(lcount==-1 &#038;&#038; rcount== -1)
+                return -1;
+            else
+            {
+                if(lcount==-1)
+                    lcount=0;
+                if(rcount==-1)
+                    rcount=0;
+
+
+                                return lcount+rcount;
+            } 
+        }
+    }
+    
+    return -1;
+}
+
+int count_occurence(int a[],int len,int num)
+{
+    return count(a,0,len-1,num);
+}
+
+int main()
+{
+    int arr[] = {1, 1, 1, 2, 2, 2, 2, 3};
+    int len=7,num=2;
+
+    printf(&#034;Count of %d is %d&#034;,num,count_occurence(arr,len,num));
+
+    return 0;
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+int count(int a[],int start,int end,int num)<br />
+{<br />
+    int mid=(start+end)/2,lcount=0,rcount=0;<br />
+    while(start&lt;=end)<br />
+    {<br />
+        lcount=count(a,start,mid-1,num);<br />
+        rcount=count(a,mid+1,end,num);</p>
+<p>        if(a[mid]==num)<br />
+        {<br />
+            if(lcount==-1)<br />
+                lcount=0;<br />
+            if(rcount==-1)<br />
+                rcount=0;<br />
+            return 1+lcount+rcount;<br />
+        }<br />
+        else<br />
+        {<br />
+            if(lcount==-1 &amp;&amp; rcount== -1)<br />
+                return -1;<br />
+            else<br />
+            {<br />
+                if(lcount==-1)<br />
+                    lcount=0;<br />
+                if(rcount==-1)<br />
+                    rcount=0;</p>
+<p>                                return lcount+rcount;<br />
+            }<br />
+        }<br />
+    }</p>
+<p>    return -1;<br />
+}</p>
+<p>int count_occurence(int a[],int len,int num)<br />
+{<br />
+    return count(a,0,len-1,num);<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int arr[] = {1, 1, 1, 2, 2, 2, 2, 3};<br />
+    int len=7,num=2;</p>
+<p>    printf(&quot;Count of %d is %d&quot;,num,count_occurence(arr,len,num));</p>
+<p>    return 0;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: din</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-28096</link>
+		<dc:creator><![CDATA[din]]></dc:creator>
+		<pubDate>Wed, 25 Sep 2013 06:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-28096</guid>
+		<description><![CDATA[code in java validate me...
+
+&lt;code&gt;
+int count(){
+        int c = 0;
+        int[] a = {1, 1, 2, 2, 2, 2, 3};
+        int  l = 0;
+        int key = 1;
+        int r = a.length-1;
+        while(l&#060;=r){
+            int mid = (l+r)/2;            
+            if(a[mid]==key){
+                c++;
+                int n=1;
+                int k =-1;
+                    while(mid+n=0 &#038;&#038;a[mid+k]==key){
+                        k--;
+                        c++;
+                    }
+                
+                return c;
+            }
+            else if(key&#062;a[mid]){
+                l=mid+1;
+            }
+            else{
+                r = mid-1;
+            }
+            
+        }
+        return -1;
+    }]]></description>
+		<content:encoded><![CDATA[<p>code in java validate me&#8230;</p>
+<p><code><br />
+int count(){<br />
+        int c = 0;<br />
+        int[] a = {1, 1, 2, 2, 2, 2, 3};<br />
+        int  l = 0;<br />
+        int key = 1;<br />
+        int r = a.length-1;<br />
+        while(l&lt;=r){<br />
+            int mid = (l+r)/2;<br />
+            if(a[mid]==key){<br />
+                c++;<br />
+                int n=1;<br />
+                int k =-1;<br />
+                    while(mid+n=0 &amp;&amp;a[mid+k]==key){<br />
+                        k--;<br />
+                        c++;<br />
+                    }</p>
+<p>                return c;<br />
+            }<br />
+            else if(key&gt;a[mid]){<br />
+                l=mid+1;<br />
+            }<br />
+            else{<br />
+                r = mid-1;<br />
+            }</p>
+<p>        }<br />
+        return -1;<br />
+    }</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vinay</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-27269</link>
+		<dc:creator><![CDATA[vinay]]></dc:creator>
+		<pubDate>Mon, 02 Sep 2013 06:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-27269</guid>
+		<description><![CDATA[#include
+
+#include
+
+void main()
+
+{
+
+  int arr[]={1,1,2,2,2,2,3};
+
+  int num,i,count=0;
+
+  clrscr();
+
+  printf(&quot;no please&quot;);
+
+  scanf(&quot;%d&quot;,&#038;num) ;
+
+  for(i=0;i&#060;7;i++)
+
+  {
+
+	 if(arr[i]!=num)
+
+	 {
+
+	 }
+
+	 else if(arr[i]==num)
+
+	 {
+
+	 count++;
+
+	 }
+
+  }
+
+  printf(&#034;no of times %d&#034;,count);
+
+  getch();
+
+}]]></description>
+		<content:encoded><![CDATA[<p>#include</p>
+<p>#include</p>
+<p>void main()</p>
+<p>{</p>
+<p>  int arr[]={1,1,2,2,2,2,3};</p>
+<p>  int num,i,count=0;</p>
+<p>  clrscr();</p>
+<p>  printf(&#8220;no please&#8221;);</p>
+<p>  scanf(&#8220;%d&#8221;,&amp;num) ;</p>
+<p>  for(i=0;i&lt;7;i++)</p>
+<p>  {</p>
+<p>	 if(arr[i]!=num)</p>
+<p>	 {</p>
+<p>	 }</p>
+<p>	 else if(arr[i]==num)</p>
+<p>	 {</p>
+<p>	 count++;</p>
+<p>	 }</p>
+<p>  }</p>
+<p>  printf(&quot;no of times %d&quot;,count);</p>
+<p>  getch();</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Abhishek</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-27241</link>
+		<dc:creator><![CDATA[Abhishek]]></dc:creator>
+		<pubDate>Sun, 01 Sep 2013 06:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-27241</guid>
+		<description><![CDATA[In above solution, there is some duplicacy in the logic. We can modify the binary search as given below to give the number of count of the specific element in one go. Working code is as follows : 
+
+
+    //this function returns the number of occurrences of element x in array a.
+    //the main function call will be - binary(0,a.length-1,a,x);
+    public static int binary(int low, int high, int[] a, int x)
+            {
+            int mid = -1;
+            if ( high = x)
+            count +=binary(low,mid-1,a,x);
+
+
+            //this signifies that we can have element x on the right side
+            if ( a[mid] &#060;= x)
+            count+=binary(mid+1,high,a,x);
+
+
+            return count;
+            }]]></description>
+		<content:encoded><![CDATA[<p>In above solution, there is some duplicacy in the logic. We can modify the binary search as given below to give the number of count of the specific element in one go. Working code is as follows : </p>
+<p>    //this function returns the number of occurrences of element x in array a.<br />
+    //the main function call will be &#8211; binary(0,a.length-1,a,x);<br />
+    public static int binary(int low, int high, int[] a, int x)<br />
+            {<br />
+            int mid = -1;<br />
+            if ( high = x)<br />
+            count +=binary(low,mid-1,a,x);</p>
+<p>            //this signifies that we can have element x on the right side<br />
+            if ( a[mid] &lt;= x)<br />
+            count+=binary(mid+1,high,a,x);</p>
+<p>            return count;<br />
+            }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Malhotra</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-16819</link>
+		<dc:creator><![CDATA[Ankit Malhotra]]></dc:creator>
+		<pubDate>Wed, 27 Mar 2013 23:52:45 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-16819</guid>
+		<description><![CDATA[Ignore the update for ++left. Original code is correct.]]></description>
+		<content:encoded><![CDATA[<p>Ignore the update for ++left. Original code is correct.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Malhotra</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-16818</link>
+		<dc:creator><![CDATA[Ankit Malhotra]]></dc:creator>
+		<pubDate>Wed, 27 Mar 2013 23:50:04 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-16818</guid>
+		<description><![CDATA[Ignore this optimization as it is a bug. The original code is correct.
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Ignore this optimization as it is a bug. The original code is correct.</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Malhotra</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-16794</link>
+		<dc:creator><![CDATA[Ankit Malhotra]]></dc:creator>
+		<pubDate>Wed, 27 Mar 2013 13:34:17 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-16794</guid>
+		<description><![CDATA[Optimize firstsortloc by adding a left increment as the first statement to the while loop as follows
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+  while (left != right &#038;&#038; terms[left] != item) {
+    ++left; // We know it&#039;s not item
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Optimize firstsortloc by adding a left increment as the first statement to the while loop as follows</p>
+<pre> <code language="C">
+  while (left != right &amp;&amp; terms[left] != item) {
+    ++left; // We know it's not item
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ankit Malhotra</title>
+		<link>http://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/#comment-16769</link>
+		<dc:creator><![CDATA[Ankit Malhotra]]></dc:creator>
+		<pubDate>Wed, 27 Mar 2013 03:40:25 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=12164#comment-16769</guid>
+		<description><![CDATA[Recursion leads to stack calls. Here is code across 2 functions with each function complexity logn thus combined of 2logn. Also returns reference position of first occurrence or position to be inserted at if not found.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include &#060;iostream&#062;
+#define MAXCOUNT 99999
+using namespace::std;
+typedef unsigned counter;
+typedef long element;
+
+// first insert position in sorted order
+// returns false with left = count for item &#062; last
+// Check boundaries before use
+bool firstsortloc (element terms[], counter n, element item, counter &#038; left)
+{
+  counter right = n, mid;
+  left = 0;
+  while (left != right &#038;&#038; terms[left] != item) {
+    mid = left + (right - left)/2;
+    if (terms[mid] &#060; item)
+      left = mid + 1;
+    else right = mid;
+  }
+  return (left == n ? false : terms[left] == item);
+}
+
+// Count occurrence of item in sorted terms
+// position = count for item &#062; last
+counter sortcount(element terms[], counter n, element item, counter &#038; startindex)
+{
+  counter left, right = n - 1, mid;
+  if (!firstsortloc(terms, n, item, startindex)) return 0;
+  left = startindex;
+  while (left != right &#038;&#038; terms[right] != item) {
+    --right; // We know it&#039;s not item
+    mid = left + (right - left)/2;
+    if (terms[mid] &#062; item)
+      right = mid - 1;
+    else left = mid;
+  }
+  return (right + 1 - startindex);
+}
+int main ()
+{
+  counter n, i, count, startindex;
+  element terms[MAXCOUNT] = {0}, item;
+  cout &#060;&#060; &#034;Enter count of terms followed by sorted terms.&#034; &#060;&#060; endl;
+  for (cin &#062;&#062; n, i =0; i &#060; n; ++i) cin &#062;&#062; terms[i];
+  cout &#060;&#060; &#034;Enter element to find count : &#034;;
+  cin &#062;&#062; item;
+  if (count = sortcount(terms, n, item, startindex))
+    cout &#060;&#060; item &#060;&#060; &#034; found &#034; &#060;&#060; count &#060;&#060; &#034; times from index &#034; 
+    &#060;&#060; startindex &#060;&#060; endl;
+  else
+    cout &#060;&#060; item &#060;&#060; &#034; not found.&#034;&#060;&#060; endl;
+  return 0;
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Recursion leads to stack calls. Here is code across 2 functions with each function complexity logn thus combined of 2logn. Also returns reference position of first occurrence or position to be inserted at if not found.</p>
+<pre> <code language="C">
+#include &lt;iostream&gt;
+#define MAXCOUNT 99999
+using namespace::std;
+typedef unsigned counter;
+typedef long element;
+
+// first insert position in sorted order
+// returns false with left = count for item &gt; last
+// Check boundaries before use
+bool firstsortloc (element terms[], counter n, element item, counter &amp; left)
+{
+  counter right = n, mid;
+  left = 0;
+  while (left != right &amp;&amp; terms[left] != item) {
+    mid = left + (right - left)/2;
+    if (terms[mid] &lt; item)
+      left = mid + 1;
+    else right = mid;
+  }
+  return (left == n ? false : terms[left] == item);
+}
+
+// Count occurrence of item in sorted terms
+// position = count for item &gt; last
+counter sortcount(element terms[], counter n, element item, counter &amp; startindex)
+{
+  counter left, right = n - 1, mid;
+  if (!firstsortloc(terms, n, item, startindex)) return 0;
+  left = startindex;
+  while (left != right &amp;&amp; terms[right] != item) {
+    --right; // We know it's not item
+    mid = left + (right - left)/2;
+    if (terms[mid] &gt; item)
+      right = mid - 1;
+    else left = mid;
+  }
+  return (right + 1 - startindex);
+}
+int main ()
+{
+  counter n, i, count, startindex;
+  element terms[MAXCOUNT] = {0}, item;
+  cout &lt;&lt; &quot;Enter count of terms followed by sorted terms.&quot; &lt;&lt; endl;
+  for (cin &gt;&gt; n, i =0; i &lt; n; ++i) cin &gt;&gt; terms[i];
+  cout &lt;&lt; &quot;Enter element to find count : &quot;;
+  cin &gt;&gt; item;
+  if (count = sortcount(terms, n, item, startindex))
+    cout &lt;&lt; item &lt;&lt; &quot; found &quot; &lt;&lt; count &lt;&lt; &quot; times from index &quot; 
+    &lt;&lt; startindex &lt;&lt; endl;
+  else
+    cout &lt;&lt; item &lt;&lt; &quot; not found.&quot;&lt;&lt; endl;
+  return 0;
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:24:41 -->
+
+<!-- Compression = gzip -->

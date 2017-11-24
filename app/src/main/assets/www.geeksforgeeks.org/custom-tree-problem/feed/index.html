@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Custom Tree Problem</title>
+	<atom:link href="http://www.geeksforgeeks.org/custom-tree-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/custom-tree-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Atul</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-31160</link>
+		<dc:creator><![CDATA[Atul]]></dc:creator>
+		<pubDate>Wed, 01 Jan 2014 04:31:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-31160</guid>
+		<description><![CDATA[Just to mention question assumes that the links are provided in order they are traversed from top.]]></description>
+		<content:encoded><![CDATA[<p>Just to mention question assumes that the links are provided in order they are traversed from top.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-30068</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 13:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-30068</guid>
+		<description><![CDATA[I am modifying the preorder traversal to print the tree using a tree information in the array tr[1024][3]
+
+
+inp[][2]  to take in the edges 
+tr[256][3]  to store the tree parent and two children
+chk[256][3]  to find out the root nodes of the forest trees.
+
+#include
+using namespace std;
+
+char tr[256][3] = {0};
+char inp[1024][2]  = {0};
+int chk[256][2] = {0};
+void in(char arr[][2], int n)
+{  for(int i = 0; i &#060; n ; i++)
+    { inp[i][0] = arr[i][0];
+      inp[i][1] = arr[i][1];
+    }
+}
+
+void populate_tree(int n)
+{ for(int i = 0; i &#060; n; i++)
+   { tr[int(inp[i][0])][0] = inp[i][0];
+     if(tr[int(inp[i][0])][1] == 0)
+      { tr[int(inp[i][0])][1] = inp[i][1];
+      }
+      else
+      { tr[int(inp[i][0])][2] = inp[i][1];
+      }
+   }
+}
+
+void print_tree(char c,int d)
+{   if(c == 0)
+      { return;
+      }
+    if(tr[int(c)][1] == 0 &#038;&#038; tr[int(c)][2] == 0)
+      { 
+        for(int i = 0 ; i &#060;d ; i++)
+         { cout&#060;&#060;&#034;  &#124;&#034;;
+         }
+         cout&#060;&quot;&#060;&#060;c&#060;&#060;endl;
+         return;
+      }
+     for(int i = 0 ; i &#060;d ; i++)
+         { cout&#060;&#060;&#034;  &#124;&#034;;
+         }
+     cout&#060;&quot;&#060;&#060;c&#060;&#060;endl;
+     print_tree(tr[int(c)][1],d+1);
+     print_tree(tr[int(c)][2],d+1);
+}
+
+int main()
+{  char c[][2] = {{&#039;a&#039;,&#039;b&#039;},{&#039;a&#039;,&#039;g&#039;},{&#039;b&#039;,&#039;c&#039;},{&#039;c&#039;,&#039;d&#039;},{&#039;d&#039;,&#039;e&#039;},{&#039;c&#039;,&#039;f&#039;},{&#039;z&#039;,&#039;y&#039;},{&#039;y&#039;,&#039;x&#039;},{&#039;x&#039;,&#039;w&#039;}};
+   int len = (sizeof(c)/2*sizeof(char));
+   in(c,len);
+   populate_tree(len);
+   for(int i = 0 ; i &#060; len; i++)
+   { chk[int(inp[i][0])][0] = 1;
+     chk[int(inp[i][1])][1] = 1;
+   }
+   int h;
+   for( h = 0 ; h &#060; 256; h++)
+   {  if(chk[h][0] != 0 &#038;&#038; chk[h][1] == 0 &#038;&#038; (tr[h][1] &#124;&#124; tr[h][2]))
+       { print_tree(char(h),0);
+       }
+   }
+//   print_tree(char(h),0);
+   return 0;
+}
+]]></description>
+		<content:encoded><![CDATA[<p>I am modifying the preorder traversal to print the tree using a tree information in the array tr[1024][3]</p>
+<p>inp[][2]  to take in the edges<br />
+tr[256][3]  to store the tree parent and two children<br />
+chk[256][3]  to find out the root nodes of the forest trees.</p>
+<p>#include<br />
+using namespace std;</p>
+<p>char tr[256][3] = {0};<br />
+char inp[1024][2]  = {0};<br />
+int chk[256][2] = {0};<br />
+void in(char arr[][2], int n)<br />
+{  for(int i = 0; i &lt; n ; i++)<br />
+    { inp[i][0] = arr[i][0];<br />
+      inp[i][1] = arr[i][1];<br />
+    }<br />
+}</p>
+<p>void populate_tree(int n)<br />
+{ for(int i = 0; i &lt; n; i++)<br />
+   { tr[int(inp[i][0])][0] = inp[i][0];<br />
+     if(tr[int(inp[i][0])][1] == 0)<br />
+      { tr[int(inp[i][0])][1] = inp[i][1];<br />
+      }<br />
+      else<br />
+      { tr[int(inp[i][0])][2] = inp[i][1];<br />
+      }<br />
+   }<br />
+}</p>
+<p>void print_tree(char c,int d)<br />
+{   if(c == 0)<br />
+      { return;<br />
+      }<br />
+    if(tr[int(c)][1] == 0 &amp;&amp; tr[int(c)][2] == 0)<br />
+      {<br />
+        for(int i = 0 ; i &lt;d ; i++)<br />
+         { cout&lt;&lt;&quot;  |&quot;;<br />
+         }<br />
+         cout&lt;&#8220;&lt;&lt;c&lt;&lt;endl;<br />
+         return;<br />
+      }<br />
+     for(int i = 0 ; i &lt;d ; i++)<br />
+         { cout&lt;&lt;&quot;  |&quot;;<br />
+         }<br />
+     cout&lt;&#8220;&lt;&lt;c&lt;&lt;endl;<br />
+     print_tree(tr[int(c)][1],d+1);<br />
+     print_tree(tr[int(c)][2],d+1);<br />
+}</p>
+<p>int main()<br />
+{  char c[][2] = {{&#039;a&#039;,&#039;b&#039;},{&#039;a&#039;,&#039;g&#039;},{&#039;b&#039;,&#039;c&#039;},{&#039;c&#039;,&#039;d&#039;},{&#039;d&#039;,&#039;e&#039;},{&#039;c&#039;,&#039;f&#039;},{&#039;z&#039;,&#039;y&#039;},{&#039;y&#039;,&#039;x&#039;},{&#039;x&#039;,&#039;w&#039;}};<br />
+   int len = (sizeof(c)/2*sizeof(char));<br />
+   in(c,len);<br />
+   populate_tree(len);<br />
+   for(int i = 0 ; i &lt; len; i++)<br />
+   { chk[int(inp[i][0])][0] = 1;<br />
+     chk[int(inp[i][1])][1] = 1;<br />
+   }<br />
+   int h;<br />
+   for( h = 0 ; h &lt; 256; h++)<br />
+   {  if(chk[h][0] != 0 &amp;&amp; chk[h][1] == 0 &amp;&amp; (tr[h][1] || tr[h][2]))<br />
+       { print_tree(char(h),0);<br />
+       }<br />
+   }<br />
+//   print_tree(char(h),0);<br />
+   return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: jeswanth</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-30067</link>
+		<dc:creator><![CDATA[jeswanth]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 13:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-30067</guid>
+		<description><![CDATA[my code that  works like preorder like traversal of the Binary tree .. can be found at http://ideone.com/HPB2wE
+Assuming only two edges are possible from each node.
+inp[1024][2]  to take in the edges 
+ tr[256][3]  to store the tree parent and two children
+chk[256][3]  to find out the root nodes of the forest trees.
+// uses three 2-D arrays]]></description>
+		<content:encoded><![CDATA[<p>my code that  works like preorder like traversal of the Binary tree .. can be found at <a href="http://ideone.com/HPB2wE" rel="nofollow">http://ideone.com/HPB2wE</a><br />
+Assuming only two edges are possible from each node.<br />
+inp[1024][2]  to take in the edges <br />
+ tr[256][3]  to store the tree parent and two children<br />
+chk[256][3]  to find out the root nodes of the forest trees.<br />
+// uses three 2-D arrays</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Nitin Sharma</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-29192</link>
+		<dc:creator><![CDATA[Nitin Sharma]]></dc:creator>
+		<pubDate>Tue, 22 Oct 2013 02:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-29192</guid>
+		<description><![CDATA[I have taken an array of nodes which will contain address of root of a tree.
+
+ALGORITHM :-
+
+1.call search function and pass it root and start point.
+
+2.If root is null , then create a node and put its entry in node array.
+
+3.Now add the end point of this start point as a child of start point.
+
+4.Repeat above points.
+
+/*CODE*/
+
+                            /*CUSTOM TREE PROBLEM*/
+#include
+#include
+
+typedef struct node
+{
+    char ch;
+    struct node *left,*right;
+}node;
+
+node* newnode(char value)
+{
+    node *tmp;
+
+    tmp = (node *)malloc(sizeof(node *));
+
+    if(tmp == NULL)
+    {
+        printf(&quot;Memory Underflow.n&quot;);
+        exit(0);
+    }
+
+    tmp-&#062;ch = value;
+    tmp-&#062;left = NULL;
+    tmp-&#062;right = NULL;
+}
+
+node * search(node *root,char value)
+{
+    node *ptr;
+
+    if(root == NULL)
+    {
+        ptr = NULL;
+    }
+    else if(root-&#062;ch == value)
+    {
+        ptr = root;
+    }
+    else
+    {
+        ptr = search(root-&#062;left,value);
+
+        if(ptr == NULL)
+        {
+            ptr = search(root-&#062;right,value);
+        }
+    }
+
+    return ptr;
+}
+
+void print(node *root, int tab)
+{
+    if(root == NULL)
+    {
+        return;
+    }
+
+    int i=0;
+
+    for(i=0;i%cn&quot;,root-&#062;ch);
+
+    print(root-&#062;left,tab+1);
+    print(root-&#062;right,tab+1);
+}
+
+void main()
+{
+    int i,j,k=0;
+    node* root[10]={NULL};
+    node *found;
+    char array[2][9] = {{&#039;a&#039;,&#039;a&#039;,&#039;b&#039;,&#039;c&#039;,&#039;d&#039;,&#039;c&#039;,&#039;z&#039;,&#039;y&#039;,&#039;x&#039;},{&#039;b&#039;,&#039;g&#039;,&#039;c&#039;,&#039;d&#039;,&#039;e&#039;,&#039;f&#039;,&#039;y&#039;,&#039;x&#039;,&#039;w&#039;}};
+
+    for(i=0;ileft == NULL)
+            {
+                found-&#062;left = newnode(array[1][i]);
+            }
+            else
+            {
+                found-&#062;right = newnode(array[1][i]);
+            }
+        }
+    }
+
+        for(i=1;i&#060;=k;i++)
+        {
+            print(root[i],0);
+        }
+    
+    
+    
+
+}]]></description>
+		<content:encoded><![CDATA[<p>I have taken an array of nodes which will contain address of root of a tree.</p>
+<p>ALGORITHM :-</p>
+<p>1.call search function and pass it root and start point.</p>
+<p>2.If root is null , then create a node and put its entry in node array.</p>
+<p>3.Now add the end point of this start point as a child of start point.</p>
+<p>4.Repeat above points.</p>
+<p>/*CODE*/</p>
+<p>                            /*CUSTOM TREE PROBLEM*/<br />
+#include<br />
+#include</p>
+<p>typedef struct node<br />
+{<br />
+    char ch;<br />
+    struct node *left,*right;<br />
+}node;</p>
+<p>node* newnode(char value)<br />
+{<br />
+    node *tmp;</p>
+<p>    tmp = (node *)malloc(sizeof(node *));</p>
+<p>    if(tmp == NULL)<br />
+    {<br />
+        printf(&#8220;Memory Underflow.n&#8221;);<br />
+        exit(0);<br />
+    }</p>
+<p>    tmp-&gt;ch = value;<br />
+    tmp-&gt;left = NULL;<br />
+    tmp-&gt;right = NULL;<br />
+}</p>
+<p>node * search(node *root,char value)<br />
+{<br />
+    node *ptr;</p>
+<p>    if(root == NULL)<br />
+    {<br />
+        ptr = NULL;<br />
+    }<br />
+    else if(root-&gt;ch == value)<br />
+    {<br />
+        ptr = root;<br />
+    }<br />
+    else<br />
+    {<br />
+        ptr = search(root-&gt;left,value);</p>
+<p>        if(ptr == NULL)<br />
+        {<br />
+            ptr = search(root-&gt;right,value);<br />
+        }<br />
+    }</p>
+<p>    return ptr;<br />
+}</p>
+<p>void print(node *root, int tab)<br />
+{<br />
+    if(root == NULL)<br />
+    {<br />
+        return;<br />
+    }</p>
+<p>    int i=0;</p>
+<p>    for(i=0;i%cn&#8221;,root-&gt;ch);</p>
+<p>    print(root-&gt;left,tab+1);<br />
+    print(root-&gt;right,tab+1);<br />
+}</p>
+<p>void main()<br />
+{<br />
+    int i,j,k=0;<br />
+    node* root[10]={NULL};<br />
+    node *found;<br />
+    char array[2][9] = {{&#8216;a&#8217;,&#8217;a&#8217;,&#8217;b&#8217;,&#8217;c&#8217;,&#8217;d&#8217;,&#8217;c&#8217;,&#8217;z&#8217;,&#8217;y&#8217;,&#8217;x&#8217;},{&#8216;b&#8217;,&#8217;g&#8217;,&#8217;c&#8217;,&#8217;d&#8217;,&#8217;e&#8217;,&#8217;f&#8217;,&#8217;y&#8217;,&#8217;x&#8217;,&#8217;w&#8217;}};</p>
+<p>    for(i=0;ileft == NULL)<br />
+            {<br />
+                found-&gt;left = newnode(array[1][i]);<br />
+            }<br />
+            else<br />
+            {<br />
+                found-&gt;right = newnode(array[1][i]);<br />
+            }<br />
+        }<br />
+    }</p>
+<p>        for(i=1;i&lt;=k;i++)<br />
+        {<br />
+            print(root[i],0);<br />
+        }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anshul</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-20803</link>
+		<dc:creator><![CDATA[Anshul]]></dc:creator>
+		<pubDate>Fri, 28 Jun 2013 07:13:21 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-20803</guid>
+		<description><![CDATA[package geeksforgeeks.random;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class CustomTree {
+	public static HashMap&lt;String, ArrayList&lt;String&gt;&gt; map =  new HashMap&lt;String, ArrayList&lt;String&gt;&gt;();
+	public static Set&lt;String&gt; childs =  new HashSet&lt;String&gt;();
+	public static Set&lt;String&gt; parents =  new HashSet&lt;String&gt;();
+	public static Set&lt;String&gt; mainparents =  new HashSet&lt;String&gt;();
+	
+	public static void printList(String parent, ArrayList&lt;String&gt; childList,String spc){
+		if(childList == null)
+			return;
+		
+		for (Iterator&lt;String&gt; iterator = childList.iterator(); iterator.hasNext();) {
+			String child = (String) iterator.next();
+			System.out.println( spc + parent +&quot;---&gt;&quot;+ child);
+			if(map.get(child) != null)
+				printList(child, map.get(child),spc+&quot;  &quot;);
+		}
+	}
+	
+	public static void generateMap (String arr[]){
+		for (int i = 0; i &lt; arr.length; i++) {
+			String parent = arr[i].split(&quot;,&quot;)[0];
+			String child = arr[i].split(&quot;,&quot;)[1];
+			if(!map.containsKey(parent)){
+				ArrayList&lt;String&gt; l = new ArrayList&lt;String&gt;();
+				l.add(child);
+				map.put(parent, l);
+			}
+			else{
+				map.get(parent).add(child);
+			}
+			parents.add(parent);
+			childs.add(child);
+		}
+		
+		for (Iterator&lt;String&gt; iterator = parents.iterator(); iterator.hasNext();) {
+			String parent = (String) iterator.next();
+			if(!childs.contains(parent))
+				mainparents.add(parent);
+		}
+		
+		for (Iterator&lt;String&gt; iterator = mainparents.iterator(); iterator.hasNext();) {
+			String parent = (String) iterator.next();
+			printList(parent,map.get(parent),&quot;&quot;);
+		}
+	}
+	
+	public static void main(String[] args) {
+		String arr [] = new String[9];
+		arr[0] = &quot;a,b&quot;;
+		arr[1] = &quot;a,g&quot;;
+		arr[2] = &quot;b,c&quot;;
+		arr[3] = &quot;c,d&quot;;
+		arr[4] = &quot;d,e&quot;;
+		arr[5] = &quot;c,f&quot;;
+		arr[6] = &quot;z,y&quot;;
+		arr[7] = &quot;y,x&quot;;
+		arr[8] = &quot;x,w&quot;;
+		generateMap(arr);
+	}
+}]]></description>
+		<content:encoded><![CDATA[<p>package geeksforgeeks.random;</p>
+<p>import java.util.ArrayList;<br />
+import java.util.HashMap;<br />
+import java.util.HashSet;<br />
+import java.util.Iterator;<br />
+import java.util.Set;</p>
+<p>public class CustomTree {<br />
+	public static HashMap<string , ArrayList<String>> map =  new HashMap</string><string , ArrayList<String>>();<br />
+	public static Set</string><string> childs =  new HashSet</string><string>();<br />
+	public static Set</string><string> parents =  new HashSet</string><string>();<br />
+	public static Set</string><string> mainparents =  new HashSet</string><string>();</p>
+<p>	public static void printList(String parent, ArrayList</string><string> childList,String spc){<br />
+		if(childList == null)<br />
+			return;</p>
+<p>		for (Iterator</string><string> iterator = childList.iterator(); iterator.hasNext();) {<br />
+			String child = (String) iterator.next();<br />
+			System.out.println( spc + parent +&#8221;&#8212;>&#8221;+ child);<br />
+			if(map.get(child) != null)<br />
+				printList(child, map.get(child),spc+&#8221;  &#8220;);<br />
+		}<br />
+	}</p>
+<p>	public static void generateMap (String arr[]){<br />
+		for (int i = 0; i < arr.length; i++) {
+			String parent = arr[i].split(",")[0];
+			String child = arr[i].split(",")[1];
+			if(!map.containsKey(parent)){
+				ArrayList<String> l = new ArrayList</string><string>();<br />
+				l.add(child);<br />
+				map.put(parent, l);<br />
+			}<br />
+			else{<br />
+				map.get(parent).add(child);<br />
+			}<br />
+			parents.add(parent);<br />
+			childs.add(child);<br />
+		}</p>
+<p>		for (Iterator</string><string> iterator = parents.iterator(); iterator.hasNext();) {<br />
+			String parent = (String) iterator.next();<br />
+			if(!childs.contains(parent))<br />
+				mainparents.add(parent);<br />
+		}</p>
+<p>		for (Iterator</string><string> iterator = mainparents.iterator(); iterator.hasNext();) {<br />
+			String parent = (String) iterator.next();<br />
+			printList(parent,map.get(parent),&#8221;&#8221;);<br />
+		}<br />
+	}</p>
+<p>	public static void main(String[] args) {<br />
+		String arr [] = new String[9];<br />
+		arr[0] = &#8220;a,b&#8221;;<br />
+		arr[1] = &#8220;a,g&#8221;;<br />
+		arr[2] = &#8220;b,c&#8221;;<br />
+		arr[3] = &#8220;c,d&#8221;;<br />
+		arr[4] = &#8220;d,e&#8221;;<br />
+		arr[5] = &#8220;c,f&#8221;;<br />
+		arr[6] = &#8220;z,y&#8221;;<br />
+		arr[7] = &#8220;y,x&#8221;;<br />
+		arr[8] = &#8220;x,w&#8221;;<br />
+		generateMap(arr);<br />
+	}<br />
+}</string></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: spiderman</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-20151</link>
+		<dc:creator><![CDATA[spiderman]]></dc:creator>
+		<pubDate>Thu, 20 Jun 2013 05:19:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-20151</guid>
+		<description><![CDATA[How does it ensure the first followed children of each node is with maximum depth while printing each tree ?
+In the first example, what will be the output if the input is String [] links1 = {&quot;a b&quot;, &quot;a e&quot;, &quot;b c&quot;, &quot;b d&quot;};
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>How does it ensure the first followed children of each node is with maximum depth while printing each tree ?<br />
+In the first example, what will be the output if the input is String [] links1 = {&#8220;a b&#8221;, &#8220;a e&#8221;, &#8220;b c&#8221;, &#8220;b d&#8221;};</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: GeeksforGeeks</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-25207</link>
+		<dc:creator><![CDATA[GeeksforGeeks]]></dc:creator>
+		<pubDate>Tue, 18 Jun 2013 15:02:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-25207</guid>
+		<description><![CDATA[Tree is fact similar to trie.  The difference here is we want to build a forest, not a single trie.  Also, the input is is in the form of links, rather than words.]]></description>
+		<content:encoded><![CDATA[<p>Tree is fact similar to trie.  The difference here is we want to build a forest, not a single trie.  Also, the input is is in the form of links, rather than words.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dhivya Subramanian</title>
+		<link>http://www.geeksforgeeks.org/custom-tree-problem/#comment-25206</link>
+		<dc:creator><![CDATA[Dhivya Subramanian]]></dc:creator>
+		<pubDate>Tue, 18 Jun 2013 13:58:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=119385#comment-25206</guid>
+		<description><![CDATA[then what makes the difference between coustom tree and trie?]]></description>
+		<content:encoded><![CDATA[<p>then what makes the difference between coustom tree and trie?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:17:46 -->
+
+<!-- Compression = gzip -->

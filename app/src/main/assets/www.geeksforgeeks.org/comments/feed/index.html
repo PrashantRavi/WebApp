@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments for GeeksforGeeks</title>
+	<atom:link href="http://www.geeksforgeeks.org/comments/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>Comment on Position of rightmost set bit by GeeksforGeeks &#124; NeverLand</title>
+		<link>http://www.geeksforgeeks.org/position-of-rightmost-set-bit/#comment-36229</link>
+		<dc:creator><![CDATA[GeeksforGeeks &#124; NeverLand]]></dc:creator>
+		<pubDate>Tue, 17 Nov 2015 05:17:31 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=555#comment-36229</guid>
+		<description><![CDATA[[&#8230;] Position of rightmost set bit [&#8230;]]]></description>
+		<content:encoded><![CDATA[<p>[&#8230;] Position of rightmost set bit [&#8230;]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Segregate 0s and 1s in an array by sachin.hbti</title>
+		<link>http://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/#comment-40183</link>
+		<dc:creator><![CDATA[sachin.hbti]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 17:11:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=5234#comment-40183</guid>
+		<description><![CDATA[In above solutions we need to hardcode the numbers and these can only work for hardcoded numbers,but the below solution can work for an array which has only two numbers and we have to segrgate them:
+
+
+public int[] sortTwoNumbersArray(int[] arr, boolean ascOrder){
+	int length = arr.length;
+	int lowEnd = 0;
+	int highEnd = length-1;
+	boolean number1IndexStuck = false;
+	boolean number2IndexStuck = false;
+	int number1 = -1, number2 =-1;
+	int i = 0, j = length-1;
+	boolean found = false;
+	/***Loop to find both different numbers**/
+	for(; i &#060; j; ){
+		if(arr[i] != arr[j]){
+			found = true;
+			break;
+		}else{
+			i++;
+			j--;
+		}
+	}
+	/**If there are any two different numbers then find small and big number and
+	assign it number1 and number2 variable to change the sorting order**/
+	if(found){
+		if(arr[i] &#060; arr[j]){
+			if(ascOrder){
+				number1 = arr[i];
+				number2 = arr[j];
+			}else{
+				number1 = arr[j];
+				number2 = arr[i];
+			}
+		}else{
+			if(ascOrder){
+				number1 = arr[j];
+				number2 = arr[i];
+			}else{
+				number1 = arr[i];
+				number2 = arr[j];
+			}
+		}
+	}else{
+		return arr;
+	}
+	
+	while(lowEnd &#060; highEnd){
+		if(arr[lowEnd] == number1){
+			lowEnd++;
+		}else{
+			number1IndexStuck = true;
+		}
+		if(arr[highEnd] == number2){
+			highEnd--;
+		}else{
+			number2IndexStuck = true;
+		}
+		if(number2IndexStuck &#038;&#038; number1IndexStuck){
+			int temp = arr[lowEnd];
+			arr[lowEnd] = arr[highEnd];
+			arr[highEnd] = temp;
+			number1IndexStuck = false;
+			number2IndexStuck = false;
+
+		}
+	}
+	return arr;
+		
+}]]></description>
+		<content:encoded><![CDATA[<p>In above solutions we need to hardcode the numbers and these can only work for hardcoded numbers,but the below solution can work for an array which has only two numbers and we have to segrgate them:</p>
+<p>public int[] sortTwoNumbersArray(int[] arr, boolean ascOrder){<br />
+	int length = arr.length;<br />
+	int lowEnd = 0;<br />
+	int highEnd = length-1;<br />
+	boolean number1IndexStuck = false;<br />
+	boolean number2IndexStuck = false;<br />
+	int number1 = -1, number2 =-1;<br />
+	int i = 0, j = length-1;<br />
+	boolean found = false;<br />
+	/***Loop to find both different numbers**/<br />
+	for(; i &lt; j; ){<br />
+		if(arr[i] != arr[j]){<br />
+			found = true;<br />
+			break;<br />
+		}else{<br />
+			i++;<br />
+			j&#8211;;<br />
+		}<br />
+	}<br />
+	/**If there are any two different numbers then find small and big number and<br />
+	assign it number1 and number2 variable to change the sorting order**/<br />
+	if(found){<br />
+		if(arr[i] &lt; arr[j]){<br />
+			if(ascOrder){<br />
+				number1 = arr[i];<br />
+				number2 = arr[j];<br />
+			}else{<br />
+				number1 = arr[j];<br />
+				number2 = arr[i];<br />
+			}<br />
+		}else{<br />
+			if(ascOrder){<br />
+				number1 = arr[j];<br />
+				number2 = arr[i];<br />
+			}else{<br />
+				number1 = arr[i];<br />
+				number2 = arr[j];<br />
+			}<br />
+		}<br />
+	}else{<br />
+		return arr;<br />
+	}</p>
+<p>	while(lowEnd &lt; highEnd){<br />
+		if(arr[lowEnd] == number1){<br />
+			lowEnd++;<br />
+		}else{<br />
+			number1IndexStuck = true;<br />
+		}<br />
+		if(arr[highEnd] == number2){<br />
+			highEnd&#8211;;<br />
+		}else{<br />
+			number2IndexStuck = true;<br />
+		}<br />
+		if(number2IndexStuck &amp;&amp; number1IndexStuck){<br />
+			int temp = arr[lowEnd];<br />
+			arr[lowEnd] = arr[highEnd];<br />
+			arr[highEnd] = temp;<br />
+			number1IndexStuck = false;<br />
+			number2IndexStuck = false;</p>
+<p>		}<br />
+	}<br />
+	return arr;</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Find a triplet from three linked lists with sum equal to a given number by vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/find-a-triplet-from-three-linked-lists-with-sum-equal-to-a-given-number/#comment-40182</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 17:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22396#comment-40182</guid>
+		<description><![CDATA[it&#039;s O(n(m+k)) if n,m,k are the lengths of lists respectively]]></description>
+		<content:encoded><![CDATA[<p>it&#8217;s O(n(m+k)) if n,m,k are the lengths of lists respectively</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on C Programming Language by ravas</title>
+		<link>http://www.geeksforgeeks.org/c/#comment-40181</link>
+		<dc:creator><![CDATA[ravas]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 17:04:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?page_id=24966#comment-40181</guid>
+		<description><![CDATA[becoz of short circuit evaluation. once ++x gets evaluted it results 2 where u r performing logicalOR operation it considers 2 as true .So according to logicalOR truth table if  exp1&#124;&#124;exp2 is der in tht if exp1 results true value then it won&#039;t evaluate exp2 so even in the above pgm also samething happened tht&#039;s why ++y is not incremented]]></description>
+		<content:encoded><![CDATA[<p>becoz of short circuit evaluation. once ++x gets evaluted it results 2 where u r performing logicalOR operation it considers 2 as true .So according to logicalOR truth table if  exp1||exp2 is der in tht if exp1 results true value then it won&#8217;t evaluate exp2 so even in the above pgm also samething happened tht&#8217;s why ++y is not incremented</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Reverse alternate levels of a perfect binary tree by Amit Jain</title>
+		<link>http://www.geeksforgeeks.org/reverse-alternate-levels-binary-tree/#comment-40180</link>
+		<dc:creator><![CDATA[Amit Jain]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 16:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129950#comment-40180</guid>
+		<description><![CDATA[will your solution work for following binary tree?
+               a
+            /     
+           b       c
+         /       /  
+        d    e    f    g
+       /     /    /     / 
+       h  i j  k l  m  n  
+I think the given solution will work only for full and complete binary trees.]]></description>
+		<content:encoded><![CDATA[<p>will your solution work for following binary tree?<br />
+               a<br />
+            /<br />
+           b       c<br />
+         /       /<br />
+        d    e    f    g<br />
+       /     /    /     /<br />
+       h  i j  k l  m  n<br />
+I think the given solution will work only for full and complete binary trees.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Find the Missing Number by Anuj Garg</title>
+		<link>http://www.geeksforgeeks.org/find-the-missing-number/#comment-40179</link>
+		<dc:creator><![CDATA[Anuj Garg]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 16:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=580#comment-40179</guid>
+		<description><![CDATA[w = ((len(a) + 1) * ( len(a) + 2 ) )//2
+
+
+what is double slash.]]></description>
+		<content:encoded><![CDATA[<p>w = ((len(a) + 1) * ( len(a) + 2 ) )//2</p>
+<p>what is double slash.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on What happens when a function is called before its declaration in C? by GOPI GOPINATH</title>
+		<link>http://www.geeksforgeeks.org/g-fact-95/#comment-40178</link>
+		<dc:creator><![CDATA[GOPI GOPINATH]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=22065#comment-40178</guid>
+		<description><![CDATA[Yes the return value will be a integer with ASCII value of &#039;S&#039;. Hence after returning from the function we are printing the character (not the Integer).]]></description>
+		<content:encoded><![CDATA[<p>Yes the return value will be a integer with ASCII value of &#8216;S&#8217;. Hence after returning from the function we are printing the character (not the Integer).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Flipkart Interview &#124; Set 8 (For SDE 1) by Rohan</title>
+		<link>http://www.geeksforgeeks.org/flipkart-interview-set-8-sde-1/#comment-40177</link>
+		<dc:creator><![CDATA[Rohan]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129918#comment-40177</guid>
+		<description><![CDATA[What is the salary package offered by flipkart ?]]></description>
+		<content:encoded><![CDATA[<p>What is the salary package offered by flipkart ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Sorted Linked List to Balanced BST by tweety</title>
+		<link>http://www.geeksforgeeks.org/sorted-linked-list-to-balanced-bst/#comment-40176</link>
+		<dc:creator><![CDATA[tweety]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=17063#comment-40176</guid>
+		<description><![CDATA[hello everyone.... i have done this problem in a different way... my logic is that... firstly i have constructed a empty binary tree.... then i have inserted nodes in appropriate place.. complexity of my code is O(n)... please check....
+
+
+#include
+#include
+#include
+struct node 
+{
+       int data;
+       struct node* left,*right;
+}*root=NULL;
+int rear=0,front=0;
+struct node* q[50];
+void enqueue(struct node* n)
+{
+     q[rear++]=n;
+}
+struct node* dequeue()
+{
+    struct node* x=q[front++];
+    return x;
+}
+void emptytree(int);
+void makebst(int a[],struct node*p);
+void inorder(struct node*p);
+
+
+int main()
+{
+    int n,i;
+    printf(&quot;enter no of elements u want to insert in treen&quot;);
+    scanf(&quot;%d&quot;,&#038;n);
+    int a[n];
+    for(i=0;i&#060;n;i++)
+                    
+    scanf(&#034;%d&#034;,&#038;a[i]);
+    
+    emptytree(n);
+    
+    makebst(a,root);
+    
+    printf(&#034;here is the inorder traversal of the binary search treen&#034;);
+    
+   inorder(root);
+  
+   getch();
+}
+void emptytree(int n)
+{
+     static struct node*q;
+     int i;
+     for(i=0;idata=-1;
+                     p-&#062;left=p-&#062;right=NULL;
+                     enqueue(p);
+                     if(root==NULL)
+                                   root=p;
+                     else
+                     {
+                         if(i%2!=0)
+                         {
+                                q=dequeue();
+                                     q-&#062;left=p;
+                         }
+                                else
+                                    q-&#062;right=p;
+                     }
+     }
+}        
+void makebst(int a[],struct node*p)
+{
+     static int count=0;
+     if(p!=NULL)
+     {
+                makebst(a,p-&#062;left);
+                p-&#062;data=a[count++];
+                makebst(a,p-&#062;right);
+     }
+}
+void inorder(struct node* p)
+{
+     if(p!=NULL)
+     {
+                inorder(p-&#062;left);
+                printf(&quot;%dn&quot;,p-&#062;data);
+                inorder(p-&#062;right);
+     }
+}]]></description>
+		<content:encoded><![CDATA[<p>hello everyone&#8230;. i have done this problem in a different way&#8230; my logic is that&#8230; firstly i have constructed a empty binary tree&#8230;. then i have inserted nodes in appropriate place.. complexity of my code is O(n)&#8230; please check&#8230;.</p>
+<p>#include<br />
+#include<br />
+#include<br />
+struct node<br />
+{<br />
+       int data;<br />
+       struct node* left,*right;<br />
+}*root=NULL;<br />
+int rear=0,front=0;<br />
+struct node* q[50];<br />
+void enqueue(struct node* n)<br />
+{<br />
+     q[rear++]=n;<br />
+}<br />
+struct node* dequeue()<br />
+{<br />
+    struct node* x=q[front++];<br />
+    return x;<br />
+}<br />
+void emptytree(int);<br />
+void makebst(int a[],struct node*p);<br />
+void inorder(struct node*p);</p>
+<p>int main()<br />
+{<br />
+    int n,i;<br />
+    printf(&#8220;enter no of elements u want to insert in treen&#8221;);<br />
+    scanf(&#8220;%d&#8221;,&amp;n);<br />
+    int a[n];<br />
+    for(i=0;i&lt;n;i++)</p>
+<p>    scanf(&quot;%d&quot;,&amp;a[i]);</p>
+<p>    emptytree(n);</p>
+<p>    makebst(a,root);</p>
+<p>    printf(&quot;here is the inorder traversal of the binary search treen&quot;);</p>
+<p>   inorder(root);</p>
+<p>   getch();<br />
+}<br />
+void emptytree(int n)<br />
+{<br />
+     static struct node*q;<br />
+     int i;<br />
+     for(i=0;idata=-1;<br />
+                     p-&gt;left=p-&gt;right=NULL;<br />
+                     enqueue(p);<br />
+                     if(root==NULL)<br />
+                                   root=p;<br />
+                     else<br />
+                     {<br />
+                         if(i%2!=0)<br />
+                         {<br />
+                                q=dequeue();<br />
+                                     q-&gt;left=p;<br />
+                         }<br />
+                                else<br />
+                                    q-&gt;right=p;<br />
+                     }<br />
+     }<br />
+}<br />
+void makebst(int a[],struct node*p)<br />
+{<br />
+     static int count=0;<br />
+     if(p!=NULL)<br />
+     {<br />
+                makebst(a,p-&gt;left);<br />
+                p-&gt;data=a[count++];<br />
+                makebst(a,p-&gt;right);<br />
+     }<br />
+}<br />
+void inorder(struct node* p)<br />
+{<br />
+     if(p!=NULL)<br />
+     {<br />
+                inorder(p-&gt;left);<br />
+                printf(&#8220;%dn&#8221;,p-&gt;data);<br />
+                inorder(p-&gt;right);<br />
+     }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Flipkart Interview &#124; Set 8 (For SDE 1) by Zohan</title>
+		<link>http://www.geeksforgeeks.org/flipkart-interview-set-8-sde-1/#comment-40175</link>
+		<dc:creator><![CDATA[Zohan]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=129918#comment-40175</guid>
+		<description><![CDATA[Telephonic round - 1 Question 2 : Describe question, path can be by adding all digits of matrix and does 2D matrix means 2 dimensional or 2 X 2 matrix.]]></description>
+		<content:encoded><![CDATA[<p>Telephonic round &#8211; 1 Question 2 : Describe question, path can be by adding all digits of matrix and does 2D matrix means 2 dimensional or 2 X 2 matrix.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Add two numbers represented by linked lists &#124; Set 1 by vipinkaushal</title>
+		<link>http://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/#comment-40174</link>
+		<dc:creator><![CDATA[vipinkaushal]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=15194#comment-40174</guid>
+		<description><![CDATA[why time complexity is O(m+n)
+i think it&#039;s O(max(m,n))
+please clear the doubt 
+
+thanks]]></description>
+		<content:encoded><![CDATA[<p>why time complexity is O(m+n)<br />
+i think it&#8217;s O(max(m,n))<br />
+please clear the doubt </p>
+<p>thanks</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.044 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 10:22:09 -->
+
+<!-- Compression = gzip -->

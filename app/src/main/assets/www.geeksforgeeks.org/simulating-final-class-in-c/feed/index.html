@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Simulating final class in C++</title>
+	<atom:link href="http://www.geeksforgeeks.org/simulating-final-class-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Siddhartha Maitra</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-30840</link>
+		<dc:creator><![CDATA[Siddhartha Maitra]]></dc:creator>
+		<pubDate>Wed, 18 Dec 2013 18:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-30840</guid>
+		<description><![CDATA[Can anyone give me one good practical example of this pattern ? I never seem to have faced a requirement for this pattern.]]></description>
+		<content:encoded><![CDATA[<p>Can anyone give me one good practical example of this pattern ? I never seem to have faced a requirement for this pattern.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tarun Kumar</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-29857</link>
+		<dc:creator><![CDATA[Tarun Kumar]]></dc:creator>
+		<pubDate>Fri, 15 Nov 2013 11:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-29857</guid>
+		<description><![CDATA[what is the use of virtual inheritance?]]></description>
+		<content:encoded><![CDATA[<p>what is the use of virtual inheritance?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: praveen sharma</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-20364</link>
+		<dc:creator><![CDATA[praveen sharma]]></dc:creator>
+		<pubDate>Sat, 22 Jun 2013 09:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-20364</guid>
+		<description><![CDATA[i think my doubt is clarified with below example
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;iostream&#062;
+using namespace std;
+ 
+class Final;  // The class to be made final
+ 
+class MakeFinal // used to make the Final class final
+{
+public:
+    MakeFinal() { cout &#060;&#060; &#034;MakFinal constructor&#034; &#060;&#060; endl; }
+	MakeFinal(int i) { cout &#060;&#060; &#034;int MakFinal constructor&#034; &#060;&#060; endl; }
+friend class Final;
+};
+ 
+class Final : virtual MakeFinal
+{
+public:
+    Final() { cout &#060;&#060; &#034;Final constructor&#034; &#060;&#060; endl; }
+	Final(int i):MakeFinal(0) { cout &#060;&#060; &#034;int Final constructor&#034; &#060;&#060; endl; }
+};
+ 
+class Derived : public Final // Compiler error
+{
+public:
+	Derived(){ cout &#060;&#060; &#034;Derived constructor&#034; &#060;&#060; endl; }
+	Derived(int i): Final(0){ cout &#060;&#060; &#034;int Derived constructor&#034; &#060;&#060; endl; }
+};
+ 
+int main(int argc, char *argv[])
+{
+    Derived d(1);
+    return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>i think my doubt is clarified with below example</p>
+<pre> <code language="C">
+#include&lt;iostream&gt;
+using namespace std;
+ 
+class Final;  // The class to be made final
+ 
+class MakeFinal // used to make the Final class final
+{
+public:
+    MakeFinal() { cout &lt;&lt; &quot;MakFinal constructor&quot; &lt;&lt; endl; }
+	MakeFinal(int i) { cout &lt;&lt; &quot;int MakFinal constructor&quot; &lt;&lt; endl; }
+friend class Final;
+};
+ 
+class Final : virtual MakeFinal
+{
+public:
+    Final() { cout &lt;&lt; &quot;Final constructor&quot; &lt;&lt; endl; }
+	Final(int i):MakeFinal(0) { cout &lt;&lt; &quot;int Final constructor&quot; &lt;&lt; endl; }
+};
+ 
+class Derived : public Final // Compiler error
+{
+public:
+	Derived(){ cout &lt;&lt; &quot;Derived constructor&quot; &lt;&lt; endl; }
+	Derived(int i): Final(0){ cout &lt;&lt; &quot;int Derived constructor&quot; &lt;&lt; endl; }
+};
+ 
+int main(int argc, char *argv[])
+{
+    Derived d(1);
+    return 0;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: praveen sharma</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-20358</link>
+		<dc:creator><![CDATA[praveen sharma]]></dc:creator>
+		<pubDate>Sat, 22 Jun 2013 08:57:28 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-20358</guid>
+		<description><![CDATA[Hi
+
+I am left very confused here. Why did we use the following declaration?
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+class Final : virtual MakeFinal
+&lt;/code&gt; &lt;/pre&gt;
+
+The explanation says &quot;The reason for this is to call the constructor of MakeFinal through the constructor of Derived, not Final (The constructor of a virtual base class is not called by the class that inherits from it, instead the constructor is called by the constructor of the concrete class).&quot;
+
+Does that mean that we have skipped the call to &quot;Final class&quot; constructor from Derived class constructor?
+If yes, then how???? What did the &quot;virtual&quot; do here?
+
+If that&#039;s the case then does it mean that every virtual base class constructor will be directly called by &quot;Concrete class&quot; only and not the middle classes?
+
+i.e the below source code should have not called B &#038; C constructor at all??
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+#include&#060;iostream&#062;
+using namespace std;
+ 
+class A{
+public:
+	A(){ cout &#060;&#060; &#034;A called&#034; &#060;&#060; endl; }
+};
+ 
+class B: virtual A{
+public:
+	B(){ cout &#060;&#060; &#034;B called&#034; &#060;&#060; endl; }
+};
+
+	class C: virtual A{
+public:
+	C(){ cout &#060;&#060; &#034;C called&#034; &#060;&#060; endl; }
+};
+
+	class D: public B, public C{
+public:
+	D(){ cout &#060;&#060; &#034;D called&#034; &#060;&#060; endl; }
+};
+
+int main(int argc, char *argv[])
+{
+    D d;
+    return 0;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Hi</p>
+<p>I am left very confused here. Why did we use the following declaration?</p>
+<pre> <code language="C">
+class Final : virtual MakeFinal
+</code> </pre>
+<p>The explanation says &#8220;The reason for this is to call the constructor of MakeFinal through the constructor of Derived, not Final (The constructor of a virtual base class is not called by the class that inherits from it, instead the constructor is called by the constructor of the concrete class).&#8221;</p>
+<p>Does that mean that we have skipped the call to &#8220;Final class&#8221; constructor from Derived class constructor?<br />
+If yes, then how???? What did the &#8220;virtual&#8221; do here?</p>
+<p>If that&#8217;s the case then does it mean that every virtual base class constructor will be directly called by &#8220;Concrete class&#8221; only and not the middle classes?</p>
+<p>i.e the below source code should have not called B &amp; C constructor at all??</p>
+<pre> <code language="C">
+#include&lt;iostream&gt;
+using namespace std;
+ 
+class A{
+public:
+	A(){ cout &lt;&lt; &quot;A called&quot; &lt;&lt; endl; }
+};
+ 
+class B: virtual A{
+public:
+	B(){ cout &lt;&lt; &quot;B called&quot; &lt;&lt; endl; }
+};
+
+	class C: virtual A{
+public:
+	C(){ cout &lt;&lt; &quot;C called&quot; &lt;&lt; endl; }
+};
+
+	class D: public B, public C{
+public:
+	D(){ cout &lt;&lt; &quot;D called&quot; &lt;&lt; endl; }
+};
+
+int main(int argc, char *argv[])
+{
+    D d;
+    return 0;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-17252</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Thu, 11 Apr 2013 15:56:37 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-17252</guid>
+		<description><![CDATA[Fred the question here is to create a Final class and you just created your Final class and Derived it instantly :D :D
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Fred the question here is to create a Final class and you just created your Final class and Derived it instantly 😀 😀</p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ssingh26</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-16847</link>
+		<dc:creator><![CDATA[ssingh26]]></dc:creator>
+		<pubDate>Fri, 29 Mar 2013 07:04:31 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-16847</guid>
+		<description><![CDATA[If virtual is replaced by public or any other access specifier it works fine. the output is as follow. shouldn&#039;t this throw an error as well? 
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* #include&#060;iostream&#062;
+using namespace std;
+ 
+class Final;  // The class to be made final
+ 
+class MakeFinal // used to make the Final class final
+{
+private:
+    MakeFinal() { cout &#060;&#060; &#034;MakFinal constructor&#034; &#060;&#060; endl; }
+friend class Final;
+};
+ 
+class Final : public MakeFinal
+{
+public:
+    Final() { cout &#060;&#060; &#034;Final constructor&#034; &#060;&#060; endl; }
+};
+ 
+class Derived : public Final // Compiler error
+{
+public:
+    Derived() { cout &#060;&#060; &#034;Derived constructor&#034; &#060;&#060; endl; }
+};
+ 
+int main(int argc, char *argv[])
+{
+    Derived d;
+    return 0;
+} */
+&lt;/code&gt; &lt;/pre&gt;
+
+output:
+MakeFinal constructor
+Final constructor
+Derived constructor]]></description>
+		<content:encoded><![CDATA[<p>If virtual is replaced by public or any other access specifier it works fine. the output is as follow. shouldn&#8217;t this throw an error as well? </p>
+<pre> <code language="C">
+/* #include&lt;iostream&gt;
+using namespace std;
+ 
+class Final;  // The class to be made final
+ 
+class MakeFinal // used to make the Final class final
+{
+private:
+    MakeFinal() { cout &lt;&lt; &quot;MakFinal constructor&quot; &lt;&lt; endl; }
+friend class Final;
+};
+ 
+class Final : public MakeFinal
+{
+public:
+    Final() { cout &lt;&lt; &quot;Final constructor&quot; &lt;&lt; endl; }
+};
+ 
+class Derived : public Final // Compiler error
+{
+public:
+    Derived() { cout &lt;&lt; &quot;Derived constructor&quot; &lt;&lt; endl; }
+};
+ 
+int main(int argc, char *argv[])
+{
+    Derived d;
+    return 0;
+} */
+</code> </pre>
+<p>output:<br />
+MakeFinal constructor<br />
+Final constructor<br />
+Derived constructor</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-7088</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Sat, 14 Jan 2012 04:31:57 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-7088</guid>
+		<description><![CDATA[@Ish:  These protected and private members are there so that they can used using base class public functions.]]></description>
+		<content:encoded><![CDATA[<p>@Ish:  These protected and private members are there so that they can used using base class public functions.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ish</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-7085</link>
+		<dc:creator><![CDATA[Ish]]></dc:creator>
+		<pubDate>Fri, 13 Jan 2012 10:14:03 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-7085</guid>
+		<description><![CDATA[Thank you sir , but I still have some doubt. I have read that private members cannot be inherited, only protected and public members can be , then how can a derived class contain even the private members of its base class ?]]></description>
+		<content:encoded><![CDATA[<p>Thank you sir , but I still have some doubt. I have read that private members cannot be inherited, only protected and public members can be , then how can a derived class contain even the private members of its base class ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-7081</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Fri, 13 Jan 2012 08:06:43 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-7081</guid>
+		<description><![CDATA[@ish:  All data members (public and private) of a base class are always available in derived classes.  They are not directly accessible in the derived class.  I hope, I clarified the point.]]></description>
+		<content:encoded><![CDATA[<p>@ish:  All data members (public and private) of a base class are always available in derived classes.  They are not directly accessible in the derived class.  I hope, I clarified the point.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ish</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-7080</link>
+		<dc:creator><![CDATA[Ish]]></dc:creator>
+		<pubDate>Fri, 13 Jan 2012 06:24:39 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-7080</guid>
+		<description><![CDATA[is this derivation possible ?]]></description>
+		<content:encoded><![CDATA[<p>is this derivation possible ?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ish</title>
+		<link>http://www.geeksforgeeks.org/simulating-final-class-in-c/#comment-7079</link>
+		<dc:creator><![CDATA[Ish]]></dc:creator>
+		<pubDate>Fri, 13 Jan 2012 06:17:34 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=16222#comment-7079</guid>
+		<description><![CDATA[The MakeFinal class has all its members as private. Why is Final class inheriting the private members of MakeFinal class ?]]></description>
+		<content:encoded><![CDATA[<p>The MakeFinal class has all its members as private. Why is Final class inheriting the private members of MakeFinal class ?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.065 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:26:44 -->
+
+<!-- Compression = gzip -->

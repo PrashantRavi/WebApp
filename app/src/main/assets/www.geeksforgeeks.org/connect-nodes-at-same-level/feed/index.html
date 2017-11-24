@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Connect nodes at same level</title>
+	<atom:link href="http://www.geeksforgeeks.org/connect-nodes-at-same-level/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: jim</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-40089</link>
+		<dc:creator><![CDATA[jim]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 17:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-40089</guid>
+		<description><![CDATA[Awesome and very simple solution!]]></description>
+		<content:encoded><![CDATA[<p>Awesome and very simple solution!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: MK</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-39191</link>
+		<dc:creator><![CDATA[MK]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 19:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-39191</guid>
+		<description><![CDATA[Can somebody elaborate on implementation of first method please?]]></description>
+		<content:encoded><![CDATA[<p>Can somebody elaborate on implementation of first method please?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: thatsme</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-39139</link>
+		<dc:creator><![CDATA[thatsme]]></dc:creator>
+		<pubDate>Thu, 19 Jun 2014 12:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-39139</guid>
+		<description><![CDATA[what if queue.front() == delimiter?? when will this condition occur?
+pls reply]]></description>
+		<content:encoded><![CDATA[<p>what if queue.front() == delimiter?? when will this condition occur?<br />
+pls reply</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pulkit Agarwal</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-38738</link>
+		<dc:creator><![CDATA[Pulkit Agarwal]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 19:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-38738</guid>
+		<description><![CDATA[Maybe We can use the sibling pointers to iterate in level order fashion without need of Queue
+
+root-&#062;nextPointer = null;
+
+populateSibling(root);
+
+void populateSibling(Node node){
+      if( node == null) return; //precondition check
+
+      Node leftMostChild = null; //helps in maintaining the level traversal
+
+      while( node != null){ //complete tree iteration       
+
+         //Both child present then link them
+          if(node-&#062;left &#038;&#038; node-&#062;right){
+              node-&#062;left-&#062;nextPointer = node-&#062;right;
+          }
+
+         //Find the first node in the next level. For a level populated once.
+         if(!leftMostChild){
+           if(node-&#062;left){
+                  leftMostChild = node-&#062;left;
+           }
+           else if(node-&#062;right){
+                   leftMostChild = node-&#062;right;
+           }
+         }
+
+         //Find the rightmost child of the node
+         Node rightMostChild = null;
+
+         if(node-&#062;right){
+                rightMostChild = node-&#062;right;
+         }
+         else if(node-&#062;left){
+                 rightMostChild = node-&#062;left;
+         }
+       
+
+        //Link the rightmost child with it&#039;s sibling
+        Node sibling = node-&#062;nextPointer;
+        Node childSibling = null;
+
+        while(sibling !=null){
+
+              if(sibling-&#062;left &#038;&#038; rightMostChild){
+                    rightMostChild-&#062;nextPointer  = sibling-&#062;left; break;
+              }
+              if(sibling-&#062;right &#038;&#038; rightMostChild){
+                    rightMostChild-&#062;nextPointer  = sibling-&#062;right; break;
+              }
+
+              sibling = sibling-&#062;nextPointer;     //level order build up 
+        }
+
+        //Current Node done. Move over to the next node in the level. 
+        node = node-&#062;nextPointer;
+
+        //if the next node is null this means that we have completed the level. Move over to the next level;
+        if(node == null){
+           node = leftMostChild;
+           leftMostChild = null;
+        }
+
+      }      //complete tree iteration complete.
+   }]]></description>
+		<content:encoded><![CDATA[<p>Maybe We can use the sibling pointers to iterate in level order fashion without need of Queue</p>
+<p>root-&gt;nextPointer = null;</p>
+<p>populateSibling(root);</p>
+<p>void populateSibling(Node node){<br />
+      if( node == null) return; //precondition check</p>
+<p>      Node leftMostChild = null; //helps in maintaining the level traversal</p>
+<p>      while( node != null){ //complete tree iteration       </p>
+<p>         //Both child present then link them<br />
+          if(node-&gt;left &amp;&amp; node-&gt;right){<br />
+              node-&gt;left-&gt;nextPointer = node-&gt;right;<br />
+          }</p>
+<p>         //Find the first node in the next level. For a level populated once.<br />
+         if(!leftMostChild){<br />
+           if(node-&gt;left){<br />
+                  leftMostChild = node-&gt;left;<br />
+           }<br />
+           else if(node-&gt;right){<br />
+                   leftMostChild = node-&gt;right;<br />
+           }<br />
+         }</p>
+<p>         //Find the rightmost child of the node<br />
+         Node rightMostChild = null;</p>
+<p>         if(node-&gt;right){<br />
+                rightMostChild = node-&gt;right;<br />
+         }<br />
+         else if(node-&gt;left){<br />
+                 rightMostChild = node-&gt;left;<br />
+         }</p>
+<p>        //Link the rightmost child with it&#8217;s sibling<br />
+        Node sibling = node-&gt;nextPointer;<br />
+        Node childSibling = null;</p>
+<p>        while(sibling !=null){</p>
+<p>              if(sibling-&gt;left &amp;&amp; rightMostChild){<br />
+                    rightMostChild-&gt;nextPointer  = sibling-&gt;left; break;<br />
+              }<br />
+              if(sibling-&gt;right &amp;&amp; rightMostChild){<br />
+                    rightMostChild-&gt;nextPointer  = sibling-&gt;right; break;<br />
+              }</p>
+<p>              sibling = sibling-&gt;nextPointer;     //level order build up<br />
+        }</p>
+<p>        //Current Node done. Move over to the next node in the level.<br />
+        node = node-&gt;nextPointer;</p>
+<p>        //if the next node is null this means that we have completed the level. Move over to the next level;<br />
+        if(node == null){<br />
+           node = leftMostChild;<br />
+           leftMostChild = null;<br />
+        }</p>
+<p>      }      //complete tree iteration complete.<br />
+   }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-37830</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 11:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-37830</guid>
+		<description><![CDATA[NICE CONCEPT 
+USING PREORDER (ROOT LEFT RIGHT)
+TO PERFORM OPERATIONS ON ROOT FIRST THEN ON PROCEEDING CHILDS (Y).]]></description>
+		<content:encoded><![CDATA[<p>NICE CONCEPT<br />
+USING PREORDER (ROOT LEFT RIGHT)<br />
+TO PERFORM OPERATIONS ON ROOT FIRST THEN ON PROCEEDING CHILDS (Y).</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-37137</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Sat, 31 May 2014 15:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-37137</guid>
+		<description><![CDATA[in the given example E&#039;s nextright node points to F but according to method 2 it is not the case it points to NULL 
+ p-&#062;right-&#062;nextRight = (p-&#062;nextRight)? p-&#062;nextRight-&#062;left: NULL;
+so this shows E&#039;s nextright points to NULL 
+correct me if im wrong!!!]]></description>
+		<content:encoded><![CDATA[<p>in the given example E&#8217;s nextright node points to F but according to method 2 it is not the case it points to NULL<br />
+ p-&gt;right-&gt;nextRight = (p-&gt;nextRight)? p-&gt;nextRight-&gt;left: NULL;<br />
+so this shows E&#8217;s nextright points to NULL<br />
+correct me if im wrong!!!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Lohith Ravi</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-35198</link>
+		<dc:creator><![CDATA[Lohith Ravi]]></dc:creator>
+		<pubDate>Sun, 27 Apr 2014 18:07:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-35198</guid>
+		<description><![CDATA[http://ideone.com/W45bQS]]></description>
+		<content:encoded><![CDATA[<p><a href="http://ideone.com/W45bQS" rel="nofollow">http://ideone.com/W45bQS</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ameet Chhatwal</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-33363</link>
+		<dc:creator><![CDATA[Ameet Chhatwal]]></dc:creator>
+		<pubDate>Tue, 11 Mar 2014 00:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-33363</guid>
+		<description><![CDATA[Beautiful solution thanks for sharing!]]></description>
+		<content:encoded><![CDATA[<p>Beautiful solution thanks for sharing!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pradeep H N</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-32807</link>
+		<dc:creator><![CDATA[Pradeep H N]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2014 15:15:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-32807</guid>
+		<description><![CDATA[f-&#062;left-&#062;nextRight = f-&#062;right instead of 
+f-&#062;left-&#062;nextRight = f-&#062;rlink;]]></description>
+		<content:encoded><![CDATA[<p>f-&gt;left-&gt;nextRight = f-&gt;right instead of<br />
+f-&gt;left-&gt;nextRight = f-&gt;rlink;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pradeep H N</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-32802</link>
+		<dc:creator><![CDATA[Pradeep H N]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2014 12:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-32802</guid>
+		<description><![CDATA[return; instead of return NULL]]></description>
+		<content:encoded><![CDATA[<p>return; instead of return NULL</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pradeep H N</title>
+		<link>http://www.geeksforgeeks.org/connect-nodes-at-same-level/#comment-32801</link>
+		<dc:creator><![CDATA[Pradeep H N]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2014 12:37:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=8631#comment-32801</guid>
+		<description><![CDATA[Below code works for a binary tree 
+
+void *reform(struct node *f)
+{
+
+  if (f == NULL) {
+       return NULL;
+  }
+
+  if (f-&#062;left != NULL) {
+       f-&#062;left-&#062;nextRight = f-&#062;rlink;
+  }
+  reform(f-&#062;left);
+  reform(f-&#062;right);
+
+  if(f-&#062;right != NULL &#038;&#038; f-&#062;nextRight != NULL) {
+       if (f-&#062;nextRight-&#062;left != NULL) {
+             f-&#062;right-&#062;nextRight = f-&#062;nextRight-&#062;left;
+       } else  {
+             f-&#062;right-&#062;nextRight = f-&#062;nextRight-&#062;right;
+       }
+  } else if (f-&#062;right == NULL &#038;&#038; f-&#062;nextRight != NULL  &#038;&#038; f-&#062;left != NULL) {
+       if (f-&#062;nextRight-&#062;left != NULL) {
+           f-&#062;left-&#062;nextRight = f-&#062;nextRight-&#062;left;
+       } else {
+           f-&#062;left-&#062;nextRight = f-&#062;nextRight-&#062;right;
+       }
+  }
+
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Below code works for a binary tree </p>
+<p>void *reform(struct node *f)<br />
+{</p>
+<p>  if (f == NULL) {<br />
+       return NULL;<br />
+  }</p>
+<p>  if (f-&gt;left != NULL) {<br />
+       f-&gt;left-&gt;nextRight = f-&gt;rlink;<br />
+  }<br />
+  reform(f-&gt;left);<br />
+  reform(f-&gt;right);</p>
+<p>  if(f-&gt;right != NULL &amp;&amp; f-&gt;nextRight != NULL) {<br />
+       if (f-&gt;nextRight-&gt;left != NULL) {<br />
+             f-&gt;right-&gt;nextRight = f-&gt;nextRight-&gt;left;<br />
+       } else  {<br />
+             f-&gt;right-&gt;nextRight = f-&gt;nextRight-&gt;right;<br />
+       }<br />
+  } else if (f-&gt;right == NULL &amp;&amp; f-&gt;nextRight != NULL  &amp;&amp; f-&gt;left != NULL) {<br />
+       if (f-&gt;nextRight-&gt;left != NULL) {<br />
+           f-&gt;left-&gt;nextRight = f-&gt;nextRight-&gt;left;<br />
+       } else {<br />
+           f-&gt;left-&gt;nextRight = f-&gt;nextRight-&gt;right;<br />
+       }<br />
+  }</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.043 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:04:04 -->
+
+<!-- Compression = gzip -->

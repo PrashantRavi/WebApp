@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Largest Rectangular Area in a Histogram &#124; Set 2</title>
+	<atom:link href="http://www.geeksforgeeks.org/largest-rectangle-under-histogram/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Sammy Mohamed</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-39827</link>
+		<dc:creator><![CDATA[Sammy Mohamed]]></dc:creator>
+		<pubDate>Wed, 25 Jun 2014 21:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-39827</guid>
+		<description><![CDATA[I thought of almost exactly the same counter example. When we pop off the 6 in the beginning and push 2 back on, we aren&#039;t keeping track of how far to the left of 2 the maximum rectangle containing it can be.]]></description>
+		<content:encoded><![CDATA[<p>I thought of almost exactly the same counter example. When we pop off the 6 in the beginning and push 2 back on, we aren&#8217;t keeping track of how far to the left of 2 the maximum rectangle containing it can be.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prasenjit Mondal</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-35333</link>
+		<dc:creator><![CDATA[Prasenjit Mondal]]></dc:creator>
+		<pubDate>Wed, 30 Apr 2014 19:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-35333</guid>
+		<description><![CDATA[//helper function to calculate maximum rectangle in the histogram
+//o(n) solution
+void findMaxRectangleHist(ll *arr, ll size){
+    stack sk;
+    ll index = 0;
+    ll max_area = LLONG_MIN;
+    
+    //last index is used to store the last height index in the stack which is greater than the left adjacent height in the array and
+    //greater than height at current index    
+    ll last_index = 0;    
+
+    //push start index
+    //get height at index by arr[index]
+    sk.push(0);
+    index++;
+    
+    while(index  arr[sk.top()]){
+            sk.push(index);        
+        }else if(!sk.empty() &#038;&#038; arr[index] &#060; arr[sk.top()]){            
+            //pop out previous index as long as height is greater than the height at current index and stack is not empty
+            while(!sk.empty() &#038;&#038; arr[index]  max_area){
+                    max_area = new_area;
+                }
+                            
+                //store last index
+                //it is used to replace the heigth at this position in the array                    
+                last_index = sk.top();
+                
+                //pop indices
+                sk.pop();            
+            }
+            
+            //replace the height in the array at this position
+            //since max rectangle is posible by constructing rectangle starting from this index to current index 
+            sk.push(last_index);
+            arr[last_index] = arr[index];
+        }
+
+        index++;
+    }
+    
+    //if stack is not empty pop previous index and update max rectangle area
+    while(!sk.empty()){
+        ll new_area = (index - sk.top()) * arr[sk.top()];
+        
+        if(new_area &#062; max_area){
+            max_area = new_area;
+        }
+            
+        sk.pop();
+    }
+    
+    cout &#060;&#060; max_area &#060;&#060; endl;
+}]]></description>
+		<content:encoded><![CDATA[<p>//helper function to calculate maximum rectangle in the histogram<br />
+//o(n) solution<br />
+void findMaxRectangleHist(ll *arr, ll size){<br />
+    stack sk;<br />
+    ll index = 0;<br />
+    ll max_area = LLONG_MIN;</p>
+<p>    //last index is used to store the last height index in the stack which is greater than the left adjacent height in the array and<br />
+    //greater than height at current index<br />
+    ll last_index = 0;    </p>
+<p>    //push start index<br />
+    //get height at index by arr[index]<br />
+    sk.push(0);<br />
+    index++;</p>
+<p>    while(index  arr[sk.top()]){<br />
+            sk.push(index);<br />
+        }else if(!sk.empty() &amp;&amp; arr[index] &lt; arr[sk.top()]){<br />
+            //pop out previous index as long as height is greater than the height at current index and stack is not empty<br />
+            while(!sk.empty() &amp;&amp; arr[index]  max_area){<br />
+                    max_area = new_area;<br />
+                }</p>
+<p>                //store last index<br />
+                //it is used to replace the heigth at this position in the array<br />
+                last_index = sk.top();</p>
+<p>                //pop indices<br />
+                sk.pop();<br />
+            }</p>
+<p>            //replace the height in the array at this position<br />
+            //since max rectangle is posible by constructing rectangle starting from this index to current index<br />
+            sk.push(last_index);<br />
+            arr[last_index] = arr[index];<br />
+        }</p>
+<p>        index++;<br />
+    }</p>
+<p>    //if stack is not empty pop previous index and update max rectangle area<br />
+    while(!sk.empty()){<br />
+        ll new_area = (index &#8211; sk.top()) * arr[sk.top()];</p>
+<p>        if(new_area &gt; max_area){<br />
+            max_area = new_area;<br />
+        }</p>
+<p>        sk.pop();<br />
+    }</p>
+<p>    cout &lt;&lt; max_area &lt;&lt; endl;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SKS</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-34705</link>
+		<dc:creator><![CDATA[SKS]]></dc:creator>
+		<pubDate>Tue, 15 Apr 2014 13:51:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-34705</guid>
+		<description><![CDATA[Please check when all values are equal.  I think u need some correction..]]></description>
+		<content:encoded><![CDATA[<p>Please check when all values are equal.  I think u need some correction..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: brijesh</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-34627</link>
+		<dc:creator><![CDATA[brijesh]]></dc:creator>
+		<pubDate>Sat, 12 Apr 2014 19:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-34627</guid>
+		<description><![CDATA[can this code work if we have  a histogram array with zero entry?????thanks ...]]></description>
+		<content:encoded><![CDATA[<p>can this code work if we have  a histogram array with zero entry?????thanks &#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Linfuzki</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-33569</link>
+		<dc:creator><![CDATA[Linfuzki]]></dc:creator>
+		<pubDate>Sun, 16 Mar 2014 11:16:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-33569</guid>
+		<description><![CDATA[it does have a loop for the &quot;else&quot; condition by not increasing i;]]></description>
+		<content:encoded><![CDATA[<p>it does have a loop for the &#8220;else&#8221; condition by not increasing i;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Puneet Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-32690</link>
+		<dc:creator><![CDATA[Puneet Jaiswal]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 09:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-32690</guid>
+		<description><![CDATA[no this algo gives 6 for input 3,2,3.]]></description>
+		<content:encoded><![CDATA[<p>no this algo gives 6 for input 3,2,3.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: dragonmigo</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-32322</link>
+		<dc:creator><![CDATA[dragonmigo]]></dc:creator>
+		<pubDate>Fri, 07 Feb 2014 19:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-32322</guid>
+		<description><![CDATA[According to the algorithm, you will get 6 as follows:
+
+1) 3
+
+push onto stack
+
+2) 2
+
+22, so push 3 onto stack.
+
+Now stack looks like 2 3
+
+Now, pop 3 off stack, area = 3 * (3 - 1 - 1) = 3
+
+pop 2 off stack, area = 2 * (3) = 6
+
+(notice s.empty() ? i : i - s.top() - 1)]]></description>
+		<content:encoded><![CDATA[<p>According to the algorithm, you will get 6 as follows:</p>
+<p>1) 3</p>
+<p>push onto stack</p>
+<p>2) 2</p>
+<p>22, so push 3 onto stack.</p>
+<p>Now stack looks like 2 3</p>
+<p>Now, pop 3 off stack, area = 3 * (3 &#8211; 1 &#8211; 1) = 3</p>
+<p>pop 2 off stack, area = 2 * (3) = 6</p>
+<p>(notice s.empty() ? i : i &#8211; s.top() &#8211; 1)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: fajsf</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-30000</link>
+		<dc:creator><![CDATA[fajsf]]></dc:creator>
+		<pubDate>Wed, 20 Nov 2013 06:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-30000</guid>
+		<description><![CDATA[I also think there is a problem with this linear algorithm,
+if you have 3,2,3, the largest possible is 6(2+2+2), but according to the algorithm we will only get 4.
+
+
+Am I misunderstand it?]]></description>
+		<content:encoded><![CDATA[<p>I also think there is a problem with this linear algorithm,<br />
+if you have 3,2,3, the largest possible is 6(2+2+2), but according to the algorithm we will only get 4.</p>
+<p>Am I misunderstand it?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: muhammad</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-28994</link>
+		<dc:creator><![CDATA[muhammad]]></dc:creator>
+		<pubDate>Thu, 17 Oct 2013 19:23:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-28994</guid>
+		<description><![CDATA[This is O(n) * (max height).  
+
+So the solution goes like this. You first find the max rect
+ area for all height 1 rectangles, then height 2 rectangles or so on..
+subtract array heights by 1 at each step, and keep track of max area at every
+level
+
+ &lt;code&gt;
+
+              
+Int maxArea=0;
+
+              
+Int curArea=0;
+
+              
+Int h=1;
+
+              
+Bool nextavail=true;
+
+              
+while(nextavail )
+
+              
+{
+
+                             
+Int curlen =0;
+
+                             
+Int maxlen= 0;
+
+ 
+
+                             
+//find max length from all possible rectangles.
+
+              
+              
+For( int i=0;I &#060; Array.len; i++)
+
+                             
+{
+
+                                            
+if( Array[i]==
+0)
+
+                                            
+{
+
+                                            
+              
+Maxlen= maxof (curLen ,maxlen);
+
+                                                           
+curLen=0;
+
+}
+
+Else curLen ++;
+
+}
+
+Maxlen=maxof
+(curlen,maxlen);
+
+ 
+
+//get  max
+area
+
+curArea=h*maxLen;
+
+maxArea= maxof
+(curArea, maxArea);
+
+ 
+
+//subtract 1 from
+heights 
+
+Nextavail=false;
+
+For( int i=0;I
+0) 
+
+                             
+Nextavail=true;
+
+}
+
+h++;
+
+}
+
+ 
+
+Return maxArea;
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>This is O(n) * (max height).  </p>
+<p>So the solution goes like this. You first find the max rect<br />
+ area for all height 1 rectangles, then height 2 rectangles or so on..<br />
+subtract array heights by 1 at each step, and keep track of max area at every<br />
+level</p>
+<p> <code></p>
+<p>Int maxArea=0;</p>
+<p>Int curArea=0;</p>
+<p>Int h=1;</p>
+<p>Bool nextavail=true;</p>
+<p>while(nextavail )</p>
+<p>{</p>
+<p>Int curlen =0;</p>
+<p>Int maxlen= 0;</p>
+<p>//find max length from all possible rectangles.</p>
+<p>For( int i=0;I &lt; Array.len; i++)</p>
+<p>{</p>
+<p>if( Array[i]==<br />
+0)</p>
+<p>{</p>
+<p>Maxlen= maxof (curLen ,maxlen);</p>
+<p>curLen=0;</p>
+<p>}</p>
+<p>Else curLen ++;</p>
+<p>}</p>
+<p>Maxlen=maxof<br />
+(curlen,maxlen);</p>
+<p>//get  max<br />
+area</p>
+<p>curArea=h*maxLen;</p>
+<p>maxArea= maxof<br />
+(curArea, maxArea);</p>
+<p>//subtract 1 from<br />
+heights </p>
+<p>Nextavail=false;</p>
+<p>For( int i=0;I<br />
+0) </p>
+<p>Nextavail=true;</p>
+<p>}</p>
+<p>h++;</p>
+<p>}</p>
+<p>Return maxArea;<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aalien</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-28059</link>
+		<dc:creator><![CDATA[Aalien]]></dc:creator>
+		<pubDate>Mon, 23 Sep 2013 20:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-28059</guid>
+		<description><![CDATA[Will this algorithm work for sorted array? Example: {1,2,3,4,5,6}]]></description>
+		<content:encoded><![CDATA[<p>Will this algorithm work for sorted array? Example: {1,2,3,4,5,6}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: innosam</title>
+		<link>http://www.geeksforgeeks.org/largest-rectangle-under-histogram/#comment-23084</link>
+		<dc:creator><![CDATA[innosam]]></dc:creator>
+		<pubDate>Fri, 02 Aug 2013 05:08:32 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=116498#comment-23084</guid>
+		<description><![CDATA[{6, 2, 5, 4, 5, 2, 6}.
+Isn&#039;t the largest rectangle possible here is 14(2x7).]]></description>
+		<content:encoded><![CDATA[<p>{6, 2, 5, 4, 5, 2, 6}.<br />
+Isn&#8217;t the largest rectangle possible here is 14(2&#215;7).</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.092 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:16:05 -->
+
+<!-- Compression = gzip -->

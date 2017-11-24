@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Convert a BST to a Binary Tree such that sum of all greater keys is added to every key</title>
+	<atom:link href="http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: ac</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-38790</link>
+		<dc:creator><![CDATA[ac]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 07:12:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-38790</guid>
+		<description><![CDATA[No, I don&#039;t think you&#039;ve understood the question correctly. 2 will not be updated to 20 according to your code. The left subtree is not being updated. That is why you need to traverse right subtree first and then left.]]></description>
+		<content:encoded><![CDATA[<p>No, I don&#8217;t think you&#8217;ve understood the question correctly. 2 will not be updated to 20 according to your code. The left subtree is not being updated. That is why you need to traverse right subtree first and then left.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ac</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-38788</link>
+		<dc:creator><![CDATA[ac]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 07:03:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-38788</guid>
+		<description><![CDATA[I don&#039;t think this will work. Question says you have to change every key to key plus sum of all greater keys in original BST. The greater value might not only be in the right subtree. According to your code 2 will not be updated to 20. Correct me if i&#039;m wrong]]></description>
+		<content:encoded><![CDATA[<p>I don&#8217;t think this will work. Question says you have to change every key to key plus sum of all greater keys in original BST. The greater value might not only be in the right subtree. According to your code 2 will not be updated to 20. Correct me if i&#8217;m wrong</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suryabhan Singh</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-28915</link>
+		<dc:creator><![CDATA[Suryabhan Singh]]></dc:creator>
+		<pubDate>Tue, 15 Oct 2013 14:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-28915</guid>
+		<description><![CDATA[&lt;code&gt;
+
+void addgreatorsum(struct node *s)
+{
+    static int pre=0;
+    if(!s)
+        return ;
+    else
+    {
+
+        addgreatorsum(s-&#062;r);
+        s-&#062;data+=pre;
+        pre=s-&#062;data;
+        addgreatorsum(s-&#062;l);
+
+    }
+}
+&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p><code></p>
+<p>void addgreatorsum(struct node *s)<br />
+{<br />
+    static int pre=0;<br />
+    if(!s)<br />
+        return ;<br />
+    else<br />
+    {</p>
+<p>        addgreatorsum(s-&gt;r);<br />
+        s-&gt;data+=pre;<br />
+        pre=s-&gt;data;<br />
+        addgreatorsum(s-&gt;l);</p>
+<p>    }<br />
+}<br />
+</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ubiquitous</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-24688</link>
+		<dc:creator><![CDATA[ubiquitous]]></dc:creator>
+		<pubDate>Thu, 08 Aug 2013 06:36:35 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-24688</guid>
+		<description><![CDATA[i feel pointer to primitive type here it&#039;s int is similar to static variable. So we can get rid of this by simple saying that node.value= node.value+right(here right is the sum of the values greater than this node&#039;s value)
+atlast return left value Please refer to the code below.
+
+
+[sourcecode language=&quot;java&quot;]
+int changeToBinaryTree(TreeNode t, int sum)
+    {
+        if(t==null)
+        {
+            return sum;
+        }
+        int right = changeToBinaryTree(t.right, sum);
+        t.val = right + t.val;
+        int left = changeToBinaryTree(t.left, t.val);
+        return left;
+    }
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>i feel pointer to primitive type here it&#8217;s int is similar to static variable. So we can get rid of this by simple saying that node.value= node.value+right(here right is the sum of the values greater than this node&#8217;s value)<br />
+atlast return left value Please refer to the code below.</p>
+<p>int changeToBinaryTree(TreeNode t, int sum)<br />
+    {<br />
+        if(t==null)<br />
+        {<br />
+            return sum;<br />
+        }<br />
+        int right = changeToBinaryTree(t.right, sum);<br />
+        t.val = right + t.val;<br />
+        int left = changeToBinaryTree(t.left, t.val);<br />
+        return left;<br />
+    }</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kush</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-19645</link>
+		<dc:creator><![CDATA[kush]]></dc:creator>
+		<pubDate>Wed, 12 Jun 2013 15:33:56 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-19645</guid>
+		<description><![CDATA[&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+tree *sum(tree *root)
+{
+	static int su=0;
+	if(!root)return NULL;
+	root-&#062;right=sum(root-&#062;right);
+	su+=root-&#062;data;
+	root-&#062;data=su;
+	root-&#062;left=sum(root-&#062;left);
+	return root;
+}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<pre> <code language="C">
+tree *sum(tree *root)
+{
+	static int su=0;
+	if(!root)return NULL;
+	root-&gt;right=sum(root-&gt;right);
+	su+=root-&gt;data;
+	root-&gt;data=su;
+	root-&gt;left=sum(root-&gt;left);
+	return root;
+}
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: abhishek08aug</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-18474</link>
+		<dc:creator><![CDATA[abhishek08aug]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 18:46:54 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-18474</guid>
+		<description><![CDATA[Intelligent :D]]></description>
+		<content:encoded><![CDATA[<p>Intelligent 😀</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Prabodh Panigrahy</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-26199</link>
+		<dc:creator><![CDATA[Prabodh Panigrahy]]></dc:creator>
+		<pubDate>Wed, 13 Mar 2013 03:56:59 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-26199</guid>
+		<description><![CDATA[No, we will have a separate counter which holds the &#039;sum&#039; till the last visited node. So it has nothing to do with the updated values of the node. Or a simple solution is to add the last visited node after updation to this node...]]></description>
+		<content:encoded><![CDATA[<p>No, we will have a separate counter which holds the &#039;sum&#039; till the last visited node. So it has nothing to do with the updated values of the node. Or a simple solution is to add the last visited node after updation to this node&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sush</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-15077</link>
+		<dc:creator><![CDATA[sush]]></dc:creator>
+		<pubDate>Thu, 07 Feb 2013 09:12:51 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-15077</guid>
+		<description><![CDATA[Easy implementation
+
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+//returns sum of all nodes in tree rooted at &#034;root&#034;
+int addGreater(struct node *root)
+{
+	if(root==NULL)
+	return 0;
+	root-&#062;key+=addGreater(root-&#062;right);
+	return root-&#062;key+addGreater(root-&#062;left);
+}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Easy implementation</p>
+<pre> <code language="C">
+//returns sum of all nodes in tree rooted at &quot;root&quot;
+int addGreater(struct node *root)
+{
+	if(root==NULL)
+	return 0;
+	root-&gt;key+=addGreater(root-&gt;right);
+	return root-&gt;key+addGreater(root-&gt;left);
+}
+
+</code> </pre>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gopal</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-14788</link>
+		<dc:creator><![CDATA[Gopal]]></dc:creator>
+		<pubDate>Sat, 26 Jan 2013 05:54:59 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-14788</guid>
+		<description><![CDATA[//where root is root of Binary Search Tree
+//method call
+addAllGreaterKeys(root, 0);
+
+[sourcecode language=&quot;JAVA&quot;]
+public static int addAllGreaterKeys(Node node,int value)
+	{
+		if(node == null)
+			return 0;
+		
+		if(node.right == null &#038;&#038; node.left == null)
+		{
+			node.n += value;
+			return node.n;
+		}
+		
+		int rightSum = addAllGreaterKeys(node.right,value);
+		
+		int leftSum = addAllGreaterKeys(node.left, rightSum + node.n);
+		
+		node.n += rightSum;
+		
+		return leftSum;
+	}
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>//where root is root of Binary Search Tree<br />
+//method call<br />
+addAllGreaterKeys(root, 0);</p>
+<p>public static int addAllGreaterKeys(Node node,int value)<br />
+	{<br />
+		if(node == null)<br />
+			return 0;</p>
+<p>		if(node.right == null &amp;&amp; node.left == null)<br />
+		{<br />
+			node.n += value;<br />
+			return node.n;<br />
+		}</p>
+<p>		int rightSum = addAllGreaterKeys(node.right,value);</p>
+<p>		int leftSum = addAllGreaterKeys(node.left, rightSum + node.n);</p>
+<p>		node.n += rightSum;</p>
+<p>		return leftSum;<br />
+	}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Gopal</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-14787</link>
+		<dc:creator><![CDATA[Gopal]]></dc:creator>
+		<pubDate>Sat, 26 Jan 2013 05:52:08 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-14787</guid>
+		<description><![CDATA[Correct me if I am wrong, everything looks great, however, in your code you are not adding root.data value to your left nodes.]]></description>
+		<content:encoded><![CDATA[<p>Correct me if I am wrong, everything looks great, however, in your code you are not adding root.data value to your left nodes.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: go4gold</title>
+		<link>http://www.geeksforgeeks.org/convert-bst-to-a-binary-tree/#comment-14578</link>
+		<dc:creator><![CDATA[go4gold]]></dc:creator>
+		<pubDate>Sun, 20 Jan 2013 04:24:28 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=29039#comment-14578</guid>
+		<description><![CDATA[void addtilllarge(node *p)
+{
+     static int sum;
+     if(p==NULL)
+     return;
+     else
+     {
+        addtilllarge(p-&#062;right);
+        sum+=p-&#062;data;
+        p-&#062;data=sum;
+        addtilllarge(p-&#062;left);
+     }
+} 
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+/* Paste your code here (You may delete these lines if not writing code) */
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>void addtilllarge(node *p)<br />
+{<br />
+     static int sum;<br />
+     if(p==NULL)<br />
+     return;<br />
+     else<br />
+     {<br />
+        addtilllarge(p-&gt;right);<br />
+        sum+=p-&gt;data;<br />
+        p-&gt;data=sum;<br />
+        addtilllarge(p-&gt;left);<br />
+     }<br />
+} </p>
+<pre> <code language="C">
+/* Paste your code here (You may delete these lines if not writing code) */
+</code> </pre>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.055 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:18:11 -->
+
+<!-- Compression = gzip -->

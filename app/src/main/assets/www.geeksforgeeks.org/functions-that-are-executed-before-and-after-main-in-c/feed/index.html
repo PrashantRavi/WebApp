@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Functions that are executed before and after main() in C</title>
+	<atom:link href="http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Sarav Sandhu</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-39647</link>
+		<dc:creator><![CDATA[Sarav Sandhu]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 13:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-39647</guid>
+		<description><![CDATA[no they&#039;re not, the order of execution only depends upon the declaration order of constructors :
+
+void myStartupFun (void) __attribute__ ((constructor));
+
+void myStartupFun2 (void) __attribute__ ((constructor));
+
+/* Apply the destructor attribute to myCleanupFun() so that it
+
+ *    is executed after main() */
+
+void myCleanupFun (void) __attribute__ ((destructor));
+
+/* implementation of myStartupFun */
+
+void myStartupFun (void)
+
+{
+
+        printf (&quot;startup code before main()n&quot;);
+
+}
+
+/* implementation of myStartupFun */
+
+void myStartupFun2 (void)
+
+{
+
+        printf (&quot;startup2 code before main()n&quot;);
+
+}
+
+it gives output:
+
+startup code before main()
+startup2 code before main()
+
+while the following code produces reverse output :
+
+void myStartupFun (void) __attribute__ ((constructor));
+
+void myStartupFun2 (void) __attribute__ ((constructor));
+
+/* Apply the destructor attribute to myCleanupFun() so that it
+
+ *    is executed after main() */
+
+void myCleanupFun (void) __attribute__ ((destructor));
+
+/* implementation of myStartupFun */
+
+void myStartupFun2 (void)
+
+{
+
+        printf (&quot;startup2 code before main()n&quot;);
+
+}
+
+/* implementation of myStartupFun */
+
+void myStartupFun (void)
+
+{
+
+        printf (&quot;startup code before main()n&quot;);
+
+}
+
+Output :
+
+startup2 code before main()
+
+startup code before main()]]></description>
+		<content:encoded><![CDATA[<p>no they&#8217;re not, the order of execution only depends upon the declaration order of constructors :</p>
+<p>void myStartupFun (void) __attribute__ ((constructor));</p>
+<p>void myStartupFun2 (void) __attribute__ ((constructor));</p>
+<p>/* Apply the destructor attribute to myCleanupFun() so that it</p>
+<p> *    is executed after main() */</p>
+<p>void myCleanupFun (void) __attribute__ ((destructor));</p>
+<p>/* implementation of myStartupFun */</p>
+<p>void myStartupFun (void)</p>
+<p>{</p>
+<p>        printf (&#8220;startup code before main()n&#8221;);</p>
+<p>}</p>
+<p>/* implementation of myStartupFun */</p>
+<p>void myStartupFun2 (void)</p>
+<p>{</p>
+<p>        printf (&#8220;startup2 code before main()n&#8221;);</p>
+<p>}</p>
+<p>it gives output:</p>
+<p>startup code before main()<br />
+startup2 code before main()</p>
+<p>while the following code produces reverse output :</p>
+<p>void myStartupFun (void) __attribute__ ((constructor));</p>
+<p>void myStartupFun2 (void) __attribute__ ((constructor));</p>
+<p>/* Apply the destructor attribute to myCleanupFun() so that it</p>
+<p> *    is executed after main() */</p>
+<p>void myCleanupFun (void) __attribute__ ((destructor));</p>
+<p>/* implementation of myStartupFun */</p>
+<p>void myStartupFun2 (void)</p>
+<p>{</p>
+<p>        printf (&#8220;startup2 code before main()n&#8221;);</p>
+<p>}</p>
+<p>/* implementation of myStartupFun */</p>
+<p>void myStartupFun (void)</p>
+<p>{</p>
+<p>        printf (&#8220;startup code before main()n&#8221;);</p>
+<p>}</p>
+<p>Output :</p>
+<p>startup2 code before main()</p>
+<p>startup code before main()</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sarav Sandhu</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-39645</link>
+		<dc:creator><![CDATA[Sarav Sandhu]]></dc:creator>
+		<pubDate>Tue, 24 Jun 2014 13:28:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-39645</guid>
+		<description><![CDATA[following articles gives the details of how to do this : http://www.keil.com/support/man/docs/armccref/armccref_cjadjige.htm]]></description>
+		<content:encoded><![CDATA[<p>following articles gives the details of how to do this : <a href="http://www.keil.com/support/man/docs/armccref/armccref_cjadjige.htm" rel="nofollow">http://www.keil.com/support/man/docs/armccref/armccref_cjadjige.htm</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Alfredo Meraz</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-27791</link>
+		<dc:creator><![CDATA[Alfredo Meraz]]></dc:creator>
+		<pubDate>Wed, 18 Sep 2013 01:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-27791</guid>
+		<description><![CDATA[constructor (priority) &#038; destructor (priority), priority being an integer, determine the order of execution. The lower the number, the sooner it executes before main and the later it executes after main.]]></description>
+		<content:encoded><![CDATA[<p>constructor (priority) &amp; destructor (priority), priority being an integer, determine the order of execution. The lower the number, the sooner it executes before main and the later it executes after main.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Saurya</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-6300</link>
+		<dc:creator><![CDATA[Saurya]]></dc:creator>
+		<pubDate>Sat, 29 Oct 2011 17:32:46 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-6300</guid>
+		<description><![CDATA[This one is Kewl...]]></description>
+		<content:encoded><![CDATA[<p>This one is Kewl&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: PsychoCoder</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-6245</link>
+		<dc:creator><![CDATA[PsychoCoder]]></dc:creator>
+		<pubDate>Wed, 26 Oct 2011 06:12:11 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-6245</guid>
+		<description><![CDATA[In the link you have given, the attribution is,
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;
+void myStartupFun2 (void) __attribute__ ((constructor));
+void myStartupFun (void) __attribute__ ((constructor));
+&lt;/code&gt; &lt;/pre&gt;
+
+the output should be different than what is given there, 
+The output will be,
+
+startup fun() before main()
+startup fun2() before main()
+hello
+
+So, we can say the function will call in the reverse way of their function declaration.]]></description>
+		<content:encoded><![CDATA[<p>In the link you have given, the attribution is,</p>
+<pre> <code language="C">
+void myStartupFun2 (void) __attribute__ ((constructor));
+void myStartupFun (void) __attribute__ ((constructor));
+</code> </pre>
+<p>the output should be different than what is given there,<br />
+The output will be,</p>
+<p>startup fun() before main()<br />
+startup fun2() before main()<br />
+hello</p>
+<p>So, we can say the function will call in the reverse way of their function declaration.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-5674</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Mon, 10 Oct 2011 10:03:22 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-5674</guid>
+		<description><![CDATA[They execute in the order of their attribution.  See &lt;a href=&quot;http://ideone.com/vc9Cn&quot; rel=&quot;nofollow&quot;&gt;this&lt;/a&gt; run for example.]]></description>
+		<content:encoded><![CDATA[<p>They execute in the order of their attribution.  See <a href="http://ideone.com/vc9Cn" rel="nofollow">this</a> run for example.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Anurag</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-5673</link>
+		<dc:creator><![CDATA[Anurag]]></dc:creator>
+		<pubDate>Mon, 10 Oct 2011 06:07:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-5673</guid>
+		<description><![CDATA[Thanks for the article. Its really nice, didn&#039;t know if any such thing  exists in C]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the article. Its really nice, didn&#8217;t know if any such thing  exists in C</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: student</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-5666</link>
+		<dc:creator><![CDATA[student]]></dc:creator>
+		<pubDate>Sun, 09 Oct 2011 15:58:43 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-5666</guid>
+		<description><![CDATA[what about the order of execution between 2 or more functions who have been attributed as constructors and destructor ??]]></description>
+		<content:encoded><![CDATA[<p>what about the order of execution between 2 or more functions who have been attributed as constructors and destructor ??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: kartik</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-5559</link>
+		<dc:creator><![CDATA[kartik]]></dc:creator>
+		<pubDate>Sat, 01 Oct 2011 04:32:22 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-5559</guid>
+		<description><![CDATA[This constructor is not a c++ type of constructor.  In C++, constructors are used to initialize objects of a class.  
+
+Here constructor is an attribute added to functions so that they are executed before main().   In fact, there can be more than one functions with constructor attribute.
+
+&lt;pre&gt; &lt;code language=&quot;C&quot;&gt;#include&#060;stdio.h&#062;
+void myStartupFun (void) __attribute__ ((constructor));
+void myCleanupFun (void) __attribute__ ((destructor));
+
+void myStartupFun2 (void) __attribute__ ((constructor));
+void myStartupFun2 (void) __attribute__ ((destructor));
+
+void myStartupFun (void)
+{
+    printf (&#034;startup fun() before main()\n&#034;);
+}
+
+void myCleanupFun (void)
+{
+    printf (&#034;cleanup fun() after main()\n&#034;);
+}
+
+
+void myStartupFun2 (void)
+{
+    printf (&#034;startup fun2() before main()\n&#034;);
+}
+
+void myCleanupFun2 (void)
+{
+    printf (&#034;cleanup fun2() after main()\n&#034;);
+}
+
+int main (void)
+{
+    printf (&#034;hello\n&#034;);
+    return 0;
+}&lt;/code&gt; &lt;/pre&gt;
+
+Output
+
+startup fun2() before main()
+startup fun() before main()
+hello
+cleanup fun() after main()
+startup fun2() before main()
+]]></description>
+		<content:encoded><![CDATA[<p>This constructor is not a c++ type of constructor.  In C++, constructors are used to initialize objects of a class.  </p>
+<p>Here constructor is an attribute added to functions so that they are executed before main().   In fact, there can be more than one functions with constructor attribute.</p>
+<pre> <code language="C">#include&lt;stdio.h&gt;
+void myStartupFun (void) __attribute__ ((constructor));
+void myCleanupFun (void) __attribute__ ((destructor));
+
+void myStartupFun2 (void) __attribute__ ((constructor));
+void myStartupFun2 (void) __attribute__ ((destructor));
+
+void myStartupFun (void)
+{
+    printf (&quot;startup fun() before main()\n&quot;);
+}
+
+void myCleanupFun (void)
+{
+    printf (&quot;cleanup fun() after main()\n&quot;);
+}
+
+
+void myStartupFun2 (void)
+{
+    printf (&quot;startup fun2() before main()\n&quot;);
+}
+
+void myCleanupFun2 (void)
+{
+    printf (&quot;cleanup fun2() after main()\n&quot;);
+}
+
+int main (void)
+{
+    printf (&quot;hello\n&quot;);
+    return 0;
+}</code> </pre>
+<p>Output</p>
+<p>startup fun2() before main()<br />
+startup fun() before main()<br />
+hello<br />
+cleanup fun() after main()<br />
+startup fun2() before main()</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Agniswar</title>
+		<link>http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/#comment-5540</link>
+		<dc:creator><![CDATA[Agniswar]]></dc:creator>
+		<pubDate>Fri, 30 Sep 2011 15:51:26 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=14538#comment-5540</guid>
+		<description><![CDATA[But can anyone please explain me how exactly this is working ? As far i know C is a procedural language where the execution starts from main() function.Then how does this thing work ?]]></description>
+		<content:encoded><![CDATA[<p>But can anyone please explain me how exactly this is working ? As far i know C is a procedural language where the execution starts from main() function.Then how does this thing work ?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.039 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:25:16 -->
+
+<!-- Compression = gzip -->

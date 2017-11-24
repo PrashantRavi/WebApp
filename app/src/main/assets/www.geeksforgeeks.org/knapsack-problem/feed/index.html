@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 10 ( 0-1 Knapsack Problem)</title>
+	<atom:link href="http://www.geeksforgeeks.org/knapsack-problem/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/knapsack-problem/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Shirsh Zibbu</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38760</link>
+		<dc:creator><![CDATA[Shirsh Zibbu]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 01:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38760</guid>
+		<description><![CDATA[k thanks
+got it]]></description>
+		<content:encoded><![CDATA[<p>k thanks<br />
+got it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nrj</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38757</link>
+		<dc:creator><![CDATA[nrj]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 23:44:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38757</guid>
+		<description><![CDATA[#include
+/**
+*@Neeraj
+*knapsack using 2 rows only space complexity if O(W)
+*/
+#define max(a,b) (a&#062;b?a:b)
+
+int picks[100][100]={0};
+
+int knapsack(int W,int wt[],int val[],int n)
+{
+    int i,j,k,f=0;
+    int l[2][W+1];
+
+    for(k=0,i=0;k&#060;=n;k++,i++)
+    {
+        if(i==2)
+        i=0;
+        if(k!=0)
+        {
+            if(i==0)
+            f=1;
+            else
+            f=0;
+        }
+        for(j=0;jj)
+        {
+            if(f==0)
+            l[i][j]=l[i-1][j];
+            else
+            l[i][j]=l[i+1][j];
+            picks[i][j]=-1;
+        }
+        else
+        {
+            if(f==0)
+            l[i][j]=max(val[k-1]+l[i-1][j-wt[k-1]],l[i-1][j]);
+            else
+            l[i][j]=max(val[k-1]+l[i+1][j-wt[k-1]],l[i+1][j]);
+
+            if(val[k-1]+l[i+1][j-wt[k-1]]&#062;l[i+1][j])
+            picks[i][j]=1;
+            else
+            picks[i][j]=-1;
+        }
+        }
+
+    }
+
+    if(!(n&#038;1))
+    return l[0][W];//printf(&quot;%dn&quot;,l[0][W]);
+    else
+    return l[1][W];//printf(&quot;%dn&quot;,l[1][W]);
+}
+
+void printPicks(int item, int size, int weights[]){
+
+    while (item&#062;0){
+        if (picks[item][size]==1){
+            printf(&quot;%d &quot;,item-1);
+            item--;
+            size -= weights[item];
+        }
+        else{
+            item--;
+        }
+    }
+
+return;
+}
+
+int main()
+{
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int  W = 50;/*
+    int val[] ={3,4,5,8,10};
+    int wt[] ={2,3,4,5,9};
+    int  W = 20;*/
+    int n = sizeof(val)/sizeof(val[0]);
+    printf(&quot;%d&quot;, knapsack(W, wt, val, n));
+    printPicks(n,W,wt);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+/**<br />
+*@Neeraj<br />
+*knapsack using 2 rows only space complexity if O(W)<br />
+*/<br />
+#define max(a,b) (a&gt;b?a:b)</p>
+<p>int picks[100][100]={0};</p>
+<p>int knapsack(int W,int wt[],int val[],int n)<br />
+{<br />
+    int i,j,k,f=0;<br />
+    int l[2][W+1];</p>
+<p>    for(k=0,i=0;k&lt;=n;k++,i++)<br />
+    {<br />
+        if(i==2)<br />
+        i=0;<br />
+        if(k!=0)<br />
+        {<br />
+            if(i==0)<br />
+            f=1;<br />
+            else<br />
+            f=0;<br />
+        }<br />
+        for(j=0;jj)<br />
+        {<br />
+            if(f==0)<br />
+            l[i][j]=l[i-1][j];<br />
+            else<br />
+            l[i][j]=l[i+1][j];<br />
+            picks[i][j]=-1;<br />
+        }<br />
+        else<br />
+        {<br />
+            if(f==0)<br />
+            l[i][j]=max(val[k-1]+l[i-1][j-wt[k-1]],l[i-1][j]);<br />
+            else<br />
+            l[i][j]=max(val[k-1]+l[i+1][j-wt[k-1]],l[i+1][j]);</p>
+<p>            if(val[k-1]+l[i+1][j-wt[k-1]]&gt;l[i+1][j])<br />
+            picks[i][j]=1;<br />
+            else<br />
+            picks[i][j]=-1;<br />
+        }<br />
+        }</p>
+<p>    }</p>
+<p>    if(!(n&amp;1))<br />
+    return l[0][W];//printf(&#8220;%dn&#8221;,l[0][W]);<br />
+    else<br />
+    return l[1][W];//printf(&#8220;%dn&#8221;,l[1][W]);<br />
+}</p>
+<p>void printPicks(int item, int size, int weights[]){</p>
+<p>    while (item&gt;0){<br />
+        if (picks[item][size]==1){<br />
+            printf(&#8220;%d &#8220;,item-1);<br />
+            item&#8211;;<br />
+            size -= weights[item];<br />
+        }<br />
+        else{<br />
+            item&#8211;;<br />
+        }<br />
+    }</p>
+<p>return;<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int val[] = {60, 100, 120};<br />
+    int wt[] = {10, 20, 30};<br />
+    int  W = 50;/*<br />
+    int val[] ={3,4,5,8,10};<br />
+    int wt[] ={2,3,4,5,9};<br />
+    int  W = 20;*/<br />
+    int n = sizeof(val)/sizeof(val[0]);<br />
+    printf(&#8220;%d&#8221;, knapsack(W, wt, val, n));<br />
+    printPicks(n,W,wt);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nrj</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38756</link>
+		<dc:creator><![CDATA[nrj]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 23:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38756</guid>
+		<description><![CDATA[it means the maximum value possible with the remaining capacity of knapsack i.e w-wt[i-1] which is the total capacity minus the weight of currently picked item.
+Hope it helps, if u still hv doubt reply then.]]></description>
+		<content:encoded><![CDATA[<p>it means the maximum value possible with the remaining capacity of knapsack i.e w-wt[i-1] which is the total capacity minus the weight of currently picked item.<br />
+Hope it helps, if u still hv doubt reply then.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shirsh Zibbu</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38710</link>
+		<dc:creator><![CDATA[Shirsh Zibbu]]></dc:creator>
+		<pubDate>Sun, 15 Jun 2014 15:55:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38710</guid>
+		<description><![CDATA[I cant completely understand the meaning of the following line in the code
+if &quot;K[i-1][w]&quot; means total value of bag, without taking current item, then what does &quot;K[i-1][w-wt[i-1]]&quot; mean?
+this is the line:
+K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);]]></description>
+		<content:encoded><![CDATA[<p>I cant completely understand the meaning of the following line in the code<br />
+if &#8220;K[i-1][w]&#8221; means total value of bag, without taking current item, then what does &#8220;K[i-1][w-wt[i-1]]&#8221; mean?<br />
+this is the line:<br />
+K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nrj</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38556</link>
+		<dc:creator><![CDATA[nrj]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 12:34:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38556</guid>
+		<description><![CDATA[here is the implementation of knapsack using 2 rows only
+
+#include
+/**
+*@Neeraj
+*knapsack using 2 rows only space complexity if O(W)
+*/
+#define max(a,b) (a&#062;b?a:b)
+int knapsack(int W,int wt[],int val[],int n)
+{
+    int i,j,k,f=0;
+    int l[2][W+1];
+
+    for(k=0,i=0;k&#060;=n;k++,i++)
+    {
+        if(i==2)
+        i=0;
+        if(k!=0)
+        {
+            if(i==0)
+            f=1;
+            else
+            f=0;
+        }
+        for(j=0;jj)
+        {
+            if(f==0)
+            l[i][j]=l[i-1][j];
+            else
+            l[i][j]=l[i+1][j];
+        }
+        else
+        {
+            if(f==0)
+            l[i][j]=max(val[k-1]+l[i-1][j-wt[k-1]],l[i-1][j]);
+            else
+            l[i][j]=max(val[k-1]+l[i+1][j-wt[k-1]],l[i+1][j]);
+        }
+        }
+
+    }
+
+    if(!(n&#038;1))
+    return l[0][W];//printf(&quot;%dn&quot;,l[0][W]);
+    else
+    return l[1][W];//printf(&quot;%dn&quot;,l[1][W]);
+}
+
+int main()
+{
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int  W = 50;/*
+    int val[] ={3,4,5,8,10};
+    int wt[] ={2,3,4,5,9};
+    int  W = 20;*/
+    int n = sizeof(val)/sizeof(val[0]);
+    printf(&quot;%d&quot;, knapsack(W, wt, val, n));
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>here is the implementation of knapsack using 2 rows only</p>
+<p>#include<br />
+/**<br />
+*@Neeraj<br />
+*knapsack using 2 rows only space complexity if O(W)<br />
+*/<br />
+#define max(a,b) (a&gt;b?a:b)<br />
+int knapsack(int W,int wt[],int val[],int n)<br />
+{<br />
+    int i,j,k,f=0;<br />
+    int l[2][W+1];</p>
+<p>    for(k=0,i=0;k&lt;=n;k++,i++)<br />
+    {<br />
+        if(i==2)<br />
+        i=0;<br />
+        if(k!=0)<br />
+        {<br />
+            if(i==0)<br />
+            f=1;<br />
+            else<br />
+            f=0;<br />
+        }<br />
+        for(j=0;jj)<br />
+        {<br />
+            if(f==0)<br />
+            l[i][j]=l[i-1][j];<br />
+            else<br />
+            l[i][j]=l[i+1][j];<br />
+        }<br />
+        else<br />
+        {<br />
+            if(f==0)<br />
+            l[i][j]=max(val[k-1]+l[i-1][j-wt[k-1]],l[i-1][j]);<br />
+            else<br />
+            l[i][j]=max(val[k-1]+l[i+1][j-wt[k-1]],l[i+1][j]);<br />
+        }<br />
+        }</p>
+<p>    }</p>
+<p>    if(!(n&amp;1))<br />
+    return l[0][W];//printf(&#8220;%dn&#8221;,l[0][W]);<br />
+    else<br />
+    return l[1][W];//printf(&#8220;%dn&#8221;,l[1][W]);<br />
+}</p>
+<p>int main()<br />
+{<br />
+    int val[] = {60, 100, 120};<br />
+    int wt[] = {10, 20, 30};<br />
+    int  W = 50;/*<br />
+    int val[] ={3,4,5,8,10};<br />
+    int wt[] ={2,3,4,5,9};<br />
+    int  W = 20;*/<br />
+    int n = sizeof(val)/sizeof(val[0]);<br />
+    printf(&#8220;%d&#8221;, knapsack(W, wt, val, n));<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nrj</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-38278</link>
+		<dc:creator><![CDATA[nrj]]></dc:creator>
+		<pubDate>Thu, 12 Jun 2014 07:09:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-38278</guid>
+		<description><![CDATA[Can someone please explain in detail why we use 2D array in some DP problems while 1D array in other DP problems, like here we use 2D array but in LIS problem we used 1D array...pls help i am newbie to DP.
+Thanks!]]></description>
+		<content:encoded><![CDATA[<p>Can someone please explain in detail why we use 2D array in some DP problems while 1D array in other DP problems, like here we use 2D array but in LIS problem we used 1D array&#8230;pls help i am newbie to DP.<br />
+Thanks!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sachin</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-37758</link>
+		<dc:creator><![CDATA[Sachin]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 16:41:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-37758</guid>
+		<description><![CDATA[Could someone please tweak this code so that we can also find the items included in the knapsack finally ..]]></description>
+		<content:encoded><![CDATA[<p>Could someone please tweak this code so that we can also find the items included in the knapsack finally ..</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-37469</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 02:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-37469</guid>
+		<description><![CDATA[no, it is considering every possible subset as the candidate for the answer, so sorting is not required.]]></description>
+		<content:encoded><![CDATA[<p>no, it is considering every possible subset as the candidate for the answer, so sorting is not required.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karshit Jaiswal</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-37468</link>
+		<dc:creator><![CDATA[Karshit Jaiswal]]></dc:creator>
+		<pubDate>Tue, 03 Jun 2014 02:33:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-37468</guid>
+		<description><![CDATA[no!! Here we consider the optimal value for the previous item plus the value obtained by adding the new item.]]></description>
+		<content:encoded><![CDATA[<p>no!! Here we consider the optimal value for the previous item plus the value obtained by adding the new item.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ankit</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-36318</link>
+		<dc:creator><![CDATA[ankit]]></dc:creator>
+		<pubDate>Tue, 20 May 2014 10:02:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-36318</guid>
+		<description><![CDATA[not working correct for wt[] = {1,30} , val[]={1,50} , capacity=100]]></description>
+		<content:encoded><![CDATA[<p>not working correct for wt[] = {1,30} , val[]={1,50} , capacity=100</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: iamprerit</title>
+		<link>http://www.geeksforgeeks.org/knapsack-problem/#comment-36169</link>
+		<dc:creator><![CDATA[iamprerit]]></dc:creator>
+		<pubDate>Sat, 17 May 2014 12:52:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=18430#comment-36169</guid>
+		<description><![CDATA[your link to that video really helped!!
+Thanx.]]></description>
+		<content:encoded><![CDATA[<p>your link to that video really helped!!<br />
+Thanx.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.042 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:59:54 -->
+
+<!-- Compression = gzip -->

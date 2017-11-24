@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Print all permutations in sorted (lexicographic) order</title>
+	<atom:link href="http://www.geeksforgeeks.org/lexicographic-permutations-of-string/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: Guest</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-38880</link>
+		<dc:creator><![CDATA[Guest]]></dc:creator>
+		<pubDate>Mon, 16 Jun 2014 18:45:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-38880</guid>
+		<description><![CDATA[in backtracking method when we choose an element we could sort the rest of the array and it will print in lexographic only....]]></description>
+		<content:encoded><![CDATA[<p>in backtracking method when we choose an element we could sort the rest of the array and it will print in lexographic only&#8230;.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Arvind kumar</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-38281</link>
+		<dc:creator><![CDATA[Arvind kumar]]></dc:creator>
+		<pubDate>Thu, 12 Jun 2014 07:56:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-38281</guid>
+		<description><![CDATA[It will handle duplicate case but upper Bound increases  to O(n^3 * n!) .... 
+
+
+
+
+#include
+#include
+#include
+
+
+
+
+int compare( const void *a, const void *b )
+{
+    return ( *(char*)a - *(char*)b );
+}
+
+
+void swap(char* a, char* b )
+{
+    char t=*a;
+    *a=*b;
+    *b=t;
+}
+int findCeil( char str[], char first, int l, int h)
+{
+    int ceilIndex=l;
+    int i;
+    for( i=l+1; i  first &#038;&#038; str[i] &#060; str[ceilIndex] )
+        ceilIndex=i;
+    return ceilIndex;
+}
+
+
+void reverse(char str[], int l, int h)
+{
+    while( l &#060; h )
+    {
+       swap(&#038;str[l],&#038;str[h]);
+       l++;
+       h--;
+    }
+}
+
+
+void sortedPermutation( char str[] )
+{
+    int size =strlen(str);
+
+
+    qsort(str, size, sizeof(str[0]), compare );
+
+
+     int k;
+     int j;
+     int m;
+   printf(&#034;%sn&#034;,str);
+    for(k=0;k&#060;size;k++)
+    {
+         for(j=k+1;j&#060;size;)
+         {
+            if(str[k]==str[j])
+            {
+             for(m=k; m =0; --i )
+        {
+            if(str[i] &#060; str[i+1] )
+            {
+                first=str[i];
+                break;
+            }
+        }
+        if( i == -1 )
+            isFinished=true;
+        else
+        {
+            int ceilIndex=findCeil(str,str[i],i+1,size-1);
+            swap(&#038;str[i],&#038;str[ceilIndex]);
+            reverse(str, i+1, size-1 );
+        }
+    }
+}
+
+
+int main()
+{
+    char str[]=&#034;CBBBBAAAAAAAAAAAA&#034;;
+    sortedPermutation(str);
+    return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>It will handle duplicate case but upper Bound increases  to O(n^3 * n!) &#8230;. </p>
+<p>#include<br />
+#include<br />
+#include</p>
+<p>int compare( const void *a, const void *b )<br />
+{<br />
+    return ( *(char*)a &#8211; *(char*)b );<br />
+}</p>
+<p>void swap(char* a, char* b )<br />
+{<br />
+    char t=*a;<br />
+    *a=*b;<br />
+    *b=t;<br />
+}<br />
+int findCeil( char str[], char first, int l, int h)<br />
+{<br />
+    int ceilIndex=l;<br />
+    int i;<br />
+    for( i=l+1; i  first &amp;&amp; str[i] &lt; str[ceilIndex] )<br />
+        ceilIndex=i;<br />
+    return ceilIndex;<br />
+}</p>
+<p>void reverse(char str[], int l, int h)<br />
+{<br />
+    while( l &lt; h )<br />
+    {<br />
+       swap(&amp;str[l],&amp;str[h]);<br />
+       l++;<br />
+       h&#8211;;<br />
+    }<br />
+}</p>
+<p>void sortedPermutation( char str[] )<br />
+{<br />
+    int size =strlen(str);</p>
+<p>    qsort(str, size, sizeof(str[0]), compare );</p>
+<p>     int k;<br />
+     int j;<br />
+     int m;<br />
+   printf(&quot;%sn&quot;,str);<br />
+    for(k=0;k&lt;size;k++)<br />
+    {<br />
+         for(j=k+1;j&lt;size;)<br />
+         {<br />
+            if(str[k]==str[j])<br />
+            {<br />
+             for(m=k; m =0; &#8211;i )<br />
+        {<br />
+            if(str[i] &lt; str[i+1] )<br />
+            {<br />
+                first=str[i];<br />
+                break;<br />
+            }<br />
+        }<br />
+        if( i == -1 )<br />
+            isFinished=true;<br />
+        else<br />
+        {<br />
+            int ceilIndex=findCeil(str,str[i],i+1,size-1);<br />
+            swap(&amp;str[i],&amp;str[ceilIndex]);<br />
+            reverse(str, i+1, size-1 );<br />
+        }<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+    char str[]=&quot;CBBBBAAAAAAAAAAAA&quot;;<br />
+    sortedPermutation(str);<br />
+    return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Amit Bendale</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-37740</link>
+		<dc:creator><![CDATA[Amit Bendale]]></dc:creator>
+		<pubDate>Fri, 06 Jun 2014 11:14:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-37740</guid>
+		<description><![CDATA[Backtracking is an elegant solution, but it doesn&#039;t guarantee sorted order of permutations. Also, looping is always preferred over recursion because recursion depth is limited on every system.]]></description>
+		<content:encoded><![CDATA[<p>Backtracking is an elegant solution, but it doesn&#8217;t guarantee sorted order of permutations. Also, looping is always preferred over recursion because recursion depth is limited on every system.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-35271</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Tue, 29 Apr 2014 07:46:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-35271</guid>
+		<description><![CDATA[I am not able to understand, if we would have used code from the previous post (with backtracking), we would have got the same results. Because if the input is sorted, even that method will generate all the permutations in lexicographical order. Can someone please explain this?]]></description>
+		<content:encoded><![CDATA[<p>I am not able to understand, if we would have used code from the previous post (with backtracking), we would have got the same results. Because if the input is sorted, even that method will generate all the permutations in lexicographical order. Can someone please explain this?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Tarun</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-34909</link>
+		<dc:creator><![CDATA[Tarun]]></dc:creator>
+		<pubDate>Sun, 20 Apr 2014 08:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-34909</guid>
+		<description><![CDATA[Nice solution, but it has a major limitation that all the characters in the string should be unique.]]></description>
+		<content:encoded><![CDATA[<p>Nice solution, but it has a major limitation that all the characters in the string should be unique.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: pankaj</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-33926</link>
+		<dc:creator><![CDATA[pankaj]]></dc:creator>
+		<pubDate>Thu, 27 Mar 2014 15:26:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-33926</guid>
+		<description><![CDATA[@admin--
+the simplest code/ method would be-- in the original question to find all the permutations of a string,just remove the last line in the loop i.e. the line which does backtrack, and then what we will get all strings in lexicographic sorted order. isn&#039;t it simple enough admin??]]></description>
+		<content:encoded><![CDATA[<p>@admin&#8211;<br />
+the simplest code/ method would be&#8211; in the original question to find all the permutations of a string,just remove the last line in the loop i.e. the line which does backtrack, and then what we will get all strings in lexicographic sorted order. isn&#8217;t it simple enough admin??</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: bani</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-32056</link>
+		<dc:creator><![CDATA[bani]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2014 12:48:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-32056</guid>
+		<description><![CDATA[If we follow the second method, then we need to put a &#039;=&#039; sign also in the findceil() function&#039;s for loop.....
+i.e the correct way would be to write as  if (str[i] &#062; first &#038;&#038; str[i] &#060;= str[ceilIndex])
+since we are going right and we should swap the content with the farthest smallest value so that after reversing we get a sorted rightside of i.
+
+check it for cases like abbbbbbb, your answer would not be correct...]]></description>
+		<content:encoded><![CDATA[<p>If we follow the second method, then we need to put a &#8216;=&#8217; sign also in the findceil() function&#8217;s for loop&#8230;..<br />
+i.e the correct way would be to write as  if (str[i] &gt; first &amp;&amp; str[i] &lt;= str[ceilIndex])<br />
+since we are going right and we should swap the content with the farthest smallest value so that after reversing we get a sorted rightside of i.</p>
+<p>check it for cases like abbbbbbb, your answer would not be correct&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jayanth</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-30078</link>
+		<dc:creator><![CDATA[Jayanth]]></dc:creator>
+		<pubDate>Sat, 23 Nov 2013 19:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-30078</guid>
+		<description><![CDATA[This is actually the simplest way of doing it...Just an extension to printing the permutation of string problem...I dont understand the need for such a long code...]]></description>
+		<content:encoded><![CDATA[<p>This is actually the simplest way of doing it&#8230;Just an extension to printing the permutation of string problem&#8230;I dont understand the need for such a long code&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rajan</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-29988</link>
+		<dc:creator><![CDATA[Rajan]]></dc:creator>
+		<pubDate>Tue, 19 Nov 2013 17:38:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-29988</guid>
+		<description><![CDATA[Here is my algorithm for the problem:
+
+1. First sort the array and give sorted array as input to the function.
+
+2. If my input is ABC, and now I after generating all the permutations of A &#038; B, I want to generate permutations for C, then I will shift all the elements to the right and put C in the front. Hence ABC --&#062; CAB. 
+
+3. Call the method recursively for remaining characters. 
+E.g. For the remaining characters in the String,  C AB --&#062; C BA conversion will happen. B is put in the front and other elements shifted to the right).
+
+4. Restore the original array again, but method in Step2 won&#039;t be useful. For example, we will convert CAB --&#062; ABC, so I will shift all the elements in the left and put C in the last.
+
+Time Complexity remains same: n*n!
+
+Code is extremely simplified! Here is mine in Java.
+
+Edit: The code was all jumbled up here: please see the below link for code:
+http://ideone.com/HrNtbZ]]></description>
+		<content:encoded><![CDATA[<p>Here is my algorithm for the problem:</p>
+<p>1. First sort the array and give sorted array as input to the function.</p>
+<p>2. If my input is ABC, and now I after generating all the permutations of A &amp; B, I want to generate permutations for C, then I will shift all the elements to the right and put C in the front. Hence ABC &#8211;&gt; CAB. </p>
+<p>3. Call the method recursively for remaining characters.<br />
+E.g. For the remaining characters in the String,  C AB &#8211;&gt; C BA conversion will happen. B is put in the front and other elements shifted to the right).</p>
+<p>4. Restore the original array again, but method in Step2 won&#8217;t be useful. For example, we will convert CAB &#8211;&gt; ABC, so I will shift all the elements in the left and put C in the last.</p>
+<p>Time Complexity remains same: n*n!</p>
+<p>Code is extremely simplified! Here is mine in Java.</p>
+<p>Edit: The code was all jumbled up here: please see the below link for code:<br />
+<a href="http://ideone.com/HrNtbZ" rel="nofollow">http://ideone.com/HrNtbZ</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vinod</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-29194</link>
+		<dc:creator><![CDATA[Vinod]]></dc:creator>
+		<pubDate>Tue, 22 Oct 2013 04:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-29194</guid>
+		<description><![CDATA[If we remove second part of the if condition &quot;str[i] &#060; str[ceilIndex]&#034; in the findCeil function, this will print all permutation in lexicographical order without repetitions.
+
+http://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order]]></description>
+		<content:encoded><![CDATA[<p>If we remove second part of the if condition &#8220;str[i] &lt; str[ceilIndex]&quot; in the findCeil function, this will print all permutation in lexicographical order without repetitions.</p>
+<p><a href="http://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order" rel="nofollow">http://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sanyam Kapoor</title>
+		<link>http://www.geeksforgeeks.org/lexicographic-permutations-of-string/#comment-24789</link>
+		<dc:creator><![CDATA[Sanyam Kapoor]]></dc:creator>
+		<pubDate>Sat, 10 Aug 2013 10:11:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=24927#comment-24789</guid>
+		<description><![CDATA[Why does this code fail for strings: &quot;012345678&quot; and &quot;0123456789&quot;
+but works for strings under &quot;01234567&quot;.
+[sourcecode language=&quot;C++&quot;]
+#include&#060;iostream&#062;
+#include&#060;string&#062;
+#include&#060;algorithm&#062;
+using namespace std;
+
+void swap(string&#038; s,int a, int b){
+char temp = s[a];
+s[a] = s[b];
+s[b] = temp;	
+}
+int num=1;
+int firstchar(string s){
+	int pos = s.length()-2;
+	for(int i=pos;i&#062;=0;i--){
+		if(s[i]&#060;s[i+1]){
+			pos = i;
+			break;
+		}
+	}
+	return pos;
+}
+
+int ceilchar(string s, int fc){
+	int ceil = fc+1;
+	int diff=27;
+	for(unsigned int i=ceil;i&#060;s.length();i++){
+		if(s[i]&#062;s[fc] &#038;&#038; s[i]-s[fc]&#060;diff){
+			ceil = i;
+			diff  = s[i]-s[fc];
+		}
+	}
+	return ceil;
+}
+
+void nextpermute(string&#038; s){
+	int fc = firstchar(s);
+	int cc = ceilchar(s,fc);
+	swap(s,fc,cc);
+	sort(&#038;s[fc]+1,&#038;s[fc]+s.length()-fc);
+	num++;
+	if(num&#060;1000000){
+		cout&#060;&#060;s&#060;&#060;&#034;\n&#034;;
+		nextpermute(s);
+	}
+	else
+		cout&#060;&#060;s&#060;&#060;&#034;\n&#034;;
+}
+
+int main(){
+	string test=&#034;0368475912&#034;;
+	nextpermute(test);
+	return 0;
+	}
+
+&lt;/code&gt; &lt;/pre&gt;]]></description>
+		<content:encoded><![CDATA[<p>Why does this code fail for strings: &#8220;012345678&#8221; and &#8220;0123456789&#8221;<br />
+but works for strings under &#8220;01234567&#8221;.</p>
+<p>#include&lt;iostream&gt;<br />
+#include&lt;string&gt;<br />
+#include&lt;algorithm&gt;<br />
+using namespace std;</p>
+<p>void swap(string&amp; s,int a, int b){<br />
+char temp = s[a];<br />
+s[a] = s[b];<br />
+s[b] = temp;<br />
+}<br />
+int num=1;<br />
+int firstchar(string s){<br />
+	int pos = s.length()-2;<br />
+	for(int i=pos;i&gt;=0;i&#8211;){<br />
+		if(s[i]&lt;s[i+1]){<br />
+			pos = i;<br />
+			break;<br />
+		}<br />
+	}<br />
+	return pos;<br />
+}</p>
+<p>int ceilchar(string s, int fc){<br />
+	int ceil = fc+1;<br />
+	int diff=27;<br />
+	for(unsigned int i=ceil;i&lt;s.length();i++){<br />
+		if(s[i]&gt;s[fc] &amp;&amp; s[i]-s[fc]&lt;diff){<br />
+			ceil = i;<br />
+			diff  = s[i]-s[fc];<br />
+		}<br />
+	}<br />
+	return ceil;<br />
+}</p>
+<p>void nextpermute(string&amp; s){<br />
+	int fc = firstchar(s);<br />
+	int cc = ceilchar(s,fc);<br />
+	swap(s,fc,cc);<br />
+	sort(&amp;s[fc]+1,&amp;s[fc]+s.length()-fc);<br />
+	num++;<br />
+	if(num&lt;1000000){<br />
+		cout&lt;&lt;s&lt;&lt;&quot;\n&quot;;<br />
+		nextpermute(s);<br />
+	}<br />
+	else<br />
+		cout&lt;&lt;s&lt;&lt;&quot;\n&quot;;<br />
+}</p>
+<p>int main(){<br />
+	string test=&quot;0368475912&quot;;<br />
+	nextpermute(test);<br />
+	return 0;<br />
+	}</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.053 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 12:46:41 -->
+
+<!-- Compression = gzip -->

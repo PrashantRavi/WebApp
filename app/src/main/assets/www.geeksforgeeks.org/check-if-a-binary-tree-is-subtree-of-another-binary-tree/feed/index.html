@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Check if a binary tree is subtree of another binary tree &#124; Set 1</title>
+	<atom:link href="http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: prokilogram</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-40159</link>
+		<dc:creator><![CDATA[prokilogram]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 13:17:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-40159</guid>
+		<description><![CDATA[If two treees are identical why will it take O(n^2) time it will take only O(n)]]></description>
+		<content:encoded><![CDATA[<p>If two treees are identical why will it take O(n^2) time it will take only O(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: nitesh</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-39931</link>
+		<dc:creator><![CDATA[nitesh]]></dc:creator>
+		<pubDate>Fri, 27 Jun 2014 05:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-39931</guid>
+		<description><![CDATA[but it will require o(n+m) extra space]]></description>
+		<content:encoded><![CDATA[<p>but it will require o(n+m) extra space</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suvodip Bhattacharya</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38976</link>
+		<dc:creator><![CDATA[Suvodip Bhattacharya]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 19:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38976</guid>
+		<description><![CDATA[#include 
+using namespace std;
+ 
+
+struct tree{
+    int data;
+    struct tree *lc,*rc;
+    };
+
+
+tree *newNode(int n)
+{
+    struct tree *node=new tree;
+    node-&#062;lc=node-&#062;rc=NULL;
+    node-&#062;data=n;
+
+    return node;
+}
+
+
+void check(struct tree *root1,struct tree *root2) throw(int)
+{
+    if(root1 &#124;&#124; root2)
+    {
+        check(root1-&#062;lc,root2-&#062;lc);
+        if( root1-&#062;data!=root2-&#062;data &#124;&#124; root1==NULL &#124;&#124; root2 ==NULL)
+        {
+            throw 1;
+        }
+
+        check(root1-&#062;rc,root2-&#062;rc);
+    }
+}
+    
+
+void Traverse(struct tree *root1,struct tree *root2)throw (char)
+{
+    if(root1 == NULL) return;
+    
+
+    try{
+        if(root1-&#062;data == root2-&#062;data)
+        {
+            check(root1,root2);
+            throw &#039;a&#039;;
+        }
+       }
+
+    catch(int i){ }
+
+    Traverse(root1-&#062;lc,root2);
+    Traverse(root1-&#062;rc,root2);
+}
+
+int main()
+{
+
+struct tree *root1=NULL,*root2=NULL;
+
+    struct tree *T        = newNode(26);
+        T-&#062;rc              = newNode(3);
+        T-&#062;rc-&#062;rc       = newNode(3);
+        T-&#062;lc               = newNode(10);
+        T-&#062;lc-&#062;lc         = newNode(4);
+        T-&#062;lc-&#062;lc-&#062;rc  = newNode(30);
+        T-&#062;lc-&#062;rc        = newNode(6);
+    
+    struct tree *S    = newNode(10);
+        S-&#062;rc          = newNode(6);
+        S-&#062;lc           = newNode(4);
+        S-&#062;lc-&#062;rc    = newNode(30);
+    
+
+try {
+    Traverse(T,S);
+    cout&#060;&#060;&#034;Not sub tree&#034;&#060;&#060;endl;
+    }
+
+catch(char a){ cout&#060;&#060;&#034;subtree&#034;&#060;&#060;endl; }
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;</p>
+<p>struct tree{<br />
+    int data;<br />
+    struct tree *lc,*rc;<br />
+    };</p>
+<p>tree *newNode(int n)<br />
+{<br />
+    struct tree *node=new tree;<br />
+    node-&gt;lc=node-&gt;rc=NULL;<br />
+    node-&gt;data=n;</p>
+<p>    return node;<br />
+}</p>
+<p>void check(struct tree *root1,struct tree *root2) throw(int)<br />
+{<br />
+    if(root1 || root2)<br />
+    {<br />
+        check(root1-&gt;lc,root2-&gt;lc);<br />
+        if( root1-&gt;data!=root2-&gt;data || root1==NULL || root2 ==NULL)<br />
+        {<br />
+            throw 1;<br />
+        }</p>
+<p>        check(root1-&gt;rc,root2-&gt;rc);<br />
+    }<br />
+}</p>
+<p>void Traverse(struct tree *root1,struct tree *root2)throw (char)<br />
+{<br />
+    if(root1 == NULL) return;</p>
+<p>    try{<br />
+        if(root1-&gt;data == root2-&gt;data)<br />
+        {<br />
+            check(root1,root2);<br />
+            throw &#8216;a&#8217;;<br />
+        }<br />
+       }</p>
+<p>    catch(int i){ }</p>
+<p>    Traverse(root1-&gt;lc,root2);<br />
+    Traverse(root1-&gt;rc,root2);<br />
+}</p>
+<p>int main()<br />
+{</p>
+<p>struct tree *root1=NULL,*root2=NULL;</p>
+<p>    struct tree *T        = newNode(26);<br />
+        T-&gt;rc              = newNode(3);<br />
+        T-&gt;rc-&gt;rc       = newNode(3);<br />
+        T-&gt;lc               = newNode(10);<br />
+        T-&gt;lc-&gt;lc         = newNode(4);<br />
+        T-&gt;lc-&gt;lc-&gt;rc  = newNode(30);<br />
+        T-&gt;lc-&gt;rc        = newNode(6);</p>
+<p>    struct tree *S    = newNode(10);<br />
+        S-&gt;rc          = newNode(6);<br />
+        S-&gt;lc           = newNode(4);<br />
+        S-&gt;lc-&gt;rc    = newNode(30);</p>
+<p>try {<br />
+    Traverse(T,S);<br />
+    cout&lt;&lt;&quot;Not sub tree&quot;&lt;&lt;endl;<br />
+    }</p>
+<p>catch(char a){ cout&lt;&lt;&quot;subtree&quot;&lt;&lt;endl; }<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38128</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 17:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38128</guid>
+		<description><![CDATA[got it . thanks]]></description>
+		<content:encoded><![CDATA[<p>got it . thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38124</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 16:24:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38124</guid>
+		<description><![CDATA[u are still not getting me
+
+suppose tree S is of size m&#062;n
+then????
+
+complexity will be only O(n^2)
+
+not 
+O(m*n)
+
+
+
+as tree T will not search for more than n.
+
+
+which is for the example case when T is actually a subtree of S bcoz of which evrynode mathces but at last which condtion will fail it is 
+(node1==null &#038;&#038; node2==null)
+
+
+
+so maximum go or steps is O(n^2).
+
+:)]]></description>
+		<content:encoded><![CDATA[<p>u are still not getting me</p>
+<p>suppose tree S is of size m&gt;n<br />
+then????</p>
+<p>complexity will be only O(n^2)</p>
+<p>not<br />
+O(m*n)</p>
+<p>as tree T will not search for more than n.</p>
+<p>which is for the example case when T is actually a subtree of S bcoz of which evrynode mathces but at last which condtion will fail it is<br />
+(node1==null &amp;&amp; node2==null)</p>
+<p>so maximum go or steps is O(n^2).</p>
+<p>🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38104</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 12:10:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38104</guid>
+		<description><![CDATA[if the two trees are same then m = n so its obiviously 0(n^2).
+but suppose if subtree consist of single node
+then i think it will be just O(n).
+
+So it does depend on the size of the subtree bcoz
+areIdentical methods complexity depends on the size of smaller tree .]]></description>
+		<content:encoded><![CDATA[<p>if the two trees are same then m = n so its obiviously 0(n^2).<br />
+but suppose if subtree consist of single node<br />
+then i think it will be just O(n).</p>
+<p>So it does depend on the size of the subtree bcoz<br />
+areIdentical methods complexity depends on the size of smaller tree .</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: v3gA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38072</link>
+		<dc:creator><![CDATA[v3gA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 08:47:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38072</guid>
+		<description><![CDATA[Another way might be to generate inorder &#038; preorder traversals (one alone won&#039;t suffice since they can&#039;t identify a tree uniquely) for both trees and use a substring search algorithm. The traversals can be found in O(n) time so the time complexity will be same as that of substring search.
+(Please mention if there is any problem with this method)]]></description>
+		<content:encoded><![CDATA[<p>Another way might be to generate inorder &amp; preorder traversals (one alone won&#8217;t suffice since they can&#8217;t identify a tree uniquely) for both trees and use a substring search algorithm. The traversals can be found in O(n) time so the time complexity will be same as that of substring search.<br />
+(Please mention if there is any problem with this method)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38058</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Tue, 10 Jun 2014 06:42:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38058</guid>
+		<description><![CDATA[actually it is O(n^2) 
+what if the two trees are identical
+
+also they have not compared one tree from another that is
+they are taking tree S to check and Tree T as fixed tree.
+
+so does not depend on size of S(for maximum go) it depends on size of T for maximum recursuions.
+
+thats why i wrote their O(n^2)]]></description>
+		<content:encoded><![CDATA[<p>actually it is O(n^2)<br />
+what if the two trees are identical</p>
+<p>also they have not compared one tree from another that is<br />
+they are taking tree S to check and Tree T as fixed tree.</p>
+<p>so does not depend on size of S(for maximum go) it depends on size of T for maximum recursuions.</p>
+<p>thats why i wrote their O(n^2)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ANA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-38040</link>
+		<dc:creator><![CDATA[ANA]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 22:05:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-38040</guid>
+		<description><![CDATA[its not O(n^2)
+its 0(m*n)
+where m is no. of nodes of one tree 
+and n is no. of nodes of other tree]]></description>
+		<content:encoded><![CDATA[<p>its not O(n^2)<br />
+its 0(m*n)<br />
+where m is no. of nodes of one tree<br />
+and n is no. of nodes of other tree</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AMIT JAMBOTKAR</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-37878</link>
+		<dc:creator><![CDATA[AMIT JAMBOTKAR]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 20:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-37878</guid>
+		<description><![CDATA[In case if root node got repeated this solution wont work and complexity  will be more than O(n)]]></description>
+		<content:encoded><![CDATA[<p>In case if root node got repeated this solution wont work and complexity  will be more than O(n)</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: RACHIT SAXENA</title>
+		<link>http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/#comment-37825</link>
+		<dc:creator><![CDATA[RACHIT SAXENA]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 11:08:00 +0000</pubDate>
+		<guid isPermaLink="false">http://geeksforgeeks.org/?p=13942#comment-37825</guid>
+		<description><![CDATA[it is O(n^2) :/]]></description>
+		<content:encoded><![CDATA[<p>it is O(n^2) :/</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.087 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 14:04:03 -->
+
+<!-- Compression = gzip -->

@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Dynamic Programming &#124; Set 14 (Maximum Sum Increasing Subsequence)</title>
+	<atom:link href="http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/</link>
+	<description>A computer science portal for geeks</description>
+	<lastBuildDate>Tue, 17 Nov 2015 05:17:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.8</generator>
+	<item>
+		<title>By: AlienOnEarth</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-37957</link>
+		<dc:creator><![CDATA[AlienOnEarth]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 04:36:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-37957</guid>
+		<description><![CDATA[Brute force:
+
+void maxIncreasingSum(int arr[],int n)
+
+{
+
+	int i,j,k,cur_sum,max_sum = INT_MIN, last;
+
+	
+
+	for(i=0;i&#060;n-1;i++)
+
+	{
+
+		for(j=i+1;j&#060;n;j++)
+
+		{
+
+			last = i;
+
+			cur_sum = arr[i];	
+
+			for(k=j;k arr[last])
+
+				{
+
+					cur_sum = cur_sum + arr[k];
+
+					last = k;
+
+				}
+
+			}
+
+			if(cur_sum &#062; max_sum)
+
+				max_sum = cur_sum;
+
+		}
+
+	}
+
+	printf(&quot;max_sum: %d&quot; ,max_sum);
+
+}]]></description>
+		<content:encoded><![CDATA[<p>Brute force:</p>
+<p>void maxIncreasingSum(int arr[],int n)</p>
+<p>{</p>
+<p>	int i,j,k,cur_sum,max_sum = INT_MIN, last;</p>
+<p>	for(i=0;i&lt;n-1;i++)</p>
+<p>	{</p>
+<p>		for(j=i+1;j&lt;n;j++)</p>
+<p>		{</p>
+<p>			last = i;</p>
+<p>			cur_sum = arr[i];	</p>
+<p>			for(k=j;k arr[last])</p>
+<p>				{</p>
+<p>					cur_sum = cur_sum + arr[k];</p>
+<p>					last = k;</p>
+<p>				}</p>
+<p>			}</p>
+<p>			if(cur_sum &gt; max_sum)</p>
+<p>				max_sum = cur_sum;</p>
+<p>		}</p>
+<p>	}</p>
+<p>	printf(&#8220;max_sum: %d&#8221; ,max_sum);</p>
+<p>}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Suvodip Bhattacharya</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-37877</link>
+		<dc:creator><![CDATA[Suvodip Bhattacharya]]></dc:creator>
+		<pubDate>Sat, 07 Jun 2014 20:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-37877</guid>
+		<description><![CDATA[#include
+//#include
+#include
+#include
+using namespace std;
+int max(int a,int b){ return ( a &#062; b) ? a : b; }
+
+int MSIS(int arr[],int start,int current,int finish)
+{
+
+    if( start &#062; finish ) return 0;
+    
+return ( current &#060; arr[start] ) ? max( ( arr[start] + MSIS(arr,start+1,arr[start],finish) ) , MSIS(arr,start+1,current,finish) ) : MSIS(arr,start+1,current,finish) ; 
+
+}
+
+int main()
+{
+    int arr[]={1, 101, 2, 3, 100, 4, 5};
+    int size=sizeof(arr)/sizeof(arr[0]);
+    cout&#060;&#060;MSIS(arr,0,INT_MIN,size)&#060;&#060;endl;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+//#include<br />
+#include<br />
+#include<br />
+using namespace std;<br />
+int max(int a,int b){ return ( a &gt; b) ? a : b; }</p>
+<p>int MSIS(int arr[],int start,int current,int finish)<br />
+{</p>
+<p>    if( start &gt; finish ) return 0;</p>
+<p>return ( current &lt; arr[start] ) ? max( ( arr[start] + MSIS(arr,start+1,arr[start],finish) ) , MSIS(arr,start+1,current,finish) ) : MSIS(arr,start+1,current,finish) ; </p>
+<p>}</p>
+<p>int main()<br />
+{<br />
+    int arr[]={1, 101, 2, 3, 100, 4, 5};<br />
+    int size=sizeof(arr)/sizeof(arr[0]);<br />
+    cout&lt;&lt;MSIS(arr,0,INT_MIN,size)&lt;&lt;endl;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Pawan</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-33885</link>
+		<dc:creator><![CDATA[Pawan]]></dc:creator>
+		<pubDate>Wed, 26 Mar 2014 17:49:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-33885</guid>
+		<description><![CDATA[Failing for the following case : 
+arr = {15, 25, 1, 2, 3, 4, 5, 6, 7, 8, 9};]]></description>
+		<content:encoded><![CDATA[<p>Failing for the following case :<br />
+arr = {15, 25, 1, 2, 3, 4, 5, 6, 7, 8, 9};</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Rohit</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-32351</link>
+		<dc:creator><![CDATA[Rohit]]></dc:creator>
+		<pubDate>Sat, 08 Feb 2014 15:35:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-32351</guid>
+		<description><![CDATA[IMHO this is a better and easier solution requiring traversing the aarray only once.
+https://ideone.com/HmaFuZ]]></description>
+		<content:encoded><![CDATA[<p>IMHO this is a better and easier solution requiring traversing the aarray only once.<br />
+<a href="https://ideone.com/HmaFuZ" rel="nofollow">https://ideone.com/HmaFuZ</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: anonymous</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-30937</link>
+		<dc:creator><![CDATA[anonymous]]></dc:creator>
+		<pubDate>Sun, 22 Dec 2013 12:01:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-30937</guid>
+		<description><![CDATA[I think you are computing some particular solutions again in this solution. Like each time you are adding the previous elements involved in the maximum sum for each solution.
+My code for the same, 
+http://ideone.com/RUgwma]]></description>
+		<content:encoded><![CDATA[<p>I think you are computing some particular solutions again in this solution. Like each time you are adding the previous elements involved in the maximum sum for each solution.<br />
+My code for the same,<br />
+<a href="http://ideone.com/RUgwma" rel="nofollow">http://ideone.com/RUgwma</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mojo</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-30879</link>
+		<dc:creator><![CDATA[Mojo]]></dc:creator>
+		<pubDate>Fri, 20 Dec 2013 11:50:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-30879</guid>
+		<description><![CDATA[How do I print the elements involved in the sequence?]]></description>
+		<content:encoded><![CDATA[<p>How do I print the elements involved in the sequence?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: prashant jha</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-30581</link>
+		<dc:creator><![CDATA[prashant jha]]></dc:creator>
+		<pubDate>Mon, 09 Dec 2013 09:22:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-30581</guid>
+		<description><![CDATA[#include
+using namespace std;
+int fun(int arr[],int h[],int low,int high)
+{
+    int m,max=0,k;
+    if(h[low]!=-1)
+       return h[low];
+    if(low==high)
+      {
+        h[low]=arr[low];
+        return arr[low];
+      }
+    for(k=low+1;karr[low])
+          {
+              m=fun(arr,h,k,high);
+              if(m&#062;=max)
+               max=m;
+          }
+    }
+    h[low]=arr[low]+max;
+    return h[low];
+}
+int main()
+{
+   int arr[]={1,101,2,3,100,4,5};
+   int n=sizeof(arr)/sizeof(arr[0]);
+   int h[n];int s=n,m,max=0;
+   for(int i=0;i&#060;n;i++)
+   {
+       h[i]=-1;
+   }
+   for(int i=0;imax)
+       max=m;
+   }
+   cout&#060;&#060;max&#060;&#060;&#034; is the max sum increasing subsequence.n&#034;;
+   /*for(int i=0;i&#060;n;i++)
+   {
+       cout&#060;&#060;h[i]&#060;&#060;&#034; &#034;;
+   }*/
+   return 0;
+}]]></description>
+		<content:encoded><![CDATA[<p>#include<br />
+using namespace std;<br />
+int fun(int arr[],int h[],int low,int high)<br />
+{<br />
+    int m,max=0,k;<br />
+    if(h[low]!=-1)<br />
+       return h[low];<br />
+    if(low==high)<br />
+      {<br />
+        h[low]=arr[low];<br />
+        return arr[low];<br />
+      }<br />
+    for(k=low+1;karr[low])<br />
+          {<br />
+              m=fun(arr,h,k,high);<br />
+              if(m&gt;=max)<br />
+               max=m;<br />
+          }<br />
+    }<br />
+    h[low]=arr[low]+max;<br />
+    return h[low];<br />
+}<br />
+int main()<br />
+{<br />
+   int arr[]={1,101,2,3,100,4,5};<br />
+   int n=sizeof(arr)/sizeof(arr[0]);<br />
+   int h[n];int s=n,m,max=0;<br />
+   for(int i=0;i&lt;n;i++)<br />
+   {<br />
+       h[i]=-1;<br />
+   }<br />
+   for(int i=0;imax)<br />
+       max=m;<br />
+   }<br />
+   cout&lt;&lt;max&lt;&lt;&quot; is the max sum increasing subsequence.n&quot;;<br />
+   /*for(int i=0;i&lt;n;i++)<br />
+   {<br />
+       cout&lt;&lt;h[i]&lt;&lt;&quot; &quot;;<br />
+   }*/<br />
+   return 0;<br />
+}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Krishna Sharma</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-28665</link>
+		<dc:creator><![CDATA[Krishna Sharma]]></dc:creator>
+		<pubDate>Thu, 10 Oct 2013 14:20:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-28665</guid>
+		<description><![CDATA[/*
+#include
+
+using namespace std;
+
+int calcMaxSumIncreasingSequence(int a[], int);
+
+int main()
+{
+  int a[] = {1, 101, 2, 3, 100, 4, 5};
+  int length = sizeof(a)/sizeof(a[0]);
+  cout &#060;&#060; calcMaxSumIncreasingSequence(a, length) &#060;&#060; endl;
+
+  return 0;
+}
+
+int calcMaxSumIncreasingSequence(int a[], int length)
+{
+  int max = a[0];
+  int lastAdded = 0;
+  for(int i=0; i&#060;length; i++) {
+    if(lastAdded&#060;a[i] &#038;&#038; max&#060;a[i]+lastAdded) {
+      max = max+a[i];
+      lastAdded = a[i];
+    }
+  }
+
+  return max;
+}*/]]></description>
+		<content:encoded><![CDATA[<p>/*<br />
+#include</p>
+<p>using namespace std;</p>
+<p>int calcMaxSumIncreasingSequence(int a[], int);</p>
+<p>int main()<br />
+{<br />
+  int a[] = {1, 101, 2, 3, 100, 4, 5};<br />
+  int length = sizeof(a)/sizeof(a[0]);<br />
+  cout &lt;&lt; calcMaxSumIncreasingSequence(a, length) &lt;&lt; endl;</p>
+<p>  return 0;<br />
+}</p>
+<p>int calcMaxSumIncreasingSequence(int a[], int length)<br />
+{<br />
+  int max = a[0];<br />
+  int lastAdded = 0;<br />
+  for(int i=0; i&lt;length; i++) {<br />
+    if(lastAdded&lt;a[i] &amp;&amp; max&lt;a[i]+lastAdded) {<br />
+      max = max+a[i];<br />
+      lastAdded = a[i];<br />
+    }<br />
+  }</p>
+<p>  return max;<br />
+}*/</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sriharsha g.r.v</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-28123</link>
+		<dc:creator><![CDATA[Sriharsha g.r.v]]></dc:creator>
+		<pubDate>Thu, 26 Sep 2013 05:39:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-28123</guid>
+		<description><![CDATA[hi....it works but i didnt understand use of this one
+
+//sum+=a[i];
+ and by ur method can we retrieve the series if asked..i am not sure?]]></description>
+		<content:encoded><![CDATA[<p>hi&#8230;.it works but i didnt understand use of this one</p>
+<p>//sum+=a[i];<br />
+ and by ur method can we retrieve the series if asked..i am not sure?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: ashish</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-27824</link>
+		<dc:creator><![CDATA[ashish]]></dc:creator>
+		<pubDate>Wed, 18 Sep 2013 18:27:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-27824</guid>
+		<description><![CDATA[please check for  given input
+ ary[]={1,101,2,29,3,100,4,5}]]></description>
+		<content:encoded><![CDATA[<p>please check for  given input<br />
+ ary[]={1,101,2,29,3,100,4,5}</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Yuvaraj Velmayil</title>
+		<link>http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/#comment-27355</link>
+		<dc:creator><![CDATA[Yuvaraj Velmayil]]></dc:creator>
+		<pubDate>Thu, 05 Sep 2013 03:30:00 +0000</pubDate>
+		<guid isPermaLink="false">http://www.cdn.geeksforgeeks.org/?p=19248#comment-27355</guid>
+		<description><![CDATA[Cant we use the same technique of finding the max sum in a array with O(n) complexity ??
+
+
+maxSoFar = a[i];
+maxOverall = a[i];
+
+for( int i =1; i&#060;n; i++)
+
+  if(a[i-1] &#060; a[i] )
+           maxSoFar += a[i];
+   else
+           maxSoFar = a[i];
+   maxOverall = Math.max(maxOverall, maxSoFar);
+
+return maxOverall;
+
+
+
+Any comments ??]]></description>
+		<content:encoded><![CDATA[<p>Cant we use the same technique of finding the max sum in a array with O(n) complexity ??</p>
+<p>maxSoFar = a[i];<br />
+maxOverall = a[i];</p>
+<p>for( int i =1; i&lt;n; i++)</p>
+<p>  if(a[i-1] &lt; a[i] )<br />
+           maxSoFar += a[i];<br />
+   else<br />
+           maxSoFar = a[i];<br />
+   maxOverall = Math.max(maxOverall, maxSoFar);</p>
+<p>return maxOverall;</p>
+<p>Any comments ??</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
+
+<!-- Dynamic page generated in 0.040 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-11-24 13:09:07 -->
+
+<!-- Compression = gzip -->
